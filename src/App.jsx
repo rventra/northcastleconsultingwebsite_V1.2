@@ -29,14 +29,12 @@ export default function NorthCastleConsulting() {
             <a href="#" className="text-2xl font-bold text-white" onClick={(e) => { e.preventDefault(); navigateToPage('home'); }}>
               North Castle Consulting
             </a>
-
-            {/* Desktop Menu */}
+            
             <div className="hidden md:flex gap-8 items-center">
               <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} className="text-white hover:text-yellow-600 transition-colors font-medium">Home</a>
-
-              {/* Services Dropdown */}
+              
               <div className="relative">
-                <button
+                <button 
                   onMouseEnter={() => setServicesDropdownOpen(true)}
                   onMouseLeave={() => setServicesDropdownOpen(false)}
                   className="text-white hover:text-yellow-600 transition-colors font-medium flex items-center gap-1"
@@ -44,18 +42,15 @@ export default function NorthCastleConsulting() {
                   Services ▾
                 </button>
                 {servicesDropdownOpen && (
-                  <div
+                  <div 
                     className="absolute top-full left-0 mt-2 w-72 bg-white rounded-lg shadow-xl py-2"
                     onMouseEnter={() => setServicesDropdownOpen(true)}
                     onMouseLeave={() => setServicesDropdownOpen(false)}
                   >
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Mass Tort</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Lender Due Diligence</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-dd-non-pe'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Lender Due Diligence For Non-PE Financing</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('challenged-credit'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Challenged Credit Due Diligence</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Sell-Side Readiness</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Corporate Development</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Dividend Recapitalization Prep</a>
                   </div>
                 )}
               </div>
@@ -66,13 +61,9 @@ export default function NorthCastleConsulting() {
                   <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }} className="text-white hover:text-yellow-600 transition-colors font-medium">Contact</a>
                 </>
               )}
-              {currentPage !== 'home' && (
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('home'); scrollToSection('contact'); }} className="text-white hover:text-yellow-600 transition-colors font-medium">Contact</a>
-              )}
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
+            <button 
               className="md:hidden text-white text-2xl"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
@@ -80,20 +71,10 @@ export default function NorthCastleConsulting() {
             </button>
           </div>
 
-          {/* Mobile Menu */}
           {mobileMenuOpen && (
             <div className="md:hidden mt-4 pb-4 flex flex-col gap-4">
               <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} className="text-white hover:text-yellow-600 transition-colors">Home</a>
-
-              <div className="text-white font-medium">Services:</div>
-              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="text-white hover:text-yellow-600 transition-colors pl-4">Mass Tort</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="text-white hover:text-yellow-600 transition-colors pl-4">Lender Due Diligence</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-dd-non-pe'); }} className="text-white hover:text-yellow-600 transition-colors pl-4">Lender DD For Non-PE Financing</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('challenged-credit'); }} className="text-white hover:text-yellow-600 transition-colors pl-4">Challenged Credit Due Diligence</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="text-white hover:text-yellow-600 transition-colors pl-4">Sell-Side Readiness</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="text-white hover:text-yellow-600 transition-colors pl-4">Corporate Development</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="text-white hover:text-yellow-600 transition-colors pl-4">Dividend Recapitalization Prep</a>
-
+              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="text-white hover:text-yellow-600 transition-colors">Mass Tort</a>
               {currentPage === 'home' && (
                 <>
                   <a href="#case-studies" onClick={(e) => { e.preventDefault(); scrollToSection('case-studies'); }} className="text-white hover:text-yellow-600 transition-colors">Case Studies</a>
@@ -105,181 +86,102 @@ export default function NorthCastleConsulting() {
         </div>
       </nav>
 
-      {/* Page Content */}
+      {/* HOME PAGE */}
       {currentPage === 'home' && (
         <>
-          {/* Hero Section */}
           <section id="home" className="pt-24 pb-20 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
                 Unlocking Value Through Financial Expertise
               </h1>
               <p className="text-xl md:text-2xl mb-8 text-gray-200">
-                Delivering actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams to maximize value, reduce risk, and drive success.
+                Delivering actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
               </p>
-              <a
-                href="#services"
+              <a 
+                href="#services" 
                 onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}
-                className="inline-block bg-yellow-600 text-slate-900 px-10 py-4 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-xl"
+                className="inline-block bg-yellow-600 text-slate-900 px-10 py-4 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg"
               >
                 Explore Our Solutions
               </a>
             </div>
           </section>
 
-          {/* Core Services */}
           <section id="services" className="py-20 px-6 bg-white">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                  Our Services
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Our Services</h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                   Comprehensive financial advisory services tailored to your specific needs.
                 </p>
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {/* Mass Tort */}
                 <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-t-4 border-blue-900">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">
-                    ⚖️
-                  </div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">⚖️</div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">Mass Tort</h3>
                   <p className="text-gray-600 leading-relaxed mb-6">
-                    Specialized financial advisory and operational solutions for mass tort litigation. From case intake to settlement, we optimize your workflow, reduce costs, and accelerate outcomes.
+                    Specialized financial advisory and operational solutions for mass tort litigation.
                   </p>
-                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">
-                    Learn More →
-                  </a>
+                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">Learn More →</a>
                 </div>
 
-                {/* Lender Due Diligence */}
                 <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-t-4 border-blue-900">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">
-                    🔍
-                  </div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">🔍</div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">Lender Due Diligence</h3>
                   <p className="text-gray-600 leading-relaxed mb-6">
-                    Comprehensive credit assessment and financial analysis to support lending decisions with confidence and minimize risk.
+                    Comprehensive credit assessment and financial analysis.
                   </p>
-                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">
-                    Learn More →
-                  </a>
+                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">Learn More →</a>
                 </div>
 
-                {/* Lender DD Non-PE */}
                 <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-t-4 border-blue-900">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">
-                    📋
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4">Lender DD For Non-PE Financing</h3>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Specialized due diligence services for non-traditional financing structures and alternative lending scenarios.
-                  </p>
-                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-dd-non-pe'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">
-                    Learn More →
-                  </a>
-                </div>
-
-                {/* Challenged Credit */}
-                <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-t-4 border-blue-900">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">
-                    ⚠️
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4">Challenged Credit Due Diligence</h3>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Expert analysis and strategic guidance for distressed situations and turnaround opportunities.
-                  </p>
-                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('challenged-credit'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">
-                    Learn More →
-                  </a>
-                </div>
-
-                {/* Sell-Side */}
-                <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-t-4 border-blue-900">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">
-                    📈
-                  </div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">📈</div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">Sell-Side Readiness</h3>
                   <p className="text-gray-600 leading-relaxed mb-6">
-                    Prepare your business for sale to achieve optimal valuation and a smooth transaction with &gt;95% success rate.
+                    Prepare your business for sale to achieve optimal valuation.
                   </p>
-                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">
-                    Learn More →
-                  </a>
+                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">Learn More →</a>
                 </div>
 
-                {/* Corporate Development */}
                 <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-t-4 border-blue-900">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">
-                    🎯
-                  </div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">🎯</div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">Corporate Development</h3>
                   <p className="text-gray-600 leading-relaxed mb-6">
-                    Strategic M&A advisory from target screening through post-merger integration to maximize synergies.
+                    Strategic M&A advisory from target screening through integration.
                   </p>
-                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">
-                    Learn More →
-                  </a>
-                </div>
-
-                {/* Dividend Recap */}
-                <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-t-4 border-blue-900">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">
-                    💰
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4">Dividend Recapitalization Prep</h3>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Strategic capital returns for PE sponsors through structured dividend recaps that balance leverage and returns.
-                  </p>
-                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">
-                    Learn More →
-                  </a>
+                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">Learn More →</a>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Case Studies */}
           <section id="case-studies" className="py-20 px-6 bg-gray-50">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                  Proven Results
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Proven Results</h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                   Real-world success stories demonstrating our impact and expertise.
                 </p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-8">
-                {/* Case Study 1 */}
                 <div className="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2">
-                  <div className="h-48 bg-gradient-to-br from-blue-900 to-slate-800 flex items-center justify-center text-6xl text-white">
-                    📊
-                  </div>
+                  <div className="h-48 bg-gradient-to-br from-blue-900 to-slate-800 flex items-center justify-center text-6xl text-white">📊</div>
                   <div className="p-8">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                      KPI Data Cube for Company Sale
-                    </h3>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4">KPI Data Cube for Company Sale</h3>
                     <p className="text-gray-600 leading-relaxed">
-                      A private equity-backed auto parts manufacturer preparing for sale required a consolidated, enterprise-level view of sales, gross margin, and KPIs across customers, SKUs, and other dimensions. We developed a comprehensive data analytics solution that streamlined reporting and enhanced buyer confidence.
+                      A private equity-backed auto parts manufacturer preparing for sale required a consolidated view of KPIs. We developed a comprehensive data analytics solution.
                     </p>
                   </div>
                 </div>
 
-                {/* Case Study 2 */}
                 <div className="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2">
-                  <div className="h-48 bg-gradient-to-br from-blue-900 to-slate-800 flex items-center justify-center text-6xl text-white">
-                    🎯
-                  </div>
+                  <div className="h-48 bg-gradient-to-br from-blue-900 to-slate-800 flex items-center justify-center text-6xl text-white">🎯</div>
                   <div className="p-8">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                      Unlocking Value in Data-Challenged Business
-                    </h3>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Unlocking Value in Data-Challenged Business</h3>
                     <p className="text-gray-600 leading-relaxed">
-                      A private equity-backed business services company in the vending and catering industry struggled to complete its sale due to significant financial and operational challenges. We restructured their data systems, validated financials, and successfully positioned the company for a competitive exit.
+                      We restructured data systems, validated financials, and successfully positioned the company for a competitive exit.
                     </p>
                   </div>
                 </div>
@@ -287,45 +189,37 @@ export default function NorthCastleConsulting() {
             </div>
           </section>
 
-          {/* Contact/CTA Section */}
           <section id="contact" className="py-20 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white text-center">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Ready to Unlock Value?
-              </h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Unlock Value?</h2>
               <p className="text-xl md:text-2xl mb-10 text-gray-200">
                 Let's discuss how our expertise can drive success for your organization.
               </p>
-              <a
-                href="mailto:contact@northcastleconsulting.com"
-                className="inline-block bg-yellow-600 text-slate-900 px-12 py-5 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-xl"
+              <a 
+                href="mailto:contact@northcastleconsulting.com" 
+                className="inline-block bg-yellow-600 text-slate-900 px-12 py-5 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg"
               >
                 Contact Us Today
               </a>
             </div>
           </section>
 
-          {/* Footer */}
           <footer className="bg-slate-900 text-white py-12 px-6">
             <div className="max-w-7xl mx-auto">
               <div className="grid md:grid-cols-3 gap-12 mb-8">
                 <div>
                   <h4 className="text-yellow-600 text-xl font-bold mb-4">North Castle Consulting</h4>
                   <p className="text-gray-400 leading-relaxed">
-                    Delivering actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
+                    Delivering actionable insights for Private Equity, Private Debt, and Corporate Development teams.
                   </p>
                 </div>
-
                 <div>
                   <h4 className="text-yellow-600 text-xl font-bold mb-4">Services</h4>
                   <div className="space-y-2">
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block text-gray-400 hover:text-yellow-600 transition-colors">Mass Tort</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="block text-gray-400 hover:text-yellow-600 transition-colors">Lender Due Diligence</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block text-gray-400 hover:text-yellow-600 transition-colors">Sell-Side Readiness</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block text-gray-400 hover:text-yellow-600 transition-colors">Corporate Development</a>
                   </div>
                 </div>
-
                 <div>
                   <h4 className="text-yellow-600 text-xl font-bold mb-4">Contact</h4>
                   <div className="space-y-2 text-gray-400">
@@ -334,7 +228,6 @@ export default function NorthCastleConsulting() {
                   </div>
                 </div>
               </div>
-
               <div className="border-t border-gray-800 pt-8 text-center text-gray-500">
                 <p>&copy; 2025 North Castle Consulting. All rights reserved.</p>
               </div>
@@ -343,7 +236,7 @@ export default function NorthCastleConsulting() {
         </>
       )}
 
-      {/* MASS TORT PAGE */}
+      {/* MASS TORT PAGE - PROPERLY FORMATTED */}
       {currentPage === 'mass-tort' && (
         <div className="pt-20">
           <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-20 px-6 text-center">
@@ -352,142 +245,150 @@ export default function NorthCastleConsulting() {
               <p className="text-xl md:text-2xl opacity-95 mb-8">
                 Operational infrastructure and financial intelligence for law firms handling mass tort litigation at scale
               </p>
-              <div className="flex gap-4 justify-center items-center flex-wrap">
-                <a
-                  href="#lifecycle"
-                  onClick={(e) => { e.preventDefault(); scrollToSection('lifecycle'); }}
-                  className="inline-block bg-yellow-600 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all transform hover:-translate-y-1 shadow-lg"
-                >
-                  Explore Our Solutions
-                </a>
-                <a
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); navigateToPage('newsletter-blog'); }}
-                  className="inline-block bg-white bg-opacity-10 backdrop-blur-sm text-white border-2 border-white border-opacity-30 px-8 py-3 rounded-full font-semibold hover:bg-opacity-20 transition-all transform hover:-translate-y-1 shadow-lg"
-                >
-                  Newsletter & Blog
-                </a>
-              </div>
             </div>
           </div>
 
           <div className="max-w-5xl mx-auto px-6 py-16">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-slate-900 mb-6">Transform Your Mass Tort Operations</h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
-                Most mass tort practices struggle with operational chaos: disorganized case intake, inconsistent medical review, manual document workflows, and inability to respond quickly to defense data requests. These inefficiencies drive up OpEx, slow settlement cycles, and undermine negotiation leverage.
+              <p className="text-xl text-gray-600 leading-relaxed mb-4">
+                Most mass tort practices struggle with operational chaos: disorganized case intake, inconsistent medical review, manual document workflows, and inability to respond quickly to defense data requests.
               </p>
-              <p className="text-xl text-gray-600 leading-relaxed mt-4">
+              <p className="text-xl text-gray-600 leading-relaxed">
                 We build the operational and data infrastructure that eliminates these bottlenecks—delivering faster case throughput, lower costs, and the portfolio analytics defense teams respect.
               </p>
             </div>
-          </div>
 
-          <div id="lifecycle" className="bg-gradient-to-b from-gray-50 to-white py-20 px-6 scroll-mt-20">
-            <div className="max-w-7xl mx-auto">
-              <h3 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 text-center">Mass Tort Case Lifecycle Services</h3>
-              <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">Click any stage below to learn how we optimize your operations and accelerate outcomes</p>
+            <div className="grid md:grid-cols-2 gap-8 mb-16">
+              <div className="bg-blue-50 p-8 rounded-xl">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">Case Intake & Qualification</h3>
+                <p className="text-gray-700 mb-4">Streamline initial screenings and eliminate bad cases early.</p>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> Custom intake forms</li>
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> Automated scoring logic</li>
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> Decision trees for routing</li>
+                </ul>
+              </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-blue-900 transform hover:-translate-y-2 p-8">
-                  <span className="inline-block bg-blue-900 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wide mb-4">STAGE 1</span>
-                  <h4 className="text-2xl font-bold text-slate-900 mb-3">Case Intake & Pre-Qualification</h4>
-                  <p className="text-gray-600 text-base mb-6 leading-relaxed">Streamline initial screenings, eliminate bad cases early, reduce downstream rework</p>
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-slate-700">
-                      <span className="text-blue-900 font-bold text-lg">↑</span>
-                      <span className="font-medium">Bad case rejection rate</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-slate-700">
-                      <span className="text-blue-900 font-bold text-lg">↓</span>
-                      <span className="font-medium">Intake cycle time</span>
-                    </div>
-                  </div>
-                </div>
+              <div className="bg-blue-50 p-8 rounded-xl">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">Document Intelligence</h3>
+                <p className="text-gray-700 mb-4">Convert documents to structured data, respond to defense in hours.</p>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> OCR and parsing</li>
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> Automated extraction</li>
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> Portfolio analytics</li>
+                </ul>
+              </div>
+
+              <div className="bg-blue-50 p-8 rounded-xl">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">Medical Review & Tiering</h3>
+                <p className="text-gray-700 mb-4">Standardize medical review and accelerate settlement negotiations.</p>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> AI-assisted review</li>
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> Consistent tier assignment</li>
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> Audit trail documentation</li>
+                </ul>
+              </div>
+
+              <div className="bg-blue-50 p-8 rounded-xl">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">Workflow Automation</h3>
+                <p className="text-gray-700 mb-4">Eliminate rework and maintain complete audit trails.</p>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> Version control</li>
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> Status tracking</li>
+                  <li className="flex items-center gap-2"><span className="text-blue-900">✓</span> Automated reminders</li>
+                </ul>
               </div>
             </div>
-          </div>
 
-          <div id="contact-form" className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-20 px-6 scroll-mt-24">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center">Ready to Transform Your Mass Tort Practice?</h2>
-              <p className="text-xl mb-10 opacity-90 text-center">
-                Schedule a 30-minute consultation to discuss your specific challenges and how our solutions can help.
-              </p>
-
-              <form
-                action="https://formspree.io/f/xyzgkjvw"
-                method="POST"
-                className="bg-white bg-opacity-10 backdrop-blur-md rounded-2xl p-8 border border-white border-opacity-20"
-              >
-                <div className="grid md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-semibold mb-2">Full Name *</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
-                      placeholder="John Smith"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-semibold mb-2">Email Address *</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
-                      placeholder="john@lawfirm.com"
-                    />
-                  </div>
-                </div>
-
-                <input type="hidden" name="_replyto" value="admin@northcastleconsulting.com" />
-                <input type="hidden" name="_subject" value="Mass Tort Services Inquiry" />
-
-                <button
-                  type="submit"
-                  className="w-full bg-yellow-600 text-slate-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-xl"
-                >
-                  Submit Interest
-                </button>
-
-                <p className="text-sm text-center mt-4 opacity-75">
-                  We'll respond within 1 business day
+            <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-16 px-8 rounded-2xl">
+              <div className="max-w-2xl mx-auto">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">Ready to Transform Your Practice?</h2>
+                <p className="text-xl mb-10 opacity-90 text-center">
+                  Schedule a 30-minute consultation to discuss your specific challenges.
                 </p>
-              </form>
+                
+                <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-xl p-8 border border-white border-opacity-20">
+                  <div className="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                      <label className="block text-sm font-semibold mb-2">Full Name *</label>
+                      <input 
+                        type="text"
+                        required
+                        className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        placeholder="John Smith"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-2">Email Address *</label>
+                      <input 
+                        type="email"
+                        required
+                        className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        placeholder="john@lawfirm.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                      <label className="block text-sm font-semibold mb-2">Law Firm / Company *</label>
+                      <input 
+                        type="text"
+                        required
+                        className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        placeholder="Smith & Associates"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-2">Phone Number</label>
+                      <input 
+                        type="tel"
+                        className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                        placeholder="(555) 123-4567"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mb-6">
+                    <label className="block text-sm font-semibold mb-2">Tell us about your challenges</label>
+                    <textarea 
+                      rows="4"
+                      className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600 resize-none"
+                      placeholder="Describe your current challenges..."
+                    ></textarea>
+                  </div>
+
+                  
+                    href="mailto:contact@northcastleconsulting.com?subject=Mass Tort Services Inquiry"
+                    className="block w-full text-center bg-yellow-600 text-slate-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg"
+                  >
+                    Contact Us
+                  </a>
+
+                  <p className="text-sm text-center mt-4 opacity-75">
+                    We'll respond within 1 business day
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Other Service Pages */}
+      {/* OTHER SERVICE PAGES */}
       {currentPage === 'lender-due-diligence' && (
         <div className="pt-24 min-h-screen">
           <div className="max-w-7xl mx-auto px-6 py-20">
             <h1 className="text-5xl font-bold text-slate-900 mb-6">Lender Due Diligence</h1>
             <p className="text-xl text-gray-600">Content coming soon...</p>
-          </div>
-        </div>
-      )}
-
-      {currentPage === 'lender-dd-non-pe' && (
-        <div className="pt-24 min-h-screen">
-          <div className="max-w-7xl mx-auto px-6 py-20">
-            <h1 className="text-5xl font-bold text-slate-900 mb-6">Lender Due Diligence For Non-PE Financing</h1>
-            <p className="text-xl text-gray-600">Content coming soon...</p>
-          </div>
-        </div>
-      )}
-
-      {currentPage === 'challenged-credit' && (
-        <div className="pt-24 min-h-screen">
-          <div className="max-w-7xl mx-auto px-6 py-20">
-            <h1 className="text-5xl font-bold text-slate-900 mb-6">Challenged Credit Due Diligence</h1>
-            <p className="text-xl text-gray-600">Content coming soon...</p>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} 
+              className="inline-block mt-8 bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all"
+            >
+              ← Back to Home
+            </a>
           </div>
         </div>
       )}
@@ -497,6 +398,13 @@ export default function NorthCastleConsulting() {
           <div className="max-w-7xl mx-auto px-6 py-20">
             <h1 className="text-5xl font-bold text-slate-900 mb-6">Sell-Side Readiness</h1>
             <p className="text-xl text-gray-600">Content coming soon...</p>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} 
+              className="inline-block mt-8 bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all"
+            >
+              ← Back to Home
+            </a>
           </div>
         </div>
       )}
@@ -506,89 +414,13 @@ export default function NorthCastleConsulting() {
           <div className="max-w-7xl mx-auto px-6 py-20">
             <h1 className="text-5xl font-bold text-slate-900 mb-6">Corporate Development</h1>
             <p className="text-xl text-gray-600">Content coming soon...</p>
-          </div>
-        </div>
-      )}
-
-      {currentPage === 'dividend-recap' && (
-        <div className="pt-24 min-h-screen">
-          <div className="max-w-7xl mx-auto px-6 py-20">
-            <h1 className="text-5xl font-bold text-slate-900 mb-6">Dividend Recapitalization Prep</h1>
-            <p className="text-xl text-gray-600">Content coming soon...</p>
-          </div>
-        </div>
-      )}
-
-      {/* Newsletter & Blog Page */}
-      {currentPage === 'newsletter-blog' && (
-        <div className="pt-20">
-          <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-20 px-6 text-center">
-            <div className="max-w-4xl mx-auto">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">Newsletter & Blog</h1>
-              <p className="text-xl md:text-2xl opacity-95 mb-8">
-                Insights, updates, and thought leadership on mass tort operations
-              </p>
-            </div>
-          </div>
-
-          <div className="max-w-5xl mx-auto px-6 py-20">
-            <div className="text-center">
-              <div className="inline-block bg-blue-50 rounded-2xl p-12 mb-8">
-                <div className="text-6xl mb-4">📰</div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-4">Coming Soon</h2>
-                <p className="text-xl text-gray-600 mb-8">
-                  We're preparing valuable content and insights for you. Check back soon for updates on mass tort operations, industry trends, and best practices.
-                </p>
-                <a
-                  href="mailto:contact@northcastleconsulting.com?subject=Newsletter Subscription"
-                  className="inline-block bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all transform hover:-translate-y-1 shadow-lg"
-                >
-                  Subscribe for Updates
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Thank You Page */}
-      {currentPage === 'thank-you' && (
-        <div className="pt-20">
-          <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-20 px-6 text-center">
-            <div className="max-w-4xl mx-auto">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">Thank You!</h1>
-              <p className="text-xl md:text-2xl opacity-95 mb-8">
-                Your interest has been received
-              </p>
-            </div>
-          </div>
-
-          <div className="max-w-3xl mx-auto px-6 py-20">
-            <div className="text-center">
-              <div className="inline-block bg-blue-50 rounded-2xl p-12 mb-8">
-                <div className="text-6xl mb-4">✓</div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-4">We've Received Your Submission</h2>
-                <p className="text-xl text-gray-600 mb-8">
-                  A member of our team will review your information and reach out within 1 business day.
-                </p>
-                <div className="space-y-4">
-                  <a
-                    href="#"
-                    onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }}
-                    className="inline-block bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all transform hover:-translate-y-1 shadow-lg mr-4"
-                  >
-                    ← Back to Mass Tort Services
-                  </a>
-                  <a
-                    href="#"
-                    onClick={(e) => { e.preventDefault(); navigateToPage('home'); }}
-                    className="inline-block bg-gray-200 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-300 transition-all transform hover:-translate-y-1 shadow-lg"
-                  >
-                    Return to Home
-                  </a>
-                </div>
-              </div>
-            </div>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} 
+              className="inline-block mt-8 bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all"
+            >
+              ← Back to Home
+            </a>
           </div>
         </div>
       )}
