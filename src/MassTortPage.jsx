@@ -714,7 +714,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
             </div>
 
             
-              href="mailto:contact@northcastleconsulting.com?subject=Mass%20Tort%20Services%20Inquiry"
+            <a  href="mailto:contact@northcastleconsulting.com?subject=Mass%20Tort%20Services%20Inquiry"
               className="block w-full text-center bg-yellow-600 text-slate-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-xl"
             >
               Submit Interest
