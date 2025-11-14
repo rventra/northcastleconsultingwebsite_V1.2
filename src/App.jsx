@@ -22,7 +22,6 @@ export default function NorthCastleConsulting() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
       <nav className="fixed top-0 w-full bg-slate-900 bg-opacity-95 backdrop-blur-sm z-50 shadow-lg">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
@@ -86,7 +85,6 @@ export default function NorthCastleConsulting() {
         </div>
       </nav>
 
-      {/* HOME PAGE */}
       {currentPage === 'home' && (
         <>
           <section id="home" className="pt-24 pb-20 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white">
@@ -236,7 +234,6 @@ export default function NorthCastleConsulting() {
         </>
       )}
 
-      {/* MASS TORT PAGE - PROPERLY FORMATTED */}
       {currentPage === 'mass-tort' && (
         <div className="pt-20">
           <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-20 px-6 text-center">
@@ -302,81 +299,26 @@ export default function NorthCastleConsulting() {
             </div>
 
             <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-16 px-8 rounded-2xl">
-              <div className="max-w-2xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">Ready to Transform Your Practice?</h2>
-                <p className="text-xl mb-10 opacity-90 text-center">
+              <div className="max-w-2xl mx-auto text-center">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Practice?</h2>
+                <p className="text-xl mb-10 opacity-90">
                   Schedule a 30-minute consultation to discuss your specific challenges.
                 </p>
-                
-                <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-xl p-8 border border-white border-opacity-20">
-                  <div className="grid md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Full Name *</label>
-                      <input 
-                        type="text"
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
-                        placeholder="John Smith"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Email Address *</label>
-                      <input 
-                        type="email"
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
-                        placeholder="john@lawfirm.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Law Firm / Company *</label>
-                      <input 
-                        type="text"
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
-                        placeholder="Smith & Associates"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Phone Number</label>
-                      <input 
-                        type="tel"
-                        className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
-                        placeholder="(555) 123-4567"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="mb-6">
-                    <label className="block text-sm font-semibold mb-2">Tell us about your challenges</label>
-                    <textarea 
-                      rows="4"
-                      className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600 resize-none"
-                      placeholder="Describe your current challenges..."
-                    ></textarea>
-                  </div>
-
-                  
-                    href="mailto:contact@northcastleconsulting.com?subject=Mass Tort Services Inquiry"
-                    className="block w-full text-center bg-yellow-600 text-slate-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg"
-                  >
-                    Contact Us
-                  </a>
-
-                  <p className="text-sm text-center mt-4 opacity-75">
-                    We'll respond within 1 business day
-                  </p>
-                </div>
+                <a 
+                  href="mailto:contact@northcastleconsulting.com?subject=Mass%20Tort%20Services%20Inquiry" 
+                  className="inline-block bg-yellow-600 text-slate-900 px-12 py-5 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg"
+                >
+                  Contact Us Today
+                </a>
+                <p className="text-sm mt-6 opacity-75">
+                  We'll respond within 1 business day
+                </p>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* OTHER SERVICE PAGES */}
       {currentPage === 'lender-due-diligence' && (
         <div className="pt-24 min-h-screen">
           <div className="max-w-7xl mx-auto px-6 py-20">
