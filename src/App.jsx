@@ -48,8 +48,11 @@ export default function NorthCastleConsulting() {
                   >
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Mass Tort</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Lender Due Diligence</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-dd-non-pe'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Lender Due Diligence For Non-PE Financing</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('challenged-credit'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Challenged Credit Due Diligence</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Sell-Side Readiness</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Corporate Development</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block px-4 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Dividend Recapitalization Prep</a>
                   </div>
                 )}
               </div>
@@ -74,6 +77,7 @@ export default function NorthCastleConsulting() {
             <div className="md:hidden mt-4 pb-4 flex flex-col gap-4">
               <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} className="text-white hover:text-yellow-600 transition-colors">Home</a>
               <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="text-white hover:text-yellow-600 transition-colors">Mass Tort</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="text-white hover:text-yellow-600 transition-colors">Lender Due Diligence</a>
               {currentPage === 'home' && (
                 <>
                   <a href="#case-studies" onClick={(e) => { e.preventDefault(); scrollToSection('case-studies'); }} className="text-white hover:text-yellow-600 transition-colors">Case Studies</a>
@@ -93,7 +97,7 @@ export default function NorthCastleConsulting() {
                 Unlocking Value Through Financial Expertise
               </h1>
               <p className="text-xl md:text-2xl mb-8 text-gray-200">
-                Delivering actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
+                Delivering actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams to maximize value, reduce risk, and drive success.
               </p>
               <a 
                 href="#services" 
@@ -119,7 +123,7 @@ export default function NorthCastleConsulting() {
                   <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">⚖️</div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">Mass Tort</h3>
                   <p className="text-gray-600 leading-relaxed mb-6">
-                    Specialized financial advisory and operational solutions for mass tort litigation.
+                    Specialized financial advisory and operational solutions for mass tort litigation. From case intake to settlement, we optimize your workflow.
                   </p>
                   <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">Learn More →</a>
                 </div>
@@ -128,16 +132,34 @@ export default function NorthCastleConsulting() {
                   <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">🔍</div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">Lender Due Diligence</h3>
                   <p className="text-gray-600 leading-relaxed mb-6">
-                    Comprehensive credit assessment and financial analysis.
+                    Comprehensive credit assessment and financial analysis to support lending decisions with confidence.
                   </p>
                   <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">Learn More →</a>
+                </div>
+
+                <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-t-4 border-blue-900">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">📋</div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-4">Lender DD For Non-PE Financing</h3>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    Specialized due diligence services for non-traditional financing structures and alternative lending.
+                  </p>
+                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-dd-non-pe'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">Learn More →</a>
+                </div>
+
+                <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-t-4 border-blue-900">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">⚠️</div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-4">Challenged Credit Due Diligence</h3>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    Expert analysis and strategic guidance for distressed situations and turnaround opportunities.
+                  </p>
+                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('challenged-credit'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">Learn More →</a>
                 </div>
 
                 <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-t-4 border-blue-900">
                   <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">📈</div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">Sell-Side Readiness</h3>
                   <p className="text-gray-600 leading-relaxed mb-6">
-                    Prepare your business for sale to achieve optimal valuation.
+                    Prepare your business for sale to achieve optimal valuation and a smooth transaction.
                   </p>
                   <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">Learn More →</a>
                 </div>
@@ -146,9 +168,18 @@ export default function NorthCastleConsulting() {
                   <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">🎯</div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">Corporate Development</h3>
                   <p className="text-gray-600 leading-relaxed mb-6">
-                    Strategic M&A advisory from target screening through integration.
+                    Strategic M&A advisory from target screening through post-merger integration.
                   </p>
                   <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">Learn More →</a>
+                </div>
+
+                <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border-t-4 border-blue-900">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-3xl text-white mb-6">💰</div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-4">Dividend Recapitalization Prep</h3>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    Strategic capital returns for PE sponsors through structured dividend recaps.
+                  </p>
+                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="text-blue-900 font-semibold hover:text-yellow-600 transition-colors inline-flex items-center gap-2">Learn More →</a>
                 </div>
               </div>
             </div>
@@ -169,7 +200,7 @@ export default function NorthCastleConsulting() {
                   <div className="p-8">
                     <h3 className="text-2xl font-bold text-slate-900 mb-4">KPI Data Cube for Company Sale</h3>
                     <p className="text-gray-600 leading-relaxed">
-                      A private equity-backed auto parts manufacturer preparing for sale required a consolidated view of KPIs. We developed a comprehensive data analytics solution.
+                      A private equity-backed auto parts manufacturer preparing for sale required a consolidated view of KPIs. We developed a comprehensive data analytics solution that streamlined reporting and enhanced buyer confidence.
                     </p>
                   </div>
                 </div>
@@ -179,7 +210,7 @@ export default function NorthCastleConsulting() {
                   <div className="p-8">
                     <h3 className="text-2xl font-bold text-slate-900 mb-4">Unlocking Value in Data-Challenged Business</h3>
                     <p className="text-gray-600 leading-relaxed">
-                      We restructured data systems, validated financials, and successfully positioned the company for a competitive exit.
+                      A private equity-backed business services company struggled to complete its sale due to significant challenges. We restructured their data systems, validated financials, and successfully positioned the company for a competitive exit.
                     </p>
                   </div>
                 </div>
@@ -208,7 +239,7 @@ export default function NorthCastleConsulting() {
                 <div>
                   <h4 className="text-yellow-600 text-xl font-bold mb-4">North Castle Consulting</h4>
                   <p className="text-gray-400 leading-relaxed">
-                    Delivering actionable insights for Private Equity, Private Debt, and Corporate Development teams.
+                    Delivering actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
                   </p>
                 </div>
                 <div>
@@ -216,6 +247,8 @@ export default function NorthCastleConsulting() {
                   <div className="space-y-2">
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block text-gray-400 hover:text-yellow-600 transition-colors">Mass Tort</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="block text-gray-400 hover:text-yellow-600 transition-colors">Lender Due Diligence</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block text-gray-400 hover:text-yellow-600 transition-colors">Sell-Side Readiness</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block text-gray-400 hover:text-yellow-600 transition-colors">Corporate Development</a>
                   </div>
                 </div>
                 <div>
@@ -249,7 +282,7 @@ export default function NorthCastleConsulting() {
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-slate-900 mb-6">Transform Your Mass Tort Operations</h2>
               <p className="text-xl text-gray-600 leading-relaxed mb-4">
-                Most mass tort practices struggle with operational chaos: disorganized case intake, inconsistent medical review, manual document workflows, and inability to respond quickly to defense data requests.
+                Most mass tort practices struggle with operational chaos: disorganized case intake, inconsistent medical review, manual document workflows, and inability to respond quickly to defense data requests. These inefficiencies drive up OpEx, slow settlement cycles, and undermine negotiation leverage.
               </p>
               <p className="text-xl text-gray-600 leading-relaxed">
                 We build the operational and data infrastructure that eliminates these bottlenecks—delivering faster case throughput, lower costs, and the portfolio analytics defense teams respect.
@@ -335,6 +368,38 @@ export default function NorthCastleConsulting() {
         </div>
       )}
 
+      {currentPage === 'lender-dd-non-pe' && (
+        <div className="pt-24 min-h-screen">
+          <div className="max-w-7xl mx-auto px-6 py-20">
+            <h1 className="text-5xl font-bold text-slate-900 mb-6">Lender Due Diligence For Non-PE Financing</h1>
+            <p className="text-xl text-gray-600">Content coming soon...</p>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} 
+              className="inline-block mt-8 bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all"
+            >
+              ← Back to Home
+            </a>
+          </div>
+        </div>
+      )}
+
+      {currentPage === 'challenged-credit' && (
+        <div className="pt-24 min-h-screen">
+          <div className="max-w-7xl mx-auto px-6 py-20">
+            <h1 className="text-5xl font-bold text-slate-900 mb-6">Challenged Credit Due Diligence</h1>
+            <p className="text-xl text-gray-600">Content coming soon...</p>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} 
+              className="inline-block mt-8 bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all"
+            >
+              ← Back to Home
+            </a>
+          </div>
+        </div>
+      )}
+
       {currentPage === 'sell-side' && (
         <div className="pt-24 min-h-screen">
           <div className="max-w-7xl mx-auto px-6 py-20">
@@ -355,6 +420,22 @@ export default function NorthCastleConsulting() {
         <div className="pt-24 min-h-screen">
           <div className="max-w-7xl mx-auto px-6 py-20">
             <h1 className="text-5xl font-bold text-slate-900 mb-6">Corporate Development</h1>
+            <p className="text-xl text-gray-600">Content coming soon...</p>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} 
+              className="inline-block mt-8 bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all"
+            >
+              ← Back to Home
+            </a>
+          </div>
+          </div>
+      )}
+
+      {currentPage === 'dividend-recap' && (
+        <div className="pt-24 min-h-screen">
+          <div className="max-w-7xl mx-auto px-6 py-20">
+            <h1 className="text-5xl font-bold text-slate-900 mb-6">Dividend Recapitalization Prep</h1>
             <p className="text-xl text-gray-600">Content coming soon...</p>
             <a 
               href="#" 
