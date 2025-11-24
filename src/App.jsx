@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import MassTortPage from './MassTortPage.jsx';  
+import MassTortPage from './MassTortPage.jsx';
+import MassTortDigestTemplate from './components/newsletters/MassTortDigestTemplate.jsx';  
 
 export default function NorthCastleConsulting() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -357,15 +358,19 @@ export default function NorthCastleConsulting() {
           <div className="max-w-7xl mx-auto px-6 py-20">
             <h1 className="text-5xl font-bold text-slate-900 mb-6">Dividend Recapitalization Prep</h1>
             <p className="text-xl text-gray-600">Content coming soon...</p>
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} 
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); navigateToPage('home'); }}
               className="inline-block mt-8 bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all"
             >
               ← Back to Home
             </a>
           </div>
         </div>
+      )}
+
+      {currentPage === 'newsletter-blog' && (
+        <MassTortDigestTemplate navigateToPage={navigateToPage} />
       )}
     </div>
   );
