@@ -1,7 +1,7 @@
 export default {
   metadata: {
-    id: "2025-12-10",
-    publishDate: "December 10, 2025",
+    id: "2025-12-08",
+    publishDate: "December 8, 2025",
     title: "Roundup Defense Gets DOJ Boost; Nuclear Verdicts Surge",
     subtitle: "Litigation developments shaping capital, risk, and case inventory",
     author: "North Castle Consulting",
