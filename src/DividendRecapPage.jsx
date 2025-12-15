@@ -19,58 +19,58 @@ export default function DividendRecapPage({ navigateToPage }) {
       </div>
 
       {/* Two-Column Section: Challenges & Solutions */}
-      <div className="py-16 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Left Column - Challenges */}
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-6">Key Issues Sponsors Face</h2>
-              <ul className="space-y-4 text-gray-700">
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span>LPs seek <strong>liquidity</strong>, but a full exit isn't always the best option.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span>The company has <strong>deleveraged</strong>, opening up recap opportunities.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span>Sponsors want to continue <strong>value creation initiatives</strong>.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Debt capital is available</strong>, but securing optimal terms requires expertise.</span>
-                </li>
-              </ul>
-            </div>
+      <div className="grid md:grid-cols-2">
+        {/* Left Column - Challenges (Grey) */}
+        <div className="bg-gray-100 py-16 px-6 md:px-12">
+          <div className="max-w-xl ml-auto">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">Key Issues Sponsors Face</h2>
+            <ul className="space-y-4 text-gray-700">
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span>LPs seek <strong>liquidity</strong>, but a full exit isn't always the best option.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span>The company has <strong>deleveraged</strong>, opening up recap opportunities.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span>Sponsors want to continue <strong>value creation initiatives</strong>.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span><strong>Debt capital is available</strong>, but securing optimal terms requires expertise.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-            {/* Right Column - Solutions */}
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-6">Our Solution</h2>
-              <ul className="space-y-4 text-gray-700">
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Lender-Ready Data Preparation</strong> — Organizing financials for lender due diligence.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Diligence Management</strong> — Handling investor/lender Q&A, minimizing management distractions.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Financial Modeling & Stress Testing</strong> — Ensuring leverage sustainability with scenario analysis.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Data Reconciliation & KPI Development</strong> — Strengthening your credit story with key performance indicators.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Market Positioning & Lender Negotiations</strong> — Identifying the optimal capital structure for success.</span>
-                </li>
-              </ul>
-            </div>
+        {/* Right Column - Solutions (Blue) */}
+        <div className="bg-blue-900 py-16 px-6 md:px-12 text-white">
+          <div className="max-w-xl mr-auto">
+            <h2 className="text-2xl font-bold mb-6">Our Solution</h2>
+            <ul className="space-y-4 text-blue-100">
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Lender-Ready Data Preparation</strong> — Organizing financials for lender due diligence.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Diligence Management</strong> — Handling investor/lender Q&A, minimizing management distractions.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Financial Modeling & Stress Testing</strong> — Ensuring leverage sustainability with scenario analysis.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Data Reconciliation & KPI Development</strong> — Strengthening your credit story with key performance indicators.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Market Positioning & Lender Negotiations</strong> — Identifying the optimal capital structure for success.</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

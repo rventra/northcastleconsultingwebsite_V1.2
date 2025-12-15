@@ -19,62 +19,62 @@ export default function CorporateDevPage({ navigateToPage }) {
       </div>
 
       {/* Two-Column Section: Challenges & Solutions */}
-      <div className="py-16 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Left Column - Challenges */}
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-6">Challenges</h2>
-              <ul className="space-y-4 text-gray-700">
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Strategic Alignment</strong> — Companies must ensure acquisitions align with growth objectives, market positioning, and financial goals.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Risk Mitigation</strong> — Poor due diligence can lead to overvaluation, operational disruptions, and integration failures.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Resource Constraints</strong> — Many firms lack in-house M&A expertise, slowing execution and increasing risk.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Complex Deal Structuring</strong> — Understanding valuation, synergies, and negotiation strategies is critical for success.</span>
-                </li>
-              </ul>
-            </div>
+      <div className="grid md:grid-cols-2">
+        {/* Left Column - Challenges (Grey) */}
+        <div className="bg-gray-100 py-16 px-6 md:px-12">
+          <div className="max-w-xl ml-auto">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">Challenges</h2>
+            <ul className="space-y-4 text-gray-700">
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span><strong>Strategic Alignment</strong> — Companies must ensure acquisitions align with growth objectives, market positioning, and financial goals.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span><strong>Risk Mitigation</strong> — Poor due diligence can lead to overvaluation, operational disruptions, and integration failures.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span><strong>Resource Constraints</strong> — Many firms lack in-house M&A expertise, slowing execution and increasing risk.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span><strong>Complex Deal Structuring</strong> — Understanding valuation, synergies, and negotiation strategies is critical for success.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-            {/* Right Column - Solutions */}
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-6">Our Solutions</h2>
-              <ul className="space-y-4 text-gray-700">
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Target Screening</strong> — Identify and evaluate potential acquisition targets based on strategic fit, financial performance, and market positioning.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Preliminary Diligence</strong> — Assess investment opportunities through financial analysis, synergy evaluation, and structuring options.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Confirmatory Diligence</strong> — Conduct comprehensive due diligence, validate key assumptions, and quantify value drivers and risks.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Valuation & Deal Structuring</strong> — Develop financial models, assess transaction risks, and negotiate optimal deal terms.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Transaction Execution</strong> — Manage the LOI, purchase agreements, and closing procedures for a seamless transaction.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Post-Deal Integration</strong> — Identify integration challenges, define synergy strategies, and support execution planning.</span>
-                </li>
-              </ul>
-            </div>
+        {/* Right Column - Solutions (Blue) */}
+        <div className="bg-blue-900 py-16 px-6 md:px-12 text-white">
+          <div className="max-w-xl mr-auto">
+            <h2 className="text-2xl font-bold mb-6">Our Solutions</h2>
+            <ul className="space-y-4 text-blue-100">
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Target Screening</strong> — Identify and evaluate potential acquisition targets based on strategic fit, financial performance, and market positioning.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Preliminary Diligence</strong> — Assess investment opportunities through financial analysis, synergy evaluation, and structuring options.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Confirmatory Diligence</strong> — Conduct comprehensive due diligence, validate key assumptions, and quantify value drivers and risks.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Valuation & Deal Structuring</strong> — Develop financial models, assess transaction risks, and negotiate optimal deal terms.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Transaction Execution</strong> — Manage the LOI, purchase agreements, and closing procedures for a seamless transaction.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Post-Deal Integration</strong> — Identify integration challenges, define synergy strategies, and support execution planning.</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -85,15 +85,25 @@ export default function CorporateDevPage({ navigateToPage }) {
           <h2 className="text-2xl font-bold text-slate-900 mb-8">Case Studies</h2>
 
           <div className="space-y-6">
-            <div className="p-6 bg-white rounded-lg border border-gray-200">
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-car-rental'); }}
+              className="block p-6 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-gray-200"
+            >
               <h3 className="text-lg font-bold text-slate-900 mb-2">From Operations to Ownership: Car Rental Franchise Acquisition</h3>
-              <p className="text-gray-600">A car rental franchise of a major global brand was up for sale. The buyers—an independent sponsor team of car rental executives—had deep operational expertise and a vision to enhance the business by implementing more efficient rental models.</p>
-            </div>
+              <p className="text-gray-600 mb-2">A car rental franchise of a major global brand was up for sale. The buyers—an independent sponsor team of car rental executives—had deep operational expertise and a vision to enhance the business by implementing more efficient rental models.</p>
+              <span className="text-blue-900 font-medium">Read Case Study →</span>
+            </a>
 
-            <div className="p-6 bg-white rounded-lg border border-gray-200">
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-target-id'); }}
+              className="block p-6 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-gray-200"
+            >
               <h3 className="text-lg font-bold text-slate-900 mb-2">Building an Acquisition Roadmap: Target Identification for a Consulting Firm</h3>
-              <p className="text-gray-600">A private equity-backed consulting firm sought to grow through acquisitions but lacked a clear picture of the potential investment universe.</p>
-            </div>
+              <p className="text-gray-600 mb-2">A private equity-backed consulting firm sought to grow through acquisitions but lacked a clear picture of the potential investment universe.</p>
+              <span className="text-blue-900 font-medium">Read Case Study →</span>
+            </a>
           </div>
         </div>
       </div>
