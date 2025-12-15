@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import MassTortPage from './MassTortPage.jsx';
+import DividendRecapPage from './DividendRecapPage.jsx';
+import SellSideReadinessPage from './SellSideReadinessPage.jsx';
+import CorporateDevPage from './CorporateDevPage.jsx';
+import BuildingCredibilityPage from './BuildingCredibilityPage.jsx';
+import EnhancingInvestmentCredibilityPage from './EnhancingInvestmentCredibilityPage.jsx';
 import MassTortDigestTemplate from './components/newsletters/MassTortDigestTemplate.jsx';  
 
 export default function NorthCastleConsulting() {
@@ -345,55 +350,27 @@ export default function NorthCastleConsulting() {
       )}
 
       {currentPage === 'sell-side' && (
-        <div className="pt-24 min-h-screen">
-          <div className="max-w-7xl mx-auto px-6 py-20">
-            <h1 className="text-5xl font-bold text-slate-900 mb-6">Sell-Side Readiness</h1>
-            <p className="text-xl text-gray-600">Content coming soon...</p>
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} 
-              className="inline-block mt-8 bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all"
-            >
-              ← Back to Home
-            </a>
-          </div>
-        </div>
+        <SellSideReadinessPage navigateToPage={navigateToPage} />
       )}
 
       {currentPage === 'corporate-dev' && (
-        <div className="pt-24 min-h-screen">
-          <div className="max-w-7xl mx-auto px-6 py-20">
-            <h1 className="text-5xl font-bold text-slate-900 mb-6">Corporate Development</h1>
-            <p className="text-xl text-gray-600">Content coming soon...</p>
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} 
-              className="inline-block mt-8 bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all"
-            >
-              ← Back to Home
-            </a>
-          </div>
-          </div>
+        <CorporateDevPage navigateToPage={navigateToPage} />
       )}
 
       {currentPage === 'dividend-recap' && (
-        <div className="pt-24 min-h-screen">
-          <div className="max-w-7xl mx-auto px-6 py-20">
-            <h1 className="text-5xl font-bold text-slate-900 mb-6">Dividend Recapitalization Prep</h1>
-            <p className="text-xl text-gray-600">Content coming soon...</p>
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); navigateToPage('home'); }}
-              className="inline-block mt-8 bg-blue-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-slate-800 transition-all"
-            >
-              ← Back to Home
-            </a>
-          </div>
-        </div>
+        <DividendRecapPage navigateToPage={navigateToPage} />
       )}
 
       {currentPage === 'newsletter-blog' && (
         <MassTortDigestTemplate navigateToPage={navigateToPage} />
+      )}
+
+      {currentPage === 'case-study-credibility' && (
+        <BuildingCredibilityPage navigateToPage={navigateToPage} />
+      )}
+
+      {currentPage === 'case-study-fintech' && (
+        <EnhancingInvestmentCredibilityPage navigateToPage={navigateToPage} />
       )}
     </div>
   );
