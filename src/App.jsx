@@ -3,6 +3,8 @@ import MassTortPage from './MassTortPage.jsx';
 import DividendRecapPage from './DividendRecapPage.jsx';
 import SellSideReadinessPage from './SellSideReadinessPage.jsx';
 import CorporateDevPage from './CorporateDevPage.jsx';
+import BuildingCredibilityPage from './BuildingCredibilityPage.jsx';
+import EnhancingInvestmentCredibilityPage from './EnhancingInvestmentCredibilityPage.jsx';
 import MassTortDigestTemplate from './components/newsletters/MassTortDigestTemplate.jsx';  
 
 export default function NorthCastleConsulting() {
@@ -361,6 +363,14 @@ export default function NorthCastleConsulting() {
 
       {currentPage === 'newsletter-blog' && (
         <MassTortDigestTemplate navigateToPage={navigateToPage} />
+      )}
+
+      {currentPage === 'case-study-credibility' && (
+        <BuildingCredibilityPage navigateToPage={navigateToPage} />
+      )}
+
+      {currentPage === 'case-study-fintech' && (
+        <EnhancingInvestmentCredibilityPage navigateToPage={navigateToPage} />
       )}
     </div>
   );

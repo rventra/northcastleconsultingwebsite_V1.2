@@ -244,7 +244,7 @@ export default function SellSideReadinessPage({ navigateToPage }) {
                 </p>
                 <a
                   href="#"
-                  onClick={(e) => { e.preventDefault(); /* navigateToPage('case-study-credibility'); */ }}
+                  onClick={(e) => { e.preventDefault(); navigateToPage('case-study-credibility'); }}
                   className="inline-block bg-blue-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-slate-800 transition-all"
                 >
                   View More →
@@ -267,7 +267,7 @@ export default function SellSideReadinessPage({ navigateToPage }) {
                 </p>
                 <a
                   href="#"
-                  onClick={(e) => { e.preventDefault(); /* navigateToPage('case-study-fintech'); */ }}
+                  onClick={(e) => { e.preventDefault(); navigateToPage('case-study-fintech'); }}
                   className="inline-block bg-blue-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-slate-800 transition-all"
                 >
                   View More →
