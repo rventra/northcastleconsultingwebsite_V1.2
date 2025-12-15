@@ -39,42 +39,50 @@ export default function NorthCastleConsulting() {
             <div className="hidden md:flex gap-8 items-center">
               <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} className="text-white hover:text-yellow-600 transition-colors font-medium">Home</a>
               
-              <div className="relative">
+              <div
+                className="relative"
+                onMouseEnter={() => setServicesDropdownOpen(true)}
+                onMouseLeave={() => setServicesDropdownOpen(false)}
+              >
                 <button
-                  onMouseEnter={() => setServicesDropdownOpen(true)}
-                  onMouseLeave={() => setServicesDropdownOpen(false)}
-                  className="text-white hover:text-yellow-600 transition-colors font-medium flex items-center gap-1"
+                  className="text-white hover:text-yellow-600 transition-colors font-medium flex items-center gap-1 py-2"
                 >
-                  Services ▾
+                  Services
+                  <svg className={`w-4 h-4 transition-transform ${servicesDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
                 </button>
-                {servicesDropdownOpen && (
-                  <div
-                    className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl py-3"
-                    onMouseEnter={() => setServicesDropdownOpen(true)}
-                    onMouseLeave={() => setServicesDropdownOpen(false)}
-                  >
+                <div
+                  className={`absolute top-full left-0 pt-2 transition-all duration-200 ${servicesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+                >
+                  <div className="w-80 bg-white rounded-lg shadow-xl py-3 border border-gray-100">
+                    <div className="px-4 py-2">
+                      <p className="text-xs font-bold text-blue-900 uppercase tracking-wider">Lender Services</p>
+                    </div>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="block px-6 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-900 transition-colors">Lender Due Diligence</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-dd-non-pe'); }} className="block px-6 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-900 transition-colors">Lender Due Diligence For Non-PE Financing</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('challenged-credit'); }} className="block px-6 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-900 transition-colors">Challenged Credit Due Diligence</a>
+
+                    <div className="border-t border-gray-200 my-2"></div>
+
                     <div className="px-4 py-2">
                       <p className="text-xs font-bold text-blue-900 uppercase tracking-wider">Private Equity Services</p>
                     </div>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block px-6 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Dividend Recapitalization Preparation</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block px-6 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Sell-Side Readiness</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block px-6 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-900 transition-colors">Sell-Side Readiness</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block px-6 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-900 transition-colors">Dividend Recapitalization Prep</a>
 
                     <div className="border-t border-gray-200 my-2"></div>
 
                     <div className="px-4 py-2">
                       <p className="text-xs font-bold text-blue-900 uppercase tracking-wider">Family Office / Independent Sponsor</p>
                     </div>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block px-6 py-2 text-slate-900 hover:bg-gray-100 hover:text-yellow-600">Corporate Development</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block px-6 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-900 transition-colors">Corporate Development</a>
                   </div>
-                )}
+                </div>
               </div>
 
-              {currentPage === 'home' && (
-                <>
-                  <a href="#case-studies" onClick={(e) => { e.preventDefault(); scrollToSection('case-studies'); }} className="text-white hover:text-yellow-600 transition-colors font-medium">Case Studies</a>
-                  <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }} className="text-white hover:text-yellow-600 transition-colors font-medium">Contact</a>
-                </>
-              )}
+              <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('case-studies') : navigateToPage('home'); }} className="text-white hover:text-yellow-600 transition-colors font-medium">Case Studies</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('contact') : navigateToPage('home'); }} className="text-white hover:text-yellow-600 transition-colors font-medium">Contact</a>
             </div>
 
             <button 
@@ -90,9 +98,16 @@ export default function NorthCastleConsulting() {
               <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} className="text-white hover:text-yellow-600 transition-colors">Home</a>
 
               <div className="border-t border-slate-700 pt-3">
+                <p className="text-xs font-bold text-yellow-600 uppercase tracking-wider mb-2">Lender Services</p>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="block pl-4 py-1 text-white hover:text-yellow-600 transition-colors text-sm">Lender Due Diligence</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-dd-non-pe'); }} className="block pl-4 py-1 text-white hover:text-yellow-600 transition-colors text-sm">Lender Due Diligence For Non-PE Financing</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('challenged-credit'); }} className="block pl-4 py-1 text-white hover:text-yellow-600 transition-colors text-sm">Challenged Credit Due Diligence</a>
+              </div>
+
+              <div className="border-t border-slate-700 pt-3">
                 <p className="text-xs font-bold text-yellow-600 uppercase tracking-wider mb-2">Private Equity Services</p>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block pl-4 py-1 text-white hover:text-yellow-600 transition-colors text-sm">Dividend Recapitalization Preparation</a>
                 <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block pl-4 py-1 text-white hover:text-yellow-600 transition-colors text-sm">Sell-Side Readiness</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block pl-4 py-1 text-white hover:text-yellow-600 transition-colors text-sm">Dividend Recapitalization Prep</a>
               </div>
 
               <div className="border-t border-slate-700 pt-3">
@@ -100,14 +115,10 @@ export default function NorthCastleConsulting() {
                 <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block pl-4 py-1 text-white hover:text-yellow-600 transition-colors text-sm">Corporate Development</a>
               </div>
 
-              {currentPage === 'home' && (
-                <>
-                  <div className="border-t border-slate-700 pt-3">
-                    <a href="#case-studies" onClick={(e) => { e.preventDefault(); scrollToSection('case-studies'); }} className="text-white hover:text-yellow-600 transition-colors">Case Studies</a>
-                  </div>
-                  <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }} className="text-white hover:text-yellow-600 transition-colors">Contact</a>
-                </>
-              )}
+              <div className="border-t border-slate-700 pt-3">
+                <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('case-studies') : navigateToPage('home'); setMobileMenuOpen(false); }} className="text-white hover:text-yellow-600 transition-colors">Case Studies</a>
+              </div>
+              <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('contact') : navigateToPage('home'); setMobileMenuOpen(false); }} className="text-white hover:text-yellow-600 transition-colors">Contact</a>
             </div>
           )}
         </div>
