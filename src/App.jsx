@@ -7,6 +7,8 @@ import BuildingCredibilityPage from './BuildingCredibilityPage.jsx';
 import EnhancingInvestmentCredibilityPage from './EnhancingInvestmentCredibilityPage.jsx';
 import CarRentalCaseStudyPage from './CarRentalCaseStudyPage.jsx';
 import TargetIdentificationCaseStudyPage from './TargetIdentificationCaseStudyPage.jsx';
+import KPIDataCubeCaseStudyPage from './KPIDataCubeCaseStudyPage.jsx';
+import DataChallengedCaseStudyPage from './DataChallengedCaseStudyPage.jsx';
 import MassTortDigestTemplate from './components/newsletters/MassTortDigestTemplate.jsx';
 
 export default function NorthCastleConsulting() {
@@ -236,7 +238,17 @@ export default function NorthCastleConsulting() {
                 <p className="text-gray-600">Proven results across industries</p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-kpi-data-cube'); }} className="block bg-white p-6 rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all">
+                  <span className="text-xs font-semibold text-blue-900 uppercase tracking-wider">Sell-Side Readiness</span>
+                  <h3 className="text-lg font-bold text-slate-900 mt-2 mb-2">KPI Data Cube for Company Sale</h3>
+                  <p className="text-gray-600 text-sm">$250M auto parts manufacturer - 2.7M data points unified</p>
+                </a>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-data-challenged'); }} className="block bg-white p-6 rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all">
+                  <span className="text-xs font-semibold text-blue-900 uppercase tracking-wider">Sell-Side Readiness</span>
+                  <h3 className="text-lg font-bold text-slate-900 mt-2 mb-2">Unlocking Value in Data-Challenged Sale</h3>
+                  <p className="text-gray-600 text-sm">Vending & catering company - stalled to sold in 7 months</p>
+                </a>
                 <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-credibility'); }} className="block bg-white p-6 rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all">
                   <span className="text-xs font-semibold text-blue-900 uppercase tracking-wider">Sell-Side Readiness</span>
                   <h3 className="text-lg font-bold text-slate-900 mt-2 mb-2">Building Credibility & Justifying Multiples</h3>
@@ -366,6 +378,14 @@ export default function NorthCastleConsulting() {
 
       {currentPage === 'case-study-target-id' && (
         <TargetIdentificationCaseStudyPage navigateToPage={navigateToPage} />
+      )}
+
+      {currentPage === 'case-study-kpi-data-cube' && (
+        <KPIDataCubeCaseStudyPage navigateToPage={navigateToPage} />
+      )}
+
+      {currentPage === 'case-study-data-challenged' && (
+        <DataChallengedCaseStudyPage navigateToPage={navigateToPage} />
       )}
     </div>
   );
