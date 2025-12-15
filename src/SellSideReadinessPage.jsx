@@ -19,62 +19,62 @@ export default function SellSideReadinessPage({ navigateToPage }) {
       </div>
 
       {/* Two-Column Section: Challenges & Solutions */}
-      <div className="py-16 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Left Column - Challenges */}
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-6">Challenges</h2>
-              <ul className="space-y-4 text-gray-700">
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Risk of Disruption</strong> — Management must balance day-to-day operations while preparing for due diligence.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Data Complexity</strong> — Disparate systems, large, unstructured data, and post-merger misalignment can stall transactions.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Buyer Scrutiny</strong> — Investors demand accuracy in financials and operations, and unexpected issues can derail valuations.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Resource Constraints</strong> — Understaffed F&A teams struggle to meet the diligence requirements of a deal.</span>
-                </li>
-              </ul>
-            </div>
+      <div className="grid md:grid-cols-2">
+        {/* Left Column - Challenges (Grey) */}
+        <div className="bg-gray-100 py-16 px-6 md:px-12">
+          <div className="max-w-xl ml-auto">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">Challenges</h2>
+            <ul className="space-y-4 text-gray-700">
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span><strong>Risk of Disruption</strong> — Management must balance day-to-day operations while preparing for due diligence.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span><strong>Data Complexity</strong> — Disparate systems, large, unstructured data, and post-merger misalignment can stall transactions.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span><strong>Buyer Scrutiny</strong> — Investors demand accuracy in financials and operations, and unexpected issues can derail valuations.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-blue-900 mt-1">•</span>
+                <span><strong>Resource Constraints</strong> — Understaffed F&A teams struggle to meet the diligence requirements of a deal.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-            {/* Right Column - Solutions */}
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-6">Our Solution</h2>
-              <ul className="space-y-4 text-gray-700">
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Transaction Success</strong> — Proven track record of engagements resulting in successful exits.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Management Focus</strong> — Allows leadership to prioritize daily operations without distraction.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Maximize Valuation</strong> — Pre-sale diligence reduces surprises and improves deal terms.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Data Validation</strong> — Rigorous verification of financial and operational metrics to instill buyer confidence.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Elevate Credibility</strong> — Professional deliverables enhance the buyer's impression of the management team.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-blue-900 mt-1">•</span>
-                  <span><strong>Prevent Surprises</strong> — Proactively address operational, technology, and HR concerns before due diligence begins.</span>
-                </li>
-              </ul>
-            </div>
+        {/* Right Column - Solutions (Blue) */}
+        <div className="bg-blue-900 py-16 px-6 md:px-12 text-white">
+          <div className="max-w-xl mr-auto">
+            <h2 className="text-2xl font-bold mb-6">Our Solution</h2>
+            <ul className="space-y-4 text-blue-100">
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Transaction Success</strong> — Proven track record of engagements resulting in successful exits.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Management Focus</strong> — Allows leadership to prioritize daily operations without distraction.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Maximize Valuation</strong> — Pre-sale diligence reduces surprises and improves deal terms.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Data Validation</strong> — Rigorous verification of financial and operational metrics to instill buyer confidence.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Elevate Credibility</strong> — Professional deliverables enhance the buyer's impression of the management team.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-yellow-500 mt-1">•</span>
+                <span><strong className="text-white">Prevent Surprises</strong> — Proactively address operational, technology, and HR concerns before due diligence begins.</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
