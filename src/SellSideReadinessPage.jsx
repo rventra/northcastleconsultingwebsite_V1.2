@@ -132,27 +132,51 @@ export default function SellSideReadinessPage({ navigateToPage }) {
 
       {/* Case Studies Section */}
       <div className="py-16 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold text-slate-900 mb-8">Case Studies</h2>
 
-          <div className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-kpi-data-cube'); }}
+              className="block p-6 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors border border-gray-200 hover:shadow-md"
+            >
+              <span className="text-xs font-semibold text-yellow-600 uppercase tracking-wider">Manufacturing</span>
+              <h3 className="text-lg font-bold text-slate-900 mt-2 mb-2">KPI Data Cube for a Company Sale</h3>
+              <p className="text-gray-600 text-sm mb-3">Transformed 2.7M data points from 6 ERP systems into actionable insights for a $250M auto parts manufacturer.</p>
+              <span className="text-blue-900 font-medium">Read Case Study →</span>
+            </a>
+
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-data-challenged'); }}
+              className="block p-6 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors border border-gray-200 hover:shadow-md"
+            >
+              <span className="text-xs font-semibold text-yellow-600 uppercase tracking-wider">Business Services</span>
+              <h3 className="text-lg font-bold text-slate-900 mt-2 mb-2">Unlocking Value in a Data-Challenged Sale</h3>
+              <p className="text-gray-600 text-sm mb-3">Turned a year-long stalled deal into a successful exit in 7 months for a vending & catering company.</p>
+              <span className="text-blue-900 font-medium">Read Case Study →</span>
+            </a>
+
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); navigateToPage('case-study-credibility'); }}
-              className="block p-6 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors border border-gray-200"
+              className="block p-6 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors border border-gray-200 hover:shadow-md"
             >
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Building Credibility & Justifying Multiples</h3>
-              <p className="text-gray-600 mb-2">A private equity-backed venue management company was preparing for a sale, but its finance team lacked the expertise to handle the complex due diligence process.</p>
+              <span className="text-xs font-semibold text-yellow-600 uppercase tracking-wider">Hospitality</span>
+              <h3 className="text-lg font-bold text-slate-900 mt-2 mb-2">Building Credibility & Justifying Multiples</h3>
+              <p className="text-gray-600 text-sm mb-3">Equipped a venue management company's finance team to support a premium EBITDA multiple.</p>
               <span className="text-blue-900 font-medium">Read Case Study →</span>
             </a>
 
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); navigateToPage('case-study-fintech'); }}
-              className="block p-6 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors border border-gray-200"
+              className="block p-6 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors border border-gray-200 hover:shadow-md"
             >
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Enhancing Investment Credibility: FinTech Sale</h3>
-              <p className="text-gray-600 mb-2">A private equity-backed FinTech payments company was preparing for a sale but lacked the critical analysis that buyers required.</p>
+              <span className="text-xs font-semibold text-yellow-600 uppercase tracking-wider">FinTech</span>
+              <h3 className="text-lg font-bold text-slate-900 mt-2 mb-2">Enhancing Investment Credibility</h3>
+              <p className="text-gray-600 text-sm mb-3">Built key growth and churn analyses for a payments company that had never operated with these insights.</p>
               <span className="text-blue-900 font-medium">Read Case Study →</span>
             </a>
           </div>

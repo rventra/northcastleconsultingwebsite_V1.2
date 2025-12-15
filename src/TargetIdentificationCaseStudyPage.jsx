@@ -3,6 +3,22 @@ import React from 'react';
 export default function TargetIdentificationCaseStudyPage({ navigateToPage }) {
   return (
     <div className="pt-20">
+      {/* Back Navigation - Top */}
+      <div className="bg-slate-900 py-3 px-6">
+        <div className="max-w-6xl mx-auto">
+          <a
+            href="#"
+            onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }}
+            className="inline-flex items-center gap-2 text-gray-300 hover:text-yellow-500 transition-colors text-sm font-medium"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Corporate Development
+          </a>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
@@ -91,23 +107,6 @@ export default function TargetIdentificationCaseStudyPage({ navigateToPage }) {
         </div>
       </div>
 
-      {/* Related Case Studies */}
-      <div className="py-12 px-6 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xl font-bold text-slate-900 mb-6">Related Case Studies</h2>
-
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); navigateToPage('case-study-car-rental'); }}
-            className="block p-6 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-gray-200"
-          >
-            <h3 className="text-lg font-bold text-slate-900 mb-2">From Operations to Ownership: Car Rental Franchise</h3>
-            <p className="text-gray-600 mb-2">A car rental franchise of a major global brand was up for sale. The buyers had deep operational expertise and a vision to enhance the business.</p>
-            <span className="text-blue-900 font-medium">Read Case Study →</span>
-          </a>
-        </div>
-      </div>
-
       {/* CTA Section */}
       <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
@@ -124,25 +123,6 @@ export default function TargetIdentificationCaseStudyPage({ navigateToPage }) {
         </div>
       </div>
 
-      {/* Back Navigation */}
-      <div className="bg-white py-6 px-6 border-t border-gray-200">
-        <div className="max-w-4xl mx-auto flex justify-between">
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }}
-            className="text-blue-900 hover:text-yellow-600 transition-colors font-medium"
-          >
-            ← Back to Corporate Development
-          </a>
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); navigateToPage('home'); }}
-            className="text-blue-900 hover:text-yellow-600 transition-colors font-medium"
-          >
-            Home
-          </a>
-        </div>
-      </div>
     </div>
   );
 }
