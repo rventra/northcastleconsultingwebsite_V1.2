@@ -4,157 +4,105 @@ export default function EnhancingInvestmentCredibilityPage({ navigateToPage }) {
   return (
     <div className="pt-20">
       {/* Hero */}
-      <div className="relative bg-gradient-to-br from-green-900 via-teal-800 to-slate-900 text-white py-24 px-6">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div className="relative max-w-4xl mx-auto text-center">
-          <span className="inline-block bg-yellow-600 text-slate-900 text-xs font-bold px-4 py-1.5 rounded-full tracking-wider mb-6">
+      <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-24 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="inline-block text-yellow-600 text-sm font-semibold tracking-wider mb-4">
             CASE STUDY
           </span>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Enhancing Investment Credibility</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Enhancing Investment Credibility</h1>
           <p className="text-xl opacity-90">FinTech Payments | Sell-Side Readiness</p>
         </div>
       </div>
 
       {/* Info Grid */}
       <div className="bg-gray-50 py-8 px-6 border-b border-gray-200">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
-              <h4 className="text-xs font-bold text-blue-900 uppercase tracking-wider mb-2">Industry</h4>
-              <p className="text-gray-600 text-sm">— Fin Tech</p>
-              <p className="text-gray-600 text-sm">— Payments</p>
+              <p className="text-xs font-semibold text-blue-900 uppercase tracking-wider mb-1">Industry</p>
+              <p className="text-gray-600 text-sm">FinTech</p>
+              <p className="text-gray-600 text-sm">Payments</p>
             </div>
             <div>
-              <h4 className="text-xs font-bold text-blue-900 uppercase tracking-wider mb-2">Duration</h4>
-              <p className="text-gray-600 text-sm">— 2 months</p>
+              <p className="text-xs font-semibold text-blue-900 uppercase tracking-wider mb-1">Duration</p>
+              <p className="text-gray-600 text-sm">2 months</p>
             </div>
             <div>
-              <h4 className="text-xs font-bold text-blue-900 uppercase tracking-wider mb-2">Team</h4>
-              <p className="text-gray-600 text-sm">— 1 Managing Director</p>
-              <p className="text-gray-600 text-sm">— 1 Director</p>
-              <p className="text-gray-600 text-sm">— 1 Vice President</p>
-              <p className="text-gray-600 text-sm">— 1 Associate</p>
+              <p className="text-xs font-semibold text-blue-900 uppercase tracking-wider mb-1">Team</p>
+              <p className="text-gray-600 text-sm">1 Managing Director</p>
+              <p className="text-gray-600 text-sm">1 Director</p>
+              <p className="text-gray-600 text-sm">1 Vice President</p>
+              <p className="text-gray-600 text-sm">1 Associate</p>
             </div>
             <div>
-              <h4 className="text-xs font-bold text-blue-900 uppercase tracking-wider mb-2">Services</h4>
-              <p className="text-gray-600 text-sm">— Sell Side Readiness</p>
-              <p className="text-gray-600 text-sm">— FP&A Support</p>
+              <p className="text-xs font-semibold text-blue-900 uppercase tracking-wider mb-1">Services</p>
+              <p className="text-gray-600 text-sm">Sell Side Readiness</p>
+              <p className="text-gray-600 text-sm">FP&A Support</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Structuring Key Growth & Churn Analysis for a FinTech Sale</h2>
+      <div className="bg-white py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Structuring Key Growth & Churn Analysis for a FinTech Sale</h2>
 
-        <p className="text-lg text-gray-700 leading-relaxed mb-6">
-          A private equity-backed FinTech payments company was preparing for a sale but lacked the critical analysis that buyers required. The company had never operated with these data-driven insights, making it difficult for the sponsor to align internal teams and produce the necessary diligence materials. With no prior experience building these analyses, the finance and operations teams struggled to provide clear explanations for revenue growth, customer retention, and sales pipeline effectiveness.
-        </p>
+          <p className="text-lg text-gray-700 leading-relaxed mb-6">
+            A private equity-backed FinTech payments company was preparing for a sale but lacked the critical analysis that buyers required. The company had never operated with these data-driven insights, making it difficult for the sponsor to align internal teams and produce the necessary diligence materials. With no prior experience building these analyses, the finance and operations teams struggled to provide clear explanations for revenue growth, customer retention, and sales pipeline effectiveness.
+          </p>
 
-        <p className="text-lg text-gray-700 leading-relaxed mb-12">
-          We were engaged to step in and construct the key analyses that would support the investment thesis, educate stakeholders, and provide a data-backed foundation for a successful sale.
-        </p>
+          <p className="text-lg text-gray-700 leading-relaxed mb-12">
+            We were engaged to step in and construct the key analyses that would support the investment thesis, educate stakeholders, and provide a data-backed foundation for a successful sale.
+          </p>
 
-        {/* The Execution */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-            <span className="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center text-white text-lg">1</span>
-            The Execution
-          </h3>
+          {/* The Execution */}
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">The Execution</h2>
           <p className="text-gray-700 mb-6">
             To bridge the gap between operational data and investment-grade analysis, we built structured financial models and insights, including:
           </p>
 
-          <div className="space-y-6">
-            <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-900">
-              <h4 className="font-bold text-slate-900 mb-2">Key Growth Driver Analysis</h4>
-              <p className="text-gray-600 leading-relaxed">
-                Constructed a data cube that segmented revenue and gross profit by customer and service line, integrating data from multiple sources. This model allowed us to connect revenue streams with issuance data at a granular level—something the company had never done before. The analysis pinpointed revenue-driving levers, explaining trends in gross revenue, net revenue, and issuance by product, service, and customer. This also helped normalize post-COVID revenue expectations.
+          <ul className="space-y-6 mb-12">
+            <li>
+              <p className="text-lg text-gray-700">
+                <strong>Key Growth Driver Analysis</strong> – Constructed a data cube that segmented revenue and gross profit by customer and service line, integrating data from multiple sources. This model allowed us to connect revenue streams with issuance data at a granular level—something the company had never done before. The analysis pinpointed revenue-driving levers, explaining trends in gross revenue, net revenue, and issuance by product, service, and customer. This also helped normalize post-COVID revenue expectations.
               </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-900">
-              <h4 className="font-bold text-slate-900 mb-2">Sales Pipeline & Win Rate Analysis</h4>
-              <p className="text-gray-600 leading-relaxed">
-                Integrated data from marketing CRM tools to build a sales pipeline model, tracking customer conversion rates at each stage. This allowed the company to justify its revenue projections with historical win rates, sales cycle lengths, and overall funnel efficiency, building credibility with potential buyers.
+            </li>
+            <li>
+              <p className="text-lg text-gray-700">
+                <strong>Sales Pipeline & Win Rate Analysis</strong> – Integrated data from marketing CRM tools to build a sales pipeline model, tracking customer conversion rates at each stage. This allowed the company to justify its revenue projections with historical win rates, sales cycle lengths, and overall funnel efficiency, building credibility with potential buyers.
               </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-900">
-              <h4 className="font-bold text-slate-900 mb-2">Customer Churn & Retention Analysis</h4>
-              <p className="text-gray-600 leading-relaxed">
-                Developed a customer lifecycle model to assess long-term retention trends across product and service lines. This analysis demonstrated that while some customers transacted infrequently, they remained consistent revenue contributors, smoothing out seasonality and substantiating claims of low churn and high product stickiness.
+            </li>
+            <li>
+              <p className="text-lg text-gray-700">
+                <strong>Customer Churn & Retention Analysis</strong> – Developed a customer lifecycle model to assess long-term retention trends across product and service lines. This analysis demonstrated that while some customers transacted infrequently, they remained consistent revenue contributors, smoothing out seasonality and substantiating claims of low churn and high product stickiness.
               </p>
-            </div>
-          </div>
-        </div>
+            </li>
+          </ul>
 
-        {/* The Results */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-            <span className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white text-lg">2</span>
-            The Results
-          </h3>
-          <div className="bg-green-50 p-6 rounded-xl border border-green-200">
-            <p className="text-gray-700 leading-relaxed">
-              The company successfully leveraged these newly developed insights to strengthen its investment thesis and provide buyers with a clearer financial story. The sponsor and management team gained a deeper understanding of key revenue drivers, customer behaviors, and long-term business stability, improving their ability to answer diligence questions with confidence. The transaction process proceeded more smoothly, backed by data-driven credibility.
-            </p>
-          </div>
+          {/* The Results */}
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">The Results</h2>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            The company successfully leveraged these newly developed insights to strengthen its investment thesis and provide buyers with a clearer financial story. The sponsor and management team gained a deeper understanding of key revenue drivers, customer behaviors, and long-term business stability, improving their ability to answer diligence questions with confidence. The transaction process proceeded more smoothly, backed by data-driven credibility.
+          </p>
         </div>
       </div>
 
       {/* Related Case Studies */}
       <div className="bg-gray-50 py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Related Case Studies</h2>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-slate-900 mb-8">Related Case Studies</h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Case Study 1 */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border border-gray-100">
-              <div className="h-40 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-900 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <div className="text-5xl mb-2">🔧</div>
-                  <p className="text-sm opacity-75">Auto Parts Manufacturing</p>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-3">Developing a KPI Data Cube For a Company Sale</h3>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                  A private equity-backed auto parts manufacturer preparing for a sale required a consolidated, enterprise-level view of sales, gross margin, and KPIs across customers, SKUs, and other dimensions.
-                </p>
-                <a
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); navigateToPage('case-study-kpi-data-cube'); }}
-                  className="inline-block bg-blue-900 text-white px-5 py-2 rounded-lg font-semibold text-sm hover:bg-slate-800 transition-all"
-                >
-                  View More →
-                </a>
-              </div>
-            </div>
-
-            {/* Case Study 2 */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 border border-gray-100">
-              <div className="h-40 bg-gradient-to-br from-orange-900 via-amber-800 to-slate-800 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <div className="text-5xl mb-2">🏭</div>
-                  <p className="text-sm opacity-75">Business Services</p>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-3">Unlocking Value in a Data-Challenged Business Sale</h3>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                  A private equity-backed business services company in the vending and catering industry was struggling to complete its sale due to significant financial and operational challenges.
-                </p>
-                <a
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); navigateToPage('case-study-data-challenged'); }}
-                  className="inline-block bg-blue-900 text-white px-5 py-2 rounded-lg font-semibold text-sm hover:bg-slate-800 transition-all"
-                >
-                  View More →
-                </a>
-              </div>
-            </div>
+          <div className="space-y-4">
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-credibility'); }}
+              className="block p-6 bg-white rounded-lg hover:bg-blue-50 transition-colors group"
+            >
+              <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-900 mb-2">Building Credibility & Justifying Multiples</h3>
+              <p className="text-gray-600 mb-2">A private equity-backed venue management company was preparing for a sale, but its finance team lacked the expertise to handle the complex due diligence process.</p>
+              <span className="text-blue-900 font-medium">Read Case Study →</span>
+            </a>
           </div>
         </div>
       </div>
@@ -162,12 +110,12 @@ export default function EnhancingInvestmentCredibilityPage({ navigateToPage }) {
       {/* CTA Section */}
       <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Drive Your Business Forward</h2>
-          <p className="text-xl mb-10 opacity-90">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Drive Your Business Forward</h2>
+          <p className="text-lg mb-8 opacity-90">
             Schedule your consultation today to leverage our expert insights and drive your business forward. Our dedicated team is ready to provide tailored solutions to meet your organization's unique needs.
           </p>
           <a
-            href="mailto:contact@northcastleconsulting.com?subject=Case%20Study%20Inquiry%20-%20FinTech%20Investment%20Credibility"
+            href="mailto:contact@northcastleconsulting.com?subject=Case%20Study%20Inquiry"
             className="inline-block bg-yellow-600 text-slate-900 px-10 py-4 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg"
           >
             Contact Us
@@ -176,8 +124,8 @@ export default function EnhancingInvestmentCredibilityPage({ navigateToPage }) {
       </div>
 
       {/* Back Navigation */}
-      <div className="bg-white py-8 px-6 border-t border-gray-200">
-        <div className="max-w-5xl mx-auto flex justify-between items-center">
+      <div className="bg-white py-6 px-6 border-t border-gray-200">
+        <div className="max-w-4xl mx-auto flex justify-between">
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }}
