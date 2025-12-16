@@ -20,34 +20,18 @@ export default function BuildingCredibilityPage({ navigateToPage }) {
       </div>
 
       {/* Compact Hero */}
-      <div className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white py-10 px-6">
+      <div className="bg-slate-900 text-white py-10 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div className="flex-1">
-              <span className="inline-block bg-yellow-500 text-slate-900 text-xs font-bold px-2 py-1 rounded mb-3">
-                SELL-SIDE READINESS
-              </span>
-              <h1 className="text-2xl md:text-3xl font-bold mb-2">
-                Building Credibility & Justifying Multiples
-              </h1>
-              <p className="text-gray-300 text-sm">
-                Equipping a venue management company's finance team to support a premium EBITDA valuation.
-              </p>
-            </div>
-            <div className="flex gap-4 text-center">
-              <div className="bg-white/10 rounded-lg px-4 py-3">
-                <p className="text-yellow-500 text-xl font-bold">5 Mo</p>
-                <p className="text-gray-400 text-xs">Duration</p>
-              </div>
-              <div className="bg-white/10 rounded-lg px-4 py-3">
-                <p className="text-yellow-500 text-xl font-bold">3</p>
-                <p className="text-gray-400 text-xs">Key Analyses</p>
-              </div>
-              <div className="bg-white/10 rounded-lg px-4 py-3">
-                <p className="text-yellow-500 text-xl font-bold">High</p>
-                <p className="text-gray-400 text-xs">Multiple</p>
-              </div>
-            </div>
+          <div>
+            <span className="inline-block bg-yellow-500 text-slate-900 text-xs font-bold px-2 py-1 rounded mb-3">
+              SELL-SIDE READINESS
+            </span>
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">
+              Building Credibility & Justifying Multiples
+            </h1>
+            <p className="text-gray-300 text-sm">
+              Equipping a venue management company's finance team to support a premium EBITDA valuation.
+            </p>
           </div>
         </div>
       </div>

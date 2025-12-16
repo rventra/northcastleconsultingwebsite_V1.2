@@ -4,7 +4,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
   return (
     <div className="pt-20">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-20 px-6 text-center">
+      <div className="bg-slate-900 text-white py-20 px-6 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">Mass Tort Services</h1>
           <p className="text-xl md:text-2xl opacity-95 mb-8">
@@ -99,7 +99,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
       </div>
 
       {/* Lifecycle Overview */}
-      <div id="lifecycle" className="bg-gradient-to-b from-gray-50 to-white py-20 px-6 scroll-mt-20">
+      <div id="lifecycle" className="bg-white py-20 px-6 scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           <h3 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 text-center">Mass Tort Case Lifecycle Services</h3>
           <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">Click any stage below to learn how we optimize your operations and accelerate outcomes</p>
@@ -111,7 +111,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
               onClick={(e) => { e.preventDefault(); scrollToSection('stage-1'); }} 
               className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-blue-900 transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-900 to-slate-800 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-900 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
               <div className="relative p-8">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-blue-900 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">STAGE 1</span>
@@ -149,7 +149,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
               onClick={(e) => { e.preventDefault(); scrollToSection('stage-2'); }} 
               className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-blue-900 transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-900 to-slate-800 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-900 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
               <div className="relative p-8">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-blue-900 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">STAGE 2</span>
@@ -186,7 +186,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
               onClick={(e) => { e.preventDefault(); scrollToSection('stage-3'); }} 
               className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-blue-900 transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-900 to-slate-800 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-900 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
               <div className="relative p-8">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-blue-900 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">STAGE 3</span>
@@ -223,7 +223,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
               onClick={(e) => { e.preventDefault(); scrollToSection('stage-4'); }} 
               className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-blue-900 transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-900 to-slate-800 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-900 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
               <div className="relative p-8">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-blue-900 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">STAGE 4</span>
@@ -260,7 +260,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
               onClick={(e) => { e.preventDefault(); scrollToSection('stage-5'); }} 
               className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-blue-900 transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-900 to-slate-800 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-900 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
               <div className="relative p-8">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-blue-900 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">STAGE 5</span>
@@ -297,7 +297,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
               onClick={(e) => { e.preventDefault(); scrollToSection('stage-6'); }} 
               className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-blue-900 transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-900 to-slate-800 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-900 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
               <div className="relative p-8">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-blue-900 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">STAGE 6</span>
@@ -334,7 +334,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
               onClick={(e) => { e.preventDefault(); scrollToSection('stage-7'); }} 
               className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-blue-900 transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-900 to-slate-800 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-900 opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
               <div className="relative p-8">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-blue-900 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wide">STAGE 7</span>
@@ -372,7 +372,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
       <div className="max-w-5xl mx-auto px-6 py-16 space-y-20">
         {/* Stage 1 Details */}
         <div id="stage-1" className="scroll-mt-24">
-          <div className="bg-gradient-to-r from-blue-900 to-slate-800 text-white p-8 rounded-t-xl">
+          <div className="bg-blue-900 text-white p-8 rounded-t-xl">
             <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 1</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Case Intake & Pre-Qualification</h2>
             <p className="text-xl opacity-90">Streamline initial screenings, eliminate bad cases early, reduce downstream rework</p>
@@ -411,7 +411,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
 
         {/* Stage 2 Details */}
         <div id="stage-2" className="scroll-mt-24">
-          <div className="bg-gradient-to-r from-blue-900 to-slate-800 text-white p-8 rounded-t-xl">
+          <div className="bg-blue-900 text-white p-8 rounded-t-xl">
             <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 2</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Case Prioritization & Resource Allocation</h2>
             <p className="text-xl opacity-90">Focus staff on high-value cases, reduce wasted effort, accelerate settlements</p>
@@ -450,7 +450,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
 
         {/* Stage 3 Details */}
         <div id="stage-3" className="scroll-mt-24">
-          <div className="bg-gradient-to-r from-blue-900 to-slate-800 text-white p-8 rounded-t-xl">
+          <div className="bg-blue-900 text-white p-8 rounded-t-xl">
             <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 3</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Document Collection & Deficiency Management</h2>
             <p className="text-xl opacity-90">Eliminate chase emails, automate reminders, reduce document collection time by 40%</p>
@@ -489,7 +489,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
 
         {/* Stage 4 Details */}
         <div id="stage-4" className="scroll-mt-24">
-          <div className="bg-gradient-to-r from-blue-900 to-slate-800 text-white p-8 rounded-t-xl">
+          <div className="bg-blue-900 text-white p-8 rounded-t-xl">
             <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 4</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">OCR, Document Parsing & Indexing</h2>
             <p className="text-xl opacity-90">Make all documents searchable, eliminate manual file hunting, enable instant retrieval</p>
@@ -528,7 +528,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
 
         {/* Stage 5 Details */}
         <div id="stage-5" className="scroll-mt-24">
-          <div className="bg-gradient-to-r from-blue-900 to-slate-800 text-white p-8 rounded-t-xl">
+          <div className="bg-blue-900 text-white p-8 rounded-t-xl">
             <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 5</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Medical Review & Tier Assignment</h2>
             <p className="text-xl opacity-90">Standardize medical review, eliminate tier disputes, accelerate settlement negotiations</p>
@@ -567,7 +567,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
 
         {/* Stage 6 Details */}
         <div id="stage-6" className="scroll-mt-24">
-          <div className="bg-gradient-to-r from-blue-900 to-slate-800 text-white p-8 rounded-t-xl">
+          <div className="bg-blue-900 text-white p-8 rounded-t-xl">
             <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 6</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Workflow Tracking & Version Control</h2>
             <p className="text-xl opacity-90">Eliminate rework, maintain audit trails, coordinate multi-party document workflows</p>
@@ -606,7 +606,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
 
         {/* Stage 7 Details */}
         <div id="stage-7" className="scroll-mt-24">
-          <div className="bg-gradient-to-r from-blue-900 to-slate-800 text-white p-8 rounded-t-xl">
+          <div className="bg-blue-900 text-white p-8 rounded-t-xl">
             <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 7</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Document Intelligence & Data Extraction</h2>
             <p className="text-xl opacity-90">Convert documents to structured data, eliminate strike teams, respond to defense in hours not weeks</p>
@@ -645,7 +645,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
       </div>
 
       {/* Contact Form */}
-      <div id="contact-form" className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-20 px-6 scroll-mt-24">
+      <div id="contact-form" className="bg-slate-900 text-white py-20 px-6 scroll-mt-24">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center">Ready to Transform Your Mass Tort Practice?</h2>
           <p className="text-xl mb-10 opacity-90 text-center">
