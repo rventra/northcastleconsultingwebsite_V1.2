@@ -3,13 +3,13 @@ import React from 'react';
 export default function TargetIdentificationCaseStudyPage({ navigateToPage }) {
   return (
     <div className="pt-20">
-      {/* Back Navigation - Top */}
-      <div className="bg-slate-900 py-3 px-6">
-        <div className="max-w-6xl mx-auto">
+      {/* Back Navigation */}
+      <div className="bg-slate-900 py-2 px-6">
+        <div className="max-w-5xl mx-auto">
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }}
-            className="inline-flex items-center gap-2 text-gray-300 hover:text-yellow-500 transition-colors text-sm font-medium"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-yellow-500 transition-colors text-sm"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -19,110 +19,150 @@ export default function TargetIdentificationCaseStudyPage({ navigateToPage }) {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-block text-yellow-500 text-sm font-semibold tracking-wider mb-4">
-            CASE STUDY
-          </span>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Building an Acquisition Roadmap
-          </h1>
-          <p className="text-lg text-gray-300">Consulting & Business Services | Corporate Development</p>
-        </div>
-      </div>
-
-      {/* Info Grid */}
-      <div className="bg-gray-50 py-8 px-6 border-b border-gray-200">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
-            <div>
-              <p className="font-semibold text-blue-900 uppercase tracking-wider mb-1">Industry</p>
-              <p className="text-gray-600">Consulting</p>
-              <p className="text-gray-600">Business Services</p>
+      {/* Compact Hero */}
+      <div className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white py-10 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div className="flex-1">
+              <span className="inline-block bg-yellow-500 text-slate-900 text-xs font-bold px-2 py-1 rounded mb-3">
+                CORPORATE DEVELOPMENT
+              </span>
+              <h1 className="text-2xl md:text-3xl font-bold mb-2">
+                Building an Acquisition Roadmap
+              </h1>
+              <p className="text-gray-300 text-sm">
+                Target identification for a PE-backed consulting firm seeking growth through acquisitions.
+              </p>
             </div>
-            <div>
-              <p className="font-semibold text-blue-900 uppercase tracking-wider mb-1">Duration</p>
-              <p className="text-gray-600">2 months</p>
-            </div>
-            <div>
-              <p className="font-semibold text-blue-900 uppercase tracking-wider mb-1">Team</p>
-              <p className="text-gray-600">1 Director</p>
-              <p className="text-gray-600">1 Vice President</p>
-            </div>
-            <div>
-              <p className="font-semibold text-blue-900 uppercase tracking-wider mb-1">Services</p>
-              <p className="text-gray-600">Corporate Development</p>
+            <div className="flex gap-4 text-center">
+              <div className="bg-white/10 rounded-lg px-4 py-3">
+                <p className="text-yellow-500 text-xl font-bold">2 Mo</p>
+                <p className="text-gray-400 text-xs">Duration</p>
+              </div>
+              <div className="bg-white/10 rounded-lg px-4 py-3">
+                <p className="text-yellow-500 text-xl font-bold">2</p>
+                <p className="text-gray-400 text-xs">Team</p>
+              </div>
+              <div className="bg-white/10 rounded-lg px-4 py-3">
+                <p className="text-yellow-500 text-xl font-bold">50+</p>
+                <p className="text-gray-400 text-xs">Targets</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="py-12 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xl font-bold text-slate-900 mb-4">Target Identification for a Consulting Firm</h2>
-
-          <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            A private equity-backed consulting firm sought to grow through acquisitions but lacked a clear picture of the potential investment universe. Without a systematic approach to identifying and evaluating targets, the company struggled to prioritize opportunities and move efficiently on attractive deals. We were engaged to develop a comprehensive target identification framework and build a pipeline of actionable acquisition candidates.
-          </p>
-
-          {/* The Execution */}
-          <h2 className="text-2xl font-bold text-slate-900 mb-6">The Execution</h2>
-          <p className="text-gray-700 mb-6">
-            To establish a structured M&A pipeline, we implemented a multi-phase target identification process:
-          </p>
-
-          <div className="space-y-6 mb-10">
-            <div>
-              <p className="text-gray-700">
-                <strong>Market Landscape Analysis</strong> — Mapped the competitive landscape across relevant consulting segments, identifying key players, market dynamics, and consolidation trends to inform targeting criteria.
-              </p>
-            </div>
-
-            <div>
-              <p className="text-gray-700">
-                <strong>Target Universe Development</strong> — Built a comprehensive database of potential acquisition candidates using proprietary research, industry databases, and network intelligence, screening for strategic fit, size, and ownership structure.
-              </p>
-            </div>
-
-            <div>
-              <p className="text-gray-700">
-                <strong>Prioritization Framework</strong> — Developed a scoring methodology to rank targets based on strategic value, integration complexity, and likelihood of transaction, enabling the management team to focus resources on highest-potential opportunities.
-              </p>
-            </div>
-
-            <div>
-              <p className="text-gray-700">
-                <strong>Outreach Strategy</strong> — Created tailored outreach materials and approach strategies for priority targets, positioning the company as an attractive acquirer and facilitating initial conversations.
-              </p>
-            </div>
-          </div>
-
-          {/* The Results */}
-          <h2 className="text-2xl font-bold text-slate-900 mb-6">The Results</h2>
-          <p className="text-lg text-gray-700 leading-relaxed">
-            The firm gained a clear view of its acquisition landscape with a prioritized pipeline of over 50 qualified targets. The structured framework enabled the management team to move quickly when opportunities arose, ultimately leading to productive conversations with several high-priority candidates. The target identification process became the foundation for the company's ongoing M&A strategy, providing a repeatable approach to pipeline development.
-          </p>
+      {/* Project Info Bar */}
+      <div className="bg-gray-100 py-4 px-6 border-b border-gray-200">
+        <div className="max-w-5xl mx-auto flex flex-wrap gap-6 text-sm">
+          <div><span className="text-gray-500">Industry:</span> <span className="font-medium text-slate-900">Consulting & Business Services</span></div>
+          <div><span className="text-gray-500">Team:</span> <span className="font-medium text-slate-900">1 Director, 1 VP</span></div>
+          <div><span className="text-gray-500">Services:</span> <span className="font-medium text-slate-900">Corporate Development</span></div>
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-16 px-6">
+      {/* Challenge & Solution - Two Column */}
+      <div className="grid md:grid-cols-2">
+        <div className="bg-gray-50 py-10 px-6 md:px-10">
+          <div className="max-w-md ml-auto">
+            <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-6 h-6 bg-blue-900 text-white rounded text-xs flex items-center justify-center">1</span>
+              The Challenge
+            </h2>
+            <p className="text-gray-700 text-sm leading-relaxed mb-4">
+              A PE-backed consulting firm sought to grow through acquisitions but <strong>lacked a clear picture</strong> of the investment universe:
+            </p>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li className="flex gap-2"><span className="text-blue-900">•</span> No systematic targeting approach</li>
+              <li className="flex gap-2"><span className="text-blue-900">•</span> Struggled to prioritize opportunities</li>
+              <li className="flex gap-2"><span className="text-blue-900">•</span> Unable to move efficiently on deals</li>
+              <li className="flex gap-2"><span className="text-blue-900">•</span> Needed repeatable M&A framework</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="bg-blue-900 py-10 px-6 md:px-10 text-white">
+          <div className="max-w-md mr-auto">
+            <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+              <span className="w-6 h-6 bg-yellow-500 text-slate-900 rounded text-xs flex items-center justify-center">2</span>
+              Our Solution
+            </h2>
+            <p className="text-blue-100 text-sm leading-relaxed mb-4">
+              We developed a comprehensive target identification framework:
+            </p>
+            <ul className="space-y-2 text-sm text-blue-100">
+              <li className="flex gap-2"><span className="text-yellow-500">•</span> Market landscape analysis</li>
+              <li className="flex gap-2"><span className="text-yellow-500">•</span> Target universe development</li>
+              <li className="flex gap-2"><span className="text-yellow-500">•</span> Prioritization framework</li>
+              <li className="flex gap-2"><span className="text-yellow-500">•</span> Outreach strategy creation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Execution Steps */}
+      <div className="py-10 px-6 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-lg font-bold text-slate-900 mb-6">Multi-Phase Target Identification Process</h2>
+          <div className="grid md:grid-cols-4 gap-4">
+            {[
+              { title: "Market Analysis", desc: "Mapped competitive landscape, identified key players, market dynamics, consolidation trends" },
+              { title: "Target Universe", desc: "Built database of candidates using research, industry databases, and network intelligence" },
+              { title: "Prioritization", desc: "Developed scoring methodology ranking targets by strategic value and integration complexity" },
+              { title: "Outreach Strategy", desc: "Created tailored materials and approach strategies for priority targets" }
+            ].map((step, i) => (
+              <div key={i} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <h3 className="text-sm font-bold text-slate-900 mb-1">{step.title}</h3>
+                <p className="text-xs text-gray-600">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Results */}
+      <div className="py-10 px-6 bg-gray-50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-lg font-bold text-slate-900 mb-4">The Results</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-green-500">✓</span>
+                <span className="font-medium text-slate-900 text-sm">50+ Qualified Targets</span>
+              </div>
+              <p className="text-xs text-gray-600">Clear view of acquisition landscape with prioritized pipeline</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-green-500">✓</span>
+                <span className="font-medium text-slate-900 text-sm">Faster Execution</span>
+              </div>
+              <p className="text-xs text-gray-600">Framework enabled quick action when opportunities arose</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-green-500">✓</span>
+                <span className="font-medium text-slate-900 text-sm">Ongoing Strategy</span>
+              </div>
+              <p className="text-xs text-gray-600">Process became foundation for company's ongoing M&A strategy</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="bg-slate-900 py-10 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Drive Your Business Forward</h2>
-          <p className="text-lg text-gray-300 mb-8">
-            Schedule your consultation today to leverage our expert insights and drive your business forward.
-          </p>
+          <h2 className="text-xl font-bold text-white mb-2">Looking to Build Your Acquisition Pipeline?</h2>
+          <p className="text-gray-400 text-sm mb-6">Let's discuss how we can help identify and prioritize your targets.</p>
           <a
-            href="mailto:contact@northcastleconsulting.com?subject=Case%20Study%20Inquiry"
-            className="inline-block bg-yellow-600 text-slate-900 px-10 py-4 rounded-full font-semibold hover:bg-yellow-500 transition-all"
+            href="mailto:contact@northcastleconsulting.com?subject=Target%20Identification%20Inquiry"
+            className="inline-block bg-yellow-500 text-slate-900 px-6 py-3 rounded font-semibold text-sm hover:bg-yellow-400 transition-all"
           >
-            Contact Us
+            Start the Conversation
           </a>
         </div>
       </div>
-
     </div>
   );
 }
