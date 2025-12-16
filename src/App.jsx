@@ -166,11 +166,11 @@ export default function NorthCastleConsulting() {
                 </a>
                 <a
                   href="#"
-                  onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}
+                  onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }}
                   className="group bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-yellow-500/50 transition-all duration-300"
                 >
-                  <div className="text-yellow-500 text-sm font-semibold uppercase tracking-wider mb-2">Due Diligence</div>
-                  <div className="text-white font-medium group-hover:text-yellow-500 transition-colors">Financial & Operational Analysis</div>
+                  <div className="text-yellow-500 text-sm font-semibold uppercase tracking-wider mb-2">Litigation</div>
+                  <div className="text-white font-medium group-hover:text-yellow-500 transition-colors">Expert Financial Analysis & Support</div>
                 </a>
                 <a
                   href="#"
