@@ -148,21 +148,21 @@ export default function NorthCastleConsulting() {
                 </div>
                 <div className="hidden md:block">
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-white/10 backdrop-blur rounded-lg p-4">
-                      <div className="text-yellow-500 text-2xl font-bold">PE</div>
-                      <div className="text-white text-sm">Private Equity Services</div>
+                    <div className="bg-blue-900/40 backdrop-blur border border-blue-800/50 rounded-xl p-5 hover:bg-blue-900/60 transition-all duration-300">
+                      <div className="text-yellow-600 text-3xl font-bold mb-2">PE</div>
+                      <div className="text-gray-100 text-sm font-medium">Private Equity Services</div>
                     </div>
-                    <div className="bg-white/10 backdrop-blur rounded-lg p-4">
-                      <div className="text-yellow-500 text-2xl font-bold">M&A</div>
-                      <div className="text-white text-sm">Corporate Development</div>
+                    <div className="bg-blue-900/40 backdrop-blur border border-blue-800/50 rounded-xl p-5 hover:bg-blue-900/60 transition-all duration-300">
+                      <div className="text-yellow-600 text-3xl font-bold mb-2">M&A</div>
+                      <div className="text-gray-100 text-sm font-medium">Corporate Development</div>
                     </div>
-                    <div className="bg-white/10 backdrop-blur rounded-lg p-4">
-                      <div className="text-yellow-500 text-2xl font-bold">DD</div>
-                      <div className="text-white text-sm">Due Diligence</div>
+                    <div className="bg-blue-900/40 backdrop-blur border border-blue-800/50 rounded-xl p-5 hover:bg-blue-900/60 transition-all duration-300">
+                      <div className="text-yellow-600 text-3xl font-bold mb-2">DD</div>
+                      <div className="text-gray-100 text-sm font-medium">Due Diligence</div>
                     </div>
-                    <div className="bg-white/10 backdrop-blur rounded-lg p-4">
-                      <div className="text-yellow-500 text-2xl font-bold">FO</div>
-                      <div className="text-white text-sm">Family Office</div>
+                    <div className="bg-blue-900/40 backdrop-blur border border-blue-800/50 rounded-xl p-5 hover:bg-blue-900/60 transition-all duration-300">
+                      <div className="text-yellow-600 text-3xl font-bold mb-2">FO</div>
+                      <div className="text-gray-100 text-sm font-medium">Family Office</div>
                     </div>
                   </div>
                 </div>
