@@ -128,63 +128,63 @@ export default function NorthCastleConsulting() {
       {currentPage === 'home' && (
         <>
           {/* Hero Section */}
-          <section className="pt-16 bg-[#0D3BC3]">
-            <div className="max-w-7xl mx-auto px-6 py-12 md:py-20">
-              <div className="grid lg:grid-cols-[1fr,400px] gap-12 items-center">
+          <section className="pt-16 bg-gradient-to-br from-[#0D3BC3] via-[#0D3BC3] to-[#1A2234]">
+            <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 lg:py-28">
+              <div className="grid lg:grid-cols-[1fr,420px] gap-16 items-center">
                 {/* Left: Main Content */}
                 <div>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight">
                     Unlocking Value Through<br />
                     <span className="text-[#EDB624]">Financial Expertise</span>
                   </h1>
-                  <p className="text-white/90 text-base md:text-lg leading-relaxed mb-6">
+                  <p className="text-white/90 text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
                     Actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
                   </p>
                   <a
                     href="#services"
                     onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}
-                    className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded font-semibold hover:bg-[#EDB624]/90 transition-all shadow-lg"
+                    className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg text-lg"
                   >
                     Explore Our Solutions
                   </a>
                 </div>
 
                 {/* Right: Services List */}
-                <div className="space-y-6">
+                <div className="space-y-4 bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                   <a
                     href="#"
                     onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }}
-                    className="group block border-l-4 border-[#EDB624] pl-4 py-2 hover:border-white transition-all duration-300"
+                    className="group block bg-white/5 hover:bg-white/15 rounded-xl p-4 border-l-4 border-[#EDB624] transition-all duration-300"
                   >
                     <div className="text-[#EDB624] text-xs font-bold uppercase tracking-wider mb-1">Private Equity</div>
-                    <div className="text-white text-sm font-medium group-hover:text-[#EDB624] transition-colors">Sell-Side Readiness & Portfolio Support</div>
+                    <div className="text-white text-base font-medium group-hover:text-[#EDB624] transition-colors">Sell-Side Readiness & Portfolio Support</div>
                   </a>
 
                   <a
                     href="#"
                     onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }}
-                    className="group block border-l-4 border-[#EDB624] pl-4 py-2 hover:border-white transition-all duration-300"
+                    className="group block bg-white/5 hover:bg-white/15 rounded-xl p-4 border-l-4 border-[#EDB624] transition-all duration-300"
                   >
                     <div className="text-[#EDB624] text-xs font-bold uppercase tracking-wider mb-1">Corporate Dev</div>
-                    <div className="text-white text-sm font-medium group-hover:text-[#EDB624] transition-colors">Target Identification & Transaction Support</div>
+                    <div className="text-white text-base font-medium group-hover:text-[#EDB624] transition-colors">Target Identification & Transaction Support</div>
                   </a>
 
                   <a
                     href="#"
                     onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }}
-                    className="group block border-l-4 border-[#EDB624] pl-4 py-2 hover:border-white transition-all duration-300"
+                    className="group block bg-white/5 hover:bg-white/15 rounded-xl p-4 border-l-4 border-[#EDB624] transition-all duration-300"
                   >
                     <div className="text-[#EDB624] text-xs font-bold uppercase tracking-wider mb-1">Litigation</div>
-                    <div className="text-white text-sm font-medium group-hover:text-[#EDB624] transition-colors">Expert Financial Analysis & Support</div>
+                    <div className="text-white text-base font-medium group-hover:text-[#EDB624] transition-colors">Expert Financial Analysis & Support</div>
                   </a>
 
                   <a
                     href="#"
                     onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }}
-                    className="group block border-l-4 border-[#EDB624] pl-4 py-2 hover:border-white transition-all duration-300"
+                    className="group block bg-white/5 hover:bg-white/15 rounded-xl p-4 border-l-4 border-[#EDB624] transition-all duration-300"
                   >
                     <div className="text-[#EDB624] text-xs font-bold uppercase tracking-wider mb-1">Family Office</div>
-                    <div className="text-white text-sm font-medium group-hover:text-[#EDB624] transition-colors">Investment & Acquisition Advisory</div>
+                    <div className="text-white text-base font-medium group-hover:text-[#EDB624] transition-colors">Investment & Acquisition Advisory</div>
                   </a>
                 </div>
               </div>
@@ -192,59 +192,59 @@ export default function NorthCastleConsulting() {
           </section>
 
           {/* Services Grid */}
-          <section id="services" className="py-10 px-6 bg-[#F6F7F7]">
+          <section id="services" className="py-16 md:py-20 px-6 bg-[#F6F7F7]">
             <div className="max-w-6xl mx-auto">
-              <div className="mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-1">Our Services</h2>
-                <p className="text-[#1A2234]/70">Comprehensive financial advisory for middle-market transactions</p>
+              <div className="mb-12 text-center">
+                <h2 className="text-3xl md:text-4xl font-bold text-[#1A2234] mb-3">Our Services</h2>
+                <p className="text-[#1A2234]/70 text-lg max-w-2xl mx-auto">Comprehensive financial advisory for middle-market transactions</p>
               </div>
 
               {/* Private Equity Services */}
-              <div className="mb-8">
-                <h3 className="text-lg font-bold text-[#1A2234] mb-3 flex items-center gap-2">
-                  <span className="w-1 h-5 bg-[#0D3BC3] rounded"></span>
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-[#1A2234] mb-6 flex items-center gap-3">
+                  <span className="w-1.5 h-8 bg-[#0D3BC3] rounded-full"></span>
                   Private Equity Services
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block p-5 bg-white rounded-lg hover:shadow-md transition-all border border-slate-200 hover:border-[#0D3BC3]/30">
-                    <h4 className="text-base font-bold text-[#1A2234] mb-1.5">Dividend Recapitalization Prep</h4>
-                    <p className="text-[#1A2234]/70 text-sm mb-2 line-clamp-2">Return capital to LPs through strategic recaps. We assess cash flow stability and debt capacity.</p>
-                    <span className="text-[#0D3BC3] font-medium text-sm">Learn more →</span>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
+                    <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Dividend Recapitalization Prep</h4>
+                    <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">Return capital to LPs through strategic recaps. We assess cash flow stability and debt capacity.</p>
+                    <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Learn more <span>→</span></span>
                   </a>
-                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block p-5 bg-white rounded-lg hover:shadow-md transition-all border border-slate-200 hover:border-[#0D3BC3]/30">
-                    <h4 className="text-base font-bold text-[#1A2234] mb-1.5">Sell-Side Readiness</h4>
-                    <p className="text-[#1A2234]/70 text-sm mb-2 line-clamp-2">Position your portfolio company for optimal valuation. We streamline financials and validate metrics.</p>
-                    <span className="text-[#0D3BC3] font-medium text-sm">Learn more →</span>
+                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
+                    <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Sell-Side Readiness</h4>
+                    <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">Position your portfolio company for optimal valuation. We streamline financials and validate metrics.</p>
+                    <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Learn more <span>→</span></span>
                   </a>
                 </div>
               </div>
 
               {/* Family Office Services */}
-              <div className="mb-8">
-                <h3 className="text-lg font-bold text-[#1A2234] mb-3 flex items-center gap-2">
-                  <span className="w-1 h-5 bg-[#0D3BC3] rounded"></span>
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-[#1A2234] mb-6 flex items-center gap-3">
+                  <span className="w-1.5 h-8 bg-[#0D3BC3] rounded-full"></span>
                   Family Office / Independent Sponsor
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block p-5 bg-white rounded-lg hover:shadow-md transition-all border border-slate-200 hover:border-[#0D3BC3]/30">
-                    <h4 className="text-base font-bold text-[#1A2234] mb-1.5">Corporate Development</h4>
-                    <p className="text-[#1A2234]/70 text-sm mb-2 line-clamp-2">End-to-end M&A support including target screening, due diligence, and deal structuring.</p>
-                    <span className="text-[#0D3BC3] font-medium text-sm">Learn more →</span>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
+                    <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Corporate Development</h4>
+                    <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">End-to-end M&A support including target screening, due diligence, and deal structuring.</p>
+                    <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Learn more <span>→</span></span>
                   </a>
                 </div>
               </div>
 
               {/* Mass Tort */}
               <div>
-                <h3 className="text-lg font-bold text-[#1A2234] mb-3 flex items-center gap-2">
-                  <span className="w-1 h-5 bg-[#0D3BC3] rounded"></span>
+                <h3 className="text-xl font-bold text-[#1A2234] mb-6 flex items-center gap-3">
+                  <span className="w-1.5 h-8 bg-[#0D3BC3] rounded-full"></span>
                   Litigation Services
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block p-5 bg-white rounded-lg hover:shadow-md transition-all border border-slate-200 hover:border-[#0D3BC3]/30">
-                    <h4 className="text-base font-bold text-[#1A2234] mb-1.5">Mass Tort</h4>
-                    <p className="text-[#1A2234]/70 text-sm mb-2 line-clamp-2">Financial analysis and expert support for mass tort litigation, including damages quantification.</p>
-                    <span className="text-[#0D3BC3] font-medium text-sm">Learn more →</span>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
+                    <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Mass Tort</h4>
+                    <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">Financial analysis and expert support for mass tort litigation, including damages quantification.</p>
+                    <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Learn more <span>→</span></span>
                   </a>
                 </div>
               </div>
@@ -252,82 +252,82 @@ export default function NorthCastleConsulting() {
           </section>
 
           {/* Case Studies */}
-          <section id="case-studies" className="py-10 px-6 bg-white">
+          <section id="case-studies" className="py-16 md:py-20 px-6 bg-white">
             <div className="max-w-6xl mx-auto">
-              <div className="mb-6">
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-1">Case Studies</h2>
-                <p className="text-[#1A2234]/70">Proven results across industries</p>
+              <div className="mb-12 text-center">
+                <h2 className="text-3xl md:text-4xl font-bold text-[#1A2234] mb-3">Case Studies</h2>
+                <p className="text-[#1A2234]/70 text-lg">Proven results across industries</p>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-kpi-data-cube'); }} className="block bg-[#F6F7F7] p-4 rounded-lg border border-slate-200 hover:border-[#0D3BC3]/30 hover:shadow-sm transition-all">
-                  <span className="text-xs font-semibold text-[#0D3BC3] uppercase tracking-wider">Sell-Side Readiness</span>
-                  <h3 className="text-base font-bold text-[#1A2234] mt-1 mb-1">KPI Data Cube for Company Sale</h3>
-                  <p className="text-[#1A2234]/70 text-sm">$250M auto parts manufacturer - 2.7M data points unified</p>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-kpi-data-cube'); }} className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
+                  <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">KPI Data Cube for Company Sale</h3>
+                  <p className="text-[#1A2234]/70 text-sm leading-relaxed">$250M auto parts manufacturer - 2.7M data points unified</p>
                 </a>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-data-challenged'); }} className="block bg-[#F6F7F7] p-4 rounded-lg border border-slate-200 hover:border-[#0D3BC3]/30 hover:shadow-sm transition-all">
-                  <span className="text-xs font-semibold text-[#0D3BC3] uppercase tracking-wider">Sell-Side Readiness</span>
-                  <h3 className="text-base font-bold text-[#1A2234] mt-1 mb-1">Unlocking Value in Data-Challenged Sale</h3>
-                  <p className="text-[#1A2234]/70 text-sm">Vending & catering company - stalled to sold in 7 months</p>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-data-challenged'); }} className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
+                  <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Unlocking Value in Data-Challenged Sale</h3>
+                  <p className="text-[#1A2234]/70 text-sm leading-relaxed">Vending & catering company - stalled to sold in 7 months</p>
                 </a>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-credibility'); }} className="block bg-[#F6F7F7] p-4 rounded-lg border border-slate-200 hover:border-[#0D3BC3]/30 hover:shadow-sm transition-all">
-                  <span className="text-xs font-semibold text-[#0D3BC3] uppercase tracking-wider">Sell-Side Readiness</span>
-                  <h3 className="text-base font-bold text-[#1A2234] mt-1 mb-1">Building Credibility & Justifying Multiples</h3>
-                  <p className="text-[#1A2234]/70 text-sm">PE-backed venue management company sale preparation</p>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-credibility'); }} className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
+                  <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Building Credibility & Justifying Multiples</h3>
+                  <p className="text-[#1A2234]/70 text-sm leading-relaxed">PE-backed venue management company sale preparation</p>
                 </a>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-fintech'); }} className="block bg-[#F6F7F7] p-4 rounded-lg border border-slate-200 hover:border-[#0D3BC3]/30 hover:shadow-sm transition-all">
-                  <span className="text-xs font-semibold text-[#0D3BC3] uppercase tracking-wider">Sell-Side Readiness</span>
-                  <h3 className="text-base font-bold text-[#1A2234] mt-1 mb-1">Enhancing Investment Credibility</h3>
-                  <p className="text-[#1A2234]/70 text-sm">FinTech payments company growth and churn analysis</p>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-fintech'); }} className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
+                  <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Enhancing Investment Credibility</h3>
+                  <p className="text-[#1A2234]/70 text-sm leading-relaxed">FinTech payments company growth and churn analysis</p>
                 </a>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-car-rental'); }} className="block bg-[#F6F7F7] p-4 rounded-lg border border-slate-200 hover:border-[#0D3BC3]/30 hover:shadow-sm transition-all">
-                  <span className="text-xs font-semibold text-[#0D3BC3] uppercase tracking-wider">Corporate Development</span>
-                  <h3 className="text-base font-bold text-[#1A2234] mt-1 mb-1">From Operations to Ownership</h3>
-                  <p className="text-[#1A2234]/70 text-sm">Enabling executives to acquire a car rental franchise</p>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-car-rental'); }} className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <span className="inline-block text-xs font-bold text-[#EDB624] uppercase tracking-wider bg-[#EDB624]/10 px-2 py-1 rounded">Corporate Development</span>
+                  <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">From Operations to Ownership</h3>
+                  <p className="text-[#1A2234]/70 text-sm leading-relaxed">Enabling executives to acquire a car rental franchise</p>
                 </a>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-target-id'); }} className="block bg-[#F6F7F7] p-4 rounded-lg border border-slate-200 hover:border-[#0D3BC3]/30 hover:shadow-sm transition-all">
-                  <span className="text-xs font-semibold text-[#0D3BC3] uppercase tracking-wider">Corporate Development</span>
-                  <h3 className="text-base font-bold text-[#1A2234] mt-1 mb-1">Building an Acquisition Roadmap</h3>
-                  <p className="text-[#1A2234]/70 text-sm">Target identification for a PE-backed consulting firm</p>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-target-id'); }} className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <span className="inline-block text-xs font-bold text-[#EDB624] uppercase tracking-wider bg-[#EDB624]/10 px-2 py-1 rounded">Corporate Development</span>
+                  <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Building an Acquisition Roadmap</h3>
+                  <p className="text-[#1A2234]/70 text-sm leading-relaxed">Target identification for a PE-backed consulting firm</p>
                 </a>
               </div>
             </div>
           </section>
 
           {/* Contact */}
-          <section id="contact" className="py-10 px-6 bg-[#1A2234] text-white">
+          <section id="contact" className="py-16 md:py-20 px-6 bg-gradient-to-br from-[#1A2234] to-[#0D3BC3] text-white">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3">Ready to Unlock Value?</h2>
-              <p className="text-white/80 mb-5">Let's discuss how our expertise can drive success for your organization.</p>
-              <a href="mailto:contact@northcastleconsulting.com" className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded font-semibold hover:bg-[#EDB624]/90 transition-all shadow-lg">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Unlock Value?</h2>
+              <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">Let's discuss how our expertise can drive success for your organization.</p>
+              <a href="mailto:contact@northcastleconsulting.com" className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg text-lg">
                 Contact Us
               </a>
             </div>
           </section>
 
           {/* Footer */}
-          <footer className="bg-[#0D3BC3] text-white py-8 px-6">
+          <footer className="bg-[#1A2234] text-white py-12 px-6">
             <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-3 gap-6 mb-6">
+              <div className="grid md:grid-cols-3 gap-8 mb-8">
                 <div>
-                  <h4 className="text-[#EDB624] font-semibold mb-2">North Castle Consulting</h4>
-                  <p className="text-white/70 text-sm">Actionable insights for Private Equity, Private Debt, and Corporate Development teams.</p>
+                  <h4 className="text-[#EDB624] font-bold text-lg mb-3">North Castle Consulting</h4>
+                  <p className="text-white/70 leading-relaxed">Actionable insights for Private Equity, Private Debt, and Corporate Development teams.</p>
                 </div>
                 <div>
-                  <h4 className="text-[#EDB624] font-semibold mb-2">Services</h4>
-                  <div className="space-y-1 text-sm">
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block text-white/70 hover:text-[#EDB624]">Dividend Recap Prep</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block text-white/70 hover:text-[#EDB624]">Sell-Side Readiness</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block text-white/70 hover:text-[#EDB624]">Corporate Development</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block text-white/70 hover:text-[#EDB624]">Mass Tort</a>
+                  <h4 className="text-[#EDB624] font-bold text-lg mb-3">Services</h4>
+                  <div className="space-y-2">
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block text-white/70 hover:text-[#EDB624] transition-colors">Dividend Recap Prep</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block text-white/70 hover:text-[#EDB624] transition-colors">Sell-Side Readiness</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block text-white/70 hover:text-[#EDB624] transition-colors">Corporate Development</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block text-white/70 hover:text-[#EDB624] transition-colors">Mass Tort</a>
                   </div>
                 </div>
                 <div>
-                  <h4 className="text-[#EDB624] font-semibold mb-2">Contact</h4>
-                  <p className="text-white/70 text-sm">contact@northcastleconsulting.com</p>
+                  <h4 className="text-[#EDB624] font-bold text-lg mb-3">Contact</h4>
+                  <p className="text-white/70">contact@northcastleconsulting.com</p>
                 </div>
               </div>
-              <div className="border-t border-white/20 pt-4 text-center text-white/60 text-sm">
+              <div className="border-t border-white/20 pt-6 text-center text-white/60">
                 © 2025 North Castle Consulting. All rights reserved.
               </div>
             </div>
