@@ -41,14 +41,14 @@ export default function NorthCastleConsulting() {
             </a>
 
             <div className="hidden md:flex gap-6 items-center">
-              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} className="text-white hover:text-yellow-600 transition-colors text-sm font-medium">Home</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} className="text-white hover:text-yellow-500 transition-colors text-sm font-medium">Home</a>
 
               <div
                 className="relative"
                 onMouseEnter={() => setServicesDropdownOpen(true)}
                 onMouseLeave={() => setServicesDropdownOpen(false)}
               >
-                <button className="text-white hover:text-yellow-600 transition-colors text-sm font-medium flex items-center gap-1 py-2">
+                <button className="text-white hover:text-yellow-500 transition-colors text-sm font-medium flex items-center gap-1 py-2">
                   Services
                   <svg className={`w-3 h-3 transition-transform ${servicesDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -85,8 +85,8 @@ export default function NorthCastleConsulting() {
                 </div>
               </div>
 
-              <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('case-studies') : navigateToPage('home'); }} className="text-white hover:text-yellow-600 transition-colors text-sm font-medium">Case Studies</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('contact') : navigateToPage('home'); }} className="text-white hover:text-yellow-600 transition-colors text-sm font-medium">Contact</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('case-studies') : navigateToPage('home'); }} className="text-white hover:text-yellow-500 transition-colors text-sm font-medium">Case Studies</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('contact') : navigateToPage('home'); }} className="text-white hover:text-yellow-500 transition-colors text-sm font-medium">Contact</a>
             </div>
 
             <button className="md:hidden text-white text-xl" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -96,30 +96,30 @@ export default function NorthCastleConsulting() {
 
           {mobileMenuOpen && (
             <div className="md:hidden mt-4 pb-4 flex flex-col gap-2 text-sm">
-              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} className="text-white hover:text-yellow-600">Home</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} className="text-white hover:text-yellow-500">Home</a>
               <div className="border-t border-slate-700 pt-2">
-                <p className="text-xs font-bold text-yellow-600 uppercase tracking-wider mb-1">Lender Services</p>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="block pl-3 py-1 text-white hover:text-yellow-600">Lender Due Diligence</a>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-dd-non-pe'); }} className="block pl-3 py-1 text-white hover:text-yellow-600">Lender DD For Non-PE</a>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('challenged-credit'); }} className="block pl-3 py-1 text-white hover:text-yellow-600">Challenged Credit DD</a>
+                <p className="text-xs font-bold text-yellow-500 uppercase tracking-wider mb-1">Lender Services</p>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="block pl-3 py-1 text-white hover:text-yellow-500">Lender Due Diligence</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-dd-non-pe'); }} className="block pl-3 py-1 text-white hover:text-yellow-500">Lender DD For Non-PE</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('challenged-credit'); }} className="block pl-3 py-1 text-white hover:text-yellow-500">Challenged Credit DD</a>
               </div>
               <div className="border-t border-slate-700 pt-2">
-                <p className="text-xs font-bold text-yellow-600 uppercase tracking-wider mb-1">Private Equity</p>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block pl-3 py-1 text-white hover:text-yellow-600">Sell-Side Readiness</a>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block pl-3 py-1 text-white hover:text-yellow-600">Dividend Recap Prep</a>
+                <p className="text-xs font-bold text-yellow-500 uppercase tracking-wider mb-1">Private Equity</p>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block pl-3 py-1 text-white hover:text-yellow-500">Sell-Side Readiness</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block pl-3 py-1 text-white hover:text-yellow-500">Dividend Recap Prep</a>
               </div>
               <div className="border-t border-slate-700 pt-2">
-                <p className="text-xs font-bold text-yellow-600 uppercase tracking-wider mb-1">Family Office</p>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block pl-3 py-1 text-white hover:text-yellow-600">Corporate Development</a>
+                <p className="text-xs font-bold text-yellow-500 uppercase tracking-wider mb-1">Family Office</p>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block pl-3 py-1 text-white hover:text-yellow-500">Corporate Development</a>
               </div>
               <div className="border-t border-slate-700 pt-2">
-                <p className="text-xs font-bold text-yellow-600 uppercase tracking-wider mb-1">Litigation</p>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block pl-3 py-1 text-white hover:text-yellow-600">Mass Tort</a>
+                <p className="text-xs font-bold text-yellow-500 uppercase tracking-wider mb-1">Litigation</p>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block pl-3 py-1 text-white hover:text-yellow-500">Mass Tort</a>
               </div>
               <div className="border-t border-slate-700 pt-2">
-                <a href="#" onClick={(e) => { e.preventDefault(); scrollToSection('case-studies'); setMobileMenuOpen(false); }} className="text-white hover:text-yellow-600">Case Studies</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); scrollToSection('case-studies'); setMobileMenuOpen(false); }} className="text-white hover:text-yellow-500">Case Studies</a>
               </div>
-              <a href="#" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); setMobileMenuOpen(false); }} className="text-white hover:text-yellow-600">Contact</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); setMobileMenuOpen(false); }} className="text-white hover:text-yellow-500">Contact</a>
             </div>
           )}
         </div>
@@ -127,45 +127,59 @@ export default function NorthCastleConsulting() {
 
       {currentPage === 'home' && (
         <>
-          {/* Compact Hero */}
+          {/* Hero Section */}
           <section className="pt-20 bg-slate-900">
-            <div className="max-w-6xl mx-auto px-6 py-16">
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div className="text-white">
-                  <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
-                    Unlocking Value Through Financial Expertise
-                  </h1>
-                  <p className="text-gray-300 mb-6 leading-relaxed">
-                    Actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams to maximize value, reduce risk, and drive success.
-                  </p>
-                  <a
-                    href="#services"
-                    onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}
-                    className="inline-block bg-yellow-600 text-slate-900 px-6 py-3 rounded font-semibold hover:bg-yellow-500 transition-all"
-                  >
-                    Explore Our Solutions
-                  </a>
-                </div>
-                <div className="hidden md:block">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-blue-900/40 backdrop-blur border border-blue-800/50 rounded-xl p-5 hover:bg-blue-900/60 transition-all duration-300">
-                      <div className="text-yellow-600 text-3xl font-bold mb-2">PE</div>
-                      <div className="text-gray-100 text-sm font-medium">Private Equity Services</div>
-                    </div>
-                    <div className="bg-blue-900/40 backdrop-blur border border-blue-800/50 rounded-xl p-5 hover:bg-blue-900/60 transition-all duration-300">
-                      <div className="text-yellow-600 text-3xl font-bold mb-2">M&A</div>
-                      <div className="text-gray-100 text-sm font-medium">Corporate Development</div>
-                    </div>
-                    <div className="bg-blue-900/40 backdrop-blur border border-blue-800/50 rounded-xl p-5 hover:bg-blue-900/60 transition-all duration-300">
-                      <div className="text-yellow-600 text-3xl font-bold mb-2">DD</div>
-                      <div className="text-gray-100 text-sm font-medium">Due Diligence</div>
-                    </div>
-                    <div className="bg-blue-900/40 backdrop-blur border border-blue-800/50 rounded-xl p-5 hover:bg-blue-900/60 transition-all duration-300">
-                      <div className="text-yellow-600 text-3xl font-bold mb-2">FO</div>
-                      <div className="text-gray-100 text-sm font-medium">Family Office</div>
-                    </div>
-                  </div>
-                </div>
+            <div className="max-w-6xl mx-auto px-6 py-20">
+              <div className="text-center mb-16">
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                  Unlocking Value Through<br />
+                  <span className="text-yellow-500">Financial Expertise</span>
+                </h1>
+                <p className="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed mb-8">
+                  Actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams to maximize value, reduce risk, and drive success.
+                </p>
+                <a
+                  href="#services"
+                  onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}
+                  className="inline-block bg-yellow-500 text-slate-900 px-8 py-3 rounded font-semibold hover:bg-yellow-400 transition-all"
+                >
+                  Explore Our Solutions
+                </a>
+              </div>
+
+              <div className="grid md:grid-cols-4 gap-6">
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }}
+                  className="group bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-yellow-500/50 transition-all duration-300"
+                >
+                  <div className="text-yellow-500 text-sm font-semibold uppercase tracking-wider mb-2">Private Equity</div>
+                  <div className="text-white font-medium group-hover:text-yellow-500 transition-colors">Sell-Side Readiness & Portfolio Support</div>
+                </a>
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }}
+                  className="group bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-yellow-500/50 transition-all duration-300"
+                >
+                  <div className="text-yellow-500 text-sm font-semibold uppercase tracking-wider mb-2">Corporate Development</div>
+                  <div className="text-white font-medium group-hover:text-yellow-500 transition-colors">Target Identification & Transaction Support</div>
+                </a>
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}
+                  className="group bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-yellow-500/50 transition-all duration-300"
+                >
+                  <div className="text-yellow-500 text-sm font-semibold uppercase tracking-wider mb-2">Due Diligence</div>
+                  <div className="text-white font-medium group-hover:text-yellow-500 transition-colors">Financial & Operational Analysis</div>
+                </a>
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }}
+                  className="group bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-yellow-500/50 transition-all duration-300"
+                >
+                  <div className="text-yellow-500 text-sm font-semibold uppercase tracking-wider mb-2">Family Office</div>
+                  <div className="text-white font-medium group-hover:text-yellow-500 transition-colors">Investment & Acquisition Advisory</div>
+                </a>
               </div>
             </div>
           </section>
@@ -278,7 +292,7 @@ export default function NorthCastleConsulting() {
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl font-bold mb-4">Ready to Unlock Value?</h2>
               <p className="text-gray-300 mb-8">Let's discuss how our expertise can drive success for your organization.</p>
-              <a href="mailto:contact@northcastleconsulting.com" className="inline-block bg-yellow-600 text-slate-900 px-8 py-3 rounded font-semibold hover:bg-yellow-500 transition-all">
+              <a href="mailto:contact@northcastleconsulting.com" className="inline-block bg-yellow-500 text-slate-900 px-8 py-3 rounded font-semibold hover:bg-yellow-500 transition-all">
                 Contact Us
               </a>
             </div>
@@ -289,20 +303,20 @@ export default function NorthCastleConsulting() {
             <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-3 gap-8 mb-8">
                 <div>
-                  <h4 className="text-yellow-600 font-bold mb-3">North Castle Consulting</h4>
+                  <h4 className="text-yellow-500 font-bold mb-3">North Castle Consulting</h4>
                   <p className="text-gray-400 text-sm">Actionable insights for Private Equity, Private Debt, and Corporate Development teams.</p>
                 </div>
                 <div>
-                  <h4 className="text-yellow-600 font-bold mb-3">Services</h4>
+                  <h4 className="text-yellow-500 font-bold mb-3">Services</h4>
                   <div className="space-y-1 text-sm">
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block text-gray-400 hover:text-yellow-600">Dividend Recap Prep</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block text-gray-400 hover:text-yellow-600">Sell-Side Readiness</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block text-gray-400 hover:text-yellow-600">Corporate Development</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block text-gray-400 hover:text-yellow-600">Mass Tort</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('dividend-recap'); }} className="block text-gray-400 hover:text-yellow-500">Dividend Recap Prep</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block text-gray-400 hover:text-yellow-500">Sell-Side Readiness</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="block text-gray-400 hover:text-yellow-500">Corporate Development</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block text-gray-400 hover:text-yellow-500">Mass Tort</a>
                   </div>
                 </div>
                 <div>
-                  <h4 className="text-yellow-600 font-bold mb-3">Contact</h4>
+                  <h4 className="text-yellow-500 font-bold mb-3">Contact</h4>
                   <p className="text-gray-400 text-sm">contact@northcastleconsulting.com</p>
                 </div>
               </div>

@@ -97,7 +97,7 @@ export default function KPIDataCubeCaseStudyPage({ navigateToPage }) {
               { num: "05", title: "Knowledge Transfer", desc: "Transitioned cube to FP&A as ongoing tool" }
             ].map((step, i) => (
               <div key={i} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <span className="text-yellow-600 text-lg font-bold">{step.num}</span>
+                <span className="text-yellow-500 text-lg font-bold">{step.num}</span>
                 <h3 className="text-sm font-bold text-slate-900 mt-1 mb-1">{step.title}</h3>
                 <p className="text-xs text-gray-600">{step.desc}</p>
               </div>
