@@ -128,7 +128,7 @@ export default function NorthCastleConsulting() {
       {currentPage === 'home' && (
         <>
           {/* Compact Hero */}
-          <section className="pt-20 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900">
+          <section className="pt-20 bg-slate-900">
             <div className="max-w-6xl mx-auto px-6 py-16">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div className="text-white">
