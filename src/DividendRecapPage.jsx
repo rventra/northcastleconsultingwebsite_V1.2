@@ -109,7 +109,7 @@ export default function DividendRecapPage({ navigateToPage }) {
           </p>
           <a
             href="mailto:contact@northcastleconsulting.com?subject=Dividend%20Recapitalization%20Inquiry"
-            className="inline-block bg-yellow-600 text-slate-900 px-10 py-4 rounded-full font-semibold hover:bg-yellow-500 transition-all"
+            className="inline-block bg-yellow-500 text-slate-900 px-10 py-4 rounded-full font-semibold hover:bg-yellow-500 transition-all"
           >
             Contact Us
           </a>
@@ -122,7 +122,7 @@ export default function DividendRecapPage({ navigateToPage }) {
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); navigateToPage('home'); }}
-            className="text-blue-900 hover:text-yellow-600 transition-colors font-medium"
+            className="text-blue-900 hover:text-yellow-500 transition-colors font-medium"
           >
             ← Back to Home
           </a>

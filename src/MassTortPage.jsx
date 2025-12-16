@@ -14,7 +14,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
             <a 
               href="#lifecycle" 
               onClick={(e) => { e.preventDefault(); scrollToSection('lifecycle'); }}
-              className="inline-block bg-yellow-600 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all transform hover:-translate-y-1 shadow-lg"
+              className="inline-block bg-yellow-500 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all transform hover:-translate-y-1 shadow-lg"
             >
               Explore Our Solutions
             </a>
@@ -373,7 +373,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
         {/* Stage 1 Details */}
         <div id="stage-1" className="scroll-mt-24">
           <div className="bg-blue-900 text-white p-8 rounded-t-xl">
-            <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 1</span>
+            <span className="text-sm font-semibold bg-yellow-500 text-slate-900 px-3 py-1 rounded-full">STAGE 1</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Case Intake & Pre-Qualification</h2>
             <p className="text-xl opacity-90">Streamline initial screenings, eliminate bad cases early, reduce downstream rework</p>
           </div>
@@ -402,7 +402,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
             </div>
 
             <div className="mt-6 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-600 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-500 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -412,7 +412,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
         {/* Stage 2 Details */}
         <div id="stage-2" className="scroll-mt-24">
           <div className="bg-blue-900 text-white p-8 rounded-t-xl">
-            <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 2</span>
+            <span className="text-sm font-semibold bg-yellow-500 text-slate-900 px-3 py-1 rounded-full">STAGE 2</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Case Prioritization & Resource Allocation</h2>
             <p className="text-xl opacity-90">Focus staff on high-value cases, reduce wasted effort, accelerate settlements</p>
           </div>
@@ -441,7 +441,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
             </div>
 
             <div className="mt-6 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-600 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-500 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -451,7 +451,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
         {/* Stage 3 Details */}
         <div id="stage-3" className="scroll-mt-24">
           <div className="bg-blue-900 text-white p-8 rounded-t-xl">
-            <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 3</span>
+            <span className="text-sm font-semibold bg-yellow-500 text-slate-900 px-3 py-1 rounded-full">STAGE 3</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Document Collection & Deficiency Management</h2>
             <p className="text-xl opacity-90">Eliminate chase emails, automate reminders, reduce document collection time by 40%</p>
           </div>
@@ -480,7 +480,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
             </div>
 
             <div className="mt-6 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-600 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-500 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -490,7 +490,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
         {/* Stage 4 Details */}
         <div id="stage-4" className="scroll-mt-24">
           <div className="bg-blue-900 text-white p-8 rounded-t-xl">
-            <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 4</span>
+            <span className="text-sm font-semibold bg-yellow-500 text-slate-900 px-3 py-1 rounded-full">STAGE 4</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">OCR, Document Parsing & Indexing</h2>
             <p className="text-xl opacity-90">Make all documents searchable, eliminate manual file hunting, enable instant retrieval</p>
           </div>
@@ -519,7 +519,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
             </div>
 
             <div className="mt-6 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-600 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-500 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -529,7 +529,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
         {/* Stage 5 Details */}
         <div id="stage-5" className="scroll-mt-24">
           <div className="bg-blue-900 text-white p-8 rounded-t-xl">
-            <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 5</span>
+            <span className="text-sm font-semibold bg-yellow-500 text-slate-900 px-3 py-1 rounded-full">STAGE 5</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Medical Review & Tier Assignment</h2>
             <p className="text-xl opacity-90">Standardize medical review, eliminate tier disputes, accelerate settlement negotiations</p>
           </div>
@@ -558,7 +558,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
             </div>
 
             <div className="mt-6 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-600 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-500 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -568,7 +568,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
         {/* Stage 6 Details */}
         <div id="stage-6" className="scroll-mt-24">
           <div className="bg-blue-900 text-white p-8 rounded-t-xl">
-            <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 6</span>
+            <span className="text-sm font-semibold bg-yellow-500 text-slate-900 px-3 py-1 rounded-full">STAGE 6</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Workflow Tracking & Version Control</h2>
             <p className="text-xl opacity-90">Eliminate rework, maintain audit trails, coordinate multi-party document workflows</p>
           </div>
@@ -597,7 +597,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
             </div>
 
             <div className="mt-6 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-600 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-500 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -607,7 +607,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
         {/* Stage 7 Details */}
         <div id="stage-7" className="scroll-mt-24">
           <div className="bg-blue-900 text-white p-8 rounded-t-xl">
-            <span className="text-sm font-semibold bg-yellow-600 text-slate-900 px-3 py-1 rounded-full">STAGE 7</span>
+            <span className="text-sm font-semibold bg-yellow-500 text-slate-900 px-3 py-1 rounded-full">STAGE 7</span>
             <h2 className="text-3xl font-bold mt-4 mb-2">Document Intelligence & Data Extraction</h2>
             <p className="text-xl opacity-90">Convert documents to structured data, eliminate strike teams, respond to defense in hours not weeks</p>
           </div>
@@ -636,7 +636,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
             </div>
 
             <div className="mt-6 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-600 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }} className="inline-block bg-yellow-500 text-slate-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -661,7 +661,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   placeholder="John Smith"
                 />
               </div>
@@ -672,7 +672,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   placeholder="john@lawfirm.com"
                 />
               </div>
@@ -686,7 +686,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
                   id="company"
                   name="company"
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   placeholder="Smith & Associates"
                 />
               </div>
@@ -696,7 +696,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
                   type="tel" 
                   id="phone"
                   name="phone"
-                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   placeholder="(555) 123-4567"
                 />
               </div>
@@ -708,14 +708,14 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
                 id="message"
                 name="message"
                 rows="4"
-                className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600 resize-none"
+                className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none"
                 placeholder="Describe your current challenges with mass tort operations..."
               ></textarea>
             </div>
 
             
             <a  href="mailto:contact@northcastleconsulting.com?subject=Mass%20Tort%20Services%20Inquiry"
-              className="block w-full text-center bg-yellow-600 text-slate-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-xl"
+              className="block w-full text-center bg-yellow-500 text-slate-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-500 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-xl"
             >
               Submit Interest
             </a>
