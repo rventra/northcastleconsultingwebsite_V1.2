@@ -62,11 +62,11 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
   };
 
   return (
-    <div className="pt-20 bg-gray-50 min-h-screen">
+    <div className="pt-16 bg-gray-50 min-h-screen">
       {/* Scroll Progress Bar */}
       <div className="fixed top-0 left-0 w-screen h-1 bg-gray-200/50 z-50">
         <div
-          className="h-full bg-blue-900/70 transition-all duration-150"
+          className="h-full bg-[#1e3a5f]/70 transition-all duration-150"
           style={{ width: `${scrollProgress}%` }}
         ></div>
       </div>
@@ -76,12 +76,12 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
         <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-[#1e3a5f] rounded-lg flex items-center justify-center">
                 <span className="text-xl">⚖️</span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-slate-900">
-                  MASS TORT <span className="text-blue-900">INTELLIGENCE</span>
+                <h1 className="text-2xl font-bold text-[#1e3a5f]">
+                  MASS TORT <span className="text-[#1e3a5f]">INTELLIGENCE</span>
                 </h1>
                 <p className="text-xs text-gray-500">{metadata.author}</p>
               </div>
@@ -90,11 +90,11 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4 text-sm">
                 <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full">
-                  <span className="text-blue-900 font-semibold">{articles.length}</span>
+                  <span className="text-[#1e3a5f] font-semibold">{articles.length}</span>
                   <span className="text-gray-600">stories</span>
                 </div>
                 <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-full">
-                  <span className="text-slate-900 font-semibold">{metadata.readTime}</span>
+                  <span className="text-[#1e3a5f] font-semibold">{metadata.readTime}</span>
                 </div>
               </div>
             </div>
@@ -103,7 +103,7 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
       </div>
 
       {/* Hero Section - Simplified */}
-      <div className="bg-blue-900 text-white">
+      <div className="bg-[#1e3a5f] text-white">
         <div className="max-w-7xl mx-auto px-6 py-10">
           <div className="max-w-4xl">
             <div className="flex items-center gap-3 mb-4">
@@ -129,7 +129,7 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
         <div className="grid lg:grid-cols-[1fr_320px] gap-8 mb-12">
           {/* LEFT: Consolidated Story List */}
           <div>
-            <h3 className="text-lg font-bold text-slate-900 mb-4 pb-2 border-b border-gray-200">
+            <h3 className="text-lg font-bold text-[#1e3a5f] mb-4 pb-2 border-b border-gray-200">
               In This Edition
             </h3>
             <div className="bg-white rounded-lg border border-gray-200 divide-y divide-gray-100">
@@ -148,12 +148,12 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
                         </span>
                         <span className="text-[10px] text-gray-400">{article.relevanceScore}/10</span>
                       </div>
-                      <h4 className="font-semibold text-slate-900 group-hover:text-blue-900 transition-colors leading-snug mb-1">
+                      <h4 className="font-semibold text-[#1e3a5f] group-hover:text-[#1e3a5f] transition-colors leading-snug mb-1">
                         {article.headline}
                       </h4>
                       <p className="text-sm text-gray-500 line-clamp-2">{article.summary}</p>
                     </div>
-                    <span className="text-gray-300 group-hover:text-blue-900 transition-colors mt-1">→</span>
+                    <span className="text-gray-300 group-hover:text-[#1e3a5f] transition-colors mt-1">→</span>
                   </div>
                 </div>
               ))}
@@ -165,14 +165,14 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
             {/* What's Trending */}
             {currentWeek.trending && (
               <div className="bg-white rounded-lg border border-gray-200 p-5">
-                <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-[#1e3a5f] mb-4 flex items-center gap-2">
                   <span className="text-orange-500">🔥</span>
                   What's Trending
                 </h3>
                 <div className="space-y-3">
                   {currentWeek.trending.topics.map((topic, index) => (
                     <div key={index} className="pb-3 border-b border-gray-100 last:border-0 last:pb-0">
-                      <div className="font-semibold text-slate-900 text-sm mb-0.5">{topic.name}</div>
+                      <div className="font-semibold text-[#1e3a5f] text-sm mb-0.5">{topic.name}</div>
                       <div className="text-gray-500 text-xs leading-relaxed">{topic.description}</div>
                     </div>
                   ))}
@@ -182,7 +182,7 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
 
             {/* Past Issues - Compact */}
             <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <h3 className="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+              <h3 className="text-sm font-bold text-[#1e3a5f] mb-3 flex items-center gap-2">
                 <span className="text-gray-400">📰</span>
                 Past Issues
               </h3>
@@ -198,12 +198,12 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
                       }}
                       className={`w-full text-left px-3 py-2 rounded text-sm transition-all ${
                         isSelected
-                          ? 'bg-blue-900 text-white'
+                          ? 'bg-[#1e3a5f] text-white'
                           : 'hover:bg-gray-50 text-gray-700'
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className={`font-medium ${isSelected ? 'text-white' : 'text-slate-900'}`}>
+                        <span className={`font-medium ${isSelected ? 'text-white' : 'text-[#1e3a5f]'}`}>
                           {week.metadata.publishDate}
                         </span>
                         <span className={`text-xs ${isSelected ? 'text-blue-200' : 'text-gray-400'}`}>
@@ -240,7 +240,7 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
                     className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow border-l-3 border-l-blue-900"
                   >
                     <div className="flex gap-3">
-                      <span className="text-blue-900 font-bold text-sm flex-shrink-0">
+                      <span className="text-[#1e3a5f] font-bold text-sm flex-shrink-0">
                         {index + 1}.
                       </span>
                       <p className="text-sm text-gray-700 leading-relaxed">{item}</p>
@@ -255,8 +255,8 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
         {/* Full Story Coverage */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
-            <span className="text-blue-900 text-xl">📋</span>
-            <h3 className="text-2xl font-bold text-slate-900">Full Story Coverage</h3>
+            <span className="text-[#1e3a5f] text-xl">📋</span>
+            <h3 className="text-2xl font-bold text-[#1e3a5f]">Full Story Coverage</h3>
           </div>
 
           <div className="space-y-6">
@@ -267,9 +267,9 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
                 className="bg-white border border-gray-200 rounded-lg overflow-hidden scroll-mt-24 hover:shadow-lg transition-shadow"
               >
                 {/* Article Header */}
-                <div className="bg-slate-900 p-6 text-white">
+                <div className="bg-[#1e3a5f] p-6 text-white">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-semibold uppercase tracking-wide text-yellow-500 bg-yellow-500/10 px-2 py-1 rounded">
+                    <span className="text-[11px] font-semibold uppercase tracking-wide text-amber-300 bg-amber-400/10 px-2 py-1 rounded">
                       {article.category}
                     </span>
                     <span className="text-xs text-gray-400">
@@ -295,14 +295,14 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
 
                   {/* Key Takeaways */}
                   <div className="bg-blue-50 border border-blue-100 p-5 rounded-lg">
-                    <h4 className="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                    <h4 className="font-bold text-[#1e3a5f] mb-3 flex items-center gap-2">
                       <span>💡</span>
                       Key Takeaways
                     </h4>
                     <ul className="space-y-2">
                       {article.keyTakeaways.map((takeaway, tIndex) => (
                         <li key={tIndex} className="flex gap-3 text-gray-700 text-sm">
-                          <span className="text-blue-900 font-bold">→</span>
+                          <span className="text-[#1e3a5f] font-bold">→</span>
                           <span>{takeaway}</span>
                         </li>
                       ))}
@@ -319,13 +319,13 @@ export default function MassTortDigestTemplate({ navigateToPage }) {
           <div className="flex justify-center gap-4">
             <button
               onClick={() => navigateToPage('mass-tort')}
-              className="bg-blue-900 text-white px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-slate-900 transition-all"
+              className="bg-[#1e3a5f] text-white px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-[#1e3a5f] transition-all"
             >
               Back to Mass Tort Services
             </button>
             <button
               onClick={() => navigateToPage('contact')}
-              className="bg-white text-slate-900 px-6 py-2.5 rounded-lg font-semibold text-sm border border-gray-300 hover:bg-gray-50 transition-all"
+              className="bg-white text-[#1e3a5f] px-6 py-2.5 rounded-lg font-semibold text-sm border border-gray-300 hover:bg-gray-50 transition-all"
             >
               Contact Us
             </button>
