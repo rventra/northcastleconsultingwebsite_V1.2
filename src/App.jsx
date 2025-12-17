@@ -150,8 +150,8 @@ export default function NorthCastleConsulting() {
                 </div>
               </div>
 
-              {/* Right: Quick Links - Light */}
-              <div className="bg-[#F6F7F7] px-6 md:px-12 py-14 md:py-20">
+              {/* Right: Quick Links - White */}
+              <div className="bg-white px-6 md:px-12 py-14 md:py-20">
                 <div className="max-w-md mr-auto space-y-6">
                   <a
                     href="#pe-services"
