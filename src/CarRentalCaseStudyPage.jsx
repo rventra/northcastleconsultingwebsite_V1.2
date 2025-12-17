@@ -140,7 +140,7 @@ export default function CarRentalCaseStudyPage({ navigateToPage }) {
           <h2 className="text-xl font-bold text-white mb-2">Ready to Make the Leap to Ownership?</h2>
           <p className="text-gray-400 text-sm mb-6">Let's discuss how we can support your acquisition journey.</p>
           <a
-            href="mailto:contact@northcastleconsulting.com?subject=Corporate%20Development%20Inquiry"
+            href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Corporate%20Development%20Inquiry"
             className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded font-semibold text-sm hover:bg-amber-300 transition-all"
           >
             Start the Conversation

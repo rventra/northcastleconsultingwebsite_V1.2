@@ -4,7 +4,7 @@ export default function CorporateDevPage({ navigateToPage }) {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-[#0D3BC3] via-[#0D3BC3] to-[#1A2234] text-white py-16 md:py-24 px-6">
+      <div className="bg-[#0D3BC3] text-white py-12 md:py-16 px-6">
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
             Corporate Development
@@ -61,7 +61,7 @@ export default function CorporateDevPage({ navigateToPage }) {
         </div>
 
         {/* Right Column - Solutions */}
-        <div className="bg-gradient-to-br from-[#0D3BC3] to-[#1A2234] py-14 px-6 md:px-12 text-white">
+        <div className="bg-[#0D3BC3] py-14 px-6 md:px-12 text-white">
           <div className="max-w-lg mr-auto">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
               <span className="w-1.5 h-8 bg-[#EDB624] rounded-full"></span>
@@ -143,14 +143,14 @@ export default function CorporateDevPage({ navigateToPage }) {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-br from-[#1A2234] to-[#0D3BC3] text-white py-16 md:py-20 px-6">
+      <div className="bg-[#1A2234] text-white py-16 md:py-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Accelerate Your Growth?</h2>
           <p className="text-lg text-white/80 mb-8 leading-relaxed">
             Schedule a consultation to discuss your corporate development strategy and M&A objectives.
           </p>
           <a
-            href="mailto:contact@northcastleconsulting.com?subject=Corporate%20Development%20Inquiry"
+            href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Corporate%20Development%20Inquiry"
             className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg text-lg"
           >
             Contact Us

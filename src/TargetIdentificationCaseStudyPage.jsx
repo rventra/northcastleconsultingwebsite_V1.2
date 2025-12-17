@@ -140,7 +140,7 @@ export default function TargetIdentificationCaseStudyPage({ navigateToPage }) {
           <h2 className="text-xl font-bold text-white mb-2">Looking to Build Your Acquisition Pipeline?</h2>
           <p className="text-gray-400 text-sm mb-6">Let's discuss how we can help identify and prioritize your targets.</p>
           <a
-            href="mailto:contact@northcastleconsulting.com?subject=Target%20Identification%20Inquiry"
+            href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Target%20Identification%20Inquiry"
             className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded font-semibold text-sm hover:bg-amber-300 transition-all"
           >
             Start the Conversation

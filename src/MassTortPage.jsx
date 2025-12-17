@@ -4,7 +4,7 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
   return (
     <div className="pt-16">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-[#0D3BC3] via-[#0D3BC3] to-[#1A2234] text-white py-16 md:py-24 px-6 text-center">
+      <div className="bg-[#0D3BC3] text-white py-12 md:py-16 px-6 text-center">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Mass Tort Services</h1>
           <p className="text-lg md:text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -713,8 +713,8 @@ export default function MassTortPage({ navigateToPage, scrollToSection }) {
               ></textarea>
             </div>
 
-            
-            <a  href="mailto:contact@northcastleconsulting.com?subject=Mass%20Tort%20Services%20Inquiry"
+
+            <a  href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Mass%20Tort%20Services%20Inquiry"
               className="block w-full text-center bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-full font-semibold text-lg hover:bg-amber-400 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-xl"
             >
               Submit Interest
