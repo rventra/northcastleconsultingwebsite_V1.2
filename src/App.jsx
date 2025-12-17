@@ -128,54 +128,63 @@ export default function NorthCastleConsulting() {
       {currentPage === 'home' && (
         <>
           {/* Hero Section */}
-          <section className="pt-16 bg-[#0D3BC3]">
-            <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
-              <div className="grid lg:grid-cols-[1fr,380px] gap-10 items-center">
-                {/* Left: Main Content */}
-                <div>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight tracking-tight">
+          <section className="pt-16">
+            <div className="grid lg:grid-cols-2">
+              {/* Left: Main Content - Blue */}
+              <div className="bg-[#0D3BC3] px-6 md:px-12 py-14 md:py-20">
+                <div className="max-w-xl ml-auto">
+                  <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
                     Unlocking Value Through<br />
                     <span className="text-[#EDB624]">Financial Expertise</span>
                   </h1>
-                  <p className="text-white/90 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
+                  <p className="text-white/90 text-base leading-relaxed mb-6">
                     Actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
                   </p>
                   <a
                     href="#services"
                     onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}
-                    className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg"
+                    className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold hover:bg-white transition-all duration-300"
                   >
                     Explore Our Solutions
                   </a>
                 </div>
+              </div>
 
-                {/* Right: Quick Links */}
-                <div className="space-y-3 bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20">
+              {/* Right: Quick Links - Light */}
+              <div className="bg-[#F6F7F7] px-6 md:px-12 py-14 md:py-20">
+                <div className="max-w-md mr-auto space-y-6">
                   <a
                     href="#pe-services"
                     onClick={(e) => { e.preventDefault(); scrollToSection('pe-services'); }}
-                    className="group block bg-white/5 hover:bg-white/15 rounded-lg p-3 border-l-4 border-[#EDB624] transition-all duration-300"
+                    className="group block"
                   >
-                    <div className="text-[#EDB624] text-xs font-bold uppercase tracking-wider mb-0.5">Private Equity</div>
-                    <div className="text-white text-sm font-medium group-hover:text-[#EDB624] transition-colors">Sell-Side Readiness & Portfolio Support</div>
+                    <div className="text-[#0D3BC3] text-xs font-semibold uppercase tracking-wider mb-1">Private Equity</div>
+                    <div className="text-[#1A2234] font-medium group-hover:text-[#0D3BC3] transition-colors">Sell-Side Readiness & Portfolio Support</div>
+                    <div className="text-[#1A2234]/60 text-sm mt-1">Position your portfolio company for optimal valuation</div>
                   </a>
+
+                  <div className="border-t border-slate-300"></div>
 
                   <a
                     href="#fo-services"
                     onClick={(e) => { e.preventDefault(); scrollToSection('fo-services'); }}
-                    className="group block bg-white/5 hover:bg-white/15 rounded-lg p-3 border-l-4 border-[#EDB624] transition-all duration-300"
+                    className="group block"
                   >
-                    <div className="text-[#EDB624] text-xs font-bold uppercase tracking-wider mb-0.5">Family Office</div>
-                    <div className="text-white text-sm font-medium group-hover:text-[#EDB624] transition-colors">Corporate Development & M&A</div>
+                    <div className="text-[#0D3BC3] text-xs font-semibold uppercase tracking-wider mb-1">Family Office</div>
+                    <div className="text-[#1A2234] font-medium group-hover:text-[#0D3BC3] transition-colors">Corporate Development & M&A</div>
+                    <div className="text-[#1A2234]/60 text-sm mt-1">End-to-end transaction support and advisory</div>
                   </a>
+
+                  <div className="border-t border-slate-300"></div>
 
                   <a
                     href="#lit-services"
                     onClick={(e) => { e.preventDefault(); scrollToSection('lit-services'); }}
-                    className="group block bg-white/5 hover:bg-white/15 rounded-lg p-3 border-l-4 border-[#EDB624] transition-all duration-300"
+                    className="group block"
                   >
-                    <div className="text-[#EDB624] text-xs font-bold uppercase tracking-wider mb-0.5">Litigation</div>
-                    <div className="text-white text-sm font-medium group-hover:text-[#EDB624] transition-colors">Mass Tort Financial Analysis</div>
+                    <div className="text-[#0D3BC3] text-xs font-semibold uppercase tracking-wider mb-1">Litigation</div>
+                    <div className="text-[#1A2234] font-medium group-hover:text-[#0D3BC3] transition-colors">Mass Tort Financial Analysis</div>
+                    <div className="text-[#1A2234]/60 text-sm mt-1">Operational infrastructure for law firms at scale</div>
                   </a>
                 </div>
               </div>
@@ -293,7 +302,17 @@ export default function NorthCastleConsulting() {
                 <p className="text-white/80 text-lg">Let's discuss how our expertise can drive success for your organization.</p>
               </div>
 
-              <form className="bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/20">
+              <form
+                action="https://formsubmit.co/admin@northcastleconsulting.com"
+                method="POST"
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/20"
+              >
+                {/* FormSubmit Configuration */}
+                <input type="hidden" name="_cc" value="rventrapragada@northcastleconsulting.com" />
+                <input type="hidden" name="_subject" value="New Website Inquiry - North Castle Consulting" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+
                 <div className="grid md:grid-cols-2 gap-5 mb-5">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">Full Name *</label>
@@ -338,11 +357,11 @@ export default function NorthCastleConsulting() {
                       className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-[#EDB624] focus:border-transparent"
                     >
                       <option value="" className="text-[#1A2234]">Select a service</option>
-                      <option value="sell-side" className="text-[#1A2234]">Sell-Side Readiness</option>
-                      <option value="dividend-recap" className="text-[#1A2234]">Dividend Recapitalization</option>
-                      <option value="corporate-dev" className="text-[#1A2234]">Corporate Development</option>
-                      <option value="mass-tort" className="text-[#1A2234]">Mass Tort Services</option>
-                      <option value="other" className="text-[#1A2234]">Other</option>
+                      <option value="Sell-Side Readiness" className="text-[#1A2234]">Sell-Side Readiness</option>
+                      <option value="Dividend Recapitalization" className="text-[#1A2234]">Dividend Recapitalization</option>
+                      <option value="Corporate Development" className="text-[#1A2234]">Corporate Development</option>
+                      <option value="Mass Tort Services" className="text-[#1A2234]">Mass Tort Services</option>
+                      <option value="Other" className="text-[#1A2234]">Other</option>
                     </select>
                   </div>
                 </div>
@@ -359,12 +378,12 @@ export default function NorthCastleConsulting() {
                   ></textarea>
                 </div>
 
-                <a
-                  href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Website%20Inquiry"
-                  className="block w-full text-center bg-[#EDB624] text-[#1A2234] px-6 py-4 rounded-lg font-semibold hover:bg-white transition-all duration-300 shadow-lg text-lg"
+                <button
+                  type="submit"
+                  className="block w-full text-center bg-[#EDB624] text-[#1A2234] px-6 py-4 rounded-lg font-semibold hover:bg-white transition-all duration-300 shadow-lg text-lg cursor-pointer"
                 >
                   Send Message
-                </a>
+                </button>
                 <p className="text-center text-white/60 text-sm mt-4">We typically respond within 1 business day</p>
               </form>
             </div>
