@@ -3,170 +3,167 @@ import React from 'react';
 export default function CorporateDevPage({ navigateToPage }) {
   return (
     <div className="pt-16">
-      {/* Hero Section */}
-      <div className="bg-[#0D3BC3] text-white py-12 md:py-16 px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+      {/* Hero */}
+      <div className="bg-[#1A2234] text-white py-20 md:py-28 px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-[#0D3BC3] text-sm font-medium tracking-wider uppercase mb-4">Family Office & Independent Sponsor</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
             Corporate Development
           </h1>
-          <p className="text-xl md:text-2xl font-light mb-4 text-white/90">
-            Strategic M&A Execution for Growth & Value Creation
-          </p>
-          <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
-            North Castle's Corporate Development services provide structured M&A strategy, due diligence, and execution to help companies maximize acquisition value and minimize risks.
+          <p className="text-xl text-white/70 leading-relaxed max-w-2xl">
+            End-to-end M&A support from target identification through closing. We help independent sponsors and family offices execute acquisitions with the rigor of institutional buyers.
           </p>
         </div>
       </div>
 
-      {/* Two-Column Section: Challenges & Solutions */}
-      <div className="grid md:grid-cols-2">
-        {/* Left Column - Challenges */}
-        <div className="bg-[#F6F7F7] py-14 px-6 md:px-12">
-          <div className="max-w-lg ml-auto">
-            <h2 className="text-2xl font-bold text-[#1A2234] mb-6 flex items-center gap-3">
-              <span className="w-1.5 h-8 bg-[#0D3BC3] rounded-full"></span>
-              Challenges
-            </h2>
-            <ul className="space-y-5">
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#0D3BC3]/10 rounded-lg flex items-center justify-center text-[#0D3BC3] font-bold">1</span>
-                <div>
-                  <strong className="text-[#1A2234] block mb-1">Strategic Alignment</strong>
-                  <span className="text-[#1A2234]/70 leading-relaxed">Companies must ensure acquisitions align with growth objectives, market positioning, and financial goals.</span>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#0D3BC3]/10 rounded-lg flex items-center justify-center text-[#0D3BC3] font-bold">2</span>
-                <div>
-                  <strong className="text-[#1A2234] block mb-1">Risk Mitigation</strong>
-                  <span className="text-[#1A2234]/70 leading-relaxed">Poor due diligence can lead to overvaluation, operational disruptions, and integration failures.</span>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#0D3BC3]/10 rounded-lg flex items-center justify-center text-[#0D3BC3] font-bold">3</span>
-                <div>
-                  <strong className="text-[#1A2234] block mb-1">Resource Constraints</strong>
-                  <span className="text-[#1A2234]/70 leading-relaxed">Many firms lack in-house M&A expertise, slowing execution and increasing risk.</span>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#0D3BC3]/10 rounded-lg flex items-center justify-center text-[#0D3BC3] font-bold">4</span>
-                <div>
-                  <strong className="text-[#1A2234] block mb-1">Complex Deal Structuring</strong>
-                  <span className="text-[#1A2234]/70 leading-relaxed">Understanding valuation, synergies, and negotiation strategies is critical for success.</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+      {/* The Challenge */}
+      <div className="py-20 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-[#0D3BC3] text-sm font-medium tracking-wider uppercase mb-3">The Challenge</p>
+          <h2 className="text-3xl font-bold text-[#1A2234] mb-8">Why M&A is hard without a team</h2>
 
-        {/* Right Column - Solutions */}
-        <div className="bg-[#0D3BC3] py-14 px-6 md:px-12 text-white">
-          <div className="max-w-lg mr-auto">
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <span className="w-1.5 h-8 bg-[#EDB624] rounded-full"></span>
-              Our Solutions
-            </h2>
-            <ul className="space-y-5">
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#EDB624] rounded-lg flex items-center justify-center text-[#1A2234] font-bold text-sm">✓</span>
-                <div>
-                  <strong className="text-white block mb-1">Target Screening</strong>
-                  <span className="text-white/80 leading-relaxed">Identify and evaluate potential acquisition targets based on strategic fit, financial performance, and market positioning.</span>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#EDB624] rounded-lg flex items-center justify-center text-[#1A2234] font-bold text-sm">✓</span>
-                <div>
-                  <strong className="text-white block mb-1">Preliminary Diligence</strong>
-                  <span className="text-white/80 leading-relaxed">Assess investment opportunities through financial analysis, synergy evaluation, and structuring options.</span>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#EDB624] rounded-lg flex items-center justify-center text-[#1A2234] font-bold text-sm">✓</span>
-                <div>
-                  <strong className="text-white block mb-1">Confirmatory Diligence</strong>
-                  <span className="text-white/80 leading-relaxed">Conduct comprehensive due diligence, validate key assumptions, and quantify value drivers and risks.</span>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#EDB624] rounded-lg flex items-center justify-center text-[#1A2234] font-bold text-sm">✓</span>
-                <div>
-                  <strong className="text-white block mb-1">Valuation & Deal Structuring</strong>
-                  <span className="text-white/80 leading-relaxed">Develop financial models, assess transaction risks, and negotiate optimal deal terms.</span>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#EDB624] rounded-lg flex items-center justify-center text-[#1A2234] font-bold text-sm">✓</span>
-                <div>
-                  <strong className="text-white block mb-1">Transaction Execution</strong>
-                  <span className="text-white/80 leading-relaxed">Manage the LOI, purchase agreements, and closing procedures for a seamless transaction.</span>
-                </div>
-              </li>
-            </ul>
+          <p className="text-[#1A2234]/60 leading-relaxed mb-8 text-lg">
+            Independent sponsors and family offices often have deep industry expertise and clear investment theses—but lack the dedicated resources to execute. Sourcing targets, running diligence, and managing a process takes bandwidth that operators don't have.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+            <div>
+              <h3 className="text-lg font-semibold text-[#1A2234] mb-2">Target Identification</h3>
+              <p className="text-[#1A2234]/60 leading-relaxed">Building a qualified pipeline requires systematic research and sustained outreach.</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-[#1A2234] mb-2">Diligence Depth</h3>
+              <p className="text-[#1A2234]/60 leading-relaxed">Missed risks in diligence become expensive problems post-close.</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-[#1A2234] mb-2">Process Management</h3>
+              <p className="text-[#1A2234]/60 leading-relaxed">Deals require coordination across legal, financial, and operational workstreams.</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-[#1A2234] mb-2">Credibility Gap</h3>
+              <p className="text-[#1A2234]/60 leading-relaxed">Sellers and intermediaries take process-ready buyers more seriously.</p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Case Studies Section */}
-      <div className="py-16 md:py-20 px-6 bg-[#F6F7F7]">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1A2234] mb-3">Case Studies</h2>
-            <p className="text-[#1A2234]/70 text-lg">See how we've helped clients execute successful M&A strategies</p>
-          </div>
+      {/* Divider */}
+      <div className="border-t border-gray-200"></div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+      {/* Our Approach */}
+      <div className="py-20 px-6 bg-[#FAFAFA]">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-[#0D3BC3] text-sm font-medium tracking-wider uppercase mb-3">Our Approach</p>
+          <h2 className="text-3xl font-bold text-[#1A2234] mb-12">How we support acquisitions</h2>
+
+          <div className="space-y-12">
+            <div className="flex gap-6">
+              <div className="text-[#0D3BC3] font-bold text-lg">01</div>
+              <div>
+                <h3 className="text-xl font-semibold text-[#1A2234] mb-2">Target Screening</h3>
+                <p className="text-[#1A2234]/60 leading-relaxed">Define criteria, map the landscape, and build a prioritized pipeline of actionable targets.</p>
+              </div>
+            </div>
+
+            <div className="flex gap-6">
+              <div className="text-[#0D3BC3] font-bold text-lg">02</div>
+              <div>
+                <h3 className="text-xl font-semibold text-[#1A2234] mb-2">Preliminary Analysis</h3>
+                <p className="text-[#1A2234]/60 leading-relaxed">Quick-turn assessment of fit, valuation range, and key risks before committing resources.</p>
+              </div>
+            </div>
+
+            <div className="flex gap-6">
+              <div className="text-[#0D3BC3] font-bold text-lg">03</div>
+              <div>
+                <h3 className="text-xl font-semibold text-[#1A2234] mb-2">Due Diligence</h3>
+                <p className="text-[#1A2234]/60 leading-relaxed">Comprehensive financial, operational, and commercial diligence to validate the thesis and size risks.</p>
+              </div>
+            </div>
+
+            <div className="flex gap-6">
+              <div className="text-[#0D3BC3] font-bold text-lg">04</div>
+              <div>
+                <h3 className="text-xl font-semibold text-[#1A2234] mb-2">Transaction Execution</h3>
+                <p className="text-[#1A2234]/60 leading-relaxed">Support through LOI, purchase agreement, and closing—coordinating workstreams and managing the process.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Banner */}
+      <div className="bg-[#0D3BC3] py-16 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-white/80 text-lg">
+            We've helped independent sponsors and family offices close acquisitions across business services, healthcare, and industrial sectors.
+          </p>
+        </div>
+      </div>
+
+      {/* Case Studies */}
+      <div className="py-20 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-[#0D3BC3] text-sm font-medium tracking-wider uppercase mb-3">Case Studies</p>
+          <h2 className="text-3xl font-bold text-[#1A2234] mb-12">Selected work</h2>
+
+          <div className="space-y-8">
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); navigateToPage('case-study-car-rental'); }}
-              className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1"
+              className="group block border-b border-gray-200 pb-8"
             >
-              <span className="inline-block text-xs font-bold text-[#EDB624] uppercase tracking-wider bg-[#EDB624]/10 px-2 py-1 rounded mb-3">Acquisition Support</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">From Operations to Ownership: Car Rental Franchise Acquisition</h3>
-              <p className="text-[#1A2234]/70 mb-4 leading-relaxed">A car rental franchise of a major global brand was up for sale. The buyers—an independent sponsor team of car rental executives—had deep operational expertise and a vision to enhance the business.</p>
-              <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Read Case Study <span>→</span></span>
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-sm text-[#1A2234]/50 mb-2">Travel & Transportation</p>
+                  <h3 className="text-xl font-semibold text-[#1A2234] group-hover:text-[#0D3BC3] transition-colors mb-2">From Operations to Ownership</h3>
+                  <p className="text-[#1A2234]/60">Enabled car rental executives to acquire a franchise of a major global brand.</p>
+                </div>
+                <span className="text-[#0D3BC3] group-hover:translate-x-1 transition-transform">→</span>
+              </div>
             </a>
 
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); navigateToPage('case-study-target-id'); }}
-              className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1"
+              className="group block"
             >
-              <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded mb-3">Target Identification</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Building an Acquisition Roadmap: Target Identification for a Consulting Firm</h3>
-              <p className="text-[#1A2234]/70 mb-4 leading-relaxed">A private equity-backed consulting firm sought to grow through acquisitions but lacked a clear picture of the potential investment universe.</p>
-              <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Read Case Study <span>→</span></span>
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-sm text-[#1A2234]/50 mb-2">Business Services</p>
+                  <h3 className="text-xl font-semibold text-[#1A2234] group-hover:text-[#0D3BC3] transition-colors mb-2">Building an Acquisition Roadmap</h3>
+                  <p className="text-[#1A2234]/60">Target identification for a PE-backed consulting firm seeking growth through M&A.</p>
+                </div>
+                <span className="text-[#0D3BC3] group-hover:translate-x-1 transition-transform">→</span>
+              </div>
             </a>
           </div>
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-[#1A2234] text-white py-16 md:py-20 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Accelerate Your Growth?</h2>
-          <p className="text-lg text-white/80 mb-8 leading-relaxed">
-            Schedule a consultation to discuss your corporate development strategy and M&A objectives.
-          </p>
+      {/* CTA */}
+      <div className="bg-[#1A2234] py-20 px-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">Planning an acquisition?</h2>
+          <p className="text-white/60 mb-8">Let's discuss how we can help you find, evaluate, and close the right deal.</p>
           <a
             href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Corporate%20Development%20Inquiry"
-            className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg text-lg"
+            className="inline-block bg-white text-[#1A2234] px-8 py-4 rounded font-semibold hover:bg-[#EDB624] transition-colors"
           >
-            Contact Us
+            Start a Conversation
           </a>
         </div>
       </div>
 
-      {/* Back Navigation */}
-      <div className="bg-white py-6 px-6 border-t border-slate-200">
-        <div className="max-w-5xl mx-auto">
+      {/* Back */}
+      <div className="bg-white py-6 px-6 border-t border-gray-200">
+        <div className="max-w-4xl mx-auto">
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); navigateToPage('home'); }}
-            className="inline-flex items-center gap-2 text-[#0D3BC3] hover:text-[#EDB624] transition-colors font-medium"
+            className="text-[#1A2234]/50 hover:text-[#0D3BC3] transition-colors text-sm"
           >
-            <span>←</span> Back to Home
+            ← Back to Home
           </a>
         </div>
       </div>
