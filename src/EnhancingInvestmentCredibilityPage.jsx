@@ -139,7 +139,7 @@ export default function EnhancingInvestmentCredibilityPage({ navigateToPage }) {
           <h2 className="text-xl font-bold text-white mb-2">Need Data-Driven Credibility for Your Sale?</h2>
           <p className="text-gray-400 text-sm mb-6">Let's discuss how we can build the analyses buyers are looking for.</p>
           <a
-            href="mailto:contact@northcastleconsulting.com?subject=FinTech%20Analysis%20Inquiry"
+            href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=FinTech%20Analysis%20Inquiry"
             className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded font-semibold text-sm hover:bg-amber-300 transition-all"
           >
             Start the Conversation

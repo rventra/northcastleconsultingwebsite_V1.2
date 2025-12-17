@@ -142,7 +142,7 @@ export default function KPIDataCubeCaseStudyPage({ navigateToPage }) {
           <h2 className="text-xl font-bold text-white mb-2">Ready to Unlock Your Data's Potential?</h2>
           <p className="text-gray-400 text-sm mb-6">Let's discuss how our data-driven approach can maximize your transaction value.</p>
           <a
-            href="mailto:contact@northcastleconsulting.com?subject=KPI%20Data%20Cube%20Inquiry"
+            href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=KPI%20Data%20Cube%20Inquiry"
             className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded font-semibold text-sm hover:bg-amber-300 transition-all"
           >
             Start the Conversation

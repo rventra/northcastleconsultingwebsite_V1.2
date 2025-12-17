@@ -18,7 +18,7 @@ export default function BuildingCredibilityPage({ navigateToPage }) {
       </div>
 
       {/* Compact Hero */}
-      <div className="bg-gradient-to-br from-[#0D3BC3] to-[#1A2234] text-white py-12 md:py-16 px-6">
+      <div className="bg-[#0D3BC3] text-white py-12 md:py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <div>
             <span className="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-3 py-1.5 rounded mb-4">
@@ -63,7 +63,7 @@ export default function BuildingCredibilityPage({ navigateToPage }) {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-[#0D3BC3] to-[#1A2234] py-14 px-6 md:px-12 text-white">
+        <div className="bg-[#0D3BC3] py-14 px-6 md:px-12 text-white">
           <div className="max-w-md mr-auto">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-3">
               <span className="w-8 h-8 bg-[#EDB624] text-[#1A2234] rounded-lg text-sm flex items-center justify-center font-bold">2</span>
@@ -135,12 +135,12 @@ export default function BuildingCredibilityPage({ navigateToPage }) {
       </div>
 
       {/* CTA */}
-      <div className="bg-gradient-to-br from-[#1A2234] to-[#0D3BC3] py-16 md:py-20 px-6">
+      <div className="bg-[#1A2234] py-16 md:py-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Justify Your Multiple?</h2>
           <p className="text-white/80 text-lg mb-8">Let's discuss how our structured approach can support your exit.</p>
           <a
-            href="mailto:contact@northcastleconsulting.com?subject=Sell-Side%20Readiness%20Inquiry"
+            href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Sell-Side%20Readiness%20Inquiry"
             className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg text-lg"
           >
             Start the Conversation
