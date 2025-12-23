@@ -57,14 +57,6 @@ export default function NorthCastleConsulting() {
                 <div className={`absolute top-full left-0 pt-2 transition-all duration-200 ${servicesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                   <div className="w-72 bg-white rounded-lg shadow-xl py-2 border border-gray-100">
                     <div className="px-4 py-1.5">
-                      <p className="text-xs font-bold text-[#0D3BC3] uppercase tracking-wider">Lender Services</p>
-                    </div>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Lender Due Diligence</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-dd-non-pe'); }} className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Lender DD For Non-PE Financing</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('challenged-credit'); }} className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Challenged Credit Due Diligence</a>
-
-                    <div className="border-t border-gray-200 my-1.5"></div>
-                    <div className="px-4 py-1.5">
                       <p className="text-xs font-bold text-[#0D3BC3] uppercase tracking-wider">Private Equity Services</p>
                     </div>
                     <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Sell-Side Readiness</a>
@@ -97,12 +89,6 @@ export default function NorthCastleConsulting() {
           {mobileMenuOpen && (
             <div className="md:hidden mt-3 pb-3 flex flex-col gap-2 text-sm">
               <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('home'); }} className="text-white hover:text-[#EDB624]">Home</a>
-              <div className="border-t border-white/20 pt-2">
-                <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider mb-1">Lender Services</p>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-due-diligence'); }} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Lender Due Diligence</a>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('lender-dd-non-pe'); }} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Lender DD For Non-PE</a>
-                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('challenged-credit'); }} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Challenged Credit DD</a>
-              </div>
               <div className="border-t border-white/20 pt-2">
                 <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider mb-1">Private Equity</p>
                 <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Sell-Side Readiness</a>
