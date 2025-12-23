@@ -40,7 +40,8 @@ export default function EnhancingInvestmentCredibilityPage({ navigateToPage }) {
       <div className="bg-gray-100 py-4 px-6 border-b border-gray-200">
         <div className="max-w-5xl mx-auto flex flex-wrap gap-6 text-sm">
           <div><span className="text-gray-500">Industry:</span> <span className="font-medium text-[#0D3BC3]">FinTech (Payments)</span></div>
-          <div><span className="text-gray-500">Team:</span> <span className="font-medium text-[#0D3BC3]">1 MD, 1 Director, 1 VP, 1 Associate</span></div>
+          <div><span className="text-gray-500">Duration:</span> <span className="font-medium text-[#0D3BC3]">2 months</span></div>
+          <div><span className="text-gray-500">Team:</span> <span className="font-medium text-[#0D3BC3]">1 Managing Director, 1 Director, 1 Vice President, 1 Associate</span></div>
           <div><span className="text-gray-500">Services:</span> <span className="font-medium text-[#0D3BC3]">Sell-Side Readiness, FP&A Support</span></div>
         </div>
       </div>
@@ -87,16 +88,19 @@ export default function EnhancingInvestmentCredibilityPage({ navigateToPage }) {
       {/* Execution Steps */}
       <div className="py-10 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-lg font-bold text-[#0D3BC3] mb-6">Building the Data Foundation</h2>
-          <div className="grid md:grid-cols-3 gap-4">
+          <h2 className="text-lg font-bold text-[#0D3BC3] mb-6">The Execution</h2>
+          <p className="text-gray-600 mb-6 text-sm">
+            To bridge the gap between operational data and investment-grade analysis, we built structured financial models and insights:
+          </p>
+          <div className="space-y-3">
             {[
-              { title: "Key Growth Driver Analysis", desc: "Built data cube segmenting revenue by customer and service line, connecting revenue streams with issuance data at granular level." },
-              { title: "Sales Pipeline Analysis", desc: "Integrated CRM data to track customer conversion rates at each stage, justifying revenue projections with historical win rates." },
-              { title: "Churn & Retention Analysis", desc: "Developed customer lifecycle model demonstrating low churn and high product stickiness across product lines." }
+              { title: "Key Growth Driver Analysis", desc: "Constructed a data cube that segmented revenue and gross profit by customer and service line, integrating data from various sources. The model pinpointed revenue-driving factors by product, service, and customer. This allowed us to connect revenue streams with issuance data at a granular level—something the company had never done before. The analysis pinpointed what was driving growth, explaining past revenue growth trends and normalizing post-COVID revenue expectations." },
+              { title: "Sales Pipeline & Win Rate Analysis", desc: "Integrated CRM marketing data to build a sales pipeline model, tracking customer conversion rates at each stage. This allowed the company to justify its revenue projections with historical win rates and overall funnel efficiency, building credibility with potential buyers. The analysis showed how the company's sales process actually performed, giving buyers confidence in the sustainability of revenue growth." },
+              { title: "Customer Churn & Retention Analysis", desc: "Developed a customer lifecycle model to assess long-term retention trends across product and service lines. This analysis demonstrated that while some customers transacted infrequently, they remained consistent revenue contributors, smoothing out seasonality and substantiating claims of low churn and high product stickiness." }
             ].map((step, i) => (
-              <div key={i} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <h3 className="text-sm font-bold text-[#0D3BC3] mb-2">{step.title}</h3>
-                <p className="text-xs text-gray-600">{step.desc}</p>
+              <div key={i} className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#0D3BC3]">
+                <h3 className="text-sm font-bold text-[#0D3BC3] mb-1.5">○ {step.title}</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -107,27 +111,30 @@ export default function EnhancingInvestmentCredibilityPage({ navigateToPage }) {
       <div className="py-10 px-6 bg-gray-50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-lg font-bold text-[#0D3BC3] mb-4">The Results</h2>
+          <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+            The company successfully leveraged these newly developed insights to strengthen its investment thesis and provide buyers with a clearer financial story. The sponsor and management team gained a deeper understanding of key revenue drivers, customer behaviors, and long-term business stability, improving their ability to answer diligence questions with confidence. The transaction process proceeded more smoothly, backed by data-driven credibility that addressed buyer concerns upfront.
+          </p>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">Stronger Thesis</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Stronger Investment Thesis</span>
               </div>
-              <p className="text-xs text-gray-600">Investment thesis strengthened with data-driven credibility</p>
+              <p className="text-xs text-gray-600">Data-driven insights strengthened the financial story and buyer confidence</p>
             </div>
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">Confident Answers</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Confident Management</span>
               </div>
-              <p className="text-xs text-gray-600">Management able to respond confidently to diligence questions</p>
+              <p className="text-xs text-gray-600">Management able to respond confidently to detailed diligence questions</p>
             </div>
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">Smooth Process</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Smooth Transaction</span>
               </div>
-              <p className="text-xs text-gray-600">Transaction proceeded smoothly backed by data credibility</p>
+              <p className="text-xs text-gray-600">Process proceeded smoothly with data addressing buyer concerns upfront</p>
             </div>
           </div>
         </div>
