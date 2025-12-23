@@ -38,7 +38,8 @@ export default function BuildingCredibilityPage({ navigateToPage }) {
       <div className="bg-[#F6F7F7] py-5 px-6 border-b border-slate-200">
         <div className="max-w-5xl mx-auto flex flex-wrap gap-8 text-sm">
           <div><span className="text-[#1A2234]/60">Industry:</span> <span className="font-semibold text-[#1A2234]">Leisure & Hospitality (Venue Management)</span></div>
-          <div><span className="text-[#1A2234]/60">Team:</span> <span className="font-semibold text-[#1A2234]">1 Director, 1 VP</span></div>
+          <div><span className="text-[#1A2234]/60">Duration:</span> <span className="font-semibold text-[#1A2234]">5 months</span></div>
+          <div><span className="text-[#1A2234]/60">Team:</span> <span className="font-semibold text-[#1A2234]">1 Director, 1 Vice President</span></div>
           <div><span className="text-[#1A2234]/60">Services:</span> <span className="font-semibold text-[#1A2234]">Sell-Side Readiness, FP&A Support</span></div>
         </div>
       </div>
@@ -83,21 +84,21 @@ export default function BuildingCredibilityPage({ navigateToPage }) {
       </div>
 
       {/* Execution Steps */}
-      <div className="py-16 md:py-20 px-6 bg-white">
+      <div className="py-10 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-8 text-center">Three Critical Analyses</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <h2 className="text-lg font-bold text-[#0D3BC3] mb-6">The Execution</h2>
+          <p className="text-gray-600 mb-6 text-sm">
+            We built three critical analyses to address buyer concerns and justify the company's premium valuation:
+          </p>
+          <div className="space-y-3">
             {[
-              { title: "Contract Leverage Analysis", desc: "Audited agreements, analyzed KPIs, built models with dozens of agreements to demonstrate strength of terms over time." },
-              { title: "Cap Ex ROI Analysis", desc: "Developed detailed model isolating investment decisions from market cycles for clear long-term return assessment." },
-              { title: "Operational Benchmarking", desc: "Benchmarked KPIs and financial performance before and after management takeover to prove improvements." }
+              { title: "Contract Leverage & Negotiation Analysis", desc: "Conducted a comprehensive audit of venue management agreements to demonstrate the company's strong contract leverage. Analyzed key performance indicators and contract terms across dozens of agreements, building models that showed how the company had consistently improved terms over time. This analysis directly addressed buyer concerns about the strength and defensibility of the contract portfolio, providing quantitative evidence of the company's negotiating power and relationship quality with venue partners." },
+              { title: "Capital Expenditure ROI & Lease Obligations Analysis", desc: "Developed a detailed financial model that isolated capital investment decisions from broader market cycles and venue performance fluctuations. This allowed us to demonstrate clear long-term returns on CapEx investments and assess the economics of lease obligations. The model provided buyers with confidence that management was making disciplined investment decisions and that capital requirements were sustainable and value-creating." },
+              { title: "Operational Improvement Benchmarking", desc: "Built comprehensive before-and-after analyses comparing venue performance and key operational metrics from before the company's management takeover to current performance. Benchmarked financial results, operational KPIs, customer satisfaction scores, and efficiency metrics to prove that the company's operational improvements were real, measurable, and sustainable. This analysis justified the premium multiple by demonstrating genuine value creation capability." }
             ].map((step, i) => (
-              <div key={i} className="bg-[#F6F7F7] rounded-xl p-6 border-t-4 border-[#0D3BC3]">
-                <div className="w-10 h-10 bg-[#0D3BC3]/10 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-[#0D3BC3] font-bold">{i + 1}</span>
-                </div>
-                <h3 className="text-lg font-bold text-[#1A2234] mb-3">{step.title}</h3>
-                <p className="text-[#1A2234]/70 leading-relaxed">{step.desc}</p>
+              <div key={i} className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#0D3BC3]">
+                <h3 className="text-sm font-bold text-[#0D3BC3] mb-1.5">○ {step.title}</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -105,30 +106,33 @@ export default function BuildingCredibilityPage({ navigateToPage }) {
       </div>
 
       {/* Results */}
-      <div className="py-16 md:py-20 px-6 bg-[#F6F7F7]">
+      <div className="py-10 px-6 bg-gray-50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-8 text-center">The Results</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-xl border border-slate-200">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">✓</span>
-                <span className="font-bold text-[#1A2234]">Premium Exit</span>
+          <h2 className="text-lg font-bold text-[#0D3BC3] mb-4">The Results</h2>
+          <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+            The structured analyses successfully justified the company's premium EBITDA multiple, providing buyers with the quantitative evidence they needed to support the valuation. By taking on the complex analytical work, we freed the CFO and PE sponsor to focus on strategic aspects of the transaction rather than getting bogged down in detailed financial modeling. The contract leverage analysis proved particularly valuable post-transaction—the acquiring company adopted our model as their standard framework for evaluating and negotiating future venue management agreements, demonstrating the lasting impact of our work.
+          </p>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-green-500">✓</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Premium Exit Achieved</span>
               </div>
-              <p className="text-[#1A2234]/70 leading-relaxed">Successfully justified high EBITDA multiple with data</p>
+              <p className="text-xs text-gray-600">Successfully justified high EBITDA multiple with quantitative data</p>
             </div>
-            <div className="bg-white p-6 rounded-xl border border-slate-200">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">✓</span>
-                <span className="font-bold text-[#1A2234]">Management Focus</span>
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-green-500">✓</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Management Focus</span>
               </div>
-              <p className="text-[#1A2234]/70 leading-relaxed">CFO and sponsor freed to focus on strategic aspects</p>
+              <p className="text-xs text-gray-600">CFO and sponsor freed to focus on strategic transaction aspects</p>
             </div>
-            <div className="bg-white p-6 rounded-xl border border-slate-200">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">✓</span>
-                <span className="font-bold text-[#1A2234]">Lasting Value</span>
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-green-500">✓</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Lasting Framework</span>
               </div>
-              <p className="text-[#1A2234]/70 leading-relaxed">Contract model adopted for future negotiations post-sale</p>
+              <p className="text-xs text-gray-600">Contract model adopted as standard for future venue negotiations post-sale</p>
             </div>
           </div>
         </div>

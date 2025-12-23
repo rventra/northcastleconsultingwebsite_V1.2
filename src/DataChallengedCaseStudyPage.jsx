@@ -40,6 +40,7 @@ export default function DataChallengedCaseStudyPage({ navigateToPage }) {
       <div className="bg-gray-100 py-4 px-6 border-b border-gray-200">
         <div className="max-w-5xl mx-auto flex flex-wrap gap-6 text-sm">
           <div><span className="text-gray-500">Industry:</span> <span className="font-medium text-[#0D3BC3]">Business Services (Vending & Catering)</span></div>
+          <div><span className="text-gray-500">Duration:</span> <span className="font-medium text-[#0D3BC3]">7 months</span></div>
           <div><span className="text-gray-500">Team:</span> <span className="font-medium text-[#0D3BC3]">1 Vice President</span></div>
           <div><span className="text-gray-500">Services:</span> <span className="font-medium text-[#0D3BC3]">Sell-Side Readiness, FP&A, Transaction DD</span></div>
         </div>
@@ -87,19 +88,22 @@ export default function DataChallengedCaseStudyPage({ navigateToPage }) {
       {/* Execution Steps */}
       <div className="py-10 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-lg font-bold text-[#0D3BC3] mb-6">Six Targeted Analytical Initiatives</h2>
-          <div className="grid md:grid-cols-3 gap-4">
+          <h2 className="text-lg font-bold text-[#0D3BC3] mb-6">The Execution</h2>
+          <p className="text-gray-600 mb-6 text-sm">
+            Working alongside the CFO as a strategic finance partner, we executed six targeted analytical initiatives to organize the business narrative and prepare for buyer diligence:
+          </p>
+          <div className="space-y-3">
             {[
-              { title: "Site Conversion Analysis", desc: "Examined conversions to higher-revenue locations, ranked non-converted sites" },
-              { title: "Same Store Growth", desc: "Demonstrated shift toward higher-margin, recession-resistant segments" },
-              { title: "Pricing/Volume/Mix", desc: "Isolated revenue drivers, proving customer expansion fueled growth" },
-              { title: "CapEx Assessment", desc: "Evaluated ROI on conversion buildouts and maintenance investments" },
-              { title: "Staffing Profitability", desc: "Allocated personnel to units/regions to optimize staffing levels" },
-              { title: "Route Effectiveness", desc: "Created roadmap for integrating acquired locations into logistics" }
+              { title: "Site Conversion Analysis", desc: "Examined the conversion of vending locations to higher-revenue full-service cafeterias. Analyzed conversion economics, ranked non-converted sites by revenue potential, and demonstrated the value creation opportunity from continued conversions." },
+              { title: "Same Store Growth Review", desc: "Built cohort analyses showing revenue growth at established locations over multiple years. Demonstrated the company's strategic shift toward higher-margin, recession-resistant cafeteria services, providing confidence in revenue sustainability." },
+              { title: "Pricing, Volume, and Mix Analysis", desc: "Isolated the drivers of revenue growth by separating price increases from volume expansion and product mix shifts. Proved that customer count expansion, not just price increases, fueled growth—a key indicator of business health." },
+              { title: "CapEx ROI Assessment", desc: "Evaluated the return on investment for site conversion buildouts and equipment maintenance. Showed that capital investments generated attractive returns and supported the company's growth strategy." },
+              { title: "Staffing Profitability Analysis", desc: "Allocated personnel costs to business units and geographic regions to identify optimal staffing levels. Provided insights into operational efficiency and areas for margin improvement." },
+              { title: "Route Effectiveness Review", desc: "Analyzed logistics efficiency and created a roadmap for integrating recently acquired locations into the company's route structure. Identified cost savings opportunities and operational synergies." }
             ].map((step, i) => (
-              <div key={i} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <h3 className="text-sm font-bold text-[#0D3BC3] mb-1">{step.title}</h3>
-                <p className="text-xs text-gray-600">{step.desc}</p>
+              <div key={i} className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#0D3BC3]">
+                <h3 className="text-sm font-bold text-[#0D3BC3] mb-1.5">○ {step.title}</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -110,27 +114,30 @@ export default function DataChallengedCaseStudyPage({ navigateToPage }) {
       <div className="py-10 px-6 bg-gray-50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-lg font-bold text-[#0D3BC3] mb-4">The Results</h2>
+          <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+            The sale that had stalled for over a year successfully closed within seven months of our engagement. Our structured analytical approach transformed disorganized financial data into a compelling business narrative, enabling management to confidently respond to buyer questions and the investment bank to focus on transaction execution rather than data remediation. The comprehensive analyses we developed facilitated a smooth due diligence process and demonstrated the company's true value drivers despite its initial data challenges.
+          </p>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">Successful Exit</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Successful Exit in 7 Months</span>
               </div>
-              <p className="text-xs text-gray-600">Sale completed despite initial financial disorganization</p>
+              <p className="text-xs text-gray-600">Transaction completed after year-long stall, overcoming financial disorganization</p>
             </div>
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
                 <span className="font-medium text-[#0D3BC3] text-sm">Bank Focus Restored</span>
               </div>
-              <p className="text-xs text-gray-600">Enabled investment bank to focus on transaction execution</p>
+              <p className="text-xs text-gray-600">Investment bank able to focus on transaction execution vs. data remediation</p>
             </div>
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">Efficient Diligence</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Compelling Narrative</span>
               </div>
-              <p className="text-xs text-gray-600">Structured approach facilitated smooth due diligence process</p>
+              <p className="text-xs text-gray-600">Transformed disorganized data into clear story demonstrating true value drivers</p>
             </div>
           </div>
         </div>

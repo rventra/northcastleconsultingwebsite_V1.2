@@ -40,7 +40,8 @@ export default function KPIDataCubeCaseStudyPage({ navigateToPage }) {
       <div className="bg-gray-100 py-4 px-6 border-b border-gray-200">
         <div className="max-w-5xl mx-auto flex flex-wrap gap-6 text-sm">
           <div><span className="text-gray-500">Industry:</span> <span className="font-medium text-[#0D3BC3]">Manufacturing (Auto Parts)</span></div>
-          <div><span className="text-gray-500">Team:</span> <span className="font-medium text-[#0D3BC3]">1 MD, 1 Director, 1 VP</span></div>
+          <div><span className="text-gray-500">Duration:</span> <span className="font-medium text-[#0D3BC3]">4 months</span></div>
+          <div><span className="text-gray-500">Team:</span> <span className="font-medium text-[#0D3BC3]">1 Managing Director, 1 Director, 1 Vice President</span></div>
           <div><span className="text-gray-500">Services:</span> <span className="font-medium text-[#0D3BC3]">Sell-Side Readiness, Transaction DD</span></div>
         </div>
       </div>
@@ -88,18 +89,20 @@ export default function KPIDataCubeCaseStudyPage({ navigateToPage }) {
       <div className="py-10 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-lg font-bold text-[#0D3BC3] mb-6">The Execution</h2>
-          <div className="grid md:grid-cols-5 gap-4">
+          <p className="text-gray-600 mb-6 text-sm">
+            We partnered with stakeholders across the organization to build a comprehensive data foundation from disparate systems:
+          </p>
+          <div className="space-y-3">
             {[
-              { num: "01", title: "Stakeholder Collaboration", desc: "Partnered with CFO, VP Sales, CIO to validate ERP data" },
-              { num: "02", title: "Requirements Discovery", desc: "Identified critical data fields for sales thesis" },
-              { num: "03", title: "Data Cube Build", desc: "Built KPI cube with Power Pivot and Power Query" },
-              { num: "04", title: "Diligence Management", desc: "Managed Q&A ensuring timely data delivery" },
-              { num: "05", title: "Knowledge Transfer", desc: "Transitioned cube to FP&A as ongoing tool" }
+              { title: "Stakeholder Collaboration", desc: "Partnered closely with the CFO, VP of Sales, and CIO to understand the architecture of each ERP system and validate data quality. This collaboration ensured we could accurately extract and consolidate transaction-level data across all six systems." },
+              { title: "Requirements Discovery", desc: "Identified the critical data fields and KPIs needed to support the sales thesis. Worked with management to understand what metrics would be most compelling to potential buyers and what questions they expected during due diligence." },
+              { title: "Data Cube Build", desc: "Built a comprehensive KPI data cube using Power Pivot and Power Query that unified 2.7 million transactions into a single analytical framework. The cube enabled slicing and dicing by customer, channel, product category, SKU, time period, and geographic region—providing unprecedented visibility into business performance." },
+              { title: "Diligence Management", desc: "Managed the Q&A process throughout due diligence, using the data cube to quickly respond to buyer requests for custom analyses. This responsiveness demonstrated management credibility and data sophistication." },
+              { title: "Knowledge Transfer", desc: "Transitioned the data cube to the FP&A team as an ongoing analytical tool. Provided training and documentation to ensure the company could maintain and update the cube post-transaction for future strategic planning and potential add-on acquisitions." }
             ].map((step, i) => (
-              <div key={i} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <span className="text-amber-300 text-lg font-bold">{step.num}</span>
-                <h3 className="text-sm font-bold text-[#0D3BC3] mt-1 mb-1">{step.title}</h3>
-                <p className="text-xs text-gray-600">{step.desc}</p>
+              <div key={i} className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#0D3BC3]">
+                <h3 className="text-sm font-bold text-[#0D3BC3] mb-1.5">○ {step.title}</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -110,27 +113,30 @@ export default function KPIDataCubeCaseStudyPage({ navigateToPage }) {
       <div className="py-10 px-6 bg-gray-50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-lg font-bold text-[#0D3BC3] mb-4">The Results</h2>
+          <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+            The KPI data cube transformed the sale process, equipping management with the analytical foundation to confidently respond to buyer inquiries in real-time. The comprehensive transaction-level visibility not only supported a successful exit but also provided the acquiring company with a powerful tool for future acquisitions and integration planning. Following the transaction, the company engaged us to develop their full business intelligence system, building on the analytical framework we established.
+          </p>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
                 <span className="font-medium text-[#0D3BC3] text-sm">Competitive Sale Process</span>
               </div>
-              <p className="text-xs text-gray-600">Management equipped to confidently respond to buyer inquiries</p>
+              <p className="text-xs text-gray-600">Management equipped to confidently respond to buyer inquiries with data-driven insights</p>
             </div>
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
                 <span className="font-medium text-[#0D3BC3] text-sm">Future-Ready Analytics</span>
               </div>
-              <p className="text-xs text-gray-600">Transaction-level visibility for future acquisitions and integration</p>
+              <p className="text-xs text-gray-600">Transaction-level visibility became foundation for future acquisitions and integration</p>
             </div>
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">Ongoing Engagement</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Ongoing Partnership</span>
               </div>
-              <p className="text-xs text-gray-600">Post-sale, company engaged for BI system development</p>
+              <p className="text-xs text-gray-600">Post-sale engagement for full BI system development building on analytical framework</p>
             </div>
           </div>
         </div>
