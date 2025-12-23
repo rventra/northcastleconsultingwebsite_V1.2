@@ -158,13 +158,28 @@ export default function SellSideReadinessPage({ navigateToPage }) {
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); navigateToPage('case-study-fintech'); }}
-              className="group block"
+              className="group block border-b border-gray-200 pb-8"
             >
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-sm text-[#1A2234]/50 mb-2">FinTech</p>
                   <h3 className="text-xl font-semibold text-[#1A2234] group-hover:text-[#0D3BC3] transition-colors mb-2">Enhancing Investment Credibility</h3>
                   <p className="text-[#1A2234]/60">Built growth and churn analyses for a payments company preparing for sale.</p>
+                </div>
+                <span className="text-[#0D3BC3] group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
+
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-streamlining-ops'); }}
+              className="group block"
+            >
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-sm text-[#1A2234]/50 mb-2">HVAC & Plumbing</p>
+                  <h3 className="text-xl font-semibold text-[#1A2234] group-hover:text-[#0D3BC3] transition-colors mb-2">Streamlining Operations and Marketing Insights</h3>
+                  <p className="text-[#1A2234]/60">Comprehensive analysis for a PE-owned HVAC and plumbing company preparing for successful exit.</p>
                 </div>
                 <span className="text-[#0D3BC3] group-hover:translate-x-1 transition-transform">→</span>
               </div>
@@ -180,7 +195,7 @@ export default function SellSideReadinessPage({ navigateToPage }) {
           <p className="text-white/60 mb-8">Let's discuss how we can help maximize your transaction value.</p>
           <a
             href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Sell-Side%20Readiness%20Inquiry"
-            className="inline-block bg-white text-[#1A2234] px-8 py-4 rounded font-semibold hover:bg-[#EDB624] transition-colors"
+            className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:shadow-xl hover:bg-amber-300 transition-all duration-300 shadow-lg"
           >
             Start a Conversation
           </a>

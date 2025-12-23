@@ -97,7 +97,7 @@ export default function AboutUsPage({ navigateToPage }) {
           </p>
           <button
             onClick={() => navigateToPage('home')}
-            className="bg-white text-[#0D3BC3] px-8 py-3 rounded-md font-semibold hover:bg-[#EDB624] hover:text-white transition-colors"
+            className="bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-amber-300 hover:shadow-xl transition-all duration-300 shadow-lg"
           >
             Contact Us
           </button>

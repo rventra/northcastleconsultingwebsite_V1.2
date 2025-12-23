@@ -141,7 +141,7 @@ export default function BuildingCredibilityPage({ navigateToPage }) {
           <p className="text-white/80 text-lg mb-8">Let's discuss how our structured approach can support your exit.</p>
           <a
             href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Sell-Side%20Readiness%20Inquiry"
-            className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg text-lg"
+            className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-amber-300 hover:shadow-xl transition-all duration-300 shadow-lg text-lg"
           >
             Start the Conversation
           </a>

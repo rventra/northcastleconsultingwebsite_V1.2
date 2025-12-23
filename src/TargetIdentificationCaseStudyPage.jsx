@@ -40,7 +40,8 @@ export default function TargetIdentificationCaseStudyPage({ navigateToPage }) {
       <div className="bg-gray-100 py-4 px-6 border-b border-gray-200">
         <div className="max-w-5xl mx-auto flex flex-wrap gap-6 text-sm">
           <div><span className="text-gray-500">Industry:</span> <span className="font-medium text-[#0D3BC3]">Consulting & Business Services</span></div>
-          <div><span className="text-gray-500">Team:</span> <span className="font-medium text-[#0D3BC3]">1 Director, 1 VP</span></div>
+          <div><span className="text-gray-500">Duration:</span> <span className="font-medium text-[#0D3BC3]">2 months</span></div>
+          <div><span className="text-gray-500">Team:</span> <span className="font-medium text-[#0D3BC3]">1 Director, 1 Vice President</span></div>
           <div><span className="text-gray-500">Services:</span> <span className="font-medium text-[#0D3BC3]">Corporate Development</span></div>
         </div>
       </div>
@@ -87,17 +88,23 @@ export default function TargetIdentificationCaseStudyPage({ navigateToPage }) {
       {/* Execution Steps */}
       <div className="py-10 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-lg font-bold text-[#0D3BC3] mb-6">Multi-Phase Target Identification Process</h2>
-          <div className="grid md:grid-cols-4 gap-4">
+          <h2 className="text-lg font-bold text-[#0D3BC3] mb-6">The Execution</h2>
+          <p className="text-gray-600 mb-6 text-sm">
+            We worked closely with the client to develop a data-driven acquisition framework that aligned with their strategic goals:
+          </p>
+          <div className="space-y-3">
             {[
-              { title: "Market Analysis", desc: "Mapped competitive landscape, identified key players, market dynamics, consolidation trends" },
-              { title: "Target Universe", desc: "Built database of candidates using research, industry databases, and network intelligence" },
-              { title: "Prioritization", desc: "Developed scoring methodology ranking targets by strategic value and integration complexity" },
-              { title: "Outreach Strategy", desc: "Created tailored materials and approach strategies for priority targets" }
+              { title: "Developed a Comprehensive Market Map", desc: "Built a broad initial list of firms within the investment universe, refining the list through stakeholder feedback and multiple iterations." },
+              { title: "Enriched Data for Target Evaluation", desc: "Leveraged publicly available data to estimate firm size, revenue potential, and valuation ranges based on headcount and market positioning. Focused on keeping data clean and used each target's service offerings to assess synergies and competitive positioning." },
+              { title: "Refined the Acquisition Criteria", desc: "Worked with the client to clarify their acquisition thesis, determining whether they sought new service lines or firms with overlapping expertise to expand their customer base." },
+              { title: "Talent Pool & Expertise Analysis", desc: "Analyzed bios/ographies at target firms to evaluate how they complemented the client's workforce and identified potential gaps or strengths in high-value services." },
+              { title: "Client Base & Positioning", desc: "Reviewed case studies and marketing materials from potential targets to assess client overlap and determine whether they sought new service lines or firms with overlapping expertise." },
+              { title: "Target Ranking & Prioritization", desc: "Established a ranking system based on geographic footprint, client alignment, service compatibility, and employee size, creating a shortlist of high-priority acquisition targets." },
+              { title: "Facilitated Initial Outreach", desc: "Provided detailed information on each target to support early engagement efforts, ensuring the client was prepared for the next phase of discussions." }
             ].map((step, i) => (
-              <div key={i} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <h3 className="text-sm font-bold text-[#0D3BC3] mb-1">{step.title}</h3>
-                <p className="text-xs text-gray-600">{step.desc}</p>
+              <div key={i} className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#0D3BC3]">
+                <h3 className="text-sm font-bold text-[#0D3BC3] mb-1.5">○ {step.title}</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -108,27 +115,30 @@ export default function TargetIdentificationCaseStudyPage({ navigateToPage }) {
       <div className="py-10 px-6 bg-gray-50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-lg font-bold text-[#0D3BC3] mb-4">The Results</h2>
+          <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+            The firm used the initial target list to gain a clearer understanding of the market landscape and refine its long-term acquisition strategy. Based on our analysis, the firm provided specific guidance on preferred target types, enabling us to build a more focused investment list with deeper diligence. The ongoing target list now serves as a resource for both competitive intelligence and long-term M&A planning, supporting the firm's ability to track potential acquisitions and industry shifts over time.
+          </p>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">50+ Qualified Targets</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Clear Market Understanding</span>
               </div>
-              <p className="text-xs text-gray-600">Clear view of acquisition landscape with prioritized pipeline</p>
+              <p className="text-xs text-gray-600">Comprehensive view of acquisition landscape with prioritized pipeline</p>
             </div>
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">Faster Execution</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Refined Strategy</span>
               </div>
-              <p className="text-xs text-gray-600">Framework enabled quick action when opportunities arose</p>
+              <p className="text-xs text-gray-600">Specific guidance on target types enabled focused investment approach</p>
             </div>
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">Ongoing Strategy</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Ongoing Resource</span>
               </div>
-              <p className="text-xs text-gray-600">Process became foundation for company's ongoing M&A strategy</p>
+              <p className="text-xs text-gray-600">Target list serves as foundation for competitive intelligence and M&A planning</p>
             </div>
           </div>
         </div>
