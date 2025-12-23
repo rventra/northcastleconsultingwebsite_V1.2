@@ -10,6 +10,7 @@ import TargetIdentificationCaseStudyPage from './TargetIdentificationCaseStudyPa
 import KPIDataCubeCaseStudyPage from './KPIDataCubeCaseStudyPage.jsx';
 import DataChallengedCaseStudyPage from './DataChallengedCaseStudyPage.jsx';
 import MassTortDigestTemplate from './components/newsletters/MassTortDigestTemplate.jsx';
+import AboutUsPage from './AboutUsPage.jsx';
 
 export default function NorthCastleConsulting() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -77,6 +78,7 @@ export default function NorthCastleConsulting() {
                 </div>
               </div>
 
+              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('about-us'); }} className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">About Us</a>
               <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('case-studies') : navigateToPage('home'); }} className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Case Studies</a>
               <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('contact') : navigateToPage('home'); }} className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Contact</a>
             </div>
@@ -101,6 +103,9 @@ export default function NorthCastleConsulting() {
               <div className="border-t border-white/20 pt-2">
                 <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider mb-1">Litigation</p>
                 <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('mass-tort'); }} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Mass Tort</a>
+              </div>
+              <div className="border-t border-white/20 pt-2">
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('about-us'); }} className="text-white hover:text-[#EDB624]">About Us</a>
               </div>
               <div className="border-t border-white/20 pt-2">
                 <a href="#" onClick={(e) => { e.preventDefault(); scrollToSection('case-studies'); setMobileMenuOpen(false); }} className="text-white hover:text-[#EDB624]">Case Studies</a>
@@ -407,6 +412,10 @@ export default function NorthCastleConsulting() {
 
       {currentPage === 'mass-tort' && (
         <MassTortPage navigateToPage={navigateToPage} scrollToSection={scrollToSection} />
+      )}
+
+      {currentPage === 'about-us' && (
+        <AboutUsPage navigateToPage={navigateToPage} />
       )}
 
       {currentPage === 'lender-due-diligence' && (
