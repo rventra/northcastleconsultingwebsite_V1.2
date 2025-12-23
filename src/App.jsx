@@ -5,6 +5,7 @@ import SellSideReadinessPage from './SellSideReadinessPage.jsx';
 import CorporateDevPage from './CorporateDevPage.jsx';
 import BuildingCredibilityPage from './BuildingCredibilityPage.jsx';
 import EnhancingInvestmentCredibilityPage from './EnhancingInvestmentCredibilityPage.jsx';
+import StreamliningOperationsCaseStudyPage from './StreamliningOperationsCaseStudyPage.jsx';
 import CarRentalCaseStudyPage from './CarRentalCaseStudyPage.jsx';
 import TargetIdentificationCaseStudyPage from './TargetIdentificationCaseStudyPage.jsx';
 import KPIDataCubeCaseStudyPage from './KPIDataCubeCaseStudyPage.jsx';
@@ -204,7 +205,7 @@ export default function NorthCastleConsulting() {
                   </a>
                   <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }} className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
                     <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Sell-Side Readiness</h4>
-                    <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">Position your portfolio company for optimal valuation. We streamline financials and validate metrics.</p>
+                    <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">Preparing your portfolio company for sale is critical to achieving optimal valuation and a smooth transaction. We streamline financials, validate operational metrics, and enhance management credibility to attract buyers and minimize last-minute surprises. With a &gt;95% success rate, we ensure your business is positioned for a competitive and successful exit.</p>
                     <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Learn more <span>→</span></span>
                   </a>
                 </div>
@@ -219,7 +220,7 @@ export default function NorthCastleConsulting() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }} className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
                     <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Corporate Development</h4>
-                    <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">End-to-end M&A support including target screening, due diligence, and deal structuring.</p>
+                    <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">Accelerate growth and expand market presence through strategic acquisitions and partnerships. Our end-to-end corporate development services include target screening, due diligence, deal structuring, and post-merger integration. We help you identify the right opportunities, mitigate risks, and maximize synergies to achieve your strategic goals.</p>
                     <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Learn more <span>→</span></span>
                   </a>
                 </div>
@@ -270,6 +271,11 @@ export default function NorthCastleConsulting() {
                   <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
                   <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Enhancing Investment Credibility</h3>
                   <p className="text-[#1A2234]/70 text-sm leading-relaxed">FinTech payments company growth and churn analysis</p>
+                </a>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-streamlining-ops'); }} className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
+                  <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Streamlining Operations and Marketing Insights</h3>
+                  <p className="text-[#1A2234]/70 text-sm leading-relaxed">HVAC & plumbing company - comprehensive analysis for successful exit</p>
                 </a>
                 <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('case-study-car-rental'); }} className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                   <span className="inline-block text-xs font-bold text-[#EDB624] uppercase tracking-wider bg-[#EDB624]/10 px-2 py-1 rounded">Corporate Development</span>
@@ -486,6 +492,10 @@ export default function NorthCastleConsulting() {
 
       {currentPage === 'case-study-data-challenged' && (
         <DataChallengedCaseStudyPage navigateToPage={navigateToPage} />
+      )}
+
+      {currentPage === 'case-study-streamlining-ops' && (
+        <StreamliningOperationsCaseStudyPage navigateToPage={navigateToPage} />
       )}
     </div>
   );

@@ -142,7 +142,7 @@ export default function DividendRecapPage({ navigateToPage }) {
           <p className="text-white/60 mb-8">Let's discuss whether it's the right move and how we can help.</p>
           <a
             href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Dividend%20Recapitalization%20Inquiry"
-            className="inline-block bg-white text-[#1A2234] px-8 py-4 rounded font-semibold hover:bg-[#EDB624] transition-colors"
+            className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:shadow-xl hover:bg-amber-300 transition-all duration-300 shadow-lg"
           >
             Start a Conversation
           </a>

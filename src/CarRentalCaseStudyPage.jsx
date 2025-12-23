@@ -40,7 +40,8 @@ export default function CarRentalCaseStudyPage({ navigateToPage }) {
       <div className="bg-gray-100 py-4 px-6 border-b border-gray-200">
         <div className="max-w-5xl mx-auto flex flex-wrap gap-6 text-sm">
           <div><span className="text-gray-500">Industry:</span> <span className="font-medium text-[#0D3BC3]">Travel & Car Rental</span></div>
-          <div><span className="text-gray-500">Team:</span> <span className="font-medium text-[#0D3BC3]">1 MD, 1 VP</span></div>
+          <div><span className="text-gray-500">Duration:</span> <span className="font-medium text-[#0D3BC3]">6 months</span></div>
+          <div><span className="text-gray-500">Team:</span> <span className="font-medium text-[#0D3BC3]">1 Managing Director, 1 Vice President</span></div>
           <div><span className="text-gray-500">Services:</span> <span className="font-medium text-[#0D3BC3]">Corporate Development, Investor Relations</span></div>
         </div>
       </div>
@@ -88,16 +89,19 @@ export default function CarRentalCaseStudyPage({ navigateToPage }) {
       <div className="py-10 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-lg font-bold text-[#0D3BC3] mb-6">The Execution</h2>
-          <div className="grid md:grid-cols-4 gap-4">
+          <p className="text-gray-600 mb-6 text-sm">
+            To support the independent sponsor team, we developed key financial tools and structured a financing approach:
+          </p>
+          <div className="space-y-3">
             {[
-              { title: "Valuation Models", desc: "Built comprehensive models capturing operational improvements and upside potential" },
-              { title: "Capital Structuring", desc: "Designed capital stack, identified debt and equity partners aligned with thesis" },
-              { title: "Due Diligence", desc: "Led financial and operational diligence, coordinated with third-party advisors" },
-              { title: "Transaction Execution", desc: "Supported negotiations and closing while buyers planned post-acquisition ops" }
+              { title: "Built a Detailed Bottom-Up Financial Model", desc: "Developed a granular model segmented by location, business line (insurance, maintenance), and key KPIs (such as revenue per car, revenue per transaction, and cost per transaction). This allowed the operations team to evaluate the business through their operational framework and assess where their strategic vision could enhance value." },
+              { title: "Developed a BI Dashboard for Data-Driven Decision-Making", desc: "Created an interactive business intelligence (BI) dashboard that provided insights the independent sponsor team hadn't planned for. This helped the management team effectively communicate their value-creation strategy to investors." },
+              { title: "Structured a Tax-Advantaged Financing Strategy", desc: "Identified a tax exchange opportunity that enabled the business to refinance its car fleet at a higher loan-to-value (LTV) ratio. This significantly reduced the equity capital required from investors. We also assisted in negotiating financing terms with alternative fleet lenders, further optimizing the capital structure." },
+              { title: "Enhanced Investor Confidence & Negotiated Terms", desc: "The granular insights from our financial model and BI dashboard allowed the investor to better understand the business than the existing management. Armed with this data, they successfully convinced investors of the superior returns their operational strategies could generate and secured favorable investment terms." }
             ].map((step, i) => (
-              <div key={i} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <h3 className="text-sm font-bold text-[#0D3BC3] mb-1">{step.title}</h3>
-                <p className="text-xs text-gray-600">{step.desc}</p>
+              <div key={i} className="bg-gray-50 rounded-lg p-4 border-l-4 border-[#0D3BC3]">
+                <h3 className="text-sm font-bold text-[#0D3BC3] mb-1.5">○ {step.title}</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -108,27 +112,30 @@ export default function CarRentalCaseStudyPage({ navigateToPage }) {
       <div className="py-10 px-6 bg-gray-50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-lg font-bold text-[#0D3BC3] mb-4">The Results</h2>
+          <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+            The operations team secured multiple investors for both fleet financing and equity investment, allowing them to submit a credible and competitive bid for the franchise. The financial model and KPI dashboards developed were transitioned into the operational foundation for managing the business post-acquisition. By minimizing the required equity investment and showcasing strong upside potential, the sponsor team positioned themselves to generate significant long-term value as operators.
+          </p>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">Successful Acquisition</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Multiple Investors Secured</span>
               </div>
-              <p className="text-xs text-gray-600">Executive team acquired the franchise and began implementing their plan</p>
+              <p className="text-xs text-gray-600">Fleet financing and equity investment enabled credible competitive bid</p>
             </div>
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">Operators to Owners</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Operational Foundation</span>
               </div>
-              <p className="text-xs text-gray-600">Enabled experienced operators to become owners without building M&A team</p>
+              <p className="text-xs text-gray-600">Financial model and dashboards transitioned to post-acquisition management tools</p>
             </div>
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-500">✓</span>
-                <span className="font-medium text-[#0D3BC3] text-sm">Flexible Structure</span>
+                <span className="font-medium text-[#0D3BC3] text-sm">Long-Term Value</span>
               </div>
-              <p className="text-xs text-gray-600">Transaction provided flexibility for growth while meeting investor expectations</p>
+              <p className="text-xs text-gray-600">Minimized equity investment while demonstrating strong upside potential</p>
             </div>
           </div>
         </div>
