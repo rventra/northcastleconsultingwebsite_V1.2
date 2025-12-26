@@ -28,23 +28,69 @@ export default function AboutUsPage({ navigateToPage }) {
               </div>
               <div className="md:col-span-2">
                 <h2 className="text-3xl font-bold text-[#1A2234] mb-2">Nicholas Citrin</h2>
-                <p className="text-[#0D3BC3] text-sm font-medium tracking-wider uppercase mb-6">Title/Role</p>
+                <p className="text-[#0D3BC3] text-sm font-medium tracking-wider uppercase mb-6">Founder</p>
 
                 <div className="space-y-4 text-[#1A2234]/70 leading-relaxed">
                   <p>
-                    [Biography and professional background to be added]
-                  </p>
-                  <p>
-                    [Additional details about experience, expertise, and achievements]
+                    Nicholas has nearly two decades of finance experience spanning investment banking, private equity, hedge funds, and equity research. He specializes in understanding key business drivers and performing valuations to guide critical decision-making for clients and stakeholders. Leveraging a deep skill set in financial modeling and analytics, Nicholas provides actionable insights that help organizations optimize their capital structures and identify growth opportunities.
                   </p>
                 </div>
+
+                {/* Contact Information */}
+                <div className="mt-6 space-y-2">
+                  <p className="text-[#1A2234]/70">
+                    <a href="mailto:ncitrin@northcastleconsulting.com" className="hover:text-[#0D3BC3] transition-colors">
+                      Email: ncitrin@northcastleconsulting.com
+                    </a>
+                  </p>
+                  <p className="text-[#1A2234]/70">
+                    <a href="tel:3144404931" className="hover:text-[#0D3BC3] transition-colors">
+                      Phone: 314.440.4931
+                    </a>
+                  </p>
+                </div>
+
+                {/* Prior Experience */}
+                <div className="mt-8 pt-8 border-t border-gray-200">
+                  <h3 className="text-lg font-semibold text-[#1A2234] mb-4">Prior Experience</h3>
+                  <ul className="space-y-2 text-[#1A2234]/70">
+                    <li>• Accordion</li>
+                    <li>• 8C Partners</li>
+                    <li>• Wedbush Securities</li>
+                    <li>• Valo Group</li>
+                    <li>• Barclays Capital</li>
+                    <li>• Lehman Brothers</li>
+                  </ul>
+                </div>
+
+                {/* Education & Extended Bio */}
+                <details className="mt-8 pt-8 border-t border-gray-200">
+                  <summary className="text-lg font-semibold text-[#1A2234] mb-4 cursor-pointer hover:text-[#0D3BC3] transition-colors">
+                    Know More
+                  </summary>
+                  <div className="mt-4 space-y-4 text-[#1A2234]/70 leading-relaxed">
+                    <div>
+                      <h4 className="font-semibold text-[#1A2234] mb-2">Education</h4>
+                      <p>University of Pennsylvania, B.A. Economics</p>
+                    </div>
+                    <p>
+                      Over the course of his career, Nicholas has led multiple consulting engagements that required building and managing outsourced teams focused on finance and data analytics. Prior to founding North Castle, Nicholas was a consultant at Accordion in the Transaction Execution Services group focused on sell side readiness and corporate development projects. Prior to Accordion, Nicholas consulted private equity and hedge fund clients on investment analysis and buy-side engagements, conducting extensive due diligence and modeling support for investments across diverse industries. He has worked on capital raising, corporate development, and investment analysis. He is skilled at leveraging tools such as Excel, Power Query, and Power BI to create dynamic, data-driven dashboards and analyses. Nicholas has analyzed companies in the technology, software, media, retail, service, and real estate sectors.
+                    </p>
+                    <p>
+                      Nicholas began his career at Lehman Brothers in the Technology & Media M&A Investment Banking group, where he was involved in evaluating strategic and financial sponsor transactions. Nicholas graduated cum laude from the University of Pennsylvania with a degree in Economics.
+                    </p>
+                  </div>
+                </details>
 
                 <div className="mt-8 pt-8 border-t border-gray-200">
                   <h3 className="text-lg font-semibold text-[#1A2234] mb-4">Areas of Expertise</h3>
                   <div className="flex flex-wrap gap-2">
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">[Expertise 1]</span>
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">[Expertise 2]</span>
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">[Expertise 3]</span>
+                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Financial Modeling & Analytics</span>
+                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Valuation & Due Diligence</span>
+                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Transaction Advisory</span>
+                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Capital Structure Optimization</span>
+                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Business Intelligence & Dashboards</span>
+                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Investment Analysis</span>
                   </div>
                 </div>
               </div>
