@@ -130,14 +130,14 @@ export default function NorthCastleConsulting() {
                     <span className="text-[#EDB624]">Financial Expertise</span>
                   </h1>
                   <p className="text-white/90 text-base leading-relaxed mb-6">
-                    Actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
+                    Delivering actionable insights and tailored solutions for Private Equity and Corporate Development teams to maximize value, reduce risk, and drive success.
                   </p>
                   <a
                     href="#services"
                     onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}
                     className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold hover:bg-white transition-all duration-300"
                   >
-                    Explore Our Solutions
+                    Contact Us
                   </a>
                 </div>
               </div>
@@ -187,8 +187,8 @@ export default function NorthCastleConsulting() {
           <section id="services" className="py-16 md:py-20 px-6 bg-[#F6F7F7]">
             <div className="max-w-6xl mx-auto">
               <div className="mb-12 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#1A2234] mb-3">Our Services</h2>
-                <p className="text-[#1A2234]/70 text-lg max-w-2xl mx-auto">Comprehensive financial advisory for middle-market transactions</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-[#1A2234] mb-3">Explore Our Tailored Financial Solutions</h2>
+                <p className="text-[#1A2234]/70 text-lg max-w-2xl mx-auto">We deliver tailored services that drive growth, mitigate risk, and maximize value for private equity firms, family offices, and independent sponsors.</p>
               </div>
 
               {/* Private Equity Services */}
@@ -295,8 +295,8 @@ export default function NorthCastleConsulting() {
           <section id="contact" className="py-16 md:py-20 px-6 bg-[#1A2234] text-white">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3">Ready to Unlock Value?</h2>
-                <p className="text-white/80 text-lg">Let's discuss how our expertise can drive success for your organization.</p>
+                <h2 className="text-3xl md:text-4xl font-bold mb-3">Drive Your Business Forward</h2>
+                <p className="text-white/80 text-lg">Schedule your consultation today to leverage our expert insights and drive your business forward. Our team provides tailored solutions to meet your organization's unique needs.</p>
               </div>
 
               <form
@@ -379,7 +379,7 @@ export default function NorthCastleConsulting() {
                   type="submit"
                   className="block w-full text-center bg-[#EDB624] text-[#1A2234] px-6 py-4 rounded-lg font-semibold hover:bg-white transition-all duration-300 shadow-lg text-lg cursor-pointer"
                 >
-                  Send Message
+                  Contact Us
                 </button>
                 <p className="text-center text-white/60 text-sm mt-4">We typically respond within 1 business day</p>
               </form>
