@@ -133,8 +133,8 @@ export default function NorthCastleConsulting() {
                     Delivering actionable insights and tailored solutions for Private Equity and Corporate Development teams to maximize value, reduce risk, and drive success.
                   </p>
                   <a
-                    href="#services"
-                    onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}
+                    href="#contact"
+                    onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
                     className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold hover:bg-white transition-all duration-300"
                   >
                     Contact Us
