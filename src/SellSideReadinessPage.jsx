@@ -103,6 +103,124 @@ export default function SellSideReadinessPage({ navigateToPage }) {
         </div>
       </div>
 
+      {/* Divider */}
+      <div className="border-t border-gray-200"></div>
+
+      {/* Real World Scenarios */}
+      <div className="py-20 px-6 bg-[#FAFAFA]">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-[#0D3BC3] text-sm font-medium tracking-wider uppercase mb-3">Real World Scenarios</p>
+          <h2 className="text-3xl font-bold text-[#1A2234] mb-12">Common situations we address</h2>
+
+          <div className="space-y-12">
+            {/* Serial Acquirer */}
+            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+              <h3 className="text-xl font-semibold text-[#1A2234] mb-4">Serial Acquirer</h3>
+              <p className="text-[#1A2234]/60 italic mb-8 border-l-4 border-[#0D3BC3] pl-4">
+                "I have helped scale our organization through five targeted acquisitions in just three years"
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+                <div>
+                  <h4 className="text-lg font-semibold text-[#1A2234] mb-3">Business Challenges:</h4>
+                  <ul className="space-y-2 text-[#1A2234]/60">
+                    <li className="flex items-start">
+                      <span className="text-[#0D3BC3] mr-2">•</span>
+                      <span>Incomplete post-merger integration</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#0D3BC3] mr-2">•</span>
+                      <span>Disparate data environment</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#0D3BC3] mr-2">•</span>
+                      <span>Multiple ERP, CRM, CPM, and BI tools in use</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#0D3BC3] mr-2">•</span>
+                      <span>Decentralized and misaligned F&A teams across multiple BUs and subsidiaries</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-[#1A2234] mb-3">Greatest Hurdle:</h4>
+                  <p className="text-[#1A2234]/60 leading-relaxed">
+                    Our management team is unable to address simple diligence requests (e.g., we need help producing a streamlined revenue pipeline by product, customer, etc.)
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Complex Data Environment */}
+            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+              <h3 className="text-xl font-semibold text-[#1A2234] mb-4">Complex Data Environment</h3>
+              <p className="text-[#1A2234]/60 italic mb-8 border-l-4 border-[#0D3BC3] pl-4">
+                "I lead finance at a company where navigating a multi-layered, data-rich environment is critical to decision-making"
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+                <div>
+                  <h4 className="text-lg font-semibold text-[#1A2234] mb-3">Business Challenges:</h4>
+                  <ul className="space-y-2 text-[#1A2234]/60">
+                    <li className="flex items-start">
+                      <span className="text-[#0D3BC3] mr-2">•</span>
+                      <span>Insufficient systems</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#0D3BC3] mr-2">•</span>
+                      <span>Large and unorganized data sets (ex: millions of rows of transactional data)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#0D3BC3] mr-2">•</span>
+                      <span>Management lacks the requisite skills to extract data and manipulate it</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-[#1A2234] mb-3">Greatest Hurdle:</h4>
+                  <p className="text-[#1A2234]/60 leading-relaxed">
+                    Our management team is unable to produce anticipated diligence analysis (e.g., we need to deliver an analysis of revenue/profitability by customer cohort)
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Understaffed Finance Team */}
+            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+              <h3 className="text-xl font-semibold text-[#1A2234] mb-4">Understaffed Finance Team</h3>
+              <p className="text-[#1A2234]/60 italic mb-8 border-l-4 border-[#0D3BC3] pl-4">
+                "I manage finance at a company where the F&A team is currently running lean relative to our operational demands"
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+                <div>
+                  <h4 className="text-lg font-semibold text-[#1A2234] mb-3">Business Challenges:</h4>
+                  <ul className="space-y-2 text-[#1A2234]/60">
+                    <li className="flex items-start">
+                      <span className="text-[#0D3BC3] mr-2">•</span>
+                      <span>Management team has significant bandwidth constraints</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#0D3BC3] mr-2">•</span>
+                      <span>F&A team is understaffed and struggling to keep up with their day-to-day activities</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-[#1A2234] mb-3">Greatest Hurdle:</h4>
+                  <p className="text-[#1A2234]/60 leading-relaxed">
+                    Our management team lacks the requisite bandwidth to tackle a transaction without the business being neglected (e.g., we need to stay focused on running the business itself)
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="border-t border-gray-200"></div>
+
       {/* Case Studies */}
       <div className="py-20 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
