@@ -142,7 +142,7 @@ export default function AboutUsPage({ navigateToPage }) {
             Get in touch to discuss how we can help your business
           </p>
           <button
-            onClick={() => navigateToPage('home')}
+            onClick={() => navigateToPage('contact-us')}
             className="bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-amber-300 hover:shadow-xl transition-all duration-300 shadow-lg"
           >
             Contact Us

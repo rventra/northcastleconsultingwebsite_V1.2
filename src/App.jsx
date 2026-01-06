@@ -12,6 +12,7 @@ import KPIDataCubeCaseStudyPage from './KPIDataCubeCaseStudyPage.jsx';
 import DataChallengedCaseStudyPage from './DataChallengedCaseStudyPage.jsx';
 import MassTortDigestTemplate from './components/newsletters/MassTortDigestTemplate.jsx';
 import AboutUsPage from './AboutUsPage.jsx';
+import ContactUsPage from './ContactUsPage.jsx';
 
 export default function NorthCastleConsulting() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -81,7 +82,7 @@ export default function NorthCastleConsulting() {
 
               <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('about-us'); }} className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">About Us</a>
               <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('case-studies') : navigateToPage('home'); }} className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Case Studies</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); currentPage === 'home' ? scrollToSection('contact') : navigateToPage('home'); }} className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Contact</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('contact-us'); }} className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Contact</a>
             </div>
 
             <button className="md:hidden text-white text-xl" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -111,7 +112,7 @@ export default function NorthCastleConsulting() {
               <div className="border-t border-white/20 pt-2">
                 <a href="#" onClick={(e) => { e.preventDefault(); scrollToSection('case-studies'); setMobileMenuOpen(false); }} className="text-white hover:text-[#EDB624]">Case Studies</a>
               </div>
-              <a href="#" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); setMobileMenuOpen(false); }} className="text-white hover:text-[#EDB624]">Contact</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('contact-us'); }} className="text-white hover:text-[#EDB624]">Contact</a>
             </div>
           )}
         </div>
@@ -496,6 +497,10 @@ export default function NorthCastleConsulting() {
 
       {currentPage === 'case-study-streamlining-ops' && (
         <StreamliningOperationsCaseStudyPage navigateToPage={navigateToPage} />
+      )}
+
+      {currentPage === 'contact-us' && (
+        <ContactUsPage navigateToPage={navigateToPage} />
       )}
     </div>
   );
