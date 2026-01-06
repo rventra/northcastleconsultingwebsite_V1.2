@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function CarRentalCaseStudyPage({ navigateToPage }) {
+export default function CarRentalCaseStudyPage() {
   return (
     <div className="pt-16">
       {/* Back Navigation */}

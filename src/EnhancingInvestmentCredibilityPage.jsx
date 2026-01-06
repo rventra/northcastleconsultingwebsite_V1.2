@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function EnhancingInvestmentCredibilityPage({ navigateToPage }) {
+export default function EnhancingInvestmentCredibilityPage() {
   return (
     <div className="pt-16">
       {/* Back Navigation */}

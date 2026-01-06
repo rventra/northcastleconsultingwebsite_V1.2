@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function DividendRecapPage({ navigateToPage }) {
+export default function DividendRecapPage() {
   return (
     <div className="pt-16">
       {/* Hero */}
@@ -152,13 +153,12 @@ export default function DividendRecapPage({ navigateToPage }) {
       {/* Back */}
       <div className="bg-white py-6 px-6 border-t border-gray-200">
         <div className="max-w-4xl mx-auto">
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); navigateToPage('home'); }}
+          <Link
+            to="/"
             className="text-[#1A2234]/50 hover:text-[#0D3BC3] transition-colors text-sm"
           >
             ← Back to Home
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function KPIDataCubeCaseStudyPage({ navigateToPage }) {
+export default function KPIDataCubeCaseStudyPage() {
   return (
     <div className="pt-16">
       {/* Back Navigation */}

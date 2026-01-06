@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function SellSideReadinessPage({ navigateToPage }) {
+export default function SellSideReadinessPage() {
   return (
     <div className="pt-16">
       {/* Hero - Clean and Simple */}
@@ -228,9 +229,8 @@ export default function SellSideReadinessPage({ navigateToPage }) {
           <h2 className="text-3xl font-bold text-[#1A2234] mb-12">Selected work</h2>
 
           <div className="space-y-8">
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-kpi-data-cube'); }}
+            <Link
+              to="/case-studies/sell-side-kpi-data-cube"
               className="group block border-b border-gray-200 pb-8"
             >
               <div className="flex justify-between items-start">
@@ -241,11 +241,10 @@ export default function SellSideReadinessPage({ navigateToPage }) {
                 </div>
                 <span className="text-[#0D3BC3] group-hover:translate-x-1 transition-transform">→</span>
               </div>
-            </a>
+            </Link>
 
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-data-challenged'); }}
+            <Link
+              to="/case-studies/sell-side-data-challenged-sale"
               className="group block border-b border-gray-200 pb-8"
             >
               <div className="flex justify-between items-start">
@@ -256,11 +255,10 @@ export default function SellSideReadinessPage({ navigateToPage }) {
                 </div>
                 <span className="text-[#0D3BC3] group-hover:translate-x-1 transition-transform">→</span>
               </div>
-            </a>
+            </Link>
 
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-credibility'); }}
+            <Link
+              to="/case-studies/sell-side-credibility-multiples"
               className="group block border-b border-gray-200 pb-8"
             >
               <div className="flex justify-between items-start">
@@ -271,11 +269,10 @@ export default function SellSideReadinessPage({ navigateToPage }) {
                 </div>
                 <span className="text-[#0D3BC3] group-hover:translate-x-1 transition-transform">→</span>
               </div>
-            </a>
+            </Link>
 
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-fintech'); }}
+            <Link
+              to="/case-studies/sell-side-investment-credibility"
               className="group block border-b border-gray-200 pb-8"
             >
               <div className="flex justify-between items-start">
@@ -286,11 +283,10 @@ export default function SellSideReadinessPage({ navigateToPage }) {
                 </div>
                 <span className="text-[#0D3BC3] group-hover:translate-x-1 transition-transform">→</span>
               </div>
-            </a>
+            </Link>
 
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-streamlining-ops'); }}
+            <Link
+              to="/case-studies/sell-side-operations-marketing"
               className="group block"
             >
               <div className="flex justify-between items-start">
@@ -301,7 +297,7 @@ export default function SellSideReadinessPage({ navigateToPage }) {
                 </div>
                 <span className="text-[#0D3BC3] group-hover:translate-x-1 transition-transform">→</span>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -323,13 +319,12 @@ export default function SellSideReadinessPage({ navigateToPage }) {
       {/* Back */}
       <div className="bg-white py-6 px-6 border-t border-gray-200">
         <div className="max-w-4xl mx-auto">
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); navigateToPage('home'); }}
+          <Link
+            to="/"
             className="text-[#1A2234]/50 hover:text-[#0D3BC3] transition-colors text-sm"
           >
             ← Back to Home
-          </a>
+          </Link>
         </div>
       </div>
     </div>

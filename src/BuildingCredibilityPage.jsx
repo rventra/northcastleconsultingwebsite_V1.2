@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function BuildingCredibilityPage({ navigateToPage }) {
+export default function BuildingCredibilityPage() {
   return (
     <div className="pt-16">
       {/* Back Navigation */}
