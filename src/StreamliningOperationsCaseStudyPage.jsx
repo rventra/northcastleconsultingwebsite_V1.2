@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function StreamliningOperationsCaseStudyPage({ navigateToPage }) {
+export default function StreamliningOperationsCaseStudyPage() {
   return (
     <div className="pt-16">
       {/* Back Navigation */}

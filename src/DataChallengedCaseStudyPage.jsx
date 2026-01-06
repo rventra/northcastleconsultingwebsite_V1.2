@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function DataChallengedCaseStudyPage({ navigateToPage }) {
+export default function DataChallengedCaseStudyPage() {
   return (
     <div className="pt-16">
       {/* Back Navigation */}

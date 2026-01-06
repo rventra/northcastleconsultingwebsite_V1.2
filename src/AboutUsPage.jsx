@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function AboutUsPage({ navigateToPage }) {
+export default function AboutUsPage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -141,25 +142,24 @@ export default function AboutUsPage({ navigateToPage }) {
           <p className="text-xl text-white/80 mb-8">
             Get in touch to discuss how we can help your business
           </p>
-          <button
-            onClick={() => navigateToPage('contact-us')}
-            className="bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-amber-300 hover:shadow-xl transition-all duration-300 shadow-lg"
+          <Link
+            to="/contact-us"
+            className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-amber-300 hover:shadow-xl transition-all duration-300 shadow-lg"
           >
             Contact Us
-          </button>
+          </Link>
         </div>
       </div>
 
       {/* Back Button */}
       <div className="bg-white py-6 px-6 border-t border-gray-200">
         <div className="max-w-4xl mx-auto">
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); navigateToPage('home'); }}
+          <Link
+            to="/"
             className="text-[#1A2234]/50 hover:text-[#0D3BC3] transition-colors text-sm"
           >
             ← Back to Home
-          </a>
+          </Link>
         </div>
       </div>
     </div>
