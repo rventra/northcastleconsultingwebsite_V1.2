@@ -109,9 +109,8 @@ export default function CorporateDevPage() {
           <h2 className="text-3xl font-bold text-[#1A2234] mb-12">Selected work</h2>
 
           <div className="space-y-8">
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-car-rental'); }}
+            <Link
+              to="/case-studies/corporate-operations-to-ownership"
               className="group block border-b border-gray-200 pb-8"
             >
               <div className="flex justify-between items-start">
@@ -122,11 +121,10 @@ export default function CorporateDevPage() {
                 </div>
                 <span className="text-[#0D3BC3] group-hover:translate-x-1 transition-transform">→</span>
               </div>
-            </a>
+            </Link>
 
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); navigateToPage('case-study-target-id'); }}
+            <Link
+              to="/case-studies/corporate-acquisition-roadmap"
               className="group block"
             >
               <div className="flex justify-between items-start">
@@ -137,7 +135,7 @@ export default function CorporateDevPage() {
                 </div>
                 <span className="text-[#0D3BC3] group-hover:translate-x-1 transition-transform">→</span>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

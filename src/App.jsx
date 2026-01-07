@@ -67,20 +67,20 @@ function Navigation() {
                   <div className="px-4 py-1.5">
                     <p className="text-xs font-bold text-[#0D3BC3] uppercase tracking-wider">Private Equity Services</p>
                   </div>
-                  <Link to="/sell-side-readiness" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Sell-Side Readiness</Link>
-                  <Link to="/dividend-recap-prep" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Dividend Recapitalization Prep</Link>
+                  <Link to="/services/sell-side-readiness" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Sell-Side Readiness</Link>
+                  <Link to="/services/dividend-recap-prep" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Dividend Recapitalization Prep</Link>
 
                   <div className="border-t border-gray-200 my-1.5"></div>
                   <div className="px-4 py-1.5">
                     <p className="text-xs font-bold text-[#0D3BC3] uppercase tracking-wider">Family Office / Independent Sponsor</p>
                   </div>
-                  <Link to="/corporate-development" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Corporate Development</Link>
+                  <Link to="/services/corporate-development" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Corporate Development</Link>
 
                   <div className="border-t border-gray-200 my-1.5"></div>
                   <div className="px-4 py-1.5">
                     <p className="text-xs font-bold text-[#0D3BC3] uppercase tracking-wider">Litigation Services</p>
                   </div>
-                  <Link to="/mass-tort" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Mass Tort</Link>
+                  <Link to="/services/mass-tort" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Mass Tort</Link>
                 </div>
               </div>
             </div>
@@ -100,16 +100,16 @@ function Navigation() {
             <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">Home</Link>
             <div className="border-t border-white/20 pt-2">
               <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider mb-1">Private Equity</p>
-              <Link to="/sell-side-readiness" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Sell-Side Readiness</Link>
-              <Link to="/dividend-recap-prep" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Dividend Recap Prep</Link>
+              <Link to="/services/sell-side-readiness" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Sell-Side Readiness</Link>
+              <Link to="/services/dividend-recap-prep" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Dividend Recap Prep</Link>
             </div>
             <div className="border-t border-white/20 pt-2">
               <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider mb-1">Family Office</p>
-              <Link to="/corporate-development" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Corporate Development</Link>
+              <Link to="/services/corporate-development" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Corporate Development</Link>
             </div>
             <div className="border-t border-white/20 pt-2">
               <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider mb-1">Litigation</p>
-              <Link to="/mass-tort" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Mass Tort</Link>
+              <Link to="/services/mass-tort" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Mass Tort</Link>
             </div>
             <div className="border-t border-white/20 pt-2">
               <Link to="/about-us" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">About Us</Link>
@@ -212,12 +212,12 @@ function HomePage() {
               Private Equity Services
             </h3>
             <div className="grid md:grid-cols-2 gap-6">
-              <Link to="/dividend-recap-prep" className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
+              <Link to="/services/dividend-recap-prep" className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
                 <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Dividend Recapitalization Prep</h4>
                 <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">Return capital to LPs through strategic recaps. We assess cash flow stability and debt capacity.</p>
                 <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Learn more <span>→</span></span>
               </Link>
-              <Link to="/sell-side-readiness" className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
+              <Link to="/services/sell-side-readiness" className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
                 <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Sell-Side Readiness</h4>
                 <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">Preparing your portfolio company for sale is critical to achieving optimal valuation and a smooth transaction. We streamline financials, validate operational metrics, and enhance management credibility to attract buyers and minimize last-minute surprises. With a &gt;95% success rate, we ensure your business is positioned for a competitive and successful exit.</p>
                 <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Learn more <span>→</span></span>
@@ -232,7 +232,7 @@ function HomePage() {
               Family Office / Independent Sponsor
             </h3>
             <div className="grid md:grid-cols-2 gap-6">
-              <Link to="/corporate-development" className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
+              <Link to="/services/corporate-development" className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
                 <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Corporate Development</h4>
                 <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">Accelerate growth and expand market presence through strategic acquisitions and partnerships. Our end-to-end corporate development services include target screening, due diligence, deal structuring, and post-merger integration. We help you identify the right opportunities, mitigate risks, and maximize synergies to achieve your strategic goals.</p>
                 <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Learn more <span>→</span></span>
@@ -247,7 +247,7 @@ function HomePage() {
               Litigation Services
             </h3>
             <div className="grid md:grid-cols-2 gap-6">
-              <Link to="/mass-tort" className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
+              <Link to="/services/mass-tort" className="group block p-6 bg-white rounded-xl hover:shadow-lg transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
                 <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Mass Tort</h4>
                 <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">Financial analysis and expert support for mass tort litigation, including damages quantification.</p>
                 <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Learn more <span>→</span></span>
@@ -411,10 +411,10 @@ function HomePage() {
             <div>
               <h4 className="text-[#EDB624] font-bold text-lg mb-3">Services</h4>
               <div className="space-y-2">
-                <Link to="/dividend-recap-prep" className="block text-white/70 hover:text-[#EDB624] transition-colors">Dividend Recap Prep</Link>
-                <Link to="/sell-side-readiness" className="block text-white/70 hover:text-[#EDB624] transition-colors">Sell-Side Readiness</Link>
-                <Link to="/corporate-development" className="block text-white/70 hover:text-[#EDB624] transition-colors">Corporate Development</Link>
-                <Link to="/mass-tort" className="block text-white/70 hover:text-[#EDB624] transition-colors">Mass Tort</Link>
+                <Link to="/services/dividend-recap-prep" className="block text-white/70 hover:text-[#EDB624] transition-colors">Dividend Recap Prep</Link>
+                <Link to="/services/sell-side-readiness" className="block text-white/70 hover:text-[#EDB624] transition-colors">Sell-Side Readiness</Link>
+                <Link to="/services/corporate-development" className="block text-white/70 hover:text-[#EDB624] transition-colors">Corporate Development</Link>
+                <Link to="/services/mass-tort" className="block text-white/70 hover:text-[#EDB624] transition-colors">Mass Tort</Link>
               </div>
             </div>
             <div>
@@ -441,10 +441,10 @@ export default function NorthCastleConsulting() {
         <Route path="/contact-us" element={<ContactUsPage />} />
 
         {/* Service Pages */}
-        <Route path="/sell-side-readiness" element={<SellSideReadinessPage />} />
-        <Route path="/dividend-recap-prep" element={<DividendRecapPage />} />
-        <Route path="/corporate-development" element={<CorporateDevPage />} />
-        <Route path="/mass-tort" element={<MassTortPage />} />
+        <Route path="/services/sell-side-readiness" element={<SellSideReadinessPage />} />
+        <Route path="/services/dividend-recap-prep" element={<DividendRecapPage />} />
+        <Route path="/services/corporate-development" element={<CorporateDevPage />} />
+        <Route path="/services/mass-tort" element={<MassTortPage />} />
 
         {/* Case Study Pages */}
         <Route path="/case-studies/sell-side-kpi-data-cube" element={<KPIDataCubeCaseStudyPage />} />
