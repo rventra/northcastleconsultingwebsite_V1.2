@@ -2,6 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function MassTortPage() {
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="pt-16">
       {/* Hero */}
@@ -19,13 +26,12 @@ export default function MassTortPage() {
             >
               Explore Our Solutions
             </a>
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); navigateToPage('newsletter-blog'); }}
+            <Link
+              to="/newsletter"
               className="inline-block bg-white/10 backdrop-blur-sm text-white border border-white/30 px-8 py-4 rounded-lg font-semibold hover:bg-white/20 transition-all duration-300 shadow-lg text-lg"
             >
               Newsletter & Blog
-            </a>
+            </Link>
           </div>
         </div>
       </div>
