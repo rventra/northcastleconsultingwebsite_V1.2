@@ -11,9 +11,11 @@ import week20251208 from './week-2025-12-08';
 import week20251216 from './week-2025-12-16';
 import week20251222 from './week-2025-12-22';
 import week20251229 from './week-2025-12-29';
+import week20260107 from './week-2026-01-07';
 
 export const WEEKS_REGISTRY = [
-  week20251229,  // Newest first
+  week20260107,  // Newest first
+  week20251229,
   week20251222,
   week20251216,
   week20251208,
