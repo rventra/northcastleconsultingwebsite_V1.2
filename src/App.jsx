@@ -11,6 +11,8 @@ import CarRentalCaseStudyPage from './CarRentalCaseStudyPage.jsx';
 import TargetIdentificationCaseStudyPage from './TargetIdentificationCaseStudyPage.jsx';
 import KPIDataCubeCaseStudyPage from './KPIDataCubeCaseStudyPage.jsx';
 import DataChallengedCaseStudyPage from './DataChallengedCaseStudyPage.jsx';
+import SellSideReadinessCaseStudiesPage from './SellSideReadinessCaseStudiesPage.jsx';
+import CorporateDevelopmentCaseStudiesPage from './CorporateDevelopmentCaseStudiesPage.jsx';
 import MassTortDigestTemplate from './components/newsletters/MassTortDigestTemplate.jsx';
 import AboutUsPage from './AboutUsPage.jsx';
 import ContactUsPage from './ContactUsPage.jsx';
@@ -265,41 +267,71 @@ function HomePage() {
             <p className="text-[#1A2234]/70 text-lg">Proven results across industries</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Link to="/case-studies/sell-side-kpi-data-cube" className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">KPI Data Cube for Company Sale</h3>
-              <p className="text-[#1A2234]/70 text-sm leading-relaxed">$250M auto parts manufacturer - 2.7M data points unified</p>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Sell-Side Readiness Card */}
+            <Link to="/case-studies/sell-side-readiness" className="group block bg-gradient-to-br from-[#0D3BC3] to-[#0D3BC3]/90 p-8 rounded-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div className="flex items-center justify-between mb-4">
+                <span className="inline-block text-xs font-bold text-[#1A2234] uppercase tracking-wider bg-[#EDB624] px-3 py-1 rounded">5 Case Studies</span>
+                <svg className="w-6 h-6 text-[#EDB624] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Sell-Side Readiness</h3>
+              <p className="text-blue-100 text-sm leading-relaxed mb-4">
+                Preparing portfolio companies for optimal valuation and smooth transactions through financial streamlining, operational metrics validation, and enhanced management credibility.
+              </p>
+              <ul className="space-y-2 text-sm text-blue-100">
+                <li className="flex gap-2">
+                  <span className="text-[#EDB624]">•</span>
+                  <span>KPI Data Cube for Company Sale</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-[#EDB624]">•</span>
+                  <span>Unlocking Value in Data-Challenged Sale</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-[#EDB624]">•</span>
+                  <span>Building Credibility & Justifying Multiples</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-[#EDB624]">•</span>
+                  <span>Enhancing Investment Credibility</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-[#EDB624]">•</span>
+                  <span>Streamlining Operations and Marketing Insights</span>
+                </li>
+              </ul>
+              <div className="mt-6 inline-flex items-center gap-2 text-[#EDB624] font-semibold group-hover:gap-3 transition-all">
+                View All Case Studies <span>→</span>
+              </div>
             </Link>
-            <Link to="/case-studies/sell-side-data-challenged-sale" className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Unlocking Value in Data-Challenged Sale</h3>
-              <p className="text-[#1A2234]/70 text-sm leading-relaxed">Vending & catering company - stalled to sold in 7 months</p>
-            </Link>
-            <Link to="/case-studies/sell-side-credibility-multiples" className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Building Credibility & Justifying Multiples</h3>
-              <p className="text-[#1A2234]/70 text-sm leading-relaxed">PE-backed venue management company sale preparation</p>
-            </Link>
-            <Link to="/case-studies/sell-side-investment-credibility" className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Enhancing Investment Credibility</h3>
-              <p className="text-[#1A2234]/70 text-sm leading-relaxed">FinTech payments company growth and churn analysis</p>
-            </Link>
-            <Link to="/case-studies/sell-side-operations-marketing" className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Streamlining Operations and Marketing Insights</h3>
-              <p className="text-[#1A2234]/70 text-sm leading-relaxed">HVAC & plumbing company - comprehensive analysis for successful exit</p>
-            </Link>
-            <Link to="/case-studies/corporate-operations-to-ownership" className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <span className="inline-block text-xs font-bold text-[#EDB624] uppercase tracking-wider bg-[#EDB624]/10 px-2 py-1 rounded">Corporate Development</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">From Operations to Ownership</h3>
-              <p className="text-[#1A2234]/70 text-sm leading-relaxed">Enabling executives to acquire a car rental franchise</p>
-            </Link>
-            <Link to="/case-studies/corporate-acquisition-roadmap" className="group block bg-[#F6F7F7] p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <span className="inline-block text-xs font-bold text-[#EDB624] uppercase tracking-wider bg-[#EDB624]/10 px-2 py-1 rounded">Corporate Development</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Building an Acquisition Roadmap</h3>
-              <p className="text-[#1A2234]/70 text-sm leading-relaxed">Target identification for a PE-backed consulting firm</p>
+
+            {/* Corporate Development Card */}
+            <Link to="/case-studies/corporate-development" className="group block bg-gradient-to-br from-[#1A2234] to-[#1A2234]/90 p-8 rounded-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div className="flex items-center justify-between mb-4">
+                <span className="inline-block text-xs font-bold text-[#1A2234] uppercase tracking-wider bg-[#EDB624] px-3 py-1 rounded">2 Case Studies</span>
+                <svg className="w-6 h-6 text-[#EDB624] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Corporate Development</h3>
+              <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                End-to-end corporate development services including target screening, due diligence, deal structuring, and post-merger integration to accelerate growth and expand market presence.
+              </p>
+              <ul className="space-y-2 text-sm text-gray-300">
+                <li className="flex gap-2">
+                  <span className="text-[#EDB624]">•</span>
+                  <span>From Operations to Ownership</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-[#EDB624]">•</span>
+                  <span>Building an Acquisition Roadmap</span>
+                </li>
+              </ul>
+              <div className="mt-6 inline-flex items-center gap-2 text-[#EDB624] font-semibold group-hover:gap-3 transition-all">
+                View All Case Studies <span>→</span>
+              </div>
             </Link>
           </div>
         </div>
@@ -445,6 +477,10 @@ export default function NorthCastleConsulting() {
         <Route path="/services/dividend-recap-prep" element={<DividendRecapPage />} />
         <Route path="/services/corporate-development" element={<CorporateDevPage />} />
         <Route path="/services/mass-tort" element={<MassTortPage />} />
+
+        {/* Case Study Category Pages */}
+        <Route path="/case-studies/sell-side-readiness" element={<SellSideReadinessCaseStudiesPage />} />
+        <Route path="/case-studies/corporate-development" element={<CorporateDevelopmentCaseStudiesPage />} />
 
         {/* Case Study Pages */}
         <Route path="/case-studies/sell-side-kpi-data-cube" element={<KPIDataCubeCaseStudyPage />} />
