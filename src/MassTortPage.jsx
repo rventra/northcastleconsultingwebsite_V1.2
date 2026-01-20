@@ -420,30 +420,30 @@ export default function MassTortPage() {
         <div id="stage-2" className="scroll-mt-24">
           <div className="bg-[#0D3BC3] text-white p-8 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 2</span>
-            <h2 className="text-3xl font-bold mt-4 mb-2">Case Prioritization & Resource Allocation</h2>
-            <p className="text-xl opacity-90">Focus staff on high-value cases, reduce wasted effort, accelerate settlements</p>
+            <h2 className="text-3xl font-bold mt-4 mb-2">Dock QA & Deficiency Curing</h2>
+            <p className="text-xl opacity-90">Verify criteria, cure gaps, reject/replace non-conforming cases before they clog your docket</p>
           </div>
           <div className="bg-white p-8 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Without prioritization frameworks, firms treat all cases equally—burning staff hours on low-value matters while high-value cases languish. Settlement velocity suffers, and ROI on case investment drops.
+              Firms take weeks to review incoming cases for quality and completeness. Cases with missing medical records, incomplete exposure histories, or statute of limitations issues clog your docket, wasting paralegal time and delaying settlement negotiations. Without systematic QA, bad cases slip through, damaging ROI and client outcomes.
             </p>
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
             <ul className="space-y-3 text-gray-700 mb-6">
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Build value scoring models:</strong> Estimate settlement potential based on diagnosis severity, exposure strength, jurisdiction, demographics</span></li>
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Segment case portfolio:</strong> Tier 1 (high value, strong facts) gets priority; Tier 3 (weak facts) gets minimal investment</span></li>
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Allocate staff strategically:</strong> Senior paralegals on Tier 1; junior staff on Tier 3; automation on routine tasks</span></li>
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Monitor velocity by tier:</strong> Track time-to-settlement and adjust resource allocation to maximize throughput</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Automated completeness checks:</strong> Flag missing medical records, incomplete exposure affidavits, statute issues within 24 hours of intake</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Deficiency workflow:</strong> Auto-send requests to claimants for missing documents with escalation to paralegals after 7 days</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Replace/reject logic:</strong> Automatically replace non-conforming cases with pre-qualified backups from your lead inventory</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Dock quality scoring:</strong> Score each case 1-100 on completeness, medical evidence strength, exposure documentation</span></li>
             </ul>
 
             <div className="bg-blue-50 border-l-4 border-[#0D3BC3] p-6 rounded">
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 25-40% increase in high-value case focus</li>
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> Faster settlement velocity for top-tier cases</li>
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> Reduced wasted effort on low-value cases</li>
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> Improved staff utilization and morale</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 40-60% improvement in dock compensability rate</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 30% higher average settlement value</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 50% reduction in time to settlement</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> Eliminated downstream surprises from incomplete cases</li>
               </ul>
             </div>
 
@@ -459,30 +459,30 @@ export default function MassTortPage() {
         <div id="stage-3" className="scroll-mt-24">
           <div className="bg-[#0D3BC3] text-white p-8 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 3</span>
-            <h2 className="text-3xl font-bold mt-4 mb-2">Document Collection & Deficiency Management</h2>
-            <p className="text-xl opacity-90">Eliminate chase emails, automate reminders, reduce document collection time by 40%</p>
+            <h2 className="text-3xl font-bold mt-4 mb-2">Automated Claimant Communication</h2>
+            <p className="text-xl opacity-90">Keep clients engaged for years with multi-channel, low-touch, high-scale outreach</p>
           </div>
           <div className="bg-white p-8 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Document collection is a massive time sink: paralegals send repeated emails chasing claimants for medical records, affidavits, and proof of exposure. Cases stall for months waiting on missing documents. Manual tracking in spreadsheets creates errors and lost follow-ups.
+              Mass tort claimants need ongoing communication for 2-5 years, but manual outreach consumes massive paralegal time. Claimants miss document deadlines, fail to respond to medical record requests, and become disengaged, dropping out before settlement. Firms spend $200-400 per case annually on manual communication tasks.
             </p>
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
             <ul className="space-y-3 text-gray-700 mb-6">
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Automated deficiency tracking:</strong> System identifies missing documents and flags cases requiring follow-up</span></li>
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Scheduled reminder workflows:</strong> Auto-send emails/texts to claimants at intervals (Day 7, Day 14, Day 21)</span></li>
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Claimant self-service portals:</strong> Let claimants upload documents directly, reducing paralegal coordination effort</span></li>
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Escalation logic:</strong> After X reminders with no response, flag for paralegal intervention or case closure review</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Multi-channel campaigns:</strong> Email, SMS, and postal mail sequences triggered by case milestones</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Smart scheduling:</strong> Send communications at optimal times based on claimant demographics and response patterns</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Two-way integration:</strong> Claimants respond via secure portal, auto-updating case management system</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Engagement scoring:</strong> Identify at-risk claimants early for paralegal intervention</span></li>
             </ul>
 
             <div className="bg-blue-50 border-l-4 border-[#0D3BC3] p-6 rounded">
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 40% reduction in document collection time</li>
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> Eliminated manual chase emails</li>
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> Higher claimant response rates</li>
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> Faster case progression to settlement-ready status</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 60-80% claimant response rate (vs. 30-40% industry average)</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 70% reduction in document cycle time</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 85% case completion rate</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> $150-250 cost savings per case annually</li>
               </ul>
             </div>
 
@@ -498,30 +498,30 @@ export default function MassTortPage() {
         <div id="stage-4" className="scroll-mt-24">
           <div className="bg-[#0D3BC3] text-white p-8 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 4</span>
-            <h2 className="text-3xl font-bold mt-4 mb-2">OCR, Document Parsing & Indexing</h2>
-            <p className="text-xl opacity-90">Make all documents searchable, eliminate manual file hunting, enable instant retrieval</p>
+            <h2 className="text-3xl font-bold mt-4 mb-2">Intelligent Medical Record Review</h2>
+            <p className="text-xl opacity-90">AI-assisted, lens-based review turns records into defensible, negotiable evidence</p>
           </div>
           <div className="bg-white p-8 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Medical records and case files arrive as scanned PDFs with no text layer. Staff spend hours manually searching through documents to find specific diagnoses, test results, or exposure details. When defense requests specific information, teams must manually review hundreds of files.
+              Medical record review consumes 4-8 hours per case at $75-150/hour paralegal rates. Reviewers miss critical diagnoses, procedure dates, and causation links. Inconsistent review quality creates tier assignment disputes with defense counsel, delaying settlements by months. Human error leads to undervaluation or case rejections.
             </p>
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
             <ul className="space-y-3 text-gray-700 mb-6">
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>OCR all documents:</strong> Convert scanned PDFs to searchable text</span></li>
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Auto-classify document types:</strong> Identify medical records, pathology reports, imaging results, affidavits automatically</span></li>
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Build searchable index:</strong> Full-text search across entire case portfolio in seconds</span></li>
-              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Tag key entities:</strong> Automatically identify and tag diagnoses, dates, provider names, medications</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>AI pre-review:</strong> Automatically identify 200+ medical data points (diagnoses, providers, dates, medications)</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Lens-based workflow:</strong> Present records chronologically with causation analysis and exposure correlation</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Quality assurance:</strong> Senior paralegals review AI-flagged issues, not entire record set</span></li>
+              <li className="flex gap-3"><span className="text-[#0D3BC3] font-bold">→</span><span><strong>Defense-ready summaries:</strong> Export review summaries that withstand Daubert challenges</span></li>
             </ul>
 
             <div className="bg-blue-50 border-l-4 border-[#0D3BC3] p-6 rounded">
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 90% reduction in document search time</li>
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> Instant response to defense document requests</li>
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> Eliminated manual file hunting</li>
-                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> Foundation for AI-powered analysis and extraction</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 50% reduction in medical review time per case</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 40% improvement in reviewer productivity</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> 25% stronger negotiation position</li>
+                <li className="flex gap-2"><span className="text-[#0D3BC3]">✓</span> Defensible review process for discovery</li>
               </ul>
             </div>
 
