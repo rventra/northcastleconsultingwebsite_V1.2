@@ -109,25 +109,56 @@ export default function AboutUsPage() {
               </div>
               <div className="md:col-span-2">
                 <h2 className="text-3xl font-bold text-[#1A2234] mb-2">Ram Ventrapragada</h2>
-                <p className="text-[#0D3BC3] text-sm font-medium tracking-wider uppercase mb-6">Title/Role</p>
 
                 <div className="space-y-4 text-[#1A2234]/70 leading-relaxed">
                   <p>
-                    [Biography and professional background to be added]
+                    Ram has over a decade of experience spanning financial modeling, data strategy, and AI-enabled automation across banking, consulting, and data-intensive legal environments. He specializes in designing and implementing complex financial and data systems that translate abstract logic into structured, decision-ready outputs for senior leadership.
                   </p>
                   <p>
-                    [Additional details about experience, expertise, and achievements]
+                    Leveraging a deep skill set in CCAR stress testing, 3-statement modeling, liquidity forecasting, valuation, and data architecture, Ram has supported major institutions including Capital One and Doral Financial. More recently, he has led advanced data strategy initiatives using Python, APIs, and AI-driven workflows to convert large volumes of unstructured information into structured, CRM-ready datasets. His work enables organizations to improve forecasting accuracy, operational scalability, and data-driven decision-making.
                   </p>
                 </div>
 
-                <div className="mt-8 pt-8 border-t border-gray-200">
-                  <h3 className="text-lg font-semibold text-[#1A2234] mb-4">Areas of Expertise</h3>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">[Expertise 1]</span>
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">[Expertise 2]</span>
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">[Expertise 3]</span>
-                  </div>
+                {/* Contact Information */}
+                <div className="mt-6 space-y-2">
+                  <p className="text-[#1A2234]/70">
+                    <a href="mailto:rventrapragada@northcastleconsulting.com" className="hover:text-[#0D3BC3] transition-colors">
+                      Email: rventrapragada@northcastleconsulting.com
+                    </a>
+                  </p>
                 </div>
+
+                {/* Prior Experience */}
+                <div className="mt-8 pt-8 border-t border-gray-200">
+                  <h3 className="text-lg font-semibold text-[#1A2234] mb-4">Prior Experience</h3>
+                  <ul className="space-y-2 text-[#1A2234]/70">
+                    <li>• Wagstaff Law Firm</li>
+                    <li>• Capital One</li>
+                    <li>• Ernst & Young (EY)</li>
+                    <li>• Doral Financial Corporation</li>
+                  </ul>
+                </div>
+
+                {/* Education & Extended Bio */}
+                <details className="mt-8 pt-8 border-t border-gray-200">
+                  <summary className="text-lg font-semibold text-[#1A2234] mb-4 cursor-pointer hover:text-[#0D3BC3] transition-colors">
+                    Know More
+                  </summary>
+                  <div className="mt-4 space-y-4 text-[#1A2234]/70 leading-relaxed">
+                    <div>
+                      <h4 className="font-semibold text-[#1A2234] mb-2">Education</h4>
+                      <p>
+                        Over the course of his career, Ram has led multiple initiatives requiring the design, validation, and governance of high-complexity financial and analytical models. At Wagstaff Law Firm, he served as Head of Data Strategy & Analytics, where he architected AI-driven lead enrichment and document review systems, transforming unstructured claimant communications into structured Salesforce uploads at scale. He designed automated logic, fallback processes, and QA protocols to ensure data integrity while supporting high-volume operational workflows.
+                      </p>
+                      <p>
+                        Prior to this, Ram was a Senior Financial Analyst at Capital One, where he developed and maintained CCAR models under baseline and adverse economic scenarios, owned mortgage origination forecasts, and performed detailed variance and NPV analyses to identify key profitability drivers. Earlier in his career, he worked as a Management Consultant at Ernst & Young, supporting process documentation and software implementations, and as a Financial Analyst at Doral Financial, where he built fully integrated 3-statement and liquidity models to support regulatory compliance and board-level capital planning.
+                      </p>
+                      <p>
+                        Ram is highly proficient in Excel, Python, Power BI, Salesforce, and AI workflow orchestration tools, and is known for his ability to bridge finance, data, and automation to create systems that are both analytically rigorous and operationally scalable.
+                      </p>
+                    </div>
+                  </div>
+                </details>
               </div>
             </div>
 
