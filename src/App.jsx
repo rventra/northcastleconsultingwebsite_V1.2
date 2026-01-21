@@ -16,6 +16,7 @@ import CorporateDevelopmentCaseStudiesPage from './CorporateDevelopmentCaseStudi
 import MassTortDigestTemplate from './components/newsletters/MassTortDigestTemplate.jsx';
 import AboutUsPage from './AboutUsPage.jsx';
 import ContactUsPage from './ContactUsPage.jsx';
+import MassTortSignals from './components/MassTortSignals.jsx';
 
 function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -70,7 +71,7 @@ function Navigation() {
                     <p className="text-xs font-bold text-[#0D3BC3] uppercase tracking-wider">Private Equity Services</p>
                   </div>
                   <Link to="/services/sell-side-readiness" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Sell-Side Readiness</Link>
-                  <Link to="/services/dividend-recap-prep" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Dividend Recapitalization Prep</Link>
+                  <Link to="/services/dividend-recap-prep" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Dividend Recap Preparation</Link>
 
                   <div className="border-t border-gray-200 my-1.5"></div>
                   <div className="px-4 py-1.5">
@@ -106,11 +107,11 @@ function Navigation() {
               <Link to="/services/dividend-recap-prep" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Dividend Recap Prep</Link>
             </div>
             <div className="border-t border-white/20 pt-2">
-              <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider mb-1">Family Office</p>
+              <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider">Family Office</p>
               <Link to="/services/corporate-development" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Corporate Development</Link>
             </div>
             <div className="border-t border-white/20 pt-2">
-              <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider mb-1">Litigation</p>
+              <p className="text-xs font-Semibold text-[#EDB624] uppercase tracking-wider">Litigation</p>
               <Link to="/services/mass-tort" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Mass Tort</Link>
             </div>
             <div className="border-t border-white/20 pt-2">
@@ -150,7 +151,7 @@ function HomePage() {
                 <span className="text-[#EDB624]">Financial Expertise</span>
               </h1>
               <p className="text-white/90 text-base leading-relaxed mb-6">
-                Delivering actionable insights and tailored solutions for Private Equity and Corporate Development teams to maximize value, reduce risk, and drive success.
+                Delivering actionable insights and tailored solutons for Private Equity and Corporate Development teams to maximize value, reduce risk, and drive success.
               </p>
               <button
                 onClick={() => scrollToSection('contact')}
@@ -198,6 +199,9 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ADDED: Mass Tort Signals Section */}
+      <MassTortSignals />
 
       {/* Services Grid */}
       <section id="services" className="py-16 md:py-20 px-6 bg-[#F6F7F7]">
@@ -282,23 +286,23 @@ function HomePage() {
               </p>
               <ul className="space-y-2 text-sm text-blue-100">
                 <li className="flex gap-2">
-                  <span className="text-[#EDB624]">•</span>
+                  <span className="text-[#EDB624]">✓</span>
                   <span>KPI Data Cube for Company Sale</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-[#EDB624]">•</span>
+                  <span className="text-[#EDB624]">✓</span>
                   <span>Unlocking Value in Data-Challenged Sale</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-[#EDB624]">•</span>
+                  <span className="text-[#EDB624]">✓</span>
                   <span>Building Credibility & Justifying Multiples</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-[#EDB624]">•</span>
+                  <span className="text-[#EDB624]">✓</span>
                   <span>Enhancing Investment Credibility</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-[#EDB624]">•</span>
+                  <span className="text-[#EDB624]">✓</span>
                   <span>Streamlining Operations and Marketing Insights</span>
                 </li>
               </ul>
@@ -321,11 +325,11 @@ function HomePage() {
               </p>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li className="flex gap-2">
-                  <span className="text-[#EDB624]">•</span>
+                  <span className="text-[#EDB624]">✓</span>
                   <span>From Operations to Ownership</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-[#EDB624]">•</span>
+                  <span className="text-[#EDB624]">✓</span>
                   <span>Building an Acquisition Roadmap</span>
                 </li>
               </ul>
