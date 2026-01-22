@@ -71,29 +71,19 @@ export default function AboutUsPage() {
                   </summary>
                   <div className="mt-4 space-y-4 text-[#1A2234]/70 leading-relaxed">
                     <div>
-                      <h4 className="font-semibold text-[#1A2234] mb-2">Education</h4>
-                      <p>University of Pennsylvania, B.A. Economics</p>
+                      <h4 className="font-semibold text-[#1A2234] mb-2 underline">Education</h4>
+                      <ul className="space-y-2">
+                        <li>• University of Pennsylvania, B.A. Economics</li>
+                      </ul>
                     </div>
                     <p>
-                      Over the course of his career, Nicholas has led multiple consulting engagements that required building and managing outsourced teams focused on finance and data analytics. Prior to founding North Castle, Nicholas was a consultant at Accordion in the Transaction Execution Services group focused on sell side readiness and corporate development projects. Prior to Accordion, Nicholas consulted private equity and hedge fund clients on investment analysis and buy-side engagements, conducting extensive due diligence and modeling support for investments across diverse industries. He has worked on capital raising, corporate development, and investment analysis. He is skilled at leveraging tools such as Excel, Power Query, and Power BI to create dynamic, data-driven dashboards and analyses. Nicholas has analyzed companies in the technology, software, media, retail, service, and real estate sectors.
+                      Over the course of his career, Nicholas has led multiple consulting engagements that required building and managing outsourced teams focused on finance and data analytics. Prior to founding North Castle, Nicholas was a consultant at Accordion in the Transaction Execution Services group focused on sell-side readiness and corporate development projects. Prior to Accordion, Nicholas consulted private equity and hedge fund clients on investment analysis and buy-side engagements, conducting extensive due diligence and modeling support for investments across diverse industries. He has worked on capital raising, corporate development, and investment analysis. He is skilled at leveraging tools such as Excel, Power Query, and Power BI to create dynamic, data-driven dashboards and analyses. Nicholas has analyzed companies in the technology, software, media, retail, service, and real estate sectors.
                     </p>
                     <p>
                       Nicholas began his career at Lehman Brothers in the Technology & Media M&A Investment Banking group, where he was involved in evaluating strategic and financial sponsor transactions. Nicholas graduated cum laude from the University of Pennsylvania with a degree in Economics.
                     </p>
                   </div>
                 </details>
-
-                <div className="mt-8 pt-8 border-t border-gray-200">
-                  <h3 className="text-lg font-semibold text-[#1A2234] mb-4">Areas of Expertise</h3>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Financial Modeling & Analytics</span>
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Valuation & Due Diligence</span>
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Transaction Advisory</span>
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Capital Structure Optimization</span>
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Business Intelligence & Dashboards</span>
-                    <span className="px-4 py-2 bg-[#F6F7F7] text-[#1A2234] text-sm rounded-md">Investment Analysis</span>
-                  </div>
-                </div>
               </div>
             </div>
 
