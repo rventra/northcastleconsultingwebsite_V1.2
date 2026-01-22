@@ -135,18 +135,15 @@ export default function AboutUsPage() {
                     Know More
                   </summary>
                   <div className="mt-4 space-y-4 text-[#1A2234]/70 leading-relaxed">
-                    <div>
-                      <h4 className="font-semibold text-[#1A2234] mb-2">Education</h4>
-                      <p>
-                        Over the course of his career, Ram has led multiple initiatives requiring the design, validation, and governance of high-complexity financial and analytical models. At Wagstaff Law Firm, he served as Head of Data Strategy & Analytics, where he architected AI-driven lead enrichment and document review systems, transforming unstructured claimant communications into structured Salesforce uploads at scale. He designed automated logic, fallback processes, and QA protocols to ensure data integrity while supporting high-volume operational workflows.
-                      </p>
-                      <p>
-                        Prior to this, Ram was a Senior Financial Analyst at Capital One, where he developed and maintained CCAR models under baseline and adverse economic scenarios, owned mortgage origination forecasts, and performed detailed variance and NPV analyses to identify key profitability drivers. Earlier in his career, he worked as a Management Consultant at Ernst & Young, supporting process documentation and software implementations, and as a Financial Analyst at Doral Financial, where he built fully integrated 3-statement and liquidity models to support regulatory compliance and board-level capital planning.
-                      </p>
-                      <p>
-                        Ram is highly proficient in Excel, Python, Power BI, Salesforce, and AI workflow orchestration tools, and is known for his ability to bridge finance, data, and automation to create systems that are both analytically rigorous and operationally scalable.
-                      </p>
-                    </div>
+                    <p>
+                      Over his career, Ram has designed and implemented advanced financial and data systems that translate complex logic into structured, decision-ready outputs for senior leadership. At Wagstaff Law Firm, he led AI-driven lead enrichment and document review initiatives, converting unstructured claimant communications into structured Salesforce datasets and developing automated QA processes and fallback logic to ensure data integrity at scale.
+                    </p>
+                    <p>
+                      At Capital One, he managed CCAR stress testing, mortgage origination forecasts, and variance analysis to identify key profitability drivers. Earlier, at Ernst & Young and Doral Financial, he built fully integrated 3-statement and liquidity models, supported process documentation, and implemented software solutions to enhance operational efficiency and regulatory compliance.
+                    </p>
+                    <p>
+                      Ram is highly skilled in Excel, Python, Power BI, Salesforce, and AI workflow orchestration tools. He excels at bridging finance, data strategy, and automation to deliver models, dashboards, and workflows that are analytically rigorous, operationally scalable, and actionable for executive decision-making.
+                    </p>
                   </div>
                 </details>
               </div>
