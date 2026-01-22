@@ -17,7 +17,7 @@ export default function MassTortPage() {
       {/* Hero */}
       <div className="grid md:grid-cols-2 gap-8 items-center bg-[#0D3BC3] text-white py-8 md:py-16 px-6 text-center">
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">End-to-End Litigation Intelligence: 8-Stage Platform</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight">End-to-End Litigation Intelligence: 8-Stage Platform</h1>
           <p className="text-lg md:text-xl text-white/90 mb-6 max-w-3xl mx-auto leading-relaxed">
             Operational infrastructure and financial intelligence for law firms handling mass tort litigation at scale
           </p>
@@ -25,13 +25,13 @@ export default function MassTortPage() {
             <a
               href="#lifecycle"
               onClick={(e) => { e.preventDefault(); scrollToSelector('#lifecycle'); }}
-              className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg text-lg"
+              className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-[#1A2234] transition-all duration-300 shadow-lg text-lg"
             >
               Explore Our Solutions
             </a>
             <Link
               to="/newsletter"
-              className="inline-block bg-white/10 backdrop-blur-sm text-white border border-white/30 px-8 py-4 rounded-lg font-semibold hover:bg-white/20 transition-all duration-300 shadow-lg text-lg"
+              className="inline-block bg-white/10 backdrop-blur-sm text-white border border-white/30 px-8 py-4 rounded-lg font-semibold transition-all duration-300 shadow-lg text-lg"
             >
               Newsletter & Blog
             </Link>
@@ -62,42 +62,42 @@ export default function MassTortPage() {
             <div className="px-2 py-1 bg-gray-300 rounded text-center opacity-60 min-w-[80px]">
               <div className="text-xs font-medium text-gray-600">1. Lead Acq.</div>
             </div>
-            <span className="text-gray-400 text-sm">⟶</span>
+            <span className="text-gray-400 text-sm">-chevron-</span>
             
             <div className="px-2 py-1 bg-[#0D3BC3] rounded text-center shadow-sm min-w-[80px]">
               <div className="text-xs font-semibold text-white">2. Quality</div>
             </div>
-            <span className="text-[#0D3BC3] text-sm font-bold">⟶</span>
+            <span className="text-[#0D3BC3] text-sm font-bold">-chevron-</span>
             
             <div className="px-2 py-1 bg-[#0D3BC3] rounded text-center shadow-sm min-w-[80px]">
               <div className="text-xs font-semibold text-white">3. QA</div>
             </div>
-            <span className="text-[#0D3BC3] text-sm font-bold">⟶</span>
+            <span className="text-[#0D3BC3] text-sm font-bold">-chevron-</span>
             
             <div className="px-2 py-1 bg-[#0D3BC3] rounded text-center shadow-sm min-w-[80px]">
               <div className="text-xs font-semibold text-white">4. Comp</div>
             </div>
-            <span className="text-[#0D3BC3] text-sm font-bold">⟶</span>
+            <span className="text-[#0D3BC3] text-sm font-bold">-chevron-</span>
             
             <div className="px-2 py-1 bg-[#0D3BC3] rounded text-center shadow-sm min-w-[80px]">
               <div className="text-xs font-semibold text-white">5. Medical</div>
             </div>
-            <span className="text-[#0D3BC3] text-sm font-bold">⟶</span>
+            <span className="text-[#0D3BC3] text-sm font-bold">-chevron-</span>
             
             <div className="px-2 py-1 bg-gray-300 rounded text-center opacity-60 min-w-[80px]">
               <div className="text-xs font-medium text-gray-600">6. Doc Intel</div>
             </div>
-            <span className="text-gray-400 text-sm">⟶</span>
+            <span className="text-gray-400 text-sm">-chevron-</span>
             
             <div className="px-2 py-1 bg-gray-300 rounded text-center opacity-60 min-w-[80px]">
               <div className="text-xs font-medium text-gray-600">7. Analytics</div>
             </div>
-            <span className="text-gray-400 text-sm">⟶</span>
+            <span className="text-gray-400 text-sm">-chevron-</span>
             
             <div className="px-2 py-1 bg-gray-300 rounded text-center opacity-60 min-w-[80px]">
               <div className="text-xs font-medium text-gray-600">8. Settlement</div>
             </div>
-            <span className="text-gray-400 text-sm">⟶</span>
+            <span className="text-gray-400 text-sm">-chevron-</span>
             
             <div className="px-2 py-1 bg-gray-300 rounded text-center opacity-60 min-w-[80px]">
               <div className="text-xs font-medium text-gray-600">9. Post-Settle</div>
@@ -109,7 +109,7 @@ export default function MassTortPage() {
       {/* Lifecycle Overview */}
       <div id="lifecycle" className="bg-white py-8 px-6 scroll-mt-20">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-4xl md:text-5xl font-bold text-[#0D3BC3] mb-4 text-center">Mass Tort Case Lifecycle Services</h3>
+          <h3 className="text-2xl md:text-3xl font-bold text-[#0D3BC3] mb-4 text-center">Mass Tort Case Lifecycle Services</h3>
           <p className="text-xl text-gray-600 text-center mb-12 max-w-6xl mx-auto">
             Click any stage below to learn how we optimize your operations and accelerate outcomes
           </p>
@@ -118,267 +118,365 @@ export default function MassTortPage() {
             {/* Stage 1 - Combined Intake & Doc QA */}
             <a 
               href="#stage-1" 
-              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-1'); }} 
-              className="relative group bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-1'); }}
+              className="group relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-[#0D3BC3] cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-4">
-                <div className="flex items-start justify-between mb-4">
-                  <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 1</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
-                </div>
-                <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Intake & Doc QA Overview</h4>
-                <p className="text-gray-600 text-base leading-relaxed">Streamline intake screening and doc qualification in unified workflow</p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Doc comp rate</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Bad case rejection rate</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Time to settlement</span>
-                  </div>
-                </div>
-                <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
-                    Learn More
-                    <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-                  </span>
-                </div>
+              {/* Stage Badge */}
+              <div className="bg-[#0D3BC3] px-3 py-2 flex items-center justify-between">
+                <span className="text-xs font-bold text-white tracking-wider">STAGE 1</span>
+                <span className="text-white text-lg">-chevron-</span>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+              {/* Card Content with p-4 max */}
+              <div className="p-4">
+                <h4 className="text-lg font-bold text-[#0D3BC3] mb-2">
+                  Intake & Doc QA
+                </h4>
+                
+                {/* TENSION: Red-tinted problem section */}
+                <div className="bg-red-50 border-l-2 border-red-400 p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-red-700 mb-1">⚠ The Problem</p>
+                  <p className="text-xs text-gray-700 leading-tight">
+                    Disorganized intake, inconsistent doc verification, wasted resources on bad leads
+                  </p>
+                </div>
+
+                {/* DESIRE: Blue-tinted solution with metrics */}
+                <div className="bg-blue-50 border-l-2 border-[#0D3BC3] p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-[#0D3BC3] mb-1">✓ The Solution</p>
+                  <ul className="space-y-1 text-xs text-gray-700">
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>40-60% ↑ doc comp rate</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>30-50% ↓ bad case rejection</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>50% faster pre-qual decisions</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* ACTION: High-contrast CTA button */}
+                <button className="w-full bg-[#EDB624] text-[#1A2234] px-3 py-2 rounded font-semibold text-sm hover:bg-amber-500 transition-colors shadow-sm">
+                  Contact Expert →
+                </button>
+              </div>
             </a>
 
             {/* Stage 2 - Former Stage 3 */}
             <a 
               href="#stage-2" 
-              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-2'); }} 
-              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-2'); }}
+              className="group relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-[#0D3BC3] cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-4">
-                <div className="flex items-start justify-between mb-4">
-                  <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 2</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
-                </div>
-                <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Automated Claimant Communication</h4>
-                <p className="text-gray-600 text-base leading-relaxed">Keep clients engaged for years with multi-channel, low-touch, high-scale outreach</p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Claimant response rate</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Document cycle time</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Case completion rate</span>
-                  </div>
-                </div>
-                <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
-                    Learn More
-                    <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-                  </span>
-                </div>
+              {/* Stage Badge */}
+              <div className="bg-[#0D3BC3] px-3 py-2 flex items-center justify-between">
+                <span className="text-xs font-bold text-white tracking-wider">STAGE 2</span>
+                <span className="text-white text-lg">-chevron-</span>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+              {/* Card Content with p-4 max */}
+              <div className="p-4">
+                <h4 className="text-lg font-bold text-[#0D3BC3] mb-2">
+                  Automated Claimant Communication
+                </h4>
+                
+                {/* TENSION: Red-tinted problem section */}
+                <div className="bg-red-50 border-l-2 border-red-400 p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-red-700 mb-1">⚠ The Problem</p>
+                  <p className="text-xs text-gray-700 leading-tight">
+                    Manual outreach consuming paralegal time, clients missing deadlines, dropping out before settlement
+                  </p>
+                </div>
+
+                {/* DESIRE: Blue-tinted solution with metrics */}
+                <div className="bg-blue-50 border-l-2 border-[#0D3BC3] p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-[#0D3BC3] mb-1">✓ The Solution</p>
+                  <ul className="space-y-1 text-xs text-gray-700">
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>60-80% claimant response rate</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>75% reduction in document cycle time</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>$150-250 cost savings per case annually</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* ACTION: High-contrast CTA button */}
+                <button className="w-full bg-[#EDB624] text-[#1A2234] px-3 py-2 rounded font-semibold text-sm hover:bg-amber-500 transition-colors shadow-sm">
+                  Contact Expert →
+                </button>
+              </div>
             </a>
 
             {/* Stage 3 - Former Stage 4 with injury confirmation */}
             <a 
               href="#stage-3" 
-              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-3'); }} 
-              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-3'); }}
+              className="group relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-[#0D3BC3] cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-4">
-                <div className="flex items-start justify-between mb-4">
-                  <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 3</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
-                </div>
-                <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Injury Confirmation with AI Medical Record Review</h4>
-                <p className="text-gray-600 text-base leading-relaxed">AI-assisted lens-based review turns records into defensible, negotiable evidence</p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Medical review time/case</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Reviewer productivity</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Negotiation strength</span>
-                  </div>
-                </div>
-                <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
-                    Learn More
-                    <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-                  </span>
-                </div>
+              {/* Stage Badge */}
+              <div className="bg-[#0D3BC3] px-3 py-2 flex items-center justify-between">
+                <span className="text-xs font-bold text-white tracking-wider">STAGE 3</span>
+                <span className="text-white text-lg">-chevron-</span>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+              {/* Card Content with p-4 max */}
+              <div className="p-4">
+                <h4 className="text-lg font-bold text-[#0D3BC3] mb-2">
+                  Injury Confirmation with AI Medical Record Review
+                </h4>
+                
+                {/* TENSION: Red-tinted problem section */}
+                <div className="bg-red-50 border-l-2 border-red-400 p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-red-700 mb-1">⚠ The Problem</p>
+                  <p className="text-xs text-gray-700 leading-tight">
+                    Medical records consume hours per case, reviewers miss critical diagnoses, inconsistent quality
+                  </p>
+                </div>
+
+                {/* DESIRE: Blue-tinted solution with metrics */}
+                <div className="bg-blue-50 border-l-2 border-[#0D3BC3] p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-[#0D3BC3] mb-1">✓ The Solution</p>
+                  <ul className="space-y-1 text-xs text-gray-700">
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>50% reduction in medical review time</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>40% improvement in reviewer productivity</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>HIPAA compliant process for discovery</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* ACTION: High-contrast CTA button */}
+                <button className="w-full bg-[#EDB624] text-[#1A2234] px-3 py-2 rounded font-semibold text-sm hover:bg-amber-500 transition-colors shadow-sm">
+                  Contact Expert →
+                </button>
+              </div>
             </a>
 
             {/* Stage 4 - Former Stage 5 */}
             <a 
               href="#stage-4" 
-              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-4'); }} 
-              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-4'); }}
+              className="group relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-[#0D3BC3] cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-4">
-                <div className="flex items-start justify-between mb-4">
-                  <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 4</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
-                </div>
-                <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Docket Tiering & Valuation</h4>
-                <p className="text-gray-600 text-base leading-relaxed">Standardize medical review, eliminate tier dispute, accelerate settlement negotiations</p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Tier consistency</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Defense tier disputes</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Portfolio forecast accuracy</span>
-                  </div>
-                </div>
-                <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
-                    Learn More
-                    <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-                  </span>
-                </div>
+              {/* Stage Badge */}
+              <div className="bg-[#0D3BC3] px-3 py-2 flex items-center justify-between">
+                <span className="text-xs font-bold text-white tracking-wider">STAGE 4</span>
+                <span className="text-white text-lg">-chevron-</span>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+              {/* Card Content with p-4 max */}
+              <div className="p-4">
+                <h4 className="text-lg font-bold text-[#0D3BC3] mb-2">
+                  Docket Tiering & Valuation
+                </h4>
+                
+                {/* TENSION: Red-tinted problem section */}
+                <div className="bg-red-50 border-l-2 border-red-400 p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-red-700 mb-1">⚠ The Problem</p>
+                  <p className="text-xs text-gray-700 leading-tight">
+                    Inconsistent medical review creates tier disputes with defense counsel, delaying settlements
+                  </p>
+                </div>
+
+                {/* DESIRE: Blue-tinted solution with metrics */}
+                <div className="bg-blue-50 border-l-2 border-[#0D3BC3] p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-[#0D3BC3] mb-1">✓ The Solution</p>
+                  <ul className="space-y-1 text-xs text-gray-700">
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>Eliminated tier assignment disputes with defense</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>50-70% faster medical review cycle time</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>90% portfolio forecast accuracy</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* ACTION: High-contrast CTA button */}
+                <button className="w-full bg-[#EDB624] text-[#1A2234] px-3 py-2 rounded font-semibold text-sm hover:bg-amber-500 transition-colors shadow-sm">
+                  Contact Expert →
+                </button>
+              </div>
             </a>
 
-            {/* Stage 5 - Former Stage 6 */}
+            {/* Stage 5 - Former Stage 6 with workflow tracking */}
             <a 
               href="#stage-5" 
-              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-5'); }} 
-              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-5'); }}
+              className="group relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-[#0D3BC3] cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-4">
-                <div className="flex items-start justify-between mb-4">
-                  <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 5</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
-                </div>
-                <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Workflow Tracking & Version Control</h4>
-                <p className="text-gray-600 text-base leading-relaxed">Eliminate rework, maintain audit trails, coordinate multi-party document workflows</p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Rework elimination</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Audit trail quality</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>AI efficiency gains</span>
-                  </div>
-                </div>
-                <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
-                    Learn More
-                    <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-                  </span>
-                </div>
+              {/* Stage Badge */}
+              <div className="bg-[#0D3BC3] px-3 py-2 flex items-center justify-between">
+                <span className="text-xs font-bold text-white tracking-wider">STAGE 5</span>
+                <span className="text-white text-lg">-chevron-</span>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+              {/* Card Content with p-4 max */}
+              <div className="p-4">
+                <h4 className="text-lg font-bold text-[#0D3BC3] mb-2">
+                  Workflow Tracking & Version Control
+                </h4>
+                
+                {/* TENSION: Red-tinted problem section */}
+                <div className="bg-red-50 border-l-2 border-red-400 p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-red-700 mb-1">⚠ The Problem</p>
+                  <p className="text-xs text-gray-700 leading-tight">
+                    Documents get uploaded, reviewed, revised and re-uploaded with no version control
+                  </p>
+                </div>
+
+                {/* DESIRE: Blue-tinted solution with metrics */}
+                <div className="bg-blue-50 border-l-2 border-[#0D3BC3] p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-[#0D3BC3] mb-1">✓ The Solution</p>
+                  <ul className="space-y-1 text-xs text-gray-700">
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>Every document gets version number, timestamp, uploader ID</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>Structured workflow ensures "Approved, Current" versions reach downstream processes</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>80% AI automation of completeness checks</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* ACTION: High-contrast CTA button */}
+                <button className="w-full bg-[#EDB624] text-[#1A2234] px-3 py-2 rounded font-semibold text-sm hover:bg-amber-500 transition-colors shadow-sm">
+                  Contact Expert →
+                </button>
+              </div>
             </a>
 
             {/* Stage 6 - Former Stage 7 with OCR conversion */}
             <a 
               href="#stage-6" 
-              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-6'); }} 
-              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-6'); }}
+              className="group relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-[#0D3BC3] cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-4">
-                <div className="flex items-start justify-between mb-4">
-                  <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 6</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
-                </div>
-                <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">OCR & Unstructured Data Conversion</h4>
-                <p className="text-gray-600 text-base leading-relaxed">Medical-grade OCR with structured data pipelines</p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>TAT: weeks ⟶ hours</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Strike team cost: $50k-$100k</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>90% time reduction vs. manual extraction</span>
-                  </div>
-                </div>
-                <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
-                    Learn More
-                    <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-                  </span>
-                </div>
+              {/* Stage Badge */}
+              <div className="bg-[#0D3BC3] px-3 py-2 flex items-center justify-between">
+                <span className="text-xs font-bold text-white tracking-wider">STAGE 6</span>
+                <span className="text-white text-lg">-chevron-</span>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+              {/* Card Content with p-4 max */}
+              <div className="p-4">
+                <h4 className="text-lg font-bold text-[#0D3BC3] mb-2">
+                  OCR & Unstructured Data Conversion
+                </h4>
+                
+                {/* TENSION: Red-tinted problem section */}
+                <div className="bg-red-50 border-l-2 border-red-400 p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-red-700 mb-1">⚠ The Problem</p>
+                  <p className="text-xs text-gray-700 leading-tight">
+                    Key evidence lives in unstructured documents requiring manual review to extract meaningful data
+                  </p>
+                </div>
+
+                {/* DESIRE: Blue-tinted solution with metrics */}
+                <div className="bg-blue-50 border-l-2 border-[#0D3BC3] p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-[#0D3BC3] mb-1">✓ The Solution</p>
+                  <ul className="space-y-1 text-xs text-gray-700">
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>Medical-grade OCR specialized for medical terminology</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>Validation rules ensure accuracy of medical term extraction</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>HL7/FHIR structured output enables seamless integration</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* ACTION: High-contrast CTA button */}
+                <button className="w-full bg-[#EDB624] text-[#1A2234] px-3 py-2 rounded font-semibold text-sm hover:bg-amber-500 transition-colors shadow-sm">
+                  Contact Expert →
+                </button>
+              </div>
             </a>
 
             {/* Stage 7 - New Dashboard section */}
             <a 
               href="#stage-7" 
-              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-7'); }} 
-              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-7'); }}
+              className="group relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-[#0D3BC3] cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-4">
-                <div className="flex items-start justify-between mb-4">
-                  <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 7</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
-                </div>
-                <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Dashboarding & Data Portals</h4>
-                <p className="text-gray-600 text-base leading-relaxed">Real-time portfolio analytics and claimant self-service</p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Manual reporting time 90%</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>24/7 claimant engagement</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
-                    <span>Portfolio forecast accuracy 90%</span>
-                  </div>
-                </div>
-                <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
-                    Learn More
-                    <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-                  </span>
-                </div>
+              {/* Stage Badge */}
+              <div className="bg-[#0D3BC3] px-3 py-2 flex items-center justify-between">
+                <span className="text-xs font-bold text-white tracking-wider">STAGE 7</span>
+                <span className="text-white text-lg">-chevron-</span>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+              {/* Card Content with p-4 max */}
+              <div className="p-4">
+                <h4 className="text-lg font-bold text-[#0D3BC3] mb-2">
+                  Dashboarding & Data Portals
+                </h4>
+                
+                {/* TENSION: Red-tinted problem section */}
+                <div className="bg-red-50 border-l-2 border-red-400 p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-red-700 mb-1">⚠ The Problem</p>
+                  <p className="text-xs text-gray-700 leading-tight">
+                    Firms lack real-time visibility into performance, claimant engagement and settlement forecasting
+                  </p>
+                </div>
+
+                {/* DESIRE: Blue-tinted solution with metrics */}
+                <div className="bg-blue-50 border-l-2 border-[#0D3BC3] p-2 mb-3 rounded">
+                  <p className="text-xs font-semibold text-[#0D3BC3] mb-1">✓ The Solution</p>
+                  <ul className="space-y-1 text-xs text-gray-700">
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>Live portfolio metrics with settlement velocity, tier distribution</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>Claimant portals enable secure self-service and status tracking</span>
+                    </li>
+                    <li className="flex items-start gap-1">
+                      <span className="text-[#0D3BC3] font-bold">•</span>
+                      <span>90% portfolio forecast accuracy</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* ACTION: High-contrast CTA button */}
+                <button className="w-full bg-[#EDB624] text-[#1A2234] px-3 py-2 rounded font-semibold text-sm hover:bg-amber-500 transition-colors shadow-sm">
+                  Contact Expert →
+                </button>
+              </div>
             </a>
           </div>
         </div>
@@ -386,7 +484,7 @@ export default function MassTortPage() {
 
       {/* Detailed Stage Sections */}
       <div className="max-w-5xl mx-auto px-6 py-8 space-y-12">
-        {/* Stage 1 Details - Combined Intake & Dock QA */}
+        {/* Stage 1 Details - Combined Intake & Doc QA */}
         <div id="stage-1" className="scroll-mt-20">
           <div className="bg-[#0D3BC3] text-white p-4 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 1</span>
@@ -396,7 +494,7 @@ export default function MassTortPage() {
           <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Most firms lack structured intake questionnaires and standardized dock verification processes, leading to inconsistent case evaluation and resource drain from pursuing poor-quality leads.
+              Most firms lack structured intake questionnaires and standardized doc verification processes, leading to inconsistent case evaluation and resource drain from pursuing poor-quality leads.
             </p>
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
@@ -418,7 +516,7 @@ export default function MassTortPage() {
             </div>
 
             <div className="mt-4 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-400 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -449,15 +547,15 @@ export default function MassTortPage() {
             <div className="bg-blue-50 border-l-4 border-[#0D3BC3] p-6 rounded">
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex gap-2">✓ 60-80% claimant response rate (vs. 30-40% industry average)</li>
-                <li className="flex gap-2">✓ 70% reduction in document cycle time</li>
+                <li className="flex gap-2">✓ 60-80% claimant response rate (vs 30-40% industry average)</li>
+                <li className="flex gap-2">✓ 75% reduction in document cycle time</li>
                 <li className="flex gap-2">✓ 85% case completion rate</li>
                 <li className="flex gap-2">✓ $150-250 cost savings per case annually</li>
               </ul>
             </div>
 
             <div className="mt-4 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-400 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -474,7 +572,7 @@ export default function MassTortPage() {
           <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Medical record review consumes 4-8 hours per case at $75-150/hour paralegal rates. Reviewers miss critical diagnoses, procedure dates, and causation links. Inconsistent review quality creates tier assignment disputes with defense counsel, delaying settlements by months. Additionally, handling of confounders and new developments requires rescreening.
+              Medical record review consumes 4-8 hours per case at $75-150/hour paralegal rates. Reviewers miss critical diagnoses, procedure dates, and causation links. Inconsistent review quality creates tier assignment disputes with defense counsel, delaying settlements by months. Additionally, handling of confounders and new developments requires rescreeening.
             </p>
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
@@ -496,7 +594,7 @@ export default function MassTortPage() {
             </div>
 
             <div className="mt-4 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-400 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -535,30 +633,30 @@ export default function MassTortPage() {
             </div>
 
             <div className="mt-4 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-400 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
           </div>
         </div>
 
-        {/* Stage 5 Details - Former Stage 6 */}
+        {/* Stage 5 Details - Former Stage 6 with workflow tracking */}
         <div id="stage-5" className="scroll-mt-20">
           <div className="bg-[#0D3BC3] text-white p-4 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 5</span>
             <h2 className="text-3xl font-bold mt-2 mb-2">Workflow Tracking & Version Control</h2>
-            <p className="text-xl opacity-90">Eliminate rework, maintain audit trails, coordinate multi-party document workflows</p>
+            <p className="text-xl opacity-90">Eliminate rework, maintain audit trails, coordinate multi-party document flows</p>
           </div>
           <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Documents get uploaded, reviewed, revised, and re-uploaded with no version control. Result: staff work from outdated files, duplicate effort, and audit trial gaps that defense counsel exploits during discovery.
+              Documents get uploaded, reviewed, revised and re-uploaded with no version control. Result: staff work from outdated files, duplicate effort, and audit trial gaps that defense counsel exploits during discovery.
             </p>
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
             <ul className="space-y-2 text-gray-700 mb-6">
               <li className="flex gap-3"><span>✓</span> <span><strong>Every document gets version number, timestamp, uploader ID, and approval status</strong></span></li>
-              <li className="flex gap-3"><span>✓</span> <span><strong>Structured workflow states include Draft ⟶ Pending Review ⟶ Approved ⟶ Current vs. Superseded</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Structured workflow states include Draft → Pending Review → Approved Current vs. Superseded</strong></span></li>
               <li className="flex gap-3"><span>✓</span> <span><strong>Integration ensures only "Approved, Current" versions reach downstream processes</strong></span></li>
               <li className="flex gap-3"><span>✓</span> <span><strong>Dashboards provide case-level and portfolio-level visibility of bottlenecks</strong></span></li>
             </ul>
@@ -574,7 +672,7 @@ export default function MassTortPage() {
             </div>
 
             <div className="mt-4 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-400 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -591,7 +689,7 @@ export default function MassTortPage() {
           <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Key evidence lives in unstructured medical documents including PDFs, handwritten records, and faxed materials. These documents require extensive manual review to extract meaningful data. When defense requests portfolio-level cuts, firms resort to costly "strike teams" performing manual extraction. Traditional OCR systems struggle with medical terminology accuracy.
+              Key evidence lives in unstructured medical documents including PDFs, handwritten records, and faxes. These documents require extensive manual review to extract meaningful data. When defense requests portfolio-level cuts, firms resort to costly "strike teams" performing manual extraction. Traditional OCR systems struggle with medical terminology accuracy.
             </p>
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
@@ -606,14 +704,14 @@ export default function MassTortPage() {
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
                 <li className="flex gap-2">✓ 90% time reduction vs. manual extraction</li>
-                <li className="flex gap-2">✓ Defense response time: weeks ⟶ hours</li>
+                <li className="flex gap-2">✓ Defense response time: weeks → hours</li>
                 <li className="flex gap-2">✓ Elimination of strike team costs ($50k-$100k/cycle)</li>
                 <li className="flex gap-2">✓ Portfolio-level analytics and scenario modeling</li>
               </ul>
             </div>
 
             <div className="mt-4 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-400 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
@@ -630,7 +728,7 @@ export default function MassTortPage() {
           <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Firms lack real-time visibility into portfolio performance, claimant engagement, and settlement forecasting. Manual reporting consumes hours weeklyly, and claimant status requests burden paralegals. There's no systematic approach to rescreen cases when new medical evidence arises.
+              Firms lack real-time visibility into portfolio performance, claimant engagement, and settlement forecasting. Manual reporting consumes hours weekly, and claimant status requests burden paralegals. There's no systematic approach to rescreen cases when new medical evidence arises.
             </p>
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
@@ -652,7 +750,7 @@ export default function MassTortPage() {
             </div>
 
             <div className="mt-4 text-center">
-              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-400 transition-all">
+              <a href="#contact-form" onClick={(e) => { e.preventDefault(); scrollToSelector('#contact-form'); }} className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-3 rounded-full font-semibold hover:bg-amber-500 transition-all">
                 Learn More About This Service
               </a>
             </div>
