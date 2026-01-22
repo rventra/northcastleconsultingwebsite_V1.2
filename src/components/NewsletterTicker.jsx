@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { getLatestNewsletters, mapToService } from '../lib/newsletter-api';
+import { getLatestNewsletters, mapToService } from '../../lib/newsletter-api';
+import { Link } from 'react-router-dom';
 
 function NewsletterTicker() {
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Skeleton loader for when data is loading
+  // Skeleton loader when data is loading
   const TickerSkeleton = () => (
     <div className="bg-[#0D3BC3] py-4 animate-pulse">
       <div className="max-w-7xl mx-auto flex space-x-8 overflow-hidden">
@@ -47,6 +48,8 @@ function NewsletterTicker() {
       const topArticles = newsletters.flatMap(n => 
         n.articles.slice(0, 2).map(article => ({
           id: article.id,
+          articleId: article.id, // NEW: for anchor linking
+          newsletterId: n.metadata.id, // NEW: for routing
           title: article.headline,
           service: mapToService(article.summary),
           date: n.metadata.publishDate
@@ -70,21 +73,25 @@ function NewsletterTicker() {
       <div className="max-w-7xl mx-auto">
         <div className="animate-loop flex items-center space-x-8 overflow-hidden py-4">
           {articles.map((item) => (
-            <NewsletterCard 
-              key={item.id}
-              title={item.title}
-              service={item.service}
-              date={item.date}
-            />
+            <Link to={`/newsletter/${item.newsletterId}#${item.articleId}`} key={item.id}>
+              <NewsletterCard 
+                key={item.id}
+                title={item.title}
+                service={item.service}
+                date={item.date}
+              />
+            </Link>
           ))}
           {/* Duplicate items to create seamless looping effect */}
           {articles.map((item) => (
-            <NewsletterCard 
-              key={`duplicate-${item.id}`}
-              title={item.title}
-              service={item.service}
-              date={item.date}
-            />
+            <Link to={`/newsletter/${item.newsletterId}#${item.articleId}`} key={`duplicate-${item.id}`}>
+              <NewsletterCard 
+                key={`duplicate-${item.id}`}
+                title={item.title}
+                service={item.service}
+                date={item.date}
+              />
+            </Link>
           ))}
         </div>
       </div>
