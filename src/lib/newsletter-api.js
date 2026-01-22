@@ -6,7 +6,7 @@
 //    - Extracts top articles by relevanceScore
 //    - Maps article content to Northcastle service categories using keywords
 // 4. Create function: mapToService(content)
-//    - Uses keyword matching for: "PFAS", "Paraquat", "settlement", "medical record", etc.
+//    - Uses keyword matching for: "PFAS", "Paracuat", "settlement", "medical record", etc.
 //    - Returns service category: "Mass Tort Services", "Medical Record Review", etc.
 // 5. Format output for NewsletterTicker component
 
@@ -50,18 +50,24 @@ export function getLatestNewsletters(count = 3) {
 
 export function mapToService(content) {
   const serviceKeywords = {
-    'mass tort': 'Mass Tort Services',
-    'medical record': 'Medical Record Review',
-    'document analysis': 'Document Intelligence',
-    'settlement': 'Settlement Services',
-    'litigation support': 'Litigation Support',
-    'financial intelligence': 'Financial Intelligence',
-    'data analytics': 'Data Analytics',
-    'PFAS': 'Environmental Services',
-    'Paraquat': 'Product Liability',
-    'MDL': 'Mass Tort Services',
-    'AFFF': 'Environmental Services',
-    'Roundup': 'Product Liability'
+    'intake': 'Intake & Doc QA',
+    'document': 'Intake & Doc QA',
+    'quality': 'Intake & Doc QA',
+    'claimant': 'Automated Claimant Communication',
+    'communication': 'Automated Claimant Communication',
+    'medical record': 'Injury Confirmation with AI Medical Record Review',
+    'medical': 'Injury Confirmation with AI Medical Record Review',
+    'injury': 'Injury Confirmation with AI Medical Record Review',
+    'tier': 'Docket Tiering & Valuation',
+    'docket': 'Docket Tiering & Valuation',
+    'valuation': 'Docket Tiering & Valuation',
+    'workflow': 'Workflow Tracking & Version Control',
+    'version': 'Workflow Tracking & Version Control',
+    'OCR': 'OCR & Unstructured Data Conversion',
+    'data conversion': 'OCR & Unstructured Data Conversion',
+    'dashboard': 'Dashboarding & Data Portals',
+    'portal': 'Dashboarding & Data Portals',
+    'analytics': 'Dashboarding & Data Portals'
   };
 
   // Search for keyword matches in content, case-insensitive
@@ -72,7 +78,7 @@ export function mapToService(content) {
   }
 
   // Default fallback
-  return 'General Services';
+  return 'Mass Tort Services';
 }
 
 export function getNewsletterById(id) {
