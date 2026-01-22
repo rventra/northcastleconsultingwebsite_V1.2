@@ -57,47 +57,47 @@ export default function MassTortPage() {
             <h3 className="text-lg font-semibold text-[#0D3BC3] mb-1">End-to-End Litigation Intelligence: 8-Stage Platform</h3>
             <p className="text-sm text-gray-600">We optimize 8 of 9 critical stages</p>
           </div>
-        
+          
           <div className="flex items-center justify-center gap-1 flex-wrap">
             <div className="px-2 py-1 bg-gray-300 rounded text-center opacity-60 min-w-[80px]">
               <div className="text-xs font-medium text-gray-600">1. Lead Acq.</div>
             </div>
-            <span className="text-gray-400 text-sm">→</span>
+            <span className="text-gray-400 text-sm">⟶</span>
             
             <div className="px-2 py-1 bg-[#0D3BC3] rounded text-center shadow-sm min-w-[80px]">
               <div className="text-xs font-semibold text-white">2. Quality</div>
             </div>
-            <span className="text-[#0D3BC3] text-sm font-bold">→</span>
+            <span className="text-[#0D3BC3] text-sm font-bold">⟶</span>
             
             <div className="px-2 py-1 bg-[#0D3BC3] rounded text-center shadow-sm min-w-[80px]">
               <div className="text-xs font-semibold text-white">3. QA</div>
             </div>
-            <span className="text-[#0D3BC3] text-sm font-bold">→</span>
+            <span className="text-[#0D3BC3] text-sm font-bold">⟶</span>
             
             <div className="px-2 py-1 bg-[#0D3BC3] rounded text-center shadow-sm min-w-[80px]">
               <div className="text-xs font-semibold text-white">4. Comp</div>
             </div>
-            <span className="text-[#0D3BC3] text-sm font-bold">→</span>
+            <span className="text-[#0D3BC3] text-sm font-bold">⟶</span>
             
             <div className="px-2 py-1 bg-[#0D3BC3] rounded text-center shadow-sm min-w-[80px]">
               <div className="text-xs font-semibold text-white">5. Medical</div>
             </div>
-            <span className="text-[#0D3BC3] text-sm font-bold">→</span>
+            <span className="text-[#0D3BC3] text-sm font-bold">⟶</span>
             
-            <div className="px-2 py-1 bg-[#0D3BC3] rounded text-center shadow-sm min-w-[80px]">
-              <div className="text-xs font-semibold text-white">6. Doc Intel</div>
+            <div className="px-2 py-1 bg-gray-300 rounded text-center opacity-60 min-w-[80px]">
+              <div className="text-xs font-medium text-gray-600">6. Doc Intel</div>
             </div>
-            <span className="text-gray-400 text-sm">→</span>
+            <span className="text-gray-400 text-sm">⟶</span>
             
             <div className="px-2 py-1 bg-gray-300 rounded text-center opacity-60 min-w-[80px]">
               <div className="text-xs font-medium text-gray-600">7. Analytics</div>
             </div>
-            <span className="text-gray-400 text-sm">→</span>
+            <span className="text-gray-400 text-sm">⟶</span>
             
             <div className="px-2 py-1 bg-gray-300 rounded text-center opacity-60 min-w-[80px]">
               <div className="text-xs font-medium text-gray-600">8. Settlement</div>
             </div>
-            <span className="text-gray-400 text-sm">→</span>
+            <span className="text-gray-400 text-sm">⟶</span>
             
             <div className="px-2 py-1 bg-gray-300 rounded text-center opacity-60 min-w-[80px]">
               <div className="text-xs font-medium text-gray-600">9. Post-Settle</div>
@@ -110,275 +110,275 @@ export default function MassTortPage() {
       <div id="lifecycle" className="bg-white py-8 px-6 scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           <h3 className="text-4xl md:text-5xl font-bold text-[#0D3BC3] mb-4 text-center">Mass Tort Case Lifecycle Services</h3>
-          <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 text-center mb-12 max-w-6xl mx-auto">
             Click any stage below to learn how we optimize your operations and accelerate outcomes
           </p>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
             {/* Stage 1 - Combined Intake & Doc QA */}
             <a 
               href="#stage-1" 
               onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-1'); }} 
-              className="relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              className="relative group bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-6">
+              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="relative p-4">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 1</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">→</div>
+                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
                 </div>
                 <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Intake & Doc QA Overview</h4>
-                <p className="text-gray-600 text-base mb-6 leading-relaxed">Streamline intake screening and dock qualification in unified workflow</p>
+                <p className="text-gray-600 text-base leading-relaxed">Streamline intake screening and doc qualification in unified workflow</p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Dock comp rate</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Doc comp rate</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Bad case rejection rate</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Bad case rejection rate</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Time to settlement</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Time to settlement</span>
                   </div>
                 </div>
                 <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center gap-2 transition-all">
+                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
                     Learn More
                     <span className="transform group-hover:translate-x-1 transition-transform">→</span>
                   </span>
                 </div>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
             </a>
 
             {/* Stage 2 - Former Stage 3 */}
             <a 
               href="#stage-2" 
               onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-2'); }} 
-              className="relative group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-6">
+              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="relative p-4">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 2</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">→</div>
+                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
                 </div>
                 <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Automated Claimant Communication</h4>
-                <p className="text-gray-600 text-base mb-6 leading-relaxed">Keep clients engaged for years with multi-channel, low-touch, high-scale outreach</p>
+                <p className="text-gray-600 text-base leading-relaxed">Keep clients engaged for years with multi-channel, low-touch, high-scale outreach</p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Claimant response rate</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Claimant response rate</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Document cycle time</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Document cycle time</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Case completion rate</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Case completion rate</span>
                   </div>
                 </div>
                 <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center gap-2 transition-all">
+                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
                     Learn More
                     <span className="transform group-hover:translate-x-1 transition-transform">→</span>
                   </span>
                 </div>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
             </a>
 
             {/* Stage 3 - Former Stage 4 with injury confirmation */}
             <a 
               href="#stage-3" 
               onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-3'); }} 
-              className="relative group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-6">
+              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="relative p-4">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 3</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">→</div>
+                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
                 </div>
                 <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Injury Confirmation with AI Medical Record Review</h4>
-                <p className="text-gray-600 text-base mb-6 leading-relaxed">AI-assisted lens-based review turns records into defensible, negotiable evidence</p>
+                <p className="text-gray-600 text-base leading-relaxed">AI-assisted lens-based review turns records into defensible, negotiable evidence</p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Medical review time/case</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Medical review time/case</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Reviewer productivity</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Reviewer productivity</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Negotiation strength</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Negotiation strength</span>
                   </div>
                 </div>
-                <div class="mt-4 pt-3 border-t border-gray-100">
-                  <span class="text-[#0D3BC3] font-semigroup-hover:gap-3 inline-flex items-center gap-2 transition-all">
+                <div className="mt-4 pt-3 border-t border-gray-100">
+                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
                     Learn More
-                    <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+                    <span className="transform group-hover:translate-x-1 transition-transform">→</span>
                   </span>
                 </div>
               </div>
-              <div class="absolute inset-0 border-2 border-[#0D3BC3] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
             </a>
 
             {/* Stage 4 - Former Stage 5 */}
             <a 
               href="#stage-4" 
               onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-4'); }} 
-              className="relative group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-6">
+              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="relative p-4">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 4</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">→</div>
+                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
                 </div>
                 <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Docket Tiering & Valuation</h4>
-                <p className="text-gray-600 text-base mb-6 leading-relaxed">Standardize medical review, eliminate tier dispute, accelerate settlement negotiations</p>
+                <p className="text-gray-600 text-base leading-relaxed">Standardize medical review, eliminate tier dispute, accelerate settlement negotiations</p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Tier consistency</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Tier consistency</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Defense tier disputes</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Defense tier disputes</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Portfolio forecast accuracy</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Portfolio forecast accuracy</span>
                   </div>
                 </div>
                 <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center gap-2 transition-all">
+                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
                     Learn More
                     <span className="transform group-hover:translate-x-1 transition-transform">→</span>
                   </span>
                 </div>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
             </a>
 
             {/* Stage 5 - Former Stage 6 */}
             <a 
               href="#stage-5" 
               onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-5'); }} 
-              className="relative group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-6">
+              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="relative p-4">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 5</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">→</div>
+                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
                 </div>
                 <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Workflow Tracking & Version Control</h4>
-                <p className="text-gray-600 text-base mb-6 leading-relaxed">Eliminate rework, maintain audit trails, coordinate multi-party document workflows</p>
+                <p className="text-gray-600 text-base leading-relaxed">Eliminate rework, maintain audit trails, coordinate multi-party document workflows</p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Rework elimination</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Rework elimination</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Audit trail quality</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Audit trail quality</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">AI efficiency gains</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>AI efficiency gains</span>
                   </div>
                 </div>
                 <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center gap-2 transition-all">
+                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
                     Learn More
                     <span className="transform group-hover:translate-x-1 transition-transform">→</span>
                   </span>
                 </div>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
             </a>
 
             {/* Stage 6 - Former Stage 7 with OCR conversion */}
             <a 
               href="#stage-6" 
               onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-6'); }} 
-              className="relative group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-6">
+              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="relative p-4">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 6</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">→</div>
+                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
                 </div>
                 <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">OCR & Unstructured Data Conversion</h4>
-                <p className="text-gray-600 text-base mb-6 leading-relaxed">Medical-grade OCR with structured data pipelines</p>
+                <p className="text-gray-600 text-base leading-relaxed">Medical-grade OCR with structured data pipelines</p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">TAT: weeks → hours</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>TAT: weeks ⟶ hours</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Strike team cost: $50k-$100k</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Strike team cost: $50k-$100k</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">90% time reduction vs. manual extraction</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>90% time reduction vs. manual extraction</span>
                   </div>
                 </div>
                 <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center gap-2 transition-all">
+                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
                     Learn More
                     <span className="transform group-hover:translate-x-1 transition-transform">→</span>
                   </span>
                 </div>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
             </a>
 
             {/* Stage 7 - New Dashboard section */}
             <a 
               href="#stage-7" 
               onClick={(e) => { e.preventDefault(); scrollToSelector('#stage-7'); }} 
-              className="relative group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
+              className="relative group relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-[#0D3BC3] transform hover:-translate-y-2 cursor-pointer"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
-              <div className="relative p-6">
+              <div className="absolute top-0 right-0 w-16 h-16 bg-[#0D3BC3] opacity-5 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
+              <div className="relative p-4">
                 <div className="flex items-start justify-between mb-4">
                   <span className="inline-block bg-[#0D3BC3] text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">STAGE 7</span>
-                  <div className="text-3xl transform group-hover:scale-110 transition-transform">→</div>
+                  <div className="text-3xl transform group-hover:scale-110 transition-transform">⟶</div>
                 </div>
                 <h4 className="text-2xl font-bold text-[#0D3BC3] mb-3 group-hover:text-[#0D3BC3] transition-colors">Dashboarding & Data Portals</h4>
-                <p className="text-gray-600 text-base mb-6 leading-relaxed">Real-time portfolio analytics and claimant self-service</p>
+                <p className="text-gray-600 text-base leading-relaxed">Real-time portfolio analytics and claimant self-service</p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Manual reporting time 90%</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Manual reporting time 90%</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">24/7 claimant engagement</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>24/7 claimant engagement</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-[#0D3BC3] font-bold text-lg">↓</span>
-                    <span className="font-medium">Portfolio forecast accuracy 90%</span>
+                    <span className="text-[#0D3BC3] font-bold text-lg">✓</span>
+                    <span>Portfolio forecast accuracy 90%</span>
                   </div>
                 </div>
                 <div className="mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center gap-2 transition-all">
+                  <span className="text-[#0D3BC3] font-semibold text-sm group-hover:gap-3 inline-flex items-center">
                     Learn More
                     <span className="transform group-hover:translate-x-1 transition-transform">→</span>
                   </span>
                 </div>
               </div>
-              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+              <div className="absolute inset-0 border-2 border-[#0D3BC3] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
             </a>
           </div>
         </div>
@@ -388,12 +388,12 @@ export default function MassTortPage() {
       <div className="max-w-5xl mx-auto px-6 py-8 space-y-12">
         {/* Stage 1 Details - Combined Intake & Dock QA */}
         <div id="stage-1" className="scroll-mt-20">
-          <div className="bg-[#0D3BC3] text-white p-6 rounded-t-xl">
+          <div className="bg-[#0D3BC3] text-white p-4 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 1</span>
             <h2 className="text-3xl font-bold mt-2 mb-2">Intake & Doc QA Overview</h2>
-            <p className="text-xl opacity-90">Streamline intake screening and dock qualification in unified workflow</p>
+            <p className="text-xl opacity-90">Streamline intake screening and doc qualification in unified workflow</p>
           </div>
-          <div className="bg-white p-6 rounded-b-xl shadow-lg">
+          <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
               Most firms lack structured intake questionnaires and standardized dock verification processes, leading to inconsistent case evaluation and resource drain from pursuing poor-quality leads.
@@ -401,19 +401,19 @@ export default function MassTortPage() {
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
             <ul className="space-y-2 text-gray-700 mb-6">
-              <li className="flex gap-3">★ <span><strong>Capture all critical data points upfront with custom intake forms</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Flag weak cases based on exposure, diagnosis, statute of limitations within 24 hours</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Automatically verify criteria and cure deficiencies rapidly</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Score each case on completeness and medical evidence strength</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Capture all critical data points upfront with custom intake forms</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Flag weak cases based on exposure, diagnosis, status of limitations within 24 hours</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Automatically verify criteria and cure deficiencies rapidly</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Score each case on completeness and medical evidence strength</strong></span></li>
             </ul>
 
             <div className="bg-blue-50 border-l-4 border-[#0D3BC3] p-6 rounded">
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex gap-2">★ 40-60% improvement in dock compensation liability rate</li>
-                <li className="flex gap-2">★ 30-50% bad case rejection reduction</li>
-                <li className="flex gap-2">★ 50% faster pre-qualification decisions</li>
-                <li className="flex gap-2">★ Data-driven lead source optimization</li>
+                <li className="flex gap-2">✓ 40-60% improvement in dock comp liability rate</li>
+                <li className="flex gap-2">✓ 30-50% bad case rejection reduction</li>
+                <li className="flex gap-2">✓ 50% faster pre-qualification decisions</li>
+                <li className="flex gap-2">✓ Data-driven lead source optimization</li>
               </ul>
             </div>
 
@@ -427,12 +427,12 @@ export default function MassTortPage() {
 
         {/* Stage 2 Details - Former Stage 3 */}
         <div id="stage-2" className="scroll-mt-20">
-          <div className="bg-[#0D3BC3] text-white p-6 rounded-t-xl">
+          <div className="bg-[#0D3BC3] text-white p-4 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 2</span>
             <h2 className="text-3xl font-bold mt-2 mb-2">Automated Claimant Communication</h2>
             <p className="text-xl opacity-90">Keep clients engaged for years with multi-channel, low-touch, high-scale outreach</p>
           </div>
-          <div className="bg-white p-6 rounded-b-xl shadow-lg">
+          <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
               Mass tort claimants need ongoing communication for 2-5 years, but manual outreach consumes massive paralegal time. Claimants miss document deadlines, fail to respond to medical record requests, and become disengaged, dropping out before settlement. Firms spend $200-400 annually per case on manual communication tasks.
@@ -440,19 +440,19 @@ export default function MassTortPage() {
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
             <ul className="space-y-2 text-gray-700 mb-6">
-              <li className="flex gap-3">★ <span><strong>Multi-channel campaigns triggered by case milestones</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Smart scheduling based on claimant demographics and response patterns</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Secure portals enable two-way communication and case updates</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Early identification of at-risk claimants for paralegal intervention</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Multi-channel campaigns triggered by case milestones</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Smart scheduling based on claimant demographics and response patterns</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Secure portals enable two-way communication and case updates</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Early identification of at-risk claimants for paralegal intervention</strong></span></li>
             </ul>
 
             <div className="bg-blue-50 border-l-4 border-[#0D3BC3] p-6 rounded">
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex gap-2">★ 60-80% claimant response rate (vs. 30-40% industry average)</li>
-                <li className="flex gap-2">★ 70% reduction in document cycle time</li>
-                <li className="flex gap-2">★ 85% case completion rate</li>
-                <li className="flex gap-2">★ $150-250 cost savings per case annually</li>
+                <li className="flex gap-2">✓ 60-80% claimant response rate (vs. 30-40% industry average)</li>
+                <li className="flex gap-2">✓ 70% reduction in document cycle time</li>
+                <li className="flex gap-2">✓ 85% case completion rate</li>
+                <li className="flex gap-2">✓ $150-250 cost savings per case annually</li>
               </ul>
             </div>
 
@@ -466,12 +466,12 @@ export default function MassTortPage() {
 
         {/* Stage 3 Details - Former Stage 4 with injury confirmation */}
         <div id="stage-3" className="scroll-mt-20">
-          <div className="bg-[#0D3BC3] text-white p-6 rounded-t-xl">
+          <div className="bg-[#0D3BC3] text-white p-4 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 3</span>
             <h2 className="text-3xl font-bold mt-2 mb-2">Injury Confirmation with AI Medical Record Review</h2>
             <p className="text-xl opacity-90">AI-assisted, lens-based review with flexible delivery and confounder handling</p>
           </div>
-          <div className="bg-white p-6 rounded-b-xl shadow-lg">
+          <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
               Medical record review consumes 4-8 hours per case at $75-150/hour paralegal rates. Reviewers miss critical diagnoses, procedure dates, and causation links. Inconsistent review quality creates tier assignment disputes with defense counsel, delaying settlements by months. Additionally, handling of confounders and new developments requires rescreening.
@@ -479,19 +479,19 @@ export default function MassTortPage() {
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
             <ul className="space-y-2 text-gray-700 mb-6">
-              <li className="flex gap-3">★ <span><strong>AI identifies 200+ medical data points (diagnoses, providers, dates, medications, injury types)</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Lens-based chronological review with causation analysis and exposure correlation</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Quality assurance focused on AI-flagged issues for senior paralegals</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Rescreening capability for new medical developments or confounder identification</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>AI identifies 200+ medical data points (diagnoses, providers, dates, medications, injury types)</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Lens-based chronological review with causation analysis and exposure correlation</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Quality assurance focused on AI-flagged issues for senior paralegals</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Rescreening capability for new medical developments or confounder identification</strong></span></li>
             </ul>
 
             <div className="bg-blue-50 border-l-4 border-[#0D3BC3] p-6 rounded">
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex gap-2">★ 50% reduction in medical review time per case</li>
-                <li className="flex gap-2">★ 40% improvement in reviewer productivity</li>
-                <li className="flex gap-2">★ Rescreening capability for new medical developments</li>
-                <li className="flex gap-2">★ Defensible review process for discovery</li>
+                <li className="flex gap-2">✓ 50% reduction in medical review time per case</li>
+                <li className="flex gap-2">✓ 40% improvement in reviewer productivity</li>
+                <li className="flex gap-2">✓ Rescreening capability for new medical developments</li>
+                <li className="flex gap-2">✓ Defensible review process for discovery</li>
               </ul>
             </div>
 
@@ -505,12 +505,12 @@ export default function MassTortPage() {
 
         {/* Stage 4 Details - Former Stage 5 */}
         <div id="stage-4" className="scroll-mt-20">
-          <div className="bg-[#0D3BC3] text-white p-6 rounded-t-xl">
+          <div className="bg-[#0D3BC3] text-white p-4 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 4</span>
             <h2 className="text-3xl font-bold mt-2 mb-2">Docket Tiering & Valuation</h2>
             <p className="text-xl opacity-90">Standardized medical review and predictive valuation</p>
           </div>
-          <div className="bg-white p-6 rounded-b-xl shadow-lg">
+          <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
               Inconsistent medical review creates tier assignment disputes with defense counsel, delaying settlements. Manual review processes are slow, costly, and prone to human error. Without standardized schemas, firms can't prove their tier definitions to skeptical defense teams.
@@ -518,19 +518,19 @@ export default function MassTortPage() {
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
             <ul className="space-y-2 text-gray-700 mb-6">
-              <li className="flex gap-3">★ <span><strong>Custom medical review schemas define tier criteria with specific diagnostic requirements</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>AI-assisted extraction with predictive settlement modeling</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Consistent application of logic across all cases eliminates reviewer bias</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Documentation captures rationale for each tier decision with supporting evidence references</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Custom medical review schemas define tier criteria with specific diagnostic requirements</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>AI-assisted extraction with predictive settlement modeling</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Consistent application of logic across all cases eliminates reviewer bias</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Documentation captures rationale for each tier decision with supporting evidence references</strong></span></li>
             </ul>
 
             <div className="bg-blue-50 border-l-4 border-[#0D3BC3] p-6 rounded">
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex gap-2">★ Eliminated tier assignment disputes with defense</li>
-                <li className="flex gap-2">★ 50-70% faster medical review cycle time</li>
-                <li className="flex gap-2">★ 90% portfolio forecast accuracy</li>
-                <li className="flex gap-2">★ Accelerated settlement negotiations</li>
+                <li className="flex gap-2">✓ Eliminated tier assignment disputes with defense</li>
+                <li className="flex gap-2">✓ 50-70% faster medical review cycle time</li>
+                <li className="flex gap-2">✓ 90% portfolio forecast accuracy</li>
+                <li className="flex gap-2">✓ Accelerated settlement negotiations</li>
               </ul>
             </div>
 
@@ -544,12 +544,12 @@ export default function MassTortPage() {
 
         {/* Stage 5 Details - Former Stage 6 */}
         <div id="stage-5" className="scroll-mt-20">
-          <div className="bg-[#0D3BC3] text-white p-6 rounded-t-xl">
+          <div className="bg-[#0D3BC3] text-white p-4 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 5</span>
             <h2 className="text-3xl font-bold mt-2 mb-2">Workflow Tracking & Version Control</h2>
             <p className="text-xl opacity-90">Eliminate rework, maintain audit trails, coordinate multi-party document workflows</p>
           </div>
-          <div className="bg-white p-6 rounded-b-xl shadow-lg">
+          <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
               Documents get uploaded, reviewed, revised, and re-uploaded with no version control. Result: staff work from outdated files, duplicate effort, and audit trial gaps that defense counsel exploits during discovery.
@@ -557,19 +557,19 @@ export default function MassTortPage() {
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
             <ul className="space-y-2 text-gray-700 mb-6">
-              <li className="flex gap-3">★ <span><strong>Every document gets version number, timestamp, uploader ID, and approval status</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Structured workflow states include Draft → Pending Review → Approved → Current vs. Superseded</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Integration ensures only "Approved, Current" versions reach downstream processes</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Dashboards provide case-level and portfolio-level visibility of bottlenecks</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Every document gets version number, timestamp, uploader ID, and approval status</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Structured workflow states include Draft ⟶ Pending Review ⟶ Approved ⟶ Current vs. Superseded</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Integration ensures only "Approved, Current" versions reach downstream processes</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Dashboards provide case-level and portfolio-level visibility of bottlenecks</strong></span></li>
             </ul>
 
             <div className="bg-blue-50 border-l-4 border-[#0D3BC3] p-6 rounded">
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex gap-2">★ Eliminated rework from version confusion</li>
-                <li className="flex gap-2">★ Defensible audit trails for discovery</li>
-                <li className="flex gap-2">★ 80% AI automation of completeness checks</li>
-                <li className="flex gap-2">★ Clear visibility into workflow bottlenecks</li>
+                <li className="flex gap-2">✓ Eliminated rework from version confusion</li>
+                <li className="flex gap-2">✓ Defensible audit trails for discovery</li>
+                <li className="flex gap-2">✓ 80% AI automation of completeness checks</li>
+                <li className="flex gap-2">✓ Clear visibility into workflow bottlenecks</li>
               </ul>
             </div>
 
@@ -583,12 +583,12 @@ export default function MassTortPage() {
 
         {/* Stage 6 Details - OCR & Unstructured Data Conversion */}
         <div id="stage-6" className="scroll-mt-20">
-          <div className="bg-[#0D3BC3] text-white p-6 rounded-t-xl">
+          <div className="bg-[#0D3BC3] text-white p-4 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 6</span>
             <h2 className="text-3xl font-bold mt-2 mb-2">OCR & Unstructured Data Conversion</h2>
             <p className="text-xl opacity-90">Medical-grade OCR, structured pipelines, 90% time reduction</p>
           </div>
-          <div className="bg-white p-6 rounded-b-xl shadow-lg">
+          <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
               Key evidence lives in unstructured medical documents including PDFs, handwritten records, and faxed materials. These documents require extensive manual review to extract meaningful data. When defense requests portfolio-level cuts, firms resort to costly "strike teams" performing manual extraction. Traditional OCR systems struggle with medical terminology accuracy.
@@ -596,19 +596,19 @@ export default function MassTortPage() {
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
             <ul className="space-y-2 text-gray-700 mb-6">
-              <li className="flex gap-3">★ <span><strong>Medical-grade optical character recognition specialized for medical terminology and formats</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Structured data pipelines organize extracted information into queryable databases</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Validation rules ensure accuracy of medical term extraction</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>HL7/FHIR structured output enables seamless integration with systems</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Medical-grade optical character recognition specialized for medical terminology and formats</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Structured data pipelines organize extracted information into queryable databases</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Validation rules ensure accuracy of medical term extraction</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>HL7/FHIR structured output enables seamless integration with systems</strong></span></li>
             </ul>
 
             <div className="bg-blue-50 border-l-4 border-[#0D3BC3] p-6 rounded">
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex gap-2">★ 90% time reduction vs. manual extraction</li>
-                <li className="flex gap-2">★ Defense response time: weeks → hours</li>
-                <li className="flex gap-2">★ Elimination of strike team costs ($50k-$100k/cycle)</li>
-                <li className="flex gap-2">★ Portfolio-level analytics and scenario modeling</li>
+                <li className="flex gap-2">✓ 90% time reduction vs. manual extraction</li>
+                <li className="flex gap-2">✓ Defense response time: weeks ⟶ hours</li>
+                <li className="flex gap-2">✓ Elimination of strike team costs ($50k-$100k/cycle)</li>
+                <li className="flex gap-2">✓ Portfolio-level analytics and scenario modeling</li>
               </ul>
             </div>
 
@@ -622,32 +622,32 @@ export default function MassTortPage() {
 
         {/* Stage 7 Details - New Dashboard section */}
         <div id="stage-7" className="scroll-mt-20">
-          <div className="bg-[#0D3BC3] text-white p-6 rounded-t-xl">
+          <div className="bg-[#0D3BC3] text-white p-4 rounded-t-xl">
             <span className="text-sm font-semibold bg-[#EDB624] text-[#1A2234] px-3 py-1 rounded-full">STAGE 7</span>
             <h2 className="text-3xl font-bold mt-2 mb-2">Dashboarding & Data Portals</h2>
             <p className="text-xl opacity-90">Real-time reporting, claimant portals, API feeds, and rescreening pipeline</p>
           </div>
-          <div className="bg-white p-6 rounded-b-xl shadow-lg">
+          <div className="bg-white p-4 rounded-b-xl shadow-lg">
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">The Challenge</h3>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Firms lack real-time visibility into portfolio performance, claimant engagement, and settlement forecasting. Manual reporting consumes hours weekly, and claimant status requests burden paralegals. There's no systematic approach to rescreen cases when new medical evidence arises.
+              Firms lack real-time visibility into portfolio performance, claimant engagement, and settlement forecasting. Manual reporting consumes hours weeklyly, and claimant status requests burden paralegals. There's no systematic approach to rescreen cases when new medical evidence arises.
             </p>
             
             <h3 className="text-2xl font-bold text-[#0D3BC3] mb-4">Our Approach</h3>
             <ul className="space-y-2 text-gray-700 mb-6">
-              <li className="flex gap-3">★ <span><strong>Live portfolio metrics with settlement velocity, tier distribution</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Claimant portals enable secure self-service document upload and status tracking</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>API data feeds integrate with settlement administrators, medical vendors, counsel</strong></span></li>
-              <li className="flex gap-3">★ <span><strong>Automated rescreening triggers when new medical evidence or exposure data emerges</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Live portfolio metrics with settlement velocity, tier distribution</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Claimant portals enable secure self-service document upload and status tracking</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>API data feeds integrate with settlement administrators, medical vendors, counsel</strong></span></li>
+              <li className="flex gap-3"><span>✓</span> <span><strong>Automated rescreening triggers when new medical evidence or exposure data emerges</strong></span></li>
             </ul>
 
             <div className="bg-blue-50 border-l-4 border-[#0D3BC3] p-6 rounded">
               <h4 className="font-bold text-[#0D3BC3] mb-3">Key Benefits</h4>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex gap-2">★ 90% reduction in manual reporting time</li>
-                <li className="flex gap-2">★ 24/7 claimant engagement without staff overhead</li>
-                <li className="flex gap-2">★ Portfolio forecast accuracy: 90%</li>
-                <li className="flex gap-2">★ Automated case escalation and rescreening triggers</li>
+                <li className="flex gap-2">✓ 90% reduction in manual reporting time</li>
+                <li className="flex gap-2">✓ 24/7 claimant engagement without staff overhead</li>
+                <li className="flex gap-2">✓ Portfolio forecast accuracy: 90%</li>
+                <li className="flex gap-2">✓ Automated case escalation and rescreening triggers</li>
               </ul>
             </div>
 
@@ -730,8 +730,7 @@ export default function MassTortPage() {
             </div>
 
             <a href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Mass%20Tort%20Services%20Inquiry"
-              className="block w-full text-center bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-full font-semibold text-lg hover:bg-amber-400 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-xl"
-            >
+              className="block w-full text-center bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-full font-semibold text-lg hover:bg-amber-400 transform hover:-translate-y-1 transition-all shadow-lg hover:shadow-xl">
               Submit Interest
             </a>
 
