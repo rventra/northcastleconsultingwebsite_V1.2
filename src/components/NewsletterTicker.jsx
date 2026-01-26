@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getLatestNewsletters, mapToService } from '../../lib/newsletter-api';
+import { getLatestNewsletters, mapToService } from '../lib/newsletter-api';
 import { Link } from 'react-router-dom';
 
 function NewsletterTicker() {
