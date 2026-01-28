@@ -18,6 +18,7 @@ import AboutUsPage from './AboutUsPage.jsx';
 import ContactUsPage from './ContactUsPage.jsx';
 import BlogPage from './BlogPage.jsx';
 import DataVisibilityBlogPost from './DataVisibilityBlogPost.jsx';
+import CaseStudiesPage from './CaseStudiesPage.jsx';
 
 function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -90,7 +91,7 @@ function Navigation() {
             </div>
 
             <Link to="/about-us" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">About Us</Link>
-            <button onClick={() => scrollToSelector('#case-studies')} className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Case Studies</button>
+            <Link to="/case-studies" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Case Studies</Link>
             <Link to="/blog" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Blog</Link>
             <Link to="/contact-us" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Contact</Link>
           </div>
@@ -120,7 +121,7 @@ function Navigation() {
               <Link to="/about-us" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">About Us</Link>
             </div>
             <div className="border-t border-white/20 pt-2">
-              <button onClick={ () => { scrollToSelector('#case-studies'); setMobileMenuOpen(false); }} className="text-white hover:text-[#EDB624]">Case Studies</button>
+              <Link to="/case-studies" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">Case Studies</Link>
             </div>
             <div className="border-t border-white/20 pt-2">
               <Link to="/blog" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">Blog</Link>
@@ -285,24 +286,24 @@ function HomePage() {
                 Preparing portfolio companies for optimal valuation and smooth transactions through financial streamlining, operational metrics validation, and enhanced management credibility.
               </p>
               <ul className="space-y-2 text-sm text-blue-100">
-                <li className="flex gap-2">
-                  <span className="text-[#EDB624]">-chevron-right</span>
+                <li className="flex gap-2 items-center">
+                  <svg className="w-4 h-4 text-[#EDB624] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   <span>KPI Data Cube for Company Sale</span>
                 </li>
-                <li className="flex gap-2">
-                  <span className="text-[#EDB624]">-chevron-right</span>
+                <li className="flex gap-2 items-center">
+                  <svg className="w-4 h-4 text-[#EDB624] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   <span>Unlocking Value in Data-Challenged Sale</span>
                 </li>
-                <li className="flex gap-2">
-                  <span className="text-[#EDB624]">-chevron-right</span>
+                <li className="flex gap-2 items-center">
+                  <svg className="w-4 h-4 text-[#EDB624] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   <span>Building Credibility & Justifying Multiples</span>
                 </li>
-                <li className="flex gap-2">
-                  <span className="text-[#EDB624]">-chevron-right</span>
+                <li className="flex gap-2 items-center">
+                  <svg className="w-4 h-4 text-[#EDB624] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   <span>Enhancing Investment Credibility</span>
                 </li>
-                <li className="flex gap-2">
-                  <span className="text-[#EDB624]">-chevron-right</span>
+                <li className="flex gap-2 items-center">
+                  <svg className="w-4 h-4 text-[#EDB624] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   <span>Streamlining Operations and Marketing Insights</span>
                 </li>
               </ul>
@@ -326,18 +327,15 @@ function HomePage() {
                 End-to-end corporate development services including target screening, due diligence, deal structuring, and post-merger integration to accelerate growth and expand market presence.
               </p>
               <ul className="space-y-2 text-sm text-gray-300">
-                <li className="flex gap-2">
-                  <span className="text-[#EDB624]">-chevron-right</span>
+                <li className="flex gap-2 items-center">
+                  <svg className="w-4 h-4 text-[#EDB624] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   <span>From Operations to Ownership</span>
                 </li>
-                <li className="flex gap-2">
-                  <span className="text-[#EDB624]">-chevron-right</span>
+                <li className="flex gap-2 items-center">
+                  <svg className="w-4 h-4 text-[#EDB624] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   <span>Building an Acquisition Roadmap</span>
                 </li>
               </ul>
-              <div className="mt-6 inline-flex items-center gap-2 text-[#EDB624] font-semibold group-hover:gap-3 transition-all">
-                View All Case Studies <span>→</span>
-              </div>
             </Link>
           </div>
         </div>
@@ -487,6 +485,9 @@ export default function NorthCastleConsulting() {
         <Route path="/services/dividend-recap-prep" element={<DividendRecapPage />} />
         <Route path="/services/corporate-development" element={<CorporateDevPage />} />
         <Route path="/services/mass-tort" element={<MassTortPage />} />
+
+        {/* Case Studies Landing Page */}
+        <Route path="/case-studies" element={<CaseStudiesPage />} />
 
         {/* Case Study Category Pages */}
         <Route path="/case-studies/sell-side-readiness" element={<SellSideReadinessCaseStudiesPage />} />
