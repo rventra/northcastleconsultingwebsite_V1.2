@@ -16,6 +16,8 @@ import CorporateDevelopmentCaseStudiesPage from './CorporateDevelopmentCaseStudi
 import MassTortDigestTemplate from './components/newsletters/MassTortDigestTemplate.jsx';
 import AboutUsPage from './AboutUsPage.jsx';
 import ContactUsPage from './ContactUsPage.jsx';
+import BlogPage from './BlogPage.jsx';
+import DataVisibilityBlogPost from './DataVisibilityBlogPost.jsx';
 
 function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -89,6 +91,7 @@ function Navigation() {
 
             <Link to="/about-us" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">About Us</Link>
             <button onClick={() => scrollToSelector('#case-studies')} className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Case Studies</button>
+            <Link to="/blog" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Blog</Link>
             <Link to="/contact-us" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Contact</Link>
           </div>
 
@@ -118,6 +121,9 @@ function Navigation() {
             </div>
             <div className="border-t border-white/20 pt-2">
               <button onClick={ () => { scrollToSelector('#case-studies'); setMobileMenuOpen(false); }} className="text-white hover:text-[#EDB624]">Case Studies</button>
+            </div>
+            <div className="border-t border-white/20 pt-2">
+              <Link to="/blog" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">Blog</Link>
             </div>
             <Link to="/contact-us" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">Contact</Link>
           </div>
@@ -494,6 +500,10 @@ export default function NorthCastleConsulting() {
         <Route path="/case-studies/sell-side-operations-marketing" element={<StreamliningOperationsCaseStudyPage />} />
         <Route path="/case-studies/corporate-operations-ownership" element={<CarRentalCaseStudyPage />} />
         <Route path="/case-studies/corporate-acquisition-roadmap" element={<TargetIdentificationCaseStudyPage />} />
+
+        {/* Blog */}
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/data-visibility-roi-driver" element={<DataVisibilityBlogPost />} />
 
         {/* Newsletter */}
         <Route path="/newsletter" element={<MassTortDigestTemplate />} />
