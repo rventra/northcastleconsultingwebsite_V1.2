@@ -208,25 +208,23 @@ function HomePage() {
 
           {/* Family Office Services */}
           <div id="fo-services" className="mb-12 scroll-mt-24">
-            <h3 className="text-xl font-bold text-[#1A2234] mb-6 flex items-center gap-3">
+            <h3 className="text-xl font-bold text-[#1A2234] mb-4 flex items-center gap-3">
               <span className="w-1.5 h-8 bg-[#0D3BC3] rounded-full"></span>
-              Family Office / Independent Sponsor
+              Family Office / Independent Sponsor Services
             </h3>
+            <p className="text-[#1A2234]/70 text-base mb-6 leading-relaxed max-w-3xl">
+              We empower family offices and independent sponsors to execute strategic growth initiatives with confidence. From M&A to corporate development, our expertise ensures seamless transactions and long-term value creation.
+            </p>
             <div className="grid md:grid-cols-2 gap-6">
               <Link to="/services/corporate-development" className="group block p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
-                <div className="flex justify-between items-start mb-4">
-                  <p className="block text-xs font-bold text-[#1A2234] uppercase tracking-wider">Growth Acceleration</p>
-                  <div className="h-6 w-0.5 bg-current rotate-12"></div>
-                </div>
-                <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">From Operations to Ownership</h4>
+                <h4 className="text-lg font-bold text-[#1A2234] mb-3 group-hover:text-[#0D3BC3] transition-colors">Corporate Development</h4>
                 <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">
-                  Strategic guidance for transitioning from operating company to investment holding
+                  Accelerate growth and expand market presence through strategic acquisitions and partnerships. Our end-to-end corporate development services include target screening, due diligence, deal structuring, and post-merger integration. We help you identify the right opportunities, mitigate risks, and maximize synergies to achieve your strategic goals.
                 </p>
                 <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                  Learn more <span>→</span>
+                  Read More <span>→</span>
                 </span>
               </Link>
-                
             </div>
           </div>
 
