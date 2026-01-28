@@ -141,16 +141,16 @@ function HomePage() {
     <>
       {/* Hero Section */}
       <section className="pt-16">
-        <div className="grid lg:grid-cols-2">
-          {/* Left: Main Content - Blue */}
+        <div>
+          {/* Main Content - Blue */}
           <div className="bg-[#0D3BC3] px-6 md:px-12 py-14 md:py-20">
-            <div className="max-w-xl ml-auto">
+            <div className="max-w-4xl mx-auto">
               <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
                 Unlocking Value Through<br />
                 <span className="text-[#EDB624]">Financial Expertise</span>
               </h1>
               <p className="text-white/90 text-base leading-relaxed mb-6">
-                Delivering actionable insights and tailored solutions for Private Equity and Corporate Development teams to maximize value, reduce risk, and drive success.
+                Delivering actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams to maximize value, reduce risk, and drive success.
               </p>
               <button
                 onClick={() => scrollToSelector('#contact')}
@@ -161,41 +161,6 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Right: Quick Links - White */}
-          <div className="bg-white px-6 md:px-12 py-14 md:py-20">
-            <div className="max-w-md mr-auto space-y-6">
-              <button
-                onClick={() => scrollToSelector('#pe-services')}
-                className="group block w-full text-left"
-              >
-                <div className="text-[#0D3BC3] text-xs font-semibold uppercase tracking-wider mb-1">Private Equity</div>
-                <div className="text-[#1A2234] font-medium group-hover:text-[#0D3BC3] transition-colors">Sell-Side Readiness & Portfolio Support</div>
-                <div className="text-[#1A2234]/60 text-sm mt-1">Position your portfolio company for optimal valuation</div>
-              </button>
-
-              <div className="border-t border-slate-300"></div>
-
-              <button
-                onClick={() => scrollToSelector('#fo-services')}
-                className="group block w-full text-left"
-              >
-                <div className="text-[#0D3BC3] text-xs font-semibold uppercase tracking-wider mb-1">Family Office</div>
-                <div className="text-[#1A2234] font-medium group-hover:text-[#0D3BC3] transition-colors">Corporate Development & M&A</div>
-                <div className="text-[#1A2234]/60 text-sm mt-1">End-to-end transaction support and advisory</div>
-              </button>
-
-              <div className="border-t border-slate-300"></div>
-
-              <button
-                onClick={() => scrollToSelector('#lit-services')}
-                className="group block w-full text-left"
-              >
-                <div className="text-[#0D3BC3] text-xs font-semibold uppercase tracking-wider mb-1">Litigation</div>
-                <div className="text-[#1A2234] font-medium group-hover:text-[#0D3BC3] transition-colors">Mass Tort Financial Analysis</div>
-                <div className="text-[#1A2234]/60 text-sm mt-1">Operational infrastructure for law firms at scale</div>
-              </button>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -205,7 +170,7 @@ function HomePage() {
           <div className="mb-12 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A2234] mb-3">Explore Our Tailored Financial Solutions</h2>
             <p className="text-[#1A2234]/70 text-lg max-w-2xl mx-auto">
-              We deliver tailored services that drive growth, mitigate risk, and maximize value for private equity firms, family offices, and independent sponsors.
+              From private debt advisory to M&A support, we deliver tailored services that drive growth, mitigate risks, and maximize value for private equity firms, family offices, and independent sponsors.
             </p>
           </div>
 
