@@ -176,36 +176,31 @@ function HomePage() {
 
           {/* Private Equity Services */}
           <div id="pe-services" className="mb-12 scroll-mt-24">
-            <h3 className="text-xl font-bold text-[#1A2234] mb-6 flex items-center gap-3">
+            <h3 className="text-xl font-bold text-[#1A2234] mb-4 flex items-center gap-3">
               <span className="w-1.5 h-8 bg-[#0D3BC3] rounded-full"></span>
               Private Equity Services
             </h3>
+            <p className="text-[#1A2234]/70 text-base mb-6 leading-relaxed max-w-3xl">
+              We partner with private equity firms to unlock value, optimize capital structures, and drive successful exits. Our tailored services ensure seamless transactions and maximize returns for sponsors and investors.
+            </p>
             <div className="grid md:grid-cols-2 gap-6">
-              <Link to="/services/dividend-recap-prep" className="group block p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
-                <div className="flex justify-between items-start mb-4">
-                  <p className="block text-xs font-bold text-[#1A2234] uppercase tracking-wider">Revenue Assurance</p>
-                  <div className="h-6 w-0.5 bg-current rotate-12"></div>
-                </div>
-                <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">KPI Data Cube for Company Sale</h4>
+              <Link to="/services/sell-side-readiness" className="group block p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
+                <h4 className="text-lg font-bold text-[#1A2234] mb-3 group-hover:text-[#0D3BC3] transition-colors">Sell-Side Readiness</h4>
                 <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">
-                  Actionable data cube for revenue & expense validation during diligence
+                  Preparing your portfolio company for sale is critical to achieving optimal valuation and a smooth transaction. We streamline financials, validate operational metrics, and enhance management credibility to attract buyers and minimize last-minute surprises. With a &gt;95% success rate, we ensure your business is positioned for a competitive and successful exit.
                 </p>
                 <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                  Learn more <span>→</span>
+                  Read More <span>→</span>
                 </span>
               </Link>
-              
-              <Link to="/services/sell-side-readiness" className="group block p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
-                <div className="flex justify-between items-start mb-4">
-                  <p className="block text-xs font-bold text-[#1A2234] uppercase tracking-wider">Portfolio Value</p>
-                  <div className="h-6 w-0.5 bg-current rotate-12"></div>
-                </div>
-                <h4 className="text-lg font-bold text-[#1A2234] mb-2 group-hover:text-[#0D3BC3] transition-colors">Unlocking Value in Data-Challenged Sale</h4>
+
+              <Link to="/services/dividend-recap-prep" className="group block p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-[#0D3BC3]/40 hover:-translate-y-1">
+                <h4 className="text-lg font-bold text-[#1A2234] mb-3 group-hover:text-[#0D3BC3] transition-colors">Dividend Recapitalization Preparation</h4>
                 <p className="text-[#1A2234]/70 text-base mb-4 leading-relaxed">
-                  Navigate data challenges during sell-side process with our solutions
+                  We help private equity sponsors return capital to LPs through strategic dividend recapitalizations. Our team assesses cash flow stability, debt capacity, and market conditions to structure transactions that balance leverage and returns—all while preserving ownership and operational focus.
                 </p>
                 <span className="text-[#0D3BC3] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                  Learn more <span>→</span>
+                  Read More <span>→</span>
                 </span>
               </Link>
             </div>
