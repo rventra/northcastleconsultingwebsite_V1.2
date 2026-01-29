@@ -496,7 +496,7 @@ export default function NorthCastleConsulting() {
         <Route path="/case-studies/sell-side-credibility-multiples" element={<BuildingCredibilityPage />} />
         <Route path="/case-studies/sell-side-investment-credibility" element={<EnhancingInvestmentCredibilityPage />} />
         <Route path="/case-studies/sell-side-operations-marketing" element={<StreamliningOperationsCaseStudyPage />} />
-        <Route path="/case-studies/corporate-operations-ownership" element={<CarRentalCaseStudyPage />} />
+        <Route path="/case-studies/corporate-operations-to-ownership" element={<CarRentalCaseStudyPage />} />
         <Route path="/case-studies/corporate-acquisition-roadmap" element={<TargetIdentificationCaseStudyPage />} />
 
         {/* Blog */}
