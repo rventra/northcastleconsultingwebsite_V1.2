@@ -54,9 +54,6 @@ export default function CaseStudiesPage() {
                   <span>Streamlining Operations and Marketing Insights</span>
                 </li>
               </ul>
-              <div className="mt-6 inline-flex items-center gap-2 text-[#EDB624] font-semibold group-hover:gap-3 transition-all">
-                View All Case Studies <span>→</span>
-              </div>
             </Link>
 
             {/* Corporate Development Card */}
