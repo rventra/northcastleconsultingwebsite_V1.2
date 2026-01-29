@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import MassTortPage from './MassTortPage.jsx';
 import DividendRecapPage from './DividendRecapPage.jsx';
@@ -19,6 +19,16 @@ import ContactUsPage from './ContactUsPage.jsx';
 import BlogPage from './BlogPage.jsx';
 import DataVisibilityBlogPost from './DataVisibilityBlogPost.jsx';
 import CaseStudiesPage from './CaseStudiesPage.jsx';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -471,6 +481,7 @@ function HomePage() {
 export default function NorthCastleConsulting() {
   return (
     <div className="min-h-screen bg-white">
+      <ScrollToTop />
       <Navigation />
       <Routes>
         <Route path="/" element={<HomePage />} />
