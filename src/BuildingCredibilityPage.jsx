@@ -4,33 +4,41 @@ import { Link } from 'react-router-dom';
 export default function BuildingCredibilityPage() {
   return (
     <div className="pt-16">
-      {/* Back Navigation */}
-      <div className="bg-[#0D3BC3] py-3 px-6">
-        <div className="max-w-5xl mx-auto">
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }}
-            className="inline-flex items-center gap-2 text-white/70 hover:text-[#EDB624] transition-colors text-sm"
-          >
-            <span>←</span>
-            Back to Sell-Side Readiness
-          </a>
-        </div>
-      </div>
+      {/* Hero with Background Image */}
+      <div
+        className="text-white relative bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/336a2faf-57ab-4af7-b678-6f89d365ec55/nighttime-concert-musicians-play-excited-crowd-generated-by-ai.jpg?format=2500w)' }}
+      >
+        {/* Subtle blue overlay for readability */}
+        <div className="absolute inset-0 bg-[#0D3BC3]/40"></div>
 
-      {/* Compact Hero */}
-      <div className="bg-[#0D3BC3] text-white py-12 md:py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div>
-            <span className="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-3 py-1.5 rounded mb-4">
-              SELL-SIDE READINESS
-            </span>
-            <h1 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight">
-              Building Credibility & Justifying Multiples
-            </h1>
-            <p className="text-white/80 text-lg max-w-3xl">
-              Equipping a venue management company's finance team to support a premium EBITDA valuation.
-            </p>
+        {/* Back Navigation */}
+        <div className="relative z-10 py-3 px-6">
+          <div className="max-w-5xl mx-auto">
+            <Link
+              to="/case-studies/sell-side-readiness"
+              className="inline-flex items-center gap-2 text-white/70 hover:text-[#EDB624] transition-colors text-sm"
+            >
+              <span>←</span>
+              Back to Sell-Side Readiness
+            </Link>
+          </div>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 py-12 md:py-16 px-6">
+          <div className="max-w-5xl mx-auto">
+            <div>
+              <span className="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-3 py-1.5 rounded mb-4">
+                SELL-SIDE READINESS
+              </span>
+              <h1 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight">
+                Building Credibility & Justifying Multiples
+              </h1>
+              <p className="text-white/80 text-lg max-w-3xl">
+                Equipping a venue management company's finance team to support a premium EBITDA valuation.
+              </p>
+            </div>
           </div>
         </div>
       </div>
