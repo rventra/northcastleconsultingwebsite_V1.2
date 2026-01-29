@@ -4,35 +4,46 @@ import { Link } from 'react-router-dom';
 export default function CarRentalCaseStudyPage() {
   return (
     <div className="pt-16">
-      {/* Back Navigation */}
-      <div className="bg-[#0D3BC3] py-2 px-6">
-        <div className="max-w-5xl mx-auto">
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }}
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-amber-300 transition-colors text-sm"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Corporate Development
-          </a>
-        </div>
-      </div>
+      {/* Hero Section with Background Image */}
+      <div
+        className="relative bg-cover bg-center"
+        style={{
+          backgroundImage: `url('https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/72a1e0b6-d9e8-45b0-b95f-d4002cc6921a/Car+rental+Franchise?format=2500w')`
+        }}
+      >
+        {/* Subtle Blue Overlay */}
+        <div className="absolute inset-0 bg-[#0D3BC3]/75"></div>
 
-      {/* Compact Hero */}
-      <div className="bg-[#0D3BC3] text-white py-10 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div>
-            <span className="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-2 py-1 rounded mb-3">
-              CORPORATE DEVELOPMENT
-            </span>
-            <h1 className="text-2xl md:text-3xl font-bold mb-2">
-              From Operations to Ownership
-            </h1>
-            <p className="text-gray-300 text-sm">
-              Enabling car rental executives to acquire a franchise of a major global brand.
-            </p>
+        {/* Back Navigation */}
+        <div className="relative py-2 px-6">
+          <div className="max-w-5xl mx-auto">
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); navigateToPage('corporate-dev'); }}
+              className="inline-flex items-center gap-2 text-gray-300 hover:text-amber-300 transition-colors text-sm"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to Corporate Development
+            </a>
+          </div>
+        </div>
+
+        {/* Compact Hero */}
+        <div className="relative text-white py-10 px-6">
+          <div className="max-w-5xl mx-auto">
+            <div>
+              <span className="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-2 py-1 rounded mb-3">
+                CORPORATE DEVELOPMENT
+              </span>
+              <h1 className="text-2xl md:text-3xl font-bold mb-2">
+                From Operations to Ownership
+              </h1>
+              <p className="text-gray-300 text-sm">
+                Enabling car rental executives to acquire a franchise of a major global brand.
+              </p>
+            </div>
           </div>
         </div>
       </div>
