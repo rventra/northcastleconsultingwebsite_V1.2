@@ -20,9 +20,14 @@ export default function KPIDataCubeCaseStudyPage() {
         </div>
       </div>
 
-      {/* Compact Hero */}
-      <div className="bg-[#0D3BC3] text-white py-10 px-6">
-        <div className="max-w-5xl mx-auto">
+      {/* Compact Hero with Background Image */}
+      <div
+        className="text-white py-10 px-6 relative bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(/images/kpi-hero.jpg)' }}
+      >
+        {/* Overlay for readability */}
+        <div className="absolute inset-0 bg-[#0D3BC3] opacity-80"></div>
+        <div className="max-w-5xl mx-auto relative z-10">
           <div>
             <span className="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-2 py-1 rounded mb-3">
               SELL-SIDE READINESS
