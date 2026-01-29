@@ -4,38 +4,43 @@ import { Link } from 'react-router-dom';
 export default function DataChallengedCaseStudyPage() {
   return (
     <div className="pt-16">
-      {/* Back Navigation */}
-      <div className="bg-[#0D3BC3] py-2 px-6">
-        <div className="max-w-5xl mx-auto">
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); navigateToPage('sell-side'); }}
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-amber-300 transition-colors text-sm"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Sell-Side Readiness
-          </a>
-        </div>
-      </div>
-
-      {/* Compact Hero with Background Image */}
+      {/* Hero with Background Image */}
       <div
-        className="text-white py-10 px-6 relative bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/images/data-challenged-hero.jpg)' }}
+        className="text-white relative bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/747fe8f0-9a4c-4411-a7b4-927b373ac2ac/getty-images-y1mJOq-cq3Q-unsplash.jpg?format=2500w)' }}
       >
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div>
-            <span className="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-2 py-1 rounded mb-3">
-              SELL-SIDE READINESS
-            </span>
-            <h1 className="text-2xl md:text-3xl font-bold mb-2">
-              Unlocking Value in a Data-Challenged Business Sale
-            </h1>
-            <p className="text-gray-300 text-sm">
-              Transforming a stalled year-long sale process into a successful exit for a vending & catering company.
-            </p>
+        {/* Subtle blue overlay for readability */}
+        <div className="absolute inset-0 bg-[#0D3BC3]/40"></div>
+
+        {/* Back Navigation */}
+        <div className="relative z-10 py-2 px-6">
+          <div className="max-w-5xl mx-auto">
+            <Link
+              to="/case-studies/sell-side-readiness"
+              className="inline-flex items-center gap-2 text-gray-300 hover:text-amber-300 transition-colors text-sm"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to Sell-Side Readiness
+            </Link>
+          </div>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 py-10 px-6">
+          <div className="max-w-5xl mx-auto">
+            <div>
+              <span className="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-2 py-1 rounded mb-3">
+                SELL-SIDE READINESS
+              </span>
+              <h1 className="text-2xl md:text-3xl font-bold mb-2">
+                Unlocking Value in a Data-Challenged Business Sale
+              </h1>
+              <p className="text-gray-300 text-sm">
+                Transforming a stalled year-long sale process into a successful exit for a vending & catering company.
+              </p>
+            </div>
           </div>
         </div>
       </div>
