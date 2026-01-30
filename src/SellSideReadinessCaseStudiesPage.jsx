@@ -85,20 +85,42 @@ export default function SellSideReadinessCaseStudiesPage() {
         </div>
       </section>
 
+      {/* Featured Case Study - Building Credibility & Justifying Multiples */}
+      <section className="py-12 md:py-16 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Image - Left */}
+            <div className="rounded-xl overflow-hidden shadow-lg">
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/336a2faf-57ab-4af7-b678-6f89d365ec55/nighttime-concert-musicians-play-excited-crowd-generated-by-ai.jpg?format=2500w"
+                alt="Building Credibility & Justifying Multiples"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+
+            {/* Content - Right */}
+            <div className="flex flex-col justify-center">
+              <h1 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-4">
+                Building Credibility & Justifying Multiples
+              </h1>
+              <p className="text-[#1A2234]/70 text-base leading-relaxed mb-6">
+                A private equity-backed venue management company, was preparing for a sale, but its finance team lacked the expertise to handle the complex due diligence process.
+              </p>
+              <Link
+                to="/case-studies/sell-side-credibility-multiples"
+                className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-amber-300 transition-all duration-300 self-start"
+              >
+                View More
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Case Studies Grid */}
-      <section className="py-16 md:py-20 px-6 bg-white">
+      <section className="py-16 md:py-20 px-6 bg-[#F6F7F7]">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Link to="/case-studies/sell-side-credibility-multiples" className="group block bg-white p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Building Credibility & Justifying Multiples</h3>
-              <p className="text-[#1A2234]/70 text-sm leading-relaxed mb-3">PE-backed venue management company sale preparation</p>
-              <div className="text-xs text-gray-500 space-y-1">
-                <div><span className="font-medium">Industry:</span> Leisure & Hospitality</div>
-                <div><span className="font-medium">Duration:</span> 5 months</div>
-              </div>
-            </Link>
-
             <Link to="/case-studies/sell-side-investment-credibility" className="group block bg-white p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
               <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Enhancing Investment Credibility</h3>
