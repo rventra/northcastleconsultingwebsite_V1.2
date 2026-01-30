@@ -21,20 +21,42 @@ export default function SellSideReadinessCaseStudiesPage() {
         </div>
       </div>
 
+      {/* Featured Case Study - KPI Data Cube */}
+      <section className="py-12 md:py-16 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Image - Left */}
+            <div className="rounded-xl overflow-hidden shadow-lg">
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/f358c6ff-8466-4cc0-93c1-929f421f131a/getty-images-idzNvTzu7R0-unsplash.jpg?format=2500w"
+                alt="Developing a KPI Data Cube For a Company Sale"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+
+            {/* Content - Right */}
+            <div className="flex flex-col justify-center">
+              <h3 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-4">
+                Developing a KPI Data Cube For a Company Sale
+              </h3>
+              <p className="text-[#1A2234]/70 text-base leading-relaxed mb-6">
+                A private equity-backed auto parts manufacturer preparing for a sale required a consolidated, enterprise-level view of sales, gross margin, and KPIs across customers, SKUs, and other dimensions.
+              </p>
+              <Link
+                to="/case-studies/sell-side-kpi-data-cube"
+                className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-amber-300 transition-all duration-300 self-start"
+              >
+                View More
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Case Studies Grid */}
       <section className="py-16 md:py-20 px-6 bg-[#F6F7F7]">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Link to="/case-studies/sell-side-kpi-data-cube" className="group block bg-white p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">KPI Data Cube for Company Sale</h3>
-              <p className="text-[#1A2234]/70 text-sm leading-relaxed mb-3">$250M auto parts manufacturer - 2.7M data points unified</p>
-              <div className="text-xs text-gray-500 space-y-1">
-                <div><span className="font-medium">Industry:</span> Manufacturing (Auto Parts)</div>
-                <div><span className="font-medium">Duration:</span> 4 months</div>
-              </div>
-            </Link>
-
             <Link to="/case-studies/sell-side-data-challenged-sale" className="group block bg-white p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
               <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Unlocking Value in Data-Challenged Sale</h3>
