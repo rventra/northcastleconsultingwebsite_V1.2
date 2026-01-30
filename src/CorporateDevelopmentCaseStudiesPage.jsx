@@ -53,19 +53,34 @@ export default function CorporateDevelopmentCaseStudiesPage() {
         </div>
       </section>
 
-      {/* Case Studies Grid */}
-      <section className="py-16 md:py-20 px-6 bg-[#F6F7F7]">
+      {/* Featured Case Study - Building an Acquisition Roadmap */}
+      <section className="py-12 md:py-16 px-6 bg-[#F6F7F7]">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Link to="/case-studies/corporate-acquisition-roadmap" className="group block bg-white p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <span className="inline-block text-xs font-bold text-[#EDB624] uppercase tracking-wider bg-[#EDB624]/10 px-2 py-1 rounded">Corporate Development</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Building an Acquisition Roadmap</h3>
-              <p className="text-[#1A2234]/70 text-sm leading-relaxed mb-3">Target identification for a PE-backed consulting firm</p>
-              <div className="text-xs text-gray-500 space-y-1">
-                <div><span className="font-medium">Industry:</span> Consulting & Business Services</div>
-                <div><span className="font-medium">Duration:</span> 2 months</div>
-              </div>
-            </Link>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Image - Left */}
+            <div className="rounded-xl overflow-hidden shadow-lg">
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/1741738068173-OFGOTPZGCUD0UQ05C3QO/unsplash-image-FVwG5OzPuzo.jpg?format=2500w"
+                alt="Building an Acquisition Roadmap: Target Identification for a Consulting Firm"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+
+            {/* Content - Right */}
+            <div className="flex flex-col justify-center">
+              <h1 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-4">
+                Building an Acquisition Roadmap: Target Identification for a Consulting Firm
+              </h1>
+              <p className="text-[#1A2234]/70 text-base leading-relaxed mb-6">
+                A private equity-backed consulting firm sought to grow through acquisitions but lacked a clear picture of the potential investment universe.
+              </p>
+              <Link
+                to="/case-studies/corporate-acquisition-roadmap"
+                className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-amber-300 transition-all duration-300 self-start"
+              >
+                View More
+              </Link>
+            </div>
           </div>
         </div>
       </section>
