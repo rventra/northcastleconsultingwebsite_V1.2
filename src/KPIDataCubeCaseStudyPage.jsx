@@ -4,20 +4,14 @@ import { Link } from 'react-router-dom';
 export default function KPIDataCubeCaseStudyPage() {
   return (
     <div className="pt-16">
-      {/* Hero with Background Image */}
-      <div
-        className="text-white relative bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/f358c6ff-8466-4cc0-93c1-929f421f131a/getty-images-idzNvTzu7R0-unsplash.jpg?format=2500w)' }}
-      >
-        {/* Subtle blue overlay for readability */}
-        <div className="absolute inset-0 bg-[#0D3BC3]/40"></div>
-
+      {/* Hero - Image Left, Content Right */}
+      <div className="bg-[#F6F7F7]">
         {/* Back Navigation */}
-        <div className="relative z-10 py-2 px-6">
-          <div className="max-w-5xl mx-auto">
+        <div className="py-3 px-6">
+          <div className="max-w-6xl mx-auto">
             <Link
               to="/case-studies/sell-side-readiness"
-              className="inline-flex items-center gap-2 text-gray-300 hover:text-amber-300 transition-colors text-sm"
+              className="inline-flex items-center gap-2 text-gray-500 hover:text-[#0D3BC3] transition-colors text-sm"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -27,26 +21,42 @@ export default function KPIDataCubeCaseStudyPage() {
           </div>
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 py-10 px-6">
-          <div className="max-w-5xl mx-auto">
-            <div>
-              <span className="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-2 py-1 rounded mb-3">
+        {/* Two-Column Hero Layout */}
+        <div className="max-w-6xl mx-auto px-6 pb-12 md:pb-16">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Image - Left */}
+            <div className="rounded-lg overflow-hidden shadow-lg">
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/f358c6ff-8466-4cc0-93c1-929f421f131a/getty-images-idzNvTzu7R0-unsplash.jpg?format=2500w"
+                alt="Developing a KPI Data Cube For a Company Sale"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Content - Right */}
+            <div className="flex flex-col justify-center">
+              <span className="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-2 py-1 rounded mb-4 self-start">
                 SELL-SIDE READINESS
               </span>
-              <h1 className="text-2xl md:text-3xl font-bold mb-2">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1A2234] mb-4">
                 Developing a KPI Data Cube For a Company Sale
               </h1>
-              <p className="text-gray-300 text-sm">
-                Transforming 2.7M data points from 6 ERP systems into actionable insights for a $250M auto parts manufacturer.
+              <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-6">
+                A private equity-backed auto parts manufacturer preparing for a sale required a consolidated, enterprise-level view of sales, gross margin, and KPIs across customers, SKUs, and other dimensions.
               </p>
+              <a
+                href="#case-study-content"
+                className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded font-semibold text-sm hover:bg-amber-300 transition-all self-start"
+              >
+                View More
+              </a>
             </div>
           </div>
         </div>
       </div>
 
       {/* Project Info Bar */}
-      <div className="bg-gray-100 py-4 px-6 border-b border-gray-200">
+      <div id="case-study-content" className="bg-gray-100 py-4 px-6 border-b border-gray-200">
         <div className="max-w-5xl mx-auto flex flex-wrap gap-6 text-sm">
           <div><span className="text-gray-500">Industry:</span> <span className="font-medium text-[#0D3BC3]">Manufacturing (Auto Parts)</span></div>
           <div><span className="text-gray-500">Duration:</span> <span className="font-medium text-[#0D3BC3]">4 months</span></div>
