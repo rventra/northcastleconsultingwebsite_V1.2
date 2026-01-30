@@ -149,19 +149,34 @@ export default function SellSideReadinessCaseStudiesPage() {
         </div>
       </section>
 
-      {/* Case Studies Grid */}
-      <section className="py-16 md:py-20 px-6 bg-white">
+      {/* Featured Case Study - Streamlining Operations and Marketing Insights */}
+      <section className="py-12 md:py-16 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Link to="/case-studies/sell-side-operations-marketing" className="group block bg-white p-6 rounded-xl border border-slate-200 hover:border-[#0D3BC3]/40 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <span className="inline-block text-xs font-bold text-[#0D3BC3] uppercase tracking-wider bg-[#0D3BC3]/10 px-2 py-1 rounded">Sell-Side Readiness</span>
-              <h3 className="text-lg font-bold text-[#1A2234] mt-3 mb-2 group-hover:text-[#0D3BC3] transition-colors">Streamlining Operations and Marketing Insights</h3>
-              <p className="text-[#1A2234]/70 text-sm leading-relaxed mb-3">HVAC & plumbing company - comprehensive analysis for successful exit</p>
-              <div className="text-xs text-gray-500 space-y-1">
-                <div><span className="font-medium">Industry:</span> HVAC & Plumbing</div>
-                <div><span className="font-medium">Duration:</span> 6 months</div>
-              </div>
-            </Link>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Image - Left */}
+            <div className="rounded-xl overflow-hidden shadow-lg">
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/e4fa03d3-8b0d-421a-9cc9-1da61e74ba9e/getty-images-4PPY1v2xChU-unsplash.jpg?format=2500w"
+                alt="Streamlining Operations and Marketing Insights for a Successful Exit"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+
+            {/* Content - Right */}
+            <div className="flex flex-col justify-center">
+              <h1 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-4">
+                Streamlining Operations and Marketing Insights for a Successful Exit
+              </h1>
+              <p className="text-[#1A2234]/70 text-base leading-relaxed mb-6">
+                A private equity-owned HVAC and plumbing company was preparing to go to market but needed robust data analysis to support the sale process.
+              </p>
+              <Link
+                to="/case-studies/sell-side-operations-marketing"
+                className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-amber-300 transition-all duration-300 self-start"
+              >
+                View More
+              </Link>
+            </div>
           </div>
         </div>
       </section>
