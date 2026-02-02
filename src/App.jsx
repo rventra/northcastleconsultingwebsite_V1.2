@@ -156,27 +156,33 @@ function HomePage() {
 
   return (
     <>
-      {/* Hero Section - Bone White with Professional Blue */}
-      <section className="pt-16 bg-[#FAFAF8]">
-        <div className="px-6 md:px-12 py-12 md:py-16">
+      {/* Hero Section - Sophisticated with Depth */}
+      <section className="pt-16 bg-gradient-to-br from-[#FAFAF8] via-white to-[#eff6ff]">
+        <div className="px-6 md:px-12 py-14 md:py-20">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-semibold text-[#1A2234] mb-3 leading-tight tracking-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1A2234] mb-4 leading-tight tracking-tight">
               Unlocking Value Through <span className="text-[#2563EB]">Financial Expertise</span>
             </h1>
-            <p className="text-[#1A2234]/70 text-base leading-relaxed mb-6 max-w-2xl">
+            <p className="text-[#1A2234]/70 text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
               Delivering actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
             </p>
             
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={() => scrollToSelector('#contact')}
-                className="inline-flex items-center gap-2 bg-[#2563EB] text-white px-5 py-2.5 rounded font-medium hover:bg-[#1d4ed8] transition-all duration-300 text-sm shadow-sm hover:shadow"
+                className="inline-flex items-center gap-2 bg-[#2563EB] text-white px-5 py-2.5 rounded font-medium hover:bg-[#1d4ed8] transition-all duration-300 text-sm shadow-md hover:shadow-lg"
               >
                 Schedule a Consultation
               </button>
+              <button
+                onClick={() => scrollToSelector('#services')}
+                className="inline-flex items-center gap-2 bg-white text-[#1A2234] px-5 py-2.5 rounded font-medium border border-[#1A2234]/15 hover:border-[#2563EB] hover:text-[#2563EB] transition-all duration-300 text-sm shadow-sm hover:shadow"
+              >
+                Services Provided
+              </button>
               <Link
                 to="/case-studies"
-                className="inline-flex items-center gap-2 bg-white text-[#1A2234] px-5 py-2.5 rounded font-medium border border-[#1A2234]/15 hover:border-[#2563EB] hover:text-[#2563EB] transition-all duration-300 text-sm shadow-sm"
+                className="inline-flex items-center gap-2 bg-white text-[#1A2234] px-5 py-2.5 rounded font-medium border border-[#1A2234]/15 hover:border-[#2563EB] hover:text-[#2563EB] transition-all duration-300 text-sm shadow-sm hover:shadow"
               >
                 See Case Studies
               </Link>
@@ -188,9 +194,12 @@ function HomePage() {
       {/* Services Grid - Cards that Pop */}
       <section id="services" className="py-12 md:py-16 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-10">
-            <span className="text-[#2563EB] text-xs font-semibold uppercase tracking-wider">What We Do</span>
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2234] mt-1 mb-3">Our Services</h2>
+          <div className="mb-10 pb-4 border-b border-[#1A2234]/10">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-8 h-0.5 bg-[#2563EB]"></span>
+              <span className="text-[#2563EB] text-xs font-semibold uppercase tracking-wider">What We Do</span>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-3">Our Services</h2>
             <p className="text-[#1A2234]/60 text-base max-w-2xl">
               From private debt advisory to M&A support, we deliver tailored services that drive growth and maximize value.
             </p>
@@ -274,9 +283,12 @@ function HomePage() {
       {/* Case Studies - Cards that Pop */}
       <section id="case-studies" className="py-12 md:py-16 px-6 bg-[#FAFAF8]">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-8">
-            <span className="text-[#2563EB] text-xs font-semibold uppercase tracking-wider">Proven Results</span>
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2234] mt-1 mb-3">Case Studies</h2>
+          <div className="mb-8 pb-4 border-b border-[#1A2234]/10">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-8 h-0.5 bg-[#2563EB]"></span>
+              <span className="text-[#2563EB] text-xs font-semibold uppercase tracking-wider">Proven Results</span>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-3">Case Studies</h2>
             <p className="text-[#1A2234]/60 text-base max-w-2xl">
               Real outcomes from real engagements. See how we've helped clients achieve optimal valuations and successful exits.
             </p>
@@ -356,8 +368,11 @@ function HomePage() {
           <div className="grid lg:grid-cols-5 gap-8 items-start">
             {/* Left Column - Info */}
             <div className="lg:col-span-2">
-              <span className="text-[#60a5fa] text-xs font-semibold uppercase tracking-wider">Get In Touch</span>
-              <h2 className="text-2xl font-semibold mt-1 mb-3">Contact Us</h2>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-8 h-0.5 bg-[#60a5fa]"></span>
+                <span className="text-[#60a5fa] text-xs font-semibold uppercase tracking-wider">Get In Touch</span>
+              </div>
+              <h2 className="text-2xl font-bold text-white mb-3">Contact Us</h2>
               <p className="text-white/70 text-base mb-6">
                 Schedule your consultation. Our team provides tailored solutions to meet your organization's unique needs.
               </p>
