@@ -95,26 +95,40 @@ function HomePage() {
 
   return (
     <>
-      {/* Hero Section - McKinsey Style Clean */}
-      <section className="pt-24 bg-white">
-        <div className="px-6 md:px-12 py-12 md:py-16 border-b border-gray-100">
-          <div className="max-w-5xl mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#051c2c] mb-6 leading-[1.2] tracking-tight">
-              Helping Private Equity firms unlock value through <em className="font-light">financial expertise</em>
+      {/* Hero Section - Killer Background Image */}
+      <section className="pt-16 relative min-h-[70vh] flex items-center">
+        {/* Background Image with Overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url(/images/hero-bg.jpg)' }}
+        >
+          {/* Gradient Overlay for Text Readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#051c2c]/95 via-[#051c2c]/80 to-[#051c2c]/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c]/50 to-transparent"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10 w-full px-6 md:px-12 py-16 md:py-24">
+          <div className="max-w-4xl">
+            <span className="inline-block text-[#60a5fa] text-xs font-semibold uppercase tracking-widest mb-4">
+              North Castle Consulting
+            </span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal text-white mb-6 leading-[1.1] tracking-tight">
+              Unlocking Value Through <em className="font-light text-[#60a5fa]">Financial Expertise</em>
             </h1>
-            <p className="text-[#051c2c]/70 text-lg leading-relaxed mb-8 max-w-3xl">
-              We deliver actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams to maximize value and drive successful outcomes.
+            <p className="text-white/80 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl">
+              We deliver actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
                 to="/contact-us"
-                className="inline-flex items-center gap-2 bg-[#051c2c] text-white px-6 py-3 rounded font-medium hover:bg-[#2563EB] transition-all duration-300 text-sm"
+                className="inline-flex items-center gap-2 bg-white text-[#051c2c] px-8 py-4 rounded font-medium hover:bg-[#60a5fa] hover:text-white transition-all duration-300 text-sm shadow-lg"
               >
                 Schedule a Consultation
               </Link>
               <Link
                 to="/services/sell-side-readiness"
-                className="inline-flex items-center gap-2 text-[#051c2c] px-6 py-3 font-medium hover:text-[#2563EB] transition-all duration-300 text-sm border-b-2 border-[#051c2c] hover:border-[#2563EB]"
+                className="inline-flex items-center gap-2 bg-transparent text-white px-8 py-4 font-medium hover:text-[#60a5fa] transition-all duration-300 text-sm border-2 border-white/30 hover:border-[#60a5fa] rounded"
               >
                 Explore Our Services
               </Link>
