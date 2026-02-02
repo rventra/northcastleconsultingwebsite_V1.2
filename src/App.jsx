@@ -156,27 +156,27 @@ function HomePage() {
 
   return (
     <>
-      {/* Hero Section - Professional B2B */}
-      <section className="pt-16">
-        <div className="bg-[#0D3BC3] px-6 md:px-12 py-12 md:py-16">
+      {/* Hero Section - Sophisticated Bone White */}
+      <section className="pt-16 bg-[#FAFAF8]">
+        <div className="px-6 md:px-12 py-10 md:py-14">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-              Unlocking Value Through <span className="text-[#EDB624]">Financial Expertise</span>
+            <h1 className="text-3xl md:text-4xl font-semibold text-[#1A2234] mb-3 leading-tight tracking-tight">
+              Unlocking Value Through <span className="text-[#0D3BC3]">Financial Expertise</span>
             </h1>
-            <p className="text-white/90 text-base md:text-lg leading-relaxed mb-6 max-w-3xl">
-              Delivering actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams to maximize value, reduce risk, and drive successful outcomes.
+            <p className="text-[#1A2234]/70 text-base leading-relaxed mb-6 max-w-2xl">
+              Delivering actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
             </p>
             
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={() => scrollToSelector('#contact')}
-                className="inline-flex items-center gap-2 bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded font-semibold hover:bg-white transition-all duration-300"
+                className="inline-flex items-center gap-2 bg-[#1A2234] text-white px-5 py-2.5 rounded font-medium hover:bg-[#0D3BC3] transition-all duration-300 text-sm"
               >
                 Schedule a Consultation
               </button>
               <Link
                 to="/case-studies"
-                className="inline-flex items-center gap-2 bg-white/10 text-white px-6 py-3 rounded font-medium border border-white/30 hover:bg-white/20 transition-all duration-300"
+                className="inline-flex items-center gap-2 bg-white text-[#1A2234] px-5 py-2.5 rounded font-medium border border-[#1A2234]/20 hover:border-[#0D3BC3] hover:text-[#0D3BC3] transition-all duration-300 text-sm"
               >
                 See Case Studies
               </Link>
@@ -184,25 +184,25 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Quick Navigation Cards */}
-        <div className="bg-[#F6F7F7] px-6 md:px-12 py-6">
+        {/* Quick Navigation Cards - In Hero */}
+        <div className="bg-[#FAFAF8] px-6 md:px-12 pb-10">
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-4">
               {/* Services Offered Card */}
               <button 
                 onClick={() => scrollToSelector('#services')}
-                className="group text-left bg-white rounded-lg p-5 shadow-sm hover:shadow-md border border-gray-200 hover:border-[#0D3BC3]/30 transition-all duration-300"
+                className="group text-left bg-white rounded-lg p-5 border border-[#1A2234]/10 hover:border-[#0D3BC3]/40 transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#0D3BC3] transition-colors duration-300">
-                    <svg className="w-5 h-5 text-slate-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 bg-[#0D3BC3]/5 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#0D3BC3] transition-colors duration-300">
+                    <svg className="w-5 h-5 text-[#0D3BC3] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-[#1A2234] mb-1 group-hover:text-[#0D3BC3] transition-colors">Services Offered</h3>
+                    <h3 className="text-base font-semibold text-[#1A2234] mb-1 group-hover:text-[#0D3BC3] transition-colors">Services Offered</h3>
                     <p className="text-[#1A2234]/60 text-sm leading-relaxed">
-                      Comprehensive solutions for Private Equity, Family Offices, and Litigation support.
+                      Private Equity, Family Office, and Litigation support services.
                     </p>
                   </div>
                 </div>
@@ -211,18 +211,18 @@ function HomePage() {
               {/* Case Studies Card */}
               <Link 
                 to="/case-studies"
-                className="group text-left bg-white rounded-lg p-5 shadow-sm hover:shadow-md border border-gray-200 hover:border-[#0D3BC3]/30 transition-all duration-300"
+                className="group text-left bg-white rounded-lg p-5 border border-[#1A2234]/10 hover:border-[#0D3BC3]/40 transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#0D3BC3] transition-colors duration-300">
-                    <svg className="w-5 h-5 text-slate-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 bg-[#0D3BC3]/5 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#0D3BC3] transition-colors duration-300">
+                    <svg className="w-5 h-5 text-[#0D3BC3] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                     </svg>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-[#1A2234] mb-1 group-hover:text-[#0D3BC3] transition-colors">Case Studies</h3>
+                    <h3 className="text-base font-semibold text-[#1A2234] mb-1 group-hover:text-[#0D3BC3] transition-colors">Case Studies</h3>
                     <p className="text-[#1A2234]/60 text-sm leading-relaxed">
-                      Real results from real engagements and successful client outcomes.
+                      Real results from client engagements and successful outcomes.
                     </p>
                   </div>
                 </div>
@@ -232,20 +232,21 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Services Grid - Professional B2B */}
+      {/* Services Grid - Professional with Color Accents */}
       <section id="services" className="py-12 md:py-16 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="mb-10">
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2234] mb-3">Our Services</h2>
-            <p className="text-[#1A2234]/70 text-base max-w-2xl">
-              From private debt advisory to M&A support, we deliver tailored services that drive growth, mitigate risks, and maximize value.
+            <span className="text-[#0D3BC3] text-xs font-semibold uppercase tracking-wider">What We Do</span>
+            <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2234] mt-1 mb-3">Our Services</h2>
+            <p className="text-[#1A2234]/60 text-base max-w-2xl">
+              From private debt advisory to M&A support, we deliver tailored services that drive growth and maximize value.
             </p>
           </div>
 
           {/* Private Equity Services */}
           <div id="pe-services" className="mb-10 scroll-mt-24">
-            <h3 className="text-lg font-semibold text-[#1A2234] mb-3 flex items-center gap-2">
-              <span className="w-1 h-5 bg-[#0D3BC3] rounded"></span>
+            <h3 className="text-base font-semibold text-[#0D3BC3] mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-5 bg-[#0D3BC3] rounded-full"></span>
               Private Equity Services
             </h3>
             <p className="text-[#1A2234]/70 text-sm mb-4 leading-relaxed max-w-3xl">
@@ -276,8 +277,8 @@ function HomePage() {
 
           {/* Family Office Services */}
           <div id="fo-services" className="mb-10 scroll-mt-24">
-            <h3 className="text-lg font-semibold text-[#1A2234] mb-3 flex items-center gap-2">
-              <span className="w-1 h-5 bg-[#1A2234] rounded"></span>
+            <h3 className="text-base font-semibold text-[#0D3BC3] mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-5 bg-[#0D3BC3] rounded-full"></span>
               Family Office & Independent Sponsor
             </h3>
             <p className="text-[#1A2234]/70 text-sm mb-4 leading-relaxed max-w-3xl">
@@ -298,8 +299,8 @@ function HomePage() {
 
           {/* Litigation Services */}
           <div id="lit-services" className="scroll-mt-24">
-            <h3 className="text-lg font-semibold text-[#1A2234] mb-3 flex items-center gap-2">
-              <span className="w-1 h-5 bg-slate-500 rounded"></span>
+            <h3 className="text-base font-semibold text-[#0D3BC3] mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-5 bg-[#0D3BC3] rounded-full"></span>
               Litigation Services
             </h3>
             <div className="grid md:grid-cols-2 gap-4">
@@ -317,12 +318,13 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Case Studies - Professional B2B */}
-      <section id="case-studies" className="py-12 md:py-16 px-6 bg-slate-50">
+      {/* Case Studies - Professional with Color Accents */}
+      <section id="case-studies" className="py-12 md:py-16 px-6 bg-[#FAFAF8]">
         <div className="max-w-5xl mx-auto">
           <div className="mb-8">
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2234] mb-3">Case Studies</h2>
-            <p className="text-[#1A2234]/70 text-base max-w-2xl">
+            <span className="text-[#0D3BC3] text-xs font-semibold uppercase tracking-wider">Proven Results</span>
+            <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2234] mt-1 mb-3">Case Studies</h2>
+            <p className="text-[#1A2234]/60 text-base max-w-2xl">
               Real outcomes from real engagements. See how we've helped clients achieve optimal valuations and successful exits.
             </p>
           </div>
@@ -395,13 +397,14 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Contact Form - Professional B2B */}
+      {/* Contact Form - Professional */}
       <section id="contact" className="py-12 md:py-16 px-6 bg-[#1A2234] text-white">
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-5 gap-8 items-start">
             {/* Left Column - Info */}
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-semibold mb-3">Contact Us</h2>
+              <span className="text-[#EDB624] text-xs font-semibold uppercase tracking-wider">Get In Touch</span>
+              <h2 className="text-2xl font-semibold mt-1 mb-3">Contact Us</h2>
               <p className="text-white/70 text-base mb-6">
                 Schedule your consultation. Our team provides tailored solutions to meet your organization's unique needs.
               </p>
