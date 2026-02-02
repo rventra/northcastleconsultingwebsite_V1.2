@@ -4,32 +4,52 @@ import { Link } from 'react-router-dom';
 export default function AboutUsPage() {
   return (
     <div className="pt-16">
-      {/* Hero Section */}
-      <div className="bg-[#1A2234] text-white py-20 md:py-28 px-6">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-[#0D3BC3] text-sm font-medium tracking-wider uppercase mb-4">Our Team</p>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">About Us</h1>
-          <p className="text-xl text-white/70 leading-relaxed max-w-2xl">
-            Meet the team behind North Castle Consulting
+      {/* Hero Section - Enhanced */}
+      <div className="bg-gradient-to-br from-[#1A2234] via-[#1A2234] to-[#0D3BC3]/30 text-white py-20 md:py-28 px-6 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#0D3BC3]/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#EDB624]/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
+        
+        <div className="max-w-4xl mx-auto relative z-10">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-white/20">
+            <span className="w-2 h-2 bg-[#EDB624] rounded-full"></span>
+            <span className="text-white/90 text-sm font-medium">Our Story</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">About Us</h1>
+          <p className="text-xl md:text-2xl text-white/70 leading-relaxed max-w-2xl">
+            Meet the experienced professionals behind North Castle Consulting
           </p>
         </div>
       </div>
 
-      {/* Team Members Section */}
-      <div className="py-20 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-20">
+      {/* Team Members Section - Enhanced */}
+      <div className="py-20 md:py-28 px-6 bg-white">
+        <div className="max-w-5xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <span className="inline-block text-[#0D3BC3] text-sm font-bold uppercase tracking-wider mb-3">Leadership</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1A2234]">Our Team</h2>
+          </div>
+
+          <div className="space-y-24">
 
             {/* Nicholas Citrin */}
             <div className="grid md:grid-cols-3 gap-8 md:gap-12">
               <div className="md:col-span-1">
-                <div className="bg-[#F6F7F7] aspect-square rounded-lg flex items-center justify-center">
-                  <span className="text-6xl text-[#0D3BC3]/20">NC</span>
+                <div className="bg-gradient-to-br from-[#0D3BC3]/10 to-[#0D3BC3]/5 aspect-square rounded-2xl flex items-center justify-center border border-[#0D3BC3]/10 shadow-lg">
+                  <span className="text-7xl font-bold text-[#0D3BC3]/30">NC</span>
                 </div>
               </div>
               <div className="md:col-span-2">
-                <h2 className="text-3xl font-bold text-[#1A2234] mb-2">Nicholas Citrin</h2>
-                <p className="text-[#0D3BC3] text-sm font-medium tracking-wider uppercase mb-6">Founder</p>
+                <div className="flex items-center gap-3 mb-2">
+                  <h2 className="text-3xl font-bold text-[#1A2234]">Nicholas Citrin</h2>
+                  <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-[#0D3BC3]/10 rounded-lg flex items-center justify-center hover:bg-[#0D3BC3] hover:text-white transition-all text-[#0D3BC3]">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </a>
+                </div>
+                <p className="text-[#0D3BC3] text-sm font-bold tracking-wider uppercase mb-6">Founder</p>
 
                 <div className="space-y-4 text-[#1A2234]/70 leading-relaxed">
                   <p>
@@ -93,12 +113,19 @@ export default function AboutUsPage() {
             {/* Ram Ventrapragada */}
             <div className="grid md:grid-cols-3 gap-8 md:gap-12">
               <div className="md:col-span-1">
-                <div className="bg-[#F6F7F7] aspect-square rounded-lg flex items-center justify-center">
-                  <span className="text-6xl text-[#0D3BC3]/20">RV</span>
+                <div className="bg-gradient-to-br from-[#1A2234]/10 to-[#1A2234]/5 aspect-square rounded-2xl flex items-center justify-center border border-[#1A2234]/10 shadow-lg">
+                  <span className="text-7xl font-bold text-[#1A2234]/30">RV</span>
                 </div>
               </div>
               <div className="md:col-span-2">
-                <h2 className="text-3xl font-bold text-[#1A2234] mb-2">Ram Ventrapragada</h2>
+                <div className="flex items-center gap-3 mb-2">
+                  <h2 className="text-3xl font-bold text-[#1A2234]">Ram Ventrapragada</h2>
+                  <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-[#0D3BC3]/10 rounded-lg flex items-center justify-center hover:bg-[#0D3BC3] hover:text-white transition-all text-[#0D3BC3]">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </a>
+                </div>
 
                 <div className="space-y-4 text-[#1A2234]/70 leading-relaxed">
                   <p>
@@ -153,19 +180,36 @@ export default function AboutUsPage() {
         </div>
       </div>
 
-      {/* Optional CTA Section */}
-      <div className="bg-[#0D3BC3] text-white py-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Work Together?</h2>
-          <p className="text-xl text-white/80 mb-8">
-            Get in touch to discuss how we can help your business
+      {/* CTA Section - Enhanced */}
+      <div className="bg-gradient-to-br from-[#0D3BC3] via-[#0D3BC3] to-[#1e4bd9] text-white py-20 px-6 relative overflow-hidden">
+        {/* Background Decoration */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-white rounded-full -translate-y-1/2 blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-[#EDB624] rounded-full translate-y-1/2 blur-3xl"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Work Together?</h2>
+          <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
+            Let's discuss how our expertise can help drive your business forward and achieve your strategic goals.
           </p>
-          <Link
-            to="/contact-us"
-            className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-amber-300 hover:shadow-xl transition-all duration-300 shadow-lg"
-          >
-            Contact Us
-          </Link>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              to="/contact-us"
+              className="inline-flex items-center gap-2 bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-xl font-bold hover:bg-white hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 shadow-lg"
+            >
+              Schedule a Consultation
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+            <Link
+              to="/case-studies"
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-semibold border border-white/30 hover:bg-white/20 transition-all duration-300"
+            >
+              View Our Results
+            </Link>
+          </div>
         </div>
       </div>
 
