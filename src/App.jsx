@@ -56,87 +56,33 @@ function Navigation() {
   };
 
   return (
-    <nav className="fixed top-0 w-full bg-[#1A2234] bg-opacity-98 backdrop-blur-sm z-50 shadow-md">
-      <div className="max-w-7xl mx-auto px-6 py-3">
+    <nav className="fixed top-0 w-full bg-white border-b border-gray-200 z-50">
+      <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <Link to="/" className="text-xl font-bold text-white hover:text-[#EDB624] transition-colors">
+          <Link to="/" className="text-xl font-semibold text-[#051c2c] hover:text-[#2563EB] transition-colors tracking-tight">
             North Castle Consulting
           </Link>
 
-          <div className="hidden md:flex gap-6 items-center">
-            <Link to="/" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Home</Link>
-
-            <div
-              className="relative"
-              onMouseEnter={() => setServicesDropdownOpen(true)}
-              onMouseLeave={() => setServicesDropdownOpen(false)}
-            >
-              <button className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium flex items-center gap-1 py-2">
-                Services
-                <svg className={`w-3 h-3 transition-transform ${servicesDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <div className={`absolute top-full left-0 pt-2 transition-all duration-200 ${servicesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-                <div className="w-72 bg-white rounded-lg shadow-xl py-2 border border-gray-100">
-                  <div className="px-4 py-1.5">
-                    <p className="text-xs font-bold text-[#0D3BC3] uppercase tracking-wider">Private Equity Services</p>
-                  </div>
-                  <Link to="/services/sell-side-readiness" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Sell-Side Readiness</Link>
-                  <Link to="/services/dividend-recap-prep" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Dividend Recap Prep</Link>
-
-                  <div className="border-t border-gray-200 my-1.5"></div>
-                  <div className="px-4 py-1.5">
-                    <p className="text-xs font-bold text-[#0D3BC3] uppercase tracking-wider">Family Office / Independent Sponsor</p>
-                  </div>
-                  <Link to="/services/corporate-development" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Corporate Development</Link>
-
-                  <div className="border-t border-gray-200 my-1.5"></div>
-                  <div className="px-4 py-1.5">
-                    <p className="text-xs font-bold text-[#0D3BC3] uppercase tracking-wider">Litigation Services</p>
-                  </div>
-                  <Link to="/services/mass-tort" className="block px-4 py-1.5 text-sm text-[#1A2234] hover:bg-[#F6F7F7] hover:text-[#0D3BC3]">Mass Tort</Link>
-                </div>
-              </div>
-            </div>
-
-            <Link to="/about-us" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">About Us</Link>
-            <Link to="/case-studies" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Case Studies</Link>
-            <Link to="/blog" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Blog</Link>
-            <Link to="/contact-us" className="text-white hover:text-[#EDB624] transition-colors text-sm font-medium">Contact</Link>
+          <div className="hidden md:flex gap-8 items-center">
+            <Link to="/services/sell-side-readiness" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">Services</Link>
+            <Link to="/case-studies" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">Case Studies</Link>
+            <Link to="/blog" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">Insights</Link>
+            <Link to="/about-us" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">About</Link>
+            <Link to="/contact-us" className="bg-[#051c2c] text-white px-4 py-2 rounded text-sm font-medium hover:bg-[#2563EB] transition-colors">Contact</Link>
           </div>
 
-          <button className="md:hidden text-white text-xl" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className="md:hidden text-[#051c2c] text-xl" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             ☰
           </button>
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden mt-3 pb-3 flex flex-col gap-2 text-sm">
-            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">Home</Link>
-            <div className="border-t border-white/20 pt-2">
-              <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider mb-1">Private Equity</p>
-              <Link to="/services/sell-side-readiness" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Sell-Side Readiness</Link>
-              <Link to="/services/dividend-recap-prep" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Dividend Recap Prep</Link>
-            </div>
-            <div className="border-t border-white/20 pt-2">
-              <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider">Family Office</p>
-              <Link to="/services/corporate-development" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Corporate Development</Link>
-            </div>
-            <div className="border-t border-white/20 pt-2">
-              <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider">Litigation</p>
-              <Link to="/services/mass-tort" onClick={() => setMobileMenuOpen(false)} className="block pl-3 py-1 text-white hover:text-[#EDB624]">Mass Tort</Link>
-            </div>
-            <div className="border-t border-white/20 pt-2">
-              <Link to="/about-us" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">About Us</Link>
-            </div>
-            <div className="border-t border-white/20 pt-2">
-              <Link to="/case-studies" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">Case Studies</Link>
-            </div>
-            <div className="border-t border-white/20 pt-2">
-              <Link to="/blog" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">Blog</Link>
-            </div>
-            <Link to="/contact-us" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#EDB624]">Contact</Link>
+          <div className="md:hidden mt-3 pb-3 flex flex-col gap-2 text-sm border-t border-gray-100 pt-3">
+            <Link to="/services/sell-side-readiness" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Services</Link>
+            <Link to="/case-studies" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Case Studies</Link>
+            <Link to="/blog" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Insights</Link>
+            <Link to="/about-us" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">About</Link>
+            <Link to="/contact-us" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Contact</Link>
           </div>
         )}
       </div>
@@ -147,256 +93,204 @@ function Navigation() {
 function HomePage() {
   const navigate = useNavigate();
 
-  const scrollToSelector = (selector) => {
-    const element = document.querySelector(selector);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <>
-      {/* Hero Section - Sophisticated with Depth */}
-      <section className="pt-16 bg-gradient-to-br from-[#FAFAF8] via-white to-[#eff6ff]">
-        <div className="px-6 md:px-12 py-14 md:py-20">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1A2234] mb-4 leading-tight tracking-tight">
-              Unlocking Value Through <span className="text-[#2563EB]">Financial Expertise</span>
+      {/* Hero Section - McKinsey Style Clean */}
+      <section className="pt-24 bg-white">
+        <div className="px-6 md:px-12 py-12 md:py-16 border-b border-gray-100">
+          <div className="max-w-5xl mx-auto">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#051c2c] mb-6 leading-[1.2] tracking-tight">
+              Helping Private Equity firms unlock value through <em className="font-light">financial expertise</em>
             </h1>
-            <p className="text-[#1A2234]/70 text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
-              Delivering actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
+            <p className="text-[#051c2c]/70 text-lg leading-relaxed mb-8 max-w-3xl">
+              We deliver actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams to maximize value and drive successful outcomes.
             </p>
-            
-            <div className="flex flex-wrap gap-3">
-              <button
-                onClick={() => scrollToSelector('#contact')}
-                className="inline-flex items-center gap-2 bg-[#2563EB] text-white px-5 py-2.5 rounded font-medium hover:bg-[#1d4ed8] transition-all duration-300 text-sm shadow-md hover:shadow-lg"
+            <div className="flex flex-wrap gap-4">
+              <Link
+                to="/contact-us"
+                className="inline-flex items-center gap-2 bg-[#051c2c] text-white px-6 py-3 rounded font-medium hover:bg-[#2563EB] transition-all duration-300 text-sm"
               >
                 Schedule a Consultation
-              </button>
-              <button
-                onClick={() => scrollToSelector('#services')}
-                className="inline-flex items-center gap-2 bg-white text-[#1A2234] px-5 py-2.5 rounded font-medium border border-[#1A2234]/15 hover:border-[#2563EB] hover:text-[#2563EB] transition-all duration-300 text-sm shadow-sm hover:shadow"
-              >
-                Services Provided
-              </button>
+              </Link>
               <Link
-                to="/case-studies"
-                className="inline-flex items-center gap-2 bg-white text-[#1A2234] px-5 py-2.5 rounded font-medium border border-[#1A2234]/15 hover:border-[#2563EB] hover:text-[#2563EB] transition-all duration-300 text-sm shadow-sm hover:shadow"
+                to="/services/sell-side-readiness"
+                className="inline-flex items-center gap-2 text-[#051c2c] px-6 py-3 font-medium hover:text-[#2563EB] transition-all duration-300 text-sm border-b-2 border-[#051c2c] hover:border-[#2563EB]"
               >
-                See Case Studies
+                Explore Our Services
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Grid - Cards that Pop */}
-      <section id="services" className="py-12 md:py-16 px-6 bg-white">
+      {/* Featured Insights - McKinsey Style */}
+      <section className="py-12 md:py-16 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-10 pb-4 border-b border-[#1A2234]/10">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="w-8 h-0.5 bg-[#2563EB]"></span>
-              <span className="text-[#2563EB] text-xs font-semibold uppercase tracking-wider">What We Do</span>
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#2563EB]">Featured Insights</span>
+              <h2 className="text-2xl font-normal text-[#051c2c] mt-2">Latest thinking</h2>
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-3">Our Services</h2>
-            <p className="text-[#1A2234]/60 text-base max-w-2xl">
-              From private debt advisory to M&A support, we deliver tailored services that drive growth and maximize value.
-            </p>
+            <Link to="/blog" className="text-sm font-medium text-[#051c2c] hover:text-[#2563EB] transition-colors flex items-center gap-1">
+              View all <span className="text-lg">→</span>
+            </Link>
           </div>
 
-          {/* Private Equity Services */}
-          <div id="pe-services" className="mb-10 scroll-mt-24">
-            <h3 className="text-base font-semibold text-[#2563EB] mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-5 bg-[#2563EB] rounded-full"></span>
-              Private Equity Services
-            </h3>
-            <p className="text-[#1A2234]/70 text-sm mb-4 leading-relaxed max-w-3xl">
-              We partner with private equity firms to unlock value, optimize capital structures, and drive successful exits.
-            </p>
-            <div className="grid md:grid-cols-2 gap-4">
-              <Link to="/services/sell-side-readiness" className="group block p-5 bg-white rounded-lg hover:shadow-md transition-all duration-300 border border-[#1A2234]/10 hover:border-[#2563EB]/30 shadow-sm">
-                <h4 className="text-base font-semibold text-[#1A2234] mb-2 group-hover:text-[#2563EB] transition-colors">Sell-Side Readiness</h4>
-                <p className="text-[#1A2234]/60 text-sm mb-3 leading-relaxed">
-                  Preparing portfolio companies for sale through financial streamlining, metrics validation, and credibility enhancement.
-                </p>
-                <span className="text-[#2563EB] text-sm font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Learn More <span>→</span>
-                </span>
-              </Link>
-
-              <Link to="/services/dividend-recap-prep" className="group block p-5 bg-white rounded-lg hover:shadow-md transition-all duration-300 border border-[#1A2234]/10 hover:border-[#2563EB]/30 shadow-sm">
-                <h4 className="text-base font-semibold text-[#1A2234] mb-2 group-hover:text-[#2563EB] transition-colors">Dividend Recapitalization</h4>
-                <p className="text-[#1A2234]/60 text-sm mb-3 leading-relaxed">
-                  Strategic dividend recapitalizations to return capital to LPs while assessing cash flow stability and debt capacity.
-                </p>
-                <span className="text-[#2563EB] text-sm font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Learn More <span>→</span>
-                </span>
-              </Link>
-            </div>
-          </div>
-
-          {/* Family Office Services */}
-          <div id="fo-services" className="mb-10 scroll-mt-24">
-            <h3 className="text-base font-semibold text-[#2563EB] mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-5 bg-[#2563EB] rounded-full"></span>
-              Family Office & Independent Sponsor
-            </h3>
-            <p className="text-[#1A2234]/70 text-sm mb-4 leading-relaxed max-w-3xl">
-              We empower family offices and independent sponsors to execute strategic growth initiatives with confidence.
-            </p>
-            <div className="grid md:grid-cols-2 gap-4">
-              <Link to="/services/corporate-development" className="group block p-5 bg-white rounded-lg hover:shadow-md transition-all duration-300 border border-[#1A2234]/10 hover:border-[#2563EB]/30 shadow-sm">
-                <h4 className="text-base font-semibold text-[#1A2234] mb-2 group-hover:text-[#2563EB] transition-colors">Corporate Development</h4>
-                <p className="text-[#1A2234]/60 text-sm mb-3 leading-relaxed">
-                  End-to-end services including target screening, due diligence, deal structuring, and post-merger integration.
-                </p>
-                <span className="text-[#2563EB] text-sm font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Learn More <span>→</span>
-                </span>
-              </Link>
-            </div>
-          </div>
-
-          {/* Litigation Services */}
-          <div id="lit-services" className="scroll-mt-24">
-            <h3 className="text-base font-semibold text-[#2563EB] mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-5 bg-[#2563EB] rounded-full"></span>
-              Litigation Services
-            </h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <Link to="/services/mass-tort" className="group block p-5 bg-white rounded-lg hover:shadow-md transition-all duration-300 border border-[#1A2234]/10 hover:border-[#2563EB]/30 shadow-sm">
-                <h4 className="text-base font-semibold text-[#1A2234] mb-2 group-hover:text-[#2563EB] transition-colors">Mass Tort Case Management</h4>
-                <p className="text-[#1A2234]/60 text-sm mb-3 leading-relaxed">
-                  Operational support for mass tort litigation including data management and financial analysis.
-                </p>
-                <span className="text-[#2563EB] text-sm font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Learn More <span>→</span>
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Case Studies - Cards that Pop */}
-      <section id="case-studies" className="py-12 md:py-16 px-6 bg-[#FAFAF8]">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-8 pb-4 border-b border-[#1A2234]/10">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="w-8 h-0.5 bg-[#2563EB]"></span>
-              <span className="text-[#2563EB] text-xs font-semibold uppercase tracking-wider">Proven Results</span>
-            </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-3">Case Studies</h2>
-            <p className="text-[#1A2234]/60 text-base max-w-2xl">
-              Real outcomes from real engagements. See how we've helped clients achieve optimal valuations and successful exits.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            {/* Sell-Side Readiness Card */}
-            <Link to="/case-studies/sell-side-readiness" className="group block bg-white p-6 rounded-lg hover:shadow-md transition-all duration-300 border border-[#1A2234]/10 hover:border-[#2563EB]/30 shadow-sm">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">5 Case Studies</span>
-                <svg className="w-4 h-4 text-[#2563EB] group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Featured Article 1 */}
+            <Link to="/blog/data-visibility-roi-driver" className="group block">
+              <div className="aspect-[16/9] bg-[#f5f5f5] rounded-sm mb-4 overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-br from-[#051c2c] to-[#1e3a5f] flex items-center justify-center">
+                  <span className="text-white/30 text-sm font-medium">FEATURED</span>
+                </div>
               </div>
-              <h3 className="text-lg font-semibold text-[#1A2234] mb-2 group-hover:text-[#2563EB] transition-colors">Sell-Side Readiness</h3>
-              <p className="text-[#1A2234]/60 text-sm leading-relaxed mb-4">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">Private Equity</span>
+                <span className="text-xs text-gray-400">|</span>
+                <span className="text-xs text-gray-500">5 min read</span>
+              </div>
+              <h3 className="text-xl font-normal text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors leading-tight">
+                Data Visibility as an ROI Driver: The Power of the Data Cube
+              </h3>
+              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
+                How PE firms can leverage data infrastructure to unlock portfolio company value and streamline exit preparation.
+              </p>
+            </Link>
+
+            {/* Featured Article 2 */}
+            <Link to="/case-studies/sell-side-readiness" className="group block">
+              <div className="aspect-[16/9] bg-[#f5f5f5] rounded-sm mb-4 overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] flex items-center justify-center">
+                  <span className="text-white/30 text-sm font-medium">CASE STUDY</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">Sell-Side Readiness</span>
+                <span className="text-xs text-gray-400">|</span>
+                <span className="text-xs text-gray-500">3 min read</span>
+              </div>
+              <h3 className="text-xl font-normal text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors leading-tight">
+                Preparing Portfolio Companies for Optimal Valuation
+              </h3>
+              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
+                A deep dive into how we helped a PE firm streamline financials and validate metrics for a successful exit.
+              </p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Overview - McKinsey Style */}
+      <section id="services" className="py-12 md:py-16 px-6 bg-[#f5f5f5]">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-10">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#2563EB]">What We Do</span>
+            <h2 className="text-2xl font-normal text-[#051c2c] mt-2">Our Services</h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link to="/services/sell-side-readiness" className="group bg-white p-6 hover:shadow-lg transition-all duration-300">
+              <h3 className="text-lg font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Sell-Side Readiness</h3>
+              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
+                Preparing portfolio companies for optimal valuation and successful exits.
+              </p>
+            </Link>
+
+            <Link to="/services/dividend-recap-prep" className="group bg-white p-6 hover:shadow-lg transition-all duration-300">
+              <h3 className="text-lg font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Dividend Recapitalization</h3>
+              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
+                Strategic capital returns while preserving ownership and operational focus.
+              </p>
+            </Link>
+
+            <Link to="/services/corporate-development" className="group bg-white p-6 hover:shadow-lg transition-all duration-300">
+              <h3 className="text-lg font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Corporate Development</h3>
+              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
+                End-to-end M&A support for family offices and independent sponsors.
+              </p>
+            </Link>
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link to="/services/sell-side-readiness" className="inline-flex items-center gap-2 text-[#051c2c] font-medium hover:text-[#2563EB] transition-colors text-sm border-b border-[#051c2c] hover:border-[#2563EB] pb-0.5">
+              View all services <span>→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies - McKinsey Style */}
+      <section className="py-12 md:py-16 px-6 bg-white border-t border-gray-100">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#2563EB]">Proven Results</span>
+              <h2 className="text-2xl font-normal text-[#051c2c] mt-2">Case Studies</h2>
+            </div>
+            <Link to="/case-studies" className="text-sm font-medium text-[#051c2c] hover:text-[#2563EB] transition-colors flex items-center gap-1">
+              View all <span className="text-lg">→</span>
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <Link to="/case-studies/sell-side-readiness" className="group block border-t-2 border-[#051c2c] pt-4 hover:border-[#2563EB] transition-colors">
+              <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">5 Case Studies</span>
+              <h3 className="text-lg font-medium text-[#051c2c] mt-2 mb-2 group-hover:text-[#2563EB] transition-colors">
+                Sell-Side Readiness
+              </h3>
+              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
                 Preparing portfolio companies for optimal valuation through financial streamlining and metrics validation.
               </p>
-              <ul className="space-y-2 text-sm text-[#1A2234]/70">
-                <li className="flex gap-2 items-center">
-                  <span className="w-1.5 h-1.5 bg-[#2563EB] rounded-full"></span>
-                  <span>KPI Data Cube for Company Sale</span>
-                </li>
-                <li className="flex gap-2 items-center">
-                  <span className="w-1.5 h-1.5 bg-[#2563EB] rounded-full"></span>
-                  <span>Unlocking Value in Data-Challenged Sale</span>
-                </li>
-                <li className="flex gap-2 items-center">
-                  <span className="w-1.5 h-1.5 bg-[#2563EB] rounded-full"></span>
-                  <span>Building Credibility & Justifying Multiples</span>
-                </li>
-              </ul>
             </Link>
 
-            {/* Corporate Development Card */}
-            <Link to="/case-studies/corporate-development" className="group block bg-white p-6 rounded-lg hover:shadow-md transition-all duration-300 border border-[#1A2234]/10 hover:border-[#2563EB]/30 shadow-sm">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">2 Case Studies</span>
-                <svg className="w-4 h-4 text-[#2563EB] group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-[#1A2234] mb-2 group-hover:text-[#2563EB] transition-colors">Corporate Development</h3>
-              <p className="text-[#1A2234]/60 text-sm leading-relaxed mb-4">
+            <Link to="/case-studies/corporate-development" className="group block border-t-2 border-[#051c2c] pt-4 hover:border-[#2563EB] transition-colors">
+              <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">2 Case Studies</span>
+              <h3 className="text-lg font-medium text-[#051c2c] mt-2 mb-2 group-hover:text-[#2563EB] transition-colors">
+                Corporate Development
+              </h3>
+              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
                 End-to-end corporate development including target screening, due diligence, and deal structuring.
               </p>
-              <ul className="space-y-2 text-sm text-[#1A2234]/70">
-                <li className="flex gap-2 items-center">
-                  <span className="w-1.5 h-1.5 bg-[#2563EB] rounded-full"></span>
-                  <span>From Operations to Ownership</span>
-                </li>
-                <li className="flex gap-2 items-center">
-                  <span className="w-1.5 h-1.5 bg-[#2563EB] rounded-full"></span>
-                  <span>Building an Acquisition Roadmap</span>
-                </li>
-              </ul>
-            </Link>
-          </div>
-
-          <div className="mt-6">
-            <Link 
-              to="/case-studies"
-              className="inline-flex items-center gap-2 text-[#2563EB] font-medium hover:gap-3 transition-all"
-            >
-              View All Case Studies
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Contact Form - Professional */}
-      <section id="contact" className="py-12 md:py-16 px-6 bg-[#1e293b] text-white">
+      {/* Contact - McKinsey Style */}
+      <section id="contact" className="py-12 md:py-16 px-6 bg-[#051c2c] text-white">
         <div className="max-w-5xl mx-auto">
-          <div className="grid lg:grid-cols-5 gap-8 items-start">
+          <div className="grid lg:grid-cols-2 gap-12">
             {/* Left Column - Info */}
-            <div className="lg:col-span-2">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-8 h-0.5 bg-[#60a5fa]"></span>
-                <span className="text-[#60a5fa] text-xs font-semibold uppercase tracking-wider">Get In Touch</span>
-              </div>
-              <h2 className="text-2xl font-bold text-white mb-3">Contact Us</h2>
-              <p className="text-white/70 text-base mb-6">
-                Schedule your consultation. Our team provides tailored solutions to meet your organization's unique needs.
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#60a5fa]">Get In Touch</span>
+              <h2 className="text-2xl font-normal mt-2 mb-4">Contact Us</h2>
+              <p className="text-white/70 text-base mb-8 leading-relaxed">
+                Ready to discuss your next transaction? Our team is here to help.
               </p>
               
-              <div className="space-y-3 text-sm">
+              <div className="space-y-4">
                 <div>
-                  <p className="text-white/50">Email</p>
+                  <p className="text-white/50 text-sm mb-1">Email</p>
                   <a href="mailto:admin@northcastleconsulting.com" className="text-white hover:text-[#60a5fa] transition-colors">admin@northcastleconsulting.com</a>
                 </div>
                 <div>
-                  <p className="text-white/50">Phone</p>
+                  <p className="text-white/50 text-sm mb-1">Phone</p>
                   <a href="tel:3144404931" className="text-white hover:text-[#60a5fa] transition-colors">314.440.4931</a>
+                </div>
+                <div>
+                  <p className="text-white/50 text-sm mb-1">Location</p>
+                  <p className="text-white">St. Louis, MO</p>
                 </div>
               </div>
             </div>
 
             {/* Right Column - Form */}
-            <div className="lg:col-span-3">
+            <div>
               <form
                 action="https://formsubmit.co/admin@northcastleconsulting.com"
                 method="POST"
-                className="bg-white/5 rounded-lg p-6 border border-white/10"
+                className="bg-white/5 rounded p-6"
               >
-                {/* FormSubmit Configuration */}
                 <input type="hidden" name="_cc" value="rventrapragada@northcastleconsulting.com" />
                 <input type="hidden" name="_subject" value="New Website Inquiry - North Castle Consulting" />
                 <input type="hidden" name="_captcha" value="false" />
@@ -404,24 +298,24 @@ function HomePage() {
 
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-1.5">Full Name *</label>
+                    <label htmlFor="name" className="block text-sm text-white/70 mb-1.5">Full Name *</label>
                     <input
                       type="text"
                       id="name"
                       name="name"
                       required
-                      className="w-full px-3 py-2.5 rounded bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white/40 transition-all text-sm"
+                      className="w-full px-3 py-2.5 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-[#60a5fa] transition-all text-sm"
                       placeholder="John Smith"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-1.5">Email Address *</label>
+                    <label htmlFor="email" className="block text-sm text-white/70 mb-1.5">Email *</label>
                     <input
                       type="email"
                       id="email"
                       name="email"
                       required
-                      className="w-full px-3 py-2.5 rounded bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white/40 transition-all text-sm"
+                      className="w-full px-3 py-2.5 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-[#60a5fa] transition-all text-sm"
                       placeholder="john@company.com"
                     />
                   </div>
@@ -429,47 +323,46 @@ function HomePage() {
 
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label htmlFor="company" className="block text-sm font-medium mb-1.5">Company</label>
+                    <label htmlFor="company" className="block text-sm text-white/70 mb-1.5">Company</label>
                     <input
                       type="text"
                       id="company"
                       name="company"
-                      className="w-full px-3 py-2.5 rounded bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white/40 transition-all text-sm"
+                      className="w-full px-3 py-2.5 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-[#60a5fa] transition-all text-sm"
                       placeholder="Your Company"
                     />
                   </div>
                   <div>
-                    <label htmlFor="service" className="block text-sm font-medium mb-1.5">Service Interest</label>
+                    <label htmlFor="service" className="block text-sm text-white/70 mb-1.5">Interest</label>
                     <select
                       id="service"
                       name="service"
-                      className="w-full px-3 py-2.5 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-white/40 transition-all text-sm"
+                      className="w-full px-3 py-2.5 bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#60a5fa] transition-all text-sm"
                     >
-                      <option value="" className="text-[#1A2234]">Select a service</option>
-                      <option value="Sell-Side Readiness" className="text-[#1A2234]">Sell-Side Readiness</option>
-                      <option value="Dividend Recapitalization" className="text-[#1A2234]">Dividend Recapitalization</option>
-                      <option value="Corporate Development" className="text-[#1A2234]">Corporate Development</option>
-                      <option value="Mass Tort Services" className="text-[#1A2234]">Mass Tort Services</option>
-                      <option value="Other" className="text-[#1A2234]">Other</option>
+                      <option value="" className="text-[#051c2c]">Select...</option>
+                      <option value="Sell-Side Readiness" className="text-[#051c2c]">Sell-Side Readiness</option>
+                      <option value="Dividend Recap" className="text-[#051c2c]">Dividend Recap</option>
+                      <option value="Corporate Development" className="text-[#051c2c]">Corporate Development</option>
+                      <option value="Other" className="text-[#051c2c]">Other</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="message" className="block text-sm font-medium mb-1.5">How Can We Help? *</label>
+                  <label htmlFor="message" className="block text-sm text-white/70 mb-1.5">Message *</label>
                   <textarea
                     id="message"
                     name="message"
                     rows={4}
                     required
-                    className="w-full px-3 py-2.5 rounded bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white/40 transition-all resize-none text-sm"
-                    placeholder="Tell us about your project..."
+                    className="w-full px-3 py-2.5 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-[#60a5fa] transition-all resize-none text-sm"
+                    placeholder="How can we help?"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="block w-full text-center bg-[#2563EB] text-white px-4 py-3 rounded font-semibold hover:bg-[#1d4ed8] transition-all duration-300 cursor-pointer text-sm"
+                  className="block w-full text-center bg-white text-[#051c2c] px-4 py-3 font-medium hover:bg-[#60a5fa] transition-all duration-300 cursor-pointer text-sm"
                 >
                   Send Message
                 </button>
@@ -479,22 +372,22 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Footer - Professional */}
-      <footer className="bg-[#1e293b] text-white py-8 px-6">
+      {/* Footer - McKinsey Style */}
+      <footer className="bg-white border-t border-gray-200 py-8 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-              <Link to="/" className="font-semibold text-white">North Castle Consulting</Link>
-              <p className="text-white/60 text-sm mt-1">Financial advisory for Private Equity and Corporate Development.</p>
+              <Link to="/" className="font-semibold text-[#051c2c]">North Castle Consulting</Link>
+              <p className="text-[#051c2c]/60 text-sm mt-1">Financial advisory for Private Equity and Corporate Development.</p>
             </div>
             <div className="flex items-center gap-6 text-sm">
-              <Link to="/services/sell-side-readiness" className="text-white/70 hover:text-[#60a5fa] transition-colors">Services</Link>
-              <Link to="/case-studies" className="text-white/70 hover:text-[#60a5fa] transition-colors">Case Studies</Link>
-              <Link to="/about-us" className="text-white/70 hover:text-[#60a5fa] transition-colors">About</Link>
-              <Link to="/contact-us" className="text-white/70 hover:text-[#60a5fa] transition-colors">Contact</Link>
+              <Link to="/services/sell-side-readiness" className="text-[#051c2c]/70 hover:text-[#2563EB] transition-colors">Services</Link>
+              <Link to="/case-studies" className="text-[#051c2c]/70 hover:text-[#2563EB] transition-colors">Case Studies</Link>
+              <Link to="/blog" className="text-[#051c2c]/70 hover:text-[#2563EB] transition-colors">Insights</Link>
+              <Link to="/contact-us" className="text-[#051c2c]/70 hover:text-[#2563EB] transition-colors">Contact</Link>
             </div>
           </div>
-          <div className="border-t border-white/10 mt-6 pt-6 text-center text-white/40 text-sm">
+          <div className="mt-6 pt-6 text-center text-[#051c2c]/40 text-sm">
             © 2025 North Castle Consulting. All rights reserved.
           </div>
         </div>
