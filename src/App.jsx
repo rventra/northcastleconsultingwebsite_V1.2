@@ -114,7 +114,7 @@ function HomePage() {
 
   return (
     <>
-      {/* Hero Section - McKinsey Style Editorial Layout */}
+      {/* Hero Section - McKinsey Style Editorial Layout with Vivid Graphics */}
       <section className="pt-16 bg-white">
         {/* Top Headline Area */}
         <div className="px-6 md:px-12 py-12 md:py-16 border-b border-gray-200">
@@ -125,27 +125,57 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Featured Content Grid - McKinsey Style with Hover Effects */}
+        {/* Featured Content Grid - McKinsey Style with Vivid Graphics */}
         <div className="px-6 md:px-12 py-8">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-12 gap-4">
               
               {/* Featured Article - Large (8 cols) */}
               <Link to="/blog/data-visibility-roi-driver" className="group md:col-span-8 relative overflow-hidden bg-[#051c2c] min-h-[400px] md:min-h-[500px]">
-                {/* Background with gradient */}
+                {/* Animated Background Pattern */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#051c2c] via-[#0a2540] to-[#1e3a5f]"></div>
-                <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center opacity-20 group-hover:opacity-30 group-hover:scale-105 transition-all duration-700"></div>
+                
+                {/* Abstract Data Visualization Graphic */}
+                <div className="absolute top-0 right-0 w-full h-full opacity-30 group-hover:opacity-40 transition-opacity duration-700">
+                  <svg className="w-full h-full" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Animated grid lines */}
+                    <defs>
+                      <linearGradient id="gridGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#2563EB" stopOpacity="0.8"/>
+                        <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.2"/>
+                      </linearGradient>
+                    </defs>
+                    {/* Horizontal lines */}
+                    <line x1="0" y1="100" x2="800" y2="100" stroke="url(#gridGrad)" strokeWidth="1" opacity="0.3"/>
+                    <line x1="0" y1="200" x2="800" y2="200" stroke="url(#gridGrad)" strokeWidth="1" opacity="0.3"/>
+                    <line x1="0" y1="300" x2="800" y2="300" stroke="url(#gridGrad)" strokeWidth="1" opacity="0.3"/>
+                    <line x1="0" y1="400" x2="800" y2="400" stroke="url(#gridGrad)" strokeWidth="1" opacity="0.3"/>
+                    {/* Data bars */}
+                    <rect x="100" y="250" width="60" height="150" fill="#2563EB" opacity="0.6" className="group-hover:opacity-80 transition-opacity"/>
+                    <rect x="200" y="180" width="60" height="220" fill="#60a5fa" opacity="0.5" className="group-hover:opacity-70 transition-opacity"/>
+                    <rect x="300" y="120" width="60" height="280" fill="#2563EB" opacity="0.7" className="group-hover:opacity-90 transition-opacity"/>
+                    <rect x="400" y="200" width="60" height="200" fill="#60a5fa" opacity="0.4" className="group-hover:opacity-60 transition-opacity"/>
+                    <rect x="500" y="80" width="60" height="320" fill="#2563EB" opacity="0.8" className="group-hover:opacity-100 transition-opacity"/>
+                    {/* Trend line */}
+                    <path d="M 50 350 Q 200 300 350 200 T 650 100" stroke="#60a5fa" strokeWidth="3" fill="none" strokeLinecap="round"/>
+                    <circle cx="650" cy="100" r="8" fill="#60a5fa" className="group-hover:scale-150 transition-transform duration-500"/>
+                    {/* Floating data points */}
+                    <circle cx="150" cy="200" r="4" fill="#2563EB" opacity="0.8"/>
+                    <circle cx="450" cy="150" r="6" fill="#60a5fa" opacity="0.6"/>
+                    <circle cx="600" cy="250" r="5" fill="#2563EB" opacity="0.7"/>
+                  </svg>
+                </div>
                 
                 {/* Content */}
                 <div className="relative z-10 h-full flex flex-col justify-between p-8">
                   <div>
                     <span className="inline-block px-3 py-1 bg-[#2563EB] text-white text-xs font-medium uppercase tracking-wider mb-4">Article</span>
                   </div>
-                  <div>
+                  <div className="max-w-lg">
                     <h2 className="text-2xl md:text-3xl font-normal text-white mb-3 group-hover:translate-x-2 transition-transform duration-500">
                       Data Visibility as an ROI Driver
                     </h2>
-                    <p className="text-white/70 text-base max-w-lg mb-4">
+                    <p className="text-white/70 text-base mb-4">
                       How PE firms can leverage data infrastructure to unlock portfolio company value and streamline exit preparation.
                     </p>
                     <span className="inline-flex items-center text-[#60a5fa] text-sm font-medium group-hover:gap-3 transition-all">
@@ -161,9 +191,29 @@ function HomePage() {
               {/* Right Column - Stacked Cards (4 cols) */}
               <div className="md:col-span-4 flex flex-col gap-4">
                 
-                {/* Case Study Card */}
-                <Link to="/case-studies/sell-side-readiness" className="group relative overflow-hidden bg-[#f5f5f5] flex-1 min-h-[200px]">
+                {/* Case Study Card - With Growth Chart Graphic */}
+                <Link to="/case-studies/sell-side-readiness" className="group relative overflow-hidden bg-[#f5f5f5] flex-1 min-h-[240px]">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#f5f5f5] to-[#e8e8e8]"></div>
+                  
+                  {/* Case Study Graphic - Upward Trend */}
+                  <div className="absolute top-4 right-4 w-32 h-24 group-hover:scale-110 transition-transform duration-500">
+                    <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Background shape */}
+                      <rect x="0" y="0" width="120" height="80" rx="8" fill="white" opacity="0.5"/>
+                      {/* Chart bars */}
+                      <rect x="15" y="50" width="12" height="20" fill="#2563EB" opacity="0.3"/>
+                      <rect x="32" y="40" width="12" height="30" fill="#2563EB" opacity="0.5"/>
+                      <rect x="49" y="25" width="12" height="45" fill="#2563EB" opacity="0.7"/>
+                      <rect x="66" y="15" width="12" height="55" fill="#2563EB" opacity="0.9"/>
+                      <rect x="83" y="5" width="12" height="65" fill="#2563EB"/>
+                      {/* Trend arrow */}
+                      <path d="M 20 60 L 50 35 L 80 20 L 105 8" stroke="#051c2c" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M 95 5 L 105 8 L 102 18" stroke="#051c2c" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                      {/* Value indicator */}
+                      <circle cx="105" cy="8" r="4" fill="#2563EB"/>
+                    </svg>
+                  </div>
+                  
                   <div className="relative z-10 h-full flex flex-col justify-between p-6">
                     <span className="inline-block px-3 py-1 bg-[#051c2c] text-white text-xs font-medium uppercase tracking-wider w-fit">Case Study</span>
                     <div>
@@ -179,9 +229,34 @@ function HomePage() {
                   <div className="absolute inset-0 shadow-[inset_0_0_0_0_rgba(0,0,0,0)] group-hover:shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] transition-shadow duration-500"></div>
                 </Link>
 
-                {/* Service Offering Card */}
-                <Link to="/services/sell-side-readiness" className="group relative overflow-hidden bg-[#2563EB] flex-1 min-h-[200px]">
+                {/* Service Offering Card - With Document/Process Graphic */}
+                <Link to="/services/sell-side-readiness" className="group relative overflow-hidden bg-[#2563EB] flex-1 min-h-[240px]">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8]"></div>
+                  
+                  {/* Service Graphic - Document/Checklist Icon */}
+                  <div className="absolute top-4 right-4 w-28 h-28 group-hover:rotate-6 transition-transform duration-500">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Document stack */}
+                      <rect x="15" y="20" width="60" height="70" rx="4" fill="white" opacity="0.2"/>
+                      <rect x="20" y="15" width="60" height="70" rx="4" fill="white" opacity="0.3"/>
+                      <rect x="25" y="10" width="60" height="70" rx="4" fill="white" opacity="0.9"/>
+                      {/* Checklist lines */}
+                      <rect x="35" y="25" width="30" height="3" rx="1.5" fill="#2563EB"/>
+                      <rect x="35" y="35" width="25" height="3" rx="1.5" fill="#2563EB"/>
+                      <rect x="35" y="45" width="35" height="3" rx="1.5" fill="#2563EB"/>
+                      {/* Checkmarks */}
+                      <circle cx="30" cy="26.5" r="4" fill="#2563EB"/>
+                      <path d="M 28 26.5 L 29.5 28 L 32 25" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="30" cy="36.5" r="4" fill="#2563EB"/>
+                      <path d="M 28 36.5 L 29.5 38 L 32 35" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="30" cy="46.5" r="4" fill="#2563EB"/>
+                      <path d="M 28 46.5 L 29.5 48 L 32 45" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      {/* Graph icon on document */}
+                      <rect x="35" y="55" width="40" height="20" rx="2" fill="#f5f5f5"/>
+                      <path d="M 40 70 L 48 62 L 55 65 L 65 55 L 72 58" stroke="#2563EB" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  
                   <div className="relative z-10 h-full flex flex-col justify-between p-6">
                     <span className="inline-block px-3 py-1 bg-white/20 text-white text-xs font-medium uppercase tracking-wider w-fit">Service Offering</span>
                     <div>
@@ -201,46 +276,127 @@ function HomePage() {
               </div>
             </div>
 
-            {/* Secondary Row - 3 Column Grid */}
+            {/* Secondary Row - 3 Column Grid with Graphics */}
             <div className="grid md:grid-cols-3 gap-4 mt-4">
               
-              {/* Article Card */}
-              <Link to="/blog" className="group relative overflow-hidden bg-white border border-gray-200 p-6 hover:border-[#2563EB] transition-colors duration-300">
-                <span className="inline-block px-2 py-0.5 bg-gray-100 text-[#051c2c] text-xs font-medium uppercase tracking-wider mb-3">Insight</span>
-                <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">
-                  The Power of the Data Cube
-                </h3>
-                <p className="text-[#051c2c]/60 text-sm mb-3">Streamline exit preparation with unified data architecture.</p>
-                <span className="inline-flex items-center text-[#2563EB] text-sm font-medium">
-                  Read <span className="ml-1 group-hover:ml-2 transition-all">→</span>
-                </span>
+              {/* Article Card - Data Cube Graphic */}
+              <Link to="/blog" className="group relative overflow-hidden bg-white border border-gray-200 hover:border-[#2563EB] transition-colors duration-300">
+                {/* Data Cube Illustration */}
+                <div className="h-40 bg-gradient-to-br from-[#f5f5f5] to-[#e8e8e8] relative overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                    <svg width="120" height="100" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* 3D Cube structure */}
+                      <path d="M 60 10 L 100 30 L 100 70 L 60 90 L 20 70 L 20 30 Z" fill="white" stroke="#2563EB" strokeWidth="2"/>
+                      <path d="M 60 10 L 60 50" stroke="#2563EB" strokeWidth="2" opacity="0.5"/>
+                      <path d="M 100 30 L 60 50" stroke="#2563EB" strokeWidth="2" opacity="0.5"/>
+                      <path d="M 20 30 L 60 50" stroke="#2563EB" strokeWidth="2" opacity="0.5"/>
+                      {/* Inner grid lines */}
+                      <path d="M 40 20 L 40 60" stroke="#2563EB" strokeWidth="1" opacity="0.3"/>
+                      <path d="M 80 20 L 80 60" stroke="#2563EB" strokeWidth="1" opacity="0.3"/>
+                      <path d="M 30 45 L 90 45" stroke="#2563EB" strokeWidth="1" opacity="0.3"/>
+                      {/* Data points */}
+                      <circle cx="60" cy="50" r="5" fill="#2563EB"/>
+                      <circle cx="40" cy="35" r="3" fill="#60a5fa"/>
+                      <circle cx="80" cy="40" r="3" fill="#60a5fa"/>
+                      <circle cx="50" cy="65" r="3" fill="#60a5fa"/>
+                      <circle cx="70" cy="60" r="3" fill="#60a5fa"/>
+                    </svg>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <span className="inline-block px-2 py-0.5 bg-gray-100 text-[#051c2c] text-xs font-medium uppercase tracking-wider mb-3">Insight</span>
+                  <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">
+                    The Power of the Data Cube
+                  </h3>
+                  <p className="text-[#051c2c]/60 text-sm mb-3">Streamline exit preparation with unified data architecture.</p>
+                  <span className="inline-flex items-center text-[#2563EB] text-sm font-medium">
+                    Read <span className="ml-1 group-hover:ml-2 transition-all">→</span>
+                  </span>
+                </div>
                 {/* Bottom accent line */}
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2563EB] group-hover:w-full transition-all duration-500"></div>
               </Link>
 
-              {/* Case Study Card 2 */}
-              <Link to="/case-studies/corporate-development" className="group relative overflow-hidden bg-white border border-gray-200 p-6 hover:border-[#2563EB] transition-colors duration-300">
-                <span className="inline-block px-2 py-0.5 bg-gray-100 text-[#051c2c] text-xs font-medium uppercase tracking-wider mb-3">Case Study</span>
-                <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">
-                  Corporate Development
-                </h3>
-                <p className="text-[#051c2c]/60 text-sm mb-3">End-to-end M&A support for independent sponsors.</p>
-                <span className="inline-flex items-center text-[#2563EB] text-sm font-medium">
-                  Explore <span className="ml-1 group-hover:ml-2 transition-all">→</span>
-                </span>
+              {/* Case Study Card 2 - M&A Handshake/Target Graphic */}
+              <Link to="/case-studies/corporate-development" className="group relative overflow-hidden bg-white border border-gray-200 hover:border-[#2563EB] transition-colors duration-300">
+                {/* Corporate Development Illustration */}
+                <div className="h-40 bg-gradient-to-br from-[#051c2c] to-[#1e3a5f] relative overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                    <svg width="140" height="100" viewBox="0 0 140 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Connected nodes representing M&A */}
+                      <circle cx="30" cy="50" r="20" fill="#2563EB" opacity="0.3"/>
+                      <circle cx="30" cy="50" r="12" fill="#2563EB"/>
+                      <circle cx="110" cy="30" r="15" fill="#60a5fa" opacity="0.8"/>
+                      <circle cx="110" cy="70" r="15" fill="#60a5fa" opacity="0.6"/>
+                      <circle cx="80" cy="50" r="10" fill="white" opacity="0.9"/>
+                      {/* Connection lines */}
+                      <line x1="42" y1="50" x2="70" y2="50" stroke="#60a5fa" strokeWidth="2" strokeDasharray="4 2"/>
+                      <line x1="88" y1="45" x2="98" y2="35" stroke="#60a5fa" strokeWidth="2"/>
+                      <line x1="88" y1="55" x2="98" y2="65" stroke="#60a5fa" strokeWidth="2"/>
+                      {/* Target/bullseye on right nodes */}
+                      <circle cx="110" cy="30" r="6" fill="none" stroke="#051c2c" strokeWidth="2"/>
+                      <circle cx="110" cy="30" r="2" fill="#051c2c"/>
+                      {/* Plus signs indicating growth */}
+                      <path d="M 130 20 L 130 30 M 125 25 L 135 25" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round"/>
+                      <path d="M 130 60 L 130 70 M 125 65 L 135 65" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
+                    </svg>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <span className="inline-block px-2 py-0.5 bg-gray-100 text-[#051c2c] text-xs font-medium uppercase tracking-wider mb-3">Case Study</span>
+                  <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">
+                    Corporate Development
+                  </h3>
+                  <p className="text-[#051c2c]/60 text-sm mb-3">End-to-end M&A support for independent sponsors.</p>
+                  <span className="inline-flex items-center text-[#2563EB] text-sm font-medium">
+                    Explore <span className="ml-1 group-hover:ml-2 transition-all">→</span>
+                  </span>
+                </div>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2563EB] group-hover:w-full transition-all duration-500"></div>
               </Link>
 
-              {/* Service Card 2 */}
-              <Link to="/services/dashboarding-data-portal" className="group relative overflow-hidden bg-white border border-gray-200 p-6 hover:border-[#2563EB] transition-colors duration-300">
-                <span className="inline-block px-2 py-0.5 bg-gray-100 text-[#051c2c] text-xs font-medium uppercase tracking-wider mb-3">Service</span>
-                <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">
-                  Dashboarding & Data Portal
-                </h3>
-                <p className="text-[#051c2c]/60 text-sm mb-3">Real-time visibility into portfolio performance.</p>
-                <span className="inline-flex items-center text-[#2563EB] text-sm font-medium">
-                  Learn more <span className="ml-1 group-hover:ml-2 transition-all">→</span>
-                </span>
+              {/* Service Card 2 - Dashboard Monitor Graphic */}
+              <Link to="/services/dashboarding-data-portal" className="group relative overflow-hidden bg-white border border-gray-200 hover:border-[#2563EB] transition-colors duration-300">
+                {/* Dashboard Illustration */}
+                <div className="h-40 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] relative overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                    <svg width="140" height="90" viewBox="0 0 140 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Monitor frame */}
+                      <rect x="10" y="5" width="120" height="70" rx="4" fill="white" opacity="0.95"/>
+                      <rect x="10" y="5" width="120" height="70" rx="4" stroke="#051c2c" strokeWidth="2"/>
+                      {/* Screen content */}
+                      <rect x="18" y="15" width="104" height="50" fill="#f5f5f5"/>
+                      {/* Dashboard elements */}
+                      {/* Chart 1 - Bar */}
+                      <rect x="25" y="45" width="15" height="12" fill="#2563EB" opacity="0.8"/>
+                      <rect x="25" y="35" width="15" height="8" fill="#60a5fa"/>
+                      {/* Chart 2 - Line */}
+                      <path d="M 50 50 L 60 42 L 70 45 L 80 35" stroke="#2563EB" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="80" cy="35" r="3" fill="#2563EB"/>
+                      {/* Chart 3 - Pie */}
+                      <circle cx="105" cy="42" r="12" fill="#e8e8e8"/>
+                      <path d="M 105 42 L 105 30 A 12 12 0 0 1 115 48 Z" fill="#2563EB"/>
+                      <path d="M 105 42 L 115 48 A 12 12 0 0 1 105 54 Z" fill="#60a5fa"/>
+                      {/* Stand */}
+                      <rect x="60" y="75" width="20" height="8" fill="#051c2c"/>
+                      <rect x="50" y="83" width="40" height="4" rx="2" fill="#051c2c"/>
+                      {/* Data pulse indicator */}
+                      <circle cx="125" y="12" r="3" fill="#22c55e">
+                        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+                      </circle>
+                    </svg>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <span className="inline-block px-2 py-0.5 bg-gray-100 text-[#051c2c] text-xs font-medium uppercase tracking-wider mb-3">Service</span>
+                  <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">
+                    Dashboarding & Data Portal
+                  </h3>
+                  <p className="text-[#051c2c]/60 text-sm mb-3">Real-time visibility into portfolio performance.</p>
+                  <span className="inline-flex items-center text-[#2563EB] text-sm font-medium">
+                    Learn more <span className="ml-1 group-hover:ml-2 transition-all">→</span>
+                  </span>
+                </div>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2563EB] group-hover:w-full transition-all duration-500"></div>
               </Link>
 
