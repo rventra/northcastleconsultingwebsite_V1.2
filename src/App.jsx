@@ -116,8 +116,8 @@ function HomePage() {
     <>
       {/* Hero Section - McKinsey Style Editorial Layout with Images + SVGs */}
       <section className="pt-16 bg-white">
-        {/* Top Headline Area - Blue Professional Gradient */}
-        <div className="px-6 md:px-12 py-16 md:py-20 bg-gradient-to-br from-[#051c2c] via-[#0a2540] to-[#1e3a5f]">
+        {/* Top Headline Area - McKinsey Blue Gradient */}
+        <div className="px-6 md:px-12 py-12 md:py-16 bg-gradient-to-r from-[#051c2c] to-[#0c4a6e]">
           <div className="max-w-6xl mx-auto">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.15] tracking-tight max-w-4xl">
               Financial expertise for Private Equity and Corporate Development teams seeking <em className="text-[#60a5fa]">measurable outcomes</em>.
@@ -140,26 +140,21 @@ function HomePage() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c] via-[#051c2c]/70 to-transparent"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#051c2c]/60 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c] via-[#051c2c]/60 to-transparent"></div>
                 </div>
                 
                 {/* Content */}
-                <div className="relative z-10 h-full flex flex-col justify-between p-8">
-                  <div>
-                    <span className="inline-block px-3 py-1 bg-[#2563EB] text-white text-xs font-medium uppercase tracking-wider mb-4">Article</span>
-                  </div>
-                  <div className="max-w-lg">
-                    <h2 className="text-2xl md:text-3xl font-normal text-white mb-3 group-hover:translate-x-2 transition-transform duration-500">
-                      Data Visibility as an ROI Driver
-                    </h2>
-                    <p className="text-white/70 text-base mb-4">
-                      How PE firms can leverage data infrastructure to unlock portfolio company value and streamline exit preparation.
-                    </p>
-                    <span className="inline-flex items-center text-[#60a5fa] text-sm font-medium group-hover:gap-3 transition-all">
-                      Read more <span className="ml-2 group-hover:ml-3 transition-all">→</span>
-                    </span>
-                  </div>
+                <div className="relative z-10 h-full flex flex-col justify-end p-8">
+                  <span className="inline-block px-3 py-1 bg-white text-[#051c2c] text-xs font-semibold uppercase tracking-wider mb-4 w-fit">Article</span>
+                  <h2 className="text-3xl md:text-4xl font-light text-white mb-3 leading-tight">
+                    Data Visibility as an ROI Driver
+                  </h2>
+                  <p className="text-white/80 text-lg mb-4 max-w-xl leading-relaxed">
+                    How PE firms can leverage data infrastructure to unlock portfolio company value.
+                  </p>
+                  <span className="inline-flex items-center text-white text-sm font-semibold border-b border-white/50 pb-1 w-fit group-hover:border-white transition-colors">
+                    Read the article
+                  </span>
                 </div>
               </Link>
 
@@ -179,12 +174,12 @@ function HomePage() {
                   </div>
                   
                   <div className="relative z-10 h-full flex flex-col justify-between p-6">
-                    <span className="inline-block px-3 py-1 bg-[#051c2c] text-white text-xs font-medium uppercase tracking-wider w-fit">Case Study</span>
+                    <span className="inline-block px-3 py-1 bg-white text-[#051c2c] text-xs font-semibold uppercase tracking-wider w-fit">Case Study</span>
                     <div>
-                      <h3 className="text-lg font-medium text-white mb-2 group-hover:text-[#60a5fa] transition-colors">
-                        Preparing Portfolio Companies for Optimal Valuation
+                      <h3 className="text-lg font-medium text-white mb-1">
+                        Preparing Portfolio Companies
                       </h3>
-                      <span className="inline-flex items-center text-[#60a5fa] text-sm font-medium">
+                      <span className="inline-flex items-center text-white/90 text-sm font-medium">
                         Explore <span className="ml-1 group-hover:ml-2 transition-all">→</span>
                       </span>
                     </div>
@@ -200,17 +195,16 @@ function HomePage() {
                       alt="Professional Consulting"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#2563EB] via-[#2563EB]/60 to-[#2563EB]/30"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c] via-[#051c2c]/50 to-transparent"></div>
                   </div>
                   
                   <div className="relative z-10 h-full flex flex-col justify-between p-6">
-                    <span className="inline-block px-3 py-1 bg-white/20 text-white text-xs font-medium uppercase tracking-wider w-fit">Service Offering</span>
+                    <span className="inline-block px-3 py-1 bg-white text-[#051c2c] text-xs font-semibold uppercase tracking-wider w-fit">Service Offering</span>
                     <div>
-                      <h3 className="text-lg font-medium text-white mb-2">
+                      <h3 className="text-lg font-medium text-white mb-1">
                         Sell-Side Readiness
                       </h3>
-                      <p className="text-white/80 text-sm mb-2">End-to-end exit preparation support.</p>
-                      <span className="inline-flex items-center text-white text-sm font-medium">
+                      <span className="inline-flex items-center text-white/90 text-sm font-medium">
                         Learn more <span className="ml-1 group-hover:ml-2 transition-all">→</span>
                       </span>
                     </div>
@@ -351,40 +345,36 @@ function HomePage() {
 
 
 
-      {/* Services Overview - McKinsey Style */}
-      <section id="services" className="py-12 md:py-16 px-6 bg-[#f5f5f5]">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-10">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#2563EB]">What We Do</span>
-            <h2 className="text-2xl font-normal text-[#051c2c] mt-2">Our Services</h2>
+      {/* Services Overview - Clean Professional Style */}
+      <section id="services" className="py-10 md:py-12 px-6 bg-white border-t border-gray-200">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-xl font-medium text-[#051c2c]">What we do</h2>
+            <Link to="/services/sell-side-readiness" className="text-sm text-[#051c2c] hover:text-[#2563EB] transition-colors font-medium">
+              View all →
+            </Link>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <Link to="/services/sell-side-readiness" className="group bg-white p-6 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-lg font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Sell-Side Readiness</h3>
-              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
+          <div className="grid md:grid-cols-3 gap-px bg-gray-200">
+            <Link to="/services/sell-side-readiness" className="group bg-white p-6 hover:bg-gray-50 transition-colors">
+              <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Sell-Side Readiness</h3>
+              <p className="text-[#051c2c]/60 text-sm">
                 Preparing portfolio companies for optimal valuation and successful exits.
               </p>
             </Link>
 
-            <Link to="/services/corporate-development" className="group bg-white p-6 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-lg font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Corporate Development</h3>
-              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
+            <Link to="/services/corporate-development" className="group bg-white p-6 hover:bg-gray-50 transition-colors">
+              <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Corporate Development</h3>
+              <p className="text-[#051c2c]/60 text-sm">
                 End-to-end M&A support for family offices and independent sponsors.
               </p>
             </Link>
 
-            <Link to="/services/dashboarding-data-portal" className="group bg-white p-6 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-lg font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Dashboarding & Data Portal</h3>
-              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
-                Custom dashboards and data portals for real-time visibility into portfolio performance.
+            <Link to="/services/dashboarding-data-portal" className="group bg-white p-6 hover:bg-gray-50 transition-colors">
+              <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Dashboarding & Data Portal</h3>
+              <p className="text-[#051c2c]/60 text-sm">
+                Custom dashboards for real-time portfolio visibility.
               </p>
-            </Link>
-          </div>
-
-          <div className="mt-8 text-center">
-            <Link to="/services/sell-side-readiness" className="inline-flex items-center gap-2 text-[#051c2c] font-medium hover:text-[#2563EB] transition-colors text-sm border-b border-[#051c2c] hover:border-[#2563EB] pb-0.5">
-              View all services <span>→</span>
             </Link>
           </div>
         </div>
