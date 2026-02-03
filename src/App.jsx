@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import MassTortPage from './MassTortPage.jsx';
-import DividendRecapPage from './DividendRecapPage.jsx';
+import DashboardingDataPortalPage from './DashboardingDataPortalPage.jsx';
 import SellSideReadinessPage from './SellSideReadinessPage.jsx';
 import CorporateDevPage from './CorporateDevPage.jsx';
 import BuildingCredibilityPage from './BuildingCredibilityPage.jsx';
@@ -92,10 +92,29 @@ function Navigation() {
 
 function HomePage() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const scrollToSelector = (selector) => {
+    // If not on home page, navigate to home first
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.querySelector(selector);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.querySelector(selector);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <>
-      {/* Hero Section - Killer Background Image */}
+      {/* Hero Section - Killer Background Image with Featured Insights */}
       <section className="pt-16 relative min-h-[70vh] flex items-center">
         {/* Background Image with Overlay */}
         <div 
@@ -109,90 +128,70 @@ function HomePage() {
         
         {/* Content */}
         <div className="relative z-10 w-full px-6 md:px-12 py-16 md:py-24">
-          <div className="max-w-4xl">
-            <span className="inline-block text-[#60a5fa] text-xs font-semibold uppercase tracking-widest mb-4">
-              North Castle Consulting
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal text-white mb-6 leading-[1.1] tracking-tight">
-              Unlocking Value Through <em className="font-light text-[#60a5fa]">Financial Expertise</em>
-            </h1>
-            <p className="text-white/80 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl">
-              We deliver actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                to="/contact-us"
-                className="inline-flex items-center gap-2 bg-white text-[#051c2c] px-8 py-4 rounded font-medium hover:bg-[#60a5fa] hover:text-white transition-all duration-300 text-sm shadow-lg"
-              >
-                Schedule a Consultation
-              </Link>
-              <Link
-                to="/services/sell-side-readiness"
-                className="inline-flex items-center gap-2 bg-transparent text-white px-8 py-4 font-medium hover:text-[#60a5fa] transition-all duration-300 text-sm border-2 border-white/30 hover:border-[#60a5fa] rounded"
-              >
-                Explore Our Services
-              </Link>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left Column - Main Hero */}
+              <div>
+                <span className="inline-block text-[#60a5fa] text-xs font-semibold uppercase tracking-widest mb-4">
+                  North Castle Consulting
+                </span>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal text-white mb-6 leading-[1.1] tracking-tight">
+                  Unlocking Value Through <em className="font-light text-[#60a5fa]">Financial Expertise</em>
+                </h1>
+                <p className="text-white/80 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
+                  We deliver actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    to="/contact-us"
+                    className="inline-flex items-center gap-2 bg-white text-[#051c2c] px-8 py-4 rounded font-medium hover:bg-[#60a5fa] hover:text-white transition-all duration-300 text-sm shadow-lg"
+                  >
+                    Schedule a Consultation
+                  </Link>
+                  <button
+                    onClick={() => scrollToSelector('#services')}
+                    className="inline-flex items-center gap-2 bg-transparent text-white px-8 py-4 font-medium hover:text-[#60a5fa] transition-all duration-300 text-sm border-2 border-white/30 hover:border-[#60a5fa] rounded cursor-pointer"
+                  >
+                    Explore Our Services
+                  </button>
+                </div>
+              </div>
+              
+              {/* Right Column - Latest Thinking */}
+              <div className="hidden lg:block">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-[#60a5fa]">Latest Thinking</span>
+                    <Link to="/blog" className="text-sm text-white/70 hover:text-[#60a5fa] transition-colors">
+                      View all →
+                    </Link>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <Link to="/blog/data-visibility-roi-driver" className="group block p-4 rounded bg-white/5 hover:bg-white/10 transition-colors">
+                      <span className="text-xs text-[#60a5fa] uppercase tracking-wider">Private Equity</span>
+                      <h3 className="text-white font-medium mt-1 group-hover:text-[#60a5fa] transition-colors leading-tight">
+                        Data Visibility as an ROI Driver
+                      </h3>
+                      <p className="text-white/60 text-sm mt-1">How PE firms can leverage data infrastructure to unlock value.</p>
+                    </Link>
+                    
+                    <Link to="/blog" className="group block p-4 rounded bg-white/5 hover:bg-white/10 transition-colors">
+                      <span className="text-xs text-[#60a5fa] uppercase tracking-wider">Insights</span>
+                      <h3 className="text-white font-medium mt-1 group-hover:text-[#60a5fa] transition-colors leading-tight">
+                        The Power of the Data Cube
+                      </h3>
+                      <p className="text-white/60 text-sm mt-1">Streamline exit preparation with unified data.</p>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Insights - McKinsey Style */}
-      <section className="py-12 md:py-16 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#2563EB]">Featured Insights</span>
-              <h2 className="text-2xl font-normal text-[#051c2c] mt-2">Latest thinking</h2>
-            </div>
-            <Link to="/blog" className="text-sm font-medium text-[#051c2c] hover:text-[#2563EB] transition-colors flex items-center gap-1">
-              View all <span className="text-lg">→</span>
-            </Link>
-          </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Featured Article 1 */}
-            <Link to="/blog/data-visibility-roi-driver" className="group block">
-              <div className="aspect-[16/9] bg-[#f5f5f5] rounded-sm mb-4 overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-[#051c2c] to-[#1e3a5f] flex items-center justify-center">
-                  <span className="text-white/30 text-sm font-medium">FEATURED</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">Private Equity</span>
-                <span className="text-xs text-gray-400">|</span>
-                <span className="text-xs text-gray-500">5 min read</span>
-              </div>
-              <h3 className="text-xl font-normal text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors leading-tight">
-                Data Visibility as an ROI Driver: The Power of the Data Cube
-              </h3>
-              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
-                How PE firms can leverage data infrastructure to unlock portfolio company value and streamline exit preparation.
-              </p>
-            </Link>
-
-            {/* Featured Article 2 */}
-            <Link to="/case-studies/sell-side-readiness" className="group block">
-              <div className="aspect-[16/9] bg-[#f5f5f5] rounded-sm mb-4 overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] flex items-center justify-center">
-                  <span className="text-white/30 text-sm font-medium">CASE STUDY</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">Sell-Side Readiness</span>
-                <span className="text-xs text-gray-400">|</span>
-                <span className="text-xs text-gray-500">3 min read</span>
-              </div>
-              <h3 className="text-xl font-normal text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors leading-tight">
-                Preparing Portfolio Companies for Optimal Valuation
-              </h3>
-              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
-                A deep dive into how we helped a PE firm streamline financials and validate metrics for a successful exit.
-              </p>
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Services Overview - McKinsey Style */}
       <section id="services" className="py-12 md:py-16 px-6 bg-[#f5f5f5]">
@@ -210,17 +209,17 @@ function HomePage() {
               </p>
             </Link>
 
-            <Link to="/services/dividend-recap-prep" className="group bg-white p-6 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-lg font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Dividend Recapitalization</h3>
-              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
-                Strategic capital returns while preserving ownership and operational focus.
-              </p>
-            </Link>
-
             <Link to="/services/corporate-development" className="group bg-white p-6 hover:shadow-lg transition-all duration-300">
               <h3 className="text-lg font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Corporate Development</h3>
               <p className="text-[#051c2c]/60 text-sm leading-relaxed">
                 End-to-end M&A support for family offices and independent sponsors.
+              </p>
+            </Link>
+
+            <Link to="/services/dashboarding-data-portal" className="group bg-white p-6 hover:shadow-lg transition-all duration-300">
+              <h3 className="text-lg font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Dashboarding & Data Portal</h3>
+              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
+                Custom dashboards and data portals for real-time visibility into portfolio performance.
               </p>
             </Link>
           </div>
@@ -355,8 +354,8 @@ function HomePage() {
                     >
                       <option value="" className="text-[#051c2c]">Select...</option>
                       <option value="Sell-Side Readiness" className="text-[#051c2c]">Sell-Side Readiness</option>
-                      <option value="Dividend Recap" className="text-[#051c2c]">Dividend Recap</option>
                       <option value="Corporate Development" className="text-[#051c2c]">Corporate Development</option>
+                      <option value="Dashboarding & Data Portal" className="text-[#051c2c]">Dashboarding & Data Portal</option>
                       <option value="Other" className="text-[#051c2c]">Other</option>
                     </select>
                   </div>
@@ -422,7 +421,7 @@ export default function NorthCastleConsulting() {
 
         {/* Service Pages */}
         <Route path="/services/sell-side-readiness" element={<SellSideReadinessPage />} />
-        <Route path="/services/dividend-recap-prep" element={<DividendRecapPage />} />
+        <Route path="/services/dashboarding-data-portal" element={<DashboardingDataPortalPage />} />
         <Route path="/services/corporate-development" element={<CorporateDevPage />} />
         <Route path="/services/mass-tort" element={<MassTortPage />} />
 

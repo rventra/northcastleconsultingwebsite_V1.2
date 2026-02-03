@@ -129,25 +129,7 @@ export default function CaseStudiesPage() {
             </Link>
           </div>
 
-          {/* Stats Row */}
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            <div className="text-center bg-white rounded-2xl p-6 shadow-md">
-              <div className="text-3xl md:text-4xl font-bold text-[#0D3BC3]">95%+</div>
-              <div className="text-[#1A2234]/70 text-sm mt-1">Success Rate</div>
-            </div>
-            <div className="text-center bg-white rounded-2xl p-6 shadow-md">
-              <div className="text-3xl md:text-4xl font-bold text-[#0D3BC3]">7</div>
-              <div className="text-[#1A2234]/70 text-sm mt-1">Case Studies</div>
-            </div>
-            <div className="text-center bg-white rounded-2xl p-6 shadow-md">
-              <div className="text-3xl md:text-4xl font-bold text-[#0D3BC3]">$500M+</div>
-              <div className="text-[#1A2234]/70 text-sm mt-1">Value Created</div>
-            </div>
-            <div className="text-center bg-white rounded-2xl p-6 shadow-md">
-              <div className="text-3xl md:text-4xl font-bold text-[#0D3BC3]">20+</div>
-              <div className="text-[#1A2234]/70 text-sm mt-1">Years Experience</div>
-            </div>
-          </div>
+
         </div>
       </section>
 
