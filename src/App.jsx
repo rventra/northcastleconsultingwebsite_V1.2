@@ -114,78 +114,136 @@ function HomePage() {
 
   return (
     <>
-      {/* Hero Section - Killer Background Image with Featured Insights */}
-      <section className="pt-16 relative min-h-[70vh] flex items-center">
-        {/* Background Image with Overlay */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/images/hero-bg.jpg)' }}
-        >
-          {/* Gradient Overlay for Text Readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#051c2c]/95 via-[#051c2c]/80 to-[#051c2c]/60"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c]/50 to-transparent"></div>
-        </div>
-        
-        {/* Content */}
-        <div className="relative z-10 w-full px-6 md:px-12 py-16 md:py-24">
+      {/* Hero Section - McKinsey Style Editorial Layout */}
+      <section className="pt-16 bg-white">
+        {/* Top Headline Area */}
+        <div className="px-6 md:px-12 py-12 md:py-16 border-b border-gray-200">
           <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left Column - Main Hero */}
-              <div>
-                <span className="inline-block text-[#60a5fa] text-xs font-semibold uppercase tracking-widest mb-4">
-                  North Castle Consulting
-                </span>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal text-white mb-6 leading-[1.1] tracking-tight">
-                  Unlocking Value Through <em className="font-light text-[#60a5fa]">Financial Expertise</em>
-                </h1>
-                <p className="text-white/80 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
-                  We deliver actionable insights and tailored solutions for Private Equity, Private Debt, and Corporate Development teams.
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <Link
-                    to="/contact-us"
-                    className="inline-flex items-center gap-2 bg-white text-[#051c2c] px-8 py-4 rounded font-medium hover:bg-[#60a5fa] hover:text-white transition-all duration-300 text-sm shadow-lg"
-                  >
-                    Schedule a Consultation
-                  </Link>
-                  <button
-                    onClick={() => scrollToSelector('#services')}
-                    className="inline-flex items-center gap-2 bg-transparent text-white px-8 py-4 font-medium hover:text-[#60a5fa] transition-all duration-300 text-sm border-2 border-white/30 hover:border-[#60a5fa] rounded cursor-pointer"
-                  >
-                    Explore Our Services
-                  </button>
-                </div>
-              </div>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#051c2c] leading-[1.15] tracking-tight max-w-4xl">
+              Financial expertise for Private Equity and Corporate Development teams seeking <em className="text-[#2563EB]">measurable outcomes</em>.
+            </h1>
+          </div>
+        </div>
+
+        {/* Featured Content Grid - McKinsey Style with Hover Effects */}
+        <div className="px-6 md:px-12 py-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-12 gap-4">
               
-              {/* Right Column - Latest Thinking */}
-              <div className="hidden lg:block">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-[#60a5fa]">Latest Thinking</span>
-                    <Link to="/blog" className="text-sm text-white/70 hover:text-[#60a5fa] transition-colors">
-                      View all →
-                    </Link>
+              {/* Featured Article - Large (8 cols) */}
+              <Link to="/blog/data-visibility-roi-driver" className="group md:col-span-8 relative overflow-hidden bg-[#051c2c] min-h-[400px] md:min-h-[500px]">
+                {/* Background with gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#051c2c] via-[#0a2540] to-[#1e3a5f]"></div>
+                <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center opacity-20 group-hover:opacity-30 group-hover:scale-105 transition-all duration-700"></div>
+                
+                {/* Content */}
+                <div className="relative z-10 h-full flex flex-col justify-between p-8">
+                  <div>
+                    <span className="inline-block px-3 py-1 bg-[#2563EB] text-white text-xs font-medium uppercase tracking-wider mb-4">Article</span>
                   </div>
-                  
-                  <div className="space-y-4">
-                    <Link to="/blog/data-visibility-roi-driver" className="group block p-4 rounded bg-white/5 hover:bg-white/10 transition-colors">
-                      <span className="text-xs text-[#60a5fa] uppercase tracking-wider">Private Equity</span>
-                      <h3 className="text-white font-medium mt-1 group-hover:text-[#60a5fa] transition-colors leading-tight">
-                        Data Visibility as an ROI Driver
-                      </h3>
-                      <p className="text-white/60 text-sm mt-1">How PE firms can leverage data infrastructure to unlock value.</p>
-                    </Link>
-                    
-                    <Link to="/blog" className="group block p-4 rounded bg-white/5 hover:bg-white/10 transition-colors">
-                      <span className="text-xs text-[#60a5fa] uppercase tracking-wider">Insights</span>
-                      <h3 className="text-white font-medium mt-1 group-hover:text-[#60a5fa] transition-colors leading-tight">
-                        The Power of the Data Cube
-                      </h3>
-                      <p className="text-white/60 text-sm mt-1">Streamline exit preparation with unified data.</p>
-                    </Link>
+                  <div>
+                    <h2 className="text-2xl md:text-3xl font-normal text-white mb-3 group-hover:translate-x-2 transition-transform duration-500">
+                      Data Visibility as an ROI Driver
+                    </h2>
+                    <p className="text-white/70 text-base max-w-lg mb-4">
+                      How PE firms can leverage data infrastructure to unlock portfolio company value and streamline exit preparation.
+                    </p>
+                    <span className="inline-flex items-center text-[#60a5fa] text-sm font-medium group-hover:gap-3 transition-all">
+                      Read more <span className="ml-2 group-hover:ml-3 transition-all">→</span>
+                    </span>
                   </div>
                 </div>
+                
+                {/* Hover overlay effect */}
+                <div className="absolute inset-0 bg-[#2563EB]/0 group-hover:bg-[#2563EB]/10 transition-colors duration-500"></div>
+              </Link>
+
+              {/* Right Column - Stacked Cards (4 cols) */}
+              <div className="md:col-span-4 flex flex-col gap-4">
+                
+                {/* Case Study Card */}
+                <Link to="/case-studies/sell-side-readiness" className="group relative overflow-hidden bg-[#f5f5f5] flex-1 min-h-[200px]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#f5f5f5] to-[#e8e8e8]"></div>
+                  <div className="relative z-10 h-full flex flex-col justify-between p-6">
+                    <span className="inline-block px-3 py-1 bg-[#051c2c] text-white text-xs font-medium uppercase tracking-wider w-fit">Case Study</span>
+                    <div>
+                      <h3 className="text-lg font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">
+                        Preparing Portfolio Companies for Optimal Valuation
+                      </h3>
+                      <span className="inline-flex items-center text-[#2563EB] text-sm font-medium">
+                        Explore <span className="ml-1 group-hover:ml-2 transition-all">→</span>
+                      </span>
+                    </div>
+                  </div>
+                  {/* Recess effect on hover */}
+                  <div className="absolute inset-0 shadow-[inset_0_0_0_0_rgba(0,0,0,0)] group-hover:shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] transition-shadow duration-500"></div>
+                </Link>
+
+                {/* Service Offering Card */}
+                <Link to="/services/sell-side-readiness" className="group relative overflow-hidden bg-[#2563EB] flex-1 min-h-[200px]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8]"></div>
+                  <div className="relative z-10 h-full flex flex-col justify-between p-6">
+                    <span className="inline-block px-3 py-1 bg-white/20 text-white text-xs font-medium uppercase tracking-wider w-fit">Service Offering</span>
+                    <div>
+                      <h3 className="text-lg font-medium text-white mb-2">
+                        Sell-Side Readiness
+                      </h3>
+                      <p className="text-white/80 text-sm mb-2">End-to-end exit preparation support.</p>
+                      <span className="inline-flex items-center text-white text-sm font-medium">
+                        Learn more <span className="ml-1 group-hover:ml-2 transition-all">→</span>
+                      </span>
+                    </div>
+                  </div>
+                  {/* Scale effect on hover */}
+                  <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-500"></div>
+                </Link>
+
               </div>
+            </div>
+
+            {/* Secondary Row - 3 Column Grid */}
+            <div className="grid md:grid-cols-3 gap-4 mt-4">
+              
+              {/* Article Card */}
+              <Link to="/blog" className="group relative overflow-hidden bg-white border border-gray-200 p-6 hover:border-[#2563EB] transition-colors duration-300">
+                <span className="inline-block px-2 py-0.5 bg-gray-100 text-[#051c2c] text-xs font-medium uppercase tracking-wider mb-3">Insight</span>
+                <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">
+                  The Power of the Data Cube
+                </h3>
+                <p className="text-[#051c2c]/60 text-sm mb-3">Streamline exit preparation with unified data architecture.</p>
+                <span className="inline-flex items-center text-[#2563EB] text-sm font-medium">
+                  Read <span className="ml-1 group-hover:ml-2 transition-all">→</span>
+                </span>
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2563EB] group-hover:w-full transition-all duration-500"></div>
+              </Link>
+
+              {/* Case Study Card 2 */}
+              <Link to="/case-studies/corporate-development" className="group relative overflow-hidden bg-white border border-gray-200 p-6 hover:border-[#2563EB] transition-colors duration-300">
+                <span className="inline-block px-2 py-0.5 bg-gray-100 text-[#051c2c] text-xs font-medium uppercase tracking-wider mb-3">Case Study</span>
+                <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">
+                  Corporate Development
+                </h3>
+                <p className="text-[#051c2c]/60 text-sm mb-3">End-to-end M&A support for independent sponsors.</p>
+                <span className="inline-flex items-center text-[#2563EB] text-sm font-medium">
+                  Explore <span className="ml-1 group-hover:ml-2 transition-all">→</span>
+                </span>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2563EB] group-hover:w-full transition-all duration-500"></div>
+              </Link>
+
+              {/* Service Card 2 */}
+              <Link to="/services/dashboarding-data-portal" className="group relative overflow-hidden bg-white border border-gray-200 p-6 hover:border-[#2563EB] transition-colors duration-300">
+                <span className="inline-block px-2 py-0.5 bg-gray-100 text-[#051c2c] text-xs font-medium uppercase tracking-wider mb-3">Service</span>
+                <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">
+                  Dashboarding & Data Portal
+                </h3>
+                <p className="text-[#051c2c]/60 text-sm mb-3">Real-time visibility into portfolio performance.</p>
+                <span className="inline-flex items-center text-[#2563EB] text-sm font-medium">
+                  Learn more <span className="ml-1 group-hover:ml-2 transition-all">→</span>
+                </span>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2563EB] group-hover:w-full transition-all duration-500"></div>
+              </Link>
+
             </div>
           </div>
         </div>
