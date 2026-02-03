@@ -114,56 +114,34 @@ function HomePage() {
 
   return (
     <>
-      {/* Hero Section - McKinsey Style Editorial Layout with Vivid Graphics */}
+      {/* Hero Section - McKinsey Style Editorial Layout with Images + SVGs */}
       <section className="pt-16 bg-white">
-        {/* Top Headline Area */}
-        <div className="px-6 md:px-12 py-12 md:py-16 border-b border-gray-200">
+        {/* Top Headline Area - Blue Professional Gradient */}
+        <div className="px-6 md:px-12 py-16 md:py-20 bg-gradient-to-br from-[#051c2c] via-[#0a2540] to-[#1e3a5f]">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#051c2c] leading-[1.15] tracking-tight max-w-4xl">
-              Financial expertise for Private Equity and Corporate Development teams seeking <em className="text-[#2563EB]">measurable outcomes</em>.
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.15] tracking-tight max-w-4xl">
+              Financial expertise for Private Equity and Corporate Development teams seeking <em className="text-[#60a5fa]">measurable outcomes</em>.
             </h1>
           </div>
         </div>
 
-        {/* Featured Content Grid - McKinsey Style with Vivid Graphics */}
+        {/* Featured Content Grid - Mix of Images and SVGs */}
         <div className="px-6 md:px-12 py-8">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-12 gap-4">
               
-              {/* Featured Article - Large (8 cols) */}
-              <Link to="/blog/data-visibility-roi-driver" className="group md:col-span-8 relative overflow-hidden bg-[#051c2c] min-h-[400px] md:min-h-[500px]">
-                {/* Animated Background Pattern */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#051c2c] via-[#0a2540] to-[#1e3a5f]"></div>
-                
-                {/* Abstract Data Visualization Graphic */}
-                <div className="absolute top-0 right-0 w-full h-full opacity-30 group-hover:opacity-40 transition-opacity duration-700">
-                  <svg className="w-full h-full" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    {/* Animated grid lines */}
-                    <defs>
-                      <linearGradient id="gridGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#2563EB" stopOpacity="0.8"/>
-                        <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.2"/>
-                      </linearGradient>
-                    </defs>
-                    {/* Horizontal lines */}
-                    <line x1="0" y1="100" x2="800" y2="100" stroke="url(#gridGrad)" strokeWidth="1" opacity="0.3"/>
-                    <line x1="0" y1="200" x2="800" y2="200" stroke="url(#gridGrad)" strokeWidth="1" opacity="0.3"/>
-                    <line x1="0" y1="300" x2="800" y2="300" stroke="url(#gridGrad)" strokeWidth="1" opacity="0.3"/>
-                    <line x1="0" y1="400" x2="800" y2="400" stroke="url(#gridGrad)" strokeWidth="1" opacity="0.3"/>
-                    {/* Data bars */}
-                    <rect x="100" y="250" width="60" height="150" fill="#2563EB" opacity="0.6" className="group-hover:opacity-80 transition-opacity"/>
-                    <rect x="200" y="180" width="60" height="220" fill="#60a5fa" opacity="0.5" className="group-hover:opacity-70 transition-opacity"/>
-                    <rect x="300" y="120" width="60" height="280" fill="#2563EB" opacity="0.7" className="group-hover:opacity-90 transition-opacity"/>
-                    <rect x="400" y="200" width="60" height="200" fill="#60a5fa" opacity="0.4" className="group-hover:opacity-60 transition-opacity"/>
-                    <rect x="500" y="80" width="60" height="320" fill="#2563EB" opacity="0.8" className="group-hover:opacity-100 transition-opacity"/>
-                    {/* Trend line */}
-                    <path d="M 50 350 Q 200 300 350 200 T 650 100" stroke="#60a5fa" strokeWidth="3" fill="none" strokeLinecap="round"/>
-                    <circle cx="650" cy="100" r="8" fill="#60a5fa" className="group-hover:scale-150 transition-transform duration-500"/>
-                    {/* Floating data points */}
-                    <circle cx="150" cy="200" r="4" fill="#2563EB" opacity="0.8"/>
-                    <circle cx="450" cy="150" r="6" fill="#60a5fa" opacity="0.6"/>
-                    <circle cx="600" cy="250" r="5" fill="#2563EB" opacity="0.7"/>
-                  </svg>
+              {/* Featured Article - Large (8 cols) with External Image */}
+              <Link to="/blog/data-visibility-roi-driver" className="group md:col-span-8 relative overflow-hidden min-h-[400px] md:min-h-[500px]">
+                {/* External Image Background */}
+                <div className="absolute inset-0">
+                  <img 
+                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop" 
+                    alt="Data Analytics Dashboard"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c] via-[#051c2c]/70 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#051c2c]/60 to-transparent"></div>
                 </div>
                 
                 {/* Content */}
@@ -183,78 +161,46 @@ function HomePage() {
                     </span>
                   </div>
                 </div>
-                
-                {/* Hover overlay effect */}
-                <div className="absolute inset-0 bg-[#2563EB]/0 group-hover:bg-[#2563EB]/10 transition-colors duration-500"></div>
               </Link>
 
-              {/* Right Column - Stacked Cards (4 cols) */}
+              {/* Right Column - Stacked Cards (4 cols) with External Images */}
               <div className="md:col-span-4 flex flex-col gap-4">
                 
-                {/* Case Study Card - With Growth Chart Graphic */}
-                <Link to="/case-studies/sell-side-readiness" className="group relative overflow-hidden bg-[#f5f5f5] flex-1 min-h-[240px]">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#f5f5f5] to-[#e8e8e8]"></div>
-                  
-                  {/* Case Study Graphic - Upward Trend */}
-                  <div className="absolute top-4 right-4 w-32 h-24 group-hover:scale-110 transition-transform duration-500">
-                    <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      {/* Background shape */}
-                      <rect x="0" y="0" width="120" height="80" rx="8" fill="white" opacity="0.5"/>
-                      {/* Chart bars */}
-                      <rect x="15" y="50" width="12" height="20" fill="#2563EB" opacity="0.3"/>
-                      <rect x="32" y="40" width="12" height="30" fill="#2563EB" opacity="0.5"/>
-                      <rect x="49" y="25" width="12" height="45" fill="#2563EB" opacity="0.7"/>
-                      <rect x="66" y="15" width="12" height="55" fill="#2563EB" opacity="0.9"/>
-                      <rect x="83" y="5" width="12" height="65" fill="#2563EB"/>
-                      {/* Trend arrow */}
-                      <path d="M 20 60 L 50 35 L 80 20 L 105 8" stroke="#051c2c" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M 95 5 L 105 8 L 102 18" stroke="#051c2c" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                      {/* Value indicator */}
-                      <circle cx="105" cy="8" r="4" fill="#2563EB"/>
-                    </svg>
+                {/* Case Study Card - With External Image */}
+                <Link to="/case-studies/sell-side-readiness" className="group relative overflow-hidden flex-1 min-h-[240px]">
+                  {/* External Image Background */}
+                  <div className="absolute inset-0">
+                    <img 
+                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" 
+                      alt="Business Growth Chart"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c] via-[#051c2c]/50 to-transparent"></div>
                   </div>
                   
                   <div className="relative z-10 h-full flex flex-col justify-between p-6">
                     <span className="inline-block px-3 py-1 bg-[#051c2c] text-white text-xs font-medium uppercase tracking-wider w-fit">Case Study</span>
                     <div>
-                      <h3 className="text-lg font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">
+                      <h3 className="text-lg font-medium text-white mb-2 group-hover:text-[#60a5fa] transition-colors">
                         Preparing Portfolio Companies for Optimal Valuation
                       </h3>
-                      <span className="inline-flex items-center text-[#2563EB] text-sm font-medium">
+                      <span className="inline-flex items-center text-[#60a5fa] text-sm font-medium">
                         Explore <span className="ml-1 group-hover:ml-2 transition-all">→</span>
                       </span>
                     </div>
                   </div>
-                  {/* Recess effect on hover */}
-                  <div className="absolute inset-0 shadow-[inset_0_0_0_0_rgba(0,0,0,0)] group-hover:shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] transition-shadow duration-500"></div>
                 </Link>
 
-                {/* Service Offering Card - With Document/Process Graphic */}
-                <Link to="/services/sell-side-readiness" className="group relative overflow-hidden bg-[#2563EB] flex-1 min-h-[240px]">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8]"></div>
-                  
-                  {/* Service Graphic - Document/Checklist Icon */}
-                  <div className="absolute top-4 right-4 w-28 h-28 group-hover:rotate-6 transition-transform duration-500">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      {/* Document stack */}
-                      <rect x="15" y="20" width="60" height="70" rx="4" fill="white" opacity="0.2"/>
-                      <rect x="20" y="15" width="60" height="70" rx="4" fill="white" opacity="0.3"/>
-                      <rect x="25" y="10" width="60" height="70" rx="4" fill="white" opacity="0.9"/>
-                      {/* Checklist lines */}
-                      <rect x="35" y="25" width="30" height="3" rx="1.5" fill="#2563EB"/>
-                      <rect x="35" y="35" width="25" height="3" rx="1.5" fill="#2563EB"/>
-                      <rect x="35" y="45" width="35" height="3" rx="1.5" fill="#2563EB"/>
-                      {/* Checkmarks */}
-                      <circle cx="30" cy="26.5" r="4" fill="#2563EB"/>
-                      <path d="M 28 26.5 L 29.5 28 L 32 25" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      <circle cx="30" cy="36.5" r="4" fill="#2563EB"/>
-                      <path d="M 28 36.5 L 29.5 38 L 32 35" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      <circle cx="30" cy="46.5" r="4" fill="#2563EB"/>
-                      <path d="M 28 46.5 L 29.5 48 L 32 45" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      {/* Graph icon on document */}
-                      <rect x="35" y="55" width="40" height="20" rx="2" fill="#f5f5f5"/>
-                      <path d="M 40 70 L 48 62 L 55 65 L 65 55 L 72 58" stroke="#2563EB" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                {/* Service Offering Card - With External Image */}
+                <Link to="/services/sell-side-readiness" className="group relative overflow-hidden flex-1 min-h-[240px]">
+                  {/* External Image Background */}
+                  <div className="absolute inset-0">
+                    <img 
+                      src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop" 
+                      alt="Professional Consulting"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#2563EB] via-[#2563EB]/60 to-[#2563EB]/30"></div>
                   </div>
                   
                   <div className="relative z-10 h-full flex flex-col justify-between p-6">
@@ -269,8 +215,6 @@ function HomePage() {
                       </span>
                     </div>
                   </div>
-                  {/* Scale effect on hover */}
-                  <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-500"></div>
                 </Link>
 
               </div>
