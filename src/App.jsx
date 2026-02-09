@@ -15,7 +15,7 @@ import SellSideReadinessCaseStudiesPage from './SellSideReadinessCaseStudiesPage
 import CorporateDevelopmentCaseStudiesPage from './CorporateDevelopmentCaseStudiesPage.jsx';
 import MassTortDigestTemplate from './components/newsletters/MassTortDigestTemplate.jsx';
 import NewsletterPage from './components/newsletters/NewsletterPage.jsx';
-import NewslettersListPage from './components/newsletters/NewslettersListPage.jsx';
+// import NewslettersListPage from './components/newsletters/NewslettersListPage.jsx';  // Unused - now using MassTortDigestTemplate
 import AboutUsPage from './AboutUsPage.jsx';
 import ContactUsPage from './ContactUsPage.jsx';
 import BlogPage from './BlogPage.jsx';
@@ -66,7 +66,56 @@ function Navigation() {
           </Link>
 
           <div className="hidden md:flex gap-8 items-center">
-            <Link to="/services/sell-side-readiness" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">Services</Link>
+            {/* Services Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setServicesDropdownOpen(true)}
+              onMouseLeave={() => setServicesDropdownOpen(false)}
+            >
+              <button 
+                className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium flex items-center gap-1"
+                onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
+              >
+                Services
+                <svg className={`w-4 h-4 transition-transform ${servicesDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {servicesDropdownOpen && (
+                <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-50">
+                  <Link 
+                    to="/services/sell-side-readiness" 
+                    className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB] transition-colors"
+                    onClick={() => setServicesDropdownOpen(false)}
+                  >
+                    Sell-Side Readiness
+                  </Link>
+                  <Link 
+                    to="/services/corporate-development" 
+                    className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB] transition-colors"
+                    onClick={() => setServicesDropdownOpen(false)}
+                  >
+                    Corporate Development
+                  </Link>
+                  <Link 
+                    to="/services/dashboarding-data-portal" 
+                    className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB] transition-colors"
+                    onClick={() => setServicesDropdownOpen(false)}
+                  >
+                    Dashboarding & Data Portal
+                  </Link>
+                  <Link 
+                    to="/services/mass-tort" 
+                    className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB] transition-colors"
+                    onClick={() => setServicesDropdownOpen(false)}
+                  >
+                    Mass Tort
+                  </Link>
+                </div>
+              )}
+            </div>
+
             <Link to="/case-studies" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">Case Studies</Link>
             <Link to="/blog" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">Insights</Link>
             <Link to="/about-us" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">About</Link>
@@ -80,7 +129,14 @@ function Navigation() {
 
         {mobileMenuOpen && (
           <div className="md:hidden mt-3 pb-3 flex flex-col gap-2 text-sm border-t border-gray-100 pt-3">
-            <Link to="/services/sell-side-readiness" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Services</Link>
+            {/* Services Section in Mobile Menu */}
+            <div className="font-medium text-[#051c2c] py-1">Services</div>
+            <div className="pl-4 flex flex-col gap-1 border-l-2 border-gray-200 ml-2">
+              <Link to="/services/sell-side-readiness" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Sell-Side Readiness</Link>
+              <Link to="/services/corporate-development" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Corporate Development</Link>
+              <Link to="/services/dashboarding-data-portal" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Dashboarding & Data Portal</Link>
+              <Link to="/services/mass-tort" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Mass Tort</Link>
+            </div>
             <Link to="/case-studies" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Case Studies</Link>
             <Link to="/blog" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Insights</Link>
             <Link to="/about-us" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">About</Link>
@@ -357,7 +413,7 @@ function HomePage() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-px bg-gray-200">
+          <div className="grid md:grid-cols-2 gap-px bg-gray-200">
             <Link to="/services/sell-side-readiness" className="group bg-white p-6 hover:bg-gray-50 transition-colors">
               <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Sell-Side Readiness</h3>
               <p className="text-[#051c2c]/60 text-sm">
@@ -376,6 +432,13 @@ function HomePage() {
               <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Dashboarding & Data Portal</h3>
               <p className="text-[#051c2c]/60 text-sm">
                 Custom dashboards for real-time portfolio visibility.
+              </p>
+            </Link>
+
+            <Link to="/services/mass-tort" className="group bg-white p-6 hover:bg-gray-50 transition-colors">
+              <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Mass Tort</h3>
+              <p className="text-[#051c2c]/60 text-sm">
+                End-to-end litigation intelligence and operational infrastructure for law firms handling mass tort litigation at scale.
               </p>
             </Link>
           </div>
@@ -598,7 +661,7 @@ export default function NorthCastleConsulting() {
         {/* Newsletter */}
         <Route path="/newsletter" element={<MassTortDigestTemplate />} />
         <Route path="/newsletter/:weekId" element={<NewsletterPage />} />
-        <Route path="/newsletters" element={<NewslettersListPage />} />
+        <Route path="/newsletters" element={<MassTortDigestTemplate />} />
       </Routes>
     </div>
   );
