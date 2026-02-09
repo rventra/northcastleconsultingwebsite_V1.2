@@ -14,6 +14,8 @@ import DataChallengedCaseStudyPage from './DataChallengedCaseStudyPage.jsx';
 import SellSideReadinessCaseStudiesPage from './SellSideReadinessCaseStudiesPage.jsx';
 import CorporateDevelopmentCaseStudiesPage from './CorporateDevelopmentCaseStudiesPage.jsx';
 import MassTortDigestTemplate from './components/newsletters/MassTortDigestTemplate.jsx';
+import NewsletterPage from './components/newsletters/NewsletterPage.jsx';
+import NewslettersListPage from './components/newsletters/NewslettersListPage.jsx';
 import AboutUsPage from './AboutUsPage.jsx';
 import ContactUsPage from './ContactUsPage.jsx';
 import BlogPage from './BlogPage.jsx';
@@ -595,6 +597,8 @@ export default function NorthCastleConsulting() {
 
         {/* Newsletter */}
         <Route path="/newsletter" element={<MassTortDigestTemplate />} />
+        <Route path="/newsletter/:weekId" element={<NewsletterPage />} />
+        <Route path="/newsletters" element={<NewslettersListPage />} />
       </Routes>
     </div>
   );
