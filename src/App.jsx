@@ -73,12 +73,12 @@ function Navigation() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              <div className="absolute top-full left-0 mt-1 w-56 bg-white border border-gray-200 rounded-lg shadow-lg py-2 hidden group-hover:block z-50">
+              <div className="absolute top-full left-0 pt-2 w-56 hidden group-hover:block z-50"><div className="bg-white border border-gray-200 rounded-lg shadow-lg py-2">
                 <Link to="/services/sell-side-readiness" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Sell-Side Readiness</Link>
                 <Link to="/services/corporate-development" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Corporate Development</Link>
                 <Link to="/services/mass-tort" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Mass Tort</Link>
                 <Link to="/services/dashboarding-data-portal" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Dashboarding & Data Portal</Link>
-              </div>
+              </div></div>
             </div>
             <Link to="/case-studies" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">Case Studies</Link>
             <Link to="/blog" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">Insights</Link>
