@@ -14,11 +14,11 @@ if (!fs.existsSync(publicDir)) {
   fs.mkdirSync(publicDir, { recursive: true });
 }
 
-// Get all .json files from the data directory
-let jsonFiles;
+// Get all .js files from the data directory (newsletter data files)
+let jsFiles;
 try {
-  jsonFiles = fs.readdirSync(dataDir)
-    .filter(file => file.endsWith('.json'))
+  jsFiles = fs.readdirSync(dataDir)
+    .filter(file => file.startsWith('week-') && file.endsWith('.js'))
     .map(file => {
       const filePath = path.join(dataDir, file);
       const stats = fs.statSync(filePath);
@@ -33,15 +33,15 @@ try {
   process.exit(1);
 }
 
-if (jsonFiles.length === 0) {
-  console.error('No .json files found in', dataDir);
+if (jsFiles.length === 0) {
+  console.error('No week-*.js files found in', dataDir);
   process.exit(1);
 }
 
 // Sort by modification time (most recent first)
-jsonFiles.sort((a, b) => b.mtime - a.mtime);
+jsFiles.sort((a, b) => b.mtime - a.mtime);
 
-const latestFile = jsonFiles[0];
+const latestFile = jsFiles[0];
 
 // Copy the latest file to public/masstort.json
 try {
