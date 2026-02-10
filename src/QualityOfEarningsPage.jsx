@@ -172,21 +172,21 @@ export default function QualityOfEarningsPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SPLIT SECTION: Framework (Left) | EBITDA Bridge + Components (Right)
+          SPLIT SECTION: Framework (Left) | Interactive Components (Right)
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="py-20 md:py-28 px-6 bg-[#F9F9F7]">
-        <div className="max-w-7xl mx-auto">
+      <div className="py-16 md:py-20 px-4 md:px-6 bg-[#F9F9F7]">
+        <div className="max-w-[1600px] mx-auto">
           {/* Section Header */}
-          <div className="mb-12">
+          <div className="mb-10">
             <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-2">Our Approach</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#051c2c]">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#051c2c]">
               Challenge by Challenge, Component by Component
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8">
+          <div className="grid lg:grid-cols-2 gap-6">
             {/* LEFT: Challenge/Framework Cards */}
-            <div className="lg:col-span-7 space-y-6">
+            <div className="space-y-4">
               {[
                 {
                   num: '01',
@@ -216,25 +216,25 @@ export default function QualityOfEarningsPage() {
                 <div key={item.num} className="bg-white border-l-4 border-[#2563EB] shadow-sm overflow-hidden">
                   <div className="grid md:grid-cols-12 gap-0">
                     {/* Challenge Side */}
-                    <div className="md:col-span-4 bg-[#051c2c] p-6 text-white">
-                      <div className="flex items-baseline gap-2 mb-2">
-                        <span className="text-3xl font-bold text-[#2563EB]">{item.num}</span>
-                        <h3 className="text-lg font-bold leading-tight">{item.challenge}</h3>
+                    <div className="md:col-span-4 bg-[#051c2c] p-5 text-white">
+                      <div className="flex items-baseline gap-2 mb-1">
+                        <span className="text-2xl font-bold text-[#2563EB]">{item.num}</span>
+                        <h3 className="text-base font-bold leading-tight">{item.challenge}</h3>
                       </div>
                       <p className="text-white/70 text-sm leading-relaxed">{item.desc}</p>
                     </div>
                     
                     {/* Framework Components */}
-                    <div className="md:col-span-8 p-6">
-                      <p className="text-xs font-bold uppercase tracking-wider text-[#051c2c]/40 mb-3">Framework Applied</p>
-                      <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="md:col-span-8 p-5">
+                      <p className="text-xs font-bold uppercase tracking-wider text-[#051c2c]/40 mb-2">Framework Applied</p>
+                      <div className="flex flex-wrap gap-2 mb-3">
                         {item.framework.map((component) => (
-                          <span key={component} className="inline-block bg-[#F9F9F7] border border-gray-200 px-3 py-1.5 text-xs font-semibold text-[#051c2c]">
+                          <span key={component} className="inline-block bg-[#F9F9F7] border border-gray-200 px-2 py-1 text-xs font-semibold text-[#051c2c]">
                             {component}
                           </span>
                         ))}
                       </div>
-                      <p className="text-sm text-[#051c2c]/70">
+                      <p className="text-xs text-[#051c2c]/70">
                         <span className="text-[#2563EB] font-semibold">Result:</span> {item.desc}
                       </p>
                     </div>
@@ -243,18 +243,18 @@ export default function QualityOfEarningsPage() {
               ))}
             </div>
 
-            {/* RIGHT: EBITDA Bridge + 4 Key Components */}
-            <div className="lg:col-span-5 space-y-6">
-              {/* EBITDA Bridge */}
-              <div className="bg-[#051c2c] p-6 text-white">
-                <h3 className="text-xl font-bold mb-4">Adjusted EBITDA Bridge</h3>
-                <div className="space-y-4 text-sm">
+            {/* RIGHT: Interactive Framework Components */}
+            <div className="space-y-4">
+              {/* EBITDA Bridge - Always Visible */}
+              <div className="bg-[#051c2c] p-5 text-white">
+                <h3 className="text-lg font-bold mb-3">Adjusted EBITDA Bridge</h3>
+                <div className="space-y-3 text-sm">
                   <div className="flex items-center gap-2">
                     <span className="font-bold">Reported EBITDA</span>
                     <span className="text-white/40 text-xs">(from statements)</span>
                   </div>
                   
-                  <div className="pl-4 space-y-2 border-l-2 border-[#2563EB]">
+                  <div className="pl-3 space-y-1.5 border-l-2 border-[#2563EB]">
                     <div>
                       <span className="text-[#60a5fa] font-semibold text-xs">+ Expense Add-Backs</span>
                       <p className="text-white/50 text-xs">Owner comp, personal expenses, one-time costs</p>
@@ -273,42 +273,50 @@ export default function QualityOfEarningsPage() {
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-white/20">
-                    <span className="text-lg font-bold">= Adjusted EBITDA</span>
-                    <p className="text-white/50 text-xs mt-1">Sustainable, transferrable cash flow</p>
+                  <div className="pt-2 border-t border-white/20">
+                    <span className="text-base font-bold">= Adjusted EBITDA</span>
+                    <p className="text-white/50 text-xs mt-0.5">Sustainable, transferrable cash flow</p>
                   </div>
                 </div>
               </div>
 
-              {/* 4 Key Analytical Components */}
-              <div className="bg-white p-6 border-t-4 border-[#EDB624] shadow-sm">
-                <h3 className="text-lg font-bold text-[#051c2c] mb-4">Key Analytical Components</h3>
-                
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-[#051c2c] text-sm">Adjusted EBITDA Bridge</h4>
-                    <p className="text-xs text-[#051c2c]/60 mt-1">Comprehensive normalization with confidence scoring</p>
-                  </div>
-                  <div className="h-px bg-gray-100"></div>
-                  
-                  <div>
-                    <h4 className="font-semibold text-[#051c2c] text-sm">Revenue Quality Tiers</h4>
-                    <p className="text-xs text-[#051c2c]/60 mt-1">5-tier taxonomy from contracted to windfall</p>
-                  </div>
-                  <div className="h-px bg-gray-100"></div>
-                  
-                  <div>
-                    <h4 className="font-semibold text-[#051c2c] text-sm">Working Capital Assessment</h4>
-                    <p className="text-xs text-[#051c2c]/60 mt-1">DSO/DIO/DPO analysis with manipulation detection</p>
-                  </div>
-                  <div className="h-px bg-gray-100"></div>
-                  
-                  <div>
-                    <h4 className="font-semibold text-[#051c2c] text-sm">Cash Flow Reconciliation</h4>
-                    <p className="text-xs text-[#051c2c]/60 mt-1">Net income to FCF bridge with variance analysis</p>
+              {/* Interactive Component Cards */}
+              {[
+                {
+                  title: 'Revenue Quality Assessment',
+                  short: 'Five-tier taxonomy from contracted to windfall',
+                  detail: 'We classify revenue into 5 tiers: (1) Recurring Contracted (90%+ renewal), (2) Sticky Repeat Business, (3) Project-Based with Backlog, (4) One-Time Project, (5) Windfall/Spot Market. Each tier receives different valuation treatment.',
+                },
+                {
+                  title: 'Working Capital Deep Dive',
+                  short: 'DSO/DIO/DPO analysis with manipulation detection',
+                  detail: 'Calculate Days Sales Outstanding, Days Inventory Outstanding, Days Payable Outstanding. Identify pre-transaction window dressing: unusual A/R decreases, sudden inventory liquidation, extended payables. Compare last 90 days to trailing 12-month averages.',
+                },
+                {
+                  title: 'Cash Flow Reconciliation',
+                  short: 'Net income to FCF bridge with variance analysis',
+                  detail: 'Bridge from Net Income to Free Cash Flow: add back D&A, adjust for working capital changes, subtract sustaining CapEx. Compare Adjusted EBITDA - CapEx to Operating Cash Flow. Variance >15% requires investigation.',
+                },
+              ].map((item, idx) => (
+                <div key={item.title} className="group bg-white border-l-4 border-[#EDB624] shadow-sm">
+                  <div className="p-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h4 className="font-bold text-[#051c2c] text-sm mb-1">{item.title}</h4>
+                        <p className="text-xs text-[#051c2c]/60">{item.short}</p>
+                      </div>
+                      <button className="ml-3 text-[#2563EB] opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                      </button>
+                    </div>
+                    <div className="hidden group-hover:block mt-3 pt-3 border-t border-gray-100">
+                      <p className="text-xs text-[#051c2c]/80 leading-relaxed">{item.detail}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
