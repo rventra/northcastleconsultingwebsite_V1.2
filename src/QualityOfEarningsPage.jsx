@@ -172,118 +172,142 @@ export default function QualityOfEarningsPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          QoE FRAMEWORK — Connected to Challenges
+          SPLIT SECTION: Framework (Left) | EBITDA Bridge + Components (Right)
       ═══════════════════════════════════════════════════════════════ */}
       <div className="py-20 md:py-28 px-6 bg-[#F9F9F7]">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">How We Address Each Challenge</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#051c2c]">
-              The QoE Analysis Framework
+          {/* Section Header */}
+          <div className="mb-12">
+            <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-2">Our Approach</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#051c2c]">
+              Challenge by Challenge, Component by Component
             </h2>
           </div>
 
-          <div className="space-y-8">
-            {[
-              {
-                num: '01',
-                challenge: 'Unsustainable Earnings',
-                framework: ['Adjusted EBITDA Bridge', 'Add-Back Validation', 'Cash Flow Reconciliation'],
-                desc: 'We reconstruct true earnings baseline through comprehensive normalization and confidence-scored adjustments.',
-              },
-              {
-                num: '02',
-                challenge: 'Working Capital Manipulation',
-                framework: ['Working Capital Deep Dive', 'Cash Flow Reconciliation', 'Data Room Index'],
-                desc: 'We analyze 24+ months of DSO/DIO/DPO trends to identify artificial cash flow boosts and determine true NWC requirements.',
-              },
-              {
-                num: '03',
-                challenge: 'Revenue Quality Issues',
-                framework: ['Revenue Quality Assessment', 'Risk Matrix', 'Management Q&A'],
-                desc: 'We apply five-tier revenue taxonomy and concentration analysis to assess sustainability and customer risk.',
-              },
-              {
-                num: '04',
-                challenge: 'Hidden Liabilities',
-                framework: ['Risk Matrix', 'Data Room Index', 'Management Q&A'],
-                desc: 'We conduct forensic analysis with red/yellow/green flag categorization to surface unrecorded obligations.',
-              },
-            ].map((item) => (
-              <div key={item.num} className="bg-white border-l-4 border-[#2563EB] shadow-sm overflow-hidden">
-                <div className="grid md:grid-cols-12 gap-0">
-                  {/* Challenge Side */}
-                  <div className="md:col-span-4 bg-[#051c2c] p-8 text-white">
-                    <div className="flex items-baseline gap-3 mb-3">
-                      <span className="text-4xl font-bold text-[#2563EB]">{item.num}</span>
-                      <h3 className="text-xl font-bold">{item.challenge}</h3>
+          <div className="grid lg:grid-cols-12 gap-8">
+            {/* LEFT: Challenge/Framework Cards */}
+            <div className="lg:col-span-7 space-y-6">
+              {[
+                {
+                  num: '01',
+                  challenge: 'Unsustainable Earnings',
+                  framework: ['Adjusted EBITDA Bridge', 'Add-Back Validation', 'Cash Flow Reconciliation'],
+                  desc: 'We reconstruct true earnings baseline through comprehensive normalization and confidence-scored adjustments.',
+                },
+                {
+                  num: '02',
+                  challenge: 'Working Capital Manipulation',
+                  framework: ['Working Capital Deep Dive', 'Cash Flow Reconciliation', 'Data Room Index'],
+                  desc: 'We analyze 24+ months of DSO/DIO/DPO trends to identify artificial cash flow boosts and determine true NWC requirements.',
+                },
+                {
+                  num: '03',
+                  challenge: 'Revenue Quality Issues',
+                  framework: ['Revenue Quality Assessment', 'Risk Matrix', 'Management Q&A'],
+                  desc: 'We apply five-tier revenue taxonomy and concentration analysis to assess sustainability and customer risk.',
+                },
+                {
+                  num: '04',
+                  challenge: 'Hidden Liabilities',
+                  framework: ['Risk Matrix', 'Data Room Index', 'Management Q&A'],
+                  desc: 'We conduct forensic analysis with red/yellow/green flag categorization to surface unrecorded obligations.',
+                },
+              ].map((item) => (
+                <div key={item.num} className="bg-white border-l-4 border-[#2563EB] shadow-sm overflow-hidden">
+                  <div className="grid md:grid-cols-12 gap-0">
+                    {/* Challenge Side */}
+                    <div className="md:col-span-4 bg-[#051c2c] p-6 text-white">
+                      <div className="flex items-baseline gap-2 mb-2">
+                        <span className="text-3xl font-bold text-[#2563EB]">{item.num}</span>
+                        <h3 className="text-lg font-bold leading-tight">{item.challenge}</h3>
+                      </div>
+                      <p className="text-white/70 text-sm leading-relaxed">{item.desc}</p>
                     </div>
-                    <p className="text-white/70 leading-relaxed">{item.desc}</p>
+                    
+                    {/* Framework Components */}
+                    <div className="md:col-span-8 p-6">
+                      <p className="text-xs font-bold uppercase tracking-wider text-[#051c2c]/40 mb-3">Framework Applied</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {item.framework.map((component) => (
+                          <span key={component} className="inline-block bg-[#F9F9F7] border border-gray-200 px-3 py-1.5 text-xs font-semibold text-[#051c2c]">
+                            {component}
+                          </span>
+                        ))}
+                      </div>
+                      <p className="text-sm text-[#051c2c]/70">
+                        <span className="text-[#2563EB] font-semibold">Result:</span> {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* RIGHT: EBITDA Bridge + 4 Key Components */}
+            <div className="lg:col-span-5 space-y-6">
+              {/* EBITDA Bridge */}
+              <div className="bg-[#051c2c] p-6 text-white">
+                <h3 className="text-xl font-bold mb-4">Adjusted EBITDA Bridge</h3>
+                <div className="space-y-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold">Reported EBITDA</span>
+                    <span className="text-white/40 text-xs">(from statements)</span>
                   </div>
                   
-                  {/* Framework Components */}
-                  <div className="md:col-span-8 p-8">
-                    <p className="text-xs font-bold uppercase tracking-wider text-[#051c2c]/40 mb-4">Framework Components Applied</p>
-                    <div className="flex flex-wrap gap-3 mb-6">
-                      {item.framework.map((component) => (
-                        <span key={component} className="inline-block bg-[#F9F9F7] border border-gray-200 px-4 py-2 text-sm font-semibold text-[#051c2c]">
-                          {component}
-                        </span>
-                      ))}
+                  <div className="pl-4 space-y-2 border-l-2 border-[#2563EB]">
+                    <div>
+                      <span className="text-[#60a5fa] font-semibold text-xs">+ Expense Add-Backs</span>
+                      <p className="text-white/50 text-xs">Owner comp, personal expenses, one-time costs</p>
                     </div>
-                    <div className="h-px bg-gray-200 mb-6"></div>
-                    <p className="text-[#051c2c]/70 leading-relaxed">
-                      <span className="text-[#2563EB] font-semibold">Result:</span> {item.desc}
-                    </p>
+                    <div>
+                      <span className="text-amber-400 font-semibold text-xs">- Revenue Adjustments</span>
+                      <p className="text-white/50 text-xs">One-time sales, insurance recoveries</p>
+                    </div>
+                    <div>
+                      <span className="text-[#60a5fa] font-semibold text-xs">± Normalizations</span>
+                      <p className="text-white/50 text-xs">Rent adjustments, deferred maintenance</p>
+                    </div>
+                    <div>
+                      <span className="text-[#60a5fa] font-semibold text-xs">± Run-Rate</span>
+                      <p className="text-white/50 text-xs">New contracts, lost customers</p>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-white/20">
+                    <span className="text-lg font-bold">= Adjusted EBITDA</span>
+                    <p className="text-white/50 text-xs mt-1">Sustainable, transferrable cash flow</p>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          ADJUSTED EBITDA BRIDGE — Dark Section
-      ═══════════════════════════════════════════════════════════════ */}
-      <div className="py-20 md:py-28 px-6 bg-[#051c2c]">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-16">
-            <p className="text-[#60a5fa] text-sm font-semibold tracking-widest uppercase mb-3">The Output</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-white">
-              The Adjusted EBITDA Bridge
-            </h2>
-          </div>
-
-          <div className="bg-white/5 border border-white/10 p-8 md:p-12">
-            <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <span className="text-2xl font-bold text-white">Reported EBITDA</span>
-                <span className="text-white/40">(from financial statements)</span>
-              </div>
-              
-              <div className="pl-8 space-y-4 border-l-2 border-[#2563EB]">
-                <div>
-                  <span className="text-[#60a5fa] font-semibold">+ Expense Add-Backs</span>
-                  <p className="text-white/60 text-sm mt-1">Owner compensation above market, personal expenses, one-time costs, litigation settlements, restructuring</p>
+              {/* 4 Key Analytical Components */}
+              <div className="bg-white p-6 border-t-4 border-[#EDB624] shadow-sm">
+                <h3 className="text-lg font-bold text-[#051c2c] mb-4">Key Analytical Components</h3>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold text-[#051c2c] text-sm">Adjusted EBITDA Bridge</h4>
+                    <p className="text-xs text-[#051c2c]/60 mt-1">Comprehensive normalization with confidence scoring</p>
+                  </div>
+                  <div className="h-px bg-gray-100"></div>
+                  
+                  <div>
+                    <h4 className="font-semibold text-[#051c2c] text-sm">Revenue Quality Tiers</h4>
+                    <p className="text-xs text-[#051c2c]/60 mt-1">5-tier taxonomy from contracted to windfall</p>
+                  </div>
+                  <div className="h-px bg-gray-100"></div>
+                  
+                  <div>
+                    <h4 className="font-semibold text-[#051c2c] text-sm">Working Capital Assessment</h4>
+                    <p className="text-xs text-[#051c2c]/60 mt-1">DSO/DIO/DPO analysis with manipulation detection</p>
+                  </div>
+                  <div className="h-px bg-gray-100"></div>
+                  
+                  <div>
+                    <h4 className="font-semibold text-[#051c2c] text-sm">Cash Flow Reconciliation</h4>
+                    <p className="text-xs text-[#051c2c]/60 mt-1">Net income to FCF bridge with variance analysis</p>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-amber-400 font-semibold">- Revenue Adjustments</span>
-                  <p className="text-white/60 text-sm mt-1">One-time asset sales, insurance recoveries, related-party above-market pricing, pull-forward revenue</p>
-                </div>
-                <div>
-                  <span className="text-[#60a5fa] font-semibold">± Operational Normalizations</span>
-                  <p className="text-white/60 text-sm mt-1">Below-market rent, deferred maintenance, inventory write-downs</p>
-                </div>
-                <div>
-                  <span className="text-[#60a5fa] font-semibold">± Run-Rate Adjustments</span>
-                  <p className="text-white/60 text-sm mt-1">New contracts not yet producing, lost customers, recent hires, regulatory cost increases</p>
-                </div>
-              </div>
-
-              <div className="pt-6 border-t border-white/20">
-                <span className="text-2xl font-bold text-white">= Adjusted EBITDA</span>
-                <p className="text-white/60 mt-2">Sustainable, transferrable cash flow under new ownership</p>
               </div>
             </div>
           </div>
