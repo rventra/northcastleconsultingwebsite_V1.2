@@ -3,6 +3,7 @@ import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
 import MassTortPage from './MassTortPage.jsx';
 import DashboardingDataPortalPage from './DashboardingDataPortalPage.jsx';
 import SellSideReadinessPage from './SellSideReadinessPage.jsx';
+import QualityOfEarningsPage from './QualityOfEarningsPage.jsx';
 import CorporateDevPage from './CorporateDevPage.jsx';
 import BuildingCredibilityPage from './BuildingCredibilityPage.jsx';
 import EnhancingInvestmentCredibilityPage from './EnhancingInvestmentCredibilityPage.jsx';
@@ -78,6 +79,7 @@ function Navigation() {
                 <Link to="/services/corporate-development" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Corporate Development</Link>
                 <Link to="/services/mass-tort" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Mass Tort</Link>
                 <Link to="/services/dashboarding-data-portal" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Dashboarding & Data Portal</Link>
+                <Link to="/services/quality-of-earnings" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Quality of Earnings</Link>
               </div></div>
             </div>
             <Link to="/case-studies" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">Case Studies</Link>
@@ -99,6 +101,7 @@ function Navigation() {
               <Link to="/services/corporate-development" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Corporate Development</Link>
               <Link to="/services/mass-tort" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Mass Tort</Link>
               <Link to="/services/dashboarding-data-portal" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Dashboarding & Data Portal</Link>
+              <Link to="/services/quality-of-earnings" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Quality of Earnings</Link>
             </div>
             <Link to="/case-studies" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Case Studies</Link>
             <Link to="/blog" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Insights</Link>
@@ -404,6 +407,13 @@ function HomePage() {
                 End-to-end litigation intelligence and operational infrastructure for law firms.
               </p>
             </Link>
+
+            <Link to="/services/quality-of-earnings" className="group bg-white p-6 hover:bg-gray-50 transition-colors">
+              <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Quality of Earnings</h3>
+              <p className="text-[#051c2c]/60 text-sm">
+                Forensic financial analysis for buy-side and sell-side due diligence.
+              </p>
+            </Link>
           </div>
         </div>
       </section>
@@ -600,6 +610,7 @@ export default function NorthCastleConsulting() {
         <Route path="/services/dashboarding-data-portal" element={<DashboardingDataPortalPage />} />
         <Route path="/services/corporate-development" element={<CorporateDevPage />} />
         <Route path="/services/mass-tort" element={<MassTortPage />} />
+        <Route path="/services/quality-of-earnings" element={<QualityOfEarningsPage />} />
 
         {/* Case Studies Landing Page */}
         <Route path="/case-studies" element={<CaseStudiesPage />} />
