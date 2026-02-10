@@ -96,29 +96,53 @@ export default function SellSideReadinessPage() {
   return (
     <div className="pt-16">
       {/* ═══════════════════════════════════════════════════════════════
-          HERO
+          HERO — Full-bleed editorial style like landing page
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-[#051c2c] py-20 md:py-28 px-6">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-[#60a5fa] text-sm md:text-base font-semibold tracking-widest uppercase mb-4">
-            Private Equity Services
-          </p>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] max-w-4xl">
-            Sell-Side Readiness
-          </h1>
-          <p className="text-2xl md:text-3xl text-white/80 font-light mb-6 max-w-3xl">
-            Maximizing Value &amp; Ensuring a Seamless Transaction
-          </p>
-          <p className="text-lg md:text-xl text-white/60 max-w-2xl leading-relaxed mb-12">
-            North Castle's Sell-Side Readiness services prepare companies for a smooth, efficient, and high-value exit 
-            by optimizing financial transparency, streamlining processes, and proactively addressing potential buyer concerns.
-          </p>
-          <a
-            href="mailto:admin@northcastleconsulting.com?subject=Sell-Side%20Readiness%20Inquiry"
-            className="inline-block bg-white text-[#051c2c] px-10 py-5 font-semibold text-lg hover:shadow-xl hover:bg-gray-50 transition-all duration-300 shadow-lg"
-          >
-            Prepare Your Exit
-          </a>
+      <div className="pt-16">
+        {/* Top Headline Area — McKinsey Blue Gradient */}
+        <div className="relative min-h-[600px] md:min-h-[700px] flex items-end">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=900&fit=crop"
+              alt="Professional consulting team"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c] via-[#051c2c]/80 to-[#051c2c]/40"></div>
+          </div>
+          
+          {/* Content */}
+          <div className="relative z-10 w-full px-6 md:px-12 py-16 md:py-24">
+            <div className="max-w-6xl mx-auto">
+              <p className="text-[#60a5fa] text-sm md:text-base font-semibold tracking-widest uppercase mb-4">
+                Private Equity Services
+              </p>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.05] max-w-4xl">
+                Sell-Side Readiness
+              </h1>
+              <p className="text-2xl md:text-3xl text-white/90 font-light mb-6 max-w-3xl leading-snug">
+                Maximize valuation and ensure a seamless exit by addressing buyer concerns before they arise.
+              </p>
+              <p className="text-lg md:text-xl text-white/60 max-w-2xl leading-relaxed mb-10">
+                We prepare companies for high-value transactions through financial transparency, 
+                operational optimization, and proactive diligence readiness.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="mailto:admin@northcastleconsulting.com?subject=Sell-Side%20Readiness%20Inquiry"
+                  className="inline-block bg-white text-[#051c2c] px-8 py-4 font-semibold text-base hover:shadow-xl hover:bg-gray-50 transition-all duration-300 shadow-lg"
+                >
+                  Prepare Your Exit
+                </a>
+                <Link
+                  to="/case-studies/sell-side-readiness"
+                  className="inline-block bg-transparent text-white px-8 py-4 font-semibold text-base border-2 border-white/30 hover:border-white hover:bg-white/10 transition-all duration-300"
+                >
+                  View Case Studies
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
