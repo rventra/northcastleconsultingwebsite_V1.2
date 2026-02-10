@@ -94,7 +94,7 @@ export default function SellSideReadinessPage() {
   ];
 
   return (
-    <div className="pt-16">
+    <div>
       {/* ═══════════════════════════════════════════════════════════════
           HERO — Full-bleed editorial style like landing page
       ═══════════════════════════════════════════════════════════════ */}
