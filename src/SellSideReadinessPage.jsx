@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function SellSideReadinessPage() {
-  const challengesWithSolutions = [
+  const challengeSolutionPairs = [
     {
+      number: '01',
       challenge: {
         title: 'Operational Disruption',
         text: 'Management must balance day-to-day operations while preparing for due diligence.',
@@ -14,6 +15,7 @@ export default function SellSideReadinessPage() {
       },
     },
     {
+      number: '02',
       challenge: {
         title: 'Data Complexity',
         text: 'Disparate systems, large unstructured data, and post-merger misalignment can stall transactions.',
@@ -24,6 +26,7 @@ export default function SellSideReadinessPage() {
       },
     },
     {
+      number: '03',
       challenge: {
         title: 'Buyer Scrutiny',
         text: 'Investors demand accuracy in financials and operations; unexpected issues derail valuations.',
@@ -34,6 +37,7 @@ export default function SellSideReadinessPage() {
       },
     },
     {
+      number: '04',
       challenge: {
         title: 'Resource Constraints',
         text: 'Understaffed F&A teams struggle to meet diligence requirements.',
@@ -94,18 +98,18 @@ export default function SellSideReadinessPage() {
       {/* ═══════════════════════════════════════════════════════════════
           HERO
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-[#051c2c] py-20 md:py-24 px-6">
+      <div className="bg-[#051c2c] py-20 md:py-28 px-6">
         <div className="max-w-6xl mx-auto">
           <p className="text-[#60a5fa] text-sm md:text-base font-semibold tracking-widest uppercase mb-4">
             Private Equity Services
           </p>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight max-w-4xl">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] max-w-4xl">
             Sell-Side Readiness
           </h1>
           <p className="text-2xl md:text-3xl text-white/80 font-light mb-6 max-w-3xl">
             Maximizing Value &amp; Ensuring a Seamless Transaction
           </p>
-          <p className="text-lg md:text-xl text-white/60 max-w-2xl leading-relaxed mb-10">
+          <p className="text-lg md:text-xl text-white/60 max-w-2xl leading-relaxed mb-12">
             North Castle's Sell-Side Readiness services prepare companies for a smooth, efficient, and high-value exit 
             by optimizing financial transparency, streamlining processes, and proactively addressing potential buyer concerns.
           </p>
@@ -119,31 +123,54 @@ export default function SellSideReadinessPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          CHALLENGES + SOLUTIONS PAIRED
+          CHALLENGE + SOLUTION — Side by Side Professional Layout
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="py-20 md:py-24 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-14">
-            <p className="text-amber-600 text-sm md:text-base font-semibold tracking-widest uppercase mb-3">The Challenge &amp; Our Response</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#051c2c] max-w-3xl">
-              Common Sell-Side Obstacles—and How We Solve Them
+      <div className="py-20 md:py-28 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="mb-16">
+            <p className="text-[#2563EB] text-sm md:text-base font-semibold tracking-widest uppercase mb-3">The Opportunity</p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#051c2c] max-w-4xl leading-tight">
+              Common Obstacles—and How We Remove Them
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {challengesWithSolutions.map((item) => (
-              <div key={item.challenge.title} className="bg-[#FAFAFA] p-8 md:p-10 border-l-4 border-amber-500">
-                {/* Challenge */}
-                <div className="mb-6 pb-6 border-b border-gray-200">
-                  <p className="text-xs font-bold uppercase tracking-wider text-amber-600 mb-2">The Challenge</p>
-                  <h3 className="text-2xl md:text-3xl font-bold text-[#051c2c] mb-3">{item.challenge.title}</h3>
-                  <p className="text-lg text-[#051c2c]/70 leading-relaxed">{item.challenge.text}</p>
+          {/* Paired Grid — Challenge | Solution Side by Side */}
+          <div className="space-y-1">
+            {challengeSolutionPairs.map((item, index) => (
+              <div 
+                key={item.number} 
+                className={`grid md:grid-cols-12 gap-0 ${index !== challengeSolutionPairs.length - 1 ? 'border-b border-gray-200' : ''}`}
+              >
+                {/* Number Column */}
+                <div className="md:col-span-1 py-8 md:py-12 flex items-start">
+                  <span className="text-4xl md:text-5xl font-bold text-gray-200">{item.number}</span>
                 </div>
-                {/* Solution */}
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-[#2563EB] mb-2">How We Help</p>
-                  <h4 className="text-xl font-semibold text-[#051c2c] mb-2">{item.solution.title}</h4>
-                  <p className="text-base text-[#051c2c]/60 leading-relaxed">{item.solution.text}</p>
+
+                {/* Challenge Column */}
+                <div className="md:col-span-5 py-8 md:py-12 pr-0 md:pr-12 border-l-4 border-amber-500 md:border-l-0 md:border-r border-gray-200">
+                  <div className="md:border-l-4 md:border-amber-500 md:pl-8">
+                    <p className="text-xs font-bold uppercase tracking-widest text-amber-600 mb-3">The Challenge</p>
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#051c2c] mb-4 leading-tight">
+                      {item.challenge.title}
+                    </h3>
+                    <p className="text-lg text-[#051c2c]/70 leading-relaxed">
+                      {item.challenge.text}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Solution Column */}
+                <div className="md:col-span-6 py-8 md:py-12 pl-0 md:pl-12 bg-[#FAFAFA] md:bg-transparent">
+                  <div className="md:border-l-4 md:border-[#2563EB] md:pl-8">
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#2563EB] mb-3">How We Help</p>
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#051c2c] mb-4 leading-tight">
+                      {item.solution.title}
+                    </h3>
+                    <p className="text-lg text-[#051c2c]/70 leading-relaxed">
+                      {item.solution.text}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -152,20 +179,20 @@ export default function SellSideReadinessPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          VALUE ADDS — Bigger, bolder grid
+          VALUE ADDS — Dark Section
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="py-20 md:py-24 px-6 bg-[#051c2c]">
+      <div className="py-20 md:py-28 px-6 bg-[#051c2c]">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-14">
+          <div className="mb-16">
             <p className="text-[#60a5fa] text-sm md:text-base font-semibold tracking-widest uppercase mb-3">Why Work With Us</p>
             <h2 className="text-4xl md:text-5xl font-bold text-white">
               The North Castle Difference
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
             {valueAdds.map((item) => (
-              <div key={item.title} className="bg-white/5 p-6 border border-white/10">
+              <div key={item.title} className="bg-[#051c2c] p-8">
                 <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
                 <p className="text-base text-white/60 leading-relaxed">{item.text}</p>
               </div>
@@ -175,25 +202,25 @@ export default function SellSideReadinessPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          REAL WORLD SCENARIOS — Larger, more distinct
+          REAL WORLD SCENARIOS
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="py-20 md:py-24 px-6 bg-white">
+      <div className="py-20 md:py-28 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-14">
+          <div className="mb-16">
             <p className="text-[#2563EB] text-sm md:text-base font-semibold tracking-widest uppercase mb-3">Client Scenarios</p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#051c2c]">Real World Scenarios</h2>
           </div>
 
           <div className="space-y-8">
             {scenarios.map((scenario) => (
-              <div key={scenario.label} className="bg-[#FAFAFA] p-8 md:p-10 border-l-4 border-[#2563EB]">
+              <div key={scenario.label} className="bg-[#FAFAFA] p-8 md:p-12 border-l-4 border-[#2563EB]">
                 <div className="grid md:grid-cols-12 gap-8">
                   {/* Label & Quote */}
                   <div className="md:col-span-4">
-                    <span className="inline-block text-sm font-bold tracking-widest uppercase text-white bg-[#2563EB] px-4 py-1.5 mb-5">
+                    <span className="inline-block text-sm font-bold tracking-widest uppercase text-white bg-[#2563EB] px-4 py-2 mb-6">
                       {scenario.label}
                     </span>
-                    <blockquote className="text-lg md:text-xl text-[#051c2c]/70 italic leading-relaxed">
+                    <blockquote className="text-xl md:text-2xl text-[#051c2c]/70 italic leading-relaxed">
                       &ldquo;{scenario.quote}&rdquo;
                     </blockquote>
                   </div>
@@ -203,7 +230,7 @@ export default function SellSideReadinessPage() {
                     <p className="text-sm font-bold uppercase tracking-wider text-[#051c2c]/40 mb-4">
                       Business Challenges
                     </p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {scenario.challenges.map((c) => (
                         <li key={c} className="flex items-start gap-3 text-base text-[#051c2c]/70">
                           <span className="mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-amber-500" />
@@ -230,7 +257,7 @@ export default function SellSideReadinessPage() {
       {/* ═══════════════════════════════════════════════════════════════
           CASE STUDIES
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="py-20 md:py-24 px-6 bg-[#FAFAFA]">
+      <div className="py-20 md:py-28 px-6 bg-[#FAFAFA]">
         <div className="max-w-6xl mx-auto">
           <p className="text-[#2563EB] text-sm md:text-base font-semibold tracking-widest uppercase mb-3">Featured Work</p>
           <h2 className="text-4xl md:text-5xl font-bold text-[#051c2c] mb-12">
@@ -240,7 +267,7 @@ export default function SellSideReadinessPage() {
           <div className="grid md:grid-cols-2 gap-8">
             <Link
               to="/case-studies/sell-side-credibility-multiples"
-              className="group relative overflow-hidden min-h-[360px] bg-[#051c2c]"
+              className="group relative overflow-hidden min-h-[400px] bg-[#051c2c]"
             >
               <div className="absolute inset-0">
                 <img
@@ -250,7 +277,7 @@ export default function SellSideReadinessPage() {
                 />
               </div>
               <div className="relative z-10 h-full flex flex-col justify-end p-8">
-                <span className="inline-block px-4 py-1.5 bg-white text-[#051c2c] text-sm font-semibold uppercase tracking-wider mb-4 w-fit">
+                <span className="inline-block px-4 py-2 bg-white text-[#051c2c] text-sm font-semibold uppercase tracking-wider mb-4 w-fit">
                   Hospitality
                 </span>
                 <h3 className="text-2xl font-bold text-white mb-3 leading-tight">
@@ -267,7 +294,7 @@ export default function SellSideReadinessPage() {
 
             <Link
               to="/case-studies/sell-side-investment-credibility"
-              className="group relative overflow-hidden min-h-[360px] bg-[#051c2c]"
+              className="group relative overflow-hidden min-h-[400px] bg-[#051c2c]"
             >
               <div className="absolute inset-0">
                 <img
@@ -277,7 +304,7 @@ export default function SellSideReadinessPage() {
                 />
               </div>
               <div className="relative z-10 h-full flex flex-col justify-end p-8">
-                <span className="inline-block px-4 py-1.5 bg-white text-[#051c2c] text-sm font-semibold uppercase tracking-wider mb-4 w-fit">
+                <span className="inline-block px-4 py-2 bg-white text-[#051c2c] text-sm font-semibold uppercase tracking-wider mb-4 w-fit">
                   FinTech
                 </span>
                 <h3 className="text-2xl font-bold text-white mb-3 leading-tight">
@@ -298,7 +325,7 @@ export default function SellSideReadinessPage() {
       {/* ═══════════════════════════════════════════════════════════════
           CTA
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-[#051c2c] py-20 md:py-24 px-6">
+      <div className="bg-[#051c2c] py-20 md:py-28 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Ready to prepare for your exit?
