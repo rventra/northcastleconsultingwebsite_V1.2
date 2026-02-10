@@ -172,22 +172,71 @@ export default function QualityOfEarningsPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          QoE FRAMEWORK — Bone White Background
+          QoE FRAMEWORK — Connected to Challenges
       ═══════════════════════════════════════════════════════════════ */}
       <div className="py-20 md:py-28 px-6 bg-[#F9F9F7]">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="mb-16">
-            <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">Our Framework</p>
+            <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">How We Address Each Challenge</p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#051c2c]">
-              The QoE Analysis Components
+              The QoE Analysis Framework
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {qoeComponents.map((item) => (
-              <div key={item.title} className="bg-white p-8 border-t-4 border-[#EDB624] shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="text-lg font-semibold text-[#051c2c] mb-3">{item.title}</h3>
-                <p className="text-base text-[#051c2c]/60 leading-relaxed">{item.text}</p>
+          <div className="space-y-8">
+            {[
+              {
+                num: '01',
+                challenge: 'Unsustainable Earnings',
+                framework: ['Adjusted EBITDA Bridge', 'Add-Back Validation', 'Cash Flow Reconciliation'],
+                desc: 'We reconstruct true earnings baseline through comprehensive normalization and confidence-scored adjustments.',
+              },
+              {
+                num: '02',
+                challenge: 'Working Capital Manipulation',
+                framework: ['Working Capital Deep Dive', 'Cash Flow Reconciliation', 'Data Room Index'],
+                desc: 'We analyze 24+ months of DSO/DIO/DPO trends to identify artificial cash flow boosts and determine true NWC requirements.',
+              },
+              {
+                num: '03',
+                challenge: 'Revenue Quality Issues',
+                framework: ['Revenue Quality Assessment', 'Risk Matrix', 'Management Q&A'],
+                desc: 'We apply five-tier revenue taxonomy and concentration analysis to assess sustainability and customer risk.',
+              },
+              {
+                num: '04',
+                challenge: 'Hidden Liabilities',
+                framework: ['Risk Matrix', 'Data Room Index', 'Management Q&A'],
+                desc: 'We conduct forensic analysis with red/yellow/green flag categorization to surface unrecorded obligations.',
+              },
+            ].map((item) => (
+              <div key={item.num} className="bg-white border-l-4 border-[#2563EB] shadow-sm overflow-hidden">
+                <div className="grid md:grid-cols-12 gap-0">
+                  {/* Challenge Side */}
+                  <div className="md:col-span-4 bg-[#051c2c] p-8 text-white">
+                    <div className="flex items-baseline gap-3 mb-3">
+                      <span className="text-4xl font-bold text-[#2563EB]">{item.num}</span>
+                      <h3 className="text-xl font-bold">{item.challenge}</h3>
+                    </div>
+                    <p className="text-white/70 leading-relaxed">{item.desc}</p>
+                  </div>
+                  
+                  {/* Framework Components */}
+                  <div className="md:col-span-8 p-8">
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#051c2c]/40 mb-4">Framework Components Applied</p>
+                    <div className="flex flex-wrap gap-3 mb-6">
+                      {item.framework.map((component) => (
+                        <span key={component} className="inline-block bg-[#F9F9F7] border border-gray-200 px-4 py-2 text-sm font-semibold text-[#051c2c]">
+                          {component}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="h-px bg-gray-200 mb-6"></div>
+                    <p className="text-[#051c2c]/70 leading-relaxed">
+                      <span className="text-[#2563EB] font-semibold">Result:</span> {item.desc}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

@@ -145,22 +145,71 @@ export default function SellSideReadinessPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          WHY WORK WITH US — Bone White Background
+          HOW WE SOLVE EACH CHALLENGE — Connected Framework
       ═══════════════════════════════════════════════════════════════ */}
       <div className="py-20 md:py-28 px-6 bg-[#F9F9F7]">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="mb-16">
-            <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">Why Work With Us</p>
+            <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">How We Address Each Challenge</p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#051c2c]">
-              The North Castle Difference
+              Our Approach to Sell-Side Readiness
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {valueAdds.map((item) => (
-              <div key={item.title} className="bg-white p-8 border-t-4 border-[#EDB624] shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="text-lg font-semibold text-[#051c2c] mb-3">{item.title}</h3>
-                <p className="text-base text-[#051c2c]/60 leading-relaxed">{item.text}</p>
+          <div className="space-y-8">
+            {[
+              {
+                num: '01',
+                challenge: 'Operational Disruption',
+                approach: ['Dedicated Deal Team', 'Management Shield', 'Parallel Workstreams'],
+                outcome: 'Leadership stays focused on running the business while we handle diligence preparation.',
+              },
+              {
+                num: '02',
+                challenge: 'Data Complexity',
+                approach: ['Data Architecture', 'KPI Data Cube', 'Consolidation Automation'],
+                outcome: 'Fragmented systems become unified, buyer-ready analytics and reporting packages.',
+              },
+              {
+                num: '03',
+                challenge: 'Buyer Scrutiny',
+                approach: ["Buyer's Perspective Review", 'Pre-Emptive Q&A', 'Professional Deliverables'],
+                outcome: 'We anticipate buyer questions and address concerns before they arise in diligence.',
+              },
+              {
+                num: '04',
+                challenge: 'Resource Constraints',
+                approach: ['Embedded Analysts', 'Bandwith Augmentation', 'Temporary Infrastructure'],
+                outcome: 'We embed as an extension of your F&A team, filling gaps without adding headcount.',
+              },
+            ].map((item) => (
+              <div key={item.num} className="bg-white border-l-4 border-[#2563EB] shadow-sm overflow-hidden">
+                <div className="grid md:grid-cols-12 gap-0">
+                  {/* Challenge Side */}
+                  <div className="md:col-span-4 bg-[#051c2c] p-8 text-white">
+                    <div className="flex items-baseline gap-3 mb-3">
+                      <span className="text-4xl font-bold text-[#2563EB]">{item.num}</span>
+                      <h3 className="text-xl font-bold">{item.challenge}</h3>
+                    </div>
+                    <p className="text-white/70 leading-relaxed">{item.outcome}</p>
+                  </div>
+                  
+                  {/* Approach Components */}
+                  <div className="md:col-span-8 p-8">
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#051c2c]/40 mb-4">Our Approach</p>
+                    <div className="flex flex-wrap gap-3 mb-6">
+                      {item.approach.map((component) => (
+                        <span key={component} className="inline-block bg-[#F9F9F7] border border-gray-200 px-4 py-2 text-sm font-semibold text-[#051c2c]">
+                          {component}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="h-px bg-gray-200 mb-6"></div>
+                    <p className="text-[#051c2c]/70 leading-relaxed">
+                      <span className="text-[#2563EB] font-semibold">Result:</span> {item.outcome}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
