@@ -100,7 +100,7 @@ export default function SellSideReadinessPage() {
       ═══════════════════════════════════════════════════════════════ */}
       <div className="pt-16">
         {/* Top Headline Area — McKinsey Blue Gradient */}
-        <div className="relative min-h-[600px] md:min-h-[700px] flex items-end">
+        <div className="relative min-h-[450px] md:min-h-[550px] flex items-end">
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
@@ -112,7 +112,7 @@ export default function SellSideReadinessPage() {
           </div>
           
           {/* Content */}
-          <div className="relative z-10 w-full px-6 md:px-12 py-16 md:py-24">
+          <div className="relative z-10 w-full px-6 md:px-12 py-12 md:py-16">
             <div className="max-w-6xl mx-auto">
               <p className="text-[#60a5fa] text-sm md:text-base font-semibold tracking-widest uppercase mb-4">
                 Private Equity Services
