@@ -233,8 +233,8 @@ export default function QualityOfEarningsPage() {
     {
       id: 'deliverables',
       num: '7',
-      title: 'Deliverables Package',
-      short: 'Interactive dashboard and comprehensive written report with findings',
+      title: 'Deliverables & Data Room Index',
+      short: 'Interactive dashboard, comprehensive report, and cross-referenced documentation',
       details: {
         sections: [
           {
@@ -256,6 +256,16 @@ export default function QualityOfEarningsPage() {
               'Working Capital Assessment: NWC peg recommendation',
               'Risk Matrix: Categorized findings with mitigants and recommendations',
               'Management Q&A Summary: Questions asked and responses documented'
+            ]
+          },
+          {
+            subtitle: '7c. Data Room Index',
+            items: [
+              'Complete table of contents cross-referencing every finding to source documents',
+              'Audit trail: Each adjustment linked to specific VDR files and folders',
+              'Instant verification: Buyers can pull supporting docs by reference number',
+              'Defensibility: Shows analysis is backed by hard evidence, not assumptions',
+              'Example: $250K Owner Comp Add-Back → /Payroll/Exec_Comp_Analysis.pdf + /Market_Data/Salary_Survey.pdf'
             ]
           }
         ]
