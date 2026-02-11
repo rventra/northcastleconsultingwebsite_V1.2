@@ -229,6 +229,37 @@ export default function QualityOfEarningsPage() {
           }
         ]
       }
+    },
+    {
+      id: 'deliverables',
+      num: '7',
+      title: 'Deliverables Package',
+      short: 'Interactive dashboard and comprehensive written report with findings',
+      details: {
+        sections: [
+          {
+            subtitle: '7a. Executive Dashboard',
+            items: [
+              'Adjusted EBITDA waterfall visualization (monthly/TTM)',
+              'Key ratio trends: Gross margin, EBITDA margin, FCF conversion',
+              'Red/Yellow/Green risk flag summary with drill-down capability',
+              'Revenue quality breakdown by tier and concentration metrics',
+              'Working capital dashboard: DSO/DIO/DPO trends vs industry'
+            ]
+          },
+          {
+            subtitle: '7b. Comprehensive Written Report',
+            items: [
+              'Executive Summary: Key findings and deal impact assessment',
+              'Detailed Adjusted EBITDA Bridge with supporting schedules',
+              'Revenue Quality Analysis: Customer cohorts, churn, backlog',
+              'Working Capital Assessment: NWC peg recommendation',
+              'Risk Matrix: Categorized findings with mitigants and recommendations',
+              'Management Q&A Summary: Questions asked and responses documented'
+            ]
+          }
+        ]
+      }
     }
   ];
 
