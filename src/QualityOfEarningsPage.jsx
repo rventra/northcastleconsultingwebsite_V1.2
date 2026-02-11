@@ -203,27 +203,28 @@ export default function QualityOfEarningsPage() {
       }
     },
     {
-      id: 'risk',
+      id: 'mgmt',
       num: '6',
-      title: 'Risk Matrix & Deliverables',
-      short: 'Red/yellow/green flags with deal impact assessment',
+      title: 'Management Q&A',
+      short: 'Targeted questions based on analytical findings and interview prep',
       details: {
         sections: [
           {
-            subtitle: '6a. Risk Categorization',
+            subtitle: '6a. Question Development',
             items: [
-              'Red Flags: Deal killers requiring price reduction or structure change',
-              'Yellow Flags: Concerns requiring representation/warranty or escrow',
-              'Green Flags: Acceptable findings with standard disclosure'
+              'Targeted questions based on specific analytical anomalies',
+              'Follow-up questions for gaps in supporting documentation',
+              'Clarification requests for unusual transactions or trends',
+              'Confirmation questions for verbal representations'
             ]
           },
           {
-            subtitle: '6b. Standard Deliverables',
+            subtitle: '6b. Interview Support',
             items: [
-              'Executive Dashboard: Adjusted EBITDA waterfall, key ratios',
-              'Detailed Schedules: Line-item bridges with documentation',
-              'Management Q&A: Questions based on analytical findings',
-              'Data Room Index: Cross-reference to supporting documents'
+              'Management interview preparation and logistics',
+              'Real-time follow-up question generation',
+              'Documentation of responses and inconsistencies',
+              'Integration of findings into final report'
             ]
           }
         ]
@@ -366,14 +367,14 @@ export default function QualityOfEarningsPage() {
                 {
                   num: '03',
                   challenge: 'Revenue Quality Issues',
-                  framework: ['2. Revenue Quality Assessment', '6. Risk Matrix', 'Management Q&A'],
+                  framework: ['2. Revenue Quality Assessment', '6. Management Q&A'],
                   desc: 'We apply five-tier revenue taxonomy and concentration analysis to assess sustainability and customer risk.',
                 },
                 {
                   num: '04',
                   challenge: 'Hidden Liabilities',
-                  framework: ['6. Risk Matrix', 'Data Room Index', 'Management Q&A'],
-                  desc: 'We conduct forensic analysis with red/yellow/green flag categorization to surface unrecorded obligations.',
+                  framework: ['6. Management Q&A'],
+                  desc: 'We conduct forensic analysis with targeted management questions to surface unrecorded obligations.',
                 },
               ].map((item) => (
                 <div key={item.num} className="bg-white border-l-4 border-[#2563EB] shadow-sm overflow-hidden">
