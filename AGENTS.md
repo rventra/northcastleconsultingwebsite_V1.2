@@ -237,6 +237,15 @@ When returning to this project, consider:
 
 ### February 12, 2026
 
+**AI QoE Engagement Redesign** (Commit: `59b9629`, Job 137)
+- Replaced "Sell-Side vs Buy-Side" with "Traditional QoE vs AI-Accelerated QoE"
+- Added comparison table: Traditional (Big 4) vs AI-Accelerated (North Castle)
+- New AI Agent Deployment section with specialized agents per engagement type:
+  - Sell-Side: Add-Back Discovery Agent, Revenue Normalization Agent, CIM Prep Agent
+  - Buy-Side: Transaction Forensics Agent, Working Capital Detective, Hidden Liability Hunter
+- Added AWS Data Room infrastructure callout box
+- Emphasizes 7-10 day deliverables vs 4-6 week traditional timeline
+
 **Revenue Quality Tiers Merge** (Commit: `e67a870`, Job 135)
 - Merged standalone "Revenue Assessment" section into expandable Framework Component #2
 - Visual tier cards (green → red) now appear inside "Revenue Quality Assessment" when clicked
