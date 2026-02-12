@@ -326,6 +326,21 @@ export default function QualityOfEarningsPage() {
               <p className="text-xl md:text-2xl text-white/80 font-light mb-6 max-w-2xl leading-relaxed">
                 Forensic financial analysis to determine if earnings will persist under new ownership.
               </p>
+              
+              {/* AI Advantage Link */}
+              <a 
+                href="#ai-accelerated"
+                className="inline-flex items-center gap-2 bg-[#EDB624] text-[#051c2c] px-6 py-3 font-bold text-base hover:shadow-xl hover:bg-[#f5c430] transition-all duration-300 mb-6 group"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                See How AI Delivers QoE Faster & More Cost-Effectively
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </a>
+              
               <div className="flex flex-wrap gap-4">
                 <a
                   href="mailto:admin@northcastleconsulting.com?subject=Quality%20of%20Earnings%20Inquiry"
@@ -575,46 +590,47 @@ export default function QualityOfEarningsPage() {
       </div>
 
       {/* TRADITIONAL VS AI-ACCELERATED QoE */}
-      <div className="py-16 md:py-20 px-4 md:px-6 bg-[#F9F9F7]">
+      <div id="ai-accelerated" className="py-16 md:py-20 px-4 md:px-6 bg-[#F9F9F7]">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">Our Difference</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#051c2c]">Traditional QoE vs. AI-Accelerated QoE</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#051c2c]">Traditional QoE vs. AI-Accelerated QoE</h2>
+            <p className="text-xl text-[#051c2c]/70 mt-4 max-w-3xl">Same forensic rigor. Exponentially faster execution. A fraction of the cost.</p>
           </div>
 
           {/* Comparison Table */}
-          <div className="bg-white shadow-sm mb-8 overflow-hidden">
-            <div className="grid md:grid-cols-3 border-b border-gray-200">
+          <div className="bg-white shadow-lg mb-8 overflow-hidden">
+            <div className="grid md:grid-cols-3 border-b-2 border-gray-200">
               <div className="p-6 bg-gray-50 border-r border-gray-200">
-                <p className="text-xs font-bold uppercase tracking-wider text-[#051c2c]/40 mb-2">Dimension</p>
+                <p className="text-sm font-bold uppercase tracking-wider text-[#051c2c]/40 mb-2">Dimension</p>
               </div>
               <div className="p-6 border-r border-gray-200">
-                <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Traditional QoE</p>
-                <p className="text-sm text-gray-500">Big 4 / Boutique Firms</p>
+                <p className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">Traditional QoE</p>
+                <p className="text-base text-gray-500">Big 4 / Boutique Firms</p>
               </div>
               <div className="p-6 bg-[#2563EB]/5">
-                <p className="text-xs font-bold uppercase tracking-wider text-[#2563EB] mb-2">AI-Accelerated QoE</p>
-                <p className="text-sm text-[#051c2c]">North Castle Consulting</p>
+                <p className="text-sm font-bold uppercase tracking-wider text-[#2563EB] mb-2">AI-Accelerated QoE</p>
+                <p className="text-base text-[#051c2c]">North Castle Consulting</p>
               </div>
             </div>
             
             {[
-              { dim: 'Data Processing', trad: 'Manual spreadsheet analysis, 2-3 weeks', ai: 'AWS-hosted data room with automated ingestion, 2-3 days' },
+              { dim: 'Data Processing', trad: 'Manual spreadsheet analysis, weeks to process', ai: 'AWS data room with automated ingestion, rapid turnaround' },
               { dim: 'Add-Back Validation', trad: 'Analyst reviews each item individually', ai: 'AI agents cross-reference supporting docs, flag inconsistencies automatically' },
               { dim: 'Revenue Analysis', trad: 'Sample-based testing, trend charts', ai: 'Full population analysis, anomaly detection, cohort clustering' },
               { dim: 'Working Capital', trad: 'Calculate ratios, compare to peers', ai: 'Predictive cash flow modeling, manipulation pattern detection' },
-              { dim: 'Deliverable Speed', trad: '4-6 weeks from data receipt', ai: '7-10 days with higher granularity' },
-              { dim: 'Cost Structure', trad: '$75K-$150K+ for mid-market deals', ai: 'Fraction of traditional cost, flat-fee options' },
+              { dim: 'Deliverable Speed', trad: 'Months from data receipt', ai: 'Days to weeks with higher granularity' },
+              { dim: 'Cost Structure', trad: 'Premium pricing for mid-market deals', ai: 'Fraction of traditional cost, transparent flat-fee options' },
             ].map((row, i) => (
               <div key={i} className="grid md:grid-cols-3 border-b border-gray-200 last:border-b-0">
-                <div className="p-4 bg-gray-50 border-r border-gray-200 flex items-center">
-                  <p className="text-sm font-semibold text-[#051c2c]">{row.dim}</p>
+                <div className="p-5 bg-gray-50 border-r border-gray-200 flex items-center">
+                  <p className="text-base font-bold text-[#051c2c]">{row.dim}</p>
                 </div>
-                <div className="p-4 border-r border-gray-200 flex items-center">
-                  <p className="text-sm text-gray-600">{row.trad}</p>
+                <div className="p-5 border-r border-gray-200 flex items-center">
+                  <p className="text-base text-gray-600">{row.trad}</p>
                 </div>
-                <div className="p-4 bg-[#2563EB]/5 flex items-center">
-                  <p className="text-sm text-[#051c2c] font-medium">{row.ai}</p>
+                <div className="p-5 bg-[#2563EB]/5 flex items-center">
+                  <p className="text-base text-[#051c2c] font-semibold">{row.ai}</p>
                 </div>
               </div>
             ))}
@@ -627,48 +643,47 @@ export default function QualityOfEarningsPage() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">Engagement Types</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#051c2c]">AI Agent Deployment: Sell-Side vs. Buy-Side</h2>
-            <p className="text-[#051c2c]/70 mt-4 max-w-3xl">Each engagement type leverages specialized AI agents orchestrated through our secure AWS Data Room infrastructure. Same forensic rigor, exponentially faster execution.</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#051c2c]">AI Agent Deployment: Sell-Side vs. Buy-Side</h2>
+            <p className="text-xl text-[#051c2c]/70 mt-4 max-w-3xl">Each engagement type leverages specialized AI agents orchestrated through our secure AWS Data Room infrastructure. Same forensic rigor, exponentially faster execution.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             {/* Sell-Side */}
             <div className="bg-white p-8 border-l-4 border-[#2563EB] shadow-lg">
               <div className="flex items-center gap-3 mb-4">
-                <span className="inline-block px-3 py-1 bg-[#2563EB] text-white text-xs font-bold uppercase tracking-wider">
+                <span className="inline-block px-3 py-1 bg-[#2563EB] text-white text-sm font-bold uppercase tracking-wider">
                   Sell-Side (Vendor Due Diligence)
                 </span>
-                <span className="text-xs text-[#051c2c]/40">6-12 months pre-market</span>
               </div>
-              <h3 className="text-xl font-bold text-[#051c2c] mb-3">Maximize Valuation</h3>
-              <p className="text-[#051c2c]/70 mb-6 text-sm">Control the narrative before buyers arrive. AI agents pre-process financials to identify and document every favorable adjustment.</p>
+              <h3 className="text-2xl font-bold text-[#051c2c] mb-3">Maximize Valuation</h3>
+              <p className="text-[#051c2c]/70 mb-6 text-base">Control the narrative before buyers arrive. AI agents pre-process financials to identify and document every favorable adjustment.</p>
               
               <div className="space-y-4">
-                <div className="p-4 bg-[#F9F9F7] rounded-lg">
+                <div className="p-5 bg-[#F9F9F7] rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="w-2 h-2 rounded-full bg-[#2563EB]"></span>
-                    <p className="text-sm font-bold text-[#051c2c]">Add-Back Discovery Agent</p>
+                    <span className="w-3 h-3 rounded-full bg-[#2563EB]"></span>
+                    <p className="text-base font-bold text-[#051c2c]">Add-Back Discovery Agent</p>
                   </div>
-                  <p className="text-xs text-[#051c2c]/60 ml-4">Scans GL for owner perks, related-party transactions, one-time expenses. Auto-generates supporting documentation package.</p>
+                  <p className="text-sm text-[#051c2c]/60 ml-5">Scans GL for owner perks, related-party transactions, one-time expenses. Auto-generates supporting documentation package.</p>
                 </div>
-                <div className="p-4 bg-[#F9F9F7] rounded-lg">
+                <div className="p-5 bg-[#F9F9F7] rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="w-2 h-2 rounded-full bg-[#2563EB]"></span>
-                    <p className="text-sm font-bold text-[#051c2c]">Revenue Normalization Agent</p>
+                    <span className="w-3 h-3 rounded-full bg-[#2563EB]"></span>
+                    <p className="text-base font-bold text-[#051c2c]">Revenue Normalization Agent</p>
                   </div>
-                  <p className="text-xs text-[#051c2c]/60 ml-4">Classifies revenue by tier, identifies seasonality patterns, flags non-recurring items for quality scoring.</p>
+                  <p className="text-sm text-[#051c2c]/60 ml-5">Classifies revenue by tier, identifies seasonality patterns, flags non-recurring items for quality scoring.</p>
                 </div>
-                <div className="p-4 bg-[#F9F9F7] rounded-lg">
+                <div className="p-5 bg-[#F9F9F7] rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="w-2 h-2 rounded-full bg-[#2563EB]"></span>
-                    <p className="text-sm font-bold text-[#051c2c]">CIM Prep Agent</p>
+                    <span className="w-3 h-3 rounded-full bg-[#2563EB]"></span>
+                    <p className="text-base font-bold text-[#051c2c]">CIM Prep Agent</p>
                   </div>
-                  <p className="text-xs text-[#051c2c]/60 ml-4">Generates recast financials, adjustment bridges, and data room index for buyer due diligence.</p>
+                  <p className="text-sm text-[#051c2c]/60 ml-5">Generates recast financials, adjustment bridges, and data room index for buyer due diligence.</p>
                 </div>
               </div>
 
               <div className="mt-6 pt-4 border-t border-gray-200">
-                <p className="text-xs text-[#051c2c]/60">
+                <p className="text-sm text-[#051c2c]/60">
                   <strong className="text-[#2563EB]">AWS Data Room:</strong> Pre-populated with organized, indexed, buyer-ready documentation
                 </p>
               </div>
@@ -677,28 +692,27 @@ export default function QualityOfEarningsPage() {
             {/* Buy-Side */}
             <div className="bg-white p-8 border-l-4 border-[#EDB624] shadow-lg">
               <div className="flex items-center gap-3 mb-4">
-                <span className="inline-block px-3 py-1 bg-[#EDB624] text-[#051c2c] text-xs font-bold uppercase tracking-wider">
+                <span className="inline-block px-3 py-1 bg-[#EDB624] text-[#051c2c] text-sm font-bold uppercase tracking-wider">
                   Buy-Side (Confirmatory Due Diligence)
                 </span>
-                <span className="text-xs text-[#051c2c]/40">30-45 day exclusivity window</span>
               </div>
-              <h3 className="text-xl font-bold text-[#051c2c] mb-3">Validate & Protect</h3>
-              <p className="text-[#051c2c]/70 mb-6 text-sm">Aggressive validation of seller claims. AI agents stress-test every assumption and surface red flags buyers miss.</p>
+              <h3 className="text-2xl font-bold text-[#051c2c] mb-3">Validate & Protect</h3>
+              <p className="text-[#051c2c]/70 mb-6 text-base">Aggressive validation of seller claims. AI agents stress-test every assumption and surface red flags buyers miss.</p>
               
               <div className="space-y-4">
-                <div className="p-4 bg-[#F9F9F7] rounded-lg">
+                <div className="p-5 bg-[#F9F9F7] rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="w-2 h-2 rounded-full bg-[#EDB624]"></span>
-                    <p className="text-sm font-bold text-[#051c2c]">Transaction Forensics Agent</p>
+                    <span className="w-3 h-3 rounded-full bg-[#EDB624]"></span>
+                    <p className="text-base font-bold text-[#051c2c]">Transaction Forensics Agent</p>
                   </div>
-                  <p className="text-xs text-[#051c2c]/60 ml-4">Analyzes 100% of transactions (not samples) for cut-off issues, revenue recognition problems, related-party infiltration.</p>
+                  <p className="text-sm text-[#051c2c]/60 ml-5">Analyzes complete transaction populations for cut-off issues, revenue recognition problems, related-party infiltration.</p>
                 </div>
-                <div className="p-4 bg-[#F9F9F7] rounded-lg">
+                <div className="p-5 bg-[#F9F9F7] rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="w-2 h-2 rounded-full bg-[#EDB624]"></span>
-                    <p className="text-sm font-bold text-[#051c2c]">Working Capital Detective</p>
+                    <span className="w-3 h-3 rounded-full bg-[#EDB624]"></span>
+                    <p className="text-base font-bold text-[#051c2c]">Working Capital Detective</p>
                   </div>
-                  <p className="text-xs text-[#051c2c]/60 ml-4">Detects window dressing, identifies artificial cash boosts, calculates true NWC peg with seasonal adjustments.</p>
+                  <p className="text-sm text-[#051c2c]/60 ml-5">Detects window dressing, identifies artificial cash boosts, calculates true NWC peg with seasonal adjustments.</p>
                 </div>
                 <div className="p-4 bg-[#F9F9F7] rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
