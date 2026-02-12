@@ -237,6 +237,9 @@ When returning to this project, consider:
 
 ### February 12, 2026
 
+**Update Calendly Link** (Commit: `e7dbc16`)
+- Updated Calendly link to: https://calendly.com/rventrapragada-northcastleconsulting/qoe-consultation
+
 **Hero Balance 50/50 + Service Overview PDF** (Commit: `7f2edfc`, Job 145)
 - Fixed hero split to be balanced 50/50 (top image section / bottom slate CTA section)
 - Reduced font sizes for better visual harmony
