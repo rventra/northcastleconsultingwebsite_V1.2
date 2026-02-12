@@ -237,6 +237,13 @@ When returning to this project, consider:
 
 ### February 12, 2026
 
+**Hero Balance 50/50 + Service Overview PDF** (Commit: `7f2edfc`, Job 145)
+- Fixed hero split to be balanced 50/50 (top image section / bottom slate CTA section)
+- Reduced font sizes for better visual harmony
+- Added eyebrow text to bottom section
+- Created `NorthCastle_QoE_Service_Overview.pdf` in documents folder
+- PDF includes: Executive Summary, 7 Components, AI Agents, Engagement Types, Contact
+
 **Hero Background & Right Panel Update** (Commit: `b2ee5de`, Job 143)
 - Changed hero background to modern corporate architecture image
 - Restructured right panel: moved content up, added service overview paragraph
