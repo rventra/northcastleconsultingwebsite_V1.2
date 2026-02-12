@@ -387,7 +387,7 @@ export default function QualityOfEarningsPage() {
                     </svg>
                   </a>
                   <a
-                    href="https://calendly.com/northcastleconsulting/qoe-consultation"
+                    href="https://calendly.com/rventrapragada-northcastleconsulting/qoe-consultation"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-6 py-3 font-bold text-base hover:bg-white hover:text-[#051c2c] transition-all duration-300"
