@@ -402,7 +402,7 @@ export default function QualityOfEarningsPage() {
                 {
                   num: '02',
                   challenge: 'Working Capital Manipulation',
-                  framework: ['3. Working Capital Deep Dive', '4. Cash Flow Reconciliation', '6. Data Room Index'],
+                  framework: ['3. Working Capital Deep Dive', '4. Cash Flow Reconciliation', '7. Deliverables & Data Room Index'],
                   desc: 'We analyze 24+ months of DSO/DIO/DPO trends to identify artificial cash flow boosts and determine true NWC requirements.',
                 },
                 {
@@ -429,7 +429,7 @@ export default function QualityOfEarningsPage() {
                     </div>
                     
                     <div className="md:col-span-8 p-5">
-                      <p className="text-xs font-bold uppercase tracking-wider text-[#051c2c]/40 mb-2">Framework Applied</p>
+                      <p className="text-sm font-bold uppercase tracking-wider text-[#051c2c]/40 mb-2">Framework Applied</p>
                       <div className="flex flex-wrap gap-2 mb-3">
                         {item.framework.map((component) => (
                           <span key={component} className="inline-block bg-[#F9F9F7] border border-gray-200 px-2 py-1 text-xs font-semibold text-[#051c2c]">
@@ -437,8 +437,8 @@ export default function QualityOfEarningsPage() {
                           </span>
                         ))}
                       </div>
-                      <p className="text-xs text-[#051c2c]/70">
-                        <span className="text-[#2563EB] font-semibold">Result:</span> {item.desc}
+                      <p className="text-base text-[#051c2c]/80 leading-relaxed">
+                        <span className="text-[#2563EB] font-bold">Result:</span> {item.desc}
                       </p>
                     </div>
                   </div>
@@ -448,7 +448,7 @@ export default function QualityOfEarningsPage() {
 
             {/* RIGHT: Interactive Framework Components */}
             <div className="space-y-3">
-              <p className="text-xs font-bold uppercase tracking-wider text-[#051c2c]/40 mb-2">The QoE Framework — Click to Expand</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-[#051c2c]/40 mb-2 font-bold">The QoE Framework — Click to Expand</p>
               
               {frameworkItems.map((item) => (
                 <div key={item.id} className="bg-white border-l-4 border-[#EDB624] shadow-sm overflow-hidden">
