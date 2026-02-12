@@ -237,6 +237,15 @@ When returning to this project, consider:
 
 ### February 12, 2026
 
+**QoE Marketing Guide PDF** (Commit: `9dcf139`)
+- Created professional 7-page marketing PDF: "Quality of Earnings: The Complete Guide"
+- Website-branded colors (navy, amber, bright blue)
+- Cover page with professional design
+- Content: QoE overview, 7 components, AI agents, engagement types, why choose us
+- Uploaded to S3: https://northcastle-consulting-docs.s3.us-east-2.amazonaws.com/qoe-guide/NorthCastle_QoE_Guide.pdf
+- Updated website link to point to S3-hosted PDF
+- Deleted old service overview PDF
+
 **Update Calendly Link** (Commit: `e7dbc16`)
 - Updated Calendly link to: https://calendly.com/rventrapragada-northcastleconsulting/qoe-consultation
 
