@@ -87,26 +87,16 @@ export default function QualityOfEarningsPage() {
       num: '2',
       title: 'Revenue Quality Assessment',
       short: 'Five-tier taxonomy from contracted recurring to windfall/spot market',
+      hasCustomContent: true,
       details: {
         sections: [
           {
             subtitle: '2a. Revenue Quality Tiers',
-            items: [
-              'Tier 1: Recurring Contracted (90%+ renewal) - SaaS, multi-year agreements',
-              'Tier 2: Sticky Repeat Business - Industrial consumables, trade relationships',
-              'Tier 3: Project-Based w/ Backlog - AEC, government (12-24 mo visibility)',
-              'Tier 4: One-Time Project - Custom implementations, event-driven',
-              'Tier 5: Windfall/Spot Market - Commodity, distressed sales'
-            ]
+            customContent: 'tierCards'
           },
           {
             subtitle: '2b. Concentration Risk Analysis',
-            items: [
-              'Red Flag: Single customer >30% of revenue',
-              'Yellow Flag: Top 5 customers >50% of revenue',
-              'Critical: Customer churn rate >20% annually',
-              'Cohort analysis by customer vintage'
-            ]
+            customContent: 'riskThresholds'
           }
         ]
       }
@@ -479,59 +469,58 @@ export default function QualityOfEarningsPage() {
                     <div className="px-4 pb-4 border-t border-gray-100">
                       {item.details.sections.map((section, idx) => (
                         <div key={idx} className="mt-4">
-                          <h5 className="text-sm font-bold text-[#051c2c] mb-2">{section.subtitle}</h5>
-                          <ul className="space-y-1.5">
-                            {section.items.map((listItem, i) => (
-                              <li key={i} className="flex items-start gap-2 text-sm text-[#051c2c]/70">
-                                <span className="text-[#2563EB] mt-1">•</span>
-                                {listItem}
-                              </li>
-                            ))}
-                          </ul>
+                          <h5 className="text-sm font-bold text-[#051c2c] mb-3">{section.subtitle}</h5>
+                          
+                          {/* Custom Tier Cards Content */}
+                          {section.customContent === 'tierCards' && (
+                            <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                              {[
+                                { tier: '1', title: 'Recurring Contracted', desc: '90%+ renewal', color: '#22c55e', examples: 'SaaS, multi-year agreements' },
+                                { tier: '2', title: 'Sticky Repeat', desc: 'High switching costs', color: '#2563EB', examples: 'Industrial consumables' },
+                                { tier: '3', title: 'Project w/ Backlog', desc: '12-24 mo visibility', color: '#EDB624', examples: 'AEC, government' },
+                                { tier: '4', title: 'One-Time Project', desc: 'Non-repeating', color: '#f97316', examples: 'Custom implementations' },
+                                { tier: '5', title: 'Windfall/Spot', desc: 'Unpredictable', color: '#ef4444', examples: 'Commodity, distressed' },
+                              ].map((t) => (
+                                <div key={t.tier} className="bg-[#FAFAFA] p-3 border-t-2" style={{ borderColor: t.color }}>
+                                  <div className="flex items-center gap-2 mb-1.5">
+                                    <span className="w-5 h-5 rounded-full text-white flex items-center justify-center text-xs font-bold" style={{ backgroundColor: t.color }}>{t.tier}</span>
+                                    <h3 className="text-xs font-bold text-[#051c2c] leading-tight">{t.title}</h3>
+                                  </div>
+                                  <p className="text-xs text-[#051c2c]/50 uppercase mb-1">{t.desc}</p>
+                                  <p className="text-xs text-[#051c2c]/70">{t.examples}</p>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          
+                          {/* Custom Risk Thresholds Content */}
+                          {section.customContent === 'riskThresholds' && (
+                            <div className="p-4 bg-[#FAFAFA] border-l-4 border-red-500">
+                              <div className="grid md:grid-cols-3 gap-3 text-sm">
+                                <p><span className="text-red-500 font-bold">Red Flag:</span> Single customer &gt;30% of revenue</p>
+                                <p><span className="text-[#EDB624] font-bold">Yellow Flag:</span> Top 5 customers &gt;50% of revenue</p>
+                                <p><span className="text-red-500 font-bold">Critical:</span> Customer churn &gt;20% annually</p>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {/* Standard List Content */}
+                          {section.items && (
+                            <ul className="space-y-1.5">
+                              {section.items.map((listItem, i) => (
+                                <li key={i} className="flex items-start gap-2 text-sm text-[#051c2c]/70">
+                                  <span className="text-[#2563EB] mt-1">•</span>
+                                  {listItem}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
               ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* REVENUE QUALITY TIERS */}
-      <div className="py-16 md:py-20 px-4 md:px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
-            <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">Revenue Assessment</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#051c2c]">Revenue Quality Tiers</h2>
-          </div>
-
-          <div className="grid md:grid-cols-5 gap-3">
-            {[
-              { tier: '1', title: 'Recurring Contracted', desc: '90%+ renewal', color: '#22c55e', examples: 'SaaS, multi-year agreements' },
-              { tier: '2', title: 'Sticky Repeat Business', desc: 'High switching costs', color: '#2563EB', examples: 'Industrial consumables' },
-              { tier: '3', title: 'Project-Based w/ Backlog', desc: '12-24 mo visibility', color: '#EDB624', examples: 'AEC, government' },
-              { tier: '4', title: 'One-Time Project', desc: 'Non-repeating', color: '#f97316', examples: 'Custom implementations' },
-              { tier: '5', title: 'Windfall/Spot Market', desc: 'Unpredictable', color: '#ef4444', examples: 'Commodity, distressed' },
-            ].map((item) => (
-              <div key={item.tier} className="bg-[#FAFAFA] p-4 border-t-4" style={{ borderColor: item.color }}>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-7 h-7 rounded-full text-white flex items-center justify-center text-xs font-bold" style={{ backgroundColor: item.color }}>{item.tier}</span>
-                  <h3 className="text-xs font-bold text-[#051c2c] leading-tight">{item.title}</h3>
-                </div>
-                <p className="text-xs text-[#051c2c]/50 uppercase mb-1">{item.desc}</p>
-                <p className="text-xs text-[#051c2c]/70">{item.examples}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6 p-5 bg-[#FAFAFA] border-l-4 border-red-500">
-            <p className="text-sm font-bold text-[#051c2c] uppercase tracking-wider mb-3">Concentration Risk Thresholds</p>
-            <div className="grid md:grid-cols-3 gap-4 text-sm">
-              <p><span className="text-red-500 font-bold">Red Flag:</span> Single customer &gt;30% of revenue</p>
-              <p><span className="text-[#EDB624] font-bold">Yellow Flag:</span> Top 5 customers &gt;50% of revenue</p>
-              <p><span className="text-red-500 font-bold">Critical:</span> Customer churn &gt;20% annually</p>
             </div>
           </div>
         </div>
