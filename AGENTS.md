@@ -237,6 +237,13 @@ When returning to this project, consider:
 
 ### February 12, 2026
 
+**Hero Background & Right Panel Update** (Commit: `b2ee5de`, Job 143)
+- Changed hero background to modern corporate architecture image
+- Restructured right panel: moved content up, added service overview paragraph
+- Added "Download Service Overview (PDF)" placeholder link
+- Connected "Schedule a Consultation" button to Calendly
+- Simplified challenges list (removed solutions, kept descriptions)
+
 **Hero Split Redesign** (Commit: `878c094`, Job 141)
 - Split left side into top (hero image + content) and bottom (slate grey CTA section)
 - Removed emoji from AI link
