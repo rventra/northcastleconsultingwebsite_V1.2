@@ -237,6 +237,12 @@ When returning to this project, consider:
 
 ### February 12, 2026
 
+**Hero AI Link & Bigger Fonts** (Commit: `57aa811`, Job 139)
+- Added prominent amber AI link in hero: "See How AI Delivers QoE Faster & More Cost-Effectively"
+- Made all AI section fonts significantly bigger (headings now 4xl/5xl, body text larger)
+- Removed specific numbers from comparison table (replaced with qualitative terms)
+- Added anchor link `#ai-accelerated` for smooth scrolling
+
 **AI QoE Engagement Redesign** (Commit: `59b9629`, Job 137)
 - Replaced "Sell-Side vs Buy-Side" with "Traditional QoE vs AI-Accelerated QoE"
 - Added comparison table: Traditional (Big 4) vs AI-Accelerated (North Castle)
