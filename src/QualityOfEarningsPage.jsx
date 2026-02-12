@@ -311,8 +311,8 @@ export default function QualityOfEarningsPage() {
             <div className="relative flex-1 flex items-end">
               <div className="absolute inset-0">
                 <img
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&h=900&fit=crop"
-                  alt="Financial analysis"
+                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=900&fit=crop"
+                  alt="Modern corporate architecture"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c] via-[#051c2c]/70 to-transparent"></div>
@@ -344,7 +344,9 @@ export default function QualityOfEarningsPage() {
                   </svg>
                 </a>
                 <a
-                  href="mailto:admin@northcastleconsulting.com?subject=Quality%20of%20Earnings%20Inquiry"
+                  href="https://calendly.com/northcastleconsulting/qoe-consultation"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-white text-[#051c2c] px-6 py-3 font-bold text-base hover:shadow-xl hover:bg-gray-50 transition-all duration-300 whitespace-nowrap"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -356,24 +358,34 @@ export default function QualityOfEarningsPage() {
             </div>
           </div>
 
-          {/* Right — Gray Panel with Obstacles */}
-          <div className="lg:col-span-4 bg-[#F5F5F5] p-8 md:p-10 lg:p-12 flex flex-col justify-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#051c2c] mb-2">
+          {/* Right — Gray Panel with Service Overview */}
+          <div className="lg:col-span-4 bg-[#F5F5F5] p-8 md:p-10 lg:p-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#051c2c] mb-4">
               Common Challenges
             </h2>
-            <p className="text-[#051c2c]/60 text-lg mb-8">
-              &amp; How We Address Them
-            </p>
             
-            <div className="space-y-6">
+            <h3 className="text-base font-semibold text-[#051c2c] mb-3 leading-relaxed">
+              We help buyers, sellers, and advisors cut through accounting noise to uncover the true economic reality of a business. Our AI-accelerated approach delivers institutional-grade analysis in a fraction of the time and cost of traditional firms.
+            </h3>
+            
+            <a 
+              href="#"
+              className="inline-flex items-center gap-2 text-[#2563EB] font-semibold text-sm hover:underline mb-6 group"
+            >
+              <span>Download Service Overview (PDF)</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </a>
+            
+            <div className="space-y-5">
               {obstacles.map((item) => (
-                <div key={item.num} className="border-l-2 border-[#2563EB] pl-5">
-                  <div className="flex items-baseline gap-3 mb-2">
-                    <span className="text-3xl font-bold text-[#2563EB]">{item.num}</span>
-                    <h3 className="text-lg font-semibold text-[#051c2c]">{item.title}</h3>
+                <div key={item.num} className="border-l-2 border-[#2563EB] pl-4">
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <span className="text-2xl font-bold text-[#2563EB]">{item.num}</span>
+                    <h4 className="text-base font-semibold text-[#051c2c]">{item.title}</h4>
                   </div>
-                  <p className="text-base text-[#051c2c]/60 mb-2 leading-relaxed">{item.desc}</p>
-                  <p className="text-base text-[#051c2c] font-medium leading-relaxed">{item.solution}</p>
+                  <p className="text-sm text-[#051c2c]/60 leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
