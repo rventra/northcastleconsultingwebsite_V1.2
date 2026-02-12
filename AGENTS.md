@@ -236,7 +236,15 @@ When returning to this project, consider:
 ## Recent Changes Log
 
 ### February 12, 2026
-**QoE Page Styling Updates** (Commit: `24f2c91`)
+
+**Revenue Quality Tiers Merge** (Commit: `e67a870`, Job 135)
+- Merged standalone "Revenue Assessment" section into expandable Framework Component #2
+- Visual tier cards (green → red) now appear inside "Revenue Quality Assessment" when clicked
+- Concentration Risk thresholds moved inside expandable section
+- Removed duplicate standalone section for cleaner page layout
+- Maintains click-to-expand structure while adding visual formatting
+
+**QoE Page Styling Updates** (Commit: `24f2c91`, Job 133)
 - Made 'Framework Applied' text larger (`text-sm`)
 - Made 'Result' text larger with bold styling (`text-base`, `font-bold`)
 - Bolded 'The QoE Framework — Click to Expand' subtitle
