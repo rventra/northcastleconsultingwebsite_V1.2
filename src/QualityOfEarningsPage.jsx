@@ -574,47 +574,161 @@ export default function QualityOfEarningsPage() {
         </div>
       </div>
 
-      {/* SELL-SIDE VS BUY-SIDE */}
+      {/* TRADITIONAL VS AI-ACCELERATED QoE */}
       <div className="py-16 md:py-20 px-4 md:px-6 bg-[#F9F9F7]">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
+            <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">Our Difference</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#051c2c]">Traditional QoE vs. AI-Accelerated QoE</h2>
+          </div>
+
+          {/* Comparison Table */}
+          <div className="bg-white shadow-sm mb-8 overflow-hidden">
+            <div className="grid md:grid-cols-3 border-b border-gray-200">
+              <div className="p-6 bg-gray-50 border-r border-gray-200">
+                <p className="text-xs font-bold uppercase tracking-wider text-[#051c2c]/40 mb-2">Dimension</p>
+              </div>
+              <div className="p-6 border-r border-gray-200">
+                <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Traditional QoE</p>
+                <p className="text-sm text-gray-500">Big 4 / Boutique Firms</p>
+              </div>
+              <div className="p-6 bg-[#2563EB]/5">
+                <p className="text-xs font-bold uppercase tracking-wider text-[#2563EB] mb-2">AI-Accelerated QoE</p>
+                <p className="text-sm text-[#051c2c]">North Castle Consulting</p>
+              </div>
+            </div>
+            
+            {[
+              { dim: 'Data Processing', trad: 'Manual spreadsheet analysis, 2-3 weeks', ai: 'AWS-hosted data room with automated ingestion, 2-3 days' },
+              { dim: 'Add-Back Validation', trad: 'Analyst reviews each item individually', ai: 'AI agents cross-reference supporting docs, flag inconsistencies automatically' },
+              { dim: 'Revenue Analysis', trad: 'Sample-based testing, trend charts', ai: 'Full population analysis, anomaly detection, cohort clustering' },
+              { dim: 'Working Capital', trad: 'Calculate ratios, compare to peers', ai: 'Predictive cash flow modeling, manipulation pattern detection' },
+              { dim: 'Deliverable Speed', trad: '4-6 weeks from data receipt', ai: '7-10 days with higher granularity' },
+              { dim: 'Cost Structure', trad: '$75K-$150K+ for mid-market deals', ai: 'Fraction of traditional cost, flat-fee options' },
+            ].map((row, i) => (
+              <div key={i} className="grid md:grid-cols-3 border-b border-gray-200 last:border-b-0">
+                <div className="p-4 bg-gray-50 border-r border-gray-200 flex items-center">
+                  <p className="text-sm font-semibold text-[#051c2c]">{row.dim}</p>
+                </div>
+                <div className="p-4 border-r border-gray-200 flex items-center">
+                  <p className="text-sm text-gray-600">{row.trad}</p>
+                </div>
+                <div className="p-4 bg-[#2563EB]/5 flex items-center">
+                  <p className="text-sm text-[#051c2c] font-medium">{row.ai}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* AI AGENTS BY ENGAGEMENT TYPE */}
+      <div className="py-16 md:py-20 px-4 md:px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-12">
             <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">Engagement Types</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#051c2c]">Sell-Side vs. Buy-Side QoE</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#051c2c]">AI Agent Deployment: Sell-Side vs. Buy-Side</h2>
+            <p className="text-[#051c2c]/70 mt-4 max-w-3xl">Each engagement type leverages specialized AI agents orchestrated through our secure AWS Data Room infrastructure. Same forensic rigor, exponentially faster execution.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white p-8 border-l-4 border-[#2563EB] shadow-sm">
-              <span className="inline-block px-3 py-1 bg-[#2563EB] text-white text-xs font-bold uppercase tracking-wider mb-4">
-                Sell-Side (Vendor Due Diligence)
-              </span>
+            {/* Sell-Side */}
+            <div className="bg-white p-8 border-l-4 border-[#2563EB] shadow-lg">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="inline-block px-3 py-1 bg-[#2563EB] text-white text-xs font-bold uppercase tracking-wider">
+                  Sell-Side (Vendor Due Diligence)
+                </span>
+                <span className="text-xs text-[#051c2c]/40">6-12 months pre-market</span>
+              </div>
               <h3 className="text-xl font-bold text-[#051c2c] mb-3">Maximize Valuation</h3>
-              <p className="text-[#051c2c]/70 mb-4 text-sm">6-12 months pre-market. Control the narrative, identify favorable add-backs, speed the process.</p>
-              <ul className="space-y-2 text-sm text-[#051c2c]/80">
-                <li className="flex items-start gap-2"><span className="text-[#2563EB]">→</span> Clean up related party transactions</li>
-                <li className="flex items-start gap-2"><span className="text-[#2563EB]">→</span> Eliminate owner perks pre-sale</li>
-                <li className="flex items-start gap-2"><span className="text-[#2563EB]">→</span> Establish market-rate compensation benchmarks</li>
-                <li className="flex items-start gap-2"><span className="text-[#2563EB]">→</span> Document one-time expenses with evidence</li>
-              </ul>
-              <p className="mt-4 pt-4 border-t border-gray-200 text-xs text-[#051c2c]/60">
-                <strong>Deliverable:</strong> Recast financials for Confidential Information Memorandum (CIM)
-              </p>
+              <p className="text-[#051c2c]/70 mb-6 text-sm">Control the narrative before buyers arrive. AI agents pre-process financials to identify and document every favorable adjustment.</p>
+              
+              <div className="space-y-4">
+                <div className="p-4 bg-[#F9F9F7] rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2 h-2 rounded-full bg-[#2563EB]"></span>
+                    <p className="text-sm font-bold text-[#051c2c]">Add-Back Discovery Agent</p>
+                  </div>
+                  <p className="text-xs text-[#051c2c]/60 ml-4">Scans GL for owner perks, related-party transactions, one-time expenses. Auto-generates supporting documentation package.</p>
+                </div>
+                <div className="p-4 bg-[#F9F9F7] rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2 h-2 rounded-full bg-[#2563EB]"></span>
+                    <p className="text-sm font-bold text-[#051c2c]">Revenue Normalization Agent</p>
+                  </div>
+                  <p className="text-xs text-[#051c2c]/60 ml-4">Classifies revenue by tier, identifies seasonality patterns, flags non-recurring items for quality scoring.</p>
+                </div>
+                <div className="p-4 bg-[#F9F9F7] rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2 h-2 rounded-full bg-[#2563EB]"></span>
+                    <p className="text-sm font-bold text-[#051c2c]">CIM Prep Agent</p>
+                  </div>
+                  <p className="text-xs text-[#051c2c]/60 ml-4">Generates recast financials, adjustment bridges, and data room index for buyer due diligence.</p>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <p className="text-xs text-[#051c2c]/60">
+                  <strong className="text-[#2563EB]">AWS Data Room:</strong> Pre-populated with organized, indexed, buyer-ready documentation
+                </p>
+              </div>
             </div>
 
-            <div className="bg-white p-8 border-l-4 border-[#EDB624] shadow-sm">
-              <span className="inline-block px-3 py-1 bg-[#EDB624] text-[#051c2c] text-xs font-bold uppercase tracking-wider mb-4">
-                Buy-Side (Confirmatory Due Diligence)
-              </span>
+            {/* Buy-Side */}
+            <div className="bg-white p-8 border-l-4 border-[#EDB624] shadow-lg">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="inline-block px-3 py-1 bg-[#EDB624] text-[#051c2c] text-xs font-bold uppercase tracking-wider">
+                  Buy-Side (Confirmatory Due Diligence)
+                </span>
+                <span className="text-xs text-[#051c2c]/40">30-45 day exclusivity window</span>
+              </div>
               <h3 className="text-xl font-bold text-[#051c2c] mb-3">Validate & Protect</h3>
-              <p className="text-[#051c2c]/70 mb-4 text-sm">Post-LOI, during exclusivity (30-45 day window). Validate investment thesis, find price reductions.</p>
-              <ul className="space-y-2 text-sm text-[#051c2c]/80">
-                <li className="flex items-start gap-2"><span className="text-[#EDB624]">→</span> Transaction-level revenue analysis</li>
-                <li className="flex items-start gap-2"><span className="text-[#EDB624]">→</span> Customer interview verification (top 10-20)</li>
-                <li className="flex items-start gap-2"><span className="text-[#EDB624]">→</span> Vendor payment pattern analysis</li>
-                <li className="flex items-start gap-2"><span className="text-[#EDB624]">→</span> Tax authority confirmation letters</li>
-              </ul>
-              <p className="mt-4 pt-4 border-t border-gray-200 text-xs text-[#051c2c]/60">
-                <strong>Deal Impact:</strong> Price reduction, earnout structure, escrow increase, NWC adjustment
-              </p>
+              <p className="text-[#051c2c]/70 mb-6 text-sm">Aggressive validation of seller claims. AI agents stress-test every assumption and surface red flags buyers miss.</p>
+              
+              <div className="space-y-4">
+                <div className="p-4 bg-[#F9F9F7] rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2 h-2 rounded-full bg-[#EDB624]"></span>
+                    <p className="text-sm font-bold text-[#051c2c]">Transaction Forensics Agent</p>
+                  </div>
+                  <p className="text-xs text-[#051c2c]/60 ml-4">Analyzes 100% of transactions (not samples) for cut-off issues, revenue recognition problems, related-party infiltration.</p>
+                </div>
+                <div className="p-4 bg-[#F9F9F7] rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2 h-2 rounded-full bg-[#EDB624]"></span>
+                    <p className="text-sm font-bold text-[#051c2c]">Working Capital Detective</p>
+                  </div>
+                  <p className="text-xs text-[#051c2c]/60 ml-4">Detects window dressing, identifies artificial cash boosts, calculates true NWC peg with seasonal adjustments.</p>
+                </div>
+                <div className="p-4 bg-[#F9F9F7] rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2 h-2 rounded-full bg-[#EDB624]"></span>
+                    <p className="text-sm font-bold text-[#051c2c]">Hidden Liability Hunter</p>
+                  </div>
+                  <p className="text-xs text-[#051c2c]/60 ml-4">Scans for unrecorded obligations—tax exposures, warranty reserves, litigation, off-balance-sheet items.</p>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <p className="text-xs text-[#051c2c]/60">
+                  <strong className="text-[#EDB624]">Deal Impact:</strong> Price reduction ammo, escrow arguments, NWC true-ups, post-close protection
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* AWS Data Room Note */}
+          <div className="mt-8 p-6 bg-[#051c2c] text-white">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-[#2563EB] rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+              </div>
+              <div>
+                <h4 className="font-bold text-lg mb-2">Secure AWS Data Room Infrastructure</h4>
+                <p className="text-white/70 text-sm leading-relaxed">All engagements operate within SOC 2-compliant AWS environments. AI agents access your data securely, process it in encrypted pipelines, and output findings to a structured data room with full audit trails. No data leaves your control. No black-box algorithms—every AI finding is traceable to source documents.</p>
+              </div>
             </div>
           </div>
         </div>
