@@ -237,6 +237,13 @@ When returning to this project, consider:
 
 ### February 12, 2026
 
+**Hero Split Redesign** (Commit: `878c094`, Job 141)
+- Split left side into top (hero image + content) and bottom (slate grey CTA section)
+- Removed emoji from AI link
+- Removed "View Case Studies" button
+- Reduced top padding to move content higher
+- New slate grey (#475569) bottom bar with AI link + "Schedule a Consultation" button
+
 **Hero AI Link & Bigger Fonts** (Commit: `57aa811`, Job 139)
 - Added prominent amber AI link in hero: "See How AI Delivers QoE Faster & More Cost-Effectively"
 - Made all AI section fonts significantly bigger (headings now 4xl/5xl, body text larger)
