@@ -302,58 +302,56 @@ export default function QualityOfEarningsPage() {
   return (
     <div>
       {/* HERO — Split: Image Left | Gray Panel Right */}
-      <div className="pt-16">
-        <div className="grid lg:grid-cols-12 min-h-[600px] lg:min-h-[700px]">
+      <div className="pt-8">
+        <div className="grid lg:grid-cols-12 min-h-[700px] lg:min-h-[800px]">
           
-          {/* Left — Image with Text Overlay */}
-          <div className="lg:col-span-8 relative flex items-end">
-            <div className="absolute inset-0">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&h=900&fit=crop"
-                alt="Financial analysis"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c] via-[#051c2c]/70 to-transparent"></div>
+          {/* Left — Split Top/Bottom */}
+          <div className="lg:col-span-8 relative flex flex-col">
+            {/* Top: Image with Hero Content */}
+            <div className="relative flex-1 flex items-end">
+              <div className="absolute inset-0">
+                <img
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&h=900&fit=crop"
+                  alt="Financial analysis"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c] via-[#051c2c]/70 to-transparent"></div>
+              </div>
+              
+              <div className="relative z-10 p-6 md:p-10 lg:p-12 w-full">
+                <p className="text-white/60 text-sm font-semibold tracking-widest uppercase mb-3">
+                  Financial Due Diligence
+                </p>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-[1.05] max-w-3xl">
+                  Quality of Earnings
+                </h1>
+                <p className="text-xl md:text-2xl text-white/80 font-light max-w-2xl leading-relaxed">
+                  Forensic financial analysis to determine if earnings will persist under new ownership.
+                </p>
+              </div>
             </div>
             
-            <div className="relative z-10 p-8 md:p-12 lg:p-16 w-full">
-              <p className="text-white/60 text-sm font-semibold tracking-widest uppercase mb-4">
-                Financial Due Diligence
-              </p>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.05] max-w-3xl">
-                Quality of Earnings
-              </h1>
-              <p className="text-xl md:text-2xl text-white/80 font-light mb-6 max-w-2xl leading-relaxed">
-                Forensic financial analysis to determine if earnings will persist under new ownership.
-              </p>
-              
-              {/* AI Advantage Link */}
-              <a 
-                href="#ai-accelerated"
-                className="inline-flex items-center gap-2 bg-[#EDB624] text-[#051c2c] px-6 py-3 font-bold text-base hover:shadow-xl hover:bg-[#f5c430] transition-all duration-300 mb-6 group"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                See How AI Delivers QoE Faster & More Cost-Effectively
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </a>
-              
-              <div className="flex flex-wrap gap-4">
+            {/* Bottom: Slate Grey Section with CTAs */}
+            <div className="bg-[#475569] p-6 md:p-8">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <a 
+                  href="#ai-accelerated"
+                  className="inline-flex items-center gap-2 text-white font-semibold text-lg hover:text-[#EDB624] transition-colors group"
+                >
+                  <span>See How AI Delivers QoE Faster & More Cost-Effectively</span>
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </a>
                 <a
                   href="mailto:admin@northcastleconsulting.com?subject=Quality%20of%20Earnings%20Inquiry"
-                  className="inline-block bg-white text-[#051c2c] px-8 py-4 font-semibold hover:shadow-xl hover:bg-gray-50 transition-all duration-300"
+                  className="inline-flex items-center gap-2 bg-white text-[#051c2c] px-6 py-3 font-bold text-base hover:shadow-xl hover:bg-gray-50 transition-all duration-300 whitespace-nowrap"
                 >
-                  Start Your Analysis
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Schedule a Consultation
                 </a>
-                <Link
-                  to="/case-studies"
-                  className="inline-block bg-transparent text-white px-8 py-4 font-semibold border border-white/40 hover:border-white hover:bg-white/10 transition-all duration-300"
-                >
-                  View Case Studies
-                </Link>
               </div>
             </div>
           </div>
