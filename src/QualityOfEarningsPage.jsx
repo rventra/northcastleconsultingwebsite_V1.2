@@ -305,10 +305,10 @@ export default function QualityOfEarningsPage() {
       <div className="pt-8">
         <div className="grid lg:grid-cols-12 min-h-[700px] lg:min-h-[800px]">
           
-          {/* Left — Split Top/Bottom */}
+          {/* Left — Split Top/Bottom (50/50 Balance) */}
           <div className="lg:col-span-8 relative flex flex-col">
-            {/* Top: Image with Hero Content */}
-            <div className="relative flex-1 flex items-end">
+            {/* Top: Image with Hero Content (50%) */}
+            <div className="relative h-1/2 min-h-[300px] flex items-end">
               <div className="absolute inset-0">
                 <img
                   src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=900&fit=crop"
@@ -322,38 +322,46 @@ export default function QualityOfEarningsPage() {
                 <p className="text-white/60 text-sm font-semibold tracking-widest uppercase mb-3">
                   Financial Due Diligence
                 </p>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-[1.05] max-w-3xl">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-[1.05] max-w-3xl">
                   Quality of Earnings
                 </h1>
-                <p className="text-xl md:text-2xl text-white/80 font-light max-w-2xl leading-relaxed">
+                <p className="text-lg md:text-xl text-white/80 font-light max-w-2xl leading-relaxed">
                   Forensic financial analysis to determine if earnings will persist under new ownership.
                 </p>
               </div>
             </div>
             
-            {/* Bottom: Slate Grey Section with CTAs */}
-            <div className="bg-[#475569] p-6 md:p-8">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <a 
-                  href="#ai-accelerated"
-                  className="inline-flex items-center gap-2 text-white font-semibold text-lg hover:text-[#EDB624] transition-colors group"
-                >
-                  <span>See How AI Delivers QoE Faster & More Cost-Effectively</span>
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </a>
-                <a
-                  href="https://calendly.com/northcastleconsulting/qoe-consultation"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-white text-[#051c2c] px-6 py-3 font-bold text-base hover:shadow-xl hover:bg-gray-50 transition-all duration-300 whitespace-nowrap"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  Schedule a Consultation
-                </a>
+            {/* Bottom: Slate Grey Section with CTAs (50%) */}
+            <div className="relative h-1/2 min-h-[300px] bg-[#475569] flex items-center">
+              <div className="p-6 md:p-10 lg:p-12 w-full">
+                <p className="text-white/60 text-sm font-semibold tracking-widest uppercase mb-4">
+                  AI-Accelerated Analysis
+                </p>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 leading-tight">
+                  Institutional-Grade QoE in a Fraction of the Time
+                </h2>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a 
+                    href="#ai-accelerated"
+                    className="inline-flex items-center justify-center gap-2 bg-[#EDB624] text-[#051c2c] px-6 py-3 font-bold text-base hover:shadow-xl hover:bg-[#f5c430] transition-all duration-300"
+                  >
+                    <span>See How AI Delivers QoE Faster</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </a>
+                  <a
+                    href="https://calendly.com/northcastleconsulting/qoe-consultation"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-6 py-3 font-bold text-base hover:bg-white hover:text-[#051c2c] transition-all duration-300"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Schedule a Consultation
+                  </a>
+                </div>
               </div>
             </div>
           </div>
