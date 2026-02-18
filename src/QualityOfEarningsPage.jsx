@@ -413,7 +413,7 @@ export default function QualityOfEarningsPage() {
             </h3>
             
             <a 
-              href="https://northcastle-consulting-docs.s3.us-east-2.amazonaws.com/North%20Castle%20Consulting%20-%20Quality%20of%20Earnings.pdf"
+              href="https://northcastle-consulting-docs.s3.us-east-2.amazonaws.com/qoe-guide/NorthCastle_QoE_Guide.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-[#2563EB] font-semibold text-sm hover:underline mb-6 group"
