@@ -95,9 +95,9 @@ export default function RoundupLandingPage() {
       <div className="h-1 bg-[#2563EB]"></div>
 
       {/* Settlement Timeline - Simple Text Strip */}
-      <div className="bg-[#475569] text-white py-3 px-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-center gap-2 text-xs">
-          <span className="text-[#EDB624] font-semibold">Settlement Filed</span>
+      <div className="bg-[#475569] text-white py-4 px-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-center gap-3 text-sm">
+          <span className="text-[#EDB624] font-semibold">Roundup Settlement Filed</span>
           <span className="text-white/30">•</span>
           <span className="font-semibold">SCOTUS Arguments <span className="text-[#EDB624]">({daysUntilScotus} days)</span></span>
           <span className="text-white/30">•</span>
@@ -178,55 +178,52 @@ export default function RoundupLandingPage() {
           </div>
         </div>
 
-        {/* Right Side - Clean Value Props */}
+        {/* Right Side - Value Props */}
         <div className="bg-[#F5F5F5] flex flex-col justify-center p-8 md:p-12 lg:p-16">
           <div className="max-w-md mx-auto w-full">
-            <h2 className="text-xl md:text-2xl font-bold text-[#051c2c] mb-8 leading-tight">
-              The Gap Between Upper-Tier and Lower-Tier Cases Is Your Documentation
+            <h2 className="text-xl md:text-2xl font-bold text-[#051c2c] mb-6 leading-tight">
+              We Determine Gross Settlement Value Per Case—And Fix What's Missing
             </h2>
             
-            <div className="space-y-5">
-              <div className="flex items-start gap-4 pb-5 border-b border-[#051c2c]/10">
-                <div className="w-10 h-10 rounded-full bg-[#051c2c]/10 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-[#051c2c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
+            <p className="text-[#051c2c]/70 text-sm mb-6 leading-relaxed">
+              Our analysis evaluates each case primarily on <strong>diagnosis and exposure history</strong> to project settlement tier and value. When information is lacking, we identify exactly what's missing and recommend the fix.
+            </p>
+            
+            <div className="space-y-4">
+              <div className="flex items-start gap-3 pb-4 border-b border-[#051c2c]/10">
+                <div className="w-8 h-8 rounded-full bg-[#051c2c]/10 flex items-center justify-center flex-shrink-0">
+                  <span className="text-[#051c2c] font-bold text-sm">1</span>
                 </div>
                 <div>
-                  <p className="text-[#051c2c] font-bold text-sm mb-1">AI-Powered Tier Analysis</p>
-                  <p className="text-[#051c2c]/60 text-sm leading-relaxed">Map cases to settlement scoring criteria in days, not weeks</p>
+                  <p className="text-[#051c2c] font-bold text-sm mb-1">Enrichment & Recontact</p>
+                  <p className="text-[#051c2c]/60 text-xs leading-relaxed">Locate lost claimants, verify contact info, and re-engage to gather missing data</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 pb-5 border-b border-[#051c2c]/10">
-                <div className="w-10 h-10 rounded-full bg-[#051c2c]/10 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-[#051c2c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
+              <div className="flex items-start gap-3 pb-4 border-b border-[#051c2c]/10">
+                <div className="w-8 h-8 rounded-full bg-[#051c2c]/10 flex items-center justify-center flex-shrink-0">
+                  <span className="text-[#051c2c] font-bold text-sm">2</span>
                 </div>
                 <div>
-                  <p className="text-[#051c2c] font-bold text-sm mb-1">Claimant Re-Engagement</p>
-                  <p className="text-[#051c2c]/60 text-sm leading-relaxed">Locate lost claimants and revive cases before opt-in deadlines</p>
+                  <p className="text-[#051c2c] font-bold text-sm mb-1">Medical Records Review</p>
+                  <p className="text-[#051c2c]/60 text-xs leading-relaxed">Order, review, and extract pathology reports, treatment history, and diagnostic confirmation</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#051c2c]/10 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-[#051c2c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-full bg-[#051c2c]/10 flex items-center justify-center flex-shrink-0">
+                  <span className="text-[#051c2c] font-bold text-sm">3</span>
                 </div>
                 <div>
-                  <p className="text-[#051c2c] font-bold text-sm mb-1">Documentation Remediation</p>
-                  <p className="text-[#051c2c]/60 text-sm leading-relaxed">Close gaps that downgrade cases from $150K+ to under $10K</p>
+                  <p className="text-[#051c2c] font-bold text-sm mb-1">Questionnaire Remediation</p>
+                  <p className="text-[#051c2c]/60 text-xs leading-relaxed">Cure ambiguous or incomplete responses through targeted follow-up and clarification</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-[#051c2c]/10">
-              <p className="text-[#051c2c]/60 text-sm italic">
-                "Firms that can't demonstrate case readiness at each settlement milestone
-                lose negotiating leverage—and leave millions on the table."
+            <div className="mt-6 pt-5 border-t border-[#051c2c]/10">
+              <p className="text-[#051c2c]/60 text-xs italic">
+                Every case is evaluated against the settlement's tiering criteria. No guesswork—just data-driven valuation and a clear path to remediation.
               </p>
             </div>
           </div>
