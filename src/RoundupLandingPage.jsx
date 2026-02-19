@@ -92,28 +92,8 @@ const RoundupLandingPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation Bar */}
-      <nav className="bg-[#0B1D3A] text-white py-3 px-6">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <a href="/" className="font-serif text-lg font-bold text-[#E2B45A]">North Castle</a>
-          <div className="hidden md:flex items-center gap-6 font-sans text-sm">
-            <a href="/" className="hover:text-[#E2B45A] transition-colors">Home</a>
-            <a href="/about" className="hover:text-[#E2B45A] transition-colors">About</a>
-            <a href="/services" className="hover:text-[#E2B45A] transition-colors">Services</a>
-            <a href="/case-studies" className="hover:text-[#E2B45A] transition-colors">Case Studies</a>
-            <a href="/contact" className="hover:text-[#E2B45A] transition-colors">Contact</a>
-          </div>
-          <button 
-            onClick={openModal}
-            className="bg-[#C8973E] text-[#0B1D3A] px-4 py-2 font-sans text-xs font-bold rounded hover:bg-[#E2B45A] transition-colors"
-          >
-            Get Free Audit
-          </button>
-        </div>
-      </nav>
-
       {/* Ticker */}
-      <div className="bg-[#142D55] text-white text-center py-2.5 px-6 text-[13px] font-semibold tracking-wide">
+      <div className="bg-[#0B1D3A] text-white text-center py-2.5 px-6 text-[13px] font-semibold tracking-wide">
         $7.25B Roundup settlement filed February 17, 2026.
         <span className="text-[#E2B45A] font-bold"> {daysUntilScotus}</span> days until SCOTUS oral arguments.
         &nbsp;|&nbsp;{' '}
