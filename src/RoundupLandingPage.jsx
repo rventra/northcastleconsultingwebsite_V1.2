@@ -77,8 +77,8 @@ export default function RoundupLandingPage() {
   };
 
   return (
-    <div>
-      {/* Breaking News Bar */}
+    <div className="pt-16">
+      {/* Breaking News Bar -->
       <div className="bg-[#051c2c] text-white py-2 px-4">
         <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 text-xs font-semibold">
           <span className="text-[#EDB624] font-bold">Breaking</span>
