@@ -1,6 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
 
 const RoundupLandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -94,8 +92,6 @@ const RoundupLandingPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
-      
       {/* Ticker */}
       <div className="bg-[#0B1D3A] text-white text-center py-2.5 px-6 text-[13px] font-semibold tracking-wide">
         $7.25B Roundup settlement filed February 17, 2026.
