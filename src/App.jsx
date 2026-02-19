@@ -597,10 +597,13 @@ function HomePage() {
 }
 
 export default function NorthCastleConsulting() {
+  const location = useLocation();
+  const isRoundupLanding = location.pathname === '/roundup-docket-intelligence';
+  
   return (
     <div className="min-h-screen bg-white">
       <ScrollToTop />
-      <Navigation />
+      {!isRoundupLanding && <Navigation />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about-us" element={<AboutUsPage />} />
