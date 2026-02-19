@@ -79,16 +79,23 @@ export default function RoundupLandingPage() {
   return (
     <div>
       {/* Breaking News Bar */}
-      <div className="bg-[#EDB624] text-[#051c2c] py-1.5 px-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 text-xs font-bold">
-          <span className="bg-[#051c2c] text-[#EDB624] px-1.5 py-0.5 text-[10px] uppercase tracking-wider">Breaking</span>
-          <span className="whitespace-nowrap">$7.25B Roundup Settlement Filed — {daysUntilScotus} Days Until SCOTUS Arguments</span>
-          <button onClick={openModal} className="underline hover:no-underline ml-2">Get Free Sample Report →</button>
+      <div className="bg-[#051c2c] text-white py-2 px-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 text-xs font-semibold">
+          <span className="text-[#EDB624] font-bold">Breaking</span>
+          <span className="text-white/40">•</span>
+          <span className="whitespace-nowrap">$7.25B Settlement Filed</span>
+          <span className="text-white/40">•</span>
+          <span className="text-[#EDB624] whitespace-nowrap">{daysUntilScotus} Days to SCOTUS</span>
+          <span className="text-white/40">•</span>
+          <button onClick={openModal} className="text-white hover:text-[#EDB624] transition-colors underline">Get Sample Report</button>
         </div>
       </div>
 
+      {/* Light Blue Divider */}
+      <div className="h-1 bg-[#2563EB]"></div>
+
       {/* Settlement Timeline - Visual Urgency Strip */}
-      <div className="bg-[#475569] text-white py-4 px-4 border-y-2 border-[#EDB624]">
+      <div className="bg-[#475569] text-white py-4 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between gap-2 text-[10px] sm:text-xs">
             {/* Milestone 1 - Complete */}
