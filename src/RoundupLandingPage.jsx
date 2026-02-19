@@ -88,7 +88,7 @@ export default function RoundupLandingPage() {
       </div>
 
       {/* Settlement Timeline - Visual Urgency Strip */}
-      <div className="bg-[#051c2c] text-white py-4 px-4 border-b border-white/10">
+      <div className="bg-[#1e293b] text-white py-4 px-4 border-y-2 border-[#EDB624]">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between gap-2 text-[10px] sm:text-xs">
             {/* Milestone 1 - Complete */}
