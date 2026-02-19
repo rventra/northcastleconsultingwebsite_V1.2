@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import NewsletterTicker from './components/NewsletterTicker';
 
 export default function RoundupLandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -74,10 +73,8 @@ export default function RoundupLandingPage() {
   };
 
   return (
-    <div className="pt-16">
-      <NewsletterTicker />
-
-      {/* Ticker Bar */}
+    <div>
+      {/* Ticker Bar -->
       <div className="bg-[#051c2c] text-white text-center py-3 px-6">
         <p className="text-sm font-semibold tracking-wide">
           $7.25B Roundup settlement filed February 17, 2026.{' '}
