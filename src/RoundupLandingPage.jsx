@@ -78,22 +78,77 @@ export default function RoundupLandingPage() {
 
   return (
     <div>
-      {/* Breaking News Timeline Bar - Compact Urgency Header */}
-      <div className="bg-[#051c2c] text-white py-2 px-4 border-b-2 border-[#EDB624]">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs md:text-sm">
-          <div className="flex items-center gap-3 overflow-x-auto">
-            <span className="bg-[#EDB624] text-[#051c2c] px-2 py-0.5 font-bold text-xs uppercase tracking-wider whitespace-nowrap">Breaking</span>
-            <span className="text-white/60 whitespace-nowrap">Feb 17:</span>
-            <span className="font-semibold whitespace-nowrap">$7.25B Settlement Filed</span>
-            <span className="text-white/40">|</span>
-            <span className="text-[#EDB624] font-bold whitespace-nowrap">{daysUntilScotus} days</span>
-            <span className="text-white/60 whitespace-nowrap">until SCOTUS arguments</span>
-            <span className="text-white/40 hidden sm:inline">|</span>
-            <span className="text-white/60 whitespace-nowrap hidden sm:inline">Q3 2026: Opt-in deadline</span>
+      {/* Breaking News Bar */}
+      <div className="bg-[#EDB624] text-[#051c2c] py-1.5 px-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 text-xs font-bold">
+          <span className="bg-[#051c2c] text-[#EDB624] px-1.5 py-0.5 text-[10px] uppercase tracking-wider">Breaking</span>
+          <span className="whitespace-nowrap">$7.25B Roundup Settlement Filed — {daysUntilScotus} Days Until SCOTUS Arguments</span>
+          <button onClick={openModal} className="underline hover:no-underline ml-2">Get Free Sample Report →</button>
+        </div>
+      </div>
+
+      {/* Settlement Timeline - Visual Urgency Strip */}
+      <div className="bg-[#051c2c] text-white py-4 px-4 border-b border-white/10">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between gap-2 text-[10px] sm:text-xs">
+            {/* Milestone 1 - Complete */}
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[#EDB624]"></div>
+              <div>
+                <p className="text-[#EDB624] font-bold">FEB 17</p>
+                <p className="text-white/50 hidden sm:block">Settlement Filed</p>
+              </div>
+            </div>
+            
+            {/* Connector */}
+            <div className="flex-1 h-0.5 bg-[#EDB624] max-w-[60px]"></div>
+            
+            {/* Milestone 2 - NOW */}
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-[#EDB624] ring-2 ring-[#EDB624]/50 animate-pulse"></div>
+              <div>
+                <p className="text-[#EDB624] font-bold">APR 27</p>
+                <p className="text-white font-semibold hidden sm:block">SCOTUS Arguments</p>
+                <p className="text-[10px] text-[#2563EB]">{daysUntilScotus} days</p>
+              </div>
+            </div>
+            
+            {/* Connector */}
+            <div className="flex-1 h-0.5 bg-white/20 max-w-[60px]"></div>
+            
+            {/* Milestone 3 */}
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full border-2 border-white/30"></div>
+              <div>
+                <p className="text-white/50 font-bold">JUN 2026</p>
+                <p className="text-white/30 hidden sm:block">Decision</p>
+              </div>
+            </div>
+            
+            {/* Connector */}
+            <div className="flex-1 h-0.5 bg-white/20 max-w-[60px]"></div>
+            
+            {/* Milestone 4 */}
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full border-2 border-white/30"></div>
+              <div>
+                <p className="text-white/50 font-bold">Q3 2026</p>
+                <p className="text-white/30 hidden sm:block">Opt-In Deadline</p>
+              </div>
+            </div>
+            
+            {/* Connector */}
+            <div className="flex-1 h-0.5 bg-white/20 max-w-[60px]"></div>
+            
+            {/* Milestone 5 */}
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full border-2 border-white/30"></div>
+              <div>
+                <p className="text-white/50 font-bold">2026-27</p>
+                <p className="text-white/30 hidden sm:block">First Payouts</p>
+              </div>
+            </div>
           </div>
-          <button onClick={openModal} className="text-[#EDB624] hover:underline font-semibold whitespace-nowrap text-xs">
-            Get 100-case sample report →
-          </button>
         </div>
       </div>
 
