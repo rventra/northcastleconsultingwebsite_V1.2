@@ -68,12 +68,21 @@ Remove-Item -Recurse -Force ncw-temp
 | Page | File | URL | Notes |
 |------|------|-----|-------|
 | Roundup Docket Intelligence | `src/RoundupLandingPage.jsx` | `/roundup-docket-intelligence` | v7.1 - No navbar |
+| Roundup Thank You | `src/RoundupThankYouPage.jsx` | `/roundup-docket-intelligence-thank-you` | Post-form submission |
 
 ### Landing Page Structure
 - Built as **React components** (JSX), not static HTML
-- No navbar on landing pages (handled in `App.jsx`)
+- No navbar on landing pages (handled in `App.jsx` with `isRoundupLanding` check)
 - Lambda autoresponder sends email on form submit
 - All CTAs should match the v7.1 copy: "Sample Docket Report"
+- Form submissions redirect to thank you page (not inline success)
+
+### Trust Badge Standard
+All landing pages must use:
+```
+All Data Housed in AWS • NDA First • 100% U.S.-Based Team
+```
+**DO NOT use:** HIPAA-Ready, 256-bit SSL, SOC2, Encrypted (removed per compliance)
 
 ### Updating Landing Pages
 1. Get latest HTML from Box: `Box/North Castle/Projects/Legal Firm/Marketing/Landing Pages/Final/`
@@ -110,8 +119,33 @@ Remove-Item -Recurse -Force ncw-temp
 }
 ```
 
+### SES Email Template Management
+Template stored in AWS SES (not Lambda code). To update:
+
+```bash
+# 1. Update ses_email_template.json file
+# 2. Delete old template
+aws ses delete-template --template-name RoundupSampleReportResponse --region us-east-2
+
+# 3. Create new template
+aws ses create-template --cli-input-json file://ses_email_template.json --region us-east-2
+```
+
+**Template Requirements:**
+- NO personalized greeting ("Dear {{name}}")
+- NO phone numbers
+- NO fake stats ($4.2M, $750K+, 90%)
+- Include Calendly link: https://calendly.com/rventrapragada-northcastleconsulting/30min
+- Footer trust badges: "All Data Housed in AWS • NDA First • 100% U.S.-Based Team"
+
 ### S3 Buckets
 - `northcastle-consulting-docs` - PDF documents only (Sample Audit Report, etc.)
+
+### Calendly URLs
+| Service | Calendly Path |
+|---------|---------------|
+| Roundup | `/rventrapragada-northcastleconsulting/30min` |
+| QoE | `/rventrapragada-northcastleconsulting/qoe-consultation` |
 
 ---
 
@@ -121,6 +155,9 @@ Remove-Item -Recurse -Force ncw-temp
 # AWS
 aws amplify list-jobs --app-id d3418fafn3crpt --branch-name claude/main --profile northcastle
 aws lambda invoke --function-name RoundupAutoResponder --payload '{}' --profile northcastle
+
+# SES Template
+aws ses get-template --template-name RoundupSampleReportResponse --region us-east-2
 
 # GitHub
 gh repo view rventra/northcastleconsultingwebsite_V1.2
@@ -170,6 +207,9 @@ curl https://openrouter.ai/api/v1/chat/completions \
 
 | Date | Change | Description |
 |------|--------|-------------|
+| 2026-02-20 | SES Template v2 | Updated email: no greeting, no fake stats, Calendly CTA, clean trust badges |
+| 2026-02-20 | Thank You Page | Added RoundupThankYouPage.jsx with Calendly integration |
+| 2026-02-20 | Trust Badge Update | Replaced HIPAA/SSL with "All Data Housed in AWS • NDA First • 100% U.S.-Based Team" |
 | 2026-02-20 | Landing Page v7.1 | Updated RoundupLandingPage to match Nick's v7.1 design |
 | 2026-02-20 | Lambda Integration | Connected landing page forms to AWS Lambda autoresponder |
 | 2026-02-17 | Initial Setup | Created AGENTS.md with newsletter workflow |
