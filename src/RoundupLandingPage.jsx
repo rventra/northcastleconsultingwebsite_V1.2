@@ -61,17 +61,43 @@ const RoundupLandingPage = () => {
     setIsSubmitting(true);
     setFormStatus({ type: '', message: '' });
 
-    // For now, just show success message
-    // TODO: Connect to Lambda API Gateway when ready
-    // const API_URL = 'https://YOUR-API-ID.execute-api.us-east-2.amazonaws.com/prod/request-report';
+    const API_URL = 'https://8jl5xpty5g.execute-api.us-east-2.amazonaws.com/prod/request-report';
     
-    setTimeout(() => {
-      setFormStatus({
-        type: 'success',
-        message: `Success! Your Sample Audit Report has been sent to: ${email}. Check your inbox (and spam folder) within a few minutes.`
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: email.split('@')[0],
+          email: email,
+          firm: '',
+          phone: '',
+          caseCount: '',
+          message: 'Requested via landing page modal'
+        })
       });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setFormStatus({
+          type: 'success',
+          message: `Success! Your Sample Audit Report has been sent to: ${email}. Check your inbox (and spam folder) within a few minutes.`
+        });
+      } else {
+        setFormStatus({ 
+          type: 'error', 
+          message: data.error || 'Something went wrong. Please try again or email us directly at consult@northcastleconsulting.com'
+        });
+      }
+    } catch (err) {
+      setFormStatus({ 
+        type: 'error', 
+        message: 'Could not connect to server. Please email us directly at consult@northcastleconsulting.com'
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const openModal = () => {
