@@ -218,7 +218,7 @@ const RoundupLandingPage = () => {
               <path d="M8 0L0 3v6c0 5.25 3.4 10.15 8 11 4.6-.85 8-5.75 8-11V3L8 0z"/>
               <path d="M6.5 13.5L3.5 10.5l1.4-1.4 1.6 1.6 4.6-4.6 1.4 1.4-6 6z" fill="#142D55"/>
             </svg>
-            HIPAA-Ready &nbsp;&bull;&nbsp; 256-bit SSL &nbsp;&bull;&nbsp; NDA First &nbsp;&bull;&nbsp; 100% U.S.-Based Team
+            All Data Housed in AWS &nbsp;&bull;&nbsp; NDA First &nbsp;&bull;&nbsp; 100% U.S.-Based Team
           </div>
         </div>
       </section>
@@ -580,9 +580,9 @@ const RoundupLandingPage = () => {
             {/* Trust badges near CTA */}
             <div className="flex justify-center gap-2 flex-wrap mt-5">
               {[
-                { icon: 'shield', text: 'HIPAA-Ready' },
+                { icon: 'shield', text: 'All Data Housed in AWS' },
                 { icon: 'shield', text: 'NDA First' },
-                { icon: 'lock', text: '256-bit SSL' },
+                { icon: 'shield', text: 'NDA First' },
                 { icon: 'check', text: 'U.S.-Based Team' }
               ].map((badge, i) => (
                 <div key={i} className="inline-flex items-center gap-1.5 px-3.5 py-1.5 border border-[#6B7B8D]/25 rounded bg-white/60">
@@ -696,7 +696,7 @@ const RoundupLandingPage = () => {
           {/* Trust badges */}
           <div className="flex justify-center gap-2 flex-wrap mt-5">
             {[
-              { text: 'HIPAA-Ready' },
+              { text: 'All Data Housed in AWS' },
               { text: 'NDA First' },
               { text: 'Encrypted' }
             ].map((badge, i) => (
@@ -716,7 +716,7 @@ const RoundupLandingPage = () => {
       <footer ref={footerRef} className="bg-[#080F1E] text-[#5A6A85] text-center py-8 px-6 font-sans text-[13px]">
         <p>&copy; 2026 North Castle Consulting. All rights reserved. &nbsp;|&nbsp; <a href="#" className="text-[#C8973E] hover:underline">Privacy Policy</a> &nbsp;|&nbsp; <a href="#" className="text-[#C8973E] hover:underline">Terms</a></p>
         <p className="mt-2 text-xs tracking-wide text-[#4A5A72]">
-          HIPAA-Ready &bull; 256-bit SSL &bull; 100% U.S.-Based Team &bull; No Offshore Data Handling
+          All Data Housed in AWS &bull; NDA First &bull; 100% U.S.-Based Team
         </p>
       </footer>
 
@@ -794,7 +794,7 @@ const RoundupLandingPage = () => {
                 {/* Trust badges in modal */}
                 <div className="flex justify-center gap-2 flex-wrap mt-4">
                   {[
-                    { text: 'HIPAA' },
+                    { text: 'AWS' },
                     { text: 'Encrypted' },
                     { text: 'NDA First' }
                   ].map((badge, i) => (

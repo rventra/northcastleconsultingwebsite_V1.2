@@ -29,7 +29,7 @@ export default function RoundupThankYouPage() {
   
   const bodyText = isPdfSource 
     ? "We've sent the Roundup Settlement Timeline & Tier Breakdown PDF to your inbox. You should receive it within 24 hours."
-    : "We've sent your Sample Docket Report. Check your inbox—and spam folder—within the next few minutes. Questions? Reply directly to the email.";
+    : "We've sent your Sample Docket Report. Check your inbox—and spam folder—within the next few minutes. Questions? Reply directly to that email.";
 
   // Trust badge icons
   const ShieldCheckIcon = () => (

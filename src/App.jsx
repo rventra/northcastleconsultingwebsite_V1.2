@@ -600,7 +600,7 @@ function HomePage() {
 
 export default function NorthCastleConsulting() {
   const location = useLocation();
-  const isRoundupLanding = location.pathname === '/roundup-docket-intelligence';
+  const isRoundupLanding = location.pathname === '/roundup-docket-intelligence' || location.pathname === '/roundup-docket-intelligence-thank-you';
   
   return (
     <div className="min-h-screen bg-white">
