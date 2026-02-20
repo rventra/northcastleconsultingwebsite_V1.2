@@ -25,10 +25,13 @@ import { useLocation } from 'react-router-dom';
  * @param {string} props.ogType - Open Graph type (default: 'website')
  * @param {boolean} props.noIndex - Set to true to prevent indexing
  */
-const MetaTags = ({ 
+// Default fallback OG image for all pages (LinkedIn requires an image)
+const DEFAULT_OG_IMAGE = 'https://northcastleconsulting.com/images/roundup-og-image.png';
+
+const MetaTags = ({
   title = 'North Castle Consulting',
   description = 'Financial advisory for Private Equity and Corporate Development.',
-  ogImage = null,
+  ogImage = DEFAULT_OG_IMAGE,
   ogType = 'website',
   noIndex = false
 }) => {
