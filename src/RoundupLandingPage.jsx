@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import MetaTags from './components/MetaTags.jsx';
 
 const RoundupLandingPage = () => {
   const navigate = useNavigate();
@@ -166,7 +167,13 @@ const RoundupLandingPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <MetaTags 
+        title="Roundup Docket Intelligence | North Castle Consulting"
+        description="Actionable intelligence and data infrastructure for Roundup mass tort litigation. Know what your docket is worth before you walk into settlement negotiations."
+        ogImage="https://northcastleconsulting.com/images/roundup-og-image.jpg"
+      />
+      <div className="min-h-screen bg-white">
       {/* Ticker */}
       <div className="bg-[#0B1D3A] text-white text-center py-2.5 px-6 text-[13px] font-semibold tracking-wide">
         $7.25B Roundup settlement filed February 17, 2026.
@@ -873,6 +880,7 @@ const RoundupLandingPage = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

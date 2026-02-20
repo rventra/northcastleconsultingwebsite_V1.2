@@ -76,6 +76,7 @@ Remove-Item -Recurse -Force ncw-temp
 - Lambda autoresponder sends email on form submit
 - All CTAs should match the v7.1 copy: "Sample Docket Report"
 - Form submissions redirect to thank you page (not inline success)
+- **LinkedIn Ads:** Must update `index.html` OG meta tags + create 1200×627px OG image
 
 ### Trust Badge Standard
 All landing pages must use:
@@ -207,12 +208,105 @@ curl https://openrouter.ai/api/v1/chat/completions \
 
 | Date | Change | Description |
 |------|--------|-------------|
+| 2026-02-20 | OG Meta Tags | Added Open Graph tags to index.html for LinkedIn Ads support |
+| 2026-02-20 | MetaTags Component | Created reusable MetaTags.jsx component with PAGE_META config |
 | 2026-02-20 | SES Template v2 | Updated email: no greeting, no fake stats, Calendly CTA, clean trust badges |
 | 2026-02-20 | Thank You Page | Added RoundupThankYouPage.jsx with Calendly integration |
 | 2026-02-20 | Trust Badge Update | Replaced HIPAA/SSL with "All Data Housed in AWS • NDA First • 100% U.S.-Based Team" |
 | 2026-02-20 | Landing Page v7.1 | Updated RoundupLandingPage to match Nick's v7.1 design |
 | 2026-02-20 | Lambda Integration | Connected landing page forms to AWS Lambda autoresponder |
 | 2026-02-17 | Initial Setup | Created AGENTS.md with newsletter workflow |
+
+---
+
+## 🔗 LinkedIn Ads & Open Graph Meta Tags
+
+**CRITICAL:** LinkedIn Ads requires static OG meta tags in `index.html`. React Helmet/runtime meta tags **WILL NOT WORK** for LinkedIn's crawler.
+
+### Current Configuration (index.html)
+| Tag | Value |
+|-----|-------|
+| **og:title** | `Roundup Docket Intelligence \| North Castle Consulting` |
+| **og:description** | Actionable intelligence and data infrastructure for Roundup mass tort litigation |
+| **og:image** | `https://northcastleconsulting.com/images/roundup-og-image.jpg` (1200×627px) |
+| **og:url** | `https://northcastleconsulting.com/roundup-docket-intelligence` |
+
+### SOP for New Landing Pages
+
+**When creating a new landing page for LinkedIn Ads:**
+
+1. **Create OG Image (1200×627px)**
+   - Save to: `public/images/[page]-og-image.jpg`
+   - Use brand colors: #0B1D3A (navy), #C8973E (gold)
+   - Keep text large and minimal (max 2 lines)
+   - See `public/images/README.md` for design guidelines
+
+2. **Update index.html Meta Tags**
+   ```html
+   <title>[Page Title] | North Castle Consulting</title>
+   <meta property="og:title" content="[Page Title] | North Castle Consulting" />
+   <meta property="og:description" content="[Description]" />
+   <meta property="og:image" content="https://northcastleconsulting.com/images/[page]-og-image.jpg" />
+   <meta property="og:url" content="https://northcastleconsulting.com/[page-url]" />
+   ```
+
+3. **Update MetaTags.jsx Config**
+   Add to `PAGE_META` object in `src/components/MetaTags.jsx`:
+   ```javascript
+   newPage: {
+     title: 'Page Title | North Castle Consulting',
+     description: 'Page description here',
+     ogImage: 'https://northcastleconsulting.com/images/page-og-image.jpg',
+   },
+   ```
+
+4. **Use MetaTags Component in Page**
+   ```jsx
+   import MetaTags from './components/MetaTags.jsx';
+   
+   function MyLandingPage() {
+     return (
+       <>
+         <MetaTags 
+           title="Page Title | North Castle Consulting"
+           description="Page description"
+           ogImage="https://northcastleconsulting.com/images/page-og-image.jpg"
+         />
+         {/* page content */}
+       </>
+     );
+   }
+   ```
+
+5. **Pre-Flight Check**
+   - Deploy to production
+   - Test with LinkedIn Post Inspector: https://www.linkedin.com/post-inspector/
+   - Verify image, title, and description show correctly
+   - **DO NOT launch ads until LinkedIn Post Inspector passes**
+
+### Multi-Page Strategy (Future)
+
+If running ads for multiple landing pages simultaneously, you'll need **prerendering** since this is a React SPA:
+
+**Options:**
+1. **Prerender.io** - Easiest solution, adds middleware
+2. **Netlify/Vercel Prerendering** - If migrating hosts  
+3. **React Snapshot** - Build-time prerendering
+4. **Next.js SSR** - Long-term solution
+
+### Testing Tools
+- **LinkedIn Post Inspector:** https://www.linkedin.com/post-inspector/
+- **Facebook Debugger:** https://developers.facebook.com/tools/debug/
+- **Twitter Card Validator:** https://cards-dev.twitter.com/validator
+
+### OG Image Requirements
+| Platform | Dimensions | Aspect Ratio |
+|----------|-----------|--------------|
+| LinkedIn | 1200×627px | 1.91:1 |
+| Twitter/X | 1200×675px | 16:9 |
+| Facebook | 1200×630px | 1.91:1 |
+
+**Use 1200×627px as the standard** - works well across all platforms.
 
 ---
 
