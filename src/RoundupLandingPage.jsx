@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RoundupLandingPage = () => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [formStatus, setFormStatus] = useState({ type: '', message: '' });
@@ -99,10 +101,8 @@ const RoundupLandingPage = () => {
       const data = await response.json();
       
       if (data.success) {
-        setFormStatus({
-          type: 'success',
-          message: `Success! Your Sample Audit Report has been sent to: ${email}. Check your inbox (and spam folder) within a few minutes.`
-        });
+        navigate(`/roundup-docket-intelligence-thank-you?email=${encodeURIComponent(email)}`);
+        return;
       } else {
         setFormStatus({ 
           type: 'error', 
@@ -152,7 +152,8 @@ const RoundupLandingPage = () => {
           message: 'Requested via exit-intent popup'
         })
       });
-      setExitSubmitted(true);
+      navigate(`/roundup-docket-intelligence-thank-you?source=pdf&email=${encodeURIComponent(exitEmail)}`);
+      return;
     } catch (err) {
       console.error('Error:', err);
     }

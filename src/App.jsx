@@ -23,6 +23,7 @@ import BlogPage from './BlogPage.jsx';
 import DataVisibilityBlogPost from './DataVisibilityBlogPost.jsx';
 import CaseStudiesPage from './CaseStudiesPage.jsx';
 import RoundupLandingPage from './RoundupLandingPage.jsx';
+import RoundupThankYouPage from './RoundupThankYouPage.jsx';
 
 
 function ScrollToTop() {
@@ -643,6 +644,7 @@ export default function NorthCastleConsulting() {
         <Route path="/newsletters" element={<MassTortDigestTemplate />} />
         {/* Standalone landing page - no navigation */}
         <Route path="/roundup-docket-intelligence" element={<RoundupLandingPage />} />
+        <Route path="/roundup-docket-intelligence-thank-you" element={<RoundupThankYouPage />} />
       </Routes>
     </div>
   );
