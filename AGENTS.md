@@ -129,6 +129,43 @@ gh api repos/rventra/northcastleconsultingwebsite_V1.2/branches --paginate
 
 ---
 
+## Architect-Agent Framework
+
+### When to Use MINIMAX2
+Spawn MINIMAX2 (via OpenRouter) for fast code generation tasks:
+- HTML → JSX conversion
+- Component modifications
+- Simple refactoring
+
+### MINIMAX2 Configuration
+| Setting | Value |
+|---------|-------|
+| **OpenRouter Model ID** | `minimax/minimax-m2.5` |
+| **Use for** | Code generation, JSX conversion |
+| **Speed** | ~17 TPS (much faster than Kimi) |
+| **Cost** | ~$0.000165 per request |
+
+### Example API Call
+```bash
+curl https://openrouter.ai/api/v1/chat/completions \
+  -H "Authorization: Bearer $OPENROUTER_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "minimax/minimax-m2.5",
+    "messages": [{"role": "user", "content": "Convert this HTML to JSX..."}]
+  }'
+```
+
+### Agent Responsibilities
+| Task | Agent | Why |
+|------|-------|-----|
+| Code generation | **MINIMAX2** | Fast, cheap, good at pattern matching |
+| Git operations | **Kimi** | File system access, error handling |
+| Architecture decisions | **Kimi** | Full context, debugging |
+| Deployment | **Kimi** | AWS/GitHub integration |
+
+---
+
 ## Changelog
 
 | Date | Change | Description |
