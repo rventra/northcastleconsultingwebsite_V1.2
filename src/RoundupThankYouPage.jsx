@@ -53,17 +53,6 @@ export default function RoundupThankYouPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white font-['Georgia','Times_New_Roman',serif] text-[#2C2C2C]">
-      {/* Header Bar */}
-      <div className="bg-[#0B1D3A] py-4 px-6 text-center">
-        <a 
-          href="#" 
-          onClick={handleBackClick}
-          className="font-['Georgia','Times_New_Roman',serif] text-lg font-bold text-white no-underline tracking-wide"
-        >
-          North Castle <span className="text-[#C8973E]">Consulting</span>
-        </a>
-      </div>
-
       {/* Main Content */}
       <main className="flex-1 flex flex-col items-center justify-center py-16 px-6 pb-10 text-center">
         {/* Success Icon */}
@@ -183,7 +172,7 @@ export default function RoundupThankYouPage() {
           <a href="#" className="text-[#C8973E] no-underline">Terms</a>
         </p>
         <p className="mt-2 text-xs tracking-wide text-[#4A5A72]">
-          100% U.S.-Based Team &bull; NDA First &bull; All Data Housed in AWS &bull; No Offshore Data Handling
+          All Data Housed in AWS &bull; NDA First &bull; 100% U.S.-Based Team
         </p>
       </footer>
 
