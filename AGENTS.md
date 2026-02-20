@@ -1,327 +1,142 @@
-# North Castle Consulting Website - Project Context
+# Northcastle Webpage - Agent Guidelines
 
-**Project:** North Castle Consulting Website + QoE Service Offering  
+> This file contains context and guidelines for AI agents working on this project.
+> Keep it updated as the project evolves.
+
+---
+
+## Project Overview
+
+**Project Name:** Northcastle Webpage  
+**Description:** North Castle Consulting Website + Marketing Landing Pages  
 **Tech Stack:** React + Vite + Tailwind CSS + AWS Amplify  
-**Last Updated:** February 12, 2026  
+**Live URL:** https://northcastleconsulting.com  
+**GitHub Repo:** https://github.com/rventra/northcastleconsultingwebsite_V1.2  
+**Default Branch:** `claude/main`  
+**Last Updated:** 2026-02-20
 
 ---
 
-## Quick Reference
+## GitHub Workflow
 
-| Item | Value |
-|------|-------|
-| Live URL | https://northcastleconsulting.com |
-| QoE Service Page | /services/quality-of-earnings |
-| AWS Region | us-east-2 |
-| AWS Profile | northcastle |
-| Framework | React + Vite |
-| Styling | Tailwind CSS |
-
----
-
-## Quality of Earnings (QoE) Framework
-
-This project includes a complete QoE service offering with the following 7 components:
-
-### The 7 Core Components
-```
-1. Adjusted EBITDA Bridge (1a, 1b, 1c, 1d)
-2. Revenue Quality Assessment (2a, 2b)
-3. Working Capital Deep Dive (3a, 3b)
-4. Cash Flow Reconciliation (4a, 4b)
-5. Add-Back Validation (5a, 5b, 5c)
-6. Management Q&A (6a, 6b)
-7. Deliverables & Data Room Index (7a, 7b, 7c)
-```
-
-### Component Summaries
-
-**1. Adjusted EBITDA Bridge** - Earnings normalization
-- 1a: Expense Add-Backs (+) - Owner comp, personal expenses, one-time costs
-- 1b: Revenue Adjustments (−) - Asset sales, insurance recoveries, related party
-- 1c: Operational Normalizations (±) - Rent, maintenance, inventory
-- 1d: Run-Rate Adjustments (±) - New contracts, lost customers, hires
-
-**2. Revenue Quality** - Five-tier taxonomy
-- Tier 1: Recurring Contracted (90%+ renewal)
-- Tier 2: Sticky Repeat (high switching costs)
-- Tier 3: Project w/ Backlog (12-24 mo visibility)
-- Tier 4: One-Time Project (non-repeating)
-- Tier 5: Windfall/Spot (unpredictable)
-
-**3. Working Capital** - DSO/DIO/DPO analysis
-- DSO >75 days = Red Flag
-- DIO >90 days = Red Flag
-- DPO <30 days = Red Flag
-- CCC >120 days = Red Flag
-
-**4. Cash Flow** - Net income to FCF bridge
-- Compare: Adj EBITDA - CapEx vs Operating Cash Flow
-- Variance >15% requires investigation
-
-**5. Add-Back Validation** - Confidence scoring
-- 5a: High Confidence - Court records, salary surveys, agreements
-- 5b: Medium Confidence - Appraisals, inspections, offer letters
-- 5c: Excluded - Synergies, pipeline, growth assumptions
-
-**6. Management Q&A** - Interview preparation and documentation
-
-**7. Deliverables** - Dashboard, written report, data room index
-
----
-
-## Key File Locations
-
-### Documents (QoE Framework)
-```
-documents/
-├── QoE_Framework_Complete_Reference.md   # Original framework doc
-├── QoE_Project_Master_Context.md         # Comprehensive context
-├── QoE_Checklist.docx                    # Word checklist (10 pages)
-└── QoE_Data_Source_Matrix.xlsx           # Excel workbook (4 sheets)
-```
-
-### Website Source
-```
-src/
-├── QualityOfEarningsPage.jsx             # QoE service page
-├── App.jsx                               # Main routing
-└── [other components]
-```
-
-### Scripts
-```
-scripts/
-├── create_qoe_checklist.py               # Generates Word doc
-└── create_qoe_source_matrix_v3.py        # Generates Excel
-```
-
----
-
-## Design System
-
-### Colors
-| Color | Hex | Usage |
-|-------|-----|-------|
-| Navy | #051c2c | Primary text, headings |
-| Bright Blue | #2563EB | Links, accents, highlights |
-| Amber | #EDB624 | CTAs, warning flags |
-| Gray | #F5F5F5 | Backgrounds, cards |
-| Bone | #F9F9F7 | Page background |
-
-### Typography
-- Headings: Bold, navy (#051c2c)
-- Body: Calibri or system sans-serif
-- Emphasis: Bright blue for key terms
-
-### Layout Pattern
-McKinsey-style editorial design:
-- Split hero (image left, text/obstacles right)
-- Horizontal challenge cards
-- Expandable framework sections
-- Connected visual flow
-
----
-
-## AWS & Deployment
-
-### AWS Profile Setup
+All changes must follow this pattern:
 ```bash
-aws configure --profile northcastle
-# Access Key ID: AKIAU55MGHNXJCTZZEHL
-# Region: us-east-2
-# Output: json
+# 1. Clone fresh
+gh repo clone rventra/northcastleconsultingwebsite_V1.2 ncw-temp -- --depth 1 --branch claude/main
+cd ncw-temp
+
+# 2. Create branch
+git checkout -b descriptive-branch-name
+
+# 3. Make changes
+# ... edit files ...
+
+# 4. Commit and push
+git add -A
+git commit -m "Clear description of changes"
+git push -u origin descriptive-branch-name
+
+# 5. Create PR and merge
+gh pr create --base claude/main --head descriptive-branch-name --title "PR Title"
+gh pr merge <PR_NUMBER> --merge --delete-branch
+
+# 6. Verify deployment
+aws amplify list-jobs --app-id d3418fafn3crpt --branch-name claude/main --profile northcastle
+
+# 7. Cleanup
+cd ..
+Remove-Item -Recurse -Force ncw-temp
 ```
 
-### Amplify Commands
+---
+
+## 📧 Weekly Newsletter Workflow
+
+**Location:** `src/components/newsletters/data/week-YYYY-MM-DD.js`
+
+### Adding a Newsletter
+1. Create file: `src/components/newsletters/data/week-YYYY-MM-DD.js`
+2. Transform JSON → JS (see `readmefirst.md` for schema)
+3. Update `index.js`: add import + add to `WEEKS_REGISTRY` (newest first!)
+4. Follow GitHub workflow above
+
+---
+
+## 🎯 Marketing Landing Pages
+
+### Current Landing Pages
+| Page | File | URL | Notes |
+|------|------|-----|-------|
+| Roundup Docket Intelligence | `src/RoundupLandingPage.jsx` | `/roundup-docket-intelligence` | v7.1 - No navbar |
+
+### Landing Page Structure
+- Built as **React components** (JSX), not static HTML
+- No navbar on landing pages (handled in `App.jsx`)
+- Lambda autoresponder sends email on form submit
+- All CTAs should match the v7.1 copy: "Sample Docket Report"
+
+### Updating Landing Pages
+1. Get latest HTML from Box: `Box/North Castle/Projects/Legal Firm/Marketing/Landing Pages/Final/`
+2. Convert HTML changes to JSX (class → className, inline styles → Tailwind)
+3. Keep Lambda API integration intact
+4. Follow GitHub workflow
+
+---
+
+## AWS Infrastructure
+
+### AWS Amplify (App Hosting)
+- **Profile:** `northcastle`
+- **Region:** `us-east-2`
+- **App ID:** `d3418fafn3crpt`
+- **Auto-deploys:** On push to `claude/main`
+
+### AWS Lambda (Email Autoresponder)
+- **Function:** `RoundupAutoResponder`
+- **API Gateway:** `8jl5xpty5g.execute-api.us-east-2.amazonaws.com/prod`
+- **Endpoint:** `POST /request-report`
+- **SES Template:** `RoundupSampleReportResponse`
+- **Sender:** `consult@northcastleconsulting.com`
+
+### Lambda Payload
+```json
+{
+  "name": "FirstName",
+  "email": "user@firm.com",
+  "firm": "",
+  "phone": "",
+  "caseCount": "",
+  "message": "Request source"
+}
+```
+
+### S3 Buckets
+- `northcastle-consulting-docs` - PDF documents only (Sample Audit Report, etc.)
+
+---
+
+## Quick Commands
+
 ```bash
-amplify pull
-amplify push
-amplify status
-```
+# AWS
+aws amplify list-jobs --app-id d3418fafn3crpt --branch-name claude/main --profile northcastle
+aws lambda invoke --function-name RoundupAutoResponder --payload '{}' --profile northcastle
 
-### Deployment Status
-- **Status:** Live
-- **Amplify Job:** 129 completed successfully
-- **Auto-deploy:** On push to main branch
-
----
-
-## Git Workflow
-
-> **IMPORTANT:** Main branch is `claude/main`, not `main`. Always use feature branch workflow.
-
-### Required: Feature Branch + PR Workflow
-```bash
-git checkout claude/main
-git pull origin claude/main
-git checkout -b feature/description
-# Make changes
-git add .
-git commit -m "Description"
-git push origin feature/description
-# Merge to claude/main locally
-git checkout claude/main
-git merge feature/description
-git push origin claude/main
-# Delete feature branch
-git branch -d feature/description
-```
-
-### ⚠️ NEVER commit directly to claude/main
-Always create a feature branch first, then merge back.
-
----
-
-## Development Commands
-
-### Local Dev
-```bash
-npm install    # Install dependencies
-npm run dev    # Start dev server
-npm run build  # Build for production
-```
-
-### Document Generation
-```bash
-python scripts/create_qoe_checklist.py
-python scripts/create_qoe_source_matrix_v3.py
+# GitHub
+gh repo view rventra/northcastleconsultingwebsite_V1.2
+gh api repos/rventra/northcastleconsultingwebsite_V1.2/branches --paginate
 ```
 
 ---
 
-## Team Contacts
+## Changelog
 
-| Role | Name | Email |
-|------|------|-------|
-| Principal | Nick Citrin | ncitrin@northcastleconsulting.com |
-| Admin | - | admin@northcastleconsulting.com |
-
----
-
-## Next Session Priorities
-
-When returning to this project, consider:
-
-1. **Website Enhancements**
-   - Add downloadable resources section (link to checklist, matrix)
-   - Add case studies/examples
-   - Add interactive calculators (DSO/DIO/DPO)
-   - SEO optimization
-
-2. **Service Offering Development**
-   - Create PowerPoint deck template
-   - Develop pricing framework
-   - Create engagement letter template
-   - Design sample deliverable mockups
-
-3. **Team Onboarding**
-   - Set up additional team member AWS CLI access
-   - Confirm GitHub repository access
-   - Document workflow in README
+| Date | Change | Description |
+|------|--------|-------------|
+| 2026-02-20 | Landing Page v7.1 | Updated RoundupLandingPage to match Nick's v7.1 design |
+| 2026-02-20 | Lambda Integration | Connected landing page forms to AWS Lambda autoresponder |
+| 2026-02-17 | Initial Setup | Created AGENTS.md with newsletter workflow |
 
 ---
 
-## Notes
-
-- QoE service page is LIVE and functional
-- Excel Data Source Matrix consolidates ~50 unique data sources
-- Word Checklist is 10 pages, professional format
-- AWS Amplify auto-deploys on `claude/main` branch pushes
-- Last deployment: Feb 12, 2026 - QoE page styling updates
-- Nick Citrin needs AWS credentials (share securely via One-Time Secret)
-
----
-
-## Recent Changes Log
-
-### February 12, 2026
-
-**QoE Marketing Guide PDF** (Commit: `9dcf139`)
-- Created professional 7-page marketing PDF: "Quality of Earnings: The Complete Guide"
-- Website-branded colors (navy, amber, bright blue)
-- Cover page with professional design
-- Content: QoE overview, 7 components, AI agents, engagement types, why choose us
-- Uploaded to S3: https://northcastle-consulting-docs.s3.us-east-2.amazonaws.com/qoe-guide/NorthCastle_QoE_Guide.pdf
-- Updated website link to point to S3-hosted PDF
-- Deleted old service overview PDF
-
-**Update Calendly Link** (Commit: `e7dbc16`)
-- Updated Calendly link to: https://calendly.com/rventrapragada-northcastleconsulting/qoe-consultation
-
-**Hero Balance 50/50 + Service Overview PDF** (Commit: `7f2edfc`, Job 145)
-- Fixed hero split to be balanced 50/50 (top image section / bottom slate CTA section)
-- Reduced font sizes for better visual harmony
-- Added eyebrow text to bottom section
-- Created `NorthCastle_QoE_Service_Overview.pdf` in documents folder
-- PDF includes: Executive Summary, 7 Components, AI Agents, Engagement Types, Contact
-
-**Hero Background & Right Panel Update** (Commit: `b2ee5de`, Job 143)
-- Changed hero background to modern corporate architecture image
-- Restructured right panel: moved content up, added service overview paragraph
-- Added "Download Service Overview (PDF)" placeholder link
-- Connected "Schedule a Consultation" button to Calendly
-- Simplified challenges list (removed solutions, kept descriptions)
-
-**Hero Split Redesign** (Commit: `878c094`, Job 141)
-- Split left side into top (hero image + content) and bottom (slate grey CTA section)
-- Removed emoji from AI link
-- Removed "View Case Studies" button
-- Reduced top padding to move content higher
-- New slate grey (#475569) bottom bar with AI link + "Schedule a Consultation" button
-
-**Hero AI Link & Bigger Fonts** (Commit: `57aa811`, Job 139)
-- Added prominent amber AI link in hero: "See How AI Delivers QoE Faster & More Cost-Effectively"
-- Made all AI section fonts significantly bigger (headings now 4xl/5xl, body text larger)
-- Removed specific numbers from comparison table (replaced with qualitative terms)
-- Added anchor link `#ai-accelerated` for smooth scrolling
-
-**AI QoE Engagement Redesign** (Commit: `59b9629`, Job 137)
-- Replaced "Sell-Side vs Buy-Side" with "Traditional QoE vs AI-Accelerated QoE"
-- Added comparison table: Traditional (Big 4) vs AI-Accelerated (North Castle)
-- New AI Agent Deployment section with specialized agents per engagement type:
-  - Sell-Side: Add-Back Discovery Agent, Revenue Normalization Agent, CIM Prep Agent
-  - Buy-Side: Transaction Forensics Agent, Working Capital Detective, Hidden Liability Hunter
-- Added AWS Data Room infrastructure callout box
-- Emphasizes 7-10 day deliverables vs 4-6 week traditional timeline
-
-**Revenue Quality Tiers Merge** (Commit: `e67a870`, Job 135)
-- Merged standalone "Revenue Assessment" section into expandable Framework Component #2
-- Visual tier cards (green → red) now appear inside "Revenue Quality Assessment" when clicked
-- Concentration Risk thresholds moved inside expandable section
-- Removed duplicate standalone section for cleaner page layout
-- Maintains click-to-expand structure while adding visual formatting
-
-**QoE Page Styling Updates** (Commit: `24f2c91`, Job 133)
-- Made 'Framework Applied' text larger (`text-sm`)
-- Made 'Result' text larger with bold styling (`text-base`, `font-bold`)
-- Bolded 'The QoE Framework — Click to Expand' subtitle
-- Fixed Data Room Index mapping from component 6 → component 7
-- Proper Git workflow: feature branch → merge → push
-
----
-
-## How We Got Here (Meta-Context)
-
-**This file was created on February 11, 2026** during a session where we (you and Kimi) discussed:
-
-1. How `AGENTS.md` works in Kimi Code CLI
-2. That you would `cd` into this directory before launching Kimi next time
-3. How this file bridges context between sessions
-
-**So if you're reading this:**
-- ✅ You successfully navigated to `northcastleconsultingwebsite_V1.2` before starting Kimi
-- ✅ Kimi loaded this context and knows about the QoE project
-- ✅ It should feel like a continuation, not a fresh start
-
-**Quick validation:** If this worked, Kimi should already know:
-- The 7-component QoE framework without you explaining it
-- Where `QoE_Checklist.docx` and `QoE_Data_Source_Matrix.xlsx` are
-- That Nick Citrin needs AWS credentials
-- The navy color is #051c2c
-
-If Kimi *doesn't* seem to know these things, the AGENTS.md auto-load might not have worked (check you launched Kimi from the right directory).
-
----
-
-*This AGENTS.md is automatically loaded by Kimi Code CLI when starting from this directory. Think of it as the project's "memory" that persists between our sessions.*
+> **Tip:** Update this file when adding landing pages, changing AWS resources, or modifying workflows.
