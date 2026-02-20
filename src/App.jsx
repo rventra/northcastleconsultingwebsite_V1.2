@@ -22,7 +22,7 @@ import ContactUsPage from './ContactUsPage.jsx';
 import BlogPage from './BlogPage.jsx';
 import DataVisibilityBlogPost from './DataVisibilityBlogPost.jsx';
 import CaseStudiesPage from './CaseStudiesPage.jsx';
-import RoundupLandingPage from './RoundupLandingPage.jsx';
+
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -597,13 +597,10 @@ function HomePage() {
 }
 
 export default function NorthCastleConsulting() {
-  const location = useLocation();
-  const isRoundupLanding = location.pathname === '/roundup-docket-intelligence';
-  
   return (
     <div className="min-h-screen bg-white">
       <ScrollToTop />
-      {!isRoundupLanding && <Navigation />}
+      <Navigation />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about-us" element={<AboutUsPage />} />
@@ -640,8 +637,7 @@ export default function NorthCastleConsulting() {
         <Route path="/newsletter" element={<MassTortDigestTemplate />} />
         <Route path="/newsletter/:weekId" element={<NewsletterPage />} />
         <Route path="/newsletters" element={<MassTortDigestTemplate />} />
-        {/* Standalone landing page - no navigation links */}
-        <Route path="/roundup-docket-intelligence" element={<RoundupLandingPage />} />
+        {/* Standalone landing page - served as static HTML from public/roundup-docket-intelligence/index.html */}
       </Routes>
     </div>
   );
