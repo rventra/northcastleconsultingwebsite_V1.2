@@ -171,7 +171,7 @@ const RoundupLandingPage = () => {
       <MetaTags 
         title="Roundup Docket Intelligence | North Castle Consulting"
         description="Actionable intelligence and data infrastructure for Roundup mass tort litigation. Know what your docket is worth before you walk into settlement negotiations."
-        ogImage="https://northcastleconsulting.com/images/roundup-og-image.jpg"
+        ogImage="https://northcastleconsulting.com/images/roundup-og-image.png"
       />
       <div className="min-h-screen bg-white">
       {/* Ticker */}
