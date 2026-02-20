@@ -28,8 +28,8 @@ export default function RoundupThankYouPage() {
   const isPdfSource = source === 'pdf';
   
   const bodyText = isPdfSource 
-    ? "The Roundup Settlement Timeline & Tier Breakdown PDF is on its way to your inbox. Look for an email from our team within 24 hours."
-    : "A sample docket report is on its way to your inbox. Look for an email from our team within 24 hours with your sample report and next steps.";
+    ? "We've sent the Roundup Settlement Timeline & Tier Breakdown PDF to your inbox. You should receive it within 24 hours."
+    : "We've sent your Sample Docket Report. Check your inbox—and spam folder—within the next few minutes. Questions? Reply directly to the email.";
 
   // Trust badge icons
   const ShieldCheckIcon = () => (
@@ -128,7 +128,7 @@ export default function RoundupThankYouPage() {
             how it applies to your specific cases—and scope a free 50-case audit of your actual docket.
           </p>
           <a 
-            href="https://calendly.com/northcastleconsulting" 
+            href="https://calendly.com/rventrapragada-northcastleconsulting/30min" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-block bg-[#0B1D3A] text-[#E2B45A] py-4 px-10 font-sans text-base font-bold no-underline rounded border-2 border-[#C8973E] cursor-pointer transition-all duration-200 tracking-wide hover:bg-[#142D55] hover:border-[#E2B45A] hover:text-white"
@@ -139,11 +139,11 @@ export default function RoundupThankYouPage() {
 
         {/* Trust Badges */}
         <div className="flex justify-center gap-3 flex-wrap mb-8">
-          {/* All Data Housed in AWS (replaces HIPAA-Ready) */}
+          {/* 100% U.S.-Based Team */}
           <div className="inline-flex items-center gap-1.5 py-1.5 px-3.5 border border-[rgba(107,123,141,0.25)] rounded bg-[rgba(255,255,255,0.6)]">
             <ShieldCheckIcon />
             <span className="font-sans text-[11px] font-bold text-[#6B7B8D] uppercase tracking-wide whitespace-nowrap">
-              All Data Housed in AWS
+              100% U.S.-Based Team
             </span>
           </div>
           
@@ -155,19 +155,11 @@ export default function RoundupThankYouPage() {
             </span>
           </div>
           
-          {/* 256-bit SSL (replaces Encrypted) */}
+          {/* All Data Housed in AWS */}
           <div className="inline-flex items-center gap-1.5 py-1.5 px-3.5 border border-[rgba(107,123,141,0.25)] rounded bg-[rgba(255,255,255,0.6)]">
-            <LockIcon />
+            <ShieldCheckIcon />
             <span className="font-sans text-[11px] font-bold text-[#6B7B8D] uppercase tracking-wide whitespace-nowrap">
-              256-bit SSL
-            </span>
-          </div>
-          
-          {/* U.S.-Based Team */}
-          <div className="inline-flex items-center gap-1.5 py-1.5 px-3.5 border border-[rgba(107,123,141,0.25)] rounded bg-[rgba(255,255,255,0.6)]">
-            <ListCheckIcon />
-            <span className="font-sans text-[11px] font-bold text-[#6B7B8D] uppercase tracking-wide whitespace-nowrap">
-              U.S.-Based Team
+              All Data Housed in AWS
             </span>
           </div>
         </div>
@@ -191,7 +183,7 @@ export default function RoundupThankYouPage() {
           <a href="#" className="text-[#C8973E] no-underline">Terms</a>
         </p>
         <p className="mt-2 text-xs tracking-wide text-[#4A5A72]">
-          All Data Housed in AWS &bull; 256-bit SSL &bull; 100% U.S.-Based Team &bull; No Offshore Data Handling
+          100% U.S.-Based Team &bull; NDA First &bull; All Data Housed in AWS &bull; No Offshore Data Handling
         </p>
       </footer>
 
