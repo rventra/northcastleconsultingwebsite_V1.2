@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { PageMeta } from './components/MetaTags.jsx';
 
 export default function RoundupThankYouPage() {
   const navigate = useNavigate();
@@ -52,7 +53,9 @@ export default function RoundupThankYouPage() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col bg-white font-['Georgia','Times_New_Roman',serif] text-[#2C2C2C]">
+    <>
+      <PageMeta pageKey="roundupThankYou" />
+      <div className="min-h-screen flex flex-col bg-white font-['Georgia','Times_New_Roman',serif] text-[#2C2C2C]">
       {/* Main Content */}
       <main className="flex-1 flex flex-col items-center justify-center py-16 px-6 pb-10 text-center">
         {/* Success Icon */}
@@ -185,5 +188,6 @@ export default function RoundupThankYouPage() {
         }
       `}</style>
     </div>
+    </>
   );
 }

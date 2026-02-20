@@ -167,11 +167,11 @@ export const PAGE_META = {
 
 /**
  * Hook for easily applying page-specific meta tags
- * 
+ *
  * Usage:
  * function MyPage() {
- *   usePageMeta('roundupLanding');
- *   return <div>...</div>;
+ *   const meta = usePageMeta('roundupLanding');
+ *   return <MetaTags {...meta} />;
  * }
  */
 export const usePageMeta = (pageKey) => {
@@ -180,7 +180,37 @@ export const usePageMeta = (pageKey) => {
     console.warn(`MetaTags: No configuration found for page key "${pageKey}"`);
     return;
   }
-  
-  // This would need to be used within a component that renders MetaTags
+
   return config;
+};
+
+/**
+ * PageMeta - Simplified centralized meta tags for landing pages
+ *
+ * Usage:
+ * // For pages with custom OG images (like landing pages for ads):
+ * <PageMeta pageKey="roundupLanding" />
+ *
+ * // For thank you/confirmation pages (auto noindex):
+ * <PageMeta pageKey="roundupThankYou" />
+ *
+ * // For regular pages (uses fallback image):
+ * <PageMeta pageKey="home" />
+ */
+export const PageMeta = ({ pageKey }) => {
+  const config = PAGE_META[pageKey];
+  if (!config) {
+    console.warn(`PageMeta: No configuration found for page key "${pageKey}"`);
+    return null;
+  }
+
+  return (
+    <MetaTags
+      title={config.title}
+      description={config.description}
+      ogImage={config.ogImage}
+      ogType={config.ogType || 'website'}
+      noIndex={config.noIndex}
+    />
+  );
 };
