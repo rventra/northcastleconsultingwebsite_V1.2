@@ -24,6 +24,7 @@ import DataVisibilityBlogPost from './DataVisibilityBlogPost.jsx';
 import CaseStudiesPage from './CaseStudiesPage.jsx';
 import RoundupLandingPage from './RoundupLandingPage.jsx';
 import RoundupThankYouPage from './RoundupThankYouPage.jsx';
+import CalendlyThankYouPage from './CalendlyThankYouPage.jsx';
 
 
 function ScrollToTop() {
@@ -600,7 +601,8 @@ function HomePage() {
 
 export default function NorthCastleConsulting() {
   const location = useLocation();
-  const isRoundupLanding = location.pathname === '/roundup-docket-intelligence' || location.pathname === '/roundup-docket-intelligence-thank-you';
+  // NO NAV BAR: These routes have no navigation
+const isRoundupLanding = location.pathname === '/roundup-docket-intelligence' || location.pathname === '/roundup-docket-intelligence-thank-you' || location.pathname === '/scheduled';
   
   return (
     <div className="min-h-screen bg-white">
@@ -642,9 +644,11 @@ export default function NorthCastleConsulting() {
         <Route path="/newsletter" element={<MassTortDigestTemplate />} />
         <Route path="/newsletter/:weekId" element={<NewsletterPage />} />
         <Route path="/newsletters" element={<MassTortDigestTemplate />} />
-        {/* Standalone landing page - no navigation */}
+        {/* Standalone landing page - NO NAV BAR */}
         <Route path="/roundup-docket-intelligence" element={<RoundupLandingPage />} />
         <Route path="/roundup-docket-intelligence-thank-you" element={<RoundupThankYouPage />} />
+        {/* Calendly redirect - NO NAV BAR */}
+        <Route path="/scheduled" element={<CalendlyThankYouPage />} />
       </Routes>
     </div>
   );
