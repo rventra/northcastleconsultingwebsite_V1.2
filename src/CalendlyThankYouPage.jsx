@@ -126,10 +126,6 @@ export default function CalendlyThankYouPage() {
                 <span className="text-[#C8973E]">✓</span>
                 <span>Review of your specific docket challenges</span>
               </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[#C8973E]">✓</span>
-                <span>Scope a free 50-case audit of your actual docket</span>
-              </li>
             </ul>
           </div>
 
