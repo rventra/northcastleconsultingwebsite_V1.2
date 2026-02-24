@@ -1,8 +1,39 @@
 // NO NAV BAR - This page intentionally has no navigation for clean redirect from Calendly
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 export default function CalendlyThankYouPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [inviteeName, setInviteeName] = useState('');
+  const [inviteeEmail, setInviteeEmail] = useState('');
+  const [eventTime, setEventTime] = useState('');
+
+  useEffect(() => {
+    // Read Calendly URL parameters
+    const name = searchParams.get('invitee_full_name') || searchParams.get('invitee_first_name') || '';
+    const email = searchParams.get('invitee_email') || '';
+    const startTime = searchParams.get('event_start_time') || '';
+
+    if (name) setInviteeName(name);
+    if (email) setInviteeEmail(email);
+    if (startTime) {
+      try {
+        const date = new Date(startTime);
+        setEventTime(date.toLocaleString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit',
+          timeZoneName: 'short'
+        }));
+      } catch (e) {
+        setEventTime(startTime);
+      }
+    }
+  }, [searchParams]);
 
   const handleBackClick = (e) => {
     e.preventDefault();
@@ -40,6 +71,30 @@ export default function CalendlyThankYouPage() {
           <h1 className="text-[clamp(28px,4vw,38px)] text-[#0B1D3A] mb-4 leading-tight">
             Your Call is Confirmed
           </h1>
+
+          {/* Booking Details from Calendly */}
+          {(inviteeName || inviteeEmail || eventTime) && (
+            <div className="bg-[#FAF5EB] border border-[#C8973E] rounded-[8px] py-4 px-6 max-w-[450px] w-full mb-6 text-left">
+              <div className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#C8973E] mb-3">
+                Booking Details
+              </div>
+              {inviteeName && (
+                <p className="font-sans text-[15px] text-[#0B1D3A] mb-1">
+                  <span className="text-[#6B7B8D]">Name:</span> {inviteeName}
+                </p>
+              )}
+              {inviteeEmail && (
+                <p className="font-sans text-[15px] text-[#0B1D3A] mb-1">
+                  <span className="text-[#6B7B8D]">Email:</span> {inviteeEmail}
+                </p>
+              )}
+              {eventTime && (
+                <p className="font-sans text-[15px] text-[#0B1D3A]">
+                  <span className="text-[#6B7B8D]">Scheduled:</span> {eventTime}
+                </p>
+              )}
+            </div>
+          )}
 
           {/* Body Text */}
           <p className="text-[17px] text-[#5A5A5A] max-w-[540px] mx-auto mb-2 leading-relaxed">
