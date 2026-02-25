@@ -127,6 +127,36 @@ export const PAGE_META = {
     description: 'Your sample docket report is on its way. Schedule a consultation to see how this applies to your specific cases.',
     noIndex: true, // Don't index thank you pages
   },
+  roundupEnrichment: {
+    title: 'Free 100-Case Claimant Enrichment | Roundup Litigation',
+    description: 'Recover lost Roundup NHL claimants with free 100-case contact enrichment. Updated phone numbers, emails, and addresses—see how many cases are recoverable before SCOTUS.',
+    ogImage: 'https://northcastleconsulting.com/images/roundup-og-image.png',
+  },
+  roundupEnrichmentThankYou: {
+    title: 'Thank You | Claimant Enrichment Request Received',
+    description: 'Your free 100-case claimant enrichment request has been received. Our team will reach out within 24 hours.',
+    noIndex: true,
+  },
+  roundupSMSBridge: {
+    title: 'Free SMS Bridge for Roundup Claimants | North Castle',
+    description: 'Deploy a free SMS bridge for 100 Roundup NHL claimants. 98% open rate vs 22% for email. TCPA-compliant, carrier validated, two-way texting.',
+    ogImage: 'https://northcastleconsulting.com/images/roundup-og-image.png',
+  },
+  roundupSMSBridgeThankYou: {
+    title: 'Thank You | SMS Bridge Pilot Request Received',
+    description: 'Your SMS Bridge pilot request has been received. Our team will reach out within 24 hours to coordinate deployment.',
+    noIndex: true,
+  },
+  roundupSwipeFile: {
+    title: 'Free Roundup SMS & Email Templates | Swipe File',
+    description: 'Download 12 SMS templates and 8 email templates built specifically for Roundup NHL cases. PFS reminders, medical record requests, re-engagement sequences.',
+    ogImage: 'https://northcastleconsulting.com/images/roundup-og-image.png',
+  },
+  roundupSwipeFileThankYou: {
+    title: 'Thank You | Swipe File Download Requested',
+    description: 'Your SMS & email swipe file is on its way. Check your inbox within 24 hours.',
+    noIndex: true,
+  },
   sellSideReadiness: {
     title: 'Sell-Side Readiness | North Castle Consulting',
     description: 'Preparing portfolio companies for optimal valuation and successful exits.',

@@ -25,6 +25,12 @@ import CaseStudiesPage from './CaseStudiesPage.jsx';
 import RoundupLandingPage from './RoundupLandingPage.jsx';
 import RoundupThankYouPage from './RoundupThankYouPage.jsx';
 import CalendlyThankYouPage from './CalendlyThankYouPage.jsx';
+import RoundupClaimantCommunicationEnrichment from './RoundupClaimantCommunicationEnrichment.jsx';
+import RoundupClaimantCommunicationEnrichmentThankYou from './RoundupClaimantCommunicationEnrichmentThankYou.jsx';
+import RoundupClaimantCommunicationSMSBridge from './RoundupClaimantCommunicationSMSBridge.jsx';
+import RoundupClaimantCommunicationSMSBridgeThankYou from './RoundupClaimantCommunicationSMSBridgeThankYou.jsx';
+import RoundupClaimantCommunicationSwipeFile from './RoundupClaimantCommunicationSwipeFile.jsx';
+import RoundupClaimantCommunicationSwipeFileThankYou from './RoundupClaimantCommunicationSwipeFileThankYou.jsx';
 
 
 function ScrollToTop() {
@@ -644,9 +650,22 @@ const isRoundupLanding = location.pathname === '/roundup-docket-intelligence' ||
         <Route path="/newsletter" element={<MassTortDigestTemplate />} />
         <Route path="/newsletter/:weekId" element={<NewsletterPage />} />
         <Route path="/newsletters" element={<MassTortDigestTemplate />} />
-        {/* Standalone landing page - NO NAV BAR */}
+        {/* Standalone landing pages - NO NAV BAR */}
         <Route path="/roundup-docket-intelligence" element={<RoundupLandingPage />} />
         <Route path="/roundup-docket-intelligence-thank-you" element={<RoundupThankYouPage />} />
+        
+        {/* Claimant Communication Enrichment - NO NAV BAR */}
+        <Route path="/roundup-claimant-communication-enrichment" element={<RoundupClaimantCommunicationEnrichment />} />
+        <Route path="/roundup-claimant-communication-enrichment-thank-you" element={<RoundupClaimantCommunicationEnrichmentThankYou />} />
+        
+        {/* SMS Bridge - NO NAV BAR */}
+        <Route path="/roundup-claimant-communication-sms-bridge" element={<RoundupClaimantCommunicationSMSBridge />} />
+        <Route path="/roundup-claimant-communication-sms-bridge-thank-you" element={<RoundupClaimantCommunicationSMSBridgeThankYou />} />
+        
+        {/* Swipe File - NO NAV BAR */}
+        <Route path="/roundup-claimant-communication-swipe-file" element={<RoundupClaimantCommunicationSwipeFile />} />
+        <Route path="/roundup-claimant-communication-swipe-file-thank-you" element={<RoundupClaimantCommunicationSwipeFileThankYou />} />
+        
         {/* Calendly redirect - NO NAV BAR */}
         <Route path="/scheduled" element={<CalendlyThankYouPage />} />
       </Routes>
