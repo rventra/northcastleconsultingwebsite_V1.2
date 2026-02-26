@@ -196,7 +196,10 @@ const RoundupClaimantCommunicationEnrichment = () => {
         <section 
           ref={heroRef}
           id="top"
-          className="bg-gradient-to-br from-[#0B1D3A] to-[#142D55] text-white text-center py-16 md:py-20 px-6"
+          className="text-white text-center py-16 md:py-20 px-6"
+          style={{
+            background: 'linear-gradient(172deg, rgba(11,29,58,0.92) 0%, rgba(20,45,85,0.88) 100%), url(/roundup-bottle.jpg) center/cover no-repeat'
+          }}
         >
           <div className="max-w-4xl mx-auto">
             <div className="font-sans text-[13px] font-bold tracking-[0.14em] uppercase text-[#C8973E] mb-4">
