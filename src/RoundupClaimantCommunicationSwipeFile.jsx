@@ -616,7 +616,7 @@ const RoundupClaimantCommunicationSwipeFile = () => {
                 <div className="font-sans text-[13px] text-[#2C2C2C] leading-relaxed space-y-1">
                   <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Complete Roundup PFS template with NHL-specific fields (DLBCL, follicular lymphoma, CLL)</div>
                   <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Glyphosate exposure documentation section with product use timeline</div>
-                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Medical treatment history capture for 9-tier compensation grid optimization</div>
+                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Medical treatment history capture</div>
                   <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Ready-to-use format—customize with your firm branding in minutes</div>
                   <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Also available: Exposure Questionnaires, HIPAA/HITECH Authorizations, CFAs &amp; Affidavits</div>
                 </div>
