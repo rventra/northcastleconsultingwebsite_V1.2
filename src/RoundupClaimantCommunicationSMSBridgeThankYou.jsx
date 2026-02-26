@@ -89,10 +89,10 @@ const RoundupClaimantCommunicationSMSBridgeThankYou = () => {
           <p className="font-sans text-[13px] text-[#6B7B8D] mt-2 mb-10">
             Questions? Reach out to{' '}
             <a 
-              href="mailto:info@northcastleconsulting.com" 
+              href="mailto:consult@northcastleconsulting.com" 
               className="text-[#C8973E] no-underline hover:underline"
             >
-              info@northcastleconsulting.com
+              consult@northcastleconsulting.com
             </a>
           </p>
 

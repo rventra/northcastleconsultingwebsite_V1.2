@@ -56,7 +56,17 @@ export default function RoundupThankYouPage() {
     <>
       <PageMeta pageKey="roundupThankYou" />
       <div className="min-h-screen flex flex-col bg-white font-['Georgia','Times_New_Roman',serif] text-[#2C2C2C]">
-      {/* Main Content */}
+        {/* Header */}
+        <div className="bg-[#0B1D3A] py-4 px-6 text-center">
+          <button 
+            onClick={handleBackClick}
+            className="font-['Georgia','Times_New_Roman',serif] text-lg font-bold text-white no-underline tracking-wide hover:text-[#E2B45A] transition-colors"
+          >
+            North Castle <span className="text-[#C8973E]">Consulting</span>
+          </button>
+        </div>
+
+        {/* Main Content */}
       <main className="flex-1 flex flex-col items-center justify-center py-16 px-6 pb-10 text-center">
         {/* Success Icon */}
         <div 
@@ -100,10 +110,10 @@ export default function RoundupThankYouPage() {
         <p className="font-sans text-[13px] text-[#6B7B8D] mt-2 mb-10">
           Didn&apos;t see it? Check your spam folder or reach out to{' '}
           <a 
-            href="mailto:info@northcastleconsulting.com" 
+            href="mailto:consult@northcastleconsulting.com" 
             className="text-[#C8973E] no-underline hover:underline"
           >
-            info@northcastleconsulting.com
+            consult@northcastleconsulting.com
           </a>
         </p>
 
