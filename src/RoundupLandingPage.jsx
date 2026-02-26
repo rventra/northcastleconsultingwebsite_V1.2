@@ -219,12 +219,12 @@ const RoundupLandingPage = () => {
           <div className="font-sans text-[11px] text-[#56687F] mb-2">
             No spam. No sharing. NDA executed before any data transfer.
           </div>
-          <div className="font-sans text-xs text-[#8DA0BF] mt-2 tracking-wide">
-            <svg className="w-3 h-3.5 inline-block -mt-0.5 mr-1" viewBox="0 0 16 20" fill="#8DA0BF">
+          <div className="font-sans text-xs text-[#8DA0BF] mt-2 tracking-wide flex items-center justify-center gap-2">
+            <svg className="w-3 h-3.5 flex-shrink-0" viewBox="0 0 16 20" fill="#8DA0BF">
               <path d="M8 0L0 3v6c0 5.25 3.4 10.15 8 11 4.6-.85 8-5.75 8-11V3L8 0z"/>
               <path d="M6.5 13.5L3.5 10.5l1.4-1.4 1.6 1.6 4.6-4.6 1.4 1.4-6 6z" fill="#142D55"/>
             </svg>
-            All Data Housed in AWS &nbsp;&bull;&nbsp; NDA First &nbsp;&bull;&nbsp; 100% U.S.-Based Team
+            <span>All Data Housed in AWS &nbsp;&bull;&nbsp; NDA First &nbsp;&bull;&nbsp; 100% U.S.-Based Team</span>
           </div>
         </div>
       </section>

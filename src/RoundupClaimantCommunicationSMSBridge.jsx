@@ -232,9 +232,9 @@ const RoundupClaimantCommunicationSMSBridge = () => {
             <div className="font-sans text-xs text-[#56687F] mt-3 mb-2">
               No spam. No sharing. See results within 5 business days.
             </div>
-            <div className="font-sans text-xs text-[#8DA0BF] mt-2 tracking-wide">
+            <div className="font-sans text-xs text-[#8DA0BF] mt-2 tracking-wide flex items-center justify-center gap-2">
               <ShieldCheckIcon />
-              All Data Housed in AWS &nbsp;&bull;&nbsp; NDA First &nbsp;&bull;&nbsp; 100% U.S.-Based Team
+              <span>All Data Housed in AWS &nbsp;&bull;&nbsp; NDA First &nbsp;&bull;&nbsp; 100% U.S.-Based Team</span>
             </div>
           </div>
         </section>
