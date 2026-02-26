@@ -93,7 +93,7 @@ const RoundupClaimantCommunicationSwipeFile = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via Claimant Communication Swipe File landing page'
+          message: 'Requested via Roundup PFS Template landing page'
         })
       });
       
@@ -148,7 +148,7 @@ const RoundupClaimantCommunicationSwipeFile = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via exit-intent popup - Swipe File page'
+          message: 'Requested via exit-intent popup - PFS Template page'
         })
       });
       navigate(`/roundup-claimant-communication-swipe-file-thank-you?source=pdf&email=${encodeURIComponent(exitEmail)}`);
@@ -185,7 +185,7 @@ const RoundupClaimantCommunicationSwipeFile = () => {
             onClick={openModal}
             className="text-[#E2B45A] underline hover:no-underline"
           >
-            Download free Roundup NHL deficiency curing templates &rarr;
+            Download free Roundup PFS Template &rarr;
           </button>
           <span className="block text-[10px] font-normal text-[#5A6A85] mt-0.5 tracking-wide">
             Last updated: {lastUpdated}
@@ -203,8 +203,8 @@ const RoundupClaimantCommunicationSwipeFile = () => {
               For Plaintiff Firms Managing Roundup NHL Cases
             </div>
             <h1 className="text-[clamp(28px,5vw,44px)] leading-tight mb-5 font-bold">
-              Your Claimants Are Going Silent.<br />
-              <em className="not-italic text-[#E2B45A]">Every Lost Contact Is a Lost Settlement.</em>
+              Free Roundup Plaintiff Fact Sheet (PFS) Template<br />
+              <em className="not-italic text-[#E2B45A]">Plus: Exposure Questionnaires, HIPAA/HITECH, CFAs &amp; Affidavits</em>
             </h1>
             <p className="text-lg leading-relaxed max-w-2xl mx-auto mb-8 text-[#C5CDDB]">
               Your Roundup NHL claimants signed retainers 3–5 years ago. Half your phone numbers are dead.
@@ -223,8 +223,8 @@ const RoundupClaimantCommunicationSwipeFile = () => {
               onClick={openModal}
               className="bg-[#C8973E] text-[#0B1D3A] px-10 py-4 font-sans text-base font-bold rounded hover:bg-[#E2B45A] transition-colors tracking-wide"
             >
-              <span className="hidden md:inline">Get the Free SMS &amp; Email Swipe File</span>
-              <span className="md:hidden">Get Swipe File</span>
+              <span className="hidden md:inline">Get Free Roundup PFS Template</span>
+              <span className="md:hidden">Get PFS Template</span>
             </button>
             <div className="font-sans text-xs text-[#56687F] mt-3 mb-2">
               No spam. No sharing. Templates delivered within 24 hours.
@@ -595,29 +595,30 @@ const RoundupClaimantCommunicationSwipeFile = () => {
         {/* Offer Section */}
         <section className="bg-[#FAF5EB] py-14 px-6 border-y-[3px] border-[#C8973E]" id="audit">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-[28px] text-center mb-3 text-[#0B1D3A]">Download the Roundup NHL Deficiency Curing Swipe File</h2>
+            <h2 className="text-[28px] text-center mb-3 text-[#0B1D3A]">Free Roundup PFS Template — Plus Additional Templates</h2>
             <p className="text-center text-[#5A5A5A] text-base max-w-2xl mx-auto mb-9">
-              Battle-tested SMS and email templates designed specifically for Roundup NHL claimant communication.
-              Each template includes subject lines, SMS copy, email body text, and escalation timing—ready to deploy
-              before the SCOTUS deadline.
+              Download our professionally designed Roundup Plaintiff Fact Sheet (PFS) Template—completely free.
+              We also have templates for Exposure Questionnaires, HIPAA/HITECH Authorizations, Contingency Fee Agreements (CFA), 
+              and Affidavits available upon request.
             </p>
             
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               {/* Offer Card */}
               <div className="bg-white border-2 border-[#C8973E] rounded-lg p-7 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
                 <span className="font-sans text-[11px] font-bold uppercase tracking-[0.1em] text-[#C8973E] mb-2.5 block">Free — Instant Download</span>
-                <h3 className="text-lg text-[#0B1D3A] mb-2.5">Roundup NHL SMS &amp; Email Swipe File</h3>
+                <h3 className="text-lg text-[#0B1D3A] mb-2.5">Free Roundup Plaintiff Fact Sheet (PFS) Template</h3>
                 <p className="text-[14px] text-[#5A5A5A] leading-relaxed mb-4">
-                  Battle-tested message templates designed specifically for Roundup NHL claimant communication. Each template includes subject lines, SMS copy, email body text, and escalation timing—with language tailored for Plaintiff Fact Sheet collection, NHL medical record authorization, and glyphosate exposure documentation. All reviewed for ABA compliance.
+                  Professionally designed Plaintiff Fact Sheet template specifically for Roundup NHL litigation. 
+                  Structured to capture all critical claimant information—including NHL diagnosis details, 
+                  glyphosate exposure history, and medical treatment timeline—to maximize settlement tier placement 
+                  under the $7.25B compensation grid.
                 </p>
                 <div className="font-sans text-[13px] text-[#2C2C2C] leading-relaxed space-y-1">
-                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">12 SMS templates for Roundup PFS reminders, NHL medical record authorization &amp; re-engagement</div>
-                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">8 email templates with Roundup case update language, settlement milestone notifications &amp; document request sequences</div>
-                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">3 Plaintiff Fact Sheet completion reminder sequences (initial &rarr; follow-up &rarr; escalation)</div>
-                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">NHL-specific medical record authorization request templates (DLBCL, follicular lymphoma, CLL)</div>
-                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">3-step escalation sequence (SMS &rarr; Email &rarr; Physical mail) with glyphosate exposure follow-up</div>
-                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Compliance-reviewed language based on ABA attorney-client text messaging guidelines</div>
-                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Response rate benchmarks from real Roundup docket implementations</div>
+                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Complete Roundup PFS template with NHL-specific fields (DLBCL, follicular lymphoma, CLL)</div>
+                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Glyphosate exposure documentation section with product use timeline</div>
+                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Medical treatment history capture for 9-tier compensation grid optimization</div>
+                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Ready-to-use format—customize with your firm branding in minutes</div>
+                  <div className="before:content-['✓_'] before:text-[#C8973E] before:font-bold">Also available: Exposure Questionnaires, HIPAA/HITECH Authorizations, CFAs &amp; Affidavits</div>
                 </div>
               </div>
               
@@ -675,8 +676,8 @@ const RoundupClaimantCommunicationSwipeFile = () => {
                 onClick={openModal}
                 className="bg-[#0B1D3A] text-[#E2B45A] px-10 py-4 font-sans text-base font-bold rounded border-2 border-[#C8973E] hover:bg-[#142D55] hover:border-[#E2B45A] transition-all"
               >
-                <span className="hidden md:inline">Get the Free SMS &amp; Email Swipe File</span>
-                <span className="md:hidden">Get Swipe File</span>
+                <span className="hidden md:inline">Get Free Roundup PFS Template</span>
+                <span className="md:hidden">Get PFS Template</span>
               </button>
               
               <div className="flex justify-center gap-2 flex-wrap mt-5">
@@ -853,7 +854,7 @@ const RoundupClaimantCommunicationSwipeFile = () => {
               onClick={openModal}
               className="bg-[#C8973E] text-[#0B1D3A] px-10 py-4 font-sans text-base font-bold rounded hover:bg-[#E2B45A] transition-colors"
             >
-              Get the Free SMS &amp; Email Swipe File
+              Get Free Roundup PFS Template
             </button>
             
             <div className="flex justify-center gap-2 flex-wrap mt-5">
@@ -882,13 +883,13 @@ const RoundupClaimantCommunicationSwipeFile = () => {
         {/* Sticky Bar */}
         <div className={`fixed bottom-0 left-0 right-0 bg-[#142D55] py-3 px-6 flex justify-center items-center gap-4 z-[900] shadow-[0_-2px_12px_rgba(0,0,0,0.2)] transition-transform duration-300 ${showSticky ? 'translate-y-0' : 'translate-y-full'}`}>
           <span className="hidden md:block font-sans text-[14px] text-white font-semibold">
-            Free SMS &amp; Email Templates — <span>{daysUntilScotus}</span> days until SCOTUS arguments
+            Free Roundup PFS Template — <span>{daysUntilScotus}</span> days until SCOTUS arguments
           </span>
           <button 
             onClick={openModal}
             className="bg-[#C8973E] text-[#0B1D3A] px-6 py-2.5 font-sans text-[13px] font-bold rounded hover:bg-[#E2B45A] transition-colors"
           >
-            Get Swipe File
+            Get PFS Template
           </button>
         </div>
 
@@ -906,8 +907,8 @@ const RoundupClaimantCommunicationSwipeFile = () => {
                 &times;
               </button>
               
-              <h2 className="text-[22px] text-[#0B1D3A] mb-2">Get Your Free Swipe File</h2>
-              <p className="font-sans text-[14px] text-[#5A5A5A] mb-6">Enter your work email and we&apos;ll send the SMS &amp; email templates within 24 hours.</p>
+              <h2 className="text-[22px] text-[#0B1D3A] mb-2">Get Your Free PFS Template</h2>
+              <p className="font-sans text-[14px] text-[#5A5A5A] mb-6">Enter your work email and we&apos;ll send the Roundup PFS Template within 24 hours. Additional templates available upon request.</p>
               
               <form onSubmit={handleSubmit} className="flex flex-wrap gap-2.5">
                 <input
@@ -923,7 +924,7 @@ const RoundupClaimantCommunicationSwipeFile = () => {
                   disabled={isSubmitting}
                   className="bg-[#C8973E] text-[#0B1D3A] px-6 py-3.5 font-sans text-[15px] font-bold rounded hover:bg-[#E2B45A] transition-colors whitespace-nowrap disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Sending...' : 'Send My Swipe File'}
+                  {isSubmitting ? 'Sending...' : 'Send My PFS Template'}
                 </button>
               </form>
               
