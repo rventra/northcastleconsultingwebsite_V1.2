@@ -31,6 +31,8 @@ import RoundupClaimantCommunicationSMSBridge from './RoundupClaimantCommunicatio
 import RoundupClaimantCommunicationSMSBridgeThankYou from './RoundupClaimantCommunicationSMSBridgeThankYou.jsx';
 import RoundupClaimantCommunicationSwipeFile from './RoundupClaimantCommunicationSwipeFile.jsx';
 import RoundupClaimantCommunicationSwipeFileThankYou from './RoundupClaimantCommunicationSwipeFileThankYou.jsx';
+import RoundupFreeDocketReview from './RoundupFreeDocketReview.jsx';
+import RoundupFreeDocketReviewThankYou from './RoundupFreeDocketReviewThankYou.jsx';
 
 
 function ScrollToTop() {
@@ -665,7 +667,11 @@ const isRoundupLanding = location.pathname === '/roundup-docket-intelligence' ||
         {/* Swipe File - NO NAV BAR */}
         <Route path="/roundup-claimant-communication-swipe-file" element={<RoundupClaimantCommunicationSwipeFile />} />
         <Route path="/roundup-claimant-communication-swipe-file-thank-you" element={<RoundupClaimantCommunicationSwipeFileThankYou />} />
-        
+
+        {/* Free Docket Review - NO NAV BAR */}
+        <Route path="/roundup-free-docket-review" element={<RoundupFreeDocketReview />} />
+        <Route path="/roundup-free-docket-review-thank-you" element={<RoundupFreeDocketReviewThankYou />} />
+
         {/* Calendly redirect - NO NAV BAR */}
         <Route path="/scheduled" element={<CalendlyThankYouPage />} />
       </Routes>
