@@ -76,30 +76,35 @@ const RoundupClaimantCommunicationSwipeFileThankYou = () => {
 
           {/* Body Text */}
           <p className="text-[17px] text-[#5A5A5A] max-w-[540px] mx-auto mb-2 leading-relaxed">
-            Your SMS & email swipe file is on its way to your inbox. Look for an email from our team within 24 hours with the templates and an implementation guide.
+            Your Roundup Plaintiff Fact Sheet (PFS) Template is on its way to your inbox. Look for an email from our team within 24 hours.
+          </p>
+
+          {/* Additional Templates Note */}
+          <p className="text-[15px] text-[#5A5A5A] max-w-[540px] mx-auto mb-2 leading-relaxed italic">
+            Need Exposure Questionnaires, HIPAA/HITECH Authorizations, CFAs, or Affidavits? Reply to the email and we'll send those too.
           </p>
 
           {/* Note */}
           <p className="font-sans text-[13px] text-[#6B7B8D] mt-2 mb-10">
             Questions? Reach out to{' '}
             <a 
-              href="mailto:info@northcastleconsulting.com" 
+              href="mailto:consult@northcastleconsulting.com" 
               className="text-[#C8973E] no-underline hover:underline"
             >
-              info@northcastleconsulting.com
+              consult@northcastleconsulting.com
             </a>
           </p>
 
           {/* Calendly CTA */}
           <div className="bg-[#FAF5EB] border-2 border-[#C8973E] rounded-[10px] py-8 px-9 max-w-[520px] w-full mb-10 text-center">
             <div className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#C8973E] mb-2.5">
-              Ready for the Next Step?
+              Need Additional Templates?
             </div>
             <h2 className="text-[22px] text-[#0B1D3A] mb-2.5 leading-snug">
-              See How Automated Communication Works at Scale
+              Get Exposure Questionnaires, HIPAA/HITECH, CFAs & Affidavits
             </h2>
             <p className="font-sans text-[14px] text-[#5A5A5A] mb-5 leading-snug">
-              The swipe file gives you templates. On a 30-minute call, we'll show you how automated multi-channel outreach works at scale—and scope a free pilot for your docket.
+              On a 30-minute call, we'll discuss your documentation needs and provide access to our complete template library—including Exposure Questionnaires, HIPAA/HITECH Authorizations, Contingency Fee Agreements, and Affidavits.
             </p>
             <a 
               href="https://calendly.com/rventrapragada-northcastleconsulting/30min" 
