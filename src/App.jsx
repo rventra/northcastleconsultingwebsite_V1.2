@@ -608,7 +608,16 @@ function HomePage() {
 export default function NorthCastleConsulting() {
   const location = useLocation();
   // NO NAV BAR: These routes have no navigation
-const isRoundupLanding = location.pathname === '/roundup-docket-intelligence' || location.pathname === '/roundup-docket-intelligence-thank-you' || location.pathname === '/scheduled';
+const isRoundupLanding = 
+    location.pathname === '/roundup-docket-intelligence' || 
+    location.pathname === '/roundup-docket-intelligence-thank-you' ||
+    location.pathname === '/roundup-claimant-communication-enrichment' ||
+    location.pathname === '/roundup-claimant-communication-enrichment-thank-you' ||
+    location.pathname === '/roundup-claimant-communication-sms-bridge' ||
+    location.pathname === '/roundup-claimant-communication-sms-bridge-thank-you' ||
+    location.pathname === '/roundup-claimant-communication-swipe-file' ||
+    location.pathname === '/roundup-claimant-communication-swipe-file-thank-you' ||
+    location.pathname === '/scheduled';
   
   return (
     <div className="min-h-screen bg-white">
