@@ -206,8 +206,8 @@ const RoundupClaimantCommunicationSwipeFile = () => {
               For Plaintiff Firms Managing Roundup NHL Cases
             </div>
             <h1 className="text-[clamp(28px,5vw,44px)] leading-tight mb-5 font-bold">
-              Free Roundup Plaintiff Fact Sheet (PFS) Template<br />
-              <em className="not-italic text-[#E2B45A]">Plus: Exposure Questionnaires, HIPAA/HITECH, CFAs &amp; Affidavits</em>
+              Your Claimants Are Going Silent.<br />
+              <em className="not-italic text-[#E2B45A]">Every Lost Contact Is a Lost Settlement.</em>
             </h1>
             <p className="text-lg leading-relaxed max-w-2xl mx-auto mb-8 text-[#C5CDDB]">
               Your Roundup NHL claimants signed retainers 3–5 years ago. Half your phone numbers are dead.
@@ -598,7 +598,7 @@ const RoundupClaimantCommunicationSwipeFile = () => {
         {/* Offer Section */}
         <section className="bg-[#FAF5EB] py-14 px-6 border-y-[3px] border-[#C8973E]" id="audit">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-[28px] text-center mb-3 text-[#0B1D3A]">Free Roundup PFS Template — Plus Additional Templates</h2>
+            <h2 className="text-[28px] text-center mb-3 text-[#0B1D3A]">Accelerate Roundup Documentation With Ready-to-Use Templates</h2>
             <p className="text-center text-[#5A5A5A] text-base max-w-2xl mx-auto mb-9">
               Download our professionally designed Roundup Plaintiff Fact Sheet (PFS) Template—completely free.
               We also have templates for Exposure Questionnaires, HIPAA/HITECH Authorizations, Contingency Fee Agreements (CFA), 
