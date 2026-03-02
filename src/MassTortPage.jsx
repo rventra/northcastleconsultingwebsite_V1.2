@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import NewsletterTicker from './components/NewsletterTicker';
 
 export default function MassTortPage() {
   const navigate = useNavigate();
@@ -54,25 +53,70 @@ export default function MassTortPage() {
     setIsModalOpen(false);
   };
 
+  // Latest news items for the mini bar
+  const latestNews = [
+    {
+      headline: "PFAS Litigation Surges to 1,972 Cases with $12.5B 3M Settlement",
+      link: "/newsletter/2026-03-02#pfas-litigation-surge",
+      tag: "MDL"
+    },
+    {
+      headline: "Supreme Court Invalidates IEEPA Tariffs, Triggering Refund Lawsuits",
+      link: "/newsletter/2026-03-02#ieepa-tariff-invalidated",
+      tag: "Regulatory"
+    },
+    {
+      headline: "Wynn Resorts Data Breach Exposes 800,000 Employees' PII",
+      link: "/newsletter/2026-03-02#wynn-data-breach",
+      tag: "Data Breach"
+    }
+  ];
+
+  // Service stages with links
+  const serviceStages = [
+    { num: '01', title: 'Intake & Doc QA', link: '#stage-1' },
+    { num: '02', title: 'Claimant Communication', link: '#stage-2' },
+    { num: '03', title: 'AI Medical Review', link: '#stage-3' },
+    { num: '04', title: 'Docket Tiering', link: '#stage-4' },
+    { num: '05', title: 'Workflow Tracking', link: '#stage-5' },
+    { num: '06', title: 'OCR & Data Conversion', link: '#stage-6' },
+    { num: '07', title: 'Dashboarding & Portals', link: '#stage-7' },
+  ];
+
   return (
     <div className="min-h-screen bg-white">
-      {/* Newsletter Ticker */}
+      {/* Mini News Bar - Below Navigation */}
       <div className="bg-[#0B1D3A] border-b border-[#C8973E]/30">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-[#C8973E]">Latest Intelligence</span>
-            <span className="text-[#5A6A85] hidden sm:inline">|</span>
-            <span className="text-[#8DA0BF] text-sm hidden sm:inline">Weekly litigation updates for plaintiff firms</span>
+        <div className="max-w-7xl mx-auto px-4 py-3">
+          <div className="flex items-center gap-4 overflow-hidden">
+            <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-[#C8973E] flex-shrink-0">
+              Latest Intelligence
+            </span>
+            <div className="h-4 w-px bg-[#C8973E]/30 flex-shrink-0"></div>
+            <div className="flex items-center gap-6 overflow-x-auto scrollbar-hide">
+              {latestNews.map((news, i) => (
+                <Link 
+                  key={i}
+                  to={news.link}
+                  className="flex items-center gap-2 text-sm text-white/90 hover:text-[#C8973E] transition-colors whitespace-nowrap group"
+                >
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#C8973E] bg-[#C8973E]/10 px-1.5 py-0.5 rounded">
+                    {news.tag}
+                  </span>
+                  <span className="group-hover:underline">{news.headline}</span>
+                </Link>
+              ))}
+            </div>
+            <Link 
+              to="/newsletter" 
+              className="ml-auto flex-shrink-0 inline-flex items-center gap-1.5 text-[#C8973E] hover:text-[#E2B45A] transition-colors font-sans text-sm font-semibold"
+            >
+              View All
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
-          <Link 
-            to="/newsletter" 
-            className="inline-flex items-center gap-1.5 text-[#C8973E] hover:text-[#E2B45A] transition-colors font-sans text-sm font-semibold"
-          >
-            View Newsletter
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
         </div>
       </div>
       
@@ -162,39 +206,38 @@ export default function MassTortPage() {
 
           {/* Right — Service Overview Panel */}
           <div className="lg:col-span-4 bg-[#F7F5F0] p-8 md:p-10 lg:p-12">
-            <h3 className="text-lg font-bold text-[#0B1D3A] mb-6 uppercase tracking-wide">
+            <h3 className="text-xl font-bold text-[#0B1D3A] mb-3 uppercase tracking-wide">
               8-Stage Platform
             </h3>
-            <p className="text-[#5A5A5A] text-sm mb-8 leading-relaxed">
+            <p className="text-[#5A5A5A] text-base mb-8 leading-relaxed">
               We optimize 8 of 9 critical stages in the mass tort case lifecycle—from intake through settlement.
             </p>
             
             <div className="space-y-4">
-              {[
-                { num: '01', title: 'Intake & Doc QA' },
-                { num: '02', title: 'Claimant Communication' },
-                { num: '03', title: 'AI Medical Review' },
-                { num: '04', title: 'Docket Tiering' },
-                { num: '05', title: 'Workflow Tracking' },
-                { num: '06', title: 'OCR & Data Conversion' },
-                { num: '07', title: 'Dashboarding & Portals' },
-              ].map((stage, i) => (
-                <div key={i} className="flex items-baseline gap-3">
-                  <span className="text-[#C8973E] font-bold text-sm">{stage.num}</span>
-                  <span className="text-[#0B1D3A] font-medium text-sm">{stage.title}</span>
-                </div>
+              {serviceStages.map((stage, i) => (
+                <a 
+                  key={i} 
+                  href={stage.link}
+                  onClick={(e) => { e.preventDefault(); scrollToSelector(stage.link); }}
+                  className="flex items-baseline gap-4 group cursor-pointer"
+                >
+                  <span className="text-[#C8973E] font-bold text-lg">{stage.num}</span>
+                  <span className="text-[#0B1D3A] font-semibold text-lg group-hover:text-[#C8973E] transition-colors border-b-2 border-transparent group-hover:border-[#C8973E]">
+                    {stage.title}
+                  </span>
+                </a>
               ))}
             </div>
             
             <div className="mt-10 pt-8 border-t border-[#E8E6E1]">
-              <p className="text-[#5A5A5A] text-sm mb-4">
+              <p className="text-[#5A5A5A] text-base mb-4">
                 Ready to transform your mass tort operations?
               </p>
               <button 
                 onClick={openModal}
-                className="w-full bg-[#0B1D3A] text-[#C8973E] px-6 py-3 font-bold text-sm hover:bg-[#142D55] transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-[#0B1D3A] text-[#C8973E] px-6 py-4 font-bold text-base hover:bg-[#142D55] transition-colors flex items-center justify-center gap-2"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 Schedule a Consultation
@@ -209,7 +252,7 @@ export default function MassTortPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="font-sans text-[11px] font-bold uppercase tracking-[0.1em] text-[#C8973E] mb-3 block">Our Solutions</span>
-            <h2 className="text-[32px] text-[#0B1D3A] mb-3 font-bold">Mass Tort Case Lifecycle Services</h2>
+            <h2 className="text-[32px] text-[#0B1D3A] mb-3 font-bold">End-to-End Litigation Intelligence</h2>
             <p className="text-[#5A5A5A] text-lg max-w-2xl mx-auto">
               Click any stage below to learn how we optimize your operations and accelerate outcomes
             </p>
