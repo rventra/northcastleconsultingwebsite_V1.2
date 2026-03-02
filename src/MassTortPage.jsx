@@ -56,84 +56,162 @@ export default function MassTortPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <NewsletterTicker />
+      {/* Newsletter Ticker */}
+      <div className="bg-[#0B1D3A] border-b border-[#C8973E]/30">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-[#C8973E]">Latest Intelligence</span>
+            <span className="text-[#5A6A85] hidden sm:inline">|</span>
+            <span className="text-[#8DA0BF] text-sm hidden sm:inline">Weekly litigation updates for plaintiff firms</span>
+          </div>
+          <Link 
+            to="/newsletter" 
+            className="inline-flex items-center gap-1.5 text-[#C8973E] hover:text-[#E2B45A] transition-colors font-sans text-sm font-semibold"
+          >
+            View Newsletter
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+      </div>
       
-      {/* Hero Section */}
-      <section 
-        ref={heroRef}
-        className="text-white text-center py-16 md:py-24 px-6"
-        style={{
-          background: 'linear-gradient(172deg, rgba(11,29,58,0.95) 0%, rgba(20,45,85,0.92) 100%), url(https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&h=1080&fit=crop) center/cover no-repeat'
-        }}
-      >
-        <div className="max-w-4xl mx-auto">
-          <div className="font-sans text-[13px] font-bold tracking-[0.14em] uppercase text-[#C8973E] mb-4">
-            End-to-End Litigation Intelligence
-          </div>
-          <h1 className="text-[clamp(32px,5vw,52px)] leading-tight mb-5 font-bold">
-            Mass Tort Operations<br />
-            <em className="not-italic text-[#E2B45A]">Built for Scale</em>
-          </h1>
-          <p className="text-lg leading-relaxed max-w-2xl mx-auto mb-8 text-[#C5CDDB]">
-            Operational infrastructure and financial intelligence for law firms handling mass tort litigation. 
-            From intake to settlement—we optimize every stage of your case lifecycle.
-          </p>
-          <div className="flex gap-4 justify-center items-center flex-wrap">
-            <button
-              onClick={() => scrollToSelector('#lifecycle')}
-              className="bg-[#C8973E] text-[#0B1D3A] px-10 py-4 font-sans text-base font-bold rounded hover:bg-[#E2B45A] transition-colors tracking-wide"
-            >
-              Explore Our Solutions
-            </button>
-            <Link
-              to="/newsletter"
-              className="inline-block bg-white/10 backdrop-blur-sm text-white border border-white/30 px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:bg-white/20 text-lg"
-            >
-              Newsletter & Blog
-            </Link>
-          </div>
+      {/* Hero Section - QoE Style Split Design */}
+      <div ref={heroRef}>
+        <div className="grid lg:grid-cols-12 min-h-[700px] lg:min-h-[800px]">
           
-          {/* Trust badges */}
-          <div className="flex justify-center gap-2 flex-wrap mt-8">
-            {[
-              { text: 'All Data Housed in AWS' },
-              { text: 'NDA First' },
-              { text: '100% U.S.-Based Team' }
-            ].map((badge, i) => (
-              <div key={i} className="inline-flex items-center gap-1.5 px-3.5 py-1.5 border border-white/15 rounded bg-white/5">
-                <svg className="w-4 h-4 text-[#8DA0BF]" viewBox="0 0 16 20" fill="currentColor">
-                  <path d="M8 0L0 3v6c0 5.25 3.4 10.15 8 11 4.6-.85 8-5.75 8-11V3L8 0z"/>
-                  <path d="M6.5 13.5L3.5 10.5l1.4-1.4 1.6 1.6 4.6-4.6 1.4 1.4-6 6z" fill="#142D55"/>
-                </svg>
-                <span className="font-sans text-[11px] font-bold text-[#8DA0BF] uppercase tracking-wide whitespace-nowrap">{badge.text}</span>
+          {/* Left — Split Top/Bottom (50/50 Balance) */}
+          <div className="lg:col-span-8 relative flex flex-col">
+            {/* Top: Image with Hero Content (50%) */}
+            <div className="relative h-1/2 min-h-[300px] flex items-end">
+              <div className="absolute inset-0">
+                <img
+                  src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600&h=900&fit=crop"
+                  alt="Legal documents and courthouse"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1D3A] via-[#0B1D3A]/70 to-transparent"></div>
               </div>
-            ))}
+              
+              <div className="relative z-10 p-6 md:p-10 lg:p-12 w-full">
+                <p className="text-[#C8973E] text-sm font-semibold tracking-widest uppercase mb-3">
+                  End-to-End Litigation Intelligence
+                </p>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-[1.05] max-w-3xl">
+                  Mass Tort Operations<br />
+                  <span className="text-[#E2B45A]">Built for Scale</span>
+                </h1>
+                <p className="text-lg md:text-xl text-white/80 font-light max-w-2xl leading-relaxed">
+                  Operational infrastructure and financial intelligence for law firms handling mass tort litigation at scale.
+                </p>
+              </div>
+            </div>
+            
+            {/* Bottom: The Challenge Section (50%) - Slate Navy */}
+            <div className="relative h-1/2 min-h-[350px] bg-[#142D55] flex items-center">
+              <div className="p-6 md:p-10 lg:p-12 w-full">
+                <p className="text-[#C8973E] text-sm font-semibold tracking-widest uppercase mb-3">
+                  The Challenge
+                </p>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">
+                  Most Mass Tort Practices Struggle With Operational Chaos
+                </h2>
+                
+                <p className="text-white/80 text-base mb-6 leading-relaxed max-w-2xl">
+                  Disorganized case intake, inconsistent medical review, manual document workflows, and inability to respond 
+                  quickly to defense data requests. These bottlenecks cost firms millions in lost settlement value.
+                </p>
+                
+                {/* Trust Badges */}
+                <div className="flex flex-wrap gap-3 mb-6">
+                  {[
+                    { text: 'All Data Housed in AWS' },
+                    { text: 'NDA First' },
+                    { text: '100% U.S.-Based Team' }
+                  ].map((badge, i) => (
+                    <div key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-white/15 rounded bg-white/5">
+                      <svg className="w-4 h-4 text-[#C8973E]" viewBox="0 0 16 20" fill="currentColor">
+                        <path d="M8 0L0 3v6c0 5.25 3.4 10.15 8 11 4.6-.85 8-5.75 8-11V3L8 0z"/>
+                        <path d="M6.5 13.5L3.5 10.5l1.4-1.4 1.6 1.6 4.6-4.6 1.4 1.4-6 6z" fill="#142D55"/>
+                      </svg>
+                      <span className="font-sans text-[11px] font-bold text-white/80 uppercase tracking-wide whitespace-nowrap">{badge.text}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button 
+                    onClick={() => scrollToSelector('#lifecycle')}
+                    className="inline-flex items-center justify-center gap-2 bg-[#C8973E] text-[#0B1D3A] px-6 py-3 font-bold text-base hover:shadow-xl hover:bg-[#E2B45A] transition-all duration-300"
+                  >
+                    <span>Explore Our Solutions</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </button>
+                  <Link
+                    to="/newsletter"
+                    className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white px-6 py-3 font-bold text-base hover:bg-white hover:text-[#0B1D3A] transition-all duration-300"
+                  >
+                    Newsletter & Blog
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right — Service Overview Panel */}
+          <div className="lg:col-span-4 bg-[#F7F5F0] p-8 md:p-10 lg:p-12">
+            <h3 className="text-lg font-bold text-[#0B1D3A] mb-6 uppercase tracking-wide">
+              8-Stage Platform
+            </h3>
+            <p className="text-[#5A5A5A] text-sm mb-8 leading-relaxed">
+              We optimize 8 of 9 critical stages in the mass tort case lifecycle—from intake through settlement.
+            </p>
+            
+            <div className="space-y-4">
+              {[
+                { num: '01', title: 'Intake & Doc QA' },
+                { num: '02', title: 'Claimant Communication' },
+                { num: '03', title: 'AI Medical Review' },
+                { num: '04', title: 'Docket Tiering' },
+                { num: '05', title: 'Workflow Tracking' },
+                { num: '06', title: 'OCR & Data Conversion' },
+                { num: '07', title: 'Dashboarding & Portals' },
+              ].map((stage, i) => (
+                <div key={i} className="flex items-baseline gap-3">
+                  <span className="text-[#C8973E] font-bold text-sm">{stage.num}</span>
+                  <span className="text-[#0B1D3A] font-medium text-sm">{stage.title}</span>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-10 pt-8 border-t border-[#E8E6E1]">
+              <p className="text-[#5A5A5A] text-sm mb-4">
+                Ready to transform your mass tort operations?
+              </p>
+              <button 
+                onClick={openModal}
+                className="w-full bg-[#0B1D3A] text-[#C8973E] px-6 py-3 font-bold text-sm hover:bg-[#142D55] transition-colors flex items-center justify-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Schedule a Consultation
+              </button>
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* Problem Statement */}
-      <section className="bg-[#F7F5F0] py-14 px-6 border-t-[3px] border-[#C8973E]">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="font-sans text-[11px] font-bold uppercase tracking-[0.1em] text-[#C8973E] mb-3 block">The Challenge</span>
-          <h2 className="text-[28px] text-[#0B1D3A] mb-4 font-bold">
-            Most Mass Tort Practices Struggle With Operational Chaos
-          </h2>
-          <p className="text-[#5A5A5A] text-base max-w-2xl mx-auto leading-relaxed">
-            Disorganized case intake, inconsistent medical review, manual document workflows, and inability to respond 
-            quickly to defense data requests. These bottlenecks cost firms millions in lost settlement value.
-          </p>
-        </div>
-      </section>
+      </div>
 
       {/* Lifecycle Overview */}
       <section id="lifecycle" className="py-16 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <span className="font-sans text-[11px] font-bold uppercase tracking-[0.1em] text-[#C8973E] mb-3 block">8-Stage Platform</span>
-            <h2 className="text-[32px] text-[#0B1D3A] mb-3 font-bold">End-to-End Litigation Intelligence</h2>
+            <span className="font-sans text-[11px] font-bold uppercase tracking-[0.1em] text-[#C8973E] mb-3 block">Our Solutions</span>
+            <h2 className="text-[32px] text-[#0B1D3A] mb-3 font-bold">Mass Tort Case Lifecycle Services</h2>
             <p className="text-[#5A5A5A] text-lg max-w-2xl mx-auto">
-              We optimize 8 of 9 critical stages in the mass tort case lifecycle
+              Click any stage below to learn how we optimize your operations and accelerate outcomes
             </p>
           </div>
           
