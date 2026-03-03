@@ -261,7 +261,7 @@ export default function NewsletterPage() {
                       {filing.status}
                     </span>
                   </div>
-                  <p className="mt-2 text-gray-700">{filing.details}</p>
+                  {filing.details && <p className="mt-2 text-gray-700">{filing.details}</p>}
                 </div>
               ))}
             </div>
@@ -278,7 +278,7 @@ export default function NewsletterPage() {
               {currentWeek.marketSignals.signals.map((signal, index) => (
                 <div key={index} className="flex items-start gap-3">
                   <span className="text-[#EDB624] text-xl">→</span>
-                  <p className="text-gray-700">{signal}</p>
+                  <p className="text-gray-700">{typeof signal === 'string' ? signal : signal.description}</p>
                 </div>
               ))}
             </div>
@@ -294,7 +294,7 @@ export default function NewsletterPage() {
             <div className="grid gap-4">
               {currentWeek.trendingThemes.themes.map((theme, index) => (
                 <div key={index} className="bg-white/10 rounded-lg p-4">
-                  <p className="text-lg">{theme}</p>
+                  <p className="text-lg">{typeof theme === 'string' ? theme : theme.description}</p>
                 </div>
               ))}
             </div>
