@@ -188,6 +188,15 @@ export default function MassTortPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
                   </button>
+                  <Link 
+                    to="/newsletter/2026-03-02"
+                    className="inline-flex items-center justify-center gap-2 border-2 border-[#C8973E] text-[#C8973E] px-6 py-3 font-bold text-base hover:bg-[#C8973E] hover:text-[#0B1D3A] transition-all duration-300"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                    </svg>
+                    <span>Latest Newsletter</span>
+                  </Link>
                 </div>
               </div>
             </div>
