@@ -184,32 +184,32 @@ export default {
   courtActivity: {
     title: "Court Activity Monitor",
     filings: [
-      { tag: "Wynn Resorts data breach class action", jurisdiction: "NV", status: "New Filing" },
-      { tag: "Multiple ADA website accessibility suits", jurisdiction: "IL, IN, CA", status: "New Filings" },
-      { tag: "IEEPA tariff refund cases", jurisdiction: "CIT", status: "New Filings" },
+      { caseId: "", tag: "Wynn Resorts data breach class action", jurisdiction: "NV", status: "New Filing" },
+      { caseId: "", tag: "Multiple ADA website accessibility suits", jurisdiction: "IL, IN, CA", status: "New Filings" },
+      { caseId: "", tag: "IEEPA tariff refund cases", jurisdiction: "CIT", status: "New Filings" },
       { caseId: "1:26-cv-00213-DJC", tag: "Town of Pepperell PFAS lawsuit", jurisdiction: "MA", status: "New Filing" },
-      { tag: "Epstein estate settlement", jurisdiction: "FL", status: "Settlement" },
-      { tag: "Evolve Bank data breach class action", jurisdiction: "AR", status: "New Filing" },
-      { tag: "SoFi data breach class action", jurisdiction: "CA", status: "New Filing" },
-      { tag: "Class action settlement administration kickback allegations", jurisdiction: "NJ", status: "New Filing" },
-      { tag: "Runway AI copyright infringement suit", jurisdiction: "NY", status: "New Filing" },
-      { tag: "USDA v. UC Regents antisemitism complaint", jurisdiction: "CA", status: "New Filing" }
+      { caseId: "", tag: "Epstein estate settlement", jurisdiction: "FL", status: "Settlement" },
+      { caseId: "", tag: "Evolve Bank data breach class action", jurisdiction: "AR", status: "New Filing" },
+      { caseId: "", tag: "SoFi data breach class action", jurisdiction: "CA", status: "New Filing" },
+      { caseId: "", tag: "Class action settlement administration kickback allegations", jurisdiction: "NJ", status: "New Filing" },
+      { caseId: "", tag: "Runway AI copyright infringement suit", jurisdiction: "NY", status: "New Filing" },
+      { caseId: "", tag: "USDA v. UC Regents antisemitism complaint", jurisdiction: "CA", status: "New Filing" }
     ]
   },
   marketSignals: {
     title: "Litigation Market Signals",
     signals: [
-      "17,320 federal tort cases filed in 2024 with product liability representing 40% of filings according to Lex Machina",
-      "MDL transfers account for 25% of federal tort cases, concentrating litigation in specialized venues",
-      "Average damages awards rising to $1.2M despite faster resolutions (median 8.5 months)",
-      "Judges like Mark Scarsi (C.D. Cal.) emerging as key decision-makers in consumer protection mass torts"
+      { description: "17,320 federal tort cases filed in 2024 with product liability representing 40% of filings according to Lex Machina" },
+      { description: "MDL transfers account for 25% of federal tort cases, concentrating litigation in specialized venues" },
+      { description: "Average damages awards rising to $1.2M despite faster resolutions (median 8.5 months)" },
+      { description: "Judges like Mark Scarsi (C.D. Cal.) emerging as key decision-makers in consumer protection mass torts" }
     ]
   },
   trendingThemes: {
     title: "Macro Litigation Themes",
     themes: [
-      "Data Vulnerability Expansion: From consumer to employee data breaches with increasing regulatory scrutiny",
-      "Executive Power Limits: Judicial pushback against broad presidential tariff authority reshaping trade litigation"
+      { description: "Data Vulnerability Expansion: From consumer to employee data breaches with increasing regulatory scrutiny" },
+      { description: "Executive Power Limits: Judicial pushback against broad presidential tariff authority reshaping trade litigation" }
     ]
   }
 };
