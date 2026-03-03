@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function MassTortPage() {
   const navigate = useNavigate();
   const [showSticky, setShowSticky] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const heroRef = useRef(null);
   const footerRef = useRef(null);
 
@@ -27,16 +26,7 @@ export default function MassTortPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close modal on escape key
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        setIsModalOpen(false);
-      }
-    };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, []);
+
 
   const scrollToSelector = (selector) => {
     const element = document.querySelector(selector);
@@ -45,13 +35,7 @@ export default function MassTortPage() {
     }
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   // Latest news items for the mini bar
   const latestNews = [
@@ -184,21 +168,26 @@ export default function MassTortPage() {
                 </div>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
+                  <a 
+                    href="https://calendly.com/rventrapragada-northcastleconsulting/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-[#C8973E] text-[#0B1D3A] px-6 py-3 font-bold text-base hover:shadow-xl hover:bg-[#E2B45A] transition-all duration-300"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span>Schedule a Consultation</span>
+                  </a>
                   <button 
                     onClick={() => scrollToSelector('#lifecycle')}
-                    className="inline-flex items-center justify-center gap-2 bg-[#C8973E] text-[#0B1D3A] px-6 py-3 font-bold text-base hover:shadow-xl hover:bg-[#E2B45A] transition-all duration-300"
+                    className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white px-6 py-3 font-bold text-base hover:bg-white hover:text-[#0B1D3A] transition-all duration-300"
                   >
                     <span>Explore Our Solutions</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
                   </button>
-                  <Link
-                    to="/newsletter"
-                    className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white px-6 py-3 font-bold text-base hover:bg-white hover:text-[#0B1D3A] transition-all duration-300"
-                  >
-                    Newsletter & Blog
-                  </Link>
                 </div>
               </div>
             </div>
@@ -233,15 +222,17 @@ export default function MassTortPage() {
               <p className="text-[#5A5A5A] text-base mb-4">
                 Ready to transform your mass tort operations?
               </p>
-              <button 
-                onClick={openModal}
+              <a 
+                href="https://calendly.com/rventrapragada-northcastleconsulting/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full bg-[#0B1D3A] text-[#C8973E] px-6 py-4 font-bold text-base hover:bg-[#142D55] transition-colors flex items-center justify-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 Schedule a Consultation
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -831,12 +822,17 @@ export default function MassTortPage() {
           <p className="text-[#C5CDDB] text-lg max-w-2xl mx-auto mb-8">
             Schedule a 30-minute consultation to discuss your specific challenges and how our solutions can help.
           </p>
-          <button 
-            onClick={openModal}
-            className="bg-[#C8973E] text-[#0B1D3A] px-10 py-4 font-sans text-base font-bold rounded hover:bg-[#E2B45A] transition-colors tracking-wide"
+          <a 
+            href="https://calendly.com/rventrapragada-northcastleconsulting/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 bg-[#C8973E] text-[#0B1D3A] px-10 py-4 font-sans text-base font-bold rounded hover:bg-[#E2B45A] transition-colors tracking-wide"
           >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
             Schedule a Consultation
-          </button>
+          </a>
           
           {/* Trust badges */}
           <div className="flex justify-center gap-2 flex-wrap mt-6">
@@ -870,89 +866,17 @@ export default function MassTortPage() {
         <span className="font-sans text-sm text-white font-semibold hidden sm:inline">
           Ready to optimize your mass tort operations?
         </span>
-        <button 
-          onClick={openModal}
-          className="bg-[#C8973E] text-[#0B1D3A] px-6 py-2.5 font-sans text-[13px] font-bold rounded hover:bg-[#E2B45A] transition-colors"
+        <a 
+          href="https://calendly.com/rventrapragada-northcastleconsulting/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2 bg-[#C8973E] text-[#0B1D3A] px-6 py-2.5 font-sans text-[13px] font-bold rounded hover:bg-[#E2B45A] transition-colors"
         >
           Schedule Consultation
-        </button>
+        </a>
       </div>
 
-      {/* Modal */}
-      {isModalOpen && (
-        <div 
-          className="fixed inset-0 bg-[#0B1D3A]/85 backdrop-blur-sm z-[1000] flex justify-center items-center p-6"
-          onClick={(e) => e.target === e.currentTarget && closeModal()}
-        >
-          <div className="bg-white rounded-xl p-8 md:p-10 max-w-md w-full text-center relative shadow-2xl">
-            <button 
-              onClick={closeModal}
-              className="absolute top-3.5 right-4 bg-none border-none text-2xl text-[#6B7B8D] cursor-pointer leading-none hover:text-[#0B1D3A]"
-            >
-              &times;
-            </button>
-            <h2 className="text-[22px] text-[#0B1D3A] mb-2 font-bold">Schedule a Consultation</h2>
-            <p className="font-sans text-sm text-[#5A5A5A] mb-6">
-              Enter your work email and we'll reach out within 24 hours to schedule your consultation.
-            </p>
-            
-            <form 
-              action="https://formsubmit.co/admin@northcastleconsulting.com" 
-              method="POST"
-              className="space-y-4"
-            >
-              <input type="hidden" name="_subject" value="Mass Tort Services Consultation Request" />
-              <input type="hidden" name="_template" value="table" />
-              <input 
-                type="text" 
-                name="name" 
-                placeholder="Your Name" 
-                required
-                className="w-full py-3.5 px-4 border border-[#E8E6E1] rounded text-[15px] font-sans text-[#2C2C2C] focus:outline-none focus:border-[#C8973E]"
-              />
-              <input 
-                type="email" 
-                name="email" 
-                placeholder="you@firmname.com" 
-                required
-                className="w-full py-3.5 px-4 border border-[#E8E6E1] rounded text-[15px] font-sans text-[#2C2C2C] focus:outline-none focus:border-[#C8973E]"
-              />
-              <input 
-                type="text" 
-                name="firm" 
-                placeholder="Law Firm / Company" 
-                required
-                className="w-full py-3.5 px-4 border border-[#E8E6E1] rounded text-[15px] font-sans text-[#2C2C2C] focus:outline-none focus:border-[#C8973E]"
-              />
-              <button
-                type="submit"
-                className="w-full bg-[#C8973E] text-[#0B1D3A] px-6 py-3.5 font-sans text-[15px] font-bold rounded hover:bg-[#E2B45A] transition-colors"
-              >
-                Request Consultation
-              </button>
-            </form>
-            
-            <div className="flex justify-center gap-2 flex-wrap mt-4">
-              {[
-                { text: 'AWS' },
-                { text: 'NDA First' },
-                { text: 'U.S.-Based' }
-              ].map((badge, i) => (
-                <div key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#6B7B8D]/25 rounded bg-white/60">
-                  <svg className="w-4 h-4 text-[#6B7B8D]" viewBox="0 0 16 20" fill="currentColor">
-                    <path d="M8 0L0 3v6c0 5.25 3.4 10.15 8 11 4.6-.85 8-5.75 8-11V3L8 0z"/>
-                    <path d="M6.5 13.5L3.5 10.5l1.4-1.4 1.6 1.6 4.6-4.6 1.4 1.4-6 6z" fill="white"/>
-                  </svg>
-                  <span className="font-sans text-[11px] font-bold text-[#6B7B8D] uppercase tracking-wide">{badge.text}</span>
-                </div>
-              ))}
-            </div>
-            <p className="font-sans text-[11px] text-[#6B7B8D] mt-3">
-              We never share your information. NDA executed before any data transfer.
-            </p>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }
