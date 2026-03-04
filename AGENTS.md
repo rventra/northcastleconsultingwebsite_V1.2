@@ -7,72 +7,41 @@
 
 ## ⚠️ CURRENT STATUS - NEXT SESSION READ THIS
 
-**Last Worked On:** 2026-02-25  
-**Current Focus:** AWS SES Multi-Template Setup with Lambda Switch Logic  
-**Status:** 🔄 IN PROGRESS - 3 New Landing Pages Deployed, SES Templates Next
+**Last Worked On:** 2026-03-03  
+**Current Focus:** GTM Advertising Funnel Setup for Roundup Docket Intelligence  
+**Status:** 🔄 IN PROGRESS - Mass Tort Page Updated, Newsletter Format Fixed, GTM Funnel Next
 
-### What Was Just Completed (Today - Feb 25, 2026):
-1. ✅ **3 New Landing Pages Created & Deployed:**
-   - `RoundupClaimantCommunicationEnrichment.jsx` → `/roundup-claimant-communication-enrichment`
-   - `RoundupClaimantCommunicationSMSBridge.jsx` → `/roundup-claimant-communication-sms-bridge`
-   - `RoundupClaimantCommunicationSwipeFile.jsx` → `/roundup-claimant-communication-swipe-file`
-2. ✅ **3 Matching Thank You Pages:**
-   - `RoundupClaimantCommunicationEnrichmentThankYou.jsx`
-   - `RoundupClaimantCommunicationSMSBridgeThankYou.jsx`
-   - `RoundupClaimantCommunicationSwipeFileThankYou.jsx`
-3. ✅ **App.jsx Updated** with imports, routes, and no-nav logic for all 6 new pages
-4. ✅ **MetaTags.jsx Updated** with page meta configurations for all new pages
-5. ✅ **Commit b0cd92b pushed** and Amplify Job #209 SUCCEEDED
+### What Was Just Completed (Today - March 3, 2026):
+1. ✅ **Mass Tort Page Updated** - Added "Latest Newsletter" button linking to `/newsletter`
+2. ✅ **March 2 Newsletter Format Fixed** - Fixed data structure to match previous newsletter schema (objects with `description` instead of plain strings)
+3. ✅ **NewsletterPage.jsx Fixed** - Added backward compatibility to handle both string and object formats for `marketSignals`, `trendingThemes`, and `courtActivity.filings`
+4. ✅ **Landing Pages Reference Table Emailed** - Sent complete table of all 5 landing pages + thank you pages to Ryan and Nick
+
+### Files Modified Today:
+- `ncw-check/src/MassTortPage.jsx` - Added newsletter link button
+- `ncw-check/src/components/newsletters/data/week-2026-03-02.js` - Fixed data format
+- `ncw-check/src/components/newsletters/NewsletterPage.jsx` - Added format compatibility
 
 ### NEXT SESSION - START HERE:
 
-**Task:** Create AWS SES Templates + Lambda Switch Logic
+**Task:** Set up GTM Advertising Funnel for https://northcastleconsulting.com/roundup-docket-intelligence
 
-**Context:** We now have 4 landing pages all using the same Lambda function, but currently they all send the same generic SES email template. We need to:
+**Context:** Need to implement Google Tag Manager tracking for the Roundup Docket Intelligence landing page to track conversions through to the thank you page.
 
-1. **Create 3 new SES templates** (JSON files):
-   - `ses_email_template_enrichment.json` → Template name: `RoundupEnrichmentResponse`
-   - `ses_email_template_sms_bridge.json` → Template name: `RoundupSMSBridgeResponse`
-   - `ses_email_template_swipe_file.json` → Template name: `RoundupSwipeFileResponse`
+**GTM Setup Notes:**
+- **Trigger:** Page Path contains `roundup-docket-intelligence-thank-you`
+- **Trigger Type:** Page View - DOM Ready
+- Form submission redirects to: `/roundup-docket-intelligence-thank-you?email=user@firm.com`
+- Email parameter available in URL for enhanced conversion tracking
 
-2. **Update existing template** (keep as fallback):
-   - Current: `ses_email_template.json` → Template name: `RoundupSampleReportResponse`
-
-3. **Update Lambda function** (`RoundupAutoResponder`) with switch logic:
-   ```javascript
-   const templateMap = {
-     'enrichment': 'RoundupEnrichmentResponse',
-     'sms-bridge': 'RoundupSMSBridgeResponse',
-     'swipe-file': 'RoundupSwipeFileResponse',
-     'docket-intelligence': 'RoundupSampleReportResponse'
-   };
-   ```
-
-4. **Update all landing pages** to pass `source` parameter in API payload:
-   - Enrichment page: `source: 'enrichment'`
-   - SMS Bridge page: `source: 'sms-bridge'`
-   - Swipe File page: `source: 'swipe-file'`
-   - Docket Intelligence page: `source: 'docket-intelligence'`
-
-**SES Template Content Requirements** (same for all):
-- NO personalized greeting (no "Dear {{name}}")
-- NO phone numbers in body
-- NO fake stats
-- Include Calendly link: https://calendly.com/rventrapragada-northcastleconsulting/30min
-- Footer: "All Data Housed in AWS • NDA First • 100% U.S.-Based Team"
-- Subject lines specific to each offer type
-
-**Files to Create:**
-- `ses_email_template_enrichment.json`
-- `ses_email_template_sms_bridge.json`
-- `ses_email_template_swipe_file.json`
-
-**Files to Modify:**
-- Lambda function code (need to fetch and update)
-- `RoundupLandingPage.jsx` (add source param)
-- `RoundupClaimantCommunicationEnrichment.jsx` (add source param)
-- `RoundupClaimantCommunicationSMSBridge.jsx` (add source param)
-- `RoundupClaimantCommunicationSwipeFile.jsx` (add source param)
+**All Landing Pages & Thank You Pages:**
+| Landing Page | URL | Thank You Page | URL |
+|--------------|-----|----------------|-----|
+| Docket Intelligence | `/roundup-docket-intelligence` | Docket Intelligence TY | `/roundup-docket-intelligence-thank-you` |
+| Free Docket Review | `/roundup-free-docket-review` | Free Docket Review TY | `/roundup-free-docket-review-thank-you` |
+| Claimant Communication Enrichment | `/roundup-claimant-communication-enrichment` | Enrichment TY | `/roundup-claimant-communication-enrichment-thank-you` |
+| SMS Bridge | `/roundup-claimant-communication-sms-bridge` | SMS Bridge TY | `/roundup-claimant-communication-sms-bridge-thank-you` |
+| Swipe File | `/roundup-claimant-communication-swipe-file` | Swipe File TY | `/roundup-claimant-communication-swipe-file-thank-you` |
 
 ---
 
