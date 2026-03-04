@@ -7,24 +7,54 @@
 
 ## ⚠️ CURRENT STATUS - NEXT SESSION READ THIS
 
-**Last Worked On:** 2026-03-03  
-**Current Focus:** GTM Advertising Funnel Setup for Roundup Docket Intelligence  
-**Status:** 🔄 IN PROGRESS - Mass Tort Page Updated, Newsletter Format Fixed, GTM Funnel Next
+**Last Worked On:** 2026-03-04  
+**Current Focus:** Ram's Prioritized Action Items - Task 1 (Autoresponder) IN PROGRESS  
+**Status:** 🔄 HANDOFF - Lambda Switch Logic Deployed, API Gateway Issue Pending
 
-### What Was Just Completed (Today - March 3, 2026):
-1. ✅ **Mass Tort Page Updated** - Added "Latest Newsletter" button linking to `/newsletter`
-2. ✅ **March 2 Newsletter Format Fixed** - Fixed data structure to match previous newsletter schema (objects with `description` instead of plain strings)
-3. ✅ **NewsletterPage.jsx Fixed** - Added backward compatibility to handle both string and object formats for `marketSignals`, `trendingThemes`, and `courtActivity.filings`
-4. ✅ **Landing Pages Reference Table Emailed** - Sent complete table of all 5 landing pages + thank you pages to Ryan and Nick
+### What Was Just Completed (Today - March 4, 2026):
 
-### Files Modified Today:
-- `ncw-check/src/MassTortPage.jsx` - Added newsletter link button
-- `ncw-check/src/components/newsletters/data/week-2026-03-02.js` - Fixed data format
-- `ncw-check/src/components/newsletters/NewsletterPage.jsx` - Added format compatibility
+#### Task 1: Autoresponder Fix (IN PROGRESS - Lambda deployed, needs API Gateway fix)
+1. ✅ **All 4 SES Templates Verified** in AWS (us-east-2):
+   - `RoundupSampleReportResponse` - Sample Audit Report PDF
+   - `ClaimantEnrichmentResponse` - 100-case enrichment offer
+   - `SMSBridgeResponse` - SMS pilot info
+   - `SwipeFileResponse` - PFS Template info
+
+2. ✅ **Lambda Function Updated** with switch logic based on `source` parameter:
+   - Code written by MINIMAX2.5 (`lambda_function.py` in root directory)
+   - Deployed to `RoundupAutoResponder` Lambda (us-east-2)
+   - Handler: `lambda_function.lambda_handler`
+   - Switch logic routes to correct email content based on `source` field
+
+3. ❌ **API Gateway Integration Issue** - Lambda receives malformed body
+   - Error: "Expecting property name enclosed in double quotes"
+   - Likely API Gateway request template/transform issue
+   - Lambda code is correct - issue is in API Gateway → Lambda request format
+
+**Source Parameter Mapping (for landing pages to send):**
+| Landing Page | source value | Email Sent |
+|--------------|--------------|------------|
+| Docket Intelligence | `docket_review` | Sample Audit Report |
+| Free Docket Review | `docket_review` | Sample Audit Report (A/B test) |
+| Enrichment | `enrichment` | 100-case enrichment offer |
+| SMS Bridge | `sms_bridge` | SMS pilot info |
+| Swipe File | `pfs_template` | PFS Template |
+
+**Files in Root Directory:**
+- `lambda_function.py` - Complete Lambda code with switch logic
+- `lambda_minimax.zip` - Deployment package
+- `KimiCLI_IAM_Policy_Updated.txt` - IAM policy with Lambda permissions
 
 ### NEXT SESSION - START HERE:
 
-**Task:** Set up GTM Advertising Funnel for https://northcastleconsulting.com/roundup-docket-intelligence
+**Task 1 Continued: Fix API Gateway Integration**
+
+**Options:**
+1. **Quick Fix:** Update API Gateway integration request template to pass through raw JSON body
+2. **Alternative:** Test Lambda directly in AWS Console (bypass API Gateway) to verify code works
+3. **Frontend Fix:** Update landing pages to send `source` parameter + verify form submission format
+
+**After Task 1 Complete:** Move to Task 2 (GTM Funnel Tracking for Swipe File)
 
 **Context:** Need to implement Google Tag Manager tracking for the Roundup Docket Intelligence landing page to track conversions through to the thank you page.
 
@@ -42,6 +72,22 @@
 | Claimant Communication Enrichment | `/roundup-claimant-communication-enrichment` | Enrichment TY | `/roundup-claimant-communication-enrichment-thank-you` |
 | SMS Bridge | `/roundup-claimant-communication-sms-bridge` | SMS Bridge TY | `/roundup-claimant-communication-sms-bridge-thank-you` |
 | Swipe File | `/roundup-claimant-communication-swipe-file` | Swipe File TY | `/roundup-claimant-communication-swipe-file-thank-you` |
+
+---
+
+## 🎯 Ram's Prioritized Action Items (March 4, 2026)
+
+**Overall Context:** Working through Ram's list 1-by-1 (no cowboy coding)
+
+| # | Task | Status | Notes |
+|---|------|--------|-------|
+| 1 | **Autoresponder Fix** | 🔄 IN PROGRESS | Lambda switch logic deployed, API Gateway issue pending |
+| 2 | **Funnel Tracking (GTM)** | ⏳ PENDING | Set up GTM triggers for "Swipe File" landing page |
+| 3 | **Ad Copy Review** | ⏳ PENDING | Review LinkedIn ads, send feedback to Nick |
+| 4 | **Audit Brainstorming** | ⏳ PENDING | Backend research on audit pain points for blog posts |
+| 5 | **Billing System** | ⏳ PENDING | Set up late-notification billing system |
+
+**Current Blocker for Task 1:** API Gateway → Lambda request body format issue. Lambda expects raw JSON but receives malformed data. Need to either fix API Gateway integration template or test Lambda directly in console.
 
 ---
 

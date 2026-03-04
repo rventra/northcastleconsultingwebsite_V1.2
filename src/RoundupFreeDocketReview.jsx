@@ -131,7 +131,8 @@ const RoundupFreeDocketReview = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via Free Docket Review landing page'
+          message: 'Requested via Free Docket Review landing page',
+          source: 'docket_review'
         })
       });
       const data = await response.json();
@@ -159,7 +160,8 @@ const RoundupFreeDocketReview = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via exit-intent PDF download'
+          message: 'Requested via exit-intent PDF download',
+          source: 'docket_review'
         })
       });
       navigate('/roundup-free-docket-review-thank-you?source=pdf&email=' + encodeURIComponent(exitEmail));

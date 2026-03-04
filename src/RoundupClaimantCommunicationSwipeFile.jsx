@@ -93,7 +93,8 @@ const RoundupClaimantCommunicationSwipeFile = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via Roundup PFS Template landing page'
+          message: 'Requested via Roundup PFS Template landing page',
+          source: 'swipe_file'
         })
       });
       
@@ -148,7 +149,8 @@ const RoundupClaimantCommunicationSwipeFile = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via exit-intent popup - PFS Template page'
+          message: 'Requested via exit-intent popup - PFS Template page',
+          source: 'swipe_file'
         })
       });
       navigate(`/roundup-claimant-communication-swipe-file-thank-you?source=pdf&email=${encodeURIComponent(exitEmail)}`);

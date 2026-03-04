@@ -95,7 +95,8 @@ const RoundupLandingPage = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via landing page modal'
+          message: 'Requested via landing page modal',
+          source: 'docket_review'
         })
       });
       
@@ -150,7 +151,8 @@ const RoundupLandingPage = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via exit-intent popup'
+          message: 'Requested via exit-intent popup',
+          source: 'docket_review'
         })
       });
       navigate(`/roundup-docket-intelligence-thank-you?source=pdf&email=${encodeURIComponent(exitEmail)}`);

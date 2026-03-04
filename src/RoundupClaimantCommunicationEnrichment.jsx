@@ -93,7 +93,8 @@ const RoundupClaimantCommunicationEnrichment = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via Claimant Communication Enrichment landing page'
+          message: 'Requested via Claimant Communication Enrichment landing page',
+          source: 'enrichment'
         })
       });
       
@@ -148,7 +149,8 @@ const RoundupClaimantCommunicationEnrichment = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via exit-intent popup - Enrichment page'
+          message: 'Requested via exit-intent popup - Enrichment page',
+          source: 'enrichment'
         })
       });
       navigate(`/roundup-claimant-communication-enrichment-thank-you?source=pdf&email=${encodeURIComponent(exitEmail)}`);

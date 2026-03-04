@@ -93,7 +93,8 @@ const RoundupClaimantCommunicationSMSBridge = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via SMS Bridge landing page'
+          message: 'Requested via SMS Bridge landing page',
+          source: 'sms_bridge'
         })
       });
       
@@ -148,7 +149,8 @@ const RoundupClaimantCommunicationSMSBridge = () => {
           firm: '',
           phone: '',
           caseCount: '',
-          message: 'Requested via exit-intent popup - SMS Bridge page'
+          message: 'Requested via exit-intent popup - SMS Bridge page',
+          source: 'sms_bridge'
         })
       });
       navigate(`/roundup-claimant-communication-sms-bridge-thank-you?source=pdf&email=${encodeURIComponent(exitEmail)}`);
