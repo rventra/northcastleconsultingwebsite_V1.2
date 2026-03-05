@@ -737,8 +737,8 @@ const RoundupClaimantCommunicationEnrichment = () => {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl text-center mb-8 text-[#0B1D3A]">Who&apos;s Behind This</h2>
             
-            <div className="grid md:grid-cols-2 gap-0">
-              <div className="pr-8 md:pr-12">
+            <div className="flex flex-col md:flex-row">
+              <div className="md:w-1/2 md:pr-6">
                 <div className="font-sans text-[15px] font-bold text-[#0B1D3A]">Ram Ventrapragada</div>
                 <div className="font-sans text-[12px] text-[#C8973E] font-semibold uppercase tracking-[0.06em] mb-1.5">Co-Founder</div>
                 <p className="text-[13px] text-[#5A5A5A] leading-relaxed">
@@ -750,8 +750,8 @@ const RoundupClaimantCommunicationEnrichment = () => {
                 <div className="font-sans text-[11px] text-[#6B7B8D] mt-1.5 font-semibold">Purdue University &nbsp;&bull;&nbsp; MBA, Carnegie Mellon Tepper School of Business</div>
               </div>
               {/* Vertical Divider */}
-              <div className="hidden md:block border-l border-[#C8973E] h-20 mx-4"></div>
-              <div className="pl-0 md:pl-4 mt-8 md:mt-0">
+              <div className="hidden md:block border-l border-[#C8973E] mx-6" style={{ height: 'auto', minHeight: '120px' }}></div>
+              <div className="md:w-1/2 md:pl-6 mt-6 md:mt-0">
                 <div className="font-sans text-[15px] font-bold text-[#0B1D3A]">Nicholas Citrin</div>
                 <div className="font-sans text-[12px] text-[#C8973E] font-semibold uppercase tracking-[0.06em] mb-1.5">Co-Founder</div>
                 <p className="text-[13px] text-[#5A5A5A] leading-relaxed">
