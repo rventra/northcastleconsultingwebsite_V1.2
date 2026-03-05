@@ -690,10 +690,8 @@ const RoundupFreeDocketReview = () => {
         <div className="max-w-[960px] mx-auto px-6">
           <h2 className="text-[24px] text-center mb-8 text-[#0B1D3A] font-serif font-bold">Who{'\u2019'}s Behind This</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[800px] mx-auto">
-            <div className="flex gap-4 items-start">
-              <div className="w-[72px] h-[72px] rounded-full border-2 border-[#C8973E] flex-shrink-0 overflow-hidden">
-                <img src="ram-photo.jpeg" alt="Ram Ventrapragada" className="w-full h-full object-cover block" />
-              </div>
+            <div className="flex items-start">
+              <div className="border-l-2 border-[#C8973E] h-full mr-6"></div>
               <div>
                 <div className="font-sans text-[15px] font-bold text-[#0B1D3A]">Ram Ventrapragada</div>
                 <div className="font-sans text-[12px] text-[#C8973E] font-semibold uppercase tracking-[0.06em] mb-1.5">Co-Founder</div>
@@ -707,10 +705,8 @@ const RoundupFreeDocketReview = () => {
                 <div className="font-sans text-[11px] text-[#6B7B8D] mt-1.5 font-semibold">Purdue University &nbsp;{'\u2022'}&nbsp; MBA, Carnegie Mellon Tepper School of Business</div>
               </div>
             </div>
-            <div className="flex gap-4 items-start">
-              <div className="w-[72px] h-[72px] rounded-full border-2 border-[#C8973E] flex-shrink-0 overflow-hidden">
-                <img src="nick-photo.jpeg" alt="Nicholas Citrin" className="w-full h-full object-cover block" />
-              </div>
+            <div className="flex items-start">
+              <div className="border-l-2 border-[#C8973E] h-full mr-6"></div>
               <div>
                 <div className="font-sans text-[15px] font-bold text-[#0B1D3A]">Nicholas Citrin</div>
                 <div className="font-sans text-[12px] text-[#C8973E] font-semibold uppercase tracking-[0.06em] mb-1.5">Co-Founder</div>

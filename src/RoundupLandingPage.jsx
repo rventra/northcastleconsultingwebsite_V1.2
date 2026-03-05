@@ -617,10 +617,8 @@ const RoundupLandingPage = () => {
           <h2 className="text-2xl text-center mb-8 text-[#0B1D3A]">Who's Behind This</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {/* Ram — first (mass tort domain expert) */}
-            <div className="flex gap-4 items-start">
-              <div className="w-[72px] h-[72px] rounded-full border-2 border-[#C8973E] flex-shrink-0 overflow-hidden">
-                <img src="/ram-photo.jpeg" alt="Ram Ventrapragada" className="w-full h-full object-cover" />
-              </div>
+            <div className="flex items-start">
+              <div className="border-l-2 border-[#C8973E] h-full mr-6"></div>
               <div>
                 <div className="font-sans text-[15px] font-bold text-[#0B1D3A]">Ram Ventrapragada</div>
                 <div className="font-sans text-xs text-[#C8973E] font-semibold uppercase tracking-wider mb-1.5">Co-Founder</div>
@@ -637,10 +635,8 @@ const RoundupLandingPage = () => {
               </div>
             </div>
             {/* Nicholas — second (finance & analytics) */}
-            <div className="flex gap-4 items-start">
-              <div className="w-[72px] h-[72px] rounded-full border-2 border-[#C8973E] flex-shrink-0 overflow-hidden">
-                <img src="/nick-photo.jpeg" alt="Nicholas Citrin" className="w-full h-full object-cover" />
-              </div>
+            <div className="flex items-start">
+              <div className="border-l-2 border-[#C8973E] h-full mr-6"></div>
               <div>
                 <div className="font-sans text-[15px] font-bold text-[#0B1D3A]">Nicholas Citrin</div>
                 <div className="font-sans text-xs text-[#C8973E] font-semibold uppercase tracking-wider mb-1.5">Co-Founder</div>
