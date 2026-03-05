@@ -222,7 +222,9 @@ const RoundupFreeDocketReview = () => {
         ref={heroRef}
         id="top"
         className="text-white text-center py-[72px] px-6"
-        style={{ background: 'linear-gradient(172deg, #0B1D3A 0%, #142D55 100%)' }}
+        style={{
+          background: 'linear-gradient(172deg, rgba(11,29,58,0.92) 0%, rgba(20,45,85,0.88) 100%), url(/roundup-bottle.jpg) center/cover no-repeat'
+        }}
       >
         <div className="max-w-[960px] mx-auto px-6">
           <div className="font-sans text-[13px] font-bold tracking-[0.14em] uppercase text-[#C8973E] mb-[18px]">

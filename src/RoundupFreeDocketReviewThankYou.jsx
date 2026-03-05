@@ -118,7 +118,7 @@ const RoundupFreeDocketReviewThankYou = () => {
               One of our team members will walk you through the audit methodology, discuss your docket's specific needs, and answer any questions about the tiering process.
             </p>
             <a
-              href="https://calendly.com/northcastle"
+              href="https://calendly.com/rventrapragada-northcastleconsulting/30min"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-[#0B1D3A] text-[#E2B45A] py-4 px-10 font-sans text-base font-bold no-underline rounded border-2 border-[#C8973E] hover:bg-[#142D55] hover:border-[#E2B45A] hover:text-white transition-all tracking-wide"
