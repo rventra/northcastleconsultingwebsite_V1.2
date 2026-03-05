@@ -13,6 +13,22 @@ const RoundupFreeDocketReviewThankYou = () => {
     const sourceParam = searchParams.get('source');
     if (emailParam) setEmail(emailParam);
     if (sourceParam) setSource(sourceParam);
+
+    // Push conversion event to dataLayer for GTM/LinkedIn tracking
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'conversion',
+        conversionType: 'free_docket_review_lead',
+        source: sourceParam || 'docket_review',
+        email: emailParam || null,
+        pagePath: window.location.pathname
+      });
+    }
+
+    // LinkedIn conversion event
+    if (window.lintrk) {
+      window.lintrk('track', { conversion_id: 19726596 });
+    }
   }, [searchParams]);
 
   const handleBackClick = (e) => {

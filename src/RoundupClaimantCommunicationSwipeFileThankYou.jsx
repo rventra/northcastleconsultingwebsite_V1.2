@@ -9,9 +9,26 @@ const RoundupClaimantCommunicationSwipeFileThankYou = () => {
 
   useEffect(() => {
     const emailParam = searchParams.get('email');
+    const sourceParam = searchParams.get('source');
     
     if (emailParam) {
       setEmail(emailParam);
+    }
+
+    // Push conversion event to dataLayer for GTM/LinkedIn tracking
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'conversion',
+        conversionType: 'swipe_file_lead',
+        source: sourceParam || 'swipe_file',
+        email: emailParam || null,
+        pagePath: window.location.pathname
+      });
+    }
+
+    // LinkedIn conversion event
+    if (window.lintrk) {
+      window.lintrk('track', { conversion_id: 19726602 });
     }
   }, [searchParams]);
 
