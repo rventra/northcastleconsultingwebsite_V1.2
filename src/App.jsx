@@ -613,6 +613,8 @@ export default function NorthCastleConsulting() {
 const isRoundupLanding = 
     location.pathname === '/roundup-docket-intelligence' || 
     location.pathname === '/roundup-docket-intelligence-thank-you' ||
+    location.pathname === '/roundup-free-docket-review' ||
+    location.pathname === '/roundup-free-docket-review-thank-you' ||
     location.pathname === '/roundup-claimant-communication-enrichment' ||
     location.pathname === '/roundup-claimant-communication-enrichment-thank-you' ||
     location.pathname === '/roundup-claimant-communication-sms-bridge' ||
