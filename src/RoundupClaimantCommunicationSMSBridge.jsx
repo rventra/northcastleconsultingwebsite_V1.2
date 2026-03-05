@@ -735,35 +735,30 @@ const RoundupClaimantCommunicationSMSBridge = () => {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl text-center mb-8 text-[#0B1D3A]">Who&apos;s Behind This</h2>
             
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="flex items-start">
-                <div className="border-l-2 border-[#C8973E] h-full mr-6"></div>
-                <div>
-                  <div className="font-sans text-[15px] font-bold text-[#0B1D3A]">Ram Ventrapragada</div>
-                  <div className="font-sans text-[12px] text-[#C8973E] font-semibold uppercase tracking-[0.06em] mb-1.5">Co-Founder</div>
-                  <p className="text-[13px] text-[#5A5A5A] leading-relaxed">
-                    Over a decade of experience in data strategy, AI-enabled automation, and mass tort litigation operations.
-                    At Wagstaff Law Firm, led AI-driven lead enrichment and document review initiatives—converting
-                    unstructured claimant communications into structured Salesforce datasets with automated QA processes
-                    and fallback logic at scale.
-                  </p>
-                  <div className="font-sans text-[11px] text-[#6B7B8D] mt-1.5 font-semibold">Purdue University &nbsp;&bull;&nbsp; MBA, Carnegie Mellon Tepper School of Business</div>
-                </div>
+            <div className="grid md:grid-cols-2 gap-0">
+              <div className="pr-8 md:pr-12">
+                <div className="font-sans text-[15px] font-bold text-[#0B1D3A]">Ram Ventrapragada</div>
+                <div className="font-sans text-[12px] text-[#C8973E] font-semibold uppercase tracking-[0.06em] mb-1.5">Co-Founder</div>
+                <p className="text-[13px] text-[#5A5A5A] leading-relaxed">
+                  Over a decade of experience in data strategy, AI-enabled automation, and mass tort litigation operations.
+                  At Wagstaff Law Firm, led AI-driven lead enrichment and document review initiatives—converting
+                  unstructured claimant communications into structured Salesforce datasets with automated QA processes
+                  and fallback logic at scale.
+                </p>
+                <div className="font-sans text-[11px] text-[#6B7B8D] mt-1.5 font-semibold">Purdue University &nbsp;&bull;&nbsp; MBA, Carnegie Mellon Tepper School of Business</div>
               </div>
-              
-              <div className="flex items-start">
-                <div className="border-l-2 border-[#C8973E] h-full mr-6"></div>
-                <div>
-                  <div className="font-sans text-[15px] font-bold text-[#0B1D3A]">Nicholas Citrin</div>
-                  <div className="font-sans text-[12px] text-[#C8973E] font-semibold uppercase tracking-[0.06em] mb-1.5">Co-Founder</div>
-                  <p className="text-[13px] text-[#5A5A5A] leading-relaxed">
-                    Nearly two decades in finance spanning investment banking, private equity, and equity research.
-                    Former consultant at Accordion (Transaction Execution Services). Career started at Lehman Brothers
-                    in Technology & Media M&A. Specializes in financial modeling, valuations,
-                    and building outsourced analytics teams for complex data environments.
-                  </p>
-                  <div className="font-sans text-[11px] text-[#6B7B8D] mt-1.5 font-semibold">University of Pennsylvania &nbsp;&bull;&nbsp; Economics, cum laude</div>
-                </div>
+              {/* Vertical Divider */}
+              <div className="hidden md:block border-l border-[#C8973E] h-20 mx-4"></div>
+              <div className="pl-0 md:pl-4 mt-8 md:mt-0">
+                <div className="font-sans text-[15px] font-bold text-[#0B1D3A]">Nicholas Citrin</div>
+                <div className="font-sans text-[12px] text-[#C8973E] font-semibold uppercase tracking-[0.06em] mb-1.5">Co-Founder</div>
+                <p className="text-[13px] text-[#5A5A5A] leading-relaxed">
+                  Nearly two decades in finance spanning investment banking, private equity, and equity research.
+                  Former consultant at Accordion (Transaction Execution Services). Career started at Lehman Brothers
+                  in Technology & Media M&A. Specializes in financial modeling, valuations,
+                  and building outsourced analytics teams for complex data environments.
+                </p>
+                <div className="font-sans text-[11px] text-[#6B7B8D] mt-1.5 font-semibold">University of Pennsylvania &nbsp;&bull;&nbsp; Economics, cum laude</div>
               </div>
             </div>
             
