@@ -27,11 +27,6 @@ const RoundupLandingPage = () => {
     // Set today's date
     const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     setTodayDate(`${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`);
-
-    // LinkedIn: Landing Page View (Docket Audit - ID: 26045410)
-    if (window.lintrk) {
-      window.lintrk('track', { conversion_id: 26045410 });
-    }
   }, []);
 
   // Sticky bar visibility

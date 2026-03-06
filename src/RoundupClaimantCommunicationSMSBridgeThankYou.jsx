@@ -15,21 +15,7 @@ const RoundupClaimantCommunicationSMSBridgeThankYou = () => {
       setEmail(emailParam);
     }
 
-    // Push conversion event to dataLayer for GTM/LinkedIn tracking
-    if (window.dataLayer) {
-      window.dataLayer.push({
-        event: 'conversion',
-        conversionType: 'sms_bridge_lead',
-        source: sourceParam || 'sms_bridge',
-        email: emailParam || null,
-        pagePath: window.location.pathname
-      });
-    }
 
-    // LinkedIn conversion event
-    if (window.lintrk) {
-      window.lintrk('track', { conversion_id: 19726600 });
-    }
   }, [searchParams]);
 
   const handleBackClick = (e) => {

@@ -25,10 +25,7 @@ const RoundupFreeDocketReviewThankYou = () => {
       });
     }
 
-    // LinkedIn: Thank You Page (Docket Audit - ID: 26045418)
-    if (window.lintrk) {
-      window.lintrk('track', { conversion_id: 26045418 });
-    }
+
   }, [searchParams]);
 
   const handleBackClick = (e) => {

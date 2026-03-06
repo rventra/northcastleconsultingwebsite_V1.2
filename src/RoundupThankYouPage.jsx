@@ -18,22 +18,6 @@ export default function RoundupThankYouPage() {
     if (sourceParam) {
       setSource(sourceParam);
     }
-
-    // Push conversion event to dataLayer for GTM/LinkedIn tracking
-    if (window.dataLayer) {
-      window.dataLayer.push({
-        event: 'conversion',
-        conversionType: 'docket_intelligence_lead',
-        source: sourceParam || 'docket_review',
-        email: emailParam || null,
-        pagePath: window.location.pathname
-      });
-    }
-
-    // LinkedIn: Thank You Page (Docket Audit - ID: 26045418)
-    if (window.lintrk) {
-      window.lintrk('track', { conversion_id: 26045418 });
-    }
   }, [searchParams]);
 
   const handleBackClick = (e) => {

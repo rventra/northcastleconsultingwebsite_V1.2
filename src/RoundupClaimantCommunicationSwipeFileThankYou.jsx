@@ -26,10 +26,7 @@ const RoundupClaimantCommunicationSwipeFileThankYou = () => {
       });
     }
 
-    // LinkedIn: Thank You Page (Swipe File - ID: 26297250)
-    if (window.lintrk) {
-      window.lintrk('track', { conversion_id: 26297250 });
-    }
+
   }, [searchParams]);
 
   const handleBackClick = (e) => {

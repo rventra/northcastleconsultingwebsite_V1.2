@@ -19,21 +19,7 @@ const RoundupClaimantCommunicationEnrichmentThankYou = () => {
       setSource(sourceParam);
     }
 
-    // Push conversion event to dataLayer for GTM/LinkedIn tracking
-    if (window.dataLayer) {
-      window.dataLayer.push({
-        event: 'conversion',
-        conversionType: 'enrichment_lead',
-        source: sourceParam || 'enrichment',
-        email: emailParam || null,
-        pagePath: window.location.pathname
-      });
-    }
 
-    // LinkedIn conversion event
-    if (window.lintrk) {
-      window.lintrk('track', { conversion_id: 19726598 });
-    }
   }, [searchParams]);
 
   const handleBackClick = (e) => {
