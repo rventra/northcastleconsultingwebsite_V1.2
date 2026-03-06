@@ -38,6 +38,11 @@ const RoundupFreeDocketReview = () => {
     const elapsed = now - settlementDate;
     const pct = Math.max(0, Math.min(100, (elapsed / totalSpan) * 100));
     setProgressWidth(pct + '%');
+
+    // LinkedIn: Landing Page View (Docket Audit - ID: 26045410)
+    if (window.lintrk) {
+      window.lintrk('track', { conversion_id: 26045410 });
+    }
   }, []);
 
   // Sticky bar visibility
@@ -120,6 +125,12 @@ const RoundupFreeDocketReview = () => {
     }
     setIsSubmitting(true);
     setFormStatus({ type: '', message: '' });
+
+    // LinkedIn: Sample Report Request (Button Click - Docket Audit - ID: 26297210)
+    if (window.lintrk) {
+      window.lintrk('track', { conversion_id: 26297210 });
+    }
+
     const API_URL = 'https://8jl5xpty5g.execute-api.us-east-2.amazonaws.com/prod/request-report';
     try {
       const response = await fetch(API_URL, {

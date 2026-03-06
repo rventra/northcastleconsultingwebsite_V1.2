@@ -27,6 +27,11 @@ const RoundupLandingPage = () => {
     // Set today's date
     const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     setTodayDate(`${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`);
+
+    // LinkedIn: Landing Page View (Docket Audit - ID: 26045410)
+    if (window.lintrk) {
+      window.lintrk('track', { conversion_id: 26045410 });
+    }
   }, []);
 
   // Sticky bar visibility
@@ -82,6 +87,11 @@ const RoundupLandingPage = () => {
 
     setIsSubmitting(true);
     setFormStatus({ type: '', message: '' });
+
+    // LinkedIn: Sample Report Request (Button Click - Docket Audit - ID: 26297210)
+    if (window.lintrk) {
+      window.lintrk('track', { conversion_id: 26297210 });
+    }
 
     const API_URL = 'https://8jl5xpty5g.execute-api.us-east-2.amazonaws.com/prod/request-report';
     
