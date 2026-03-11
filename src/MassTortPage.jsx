@@ -40,19 +40,19 @@ export default function MassTortPage() {
   // Latest news items for the mini bar
   const latestNews = [
     {
-      headline: "PFAS Litigation Surges to 1,972 Cases with $12.5B 3M Settlement",
-      link: "/newsletter/2026-03-02#pfas-litigation-surge",
+      headline: "Ozempic NAION Filings Surge 200% in MDL 3163 Amid FDA Warning Letter",
+      link: "/newsletter/2026-03-09#ozempic-naion-filings-surge",
       tag: "MDL"
     },
     {
-      headline: "Supreme Court Invalidates IEEPA Tariffs, Triggering Refund Lawsuits",
-      link: "/newsletter/2026-03-02#ieepa-tariff-invalidated",
-      tag: "Regulatory"
+      headline: "PFAS Personal Injury Claims Accelerate Despite $10.9B Water Settlement",
+      link: "/newsletter/2026-03-09#pfas-personal-injury-claims",
+      tag: "Settlement"
     },
     {
-      headline: "Wynn Resorts Data Breach Exposes 800,000 Employees' PII",
-      link: "/newsletter/2026-03-02#wynn-data-breach",
-      tag: "Data Breach"
+      headline: "Google AI Music Copyright MDL Looms as 44M Tracks Allegedly Copied",
+      link: "/newsletter/2026-03-09#google-ai-music-copyright",
+      tag: "MDL"
     }
   ];
 
