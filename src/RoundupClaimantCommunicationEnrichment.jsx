@@ -25,6 +25,13 @@ const RoundupClaimantCommunicationEnrichment = () => {
     
     const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     setTodayDate(`${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`);
+    
+    // Push GTM event for landing page view (Landing Page - Enrichment)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'enrichment_landing_page_view',
+      'conversion_id': '26409010'
+    });
   }, []);
 
   // Sticky bar visibility
@@ -101,6 +108,14 @@ const RoundupClaimantCommunicationEnrichment = () => {
       const data = await response.json();
       
       if (data.success) {
+        // Push GTM event for successful form submission (Sample Report Request)
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'enrichment_form_submit',
+          'conversion_id': '26409018',
+          'email': email
+        });
+        
         navigate(`/roundup-claimant-communication-enrichment-thank-you?email=${encodeURIComponent(email)}`);
         return;
       } else {

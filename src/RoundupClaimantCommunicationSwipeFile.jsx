@@ -25,6 +25,13 @@ const RoundupClaimantCommunicationSwipeFile = () => {
     
     const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     setTodayDate(`${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`);
+    
+    // Push GTM event for landing page view (Landing Page - Swipe File)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'swipe_file_landing_page_view',
+      'conversion_id': '26297234'
+    });
   }, []);
 
   // Sticky bar visibility
@@ -101,6 +108,14 @@ const RoundupClaimantCommunicationSwipeFile = () => {
       const data = await response.json();
       
       if (data.success) {
+        // Push GTM event for successful form submission (Sample Report Request - Swipe File)
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'swipe_file_form_submit',
+          'conversion_id': '26297242',
+          'email': email
+        });
+        
         navigate(`/roundup-claimant-communication-swipe-file-thank-you?email=${encodeURIComponent(email)}`);
         return;
       } else {

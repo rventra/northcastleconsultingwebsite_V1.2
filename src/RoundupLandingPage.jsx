@@ -27,6 +27,13 @@ const RoundupLandingPage = () => {
     // Set today's date
     const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     setTodayDate(`${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`);
+    
+    // Push GTM event for landing page view (Landing Page - Docket Audit)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'docket_audit_landing_page_view',
+      'conversion_id': '26045410'
+    });
   }, []);
 
   // Sticky bar visibility
@@ -87,6 +94,14 @@ const RoundupLandingPage = () => {
     if (window.lintrk) {
       window.lintrk('track', { conversion_id: 26297210 });
     }
+    
+    // Push GTM event for form submission (Sample Report Request - Docket Audit)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'docket_audit_form_submit',
+      'conversion_id': '26297210',
+      'email': email
+    });
 
     const API_URL = 'https://8jl5xpty5g.execute-api.us-east-2.amazonaws.com/prod/request-report';
     

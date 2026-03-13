@@ -15,16 +15,15 @@ const RoundupClaimantCommunicationSwipeFileThankYou = () => {
       setEmail(emailParam);
     }
 
-    // Push conversion event to dataLayer for GTM/LinkedIn tracking
-    if (window.dataLayer) {
-      window.dataLayer.push({
-        event: 'conversion',
-        conversionType: 'swipe_file_lead',
-        source: sourceParam || 'swipe_file',
-        email: emailParam || null,
-        pagePath: window.location.pathname
-      });
-    }
+    // Push GTM event for thank you page view (Thank You Page - Swipe File Lead)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'swipe_file_thank_you_page_view',
+      'conversion_id': '26297250',
+      'source': sourceParam || 'swipe_file',
+      'email': emailParam || null,
+      'pagePath': window.location.pathname
+    });
 
 
   }, [searchParams]);

@@ -18,6 +18,15 @@ export default function RoundupThankYouPage() {
     if (sourceParam) {
       setSource(sourceParam);
     }
+    
+    // Push GTM event for thank you page view (Thank You Page - Docket Audit Lead)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'docket_audit_thank_you_page_view',
+      'conversion_id': '26045418',
+      'source': sourceParam || 'docket_review',
+      'email': emailParam || null
+    });
   }, [searchParams]);
 
   const handleBackClick = (e) => {
