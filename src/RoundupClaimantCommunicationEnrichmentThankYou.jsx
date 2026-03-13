@@ -18,7 +18,15 @@ const RoundupClaimantCommunicationEnrichmentThankYou = () => {
     if (sourceParam) {
       setSource(sourceParam);
     }
-
+    
+    // Push GTM event for thank you page view (Thank You Page - Enrichment Lead)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'enrichment_thank_you_page_view',
+      'conversion_id': '26409026',
+      'source': sourceParam || 'enrichment',
+      'email': emailParam || null
+    });
 
   }, [searchParams]);
 
@@ -118,14 +126,6 @@ const RoundupClaimantCommunicationEnrichmentThankYou = () => {
               href="https://calendly.com/rventrapragada-northcastleconsulting/30min" 
               target="_blank" 
               rel="noopener noreferrer"
-              onClick={() => {
-                // Push GTM event for Calendly button click (Thank You Page - Enrichment Lead)
-                window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({
-                  'event': 'enrichment_thank_you_cta_click',
-                  'conversion_id': '26409026'
-                });
-              }}
               className="inline-block bg-[#0B1D3A] text-[#E2B45A] py-4 px-10 font-sans text-base font-bold no-underline rounded border-2 border-[#C8973E] cursor-pointer transition-all duration-200 tracking-wide hover:bg-[#142D55] hover:border-[#E2B45A] hover:text-white"
             >
               Schedule My Call
