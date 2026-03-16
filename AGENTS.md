@@ -7,9 +7,29 @@
 
 ## ⚠️ CURRENT STATUS - NEXT SESSION READ THIS
 
-**Last Worked On:** 2026-03-04  
-**Current Focus:** Ram's Prioritized Action Items - Task 1 (Autoresponder) ✅ COMPLETE  
-**Status:** ✅ AUTORESPONDER FULLY OPERATIONAL - All tests passed
+**Last Worked On:** 2026-03-16  
+**Current Focus:** Newsletter Deployment - March 16, 2026 Edition  
+**Status:** ✅ NEWSLETTER DEPLOYED - Healthcare Data Breaches & AI Liability edition live
+
+### What Was Just Completed (Today - March 16, 2026):
+
+#### Newsletter March 16, 2026 ✅ DEPLOYED
+1. ✅ **Created newsletter branch**: `newsletter-2026-03-16`
+2. ✅ **Added week-2026-03-16.js**: Healthcare Data Breaches & AI Liability (5 articles)
+3. ✅ **Updated registry**: Added import and entry to WEEKS_REGISTRY (newest first)
+4. ✅ **Merged to claude/main**: PR merged, branch deleted
+5. ✅ **Amplify deployed**: Auto-deploy triggered on push
+
+**Articles in this edition:**
+| Rank | Category | Headline | Relevance |
+|------|----------|----------|-----------|
+| 1 | Data Breach | Epic Systems Faces Seven Healthcare Data Breach Class Actions | 10/10 |
+| 2 | Regulatory | xAI Faces Landmark CSAM Lawsuit Over Grok-Generated Content | 9/10 |
+| 3 | Regulatory | Tariff Refund Litigation Surges After Supreme Court Ruling | 9/10 |
+| 4 | Regulatory | Live Nation Faces Mistrial Motion After DOJ Settlement | 8/10 |
+| 5 | Regulatory | DOGE AI Discrimination Lawsuits Challenge ChatGPT Use | 8/10 |
+
+---
 
 ### What Was Just Completed (Today - March 4, 2026):
 
@@ -125,11 +145,74 @@ aws amplify list-jobs --app-id d3418fafn3crpt --branch-name claude/main --profil
 
 **Location:** `src/components/newsletters/data/week-YYYY-MM-DD.js`
 
-### Adding a Newsletter
-1. Create file: `src/components/newsletters/data/week-YYYY-MM-DD.js`
-2. Transform JSON → JS (see `readmefirst.md` for schema)
-3. Update `index.js`: add import + add to `WEEKS_REGISTRY` (newest first!)
-4. Follow GitHub workflow above
+### Newsletter Deployment Workflow (One-Shot Process)
+
+When user provides JSON content for a new newsletter:
+
+```bash
+# 1. Ensure you're on main and have latest
+cd northcastle-repo
+git checkout claude/main
+git pull origin claude/main
+
+# 2. Create feature branch (use date from newsletter)
+git checkout -b newsletter-YYYY-MM-DD
+
+# 3. Copy newsletter file to data folder
+cp week-YYYY-MM-DD.js src/components/newsletters/data/
+
+# 4. Update index.js - add import at top + add to WEEKS_REGISTRY array (newest first!)
+# Edit: src/components/newsletters/data/index.js
+
+# 5. Update AGENTS.md "Last Worked On" and "Current Status"
+
+# 6. Commit changes
+git add -A
+git commit -m "Add newsletter for week YYYY-MM-DD: [Brief Title]"
+
+# 7. Push branch
+git push origin newsletter-YYYY-MM-DD
+
+# 8. Create PR and merge to main (using gh CLI)
+gh pr create --title "Add newsletter YYYY-MM-DD" --body "Weekly newsletter: [Title]" --base claude/main
+gh pr merge --merge --delete-branch
+
+# 9. Verify Amplify deployment
+aws amplify list-jobs --app-id d3418fafn3crpt --branch-name claude/main --profile northcastle --region us-east-2
+```
+
+### Adding a Newsletter - Step by Step
+1. **Transform JSON → JS** (see `readmefirst.md` for schema)
+   - `executiveBrief` → `hero`
+   - `topStories` → `articles`
+   - `actionItems.items` → `actionItems` (flatten)
+   - `content` → array of 4 paragraphs (not string with \n)
+   - Use `export default` (not named export)
+   
+2. **Create file**: `src/components/newsletters/data/week-YYYY-MM-DD.js`
+
+3. **Update `index.js`**:
+   - Add import: `import weekYYYYMMDD from './week-YYYY-MM-DD';` (at top, newest first)
+   - Add to `WEEKS_REGISTRY`: `weekYYYYMMDD,` (first item in array)
+
+4. **Update AGENTS.md**:
+   - Update "Last Worked On" date
+   - Update "Current Status"
+   - Add newsletter summary to "What Was Just Completed"
+
+5. **Commit, Push, Merge, Cleanup** (see workflow above)
+
+6. **Verify Amplify**: Check deployment status via AWS CLI or Amplify Console
+
+### Critical Checks Before Commit
+- [ ] Filename matches `week-YYYY-MM-DD.js` format
+- [ ] Uses `export default` (not named export)
+- [ ] Exactly 4 paragraphs per article's `content` array
+- [ ] Exactly 4 key takeaways per article
+- [ ] Exactly 3 action items per article
+- [ ] Import added to TOP of index.js (newest first)
+- [ ] Added to TOP of WEEKS_REGISTRY array
+- [ ] AGENTS.md updated with status
 
 ---
 
