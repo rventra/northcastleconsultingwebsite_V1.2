@@ -147,39 +147,61 @@ aws amplify list-jobs --app-id d3418fafn3crpt --branch-name claude/main --profil
 
 ### Newsletter Deployment Workflow (One-Shot Process)
 
-When user provides JSON content for a new newsletter:
+**Repository Location:** `C:\Users\New User\northcastle-repo` (or `../northcastle-repo` from working directory)
 
-```bash
-# 1. Ensure you're on main and have latest
-cd northcastle-repo
+**When user provides JSON content for a new newsletter, execute these commands:**
+
+```powershell
+# === STEP 1: Setup ===
+cd ..\northcastle-repo
 git checkout claude/main
 git pull origin claude/main
 
-# 2. Create feature branch (use date from newsletter)
+# === STEP 2: Create branch (use date from newsletter metadata) ===
+# Example: git checkout -b newsletter-2026-03-16
 git checkout -b newsletter-YYYY-MM-DD
 
-# 3. Copy newsletter file to data folder
-cp week-YYYY-MM-DD.js src/components/newsletters/data/
+# === STEP 3: Copy newsletter file ===
+# Copy from your working directory to the repo
+cp "..\Northcastle Newsletter\ncw-check\src\components\newsletters\data\week-YYYY-MM-DD.js" "src\components\newsletters\data\"
 
-# 4. Update index.js - add import at top + add to WEEKS_REGISTRY array (newest first!)
-# Edit: src/components/newsletters/data/index.js
+# === STEP 4: Update index.js ===
+# Add import at TOP (newest first):
+#   import weekYYYYMMDD from './week-YYYY-MM-DD';
+# Add to WEEKS_REGISTRY array at TOP (first item):
+#   weekYYYYMMDD,
 
-# 5. Update AGENTS.md "Last Worked On" and "Current Status"
+# === STEP 5: Update AGENTS.md ===
+# - Update "Last Worked On" date at top
+# - Update "Current Status" 
+# - Add newsletter summary to "What Was Just Completed"
 
-# 6. Commit changes
+# === STEP 6: Commit ===
 git add -A
 git commit -m "Add newsletter for week YYYY-MM-DD: [Brief Title]"
 
-# 7. Push branch
+# === STEP 7: Push branch ===
 git push origin newsletter-YYYY-MM-DD
 
-# 8. Create PR and merge to main (using gh CLI)
+# === STEP 8: Create PR and merge ===
 gh pr create --title "Add newsletter YYYY-MM-DD" --body "Weekly newsletter: [Title]" --base claude/main
 gh pr merge --merge --delete-branch
 
-# 9. Verify Amplify deployment
+# === STEP 9: Verify Amplify deployment ===
 aws amplify list-jobs --app-id d3418fafn3crpt --branch-name claude/main --profile northcastle --region us-east-2
+
+# Check status (should show SUCCEED within 2-3 minutes)
+aws amplify list-jobs --app-id d3418fafn3crpt --branch-name claude/main --max-results 1 --profile northcastle --region us-east-2 --output json | ConvertFrom-Json | Select-Object -ExpandProperty jobSummaries | Select-Object jobId, status
 ```
+
+**Expected Output:**
+```
+jobId status 
+----- ------ 
+248   SUCCEED
+```
+
+**Live Site:** https://northcastleconsulting.com/newsletter (shows latest edition)
 
 ### Adding a Newsletter - Step by Step
 1. **Transform JSON → JS** (see `readmefirst.md` for schema)
@@ -213,6 +235,31 @@ aws amplify list-jobs --app-id d3418fafn3crpt --branch-name claude/main --profil
 - [ ] Import added to TOP of index.js (newest first)
 - [ ] Added to TOP of WEEKS_REGISTRY array
 - [ ] AGENTS.md updated with status
+
+### Last Successful Deployment
+| Date | Newsletter | Commit | Job ID | Duration | Status |
+|------|------------|--------|--------|----------|--------|
+| 2026-03-16 | week-2026-03-16 | `0e6aa8c` | 248 | 1m 26s | ✅ SUCCEED |
+| 2026-03-09 | week-2026-03-09 | `5c90c18` | 245 | ~3m | ✅ SUCCEED |
+
+### Troubleshooting
+
+**Issue: `gh pr merge` fails**
+- Solution: The PR may have already been merged via GitHub UI. Check with `git branch -a` and delete local branch if needed: `git branch -D newsletter-YYYY-MM-DD`
+
+**Issue: Amplify build shows FAILED**
+- Check build logs: `aws amplify get-job --app-id d3418fafn3crpt --branch-name claude/main --job-id <job-id> --profile northcastle --region us-east-2`
+- Common causes: syntax errors in JS file, missing imports
+- Fix the issue, commit, and push again
+
+**Issue: Newsletter not showing on website**
+- Verify `WEEKS_REGISTRY[0]` returns the new newsletter
+- Check browser console for JS errors
+- Verify Amplify deployment completed successfully
+
+**Issue: Git push fails (authentication)**
+- Ensure GitHub CLI is authenticated: `gh auth status`
+- If needed: `gh auth login`
 
 ---
 
