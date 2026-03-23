@@ -4,6 +4,7 @@
 // 2. Import it here
 // 3. Add to WEEKS_REGISTRY array (newest first)
 
+import week20260323 from './week-2026-03-23';
 import week20260316 from './week-2026-03-16';
 import week20260309 from './week-2026-03-09';
 import week20260302 from './week-2026-03-02';
@@ -24,7 +25,8 @@ import week20251124 from './week-2025-11-24';
 import week20251117 from './week-2025-11-17';
 
 export const WEEKS_REGISTRY = [
-  week20260316,  // Newest first
+  week20260323,  // Newest first
+  week20260316,
   week20260309,
   week20260302,
   week20260224,
