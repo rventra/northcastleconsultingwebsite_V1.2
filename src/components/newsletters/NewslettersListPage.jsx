@@ -8,6 +8,7 @@ export default function NewslettersListPage() {
   const navigate = useNavigate();
   const allWeeks = getAllWeeksMeta();
   const [showAll, setShowAll] = useState(false);
+  const [archiveOpen, setArchiveOpen] = useState(false);
 
   const visibleWeeks = showAll ? allWeeks : allWeeks.slice(0, INITIAL_VISIBLE);
   const hasMore = allWeeks.length > INITIAL_VISIBLE;
@@ -33,57 +34,77 @@ export default function NewslettersListPage() {
           </p>
         </div>
 
-        {/* Newsletter Archive */}
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-900">Archive</h2>
-
-          {allWeeks.length === 0 ? (
-            <div className="bg-white rounded-lg p-8 text-center text-gray-500">
-              No newsletters available at this time.
+        {/* Newsletter Archive — Accordion */}
+        <div className="mb-10">
+          <button
+            onClick={() => setArchiveOpen(!archiveOpen)}
+            className="w-full flex items-center justify-between bg-white border border-gray-200 rounded-lg px-6 py-4 hover:bg-gray-50 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <h2 className="text-xl font-bold text-gray-900">Archive</h2>
+              <span className="text-sm text-gray-500">({allWeeks.length} editions)</span>
             </div>
-          ) : (
-            <>
-              <div className="grid gap-4">
-                {visibleWeeks.map((week) => (
-                  <div
-                    key={week.id}
-                    onClick={() => navigate('/newsletter')}
-                    className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer border border-gray-200"
-                  >
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="text-sm text-gray-500">{week.publishDate}</span>
-                      <span className="text-[#0D3BC3] text-sm font-medium">Read →</span>
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 leading-tight">
-                      {week.title}
-                    </h3>
-                  </div>
-                ))}
-              </div>
+            <svg
+              className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${archiveOpen ? 'rotate-180' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
 
-              {hasMore && (
-                <button
-                  onClick={() => setShowAll(!showAll)}
-                  className="w-full py-3 px-6 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors flex items-center justify-center gap-2"
-                >
-                  {showAll ? (
-                    <>
-                      <span>Show Less</span>
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                      </svg>
-                    </>
-                  ) : (
-                    <>
-                      <span>Show {allWeeks.length - INITIAL_VISIBLE} More Editions</span>
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </>
+          {archiveOpen && (
+            <div className="mt-4 space-y-4">
+              {allWeeks.length === 0 ? (
+                <div className="bg-white rounded-lg p-8 text-center text-gray-500">
+                  No newsletters available at this time.
+                </div>
+              ) : (
+                <>
+                  <div className="grid gap-4">
+                    {visibleWeeks.map((week) => (
+                      <div
+                        key={week.id}
+                        onClick={() => navigate('/newsletter')}
+                        className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer border border-gray-200"
+                      >
+                        <div className="flex justify-between items-start mb-2">
+                          <span className="text-sm text-gray-500">{week.publishDate}</span>
+                          <span className="text-[#0D3BC3] text-sm font-medium">Read →</span>
+                        </div>
+                        <h3 className="text-lg font-semibold text-gray-900 leading-tight">
+                          {week.title}
+                        </h3>
+                      </div>
+                    ))}
+                  </div>
+
+                  {hasMore && (
+                    <button
+                      onClick={() => setShowAll(!showAll)}
+                      className="w-full py-3 px-6 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors flex items-center justify-center gap-2"
+                    >
+                      {showAll ? (
+                        <>
+                          <span>Show Less</span>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                          </svg>
+                        </>
+                      ) : (
+                        <>
+                          <span>Show {allWeeks.length - INITIAL_VISIBLE} More Editions</span>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </>
+                      )}
+                    </button>
                   )}
-                </button>
+                </>
               )}
-            </>
+            </div>
           )}
         </div>
 
