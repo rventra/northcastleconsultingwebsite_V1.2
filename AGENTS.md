@@ -7,8 +7,27 @@
 
 ## ⚠️ CURRENT STATUS - NEXT SESSION READ THIS
 
-**Last Worked On:** 2026-03-16  
-**Current Focus:** Newsletter Deployment - March 16, 2026 Edition  
+**Last Worked On:** 2026-04-30  
+**Current Focus:** About Us Page Headshots Added & Deployed  
+**Status:** ✅ Headshots live on About Us page with proper crop positioning
+
+### What Was Just Completed (April 30, 2026):
+
+#### About Us Page Headshots - COMPLETE ✅
+1. ✅ **Copied headshots** from OneDrive/Documents to `public/images/`
+   - `ram-headshot.jpg` (240×336px, portrait)
+   - `nick-headshot.png` (320×240px, landscape)
+2. ✅ **Updated `src/AboutUsPage.jsx`** — replaced gradient placeholder initials with `<img>` tags
+3. ✅ **Fixed crop positioning** — added `object-top` to preserve top of head in square crop
+4. ✅ **Deployed** via Amplify Build #258 (SUCCEED)
+
+**Important Note:** The `object-top` CSS property is critical for portrait headshots cropped to `aspect-square` containers. Without it, the center-crop from `object-cover` cuts off the top of the head.
+
+---
+
+### Previous Session (March 16, 2026):
+
+#### Newsletter Deployment - March 16, 2026 Edition
 **Status:** ✅ NEWSLETTER DEPLOYED - Healthcare Data Breaches & AI Liability edition live
 
 ### What Was Just Completed (Today - March 16, 2026):
