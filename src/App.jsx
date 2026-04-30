@@ -661,7 +661,6 @@ const isRoundupLanding =
 
         {/* Newsletter */}
         <Route path="/newsletter" element={<MassTortDigestTemplate />} />
-        <Route path="/newsletter/:weekId" element={<NewsletterPage />} />
         <Route path="/newsletters" element={<MassTortDigestTemplate />} />
         {/* Standalone landing pages - NO NAV BAR */}
         <Route path="/roundup-docket-intelligence" element={<RoundupLandingPage />} />
