@@ -36,8 +36,12 @@ export default function AboutUsPage() {
             {/* Nicholas Citrin */}
             <div className="grid md:grid-cols-3 gap-8 md:gap-12">
               <div className="md:col-span-1">
-                <div className="bg-gradient-to-br from-[#0D3BC3]/10 to-[#0D3BC3]/5 aspect-square rounded-2xl flex items-center justify-center border border-[#0D3BC3]/10 shadow-lg">
-                  <span className="text-7xl font-bold text-[#0D3BC3]/30">NC</span>
+                <div className="aspect-square rounded-2xl overflow-hidden border border-[#0D3BC3]/10 shadow-lg">
+                  <img
+                    src="/images/nick-headshot.png"
+                    alt="Nicholas Citrin"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
               <div className="md:col-span-2">
@@ -113,8 +117,12 @@ export default function AboutUsPage() {
             {/* Ram Ventrapragada */}
             <div className="grid md:grid-cols-3 gap-8 md:gap-12">
               <div className="md:col-span-1">
-                <div className="bg-gradient-to-br from-[#1A2234]/10 to-[#1A2234]/5 aspect-square rounded-2xl flex items-center justify-center border border-[#1A2234]/10 shadow-lg">
-                  <span className="text-7xl font-bold text-[#1A2234]/30">RV</span>
+                <div className="aspect-square rounded-2xl overflow-hidden border border-[#1A2234]/10 shadow-lg">
+                  <img
+                    src="/images/ram-headshot.jpg"
+                    alt="Ram Ventrapragada"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
               <div className="md:col-span-2">
