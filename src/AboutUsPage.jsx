@@ -40,7 +40,7 @@ export default function AboutUsPage() {
                   <img
                     src="/images/nick-headshot.png"
                     alt="Nicholas Citrin"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                   />
                 </div>
               </div>
@@ -121,7 +121,7 @@ export default function AboutUsPage() {
                   <img
                     src="/images/ram-headshot.jpg"
                     alt="Ram Ventrapragada"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                   />
                 </div>
               </div>
