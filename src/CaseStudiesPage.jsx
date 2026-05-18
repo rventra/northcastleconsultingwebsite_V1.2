@@ -127,6 +127,44 @@ export default function CaseStudiesPage() {
                 </div>
               </div>
             </Link>
+            {/* Dashboarding & Reporting Card */}
+            <Link to="/case-studies/dashboarding-reporting" className="group block bg-gradient-to-br from-[#2563EB] via-[#2563EB] to-[#1d4ed8] p-8 md:p-10 rounded-2xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
+              {/* Background Decoration */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <span className="inline-flex items-center gap-2 text-xs font-bold text-[#1A2234] uppercase tracking-wider bg-[#EDB624] px-4 py-2 rounded-full">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    1 Case Study
+                  </span>
+                  <span className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                    <svg className="w-5 h-5 text-[#EDB624] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+                
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Dashboarding &amp; Reporting</h3>
+                <p className="text-blue-100 text-base leading-relaxed mb-6">
+                  Custom dashboards and data portals for real-time visibility into portfolio performance and value-creation plan execution.
+                </p>
+                
+                <div className="space-y-3">
+                  <p className="text-xs font-semibold text-[#EDB624] uppercase tracking-wider">Featured Stories:</p>
+                  <ul className="space-y-2.5">
+                    <li className="flex gap-3 items-center text-sm text-blue-100 bg-white/5 rounded-lg px-3 py-2">
+                      <svg className="w-4 h-4 text-[#EDB624] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      <span>$100M Manufacturer: Zero to Enterprise Dashboards</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </Link>
           </div>
 
 

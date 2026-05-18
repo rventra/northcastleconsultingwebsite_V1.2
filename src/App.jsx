@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import MassTortPage from './MassTortPage.jsx';
 import DashboardingDataPortalPage from './DashboardingDataPortalPage.jsx';
+import DashboardingCaseStudiesPage from './DashboardingCaseStudiesPage.jsx';
+import DashboardingCaseStudyPage from './DashboardingCaseStudyPage.jsx';
 import SellSideReadinessPage from './SellSideReadinessPage.jsx';
 import QualityOfEarningsPage from './QualityOfEarningsPage.jsx';
 import CorporateDevPage from './CorporateDevPage.jsx';
@@ -92,6 +94,7 @@ function Navigation() {
                 <Link to="/services/mass-tort" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Mass Tort</Link>
                 <Link to="/services/dashboarding-data-portal" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Dashboarding & Data Portal</Link>
                 <Link to="/services/quality-of-earnings" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Quality of Earnings</Link>
+                <Link to="/services/dashboarding-data-portal" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Dashboarding &amp; Reporting</Link>
               </div></div>
             </div>
             <Link to="/case-studies" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">Case Studies</Link>
@@ -114,6 +117,7 @@ function Navigation() {
               <Link to="/services/mass-tort" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Mass Tort</Link>
               <Link to="/services/dashboarding-data-portal" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Dashboarding & Data Portal</Link>
               <Link to="/services/quality-of-earnings" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Quality of Earnings</Link>
+              <Link to="/services/dashboarding-data-portal" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Dashboarding &amp; Reporting</Link>
             </div>
             <Link to="/case-studies" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Case Studies</Link>
             <Link to="/blog" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Insights</Link>
@@ -407,9 +411,9 @@ function HomePage() {
             </Link>
 
             <Link to="/services/dashboarding-data-portal" className="group bg-white p-6 hover:bg-gray-50 transition-colors">
-              <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Dashboarding & Data Portal</h3>
+              <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Dashboarding &amp; Reporting</h3>
               <p className="text-[#051c2c]/60 text-sm">
-                Custom dashboards for real-time portfolio visibility.
+                Custom dashboards and data portals for real-time visibility into portfolio performance.
               </p>
             </Link>
 
@@ -461,6 +465,16 @@ function HomePage() {
               </h3>
               <p className="text-[#051c2c]/60 text-sm leading-relaxed">
                 End-to-end corporate development including target screening, due diligence, and deal structuring.
+              </p>
+            </Link>
+
+            <Link to="/case-studies/dashboarding-reporting" className="group block border-t-2 border-[#051c2c] pt-4 hover:border-[#2563EB] transition-colors">
+              <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">1 Case Study</span>
+              <h3 className="text-lg font-medium text-[#051c2c] mt-2 mb-2 group-hover:text-[#2563EB] transition-colors">
+                Dashboarding &amp; Reporting
+              </h3>
+              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
+                Custom dashboards and data portals for real-time visibility and value-creation plan execution.
               </p>
             </Link>
           </div>
@@ -645,6 +659,7 @@ const isRoundupLanding =
         {/* Case Study Category Pages */}
         <Route path="/case-studies/sell-side-readiness" element={<SellSideReadinessCaseStudiesPage />} />
         <Route path="/case-studies/corporate-development" element={<CorporateDevelopmentCaseStudiesPage />} />
+        <Route path="/case-studies/dashboarding-reporting" element={<DashboardingCaseStudiesPage />} />
 
         {/* Case Study Pages */}
         <Route path="/case-studies/sell-side-kpi-data-cube" element={<KPIDataCubeCaseStudyPage />} />
@@ -654,6 +669,7 @@ const isRoundupLanding =
         <Route path="/case-studies/sell-side-operations-marketing" element={<StreamliningOperationsCaseStudyPage />} />
         <Route path="/case-studies/corporate-operations-to-ownership" element={<CarRentalCaseStudyPage />} />
         <Route path="/case-studies/corporate-acquisition-roadmap" element={<TargetIdentificationCaseStudyPage />} />
+        <Route path="/case-studies/dashboarding-pe-value-visibility" element={<DashboardingCaseStudyPage />} />
 
         {/* Blog */}
         <Route path="/blog" element={<BlogPage />} />

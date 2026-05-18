@@ -91,6 +91,7 @@ export default function ContactUsPage() {
                   <option value="Sell-Side Readiness">Sell-Side Readiness</option>
                   <option value="Dividend Recapitalization">Dividend Recapitalization</option>
                   <option value="Corporate Development">Corporate Development</option>
+                  <option value="Dashboarding &amp; Reporting">Dashboarding &amp; Reporting</option>
                   <option value="Mass Tort Services">Mass Tort Services</option>
                   <option value="Other">Other</option>
                 </select>
