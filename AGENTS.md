@@ -7,11 +7,40 @@
 
 ## ⚠️ CURRENT STATUS - NEXT SESSION READ THIS
 
-**Last Worked On:** 2026-04-30  
-**Current Focus:** About Us Page Headshots Added & Deployed  
-**Status:** ✅ Headshots live on About Us page with proper crop positioning
+**Last Worked On:** 2026-05-18  
+**Current Focus:** Dashboarding & Reporting Service Page Live + Working Directory Cleanup  
+**Status:** ✅ Dashboarding service page deployed. Working directory cleaned.
 
-### What Was Just Completed (April 30, 2026):
+### What Was Just Completed (May 18, 2026):
+
+#### Dashboarding & Reporting Service Page — COMPLETE ✅
+1. ✅ **Rewrote `src/DashboardingDataPortalPage.jsx`** — replaced "Coming Soon" with full service page based on NCC V4.1 deck slides 22-26
+   - Split hero with data analytics imagery + Common Data Challenges panel
+   - The NCC Approach: 4 dashboard types (Board/Sponsor tracker, Ops cockpit, Sales pipeline, Lender covenant pack)
+   - Use Cases by Audience: 6 stakeholder cards with cadences and KPIs
+   - Engagement Model: Discover → Build → Run → Iterate (4 phases)
+   - Case study preview linking to detailed case study page
+2. ✅ **Created `src/DashboardingCaseStudiesPage.jsx`** — category page for Dashboarding case studies
+3. ✅ **Created `src/DashboardingCaseStudyPage.jsx`** — detailed case study: "$100M Manufacturer: Zero to Enterprise Dashboards"
+   - Challenge/Solution two-column layout
+   - 4 execution steps (Automated Reporting, Win/Loss Analysis, Data Architecture, Board Reporting)
+   - Results: Zero→Enterprise dashboards, margin insights lifted EBITDA, engagement extended 3x
+4. ✅ **Updated `src/App.jsx`** — added routes (`/case-studies/dashboarding-reporting`, `/case-studies/dashboarding-pe-value-visibility`), nav links, homepage case studies section
+5. ✅ **Updated `src/CaseStudiesPage.jsx`** — added Dashboarding & Reporting card
+6. ✅ **Updated `src/ContactUsPage.jsx`** — added Dashboarding & Reporting to service dropdown
+7. ✅ **Merged to `claude/main`** via `feature/dashboarding-service` branch and deployed via Amplify Build #260 (SUCCEED)
+
+#### Working Directory Cleanup — COMPLETE ✅
+- Removed sensitive old credentials (`credentials.json`, `token.json`)
+- Removed one-off scripts (`create_sample_audit_report.py`, `send_email_to_nick.py`, `send_landing_pages_table.py`)
+- Removed old Lambda deployment packages (`lambda_minimax.zip`, `lambda_v1.zip`)
+- Removed superseded static HTML files (`Roundup_Free_Docket_Review_v7.html`, `v7.1.html`)
+- Removed stale `src/` folder copies and empty newsletter file
+- Removed duplicate `lambda_current/` folder
+
+---
+
+### Previous Session (April 30, 2026):
 
 #### About Us Page Headshots - COMPLETE ✅
 1. ✅ **Copied headshots** from OneDrive/Documents to `public/images/`
@@ -112,10 +141,11 @@ Set up Google Tag Manager tracking for the Roundup Docket Intelligence landing p
 | # | Task | Status | Notes |
 |---|------|--------|-------|
 | 1 | **Autoresponder Fix** | ✅ **COMPLETE** | All 5 landing pages + Lambda switch working. 5/5 tests passed |
-| 2 | **Funnel Tracking (GTM)** | ⏳ PENDING | Set up GTM triggers for "Swipe File" landing page |
-| 3 | **Ad Copy Review** | ⏳ PENDING | Review LinkedIn ads, send feedback to Nick |
-| 4 | **Audit Brainstorming** | ⏳ PENDING | Backend research on audit pain points for blog posts |
-| 5 | **Billing System** | ⏳ PENDING | Set up late-notification billing system |
+| 2 | **Funnel Tracking (GTM)** | ✅ **COMPLETE** | 9 conversion events implemented, GTM published, LinkedIn tracking live |
+| 3 | **Dashboarding Service Page** | ✅ **COMPLETE** | Full service page + case study deployed (Build #260) |
+| 4 | **Ad Copy Review** | ⏳ PENDING | Review LinkedIn ads, send feedback to Nick |
+| 5 | **Audit Brainstorming** | ⏳ PENDING | Backend research on audit pain points for blog posts |
+| 6 | **Billing System** | ⏳ PENDING | Set up late-notification billing system |
 
 **Task 1 Completion Notes:**
 - Frontend: All 5 landing pages updated with `source` parameter
@@ -133,7 +163,7 @@ Set up Google Tag Manager tracking for the Roundup Docket Intelligence landing p
 **Live URL:** https://northcastleconsulting.com  
 **GitHub Repo:** https://github.com/rventra/northcastleconsultingwebsite_V1.2  
 **Default Branch:** `claude/main`  
-**Last Updated:** 2026-02-25
+**Last Updated:** 2026-05-18
 
 ---
 
@@ -485,6 +515,8 @@ gh repo view rventra/northcastleconsultingwebsite_V1.2
 
 | Date | Change | Description |
 |------|--------|-------------|
+| 2026-05-18 | Dashboarding Service | Added full Dashboarding & Reporting service page + case study from NCC deck slides 22-26 |
+| 2026-05-18 | Cleanup | Removed extraneous files from working directory (credentials, old scripts, stale copies) |
 | 2026-02-25 | 3 New Landing Pages | Created Claimant Enrichment, SMS Bridge, and Swipe File landing pages + thank you pages |
 | 2026-02-25 | App.jsx Routes | Added routes and no-nav logic for 6 new pages |
 | 2026-02-25 | MetaTags.jsx | Added PAGE_META configs for enrichment, SMS bridge, and swipe file pages |
