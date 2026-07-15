@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sample Dashboards · North Castle Consulting</title>
+<meta name="description" content="A small sample of interactive analytics dashboards built by North Castle Consulting — illustrative data, real methodology." />
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+<style>
+  :root{
+    --navy:#1E2761; --navy-deep:#121A47; --navy-ink:#1A1A2E;
+    --gold:#C9A227; --gold-lite:#E6C95B;
+    --slate:#475569; --slate-lite:#94A3B8;
+    --bg:#F8FAFC; --mist:#EEF2FF; --border:#E5E7EB; --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--navy-ink);
+    font-family:Calibri,"Segoe UI",Arial,sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px; margin:0 auto; padding:0 24px;}
+
+  header.hero{
+    background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 100%);
+    color:var(--white); padding:56px 0 60px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-size:14px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--gold-lite); font-weight:700; margin-bottom:26px;
+  }
+  .brand .mark{
+    width:26px; height:26px; border-radius:5px;
+    background:var(--gold); color:var(--navy-deep);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:15px; letter-spacing:0;
+  }
+  header.hero h1{
+    margin:0 0 14px; font-size:38px; line-height:1.12; font-weight:700;
+    letter-spacing:-.01em;
+  }
+  header.hero p{
+    margin:0; max-width:640px; font-size:18px; color:#D7DCF0;
+  }
+
+  main{padding:44px 0 64px;}
+
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  @media (max-width:720px){ .cards{grid-template-columns:1fr;} header.hero h1{font-size:30px;} }
+
+  .card{
+    display:flex; flex-direction:column;
+    background:var(--white); border:1px solid var(--border); border-radius:12px;
+    overflow:hidden; text-decoration:none; color:inherit;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    box-shadow:0 1px 2px rgba(18,26,71,.04);
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px rgba(18,26,71,.14);
+    border-color:var(--gold);
+  }
+  .card .top{height:6px; background:linear-gradient(90deg,var(--navy),var(--gold));}
+  .card .body{padding:26px 24px 24px; display:flex; flex-direction:column; flex:1;}
+  .card .kicker{
+    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold); font-weight:700; margin-bottom:10px;
+  }
+  .card h2{margin:0 0 10px; font-size:22px; color:var(--navy); font-weight:700; line-height:1.2;}
+  .card p{margin:0 0 22px; color:var(--slate); font-size:15px; flex:1;}
+  .card .go{
+    align-self:flex-start; display:inline-flex; align-items:center; gap:8px;
+    background:var(--navy); color:var(--white); font-weight:700; font-size:14px;
+    padding:10px 18px; border-radius:7px;
+  }
+  .card:hover .go{background:var(--navy-deep);}
+  .card .go .arrow{transition:transform .15s ease;}
+  .card:hover .go .arrow{transform:translateX(3px);}
+
+  .note{
+    margin-top:38px; padding:16px 20px; border-left:3px solid var(--gold);
+    background:var(--mist); border-radius:0 8px 8px 0;
+    color:var(--slate); font-size:14px;
+  }
+
+  footer{border-top:1px solid var(--border); padding:26px 0; color:var(--slate-lite); font-size:13px;}
+  footer a{color:var(--slate); text-decoration:none; font-weight:600;}
+  footer a:hover{color:var(--navy);}
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="brand"><span class="mark">N</span>North Castle Consulting</div>
+      <h1>Sample Dashboards</h1>
+      <p>A short look at how we turn financial and operating data into decision-ready analytics. These are illustrative builds on representative data — the methodology is the real thing.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="cards">
+
+        <a class="card" href="software-arr-bridge.html">
+          <div class="top"></div>
+          <div class="body">
+            <div class="kicker">SaaS · Recurring Revenue</div>
+            <h2>ARR Performance Bridge</h2>
+            <p>Sources, stickiness, and sustainability of Annual Recurring Revenue — new, expansion, contraction, and churn walked from opening to closing ARR.</p>
+            <span class="go">Open dashboard <span class="arrow">&rarr;</span></span>
+          </div>
+        </a>
+
+        <a class="card" href="revenue-bridge.html">
+          <div class="top"></div>
+          <div class="body">
+            <div class="kicker">Revenue · Growth Drivers</div>
+            <h2>Revenue Bridge</h2>
+            <p>Decomposes total revenue growth into organic, M&amp;A, FX, and price-volume effects — isolating what actually moved the top line.</p>
+            <span class="go">Open dashboard <span class="arrow">&rarr;</span></span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="note">
+        These dashboards use illustrative/representative data for demonstration and do not reflect any specific client. Built and maintained by North Castle Consulting.
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      &copy; North Castle Consulting &nbsp;·&nbsp; <a href="https://northcastleconsulting.com/">northcastleconsulting.com</a>
+    </div>
+  </footer>
+</body>
+</html>

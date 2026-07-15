@@ -1,0 +1,1676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>ARR Performance Bridge · Sources, stickiness, sustainability · North Castle Consulting</title>
+<meta name="viewport" content="width=1280" />
+<script src="saas_data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+:root {
+  --navy:#1E2761; --navy-deep:#121A47; --navy-ink:#1A1A2E;
+  --gold:#C9A227; --gold-lite:#E6C95B;
+  --slate:#475569; --slate-lite:#94A3B8;
+  --bg:#F8FAFC; --mist:#EEF2FF; --border:#E5E7EB;
+  --white:#FFFFFF; --red:#B22234; --green:#2C5F2D;
+  --amber:#B45309; --amber-bg:#FEF3C7;
+  --red-bg:#FEE2E2; --green-bg:#DCFCE7;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg)}
+.page{max-width:1320px;margin:0 auto;background:var(--white);min-height:100vh;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+header.ncc{background:var(--navy-deep);color:var(--white);padding:18px 32px 14px;position:relative}
+header.ncc::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--gold)}
+header.ncc .brand{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--gold-lite)}
+header.ncc h1{margin:6px 0 2px;font-size:26px;font-weight:700}
+header.ncc .sub{font-size:13px;color:#cfd8dc;margin-top:2px}
+header.ncc .illus{position:absolute;top:18px;right:32px;background:var(--gold);color:var(--navy-deep);
+  font-weight:700;font-size:11px;letter-spacing:.18em;padding:6px 12px;border-radius:2px}
+.banner{background:var(--mist);border-bottom:1px solid var(--border);padding:14px 32px;
+  display:flex;align-items:center;gap:18px}
+.banner .q-tag{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.12em;background:var(--white);
+  padding:6px 12px;border:1px solid var(--border)}
+.banner .q-text{font-size:14px;color:var(--navy-ink);font-style:italic;flex:1}
+.controls{display:flex;gap:14px;align-items:center;padding:16px 32px;background:var(--white);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.controls label{font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-right:8px}
+.controls select{font-family:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);min-width:140px}
+.controls .pill{background:var(--navy);color:var(--white);padding:6px 12px;font-size:11px;font-weight:700;letter-spacing:.08em}
+
+/* Tab strip */
+.tabstrip{display:flex;gap:0;padding:0 32px;background:var(--white);border-bottom:1px solid var(--border)}
+.tab{flex:1;background:#F1F5F9;color:var(--slate);border:none;border-right:1px solid var(--border);
+  padding:14px 18px 12px;text-align:left;cursor:pointer;font-family:inherit;position:relative;
+  transition:background .15s,color .15s}
+.tab:last-child{border-right:none}
+.tab:hover{background:#E2E8F0}
+.tab .tab-title{font-size:14px;font-weight:700;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.tab .tab-sub{font-size:11px;color:inherit;opacity:.75;margin-top:3px;font-weight:400}
+.tab .dots{font-size:12px;letter-spacing:.08em;color:var(--gold);font-weight:700}
+.tab.active{background:var(--navy);color:var(--white)}
+.tab.active .tab-sub{opacity:.85;color:#cfd8dc}
+.tab.active .dots{color:var(--gold-lite)}
+.tab.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--gold)}
+
+/* Audit ribbon */
+.ribbon{display:flex;gap:0;background:var(--bg);border-bottom:1px solid var(--border);padding:0 32px}
+.ribbon .rcell{flex:1;padding:8px 14px;border-right:1px solid var(--border);font-size:11px;color:var(--slate);
+  display:flex;align-items:center;gap:8px;line-height:1.3}
+.ribbon .rcell:last-child{border-right:none}
+.ribbon .rcell .dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex:none}
+.ribbon .rcell .rname{font-weight:700;color:var(--navy-ink);letter-spacing:.02em}
+.dot-green{background:#16A34A}
+.dot-yellow{background:#EAB308}
+.dot-red{background:#DC2626}
+
+/* Tab content header */
+.tabhdr{display:flex;justify-content:space-between;align-items:center;padding:14px 32px 0}
+.tabhdr .lead{font-size:11px;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px 32px 18px;background:var(--bg)}
+.tile{background:var(--white);border:1px solid var(--border);position:relative;padding:14px 16px 16px;min-height:160px}
+.tile::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--navy))}
+.tile .tag{font-size:10px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.12em}
+.tile .label{font-size:13px;font-weight:700;color:var(--navy-ink);margin-top:6px}
+.tile .big{font-size:30px;font-weight:700;color:var(--big,var(--navy-ink));margin-top:10px;line-height:1}
+.tile .unit{font-size:11px;color:var(--slate);margin-top:6px}
+.tile .bullets{font-size:11px;color:var(--slate);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.6}
+.tile .bullets div::before{content:"\2022 ";color:var(--gold)}
+.panel{margin:0 32px 18px;background:var(--white);border:1px solid var(--border);padding:18px 22px}
+.panel .ptitle{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.panel h2{margin:0;font-size:16px;font-weight:700;color:var(--navy-ink)}
+.panel .chart-wrap{position:relative;height:340px;margin-top:12px}
+.grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;padding:0 32px 18px}
+.grid2-eq{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 32px 18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 32px 18px}
+table.ncc{width:100%;border-collapse:collapse;font-size:12px}
+table.ncc th{text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);
+  padding:8px 10px;border-bottom:2px solid var(--navy)}
+table.ncc td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--navy-ink)}
+table.ncc tr:hover td{background:var(--mist)}
+.pos{color:var(--green);font-weight:700}
+.neg{color:var(--red);font-weight:700}
+.muted{color:var(--slate-lite)}
+.chip-g{display:inline-block;background:var(--green-bg);color:#14532D;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
+.chip-y{display:inline-block;background:var(--amber-bg);color:#78350F;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
+.chip-r{display:inline-block;background:var(--red-bg);color:#7F1D1D;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
+footer.ncc{background:var(--white);border-top:1px solid var(--border);padding:14px 32px 18px;
+  font-size:11px;color:var(--slate-lite);display:flex;justify-content:space-between;align-items:center}
+footer.ncc .left{display:flex;gap:18px;align-items:center}
+footer.ncc strong{color:var(--slate)}
+.gold-rule{height:2px;background:var(--gold);margin:0 32px 18px;width:48px}
+.section-title{padding:6px 32px 0;font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase}
+.section-sub{padding:2px 32px 14px;font-size:13px;color:var(--slate)}
+.note{margin:0 32px 18px;background:var(--mist);border-left:3px solid var(--gold);padding:10px 14px;font-size:12px;color:var(--navy-ink)}
+.note strong{color:var(--navy)}
+
+/* Callout box (tab 3) */
+.callout{margin:0 32px 24px;background:#FFFBEB;border:1px solid var(--gold);border-left:4px solid var(--gold);
+  padding:14px 18px;font-size:13px;color:var(--navy-ink);line-height:1.55}
+.callout .ctitle{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.callout strong{color:var(--red)}
+
+/* Banner for illustrative caveats */
+.illus-banner{margin:0 32px 18px;background:var(--red-bg);border-left:3px solid var(--red);padding:10px 14px;
+  font-size:12px;color:var(--navy-ink)}
+.illus-banner strong{color:var(--red)}
+
+/* Side audit panel */
+.scrim{position:fixed;inset:0;background:rgba(18,26,71,0.35);opacity:0;pointer-events:none;
+  transition:opacity .2s ease;z-index:90}
+.scrim.open{opacity:1;pointer-events:auto}
+aside.audit{position:fixed;top:0;right:-520px;width:480px;height:100vh;background:var(--white);
+  box-shadow:-2px 0 18px rgba(18,26,71,0.18);transition:right .25s ease;z-index:100;display:flex;flex-direction:column}
+aside.audit.open{right:0}
+aside.audit .ahead{background:var(--navy-deep);color:var(--white);padding:16px 22px;flex:none;position:relative}
+aside.audit .ahead::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--gold)}
+aside.audit .ahead .alabel{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--gold-lite)}
+aside.audit .ahead h3{margin:4px 0 2px;font-size:18px;font-weight:700}
+aside.audit .ahead .atab{font-size:12px;color:#cfd8dc;margin-top:4px}
+aside.audit .ahead .astatus{margin-top:10px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;
+  gap:8px;padding:5px 10px;border-radius:2px}
+aside.audit .ahead .astatus.green{background:rgba(34,197,94,0.18);color:#86EFAC}
+aside.audit .ahead .astatus.yellow{background:rgba(234,179,8,0.18);color:#FDE68A}
+aside.audit .ahead .astatus.red{background:rgba(220,38,38,0.18);color:#FECACA}
+aside.audit .ahead .xbtn{position:absolute;top:14px;right:18px;background:transparent;border:none;color:var(--white);
+  font-size:22px;cursor:pointer;line-height:1;padding:0;width:28px;height:28px}
+aside.audit .ahead .xbtn:hover{color:var(--gold-lite)}
+aside.audit .abody{overflow-y:auto;padding:18px 22px 24px;color:var(--navy-ink);font-size:12px;line-height:1.55;flex:1}
+aside.audit .abody h4{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.10em;text-transform:uppercase;
+  margin:18px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+aside.audit .abody h4:first-child{margin-top:0}
+aside.audit .abody table{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px}
+aside.audit .abody th{text-align:left;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);
+  padding:6px 6px;border-bottom:1.5px solid var(--navy);font-weight:700}
+aside.audit .abody td{padding:6px 6px;border-bottom:1px solid var(--border);vertical-align:top}
+aside.audit .abody td.right{text-align:right;white-space:nowrap}
+aside.audit .abody ul{margin:6px 0 0;padding-left:18px}
+aside.audit .abody ul li{margin-bottom:4px}
+aside.audit .abody .narr{background:var(--bg);border-left:3px solid var(--gold);padding:10px 12px;font-size:11.5px;
+  color:var(--navy-ink);margin-top:8px;line-height:1.55}
+aside.audit .abody .ck-pass{color:var(--green);font-weight:700}
+aside.audit .abody .ck-warn{color:var(--amber);font-weight:700}
+aside.audit .abody .ck-fail{color:var(--red);font-weight:700}
+.tabpane{display:none}
+.tabpane.active{display:block}
+
+/* Term tooltip */
+.tip{display:inline-flex;align-items:center;justify-content:center;width:13px;height:13px;border-radius:50%;
+  background:var(--slate-lite);color:var(--white);font-size:9px;font-weight:700;font-style:normal;
+  margin-left:5px;cursor:help;position:relative;vertical-align:middle;font-family:Calibri,sans-serif;line-height:1}
+.tip:hover{background:var(--navy)}
+.tip .tip-body{visibility:hidden;opacity:0;background:var(--navy-deep);color:var(--white);
+  font-size:11px;font-weight:400;font-style:normal;line-height:1.45;letter-spacing:0;
+  padding:8px 10px;border-radius:2px;width:240px;position:absolute;top:18px;left:50%;
+  transform:translateX(-50%);z-index:120;text-transform:none;
+  box-shadow:0 4px 14px rgba(18,26,71,0.25);transition:opacity .15s}
+.tip:hover .tip-body{visibility:visible;opacity:1}
+.tip .tip-body::before{content:"";position:absolute;top:-5px;left:50%;transform:translateX(-50%);
+  border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:5px solid var(--navy-deep)}
+
+/* Ribbon chips are clickable */
+.ribbon .rcell{cursor:pointer;transition:background .15s}
+.ribbon .rcell:hover{background:var(--mist)}
+
+/* TAB 4 — Data Readiness Audit */
+.audit-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px 32px 4px;background:var(--bg)}
+.audit-tile{background:var(--white);border:1px solid var(--border);padding:14px 16px 16px;position:relative;min-height:120px}
+.audit-tile::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--navy))}
+.audit-tile .at-tag{font-size:10px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.12em}
+.audit-tile .at-label{font-size:13px;font-weight:700;color:var(--navy-ink);margin-top:6px}
+.audit-tile .at-big{font-size:36px;font-weight:700;color:var(--big,var(--navy-ink));margin-top:10px;line-height:1}
+.audit-tile .at-sub{font-size:11px;color:var(--slate);margin-top:6px}
+.audit-totals{padding:0 32px 14px;font-size:12px;color:var(--slate);background:var(--bg)}
+.audit-totals strong{color:var(--navy-ink)}
+
+table.audit-tbl{width:100%;border-collapse:collapse;font-size:12px}
+table.audit-tbl th{text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);
+  padding:8px 10px;border-bottom:2px solid var(--navy);font-weight:700}
+table.audit-tbl td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--navy-ink);vertical-align:top}
+table.audit-tbl td.right{text-align:right}
+table.audit-tbl td.ctr{text-align:center}
+.tab-chip{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.06em;
+  background:var(--mist);color:var(--navy);padding:2px 6px;border-radius:2px;margin-right:3px}
+.chart-chip{display:block;font-size:9.5px;font-weight:700;letter-spacing:.02em;
+  background:var(--mist);color:var(--navy);padding:3px 7px;border-radius:2px;margin:0 0 3px 0;
+  line-height:1.25;max-width:100%}
+.chart-chip:last-child{margin-bottom:0}
+.fix-name{font-size:11px;color:var(--navy-ink);line-height:1.3;cursor:help}
+.fixes-list{font-size:11px;color:var(--navy-ink);line-height:1.35;cursor:help}
+.owner-pill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 8px;border-radius:2px;white-space:nowrap}
+.owner-PortcoIT{background:#CCFBF1;color:#115E59}
+.owner-PortcoFinance{background:#DBEAFE;color:#1E3A8A}
+.owner-CustomerSuccess{background:#FEF3C7;color:#92400E}
+.owner-SalesOps{background:#FEF9C3;color:#854D0E}
+.owner-Admin{background:#F1F5F9;color:#334155}
+.pri-pill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;padding:3px 8px;border-radius:2px;text-transform:uppercase}
+.pri-Critical{background:var(--red-bg);color:#7F1D1D}
+.pri-High{background:var(--amber-bg);color:#78350F}
+.pri-Medium{background:#E2E8F0;color:#334155}
+.status-cell{font-size:11px;font-weight:700;white-space:nowrap}
+.status-pass{color:#14532D}
+.status-warn{color:#78350F}
+.status-fail{color:#7F1D1D}
+.glyph-pass{color:#16A34A;font-weight:700}
+.glyph-warn{color:#B45309;font-weight:700}
+.glyph-fail{color:#DC2626;font-weight:700}
+
+.audit-section{margin:0 32px 18px;background:var(--white);border:1px solid var(--border);padding:18px 22px}
+.audit-section .as-title{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.audit-section .as-sub{font-size:13px;color:var(--slate);margin-bottom:12px;font-style:italic}
+
+/* Clickable row affordance in Tab 4 tables */
+table.audit-tbl tbody tr{cursor:pointer;transition:background .12s}
+table.audit-tbl tbody tr:hover{background:var(--mist)}
+
+/* Side-panel additions for check/action detail */
+aside.audit .abody .subtest-tbl td:first-child{font-weight:700;color:var(--navy);width:96px;white-space:nowrap}
+aside.audit .abody .fix-card{background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--gold);padding:10px 12px;margin-top:6px}
+aside.audit .abody .fix-card .fc-row{display:flex;gap:14px;font-size:11px;margin-top:4px;color:var(--slate)}
+aside.audit .abody .fix-card .fc-row strong{color:var(--navy-ink)}
+aside.audit .abody .effort-list{margin:6px 0 0;padding-left:18px;font-size:11.5px}
+aside.audit .abody .effort-list li{margin-bottom:3px;color:var(--navy-ink)}
+aside.audit .abody .univ-row{display:grid;grid-template-columns:1fr 80px;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:11.5px;align-items:start}
+aside.audit .abody .univ-row.dim{opacity:0.45}
+aside.audit .abody .univ-row .uname{color:var(--navy-ink)}
+aside.audit .abody .univ-row .udash{font-size:10px;color:var(--slate);font-style:italic;margin-top:2px}
+aside.audit .abody .ubadge{font-size:10px;font-weight:700;text-align:right;white-space:nowrap}
+aside.audit .abody .ubadge.pass{color:#14532D}
+aside.audit .abody .ubadge.warn{color:#78350F}
+aside.audit .abody .ubadge.fail{color:#7F1D1D}
+aside.audit .abody .close-btn{margin-top:16px;background:var(--navy);color:var(--white);border:none;
+  font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:8px 16px;cursor:pointer}
+aside.audit .abody .close-btn:hover{background:var(--navy-deep)}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="ncc">
+  <div class="brand">NORTH CASTLE CONSULTING  &middot;  SOFTWARE DASHBOARD PACK</div>
+  <h1>ARR Performance Bridge  &middot;  Sources, stickiness, sustainability</h1>
+  <div class="sub">Splits ARR growth into new logo, expansion, contraction and churn; then tests whether the growth survives a buyer's cohort math.</div>
+  <div class="illus">ILLUSTRATIVE  &middot;  SAMPLE DATA</div>
+</header>
+<div class="banner">
+  <div class="q-tag">THE QUESTION</div>
+  <div class="q-text">Where does ARR growth come from, and how much of it survives a buyer pulling on the cohorts?</div>
+</div>
+
+<div class="controls">
+  <div><label>Period</label>
+    <select id="periodFilter">
+      <option value="TTM">TTM</option>
+      <option value="FY2025">FY 2025</option>
+      <option value="FY2024">FY 2024</option>
+      <option value="FY2023">FY 2023</option>
+    </select></div>
+  <div><label>ICP segment</label>
+    <select id="segFilter">
+      <option value="ALL">All segments</option>
+      <option value="Enterprise">Enterprise</option>
+      <option value="Midmarket">Mid-market</option>
+      <option value="SMB">SMB</option>
+    </select></div>
+  <div><label>Contract size</label>
+    <select id="sizeFilter">
+      <option value="ALL">All sizes</option>
+      <option value="L">&gt;$100K ACV</option>
+      <option value="M">$25-100K ACV</option>
+      <option value="S">&lt;$25K ACV</option>
+    </select></div>
+  <div style="margin-left:auto" class="pill" id="kpiHeadline">TTM ARR $25.0M &middot; Growth +14.1% &middot; New logo $2.1M &middot; Expansion $2.4M</div>
+</div>
+
+<!-- Tab strip -->
+<div class="tabstrip" role="tablist">
+  <button class="tab active" data-tab="t1" role="tab" aria-selected="true">
+    <div class="tab-title">Sources of growth <span class="dots">&#9679;&#9675;&#9675;&#9675;</span></div>
+    <div class="tab-sub">New logo, expansion, contraction, churn</div>
+  </button>
+  <button class="tab" data-tab="t2" role="tab" aria-selected="false">
+    <div class="tab-title">Where growth stuck <span class="dots">&#9679;&#9679;&#9675;&#9675;</span></div>
+    <div class="tab-sub">Per-customer expansion &middot; cohort retention</div>
+  </button>
+  <button class="tab" data-tab="t3" role="tab" aria-selected="false">
+    <div class="tab-title">Growth sustainability <span class="dots">&#9679;&#9679;&#9679;&#9675;</span></div>
+    <div class="tab-sub">NDR trend &middot; cohort growth engine</div>
+  </button>
+  <button class="tab" data-tab="t4" role="tab" aria-selected="false">
+    <div class="tab-title">Data audit <span class="dots">&#9679;&#9679;&#9679;&#9679;</span></div>
+    <div class="tab-sub">Scorecard &amp; action items</div>
+  </button>
+</div>
+
+<!-- Audit ribbon -->
+<div class="ribbon" id="auditRibbon" title="Click any cell to jump to Data Readiness Audit">
+  <div class="rcell" data-jump="t4"><span class="dot dot-yellow"></span><span><span class="rname">Sources of growth</span> &middot; Workable</span></div>
+  <div class="rcell" data-jump="t4"><span class="dot dot-red"></span><span><span class="rname">Where growth stuck</span> &middot; Fix required</span></div>
+  <div class="rcell" data-jump="t4"><span class="dot dot-red"></span><span><span class="rname">Growth sustainability</span> &middot; Fix required</span></div>
+</div>
+
+<!-- ================= TAB 1 ================= -->
+<div class="tabpane active" id="pane-t1">
+  <div class="tabhdr">
+    <div class="lead">Sources of growth &middot; Closing ARR = Opening + New logo + Expansion &minus; Contraction &minus; Churn</div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile" style="--accent:var(--green)">
+      <div class="label">New logo ARR</div>
+      <div class="big" id="t1NewLogo" style="--big:var(--green)">$2.1M</div>
+      <div class="unit" id="t1NewLogoUnit">Logos signed in period</div>
+      <div class="bullets">
+        <div id="t1NewLogoShare">9.6% of opening ARR</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--gold)">
+      <div class="label">Expansion ARR</div>
+      <div class="big" id="t1Expansion" style="--big:var(--gold)">$2.4M</div>
+      <div class="unit" id="t1ExpansionUnit">Upsell into the existing base</div>
+      <div class="bullets">
+        <div id="t1ExpansionShare">10.7% of opening ARR</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--amber)">
+      <div class="label">Contraction ARR</div>
+      <div class="big" id="t1Contraction" style="--big:var(--amber)">&minus;$0.6M</div>
+      <div class="unit" id="t1ContractionUnit">Downgrades at renewal</div>
+      <div class="bullets">
+        <div id="t1ContractionShare">2.6% of opening ARR</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--red)">
+      <div class="label">Gross churn ARR</div>
+      <div class="big" id="t1Churn" style="--big:var(--red)">&minus;$0.8M</div>
+      <div class="unit" id="t1ChurnUnit">Logos lost in period</div>
+      <div class="bullets">
+        <div id="t1ChurnShare">3.6% of opening ARR</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="ptitle">ARR BRIDGE WATERFALL  &middot;  <span id="t1BridgeLabel">OPENING &rarr; CLOSING ARR</span></div>
+    <div class="chart-wrap" style="height:360px"><canvas id="t1Bridge"></canvas></div>
+  </div>
+  <div class="panel" style="margin-bottom:24px">
+    <div class="ptitle">12-QUARTER ARR TREND  &middot;  CLOSING ARR BY QUARTER</div>
+    <div class="chart-wrap" style="height:300px"><canvas id="t1ArrTrend"></canvas></div>
+  </div>
+</div>
+<!-- ================= TAB 2 ================= -->
+<div class="tabpane" id="pane-t2">
+  <div class="tabhdr">
+    <div class="lead">Where growth stuck &middot; Is expansion real, are new logos sticky, is contraction structural?</div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile" style="--accent:var(--green)">
+      <div class="label">New-logo cohort retained <span class="tip">i<span class="tip-body">Share of new-logo ARR signed 4+ quarters ago that is still active today. Below 85% means the logo engine is filling a leaky bucket.</span></span></div>
+      <div class="big" id="t2NlRet" style="--big:var(--green)">90%</div>
+      <div class="unit" id="t2NlRetUnit">New-logo ARR still active at 12 months</div>
+      <div class="bullets">
+        <div id="t2NlRetNote">Enterprise logos stick; SMB logos wash out</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--gold)">
+      <div class="label">Expansion persistence <span class="tip">i<span class="tip-body">Share of expansion dollars that survived the following renewal. Expansion that reverses at renewal is usage true-up, not real growth.</span></span></div>
+      <div class="big" id="t2ExpPersist" style="--big:var(--gold)">86%</div>
+      <div class="unit" id="t2ExpPersistUnit">Expansion $ held at next renewal</div>
+      <div class="bullets">
+        <div id="t2ExpPersistNote">Product-add sticks; price-only expansion churns</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--red)">
+      <div class="label">At-risk ARR share</div>
+      <div class="big" id="t2AtRisk" style="--big:var(--red)">9%</div>
+      <div class="unit" id="t2AtRiskUnit">ARR in late-renewal / declining-usage accounts</div>
+      <div class="bullets">
+        <div id="t2AtRiskNote">Concentrated in SMB and &lt;$25K contracts</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--slate)">
+      <div class="label">Largest contraction driver</div>
+      <div class="big" id="t2ContrDriver" style="--big:var(--navy-ink);font-size:24px">Pricing</div>
+      <div class="unit" id="t2ContrDriverUnit">Share of contraction $</div>
+      <div class="bullets">
+        <div id="t2ContrDriverNote">Renewal-uplift pushback is growing</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2-eq">
+    <div class="panel">
+      <div class="ptitle">EXPANSION DECOMPOSITION  &middot;  TOP CUSTOMERS  &middot;  PRICE-UP vs SEAT-UP vs PRODUCT-ADD</div>
+      <div class="chart-wrap" style="height:360px"><canvas id="t2ExpDecomp"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">NEW-LOGO COHORT RETENTION  &middot;  ARR HELD BY ACQUISITION VINTAGE</div>
+      <div class="chart-wrap" style="height:360px"><canvas id="t2Vintage"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="ptitle">CONTRACTION REASON MIX  &middot;  WHY ACCOUNTS DOWNGRADED  &middot;  $M BY PERIOD</div>
+    <div class="chart-wrap" style="height:300px"><canvas id="t2ContrReasons"></canvas></div>
+  </div>
+
+  <div class="panel" style="margin-bottom:24px">
+    <div class="ptitle">CUSTOMER DETAIL  &middot;  ARR  &middot;  EXPANSION SPLIT  &middot;  SERVICES SHARE</div>
+    <table class="ncc" id="t2Table">
+      <thead><tr>
+        <th>Customer</th>
+        <th>Segment</th>
+        <th>Contract size</th>
+        <th style="text-align:right">ARR ($K)</th>
+        <th style="text-align:right">Expansion ($K)</th>
+        <th style="text-align:right">Price-up</th>
+        <th style="text-align:right">Seat-up</th>
+        <th style="text-align:right">Product-add</th>
+        <th style="text-align:right">PS share <span class="tip">i<span class="tip-body">Professional services as % of total account revenue. PS-heavy accounts here expand on price only; product-add expansion collapses.</span></span></th>
+        <th>Expansion character</th>
+      </tr></thead><tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ================= TAB 3 ================= -->
+<div class="tabpane" id="pane-t3">
+  <div class="tabhdr">
+    <div class="lead">Growth sustainability &middot; Is the growth durable, where does the base leak?</div>
+  </div>
+
+  <div class="illus-banner">
+    <strong>Illustrative.</strong> Expansion component split (price / seat / product) is estimated from amended invoice lines; the deal-level decomposition is not captured at source.
+    Renewal outcomes are processed as continued billing with no event record, so uplift-asked vs uplift-realized is reconstructable for ~2 years at best.
+    The view below shows what the analysis reveals at full resolution; the cohort story is supported by the billing data that does exist.
+  </div>
+
+  <div class="tiles">
+    <div class="tile" style="--accent:var(--navy)">
+      <div class="label">Blended NDR <span class="tip">i<span class="tip-body">Net dollar retention: (opening ARR + expansion &minus; contraction &minus; churn) &divide; opening ARR. Excludes new logos. Above 100% means the existing base grows by itself.</span></span></div>
+      <div class="big" id="t3Ndr">104.5%</div>
+      <div class="unit" id="t3NdrUnit">Existing-base growth ex-new-logos</div>
+      <div class="bullets">
+        <div id="t3NdrNote">Enterprise 117 &middot; Mid-market 102 &middot; SMB 81</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--green)">
+      <div class="label">Gross retention <span class="tip">i<span class="tip-body">(Opening ARR &minus; contraction &minus; churn) &divide; opening ARR. Ignores expansion: how much of the book survives on its own.</span></span></div>
+      <div class="big" id="t3Grr" style="--big:var(--green)">93.8%</div>
+      <div class="unit" id="t3GrrUnit">Base surviving before any upsell</div>
+      <div class="bullets">
+        <div id="t3GrrNote">Buyer benchmark: 90%+ for this profile</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--gold)">
+      <div class="label">Same-cohort growth</div>
+      <div class="big" id="t3SameCohort" style="--big:var(--gold)">+4.5pp</div>
+      <div class="unit" id="t3SameCohortUnit">Net growth from the existing base</div>
+      <div class="bullets">
+        <div id="t3SameCohortNote">NDR minus 100: the compounding engine</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--red)">
+      <div class="label">Churn drag</div>
+      <div class="big" id="t3ChurnDrag" style="--big:var(--red)">&minus;6.2pp</div>
+      <div class="unit" id="t3ChurnDragUnit">Contraction + churn on opening ARR</div>
+      <div class="bullets">
+        <div id="t3ChurnDragNote">What new logos must outrun every year</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2-eq">
+    <div class="panel">
+      <div class="ptitle">12-QUARTER  &middot;  TRAILING NDR vs GROSS RETENTION</div>
+      <div class="chart-wrap" style="height:320px"><canvas id="t3NdrTrend"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">COHORT GROWTH ENGINE  &middot;  WHERE THE ARR GROWTH IS COMING FROM</div>
+      <div style="font-size:11px;color:var(--slate);margin-top:-4px;margin-bottom:8px">
+        Contribution to ARR growth (pp of opening ARR) &mdash; expansion &middot; new-logo &middot; attrition drag
+      </div>
+      <div class="chart-wrap" style="height:320px"><canvas id="t3GrowthArea"></canvas></div>
+      <div style="font-size:11px;color:var(--slate);margin-top:8px;font-style:italic">
+        Expansion is upsell into the existing base; new-logo is ARR from logos signed in the period; attrition drag is contraction plus gross churn (negative). Components sum to reported ARR growth.
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="ctitle">COHORT-ENGINE TAKEAWAY</div>
+    Blended growth reads healthy, but it is carried by one segment. Enterprise NDR has climbed <strong>110% &rarr; 117%</strong> while SMB has slid <strong>95% &rarr; 81%</strong> and turned net-negative in the trailing period.
+    Filter this page to SMB and the growth engine inverts: attrition outruns expansion and new logos combined. A buyer's first cohort cut will find this; the question is whether the sell side finds it first.
+  </div>
+</div>
+<!-- ================= TAB 4 — DATA READINESS AUDIT ================= -->
+<div class="tabpane" id="pane-t4">
+  <div class="tabhdr">
+    <div class="lead">Data audit &middot; Scorecard &amp; action items</div>
+  </div>
+  <div style="margin:0 32px 12px;padding:8px 12px;background:var(--mist);border-left:3px solid var(--navy);font-size:11.5px;color:var(--slate)">
+    <strong style="color:var(--navy-ink)">Data quality assessment</strong> &mdash; not subject to period / segment / contract-size filters. Scope is the ARR Performance Bridge analysis (Sources of growth, Where growth stuck, Growth sustainability).
+  </div>
+
+  <!-- Standalone reader intro panel -->
+  <div style="margin:0 32px 14px;padding:12px 16px;background:#FAFAF5;border:1px solid var(--border);border-left:3px solid var(--slate-lite);font-size:11.5px;color:var(--slate);line-height:1.6;font-style:italic">
+    <div style="font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.10em;color:var(--navy);text-transform:uppercase;margin-bottom:4px">Data readiness audit &middot; How to read this view</div>
+    The scorecard below shows which data inputs the three ARR Performance Bridge analyses (<strong style="font-style:normal;color:var(--navy-ink)">Sources of growth</strong>, <strong style="font-style:normal;color:var(--navy-ink)">Where growth stuck</strong>, <strong style="font-style:normal;color:var(--navy-ink)">Growth sustainability</strong>) need to run reliably. Each row is a data check. <strong style="font-style:normal;color:var(--navy-ink)">Click any row to see sub-tests and the action that closes the gap.</strong> The Action Items table below shows the work; each action's "Fixes" column points back to the check rows it resolves. <strong style="font-style:normal;color:var(--navy-ink)">Scope:</strong> this is the data audit for this analysis only, not a company-wide systems audit. The full audit catalog has 22 checks across the software dashboard pack; 12 of them are relevant here. Click "View full check universe" to see them all.
+    <div style="font-style:normal;margin-top:8px"><a href="#" id="t4ViewAll" style="font-size:11px;color:var(--navy);font-weight:700;text-decoration:underline">View full check universe (22 total) &rarr;</a></div>
+  </div>
+
+  <div class="audit-tiles">
+    <div class="audit-tile" style="--accent:var(--navy)">
+      <div class="at-tag">SCOPE</div>
+      <div class="at-label">Inputs needed</div>
+      <div class="at-big" id="t4Needed">&mdash;</div>
+      <div class="at-sub">Data checks this dashboard depends on</div>
+    </div>
+    <div class="audit-tile" style="--accent:var(--green)">
+      <div class="at-tag">READY</div>
+      <div class="at-label">&#x1F7E2; Ready</div>
+      <div class="at-big" style="--big:var(--green)" id="t4Ready">&mdash;</div>
+      <div class="at-sub">Pass &mdash; usable as-is</div>
+    </div>
+    <div class="audit-tile" style="--accent:var(--amber)">
+      <div class="at-tag">WORKABLE</div>
+      <div class="at-label">&#x1F7E1; Workable with gaps</div>
+      <div class="at-big" style="--big:var(--amber)" id="t4Workable">&mdash;</div>
+      <div class="at-sub">Warn &mdash; needs reformatting / cleanup</div>
+    </div>
+    <div class="audit-tile" style="--accent:var(--red)">
+      <div class="at-tag">GAP</div>
+      <div class="at-label">&#x1F534; Illustrative &mdash; fix required</div>
+      <div class="at-big" style="--big:var(--red)" id="t4Gap">&mdash;</div>
+      <div class="at-sub">Fail &mdash; missing / not reliable</div>
+    </div>
+  </div>
+  <div class="audit-totals" id="t4Totals">Total fix &middot; &mdash; weeks (sum of mapped action items)</div>
+
+  <div class="audit-section">
+    <div class="as-title">SCORECARD &middot; DATA INPUTS REQUIRED</div>
+    <div class="as-sub">Data inputs needed for this analysis: what you have, what's missing, what to fix. (Scope is the ARR Performance Bridge analysis, not a company-wide systems audit.)</div>
+    <table class="audit-tbl" id="t4Scorecard">
+      <thead><tr>
+        <th>Data input needed</th>
+        <th style="width:180px">Used in</th>
+        <th class="ctr" style="width:78px">Have it?</th>
+        <th class="ctr" style="width:96px">Right format?</th>
+        <th class="ctr" style="width:72px">Clean?</th>
+        <th style="width:170px">Status</th>
+        <th style="width:220px">Fixed by</th>
+      </tr></thead><tbody></tbody>
+    </table>
+  </div>
+
+  <div class="audit-section" style="margin-bottom:24px">
+    <div class="as-title">ACTION ITEMS &middot; WORK NCC WILL EXECUTE &mdash; PRIORITIZED</div>
+    <div class="as-sub">Work NCC will execute &middot; Portco contact for data access &mdash; prioritized.</div>
+    <table class="audit-tbl" id="t4Actions">
+      <thead><tr>
+        <th>Action</th>
+        <th style="width:190px">Portco contact</th>
+        <th class="right" style="width:70px">Effort</th>
+        <th class="ctr" style="width:100px">Priority</th>
+        <th style="width:240px">Fixes these data gaps</th>
+      </tr></thead><tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<footer class="ncc">
+  <div class="left">
+    <strong>North Castle Consulting</strong>
+    <span>&middot;  Sell-side data readiness  &middot;  Illustrative sample</span>
+    <span>&middot;  <em>Software Dashboard Pack  &middot;  v26.07.08</em></span>
+  </div>
+  <div>Nick Citrin  &middot;  ncitrin@northcastleconsulting.com</div>
+</footer>
+</div>
+
+<!-- Scrim + side panel -->
+<div class="scrim" id="scrim"></div>
+<aside class="audit" id="auditPanel" aria-hidden="true">
+  <div class="ahead">
+    <div class="alabel">DATA SPEC &amp; AUDIT</div>
+    <h3 id="apTitle">Sources of growth</h3>
+    <div class="atab" id="apSubtitle">Tab 1 of 4</div>
+    <div class="astatus yellow" id="apStatus">&#9679; Partial</div>
+    <button class="xbtn" id="apClose" aria-label="Close">&times;</button>
+  </div>
+  <div class="abody" id="apBody"></div>
+</aside>
+
+<script>
+Chart.defaults.font.family = 'Calibri, "Segoe UI", Arial, sans-serif';
+Chart.defaults.color = '#475569';
+Chart.defaults.plugins.legend.labels.boxWidth = 14;
+Chart.defaults.plugins.legend.labels.font = {size:11};
+Chart.register(ChartDataLabels);
+Chart.defaults.plugins.datalabels.display = false;
+const NCC = {navy:'#1E2761',navyDeep:'#121A47',gold:'#C9A227',goldLite:'#E6C95B',
+  slate:'#475569',slateLite:'#94A3B8',green:'#2C5F2D',red:'#B22234',mist:'#EEF2FF',border:'#E5E7EB',
+  amber:'#B45309'};
+
+const S = window.SAAS;
+
+let segF='ALL', sizeF='ALL', periodF='TTM', tabF='t1';
+let chartRefs = {};
+function destroyChart(name){ if(chartRefs[name]) { chartRefs[name].destroy(); delete chartRefs[name]; } }
+function fmtPct(v){ return (v>=0?'+':'') + v.toFixed(1) + '%'; }
+function fmt$(v){ return '$'+v.toFixed(1)+'M'; }
+function fmt$2(v){ return '$'+v.toFixed(2)+'M'; }
+function fmtPP(v){ return (v>=0?'+':'') + v.toFixed(1) + 'pp'; }
+function periodLabel(k){ return k==='TTM' ? 'TTM' : ('FY '+k.slice(2)); }
+
+/* =========================================================
+   DATA AUDIT — Tab 4 standalone reader depth
+   ---------------------------------------------------------
+   Sub-tests, action breakdowns, and full-universe attribution
+   live here (not in saas_data.js, which is shared).
+   ========================================================= */
+
+// Sub-tests per check: 4 specific tests covering granularity / completeness /
+// refresh / join keys / historical depth. Plausible for a $25M-ARR software
+// company running QuickBooks + CRM + hand-maintained Excel schedules.
+const CHECK_SUBTESTS = {
+  1: [ // Customer master canonicalization
+    { dim:'Granularity',     name:'Account-level (not contact- or invoice-level)', threshold:'1 row per legal entity', state:'Mostly OK; 3 subsidiaries billed as separate accounts roll to one parent', verdict:'warn' },
+    { dim:'Completeness',    name:'ARR tied to a canonical customer ID', threshold:'&ge;98% of ARR', state:'95.1%; 9 customers under 2+ name variants between QuickBooks and CRM', verdict:'warn' },
+    { dim:'Refresh latency', name:'Customer master sync billing &harr; CRM', threshold:'Weekly or better', state:'Manual; bookkeeper reconciles names at month-end', verdict:'warn' },
+    { dim:'Join keys',       name:'QuickBooks customer &harr; CRM account &harr; contract register', threshold:'1:1 mapping', state:'No shared key; joins done by name matching', verdict:'fail' }
+  ],
+  2: [ // Contract dates populated
+    { dim:'Completeness',    name:'Start / end / renewal date structured per active contract', threshold:'100% of active contracts', state:'~60% keyed into the contract spreadsheet; rest read from PDFs at renewal', verdict:'warn' },
+    { dim:'Granularity',     name:'Term captured at line level for multi-element deals', threshold:'Per element', state:'Single term per contract; embedded PS milestones not split', verdict:'warn' },
+    { dim:'Refresh latency', name:'New contracts keyed within 10 business days of signature', threshold:'&le;10 days', state:'Median 6 weeks; keyed when first invoice is raised', verdict:'fail' },
+    { dim:'Join keys',       name:'Contract &harr; customer ID &harr; billing schedule', threshold:'1:1 mapping', state:'Contract spreadsheet keyed by customer name, not ID', verdict:'warn' }
+  ],
+  3: [ // MRR-to-ARR reconciliation
+    { dim:'Granularity',     name:'ARR derived per contract line, not per account total', threshold:'Contract-line level', state:'Schedule tracks account totals; line detail lives in invoices only', verdict:'fail' },
+    { dim:'Completeness',    name:'Every active subscription present in the ARR schedule', threshold:'100% of active subs', state:'2 quarterly billers missing from the current schedule tab', verdict:'warn' },
+    { dim:'Refresh latency', name:'Schedule updated within 5 business days of month-end', threshold:'&le;5 days', state:'Updated in the monthly close cycle; 1-2 days of manual work each time', verdict:'warn' },
+    { dim:'Join keys',       name:'Schedule row &harr; invoice line &harr; GL revenue account', threshold:'Reconciles within 0.5%', state:'Annualization convention differs for monthly vs quarterly billers; ties within ~3%', verdict:'fail' }
+  ],
+  4: [ // Multi-year deal amortization
+    { dim:'Granularity',     name:'Multi-year TCV split into per-year ARR layers', threshold:'Per contract year', state:'3 of 7 multi-year deals carry full TCV in the year-one line', verdict:'warn' },
+    { dim:'Completeness',    name:'All multi-year deals identified and flagged', threshold:'100% of multi-year deals', state:'Flag exists in the contract spreadsheet; complete for known deals', verdict:'pass' },
+    { dim:'Refresh latency', name:'Amortization layers roll forward at each anniversary', threshold:'At anniversary', state:'Rolled manually at annual review, not at anniversary', verdict:'warn' },
+    { dim:'Join keys',       name:'TCV layer &harr; deferred revenue balance', threshold:'Ties within 0.5%', state:'Cannot test; no deferred roll-forward exists (see Revenue-to-billings tie-out)', verdict:'warn' }
+  ],
+  5: [ // Deal-level expansion decomposition
+    { dim:'Granularity',     name:'Expansion split into price-up / seat-up / product-add at deal line', threshold:'Component level', state:'Upsells booked as one amended invoice line; no component split', verdict:'fail' },
+    { dim:'Completeness',    name:'Expansion events identified vs renewals-as-usual', threshold:'&ge;90% of expansion $', state:'Identifiable by invoice delta; component attribution missing', verdict:'warn' },
+    { dim:'Refresh latency', name:'Expansion recorded in the quarter it takes effect', threshold:'Same quarter', state:'OK; billing reflects amendments promptly', verdict:'pass' },
+    { dim:'Join keys',       name:'Expansion line &harr; originating contract &harr; product SKU', threshold:'1:1 mapping', state:'Product catalog too coarse; "platform fee" covers 3 modules', verdict:'fail' }
+  ],
+  6: [ // Contraction reason coding
+    { dim:'Granularity',     name:'Reason coded per contraction event', threshold:'Per event', state:'No reason field exists in billing or CRM', verdict:'fail' },
+    { dim:'Completeness',    name:'All contraction events carry a coded reason', threshold:'100% of events', state:'0%; context lives in account-manager email threads', verdict:'fail' },
+    { dim:'Refresh latency', name:'Reason captured within 30 days of the downgrade', threshold:'&le;30 days', state:'Not captured at all today', verdict:'fail' },
+    { dim:'Join keys',       name:'Contraction event &harr; renewal record &harr; customer ID', threshold:'1:1 mapping', state:'Renewal events not logged (see Renewal event log)', verdict:'fail' }
+  ],
+  7: [ // Churn reason capture
+    { dim:'Granularity',     name:'Reason coded per churned logo', threshold:'Per logo', state:'Free-text CRM notes post-2024; no structured code', verdict:'warn' },
+    { dim:'Completeness',    name:'All churned logos carry a reason', threshold:'100% of churned logos', state:'~70% post-2024 have usable notes; earlier exits undocumented', verdict:'warn' },
+    { dim:'Refresh latency', name:'Captured at offboarding, not reconstructed later', threshold:'At offboarding', state:'Written at offboarding when written at all', verdict:'warn' },
+    { dim:'Join keys',       name:'Churn record &harr; final invoice &harr; customer ID', threshold:'1:1 mapping', state:'Joinable by name matching; depends on customer master dedup', verdict:'warn' }
+  ],
+  8: [ // Cohort acquisition dates
+    { dim:'Granularity',     name:'Date precision: month or finer', threshold:'&le;month', state:'Month precision for 96% of accounts', verdict:'pass' },
+    { dim:'Completeness',    name:'Acquisition date populated per customer', threshold:'100% of customers', state:'11 long-tenured customers default to the 2019 system-migration date', verdict:'warn' },
+    { dim:'Refresh latency', name:'Set at first contract, never edited after', threshold:'Immutable after set', state:'Editable field; 2 known overwrites during CRM cleanup', verdict:'warn' },
+    { dim:'Join keys',       name:'Acquisition date &harr; first invoice &harr; customer ID', threshold:'1:1 mapping', state:'First-invoice history exists back to 2019 to rebuild from', verdict:'pass' }
+  ],
+  9: [ // Segment and size tagging
+    { dim:'Granularity',     name:'ICP segment + ACV band per account', threshold:'Both tags per account', state:'Segment tag in CRM; ACV band derived ad hoc in Excel', verdict:'warn' },
+    { dim:'Completeness',    name:'Tags populated on every active account', threshold:'100% of accounts', state:'Segment 92% populated; band 100% derivable from billing', verdict:'warn' },
+    { dim:'Refresh latency', name:'Band re-derived when contract value changes', threshold:'At amendment', state:'Re-derived annually; mid-year upgrades keep the old band', verdict:'warn' },
+    { dim:'Join keys',       name:'CRM segment tag &harr; billing account', threshold:'1:1 mapping', state:'Depends on customer master dedup (no shared key)', verdict:'warn' }
+  ],
+  10: [ // Subscription vs PS revenue split
+    { dim:'Granularity',     name:'Revenue type tagged at invoice line', threshold:'Per invoice line', state:'Item names imply type; no explicit tag field', verdict:'warn' },
+    { dim:'Completeness',    name:'Every line classifiable as subscription or PS', threshold:'&ge;99% of lines', state:'~92%; mixed-scope invoices bundle setup work with the subscription', verdict:'warn' },
+    { dim:'Refresh latency', name:'Classification current with each invoice run', threshold:'Per invoice run', state:'OK once tag exists; item catalog is stable', verdict:'pass' },
+    { dim:'Join keys',       name:'Invoice line &harr; GL revenue account (sub vs PS)', threshold:'1:1 mapping', state:'GL splits sub vs PS at the account level; line-level bridge is inferred', verdict:'warn' }
+  ],
+  11: [ // Revenue-to-billings tie-out
+    { dim:'Granularity',     name:'Deferred revenue tracked per contract', threshold:'Per contract', state:'Single deferred balance at entity level; trued up annually', verdict:'fail' },
+    { dim:'Completeness',    name:'Roll-forward covers all advance billing', threshold:'100% of advance billing', state:'No roll-forward maintained', verdict:'fail' },
+    { dim:'Refresh latency', name:'Roll-forward closes monthly', threshold:'Monthly', state:'Annual true-up at review only', verdict:'fail' },
+    { dim:'Join keys',       name:'Billings &harr; recognized revenue &harr; deferred movement', threshold:'Ties within 0.5%', state:'Cannot test until the roll-forward exists', verdict:'fail' }
+  ],
+  12: [ // Renewal event log
+    { dim:'Granularity',     name:'Renewal event with uplift asked vs realized per contract', threshold:'Per renewal event', state:'Renewals processed as continued billing; no event record', verdict:'fail' },
+    { dim:'Completeness',    name:'&ge;24 months of renewal events captured', threshold:'&ge;24 months', state:'0 months; reconstructable from invoice deltas for ~2 years', verdict:'fail' },
+    { dim:'Refresh latency', name:'Event logged within 10 days of renewal decision', threshold:'&le;10 days', state:'No process today', verdict:'fail' },
+    { dim:'Join keys',       name:'Renewal event &harr; contract &harr; price change', threshold:'1:1 mapping', state:'Depends on the contract register existing first', verdict:'fail' }
+  ]
+};
+
+// Effort breakdown per action: 3-5 line items describing the work
+const ACTION_DETAILS = {
+  A1: ['Define one ARR convention: monthly &times;12, quarterly &times;4, annual as-is, multi-year ratable',
+       'Rebuild the subscription schedule per contract line from the billing system',
+       'Layer multi-year deals into per-year ARR (fixes the 3 front-loaded deals)',
+       'Reconcile schedule to GL revenue and billing for trailing 8 quarters (&le;0.5% tolerance)',
+       'Hand off a refresh routine the bookkeeper can run at each close'],
+  A2: ['Inventory all executed contracts and amendments (PDF archive + email)',
+       'Key start / end / renewal / auto-renew / uplift terms into a structured register',
+       'Link each register row to the canonical customer ID and billing schedule',
+       'Flag contracts renewing in the next 12 months for the renewal calendar'],
+  A3: ['Pull customer lists from QuickBooks, the CRM, and the contract spreadsheet',
+       'Fuzzy-match on name + domain + billing address; manual review of low-confidence matches',
+       'Publish a canonical customer_id crosswalk and wire the 9 known variants',
+       'Add segment + ACV band tags to the crosswalk so finance cuts stop being manual'],
+  A4: ['Pull amended invoice lines for the trailing 8 quarters',
+       'Attribute each expansion event to price-up, seat-up, or product-add using contract terms and price list',
+       'Review attributions with the account owners for the top 20 customers',
+       'Define the go-forward rule: every upsell books as split component lines'],
+  A5: ['Define reason taxonomies: contraction (pricing / competition / no-longer-needed / out-of-business) and churn',
+       'Backfill trailing 8 quarters from account-manager threads and offboarding notes',
+       'Add required reason fields to the CRM downgrade and offboarding workflows',
+       'Monthly report: contraction and churn $ by reason, by segment'],
+  A6: ['Add a revenue-type field (subscription / PS) to the invoice item catalog',
+       'Reclassify the item list once; split the known mixed-scope invoice templates',
+       'Backfill trailing 24 months of invoice lines by item mapping',
+       'Tie line-level totals to the GL sub vs PS accounts as a monthly check'],
+  A7: ['Build a deferred revenue roll-forward per contract: opening + billings &minus; recognized = closing',
+       'Reconstruct opening balances from contract terms and invoice history',
+       'Close the roll-forward monthly alongside the ARR schedule',
+       'Monthly tie-out: billings to revenue to deferred movement within 0.5%'],
+  A8: ['Identify the 11 accounts carrying the 2019 migration placeholder date',
+       'Cross-reference first invoice date in the billing history',
+       'Update the customer master and lock the field against edits',
+       'Re-run the cohort retention curves to validate vintage assignment']
+};
+
+/* Which analysis chart each check serves + scorecard overlays + fixing action */
+const T4 = {
+  relevantCheckIds: [1,2,3,4,5,6,7,8,9,10,11,12],
+  byId: {
+    1:  { tabs:['T1','T2','T3'], have:'pass', format:'warn', clean:'warn', actionRef:'A3' },
+    2:  { tabs:['T2','T3'],      have:'warn', format:'warn', clean:'warn', actionRef:'A2' },
+    3:  { tabs:['T1','T3'],      have:'fail', format:'fail', clean:'warn', actionRef:'A1' },
+    4:  { tabs:['T1'],           have:'warn', format:'warn', clean:'warn', actionRef:'A1' },
+    5:  { tabs:['T2'],           have:'fail', format:'fail', clean:'fail', actionRef:'A4' },
+    6:  { tabs:['T2'],           have:'fail', format:'fail', clean:'fail', actionRef:'A5' },
+    7:  { tabs:['T2','T3'],      have:'warn', format:'warn', clean:'warn', actionRef:'A5' },
+    8:  { tabs:['T2','T3'],      have:'pass', format:'pass', clean:'warn', actionRef:'A8' },
+    9:  { tabs:['T1','T2','T3'], have:'warn', format:'warn', clean:'warn', actionRef:'A3' },
+    10: { tabs:['T1','T3'],      have:'pass', format:'warn', clean:'warn', actionRef:'A6' },
+    11: { tabs:['T1'],           have:'fail', format:'fail', clean:'fail', actionRef:'A7' },
+    12: { tabs:['T2','T3'],      have:'fail', format:'fail', clean:'fail', actionRef:'A2' }
+  },
+  relevantActionIds: ['A1','A2','A3','A4','A5','A6','A7','A8']
+};
+
+// Human-readable names for the three analyses (IDs live under the hood only)
+const TAB_NAMES = {
+  T1: 'Sources of growth',
+  T2: 'Where growth stuck',
+  T3: 'Growth sustainability'
+};
+
+function actionNameById(aid){
+  const a = S.actionItems.find(x=>x.id===aid);
+  return a ? a.action : '';
+}
+function checkNameById(cid){
+  const ch = S.dataChecks.find(c=>c.id===cid);
+  return ch ? ch.area : '';
+}
+function truncate(s, n){
+  if(!s) return '';
+  if(s.length <= n) return s;
+  return s.slice(0, n-1).replace(/\s+\S*$/,'') + '…';
+}
+function chartChipsHTML(tabCodes){
+  return tabCodes.map(t=>'<span class="chart-chip" data-tab-id="'+t+'">'+
+    (TAB_NAMES[t]||t)+'</span>').join('');
+}
+function fixesNamesHTML(unblockIds){
+  const names = unblockIds.map(checkNameById).filter(n=>n);
+  if(!names.length) return '<span style="color:var(--slate-lite)">&mdash;</span>';
+  const full = names.join(' + ');
+  if(names.length <= 2){
+    return '<span class="fixes-list" title="'+full.replace(/"/g,'&quot;')+'">'+names.join(' + ')+'</span>';
+  }
+  const head = names[0] + ' + ' + (names.length - 1) + ' more';
+  return '<span class="fixes-list" title="'+full.replace(/"/g,'&quot;')+'">'+head+'</span>';
+}
+function fixedByNamesHTML(actionRef){
+  if(!actionRef || actionRef==='—' || actionRef==='-'){
+    return '<span style="color:var(--slate-lite)">&mdash;</span>';
+  }
+  const ids = actionRef.split(',').map(s=>s.trim()).filter(s=>s);
+  const names = ids.map(actionNameById).filter(n=>n);
+  if(!names.length) return '<span style="color:var(--slate-lite)">&mdash;</span>';
+  const joined = names.join(' + ');
+  const shown = truncate(joined, 48);
+  return '<span class="fix-name" title="'+joined.replace(/"/g,'&quot;')+'">'+shown+'</span>';
+}
+function ynGlyph(v){
+  if(v==='pass') return '<span class="glyph-pass">&#10003;</span>';
+  if(v==='warn') return '<span class="glyph-warn">&#9888;</span>';
+  return '<span class="glyph-fail">&#10007;</span>';
+}
+function statusPill(s){
+  if(s==='pass') return '<span class="status-cell status-pass">&#x1F7E2; Ready</span>';
+  if(s==='warn') return '<span class="status-cell status-warn">&#x1F7E1; Workable with gaps</span>';
+  return '<span class="status-cell status-fail">&#x1F534; Illustrative &mdash; fix required</span>';
+}
+function aggregateStatus(checkStatus, overlay){
+  const order = {pass:0, warn:1, fail:2};
+  const arr = [checkStatus, overlay.format, overlay.clean, overlay.have];
+  let worst = 'pass';
+  arr.forEach(v=>{ if(order[v] > order[worst]) worst = v; });
+  return worst;
+}
+function ownerClass(owner){
+  if(/Customer Success/i.test(owner)) return 'owner-CustomerSuccess';
+  if(/Sales Ops/i.test(owner))        return 'owner-SalesOps';
+  if(/IT/i.test(owner))               return 'owner-PortcoIT';
+  if(/Admin/i.test(owner))            return 'owner-Admin';
+  if(/Finance/i.test(owner))          return 'owner-PortcoFinance';
+  return 'owner-Admin';
+}
+
+/* =========================================================
+   FILTER MATH — buildView() is the SINGLE SOURCE OF TRUTH.
+   Every tile/chart with filter dependency reads from buildView().
+   Aggregates come from SAAS.query (granular facts); the flows
+   reconcile by construction so the waterfall closes at $0 gap.
+   ========================================================= */
+function buildView(){
+  const v = S.query({seg:segF, size:sizeF}, periodF);
+  v.samePP  = +(v.ndr - 100).toFixed(1);                                    // same-cohort growth pp
+  v.dragPP  = v.open>0 ? +(-((v.contr + v.churn)/v.open)*100).toFixed(1) : 0; // churn drag pp
+  v.newPP   = v.open>0 ? +((v.newL/v.open)*100).toFixed(1) : 0;
+  v.expPP   = v.open>0 ? +((v.exp/v.open)*100).toFixed(1) : 0;
+  v.contrPP = v.open>0 ? +((v.contr/v.open)*100).toFixed(1) : 0;
+  v.churnPP = v.open>0 ? +((v.churn/v.open)*100).toFixed(1) : 0;
+  return v;
+}
+function refreshHeadline(){
+  const v = buildView();
+  document.getElementById('kpiHeadline').textContent =
+    periodLabel(periodF) + ' ARR $' + v.close.toFixed(1) + 'M  ·  Growth ' + fmtPct(v.reported) +
+    '  ·  New logo $' + v.newL.toFixed(1) + 'M  ·  Expansion $' + v.exp.toFixed(1) + 'M';
+}
+
+/* Segment-weighted lookup for tables keyed {seg:{period:value}}.
+   When seg=ALL, the value is the TRUE opening-ARR-weighted average across
+   segments (never 1.00 and never any single segment's value). */
+function segWeighted(table){
+  if(segF !== 'ALL'){
+    return table[segF][periodF];
+  }
+  const segs = ['Enterprise','Midmarket','SMB'];
+  let wsum = 0, vsum = 0;
+  segs.forEach(function(sg){
+    const w = S.query({seg:sg, size:sizeF}, periodF).open;
+    wsum += w;
+    vsum += table[sg][periodF] * w;
+  });
+  return wsum > 0 ? vsum / wsum : 0;
+}
+
+/* Contraction reason shares for the current segment filter, blended by each
+   segment's contraction $ when seg=ALL, with the period tilt applied to the
+   pricing share and the mix renormalized. */
+function reasonShares(periodK){
+  const keys = ['pricing','competition','sunset','oob'];
+  let mix = {pricing:0, competition:0, sunset:0, oob:0};
+  if(segF !== 'ALL'){
+    keys.forEach(function(k){ mix[k] = S.contractionReasons[segF][k]; });
+  } else {
+    const segs = ['Enterprise','Midmarket','SMB'];
+    let wsum = 0;
+    segs.forEach(function(sg){
+      const w = S.query({seg:sg, size:sizeF}, periodK).contr;
+      wsum += w;
+      keys.forEach(function(k){ mix[k] += S.contractionReasons[sg][k] * w; });
+    });
+    if(wsum > 0) keys.forEach(function(k){ mix[k] = mix[k]/wsum; });
+  }
+  // Period tilt on pricing pushback, renormalized
+  const tilt = S.contractionPeriodTilt[periodK] || 1.0;
+  mix.pricing = mix.pricing * tilt;
+  const tot = keys.reduce(function(a,k){ return a + mix[k]; }, 0);
+  keys.forEach(function(k){ mix[k] = mix[k]/tot; });
+  return mix;
+}
+
+/* ============== TAB 1 RENDER ============== */
+function renderTab1(){
+  const v = buildView();
+  const lbl = periodLabel(periodF);
+  const qs = S.periodQuarters[periodF];
+
+  document.getElementById('t1NewLogo').textContent = fmt$(v.newL);
+  document.getElementById('t1NewLogoUnit').textContent = 'Logos signed  ·  ' + lbl;
+  document.getElementById('t1NewLogoShare').textContent = v.newPP.toFixed(1)+'% of opening ARR';
+
+  document.getElementById('t1Expansion').textContent = fmt$(v.exp);
+  document.getElementById('t1ExpansionShare').textContent = v.expPP.toFixed(1)+'% of opening ARR';
+
+  document.getElementById('t1Contraction').innerHTML = '&minus;'+fmt$(v.contr);
+  document.getElementById('t1ContractionShare').textContent = v.contrPP.toFixed(1)+'% of opening ARR';
+
+  document.getElementById('t1Churn').innerHTML = '&minus;'+fmt$(v.churn);
+  document.getElementById('t1ChurnShare').textContent = v.churnPP.toFixed(1)+'% of opening ARR';
+
+  document.getElementById('t1BridgeLabel').textContent =
+    lbl.toUpperCase()+'  ·  OPENING ('+qs[0]+') → CLOSING ('+qs[qs.length-1]+')  ·  NDR '+v.ndr.toFixed(1)+'%';
+
+  /* Waterfall: Opening + New logo + Expansion − Contraction − Churn = Closing.
+     RECONCILIATION RULE: flows come from SAAS.query over the same fact rows
+     that produce opening and closing, and the fact table is built so that
+     close = open + newL + exp − contr − churn at every cell. Any floating-
+     point residual is absorbed into the expansion step so the bridge closes
+     at exactly $0 gap. */
+  destroyChart('t1bridge');
+  const open = v.open, close = v.close;
+  let nlD = +v.newL.toFixed(4), exD = +v.exp.toFixed(4);
+  let coD = -(+v.contr.toFixed(4)), chD = -(+v.churn.toFixed(4));
+  const residual = +(close - open - nlD - exD - coD - chD).toFixed(6);
+  if(Math.abs(residual) > 0){ exD = +(exD + residual).toFixed(6); }
+
+  const wfLabels = ['Opening ARR', 'New logo', 'Expansion', 'Contraction', 'Churn', 'Closing ARR'];
+  const deltas   = [null, nlD, exD, coD, chD, null];
+  const anchors  = [open, null, null, null, null, close];
+  const stepCols = [NCC.navy, NCC.green, NCC.gold, NCC.amber, NCC.red, NCC.navy];
+
+  const invisibleBase = [];
+  const valueData = [];
+  const barColors = [];
+  let cum = open;
+  for(let i=0;i<wfLabels.length;i++){
+    if(anchors[i] !== null){
+      invisibleBase.push(0);
+      valueData.push(anchors[i]);
+      barColors.push(stepCols[i]);
+    } else {
+      const d = deltas[i];
+      if(d >= 0){ invisibleBase.push(cum); valueData.push(d); }
+      else { invisibleBase.push(cum + d); valueData.push(Math.abs(d)); }
+      barColors.push(stepCols[i]);
+      cum += d;
+    }
+  }
+  const allTops = invisibleBase.map((b,i)=> b + valueData[i]);
+  const yMinRaw = Math.min(open, close);
+  const yMaxRaw = Math.max(...allTops);
+  const span = Math.max(0.5, yMaxRaw - yMinRaw);
+  const yMin = Math.max(0, yMinRaw - span*0.9);
+  const yMax = yMaxRaw + span*0.35;
+
+  chartRefs.t1bridge = new Chart(document.getElementById('t1Bridge'),{
+    type:'bar',
+    data:{labels:wfLabels, datasets:[
+      { label:'_base', data:invisibleBase,
+        backgroundColor:'rgba(0,0,0,0)', borderColor:'rgba(0,0,0,0)',
+        stack:'wf', categoryPercentage:.62, barPercentage:.85,
+        datalabels:{display:false} },
+      { label:'$M', data:valueData, backgroundColor:barColors,
+        borderRadius:0, stack:'wf', categoryPercentage:.62, barPercentage:.85 }
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{display:false},
+        tooltip:{filter:c=>c.datasetIndex===1, callbacks:{
+          label:c=>{
+            const i = c.dataIndex;
+            if(anchors[i] !== null) return wfLabels[i]+': '+fmt$2(anchors[i]);
+            const d = deltas[i];
+            return wfLabels[i]+': '+(d>=0?'+':'−')+'$'+Math.abs(d).toFixed(2)+'M';
+          }
+        }},
+        datalabels:{display:ctx=>ctx.datasetIndex===1, anchor:'end', align:'top',
+          color:NCC.navyDeep, font:{weight:700,size:10},
+          formatter:(val,ctx)=>{
+            const i = ctx.dataIndex;
+            if(anchors[i] !== null) return '$'+anchors[i].toFixed(1)+'M';
+            const d = deltas[i];
+            return (d>=0?'+':'−')+'$'+Math.abs(d).toFixed(2)+'M';
+          }}
+      },
+      scales:{
+        x:{stacked:true, grid:{display:false}, ticks:{font:{size:11}}},
+        y:{stacked:true, beginAtZero:false, min:yMin, max:yMax, grid:{color:NCC.border},
+           title:{display:true,text:'$M ARR',font:{size:11}}, ticks:{callback:v=>'$'+(+v).toFixed(1)+'M'}}
+      }
+    }
+  });
+
+  /* 12-quarter ARR trend — closing ARR per quarter from the fact table */
+  destroyChart('t1trend');
+  const series = S.quarterSeries({seg:segF, size:sizeF});
+  chartRefs.t1trend = new Chart(document.getElementById('t1ArrTrend'),{
+    data:{labels:series.map(x=>x.q), datasets:[
+      {type:'line', label:'Closing ARR ($M)', data:series.map(x=>x.arr),
+       borderColor:NCC.navy, backgroundColor:'rgba(30,39,97,0.10)',
+       tension:.2, pointRadius:3, borderWidth:2.5, fill:true},
+      {type:'bar', label:'New logo ARR added ($M)', data:series.map(x=>x.newL),
+       backgroundColor:'rgba(44,95,45,0.55)', categoryPercentage:.6, barPercentage:.8, yAxisID:'y1'}
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=> c.dataset.label+': $'+c.parsed.y.toFixed(2)+'M'}}
+      },
+      scales:{
+        x:{grid:{display:false}},
+        y:{grid:{color:NCC.border}, title:{display:true,text:'$M ARR',font:{size:11}},
+           ticks:{callback:v=>'$'+(+v).toFixed(0)+'M'}},
+        y1:{position:'right', grid:{display:false}, beginAtZero:true,
+           title:{display:true,text:'New logo $M / qtr',font:{size:11}},
+           ticks:{callback:v=>'$'+(+v).toFixed(1)+'M'}}
+      }
+    }
+  });
+}
+
+/* ============== TAB 2 RENDER ============== */
+function renderTab2(){
+  const v = buildView();
+  const reasonLabels = {pricing:'Pricing pushback', competition:'Competitive displacement', sunset:'No longer needed', oob:'Out of business'};
+
+  // Tiles — per-segment story values, ALL = true opening-ARR-weighted average,
+  // then contract-size multiplier (whose ALL key is band-weighted, not 1.00)
+  const nlRet  = segWeighted(S.stuckTiers.newLogoRetention)   * S.stuckSizeMult.retention[sizeF];
+  const expPer = segWeighted(S.stuckTiers.expansionPersistence)* S.stuckSizeMult.persistence[sizeF];
+  const atRisk = segWeighted(S.stuckTiers.atRiskShare)         * S.stuckSizeMult.atRisk[sizeF];
+  document.getElementById('t2NlRet').textContent = Math.round(nlRet)+'%';
+  const nlRetEl = document.getElementById('t2NlRet');
+  nlRetEl.style.setProperty('--big', nlRet>=85 ? 'var(--green)' : (nlRet>=75 ? 'var(--amber)' : 'var(--red)'));
+  document.getElementById('t2NlRetNote').textContent =
+    nlRet>=85 ? 'Logo engine compounding, not replacing' : 'Logo engine is refilling a leaky bucket';
+
+  document.getElementById('t2ExpPersist').textContent = Math.round(expPer)+'%';
+  const epEl = document.getElementById('t2ExpPersist');
+  epEl.style.setProperty('--big', expPer>=85 ? 'var(--gold)' : 'var(--red)');
+  document.getElementById('t2ExpPersistNote').textContent =
+    expPer>=85 ? 'Expansion survives renewal: real growth' : 'Expansion reverses at renewal: true-ups, not growth';
+
+  document.getElementById('t2AtRisk').textContent = Math.round(atRisk)+'%';
+  const arEl = document.getElementById('t2AtRisk');
+  arEl.style.setProperty('--big', atRisk<=6 ? 'var(--green)' : (atRisk<=15 ? 'var(--amber)' : 'var(--red)'));
+  document.getElementById('t2AtRiskNote').textContent =
+    atRisk<=6 ? 'Watch list is thin' : (atRisk<=15 ? 'Watch list needs an owner' : 'A third of the base is on the watch list');
+
+  // Largest contraction driver for the current filter
+  const mix = reasonShares(periodF);
+  let topKey = 'pricing';
+  Object.keys(mix).forEach(function(k){ if(mix[k] > mix[topKey]) topKey = k; });
+  document.getElementById('t2ContrDriver').textContent = reasonLabels[topKey].split(' ')[0];
+  document.getElementById('t2ContrDriverUnit').textContent =
+    Math.round(mix[topKey]*100)+'% of '+fmt$2(v.contr)+' contraction';
+  document.getElementById('t2ContrDriverNote').textContent =
+    topKey==='pricing' ? 'Renewal-uplift pushback is growing' :
+    topKey==='competition' ? 'Displacement pressure in the base' :
+    topKey==='sunset' ? 'Descoping: usage case ended' : 'Customer failures drive the losses';
+
+  /* Expansion decomposition — top customers under the current filter.
+     If the seg × size cell has too few sample customers, fall back to the
+     segment list and attribute the band's ARR share of each customer's
+     expansion, so every combo still reads distinctly. */
+  destroyChart('t2decomp');
+  const pScale = S.customerPeriodScale[periodF] || 1.0;
+  let clist = S.customers.filter(function(c){
+    if(segF !== 'ALL' && c.seg !== segF) return false;
+    if(sizeF !== 'ALL' && c.size !== sizeF) return false;
+    return true;
+  });
+  let bandShare = 1.0;
+  if(clist.length < 3 && sizeF !== 'ALL'){
+    clist = S.customers.filter(function(c){ return segF==='ALL' || c.seg===segF; });
+    const bandOpen = S.query({seg:segF, size:sizeF}, periodF).open;
+    const allOpen  = S.query({seg:segF, size:'ALL'}, periodF).open;
+    bandShare = allOpen > 0 ? bandOpen/allOpen : 1.0;
+  }
+  clist = clist.slice().sort(function(a,b){ return b.expK - a.expK; }).slice(0,8);
+  const dLabels = clist.map(c=>c.name);
+  const priceD  = clist.map(c=> +(c.expK * c.split.price   * pScale * bandShare).toFixed(1));
+  const seatD   = clist.map(c=> +(c.expK * c.split.seat    * pScale * bandShare).toFixed(1));
+  const prodD   = clist.map(c=> +(c.expK * c.split.product * pScale * bandShare).toFixed(1));
+  chartRefs.t2decomp = new Chart(document.getElementById('t2ExpDecomp'),{
+    type:'bar',
+    data:{labels:dLabels, datasets:[
+      {label:'Price-up $K',    data:priceD, backgroundColor:NCC.navy,  stack:'e', categoryPercentage:.7, barPercentage:.82},
+      {label:'Seat-up $K',     data:seatD,  backgroundColor:NCC.gold,  stack:'e', categoryPercentage:.7, barPercentage:.82},
+      {label:'Product-add $K', data:prodD,  backgroundColor:NCC.green, stack:'e', categoryPercentage:.7, barPercentage:.82}
+    ]},
+    options:{
+      indexAxis:'y',
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=> c.dataset.label.replace(' $K','')+': $'+c.parsed.x.toFixed(1)+'K'}}
+      },
+      scales:{
+        x:{stacked:true, grid:{color:NCC.border}, beginAtZero:true,
+           title:{display:true,text:'Expansion ARR ($K) '+periodLabel(periodF),font:{size:11}},
+           ticks:{callback:v=>'$'+(+v).toFixed(0)+'K'}},
+        y:{stacked:true, grid:{display:false}, ticks:{font:{size:11}}}
+      }
+    }
+  });
+
+  /* New-logo cohort retention curves by acquisition vintage */
+  destroyChart('t2vint');
+  const vinKeys = ['FY2022','FY2023','FY2024','FY2025'];
+  const vinCols = [NCC.navy, NCC.gold, NCC.green, NCC.slateLite];
+  const segsFor = (segF==='ALL') ? ['Enterprise','Midmarket','SMB'] : [segF];
+  const gainF = S.vintageSizeTilt.gain[sizeF];
+  const lossF = S.vintageSizeTilt.loss[sizeF];
+  const vinDatasets = vinKeys.map(function(fy, vi){
+    const maxLen = 5;
+    const pts = [];
+    for(let off=0; off<maxLen; off++){
+      let wsum=0, vsum=0;
+      segsFor.forEach(function(sg){
+        const curve = S.vintages.curves[sg][fy];
+        if(!curve || off >= curve.length) return;
+        const w = (S.vintages.initialARR[sg] && S.vintages.initialARR[sg][fy]) || 0;
+        wsum += w; vsum += curve[off]*w;
+      });
+      if(wsum <= 0){ pts.push(null); continue; }
+      let val = vsum/wsum;
+      val = val >= 100 ? 100 + (val-100)*gainF : 100 - (100-val)*lossF;
+      pts.push(+val.toFixed(1));
+    }
+    return {label:fy+' vintage', data:pts, borderColor:vinCols[vi], backgroundColor:vinCols[vi],
+            tension:.2, pointRadius:3, borderWidth:2.5, fill:false, spanGaps:false};
+  });
+  chartRefs.t2vint = new Chart(document.getElementById('t2Vintage'),{
+    type:'line',
+    data:{labels:['Year 0','Year 1','Year 2','Year 3','Year 4'], datasets:vinDatasets},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=> c.dataset.label+': '+(c.parsed.y===null?'n/a':c.parsed.y.toFixed(0)+' (index)')}}
+      },
+      scales:{
+        x:{grid:{display:false}},
+        y:{grid:{color:NCC.border}, suggestedMin:40, suggestedMax:130,
+           title:{display:true,text:'ARR held (initial cohort = 100)',font:{size:11}},
+           ticks:{callback:v=>(+v).toFixed(0)}}
+      }
+    }
+  });
+
+  /* Contraction reason mix across periods */
+  destroyChart('t2reasons');
+  const pers = ['FY2023','FY2024','FY2025','TTM'];
+  const rKeys = ['pricing','competition','sunset','oob'];
+  const rCols = {pricing:NCC.gold, competition:NCC.navy, sunset:NCC.slateLite, oob:NCC.red};
+  const perContr = pers.map(function(p){ return S.query({seg:segF, size:sizeF}, p).contr; });
+  const perMix   = pers.map(function(p){ return reasonShares(p); });
+  const rDatasets = rKeys.map(function(k){
+    return {label:reasonLabels[k],
+      data:pers.map(function(p,i){ return +(perContr[i]*perMix[i][k]).toFixed(3); }),
+      backgroundColor:rCols[k], stack:'r', categoryPercentage:.55, barPercentage:.85};
+  });
+  chartRefs.t2reasons = new Chart(document.getElementById('t2ContrReasons'),{
+    type:'bar',
+    data:{labels:pers.map(periodLabel), datasets:rDatasets},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=> c.dataset.label+': $'+c.parsed.y.toFixed(2)+'M'}}
+      },
+      scales:{
+        x:{stacked:true, grid:{display:false}, ticks:{font:{size:11}}},
+        y:{stacked:true, beginAtZero:true, grid:{color:NCC.border},
+           title:{display:true,text:'Contraction ARR ($M)',font:{size:11}},
+           ticks:{callback:v=>'$'+(+v).toFixed(1)+'M'}}
+      }
+    }
+  });
+
+  /* Customer detail table */
+  const tb = document.querySelector('#t2Table tbody');
+  const tlist = S.customers.filter(function(c){
+    if(segF !== 'ALL' && c.seg !== segF) return false;
+    if(sizeF !== 'ALL' && c.size !== sizeF) return false;
+    return true;
+  });
+  const rows = (tlist.length ? tlist : S.customers.filter(function(c){ return segF==='ALL' || c.seg===segF; }));
+  tb.innerHTML = rows.map(function(c){
+    const arr = Math.round(c.arrK * pScale);
+    const exp = +(c.expK * pScale).toFixed(1);
+    const psChip = c.psShare>=50 ? '<span class="chip-r">'+c.psShare+'%</span>'
+                 : c.psShare>=25 ? '<span class="chip-y">'+c.psShare+'%</span>'
+                 : '<span class="chip-g">'+c.psShare+'%</span>';
+    let read;
+    if(c.psShare>=50)              read = 'PS-heavy: expansion is price-only';
+    else if(c.split.product>=0.40) read = 'Product-led: stickiest expansion';
+    else if(c.split.price>=0.60)   read = 'Price-only: at-risk at renewal';
+    else                           read = 'Balanced: seat + product mix';
+    return '<tr>'+
+      '<td><strong>'+c.name+'</strong></td>'+
+      '<td>'+S.segments[c.seg].label+'</td>'+
+      '<td>'+S.sizes[c.size].label+'</td>'+
+      '<td style="text-align:right">'+arr.toLocaleString()+'</td>'+
+      '<td style="text-align:right"><strong>'+exp.toFixed(1)+'</strong></td>'+
+      '<td style="text-align:right">'+Math.round(c.split.price*100)+'%</td>'+
+      '<td style="text-align:right">'+Math.round(c.split.seat*100)+'%</td>'+
+      '<td style="text-align:right" class="'+(c.split.product>=0.4?'pos':(c.split.product<=0.1?'neg':''))+'">'+Math.round(c.split.product*100)+'%</td>'+
+      '<td style="text-align:right">'+psChip+'</td>'+
+      '<td style="color:var(--slate);font-size:11px">'+read+'</td>'+
+    '</tr>';
+  }).join('');
+}
+
+/* ============== TAB 3 RENDER ============== */
+function renderTab3(){
+  const v = buildView();
+
+  const ndrEl = document.getElementById('t3Ndr');
+  ndrEl.textContent = v.ndr.toFixed(1)+'%';
+  ndrEl.style.setProperty('--big', v.ndr>=105 ? 'var(--green)' : (v.ndr>=98 ? 'var(--navy-ink)' : 'var(--red)'));
+  const segNote = 'Enterprise '+S.query({seg:'Enterprise',size:sizeF},periodF).ndr.toFixed(0)+
+    ' · Mid-market '+S.query({seg:'Midmarket',size:sizeF},periodF).ndr.toFixed(0)+
+    ' · SMB '+S.query({seg:'SMB',size:sizeF},periodF).ndr.toFixed(0);
+  document.getElementById('t3NdrNote').textContent = segNote;
+
+  const grrEl = document.getElementById('t3Grr');
+  grrEl.textContent = v.grr.toFixed(1)+'%';
+  grrEl.style.setProperty('--big', v.grr>=90 ? 'var(--green)' : 'var(--red)');
+  document.getElementById('t3GrrNote').textContent =
+    v.grr>=90 ? 'Buyer benchmark: 90%+ for this profile' : 'Below the 90% bar a buyer expects here';
+
+  const scEl = document.getElementById('t3SameCohort');
+  scEl.textContent = fmtPP(v.samePP);
+  scEl.style.setProperty('--big', v.samePP>=0 ? 'var(--gold)' : 'var(--red)');
+  document.getElementById('t3SameCohortNote').textContent =
+    v.samePP>=0 ? 'NDR minus 100: the compounding engine' : 'Existing base is shrinking on its own';
+
+  document.getElementById('t3ChurnDrag').textContent = fmtPP(v.dragPP);
+  document.getElementById('t3ChurnDragNote').textContent =
+    'New logos must outrun '+Math.abs(v.dragPP).toFixed(1)+'pp of attrition each year';
+
+  /* 12-quarter trailing NDR vs gross retention */
+  destroyChart('t3ndr');
+  const series = S.quarterSeries({seg:segF, size:sizeF});
+  chartRefs.t3ndr = new Chart(document.getElementById('t3NdrTrend'),{
+    data:{labels:series.map(x=>x.q), datasets:[
+      {type:'line', label:'Trailing 4-qtr NDR %', data:series.map(x=>x.ndr),
+       borderColor:NCC.gold, backgroundColor:NCC.gold, tension:.2, pointRadius:3, borderWidth:2.5, fill:false},
+      {type:'line', label:'Trailing 4-qtr gross retention %', data:series.map(x=>x.grr),
+       borderColor:NCC.green, backgroundColor:NCC.green, tension:.2, pointRadius:3, borderWidth:2.5, fill:false, borderDash:[6,4]},
+      {type:'line', label:'100% line', data:series.map(()=>100),
+       borderColor:NCC.slateLite, backgroundColor:NCC.slateLite, pointRadius:0, borderWidth:1.5, borderDash:[3,4], fill:false}
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{position:'bottom', labels:{filter:function(item){ return item.text!=='100% line'; }}},
+        tooltip:{callbacks:{label:c=> c.dataset.label+': '+c.parsed.y.toFixed(1)+'%'}}
+      },
+      scales:{
+        x:{grid:{display:false}},
+        y:{grid:{color:NCC.border},
+           title:{display:true,text:'Trailing 4-quarter retention (%)',font:{size:11}},
+           ticks:{callback:v=>(+v).toFixed(0)+'%'}}
+      }
+    }
+  });
+
+  /* Cohort growth engine — stacked area over the four periods.
+     Components (pp of opening ARR) sum exactly to reported ARR growth:
+     expansion + new logo + attrition drag (negative) = reported. */
+  destroyChart('t3area');
+  const pers = ['FY2023','FY2024','FY2025','TTM'];
+  const labels = pers.map(periodLabel);
+  const expPP = [], nlPP = [], dragPP = [], netPP = [];
+  pers.forEach(function(p){
+    const q = S.query({seg:segF, size:sizeF}, p);
+    const e = q.open>0 ? (q.exp/q.open)*100 : 0;
+    const n = q.open>0 ? (q.newL/q.open)*100 : 0;
+    const d = q.open>0 ? -((q.contr+q.churn)/q.open)*100 : 0;
+    expPP.push(+e.toFixed(2)); nlPP.push(+n.toFixed(2)); dragPP.push(+d.toFixed(2));
+    netPP.push(+(e+n+d).toFixed(2));
+  });
+  chartRefs.t3area = new Chart(document.getElementById('t3GrowthArea'),{
+    type:'line',
+    data:{labels:labels, datasets:[
+      {label:'Expansion (existing base)', data:expPP, backgroundColor:'rgba(30,39,97,0.70)',
+        borderColor:NCC.navy, fill:'origin', tension:.25, pointRadius:3, borderWidth:2, stack:'pos'},
+      {label:'New-logo ARR', data:nlPP, backgroundColor:'rgba(44,95,45,0.60)',
+        borderColor:NCC.green, fill:'-1', tension:.25, pointRadius:3, borderWidth:2, stack:'pos'},
+      {label:'Attrition drag (contraction + churn)', data:dragPP, backgroundColor:'rgba(178,34,52,0.55)',
+        borderColor:NCC.red, fill:'origin', tension:.25, pointRadius:3, borderWidth:2, stack:'neg'},
+      {type:'line', label:'Reported ARR growth', data:netPP, stack:'tot',
+        borderColor:NCC.navyDeep, borderDash:[6,4], borderWidth:2, pointRadius:4,
+        pointStyle:'rectRot', backgroundColor:NCC.navyDeep, fill:false}
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=> c.dataset.label+': '+c.parsed.y.toFixed(1)+'pp'}}
+      },
+      scales:{
+        x:{grid:{display:false}},
+        y:{stacked:true, grid:{color:NCC.border},
+          title:{display:true,text:'Contribution to ARR growth (pp of opening)',font:{size:11}},
+          ticks:{callback:v=>(+v).toFixed(0)+'pp'},
+          suggestedMin:-24, suggestedMax:26}
+      }
+    }
+  });
+}
+
+/* ============== TAB 4 RENDER — DATA READINESS AUDIT ============== */
+function renderTab4(){
+  const ids = T4.relevantCheckIds;
+  const checksMap = {};
+  S.dataChecks.forEach(c=>{ checksMap[c.id] = c; });
+
+  let nReady=0, nWorkable=0, nGap=0;
+  ids.forEach(id=>{
+    const ch = checksMap[id];
+    const ov = T4.byId[id];
+    const agg = aggregateStatus(ch.status, ov);
+    if(agg==='pass') nReady++;
+    else if(agg==='warn') nWorkable++;
+    else nGap++;
+  });
+  document.getElementById('t4Needed').textContent = ids.length;
+  document.getElementById('t4Ready').textContent = nReady;
+  document.getElementById('t4Workable').textContent = nWorkable;
+  document.getElementById('t4Gap').textContent = nGap;
+
+  const actions = S.actionItems.filter(a => T4.relevantActionIds.includes(a.id));
+  const maxWeeks = actions.reduce((a,b)=>Math.max(a,b.weeks),0);
+  const sumWeeks = actions.reduce((a,b)=>a+b.weeks,0);
+  document.getElementById('t4Totals').innerHTML =
+    'Total fix  &middot;  ' +
+    '<strong>~' + maxWeeks + ' weeks</strong> (critical path)  &middot;  ' +
+    sumWeeks + ' analyst-weeks total across ' + actions.length + ' workstreams';
+
+  const sortedIds = ids.slice().sort((a,b)=>a-b);
+  const sbody = document.querySelector('#t4Scorecard tbody');
+  sbody.innerHTML = sortedIds.map(id=>{
+    const ch = checksMap[id];
+    const ov = T4.byId[id];
+    const agg = aggregateStatus(ch.status, ov);
+    const chartChips = chartChipsHTML(ov.tabs);
+    return '<tr data-check-id="'+id+'">'+
+      '<td><strong>'+ch.area+'</strong><div style="color:var(--slate);font-size:11px;margin-top:2px">'+ch.check+'</div>'+
+        (ch.detail?'<div style="color:var(--slate-lite);font-size:10.5px;margin-top:2px">'+ch.detail+'</div>':'')+'</td>'+
+      '<td>'+chartChips+'</td>'+
+      '<td class="ctr">'+ynGlyph(ov.have)+'</td>'+
+      '<td class="ctr">'+ynGlyph(ov.format)+'</td>'+
+      '<td class="ctr">'+ynGlyph(ov.clean)+'</td>'+
+      '<td>'+statusPill(agg)+'</td>'+
+      '<td>'+fixedByNamesHTML(ov.actionRef)+'</td>'+
+    '</tr>';
+  }).join('');
+  sbody.querySelectorAll('tr').forEach(tr=>{
+    tr.addEventListener('click', ()=> openCheckDetail(parseInt(tr.dataset.checkId,10)));
+  });
+
+  const priorityOrder = {Critical:0, High:1, Medium:2};
+  const sorted = actions.slice().sort((a,b)=>{
+    const p = priorityOrder[a.priority] - priorityOrder[b.priority];
+    if(p!==0) return p;
+    return a.weeks - b.weeks;
+  });
+  const abody = document.querySelector('#t4Actions tbody');
+  abody.innerHTML = sorted.map(a=>{
+    const oc = ownerClass(a.owner);
+    const fixesCell = fixesNamesHTML(a.unblocks);
+    return '<tr data-action-id="'+a.id+'">'+
+      '<td><strong>'+a.action+'</strong>'+
+        '<div style="color:var(--slate);font-size:11px;margin-top:3px">Lever: '+a.lever+'</div></td>'+
+      '<td><span class="owner-pill '+oc+'">'+a.owner+'</span></td>'+
+      '<td class="right"><strong>'+a.weeks+' wks</strong></td>'+
+      '<td class="ctr"><span class="pri-pill pri-'+a.priority+'">'+a.priority+'</span></td>'+
+      '<td>'+fixesCell+'</td>'+
+    '</tr>';
+  }).join('');
+  abody.querySelectorAll('tr').forEach(tr=>{
+    tr.addEventListener('click', ()=> openActionDetail(tr.dataset.actionId));
+  });
+}
+
+/* ============== TAB 4 DETAIL PANELS (check / action / universe) ============== */
+function _statusBadgeHTML(s){
+  const txt = s==='pass'?'Ready' : s==='warn'?'Workable with gaps' : 'Fix required';
+  return '&#9679; ' + txt;
+}
+function _verdictChip(v){
+  if(v==='pass') return '<span class="ck-pass">&#10003; Pass</span>';
+  if(v==='warn') return '<span class="ck-warn">&#9888; Warn</span>';
+  return '<span class="ck-fail">&#10007; Fail</span>';
+}
+
+function openCheckDetail(checkId){
+  const ch = S.dataChecks.find(c=>c.id===checkId);
+  const ov = T4.byId[checkId];
+  if(!ch || !ov) return;
+  const agg = aggregateStatus(ch.status, ov);
+  const subs = CHECK_SUBTESTS[checkId] || [];
+
+  document.getElementById('apTitle').innerHTML = ch.area;
+  const chartNamesList = ov.tabs.map(t=>TAB_NAMES[t]||t).join(' chart, ') + ' chart';
+  document.getElementById('apSubtitle').innerHTML = 'Used to build: '+chartNamesList;
+  const sEl = document.getElementById('apStatus');
+  const cls = agg==='pass'?'green' : agg==='warn'?'yellow' : 'red';
+  sEl.className = 'astatus ' + cls;
+  sEl.innerHTML = _statusBadgeHTML(agg);
+
+  const descHtml =
+    '<div style="font-size:12px;line-height:1.55;color:var(--navy-ink)">'+
+    '<div><strong>Check:</strong> '+ch.check+'</div>'+
+    '<div style="margin-top:4px"><strong>Threshold:</strong> '+ch.threshold+'</div>'+
+    (ch.detail?'<div style="margin-top:4px;color:var(--slate)"><strong style="color:var(--navy-ink)">Current state:</strong> '+ch.detail+'</div>':'')+
+    '</div>';
+
+  let subHtml = '';
+  if(subs.length){
+    subHtml = '<table class="subtest-tbl"><thead><tr><th>Dimension</th><th>Sub-test</th><th style="width:90px">Threshold</th><th style="width:48px" class="right">Result</th></tr></thead><tbody>'+
+      subs.map(s=>'<tr><td>'+s.dim+'</td><td><strong>'+s.name+'</strong>'+
+        '<div style="color:var(--slate);margin-top:3px;font-size:10.5px">'+s.state+'</div></td>'+
+        '<td style="font-size:10.5px">'+s.threshold+'</td>'+
+        '<td class="right">'+_verdictChip(s.verdict)+'</td></tr>').join('')+
+      '</tbody></table>';
+  } else {
+    subHtml = '<div style="color:var(--slate);font-size:11px;font-style:italic">Sub-tests not defined for this check.</div>';
+  }
+
+  const actionRefs = (ov.actionRef||'').split(',').map(s=>s.trim()).filter(s=>s && s!=='—');
+  let fixHtml = '';
+  if(actionRefs.length){
+    fixHtml = actionRefs.map(aid=>{
+      const a = S.actionItems.find(x=>x.id===aid);
+      if(!a) return '';
+      const oc = ownerClass(a.owner);
+      return '<div class="fix-card" data-action-id="'+a.id+'">'+
+        '<div><strong>'+a.action+'</strong></div>'+
+        '<div class="fc-row">'+
+          '<span><strong>Portco contact:</strong> <span class="owner-pill '+oc+'">'+a.owner+'</span></span>'+
+          '<span><strong>Effort:</strong> '+a.weeks+' wks</span>'+
+        '</div>'+
+        '<div class="fc-row">'+
+          '<span><strong>Priority:</strong> <span class="pri-pill pri-'+a.priority+'">'+a.priority+'</span></span>'+
+          '<span><strong>Lever:</strong> '+a.lever+'</span>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  } else {
+    fixHtml = '<div style="color:var(--slate);font-size:11px;font-style:italic">No fix required &mdash; check is passing.</div>';
+  }
+
+  const fixedBySummary = actionRefs.length
+    ? actionRefs.map(aid=>{
+        const a = S.actionItems.find(x=>x.id===aid);
+        if(!a) return '';
+        return a.action + ' (' + a.owner + ', ' + a.weeks + ' wk' + (a.weeks===1?'':'s') + ')';
+      }).filter(s=>s).join('; ')
+    : '';
+  const statusText = agg==='pass'?'Ready' : agg==='warn'?'Workable with gaps' : 'Illustrative — fix required';
+  const summaryHtml =
+    '<div style="font-size:12px;line-height:1.7;color:var(--navy-ink);padding:8px 12px;background:var(--mist);border-left:3px solid var(--navy);margin-bottom:14px">'+
+    '<div><strong>Status:</strong> '+statusText+'</div>'+
+    '<div><strong>Used to build:</strong> '+chartNamesList+'</div>'+
+    (fixedBySummary
+      ? '<div><strong>Fixed by:</strong> '+fixedBySummary+'</div>'
+      : '<div><strong>Fixed by:</strong> &mdash; (no fix required)</div>')+
+    '</div>';
+
+  document.getElementById('apBody').innerHTML =
+    summaryHtml +
+    '<h4>A &middot; Description</h4>' + descHtml +
+    '<h4>B &middot; Sub-tests</h4>' + subHtml +
+    '<h4>C &middot; Fixing action</h4>' + fixHtml +
+    '<button class="close-btn" onclick="closeAudit()">Close</button>';
+
+  document.getElementById('auditPanel').classList.add('open');
+  document.getElementById('auditPanel').setAttribute('aria-hidden','false');
+  document.getElementById('scrim').classList.add('open');
+}
+
+function openActionDetail(actionId){
+  const a = S.actionItems.find(x=>x.id===actionId);
+  if(!a) return;
+  const oc = ownerClass(a.owner);
+
+  document.getElementById('apTitle').innerHTML = a.action;
+  document.getElementById('apSubtitle').innerHTML =
+    'Portco contact: '+a.owner+' &middot; Effort: '+a.weeks+' wk'+(a.weeks===1?'':'s')+' &middot; '+
+    'Priority: '+a.priority+' &middot; Lever: '+a.lever;
+  const sEl = document.getElementById('apStatus');
+  const cls = a.priority==='Critical'?'red' : a.priority==='High'?'yellow' : 'green';
+  sEl.className = 'astatus ' + cls;
+  sEl.innerHTML = '&#9679; '+a.priority;
+
+  const metaHtml =
+    '<div class="fix-card" style="border-left-color:var(--navy)">'+
+      '<div class="fc-row" style="margin-top:0">'+
+        '<span><strong>Portco contact:</strong> <span class="owner-pill '+oc+'">'+a.owner+'</span></span>'+
+        '<span><strong>Effort:</strong> '+a.weeks+' wks</span>'+
+      '</div>'+
+      '<div class="fc-row">'+
+        '<span><strong>Priority:</strong> <span class="pri-pill pri-'+a.priority+'">'+a.priority+'</span></span>'+
+        '<span><strong>Lever:</strong> '+a.lever+'</span>'+
+      '</div>'+
+    '</div>';
+
+  const fixesHtml = '<table><thead><tr><th>Data gap</th><th style="width:200px">Used in</th></tr></thead><tbody>'+
+    a.unblocks.map(uid=>{
+      const ch = S.dataChecks.find(c=>c.id===uid);
+      const ov = T4.byId[uid];
+      const usedIn = ov ? ov.tabs.map(t=>TAB_NAMES[t]||t).join(' chart, ') + ' chart' : '(other analysis)';
+      return '<tr data-check-id="'+uid+'">'+
+        '<td><strong>'+(ch?ch.area:'(unknown)')+'</strong>'+
+          (ch?'<div style="color:var(--slate);margin-top:2px;font-size:10.5px">'+ch.check+'</div>':'')+
+        '</td>'+
+        '<td style="font-size:10.5px">'+usedIn+'</td></tr>';
+    }).join('') +
+    '</tbody></table>';
+
+  const det = ACTION_DETAILS[a.id] || [];
+  let effortHtml;
+  if(det.length){
+    effortHtml = '<ol class="effort-list">'+det.map(d=>'<li>'+d+'</li>').join('')+'</ol>';
+  } else {
+    effortHtml = '<div style="color:var(--slate);font-size:11px;font-style:italic">Effort breakdown not defined for this action.</div>';
+  }
+
+  document.getElementById('apBody').innerHTML =
+    '<h4>A &middot; Action metadata</h4>' + metaHtml +
+    '<h4>B &middot; Fixes these data gaps</h4>' + fixesHtml +
+    '<h4>C &middot; Effort breakdown</h4>' + effortHtml +
+    '<button class="close-btn" onclick="closeAudit()">Close</button>';
+
+  document.getElementById('auditPanel').classList.add('open');
+  document.getElementById('auditPanel').setAttribute('aria-hidden','false');
+  document.getElementById('scrim').classList.add('open');
+}
+
+function openCheckUniverse(){
+  document.getElementById('apTitle').innerHTML = 'Full check universe';
+  document.getElementById('apSubtitle').innerHTML = 'All 22 checks NCC tracks &middot; 12 used by the ARR Performance Bridge analysis';
+  const sEl = document.getElementById('apStatus');
+  sEl.className = 'astatus yellow';
+  sEl.innerHTML = '&#9679; 12 of 22 relevant to this analysis';
+
+  const relevantRows = S.dataChecks.slice().sort((a,b)=>a.id-b.id).map(ch=>{
+    const ov = T4.byId[ch.id];
+    const agg = ov ? aggregateStatus(ch.status, ov) : ch.status;
+    const badge = agg==='pass' ? '<span class="ubadge pass">&#9679; Ready</span>'
+                : agg==='warn' ? '<span class="ubadge warn">&#9679; Workable</span>'
+                :                 '<span class="ubadge fail">&#9679; Fix req\'d</span>';
+    const charts = ov ? ov.tabs.map(t=>TAB_NAMES[t]||t).join(' chart, ') + ' chart' : 'this analysis';
+    const dashLabel = '<span style="color:var(--navy);font-weight:700">Used to build: '+
+      charts+'</span> <span style="color:var(--slate);font-weight:400">&larr; (this analysis)</span>';
+    return '<div class="univ-row" data-check-id="'+ch.id+'">'+
+      '<div><div class="uname"><strong>'+ch.area+'</strong> &mdash; '+ch.check+'</div>'+
+        '<div class="udash">'+dashLabel+'</div></div>'+
+      '<div>'+badge+'</div>'+
+    '</div>';
+  }).join('');
+
+  const otherRows = S.checkUniverse.slice().sort((a,b)=>a.id-b.id).map(ch=>{
+    const badge = ch.status==='pass' ? '<span class="ubadge pass">&#9679; Ready</span>'
+                : ch.status==='warn' ? '<span class="ubadge warn">&#9679; Workable</span>'
+                :                       '<span class="ubadge fail">&#9679; Fix req\'d</span>';
+    const dashLabel = 'Used in: '+ch.usedIn+'  <span style="color:var(--slate-lite)">(not used here)</span>';
+    return '<div class="univ-row dim" data-check-id="'+ch.id+'">'+
+      '<div><div class="uname"><strong>'+ch.area+'</strong> &mdash; '+ch.check+'</div>'+
+        '<div class="udash">'+dashLabel+'</div></div>'+
+      '<div>'+badge+'</div>'+
+    '</div>';
+  }).join('');
+
+  const summary =
+    '<div style="font-size:11.5px;color:var(--slate);line-height:1.55;margin-bottom:10px">'+
+    'NCC tracks a master spec of <strong style="color:var(--navy-ink)">22 data quality checks</strong> across the software dashboard pack. '+
+    'This <strong style="color:var(--navy-ink)">ARR Performance Bridge analysis</strong> depends on <strong style="color:var(--navy-ink)">12 of them</strong>. The other 10 are grayed out below and serve different analyses (Cash conversion, Services economics, Renewal risk, Bookings quality, Pricing power, Product stickiness, Go-to-market efficiency, Revenue quality).'+
+    '</div>';
+
+  document.getElementById('apBody').innerHTML =
+    '<h4>A &middot; Coverage summary</h4>' + summary +
+    '<h4>B &middot; All 22 checks</h4>' + relevantRows + otherRows +
+    '<button class="close-btn" onclick="closeAudit()">Close</button>';
+
+  document.getElementById('auditPanel').classList.add('open');
+  document.getElementById('auditPanel').setAttribute('aria-hidden','false');
+  document.getElementById('scrim').classList.add('open');
+}
+
+function closeAudit(){
+  document.getElementById('auditPanel').classList.remove('open');
+  document.getElementById('auditPanel').setAttribute('aria-hidden','true');
+  document.getElementById('scrim').classList.remove('open');
+}
+
+/* ============== TAB SWITCH ============== */
+function showTab(t){
+  tabF = t;
+  document.querySelectorAll('.tab').forEach(b=>{
+    const on = b.dataset.tab===t;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-selected', on?'true':'false');
+  });
+  document.querySelectorAll('.tabpane').forEach(p=>{
+    p.classList.toggle('active', p.id==='pane-'+t);
+  });
+  // Always render the tab being shown — guarantees fresh values after filter change
+  if(t==='t1') renderTab1();
+  if(t==='t2') renderTab2();
+  if(t==='t3') renderTab3();
+  if(t==='t4') renderTab4();
+}
+
+/* ============== WIRING ============== */
+document.querySelectorAll('.tab').forEach(b=>{
+  b.addEventListener('click', ()=> showTab(b.dataset.tab));
+});
+document.querySelectorAll('.ribbon .rcell').forEach(c=>{
+  c.addEventListener('click', ()=>{
+    const dest = c.getAttribute('data-jump') || 't4';
+    showTab(dest);
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+document.getElementById('apClose').addEventListener('click', closeAudit);
+document.getElementById('scrim').addEventListener('click', closeAudit);
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAudit(); });
+const _viewAllLink = document.getElementById('t4ViewAll');
+if(_viewAllLink){
+  _viewAllLink.addEventListener('click', (e)=>{ e.preventDefault(); openCheckUniverse(); });
+}
+
+document.getElementById('segFilter').onchange    = (e)=>{ segF=e.target.value; refreshHeadline(); rerender(); };
+document.getElementById('sizeFilter').onchange   = (e)=>{ sizeF=e.target.value; refreshHeadline(); rerender(); };
+document.getElementById('periodFilter').onchange = (e)=>{ periodF=e.target.value; refreshHeadline(); rerender(); };
+
+function rerender(){
+  if(tabF==='t1') renderTab1();
+  if(tabF==='t2') renderTab2();
+  if(tabF==='t3') renderTab3();
+  if(tabF==='t4') renderTab4();
+}
+
+/* Initial render */
+refreshHeadline();
+renderTab1();
+// Pre-populate Tab 4 (no canvases — tables/tiles render fine while hidden)
+renderTab4();
+showTab('t1');
+
+</script>
+</body>
+</html>

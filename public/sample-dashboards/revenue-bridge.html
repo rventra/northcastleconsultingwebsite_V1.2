@@ -1,0 +1,1959 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Revenue Bridge · Organic / M&A / FX / Price-Volume · North Castle Consulting</title>
+<meta name="viewport" content="width=1280" />
+<script src="meridian_data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+:root {
+  --navy:#1E2761; --navy-deep:#121A47; --navy-ink:#1A1A2E;
+  --gold:#C9A227; --gold-lite:#E6C95B;
+  --slate:#475569; --slate-lite:#94A3B8;
+  --bg:#F8FAFC; --mist:#EEF2FF; --border:#E5E7EB;
+  --white:#FFFFFF; --red:#B22234; --green:#2C5F2D;
+  --amber:#B45309; --amber-bg:#FEF3C7;
+  --red-bg:#FEE2E2; --green-bg:#DCFCE7;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg)}
+.page{max-width:1320px;margin:0 auto;background:var(--white);min-height:100vh;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+header.ncc{background:var(--navy-deep);color:var(--white);padding:18px 32px 14px;position:relative}
+header.ncc::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--gold)}
+header.ncc .brand{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--gold-lite)}
+header.ncc h1{margin:6px 0 2px;font-size:26px;font-weight:700}
+header.ncc .sub{font-size:13px;color:#cfd8dc;margin-top:2px}
+header.ncc .illus{position:absolute;top:18px;right:32px;background:var(--gold);color:var(--navy-deep);
+  font-weight:700;font-size:11px;letter-spacing:.18em;padding:6px 12px;border-radius:2px}
+.banner{background:var(--mist);border-bottom:1px solid var(--border);padding:14px 32px;
+  display:flex;align-items:center;gap:18px}
+.banner .q-tag{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.12em;background:var(--white);
+  padding:6px 12px;border:1px solid var(--border)}
+.banner .q-text{font-size:14px;color:var(--navy-ink);font-style:italic;flex:1}
+.controls{display:flex;gap:14px;align-items:center;padding:16px 32px;background:var(--white);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.controls label{font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-right:8px}
+.controls select{font-family:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);min-width:140px}
+.controls .pill{background:var(--navy);color:var(--white);padding:6px 12px;font-size:11px;font-weight:700;letter-spacing:.08em}
+
+/* Tab strip */
+.tabstrip{display:flex;gap:0;padding:0 32px;background:var(--white);border-bottom:1px solid var(--border)}
+.tab{flex:1;background:#F1F5F9;color:var(--slate);border:none;border-right:1px solid var(--border);
+  padding:14px 18px 12px;text-align:left;cursor:pointer;font-family:inherit;position:relative;
+  transition:background .15s,color .15s}
+.tab:last-child{border-right:none}
+.tab:hover{background:#E2E8F0}
+.tab .tab-title{font-size:14px;font-weight:700;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.tab .tab-sub{font-size:11px;color:inherit;opacity:.75;margin-top:3px;font-weight:400}
+.tab .dots{font-size:12px;letter-spacing:.08em;color:var(--gold);font-weight:700}
+.tab.active{background:var(--navy);color:var(--white)}
+.tab.active .tab-sub{opacity:.85;color:#cfd8dc}
+.tab.active .dots{color:var(--gold-lite)}
+.tab.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--gold)}
+
+/* Audit ribbon */
+.ribbon{display:flex;gap:0;background:var(--bg);border-bottom:1px solid var(--border);padding:0 32px}
+.ribbon .rcell{flex:1;padding:8px 14px;border-right:1px solid var(--border);font-size:11px;color:var(--slate);
+  display:flex;align-items:center;gap:8px;line-height:1.3;cursor:pointer;transition:background .15s}
+.ribbon .rcell:last-child{border-right:none}
+.ribbon .rcell:hover{background:var(--mist)}
+.ribbon .rcell .dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex:none}
+.ribbon .rcell .rname{font-weight:700;color:var(--navy-ink);letter-spacing:.02em}
+.dot-green{background:#16A34A}
+.dot-yellow{background:#EAB308}
+.dot-red{background:#DC2626}
+
+/* Tab content header */
+.tabhdr{display:flex;justify-content:space-between;align-items:center;padding:14px 32px 0}
+.tabhdr .lead{font-size:11px;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px 32px 18px;background:var(--bg)}
+.tile{background:var(--white);border:1px solid var(--border);position:relative;padding:14px 16px 16px;min-height:160px}
+.tile::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--navy))}
+.tile .tag{font-size:10px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.12em}
+.tile .label{font-size:13px;font-weight:700;color:var(--navy-ink);margin-top:6px}
+.tile .big{font-size:30px;font-weight:700;color:var(--big,var(--navy-ink));margin-top:10px;line-height:1}
+.tile .unit{font-size:11px;color:var(--slate);margin-top:6px}
+.tile .bullets{font-size:11px;color:var(--slate);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.6}
+.tile .bullets div::before{content:"\2022 ";color:var(--gold)}
+.panel{margin:0 32px 18px;background:var(--white);border:1px solid var(--border);padding:18px 22px}
+.panel .ptitle{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.panel h2{margin:0;font-size:16px;font-weight:700;color:var(--navy-ink)}
+.panel .chart-wrap{position:relative;height:340px;margin-top:12px}
+.grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;padding:0 32px 18px}
+.grid2-eq{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 32px 18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 32px 18px}
+table.ncc{width:100%;border-collapse:collapse;font-size:12px}
+table.ncc th{text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);
+  padding:8px 10px;border-bottom:2px solid var(--navy)}
+table.ncc td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--navy-ink)}
+table.ncc tr:hover td{background:var(--mist);cursor:pointer}
+table.ncc tr.active td{background:var(--mist);font-weight:700}
+.pos{color:var(--green);font-weight:700}
+.neg{color:var(--red);font-weight:700}
+.muted{color:var(--slate-lite)}
+.chip-g{display:inline-block;background:var(--green-bg);color:#14532D;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
+.chip-y{display:inline-block;background:var(--amber-bg);color:#78350F;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
+.chip-r{display:inline-block;background:var(--red-bg);color:#7F1D1D;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
+footer.ncc{background:var(--white);border-top:1px solid var(--border);padding:14px 32px 18px;
+  font-size:11px;color:var(--slate-lite);display:flex;justify-content:space-between;align-items:center}
+footer.ncc .left{display:flex;gap:18px;align-items:center}
+footer.ncc strong{color:var(--slate)}
+.gold-rule{height:2px;background:var(--gold);margin:0 32px 18px;width:48px}
+.section-title{padding:6px 32px 0;font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase}
+.section-sub{padding:2px 32px 14px;font-size:13px;color:var(--slate)}
+.note{margin:0 32px 18px;background:var(--mist);border-left:3px solid var(--gold);padding:10px 14px;font-size:12px;color:var(--navy-ink)}
+.note strong{color:var(--navy)}
+
+/* Callout box */
+.callout{margin:0 32px 24px;background:#FFFBEB;border:1px solid var(--gold);border-left:4px solid var(--gold);
+  padding:14px 18px;font-size:13px;color:var(--navy-ink);line-height:1.55}
+.callout .ctitle{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.callout strong{color:var(--red)}
+
+/* Banner for illustrative caveat */
+.illus-banner{margin:0 32px 18px;background:var(--red-bg);border-left:3px solid var(--red);padding:10px 14px;
+  font-size:12px;color:var(--navy-ink)}
+.illus-banner strong{color:var(--red)}
+
+/* Side audit panel */
+.scrim{position:fixed;inset:0;background:rgba(18,26,71,0.35);opacity:0;pointer-events:none;
+  transition:opacity .2s ease;z-index:90}
+.scrim.open{opacity:1;pointer-events:auto}
+aside.audit{position:fixed;top:0;right:-520px;width:480px;height:100vh;background:var(--white);
+  box-shadow:-2px 0 18px rgba(18,26,71,0.18);transition:right .25s ease;z-index:100;display:flex;flex-direction:column}
+aside.audit.open{right:0}
+aside.audit .ahead{background:var(--navy-deep);color:var(--white);padding:16px 22px;flex:none;position:relative}
+aside.audit .ahead::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--gold)}
+aside.audit .ahead .alabel{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--gold-lite)}
+aside.audit .ahead h3{margin:4px 0 2px;font-size:18px;font-weight:700}
+aside.audit .ahead .atab{font-size:12px;color:#cfd8dc;margin-top:4px}
+aside.audit .ahead .astatus{margin-top:10px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;
+  gap:8px;padding:5px 10px;border-radius:2px}
+aside.audit .ahead .astatus.green{background:rgba(34,197,94,0.18);color:#86EFAC}
+aside.audit .ahead .astatus.yellow{background:rgba(234,179,8,0.18);color:#FDE68A}
+aside.audit .ahead .astatus.red{background:rgba(220,38,38,0.18);color:#FECACA}
+aside.audit .ahead .xbtn{position:absolute;top:14px;right:18px;background:transparent;border:none;color:var(--white);
+  font-size:22px;cursor:pointer;line-height:1;padding:0;width:28px;height:28px}
+aside.audit .ahead .xbtn:hover{color:var(--gold-lite)}
+aside.audit .abody{overflow-y:auto;padding:18px 22px 24px;color:var(--navy-ink);font-size:12px;line-height:1.55;flex:1}
+aside.audit .abody h4{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.10em;text-transform:uppercase;
+  margin:18px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+aside.audit .abody h4:first-child{margin-top:0}
+aside.audit .abody table{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px}
+aside.audit .abody th{text-align:left;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);
+  padding:6px 6px;border-bottom:1.5px solid var(--navy);font-weight:700}
+aside.audit .abody td{padding:6px 6px;border-bottom:1px solid var(--border);vertical-align:top}
+aside.audit .abody td.right{text-align:right;white-space:nowrap}
+aside.audit .abody ul{margin:6px 0 0;padding-left:18px}
+aside.audit .abody ul li{margin-bottom:4px}
+aside.audit .abody .narr{background:var(--bg);border-left:3px solid var(--gold);padding:10px 12px;font-size:11.5px;
+  color:var(--navy-ink);margin-top:8px;line-height:1.55}
+aside.audit .abody .ck-pass{color:var(--green);font-weight:700}
+aside.audit .abody .ck-warn{color:var(--amber);font-weight:700}
+aside.audit .abody .ck-fail{color:var(--red);font-weight:700}
+
+.tabpane{display:none}
+.tabpane.active{display:block}
+
+/* Term tooltip */
+.tip{display:inline-flex;align-items:center;justify-content:center;width:13px;height:13px;border-radius:50%;
+  background:var(--slate-lite);color:var(--white);font-size:9px;font-weight:700;font-style:normal;
+  margin-left:5px;cursor:help;position:relative;vertical-align:middle;font-family:Calibri,sans-serif;line-height:1}
+.tip:hover{background:var(--navy)}
+.tip .tip-body{visibility:hidden;opacity:0;background:var(--navy-deep);color:var(--white);
+  font-size:11px;font-weight:400;font-style:normal;line-height:1.45;letter-spacing:0;
+  padding:8px 10px;border-radius:2px;width:240px;position:absolute;top:18px;left:50%;
+  transform:translateX(-50%);z-index:120;text-transform:none;
+  box-shadow:0 4px 14px rgba(18,26,71,0.25);transition:opacity .15s}
+.tip:hover .tip-body{visibility:visible;opacity:1}
+.tip .tip-body::before{content:"";position:absolute;top:-5px;left:50%;transform:translateX(-50%);
+  border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:5px solid var(--navy-deep)}
+
+/* TAB 4 — Data audit */
+.audit-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px 32px 4px;background:var(--bg)}
+.audit-tile{background:var(--white);border:1px solid var(--border);padding:14px 16px 16px;position:relative;min-height:120px}
+.audit-tile::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--navy))}
+.audit-tile .at-tag{font-size:10px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.12em}
+.audit-tile .at-label{font-size:13px;font-weight:700;color:var(--navy-ink);margin-top:6px}
+.audit-tile .at-big{font-size:36px;font-weight:700;color:var(--big,var(--navy-ink));margin-top:10px;line-height:1}
+.audit-tile .at-sub{font-size:11px;color:var(--slate);margin-top:6px}
+.audit-totals{padding:0 32px 14px;font-size:12px;color:var(--slate);background:var(--bg)}
+.audit-totals strong{color:var(--navy-ink)}
+
+table.audit-tbl{width:100%;border-collapse:collapse;font-size:12px}
+table.audit-tbl th{text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);
+  padding:8px 10px;border-bottom:2px solid var(--navy);font-weight:700}
+table.audit-tbl td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--navy-ink);vertical-align:top}
+table.audit-tbl td.right{text-align:right}
+table.audit-tbl td.ctr{text-align:center}
+table.audit-tbl tbody tr{cursor:pointer;transition:background .12s}
+table.audit-tbl tbody tr:hover{background:var(--mist)}
+.chart-chip{display:block;font-size:9.5px;font-weight:700;letter-spacing:.02em;
+  background:var(--mist);color:var(--navy);padding:3px 7px;border-radius:2px;margin:0 0 3px 0;
+  line-height:1.25;max-width:100%}
+.chart-chip:last-child{margin-bottom:0}
+.fix-name{font-size:11px;color:var(--navy-ink);line-height:1.3;cursor:help}
+.fixes-list{font-size:11px;color:var(--navy-ink);line-height:1.35;cursor:help}
+.owner-pill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 8px;border-radius:2px;white-space:nowrap}
+.owner-Sponsor{background:#EDE9FE;color:#5B21B6}
+.owner-CFO{background:#DBEAFE;color:#1E3A8A}
+.owner-PortcoIT{background:#CCFBF1;color:#115E59}
+.owner-PortcoOps{background:#FEF3C7;color:#92400E}
+.owner-Commercial{background:#FEF9C3;color:#854D0E}
+.owner-PortcoFinance{background:#DBEAFE;color:#1E3A8A}
+.owner-Service{background:#FEF3C7;color:#92400E}
+.owner-IT{background:#CCFBF1;color:#115E59}
+.owner-Admin{background:#F1F5F9;color:#334155}
+.owner-Treasury{background:#DBEAFE;color:#1E3A8A}
+.owner-SalesOps{background:#FEF9C3;color:#854D0E}
+.pri-pill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;padding:3px 8px;border-radius:2px;text-transform:uppercase}
+.pri-Critical{background:var(--red-bg);color:#7F1D1D}
+.pri-High{background:var(--amber-bg);color:#78350F}
+.pri-Medium{background:#E2E8F0;color:#334155}
+.status-cell{font-size:11px;font-weight:700;white-space:nowrap}
+.status-pass{color:#14532D}
+.status-warn{color:#78350F}
+.status-fail{color:#7F1D1D}
+.glyph-pass{color:#16A34A;font-weight:700}
+.glyph-warn{color:#B45309;font-weight:700}
+.glyph-fail{color:#DC2626;font-weight:700}
+
+.audit-section{margin:0 32px 18px;background:var(--white);border:1px solid var(--border);padding:18px 22px}
+.audit-section .as-title{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.audit-section .as-sub{font-size:13px;color:var(--slate);margin-bottom:12px;font-style:italic}
+
+/* Side-panel additions */
+aside.audit .abody .subtest-tbl td:first-child{font-weight:700;color:var(--navy);width:96px;white-space:nowrap}
+aside.audit .abody .fix-card{background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--gold);padding:10px 12px;margin-top:6px}
+aside.audit .abody .fix-card .fc-row{display:flex;gap:14px;font-size:11px;margin-top:4px;color:var(--slate)}
+aside.audit .abody .fix-card .fc-row strong{color:var(--navy-ink)}
+aside.audit .abody .effort-list{margin:6px 0 0;padding-left:18px;font-size:11.5px}
+aside.audit .abody .effort-list li{margin-bottom:3px;color:var(--navy-ink)}
+aside.audit .abody .univ-row{display:grid;grid-template-columns:1fr 80px;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:11.5px;align-items:start}
+aside.audit .abody .univ-row.dim{opacity:0.45}
+aside.audit .abody .univ-row .uname{color:var(--navy-ink)}
+aside.audit .abody .univ-row .udash{font-size:10px;color:var(--slate);font-style:italic;margin-top:2px}
+aside.audit .abody .univ-row .ubadge{font-size:10px;font-weight:700;text-align:right;white-space:nowrap}
+aside.audit .abody .ubadge.pass{color:#14532D}
+aside.audit .abody .ubadge.warn{color:#78350F}
+aside.audit .abody .ubadge.fail{color:#7F1D1D}
+aside.audit .abody .close-btn{margin-top:16px;background:var(--navy);color:var(--white);border:none;
+  font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:8px 16px;cursor:pointer}
+aside.audit .abody .close-btn:hover{background:var(--navy-deep)}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="ncc">
+  <div class="brand">NORTH CASTLE CONSULTING  &middot;  INDUSTRIAL DASHBOARD PACK</div>
+  <h1>Revenue Bridge  &middot;  Organic / M&amp;A / FX / Price-Volume</h1>
+  <div class="sub">Bridges what's organic from what's bought, financed, or priced &mdash; then tests how much survives once the M&amp;A tail rolls off.</div>
+  <div class="illus">ILLUSTRATIVE  &middot;  SAMPLE DATA</div>
+</header>
+<div class="banner">
+  <div class="q-tag">THE QUESTION</div>
+  <div class="q-text">How much of your growth is real organic, and how much is acquisition carry-over, FX, and pricing dressed up as it?</div>
+</div>
+
+<div class="controls">
+  <div><label>Period</label>
+    <select id="periodFilter">
+      <option value="TTM">TTM</option>
+      <option value="FY2025">FY 2025</option>
+      <option value="FY2024">FY 2024</option>
+      <option value="FY2023">FY 2023</option>
+    </select></div>
+  <div><label>Segment</label>
+    <select id="segFilter">
+      <option value="ALL">All segments</option>
+      <option value="Protein">Protein Solutions</option>
+      <option value="Prepared">Prepared Foods</option>
+      <option value="Coatings">Coatings (NorthPlate)</option>
+    </select></div>
+  <div><label>Region</label>
+    <select id="regFilter">
+      <option value="ALL">All regions</option>
+      <option value="US">US</option>
+      <option value="EMEA">EMEA</option>
+      <option value="LATAM">LATAM</option>
+      <option value="APAC">APAC</option>
+    </select></div>
+  <div style="margin-left:auto" class="pill" id="kpiHeadline">TTM $185M &middot; Reported +1.6% &middot; Organic +1.0% &middot; Same-customer +3.2%</div>
+</div>
+
+<!-- Tab strip -->
+<div class="tabstrip" role="tablist">
+  <button class="tab active" data-tab="t1" role="tab" aria-selected="true">
+    <div class="tab-title">Growth bridge <span class="dots">&#9679;&#9675;&#9675;&#9675;</span></div>
+    <div class="tab-sub">Reported = Organic + M&amp;A + FX + Mix</div>
+  </button>
+  <button class="tab" data-tab="t2" role="tab" aria-selected="false">
+    <div class="tab-title">Where it came from <span class="dots">&#9679;&#9679;&#9675;&#9675;</span></div>
+    <div class="tab-sub">Segment, region &amp; customer cohort</div>
+  </button>
+  <button class="tab" data-tab="t3" role="tab" aria-selected="false">
+    <div class="tab-title">Underlying engine <span class="dots">&#9679;&#9679;&#9679;&#9675;</span></div>
+    <div class="tab-sub">What's left after pricing &amp; new logos</div>
+  </button>
+  <button class="tab" data-tab="t4" role="tab" aria-selected="false">
+    <div class="tab-title">Data audit <span class="dots">&#9679;&#9679;&#9679;&#9679;</span></div>
+    <div class="tab-sub">Scorecard &amp; action items</div>
+  </button>
+</div>
+
+<!-- Audit ribbon -->
+<div class="ribbon" id="auditRibbon" title="Click any cell to jump to Data audit">
+  <div class="rcell" data-jump="t4"><span class="dot dot-yellow"></span><span><span class="rname">Growth bridge</span> &middot; Workable</span></div>
+  <div class="rcell" data-jump="t4"><span class="dot dot-yellow"></span><span><span class="rname">Where it came from</span> &middot; Workable</span></div>
+  <div class="rcell" data-jump="t4"><span class="dot dot-red"></span><span><span class="rname">Underlying engine</span> &middot; Fix required</span></div>
+</div>
+
+<!-- ================= TAB 1 ================= -->
+<div class="tabpane active" id="pane-t1">
+  <div class="tabhdr">
+    <div class="lead">Growth bridge &middot; Reported = Organic + M&amp;A + FX + Mix</div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile" style="--accent:var(--navy)">
+      <div class="label">Reported revenue growth</div>
+      <div class="big" id="t1Reported">+1.6%</div>
+      <div class="unit" id="t1ReportedUnit">TTM $185.0M  &middot;  vs PY $182.0M</div>
+      <div class="bullets">
+        <div id="t1ReportedAbs">+$3.0M absolute</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--green)">
+      <div class="label">Organic growth</div>
+      <div class="big" id="t1Organic" style="--big:var(--green)">+1.0%</div>
+      <div class="unit" id="t1OrganicUnit">Ex-acquisition, ex-FX</div>
+      <div class="bullets">
+        <div id="t1PV">+0.8% price &middot; +0.4% volume</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--gold)">
+      <div class="label">M&amp;A contribution</div>
+      <div class="big" id="t1MA" style="--big:var(--gold)">+0.4%</div>
+      <div class="unit" id="t1MAUnit">NorthPlate &amp; VerdeCure carry-in</div>
+      <div class="bullets">
+        <div id="t1MAabs">+$0.7M absolute</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--navy-deep)">
+      <div class="label">FX impact</div>
+      <div class="big" id="t1FX">+0.2%</div>
+      <div class="unit" id="t1FXUnit">Translation impact, period-over-period</div>
+      <div class="bullets">
+        <div id="t1FXabs">+$0.4M absolute</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="ptitle">WATERFALL BRIDGE  &middot;  <span id="t1BridgeLabel">FY 2025 &rarr; TTM</span>  &middot;  $M reconciliation</div>
+    <div class="chart-wrap" style="height:360px"><canvas id="t1Bridge"></canvas></div>
+  </div>
+  <div class="panel" style="margin-bottom:24px">
+    <div class="ptitle">12-QUARTER REVENUE TREND  &middot;  Q1-23 &rarr; Q1-26  &middot;  $M per quarter</div>
+    <div class="chart-wrap" style="height:300px"><canvas id="t1Trend"></canvas></div>
+  </div>
+</div>
+
+<!-- ================= TAB 2 ================= -->
+<div class="tabpane" id="pane-t2">
+  <div class="tabhdr">
+    <div class="lead">Where it came from &middot; Segment, region &amp; customer cohort</div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile" style="--accent:var(--navy)">
+      <div class="label">Protein Solutions</div>
+      <div class="big" id="t2Protein">$108.7M</div>
+      <div class="unit" id="t2ProteinUnit">58.8% of revenue  &middot;  Organic +7.2%</div>
+      <div class="bullets">
+        <div id="t2ProteinBullet">Healthy cohort &middot; price 4.4 / volume 3.0</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--gold)">
+      <div class="label">Prepared Foods</div>
+      <div class="big" id="t2Prepared">$55.5M</div>
+      <div class="unit" id="t2PreparedUnit">30.0% of revenue  &middot;  Organic +3.4%</div>
+      <div class="bullets">
+        <div id="t2PreparedBullet">Flat-cooling &middot; volume near zero</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--red)">
+      <div class="label">Coatings (NorthPlate)</div>
+      <div class="big" id="t2Coatings" style="--big:var(--red)">$20.8M</div>
+      <div class="unit" id="t2CoatingsUnit">11.2% of revenue  &middot;  Organic +4.8%</div>
+      <div class="bullets">
+        <div id="t2CoatingsBullet">M&amp;A bolt-on; same-store stalling</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--navy-deep)">
+      <div class="label">Same-store organic</div>
+      <div class="big" id="t2SameStore" style="--big:var(--navy-deep)">+3.2%</div>
+      <div class="unit" id="t2SameStoreUnit">Existing customers, ex-new logos</div>
+      <div class="bullets">
+        <div>Half of the headline organic engine</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2-eq">
+    <div class="panel">
+      <div class="ptitle">SEGMENT CONTRIBUTION  &middot;  YoY GROWTH POINTS</div>
+      <div class="chart-wrap" style="height:320px"><canvas id="t2Segment"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">REGION ATTRIBUTION  &middot;  ORGANIC / FX SPLIT</div>
+      <div class="chart-wrap" style="height:320px"><canvas id="t2Region"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="ptitle">COHORT SAME-STORE ORGANIC GROWTH  &middot;  PER SEGMENT</div>
+    <div style="font-size:11px;color:var(--slate);margin-top:-4px;margin-bottom:8px">
+      Same-store = existing customers carried period-over-period &middot; excludes new logos and acquisitions
+    </div>
+    <div class="chart-wrap" style="height:300px"><canvas id="t2Cohort"></canvas></div>
+  </div>
+
+  <div class="panel" style="margin-bottom:24px">
+    <div class="ptitle">DRILL-DOWN  &middot;  GROWTH COMPONENTS BY SEGMENT &amp; REGION</div>
+    <table class="ncc" id="t2Table">
+      <thead><tr>
+        <th>Segment / Region</th>
+        <th style="text-align:right">Revenue $M</th>
+        <th style="text-align:right">Reported</th>
+        <th style="text-align:right">Organic</th>
+        <th style="text-align:right">M&amp;A</th>
+        <th style="text-align:right">FX</th>
+        <th style="text-align:right">Price / Mix</th>
+      </tr></thead><tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ================= TAB 3 ================= -->
+<div class="tabpane" id="pane-t3">
+  <div class="tabhdr">
+    <div class="lead">Underlying engine &middot; What's left after pricing and new logos</div>
+  </div>
+
+  <div class="illus-banner">
+    <strong>Illustrative.</strong> Pre-2022 ERP migration truncated line-item detail for orders older than 18 months at migration.
+    Same-customer same-product 4-year stitch is reconstructable for ~70% of revenue at full granularity; the remainder requires archive restore.
+    The view below shows what the analysis would reveal at full resolution &mdash; the slowdown thesis is supported by the structured data we DO have post-2022.
+  </div>
+
+  <div class="tiles">
+    <div class="tile" style="--accent:var(--red)">
+      <div class="label">Same-customer organic</div>
+      <div class="big" id="t3SameCust" style="--big:var(--red)">+3.2%</div>
+      <div class="unit" id="t3SameCustUnit">Ex-new logos, ex-acquired revenue</div>
+      <div class="bullets">
+        <div>Half of TTM organic engine</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--red)">
+      <div class="label">Real volume growth</div>
+      <div class="big" id="t3RealVol" style="--big:var(--red)">+0.4%</div>
+      <div class="unit">Ex-price, ex-M&amp;A, ex-FX, ex-new logo</div>
+      <div class="bullets">
+        <div>5-yr avg = +1.8% &middot; underlying engine slowing</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--gold)">
+      <div class="label">Price-cost spread</div>
+      <div class="big" id="t3Spread" style="--big:var(--gold)">+20 bps</div>
+      <div class="unit" id="t3SpreadUnit">Price +4.2% &middot; Input cost +4.0%</div>
+      <div class="bullets">
+        <div>Was +90 bps FY25 &middot; tightening</div>
+      </div>
+    </div>
+    <div class="tile" style="--accent:var(--navy-deep)">
+      <div class="label">M&amp;A cycle-out exposure</div>
+      <div class="big" id="t3MAtail">-3.0%</div>
+      <div class="unit">Acquisition tail rolls off FY26 Q3</div>
+      <div class="bullets">
+        <div id="t3MAtailBullet">NorthPlate anniv. Apr-26 &middot; carry-in normalizes</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="ptitle">FIVE-YEAR BRIDGE  &middot;  FY21 &rarr; TTM  &middot;  ORGANIC TREND NET OF PRICING</div>
+    <div class="chart-wrap" style="height:340px"><canvas id="t3FiveYr"></canvas></div>
+  </div>
+  <div class="grid2-eq">
+    <div class="panel">
+      <div class="ptitle">PRICE INDEX vs INPUT COST INDEX  &middot;  Q1-23 = 100  &middot;  13 QUARTERS</div>
+      <div class="chart-wrap" style="height:300px"><canvas id="t3PriceCost"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">SAME-STORE ORGANIC GROWTH  &middot;  PER-PERIOD COHORT DECOMP</div>
+      <div class="chart-wrap" style="height:300px"><canvas id="t3SameStore"></canvas></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="ctitle">REVENUE BRIDGE TAKEAWAY</div>
+    FY24 reported +10.8% absorbed the NorthPlate ramp; FY25 reported +11.0% was the last big M&amp;A carry-in. TTM steps down to <strong>+1.6% reported</strong> &mdash; and once M&amp;A and FX are stripped, organic is <strong>~$3M only</strong>. Same-store organic at <strong>+3.2%</strong> is half of organic; <strong>real volume +0.4%</strong> tells the slowdown story. Underwrite to same-store organic, not reported.
+  </div>
+</div>
+
+<!-- ================= TAB 4 — DATA AUDIT ================= -->
+<div class="tabpane" id="pane-t4">
+  <div class="tabhdr">
+    <div class="lead">Data audit &middot; Scorecard &amp; action items</div>
+  </div>
+  <div style="margin:0 32px 12px;padding:8px 12px;background:var(--mist);border-left:3px solid var(--navy);font-size:11.5px;color:var(--slate)">
+    <strong style="color:var(--navy-ink)">Data quality assessment</strong> &mdash; not subject to period / segment / region filters. Scope is the Revenue Bridge analysis (Growth bridge, Where it came from, Underlying engine).
+  </div>
+
+  <!-- Standalone reader intro panel -->
+  <div style="margin:0 32px 14px;padding:12px 16px;background:#FAFAF5;border:1px solid var(--border);border-left:3px solid var(--slate-lite);font-size:11.5px;color:var(--slate);line-height:1.6;font-style:italic">
+    <div style="font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.10em;color:var(--navy);text-transform:uppercase;margin-bottom:4px">Data readiness audit &middot; How to read this view</div>
+    The scorecard below shows which data inputs the three Revenue Bridge analyses (<strong style="font-style:normal;color:var(--navy-ink)">Growth bridge</strong>, <strong style="font-style:normal;color:var(--navy-ink)">Where it came from</strong>, <strong style="font-style:normal;color:var(--navy-ink)">Underlying engine</strong>) need to run reliably. Each row is a data check. <strong style="font-style:normal;color:var(--navy-ink)">Click any row to see sub-tests and the action that closes the gap.</strong> The Action Items table below shows the work &mdash; each action's "Fixes" column points back to the check rows it resolves. <strong style="font-style:normal;color:var(--navy-ink)">Scope:</strong> this is the data audit for this analysis only, not an enterprise-wide ERP audit. The full audit catalog has 20 checks across all 7 dashboards in the sell-side data audit pack &mdash; 10 of them are relevant here. Click "View full check universe" to see them all.
+    <div style="font-style:normal;margin-top:8px"><a href="#" id="t4ViewAll" style="font-size:11px;color:var(--navy);font-weight:700;text-decoration:underline">View full check universe (20 total) &rarr;</a></div>
+  </div>
+
+  <div class="audit-tiles">
+    <div class="audit-tile" style="--accent:var(--navy)">
+      <div class="at-tag">SCOPE</div>
+      <div class="at-label">Inputs needed</div>
+      <div class="at-big" id="t4Needed">&mdash;</div>
+      <div class="at-sub">Data checks this analysis depends on</div>
+    </div>
+    <div class="audit-tile" style="--accent:var(--green)">
+      <div class="at-tag">READY</div>
+      <div class="at-label">&#x1F7E2; Ready</div>
+      <div class="at-big" style="--big:var(--green)" id="t4Ready">&mdash;</div>
+      <div class="at-sub">Pass &mdash; usable as-is</div>
+    </div>
+    <div class="audit-tile" style="--accent:var(--amber)">
+      <div class="at-tag">WORKABLE</div>
+      <div class="at-label">&#x1F7E1; Workable with gaps</div>
+      <div class="at-big" style="--big:var(--amber)" id="t4Workable">&mdash;</div>
+      <div class="at-sub">Warn &mdash; needs reformatting / cleanup</div>
+    </div>
+    <div class="audit-tile" style="--accent:var(--red)">
+      <div class="at-tag">GAP</div>
+      <div class="at-label">&#x1F534; Illustrative &mdash; fix required</div>
+      <div class="at-big" style="--big:var(--red)" id="t4Gap">&mdash;</div>
+      <div class="at-sub">Fail &mdash; missing / not reliable</div>
+    </div>
+  </div>
+  <div class="audit-totals" id="t4Totals">Total fix &middot; &mdash; weeks (sum of mapped action items)</div>
+
+  <div class="audit-section">
+    <div class="as-title">SCORECARD &middot; DATA INPUTS REQUIRED</div>
+    <div class="as-sub">Data inputs needed for this analysis &mdash; what you have, what's missing, what to fix. (Scope is the Revenue Bridge analyses on the first three tabs, not an enterprise-wide ERP audit.)</div>
+    <table class="audit-tbl" id="t4Scorecard">
+      <thead><tr>
+        <th>Data input needed</th>
+        <th style="width:180px">Used in</th>
+        <th class="ctr" style="width:78px">Have it?</th>
+        <th class="ctr" style="width:96px">Right format?</th>
+        <th class="ctr" style="width:72px">Clean?</th>
+        <th style="width:170px">Status</th>
+        <th style="width:220px">Fixed by</th>
+      </tr></thead><tbody></tbody>
+    </table>
+  </div>
+
+  <div class="audit-section" style="margin-bottom:24px">
+    <div class="as-title">ACTION ITEMS &middot; WORK NCC WILL EXECUTE &mdash; PRIORITIZED</div>
+    <div class="as-sub">Work NCC will execute &middot; Portco contact for data access &mdash; prioritized.</div>
+    <table class="audit-tbl" id="t4Actions">
+      <thead><tr>
+        <th>Action</th>
+        <th style="width:170px">Portco contact</th>
+        <th class="right" style="width:70px">Effort</th>
+        <th class="ctr" style="width:100px">Priority</th>
+        <th style="width:240px">Fixes these data gaps</th>
+      </tr></thead><tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<footer class="ncc">
+  <div class="left">
+    <strong>North Castle Consulting</strong>
+    <span>&middot;  Sell-side data readiness  &middot;  Illustrative sample</span>
+    <span>&middot;  <em>Industrial Dashboard Pack</em></span>
+  </div>
+  <div>Nick Citrin  &middot;  ncitrin@northcastleconsulting.com</div>
+</footer>
+</div>
+
+<!-- Scrim + side panel -->
+<div class="scrim" id="scrim"></div>
+<aside class="audit" id="auditPanel" aria-hidden="true">
+  <div class="ahead">
+    <div class="alabel">DATA SPEC &amp; AUDIT</div>
+    <h3 id="apTitle">Growth bridge</h3>
+    <div class="atab" id="apSubtitle">Revenue Bridge analysis</div>
+    <div class="astatus yellow" id="apStatus">&#9679; Partial</div>
+    <button class="xbtn" id="apClose" aria-label="Close">&times;</button>
+  </div>
+  <div class="abody" id="apBody"></div>
+</aside>
+
+<script>
+Chart.defaults.font.family = 'Calibri, "Segoe UI", Arial, sans-serif';
+Chart.defaults.color = '#475569';
+Chart.defaults.plugins.legend.labels.boxWidth = 14;
+Chart.defaults.plugins.legend.labels.font = {size:11};
+Chart.register(ChartDataLabels);
+Chart.defaults.plugins.datalabels.display = false;
+const NCC = {navy:'#1E2761',navyDeep:'#121A47',gold:'#C9A227',goldLite:'#E6C95B',
+  slate:'#475569',slateLite:'#94A3B8',green:'#2C5F2D',red:'#B22234',mist:'#EEF2FF',border:'#E5E7EB',
+  amber:'#B45309'};
+
+const M = window.MERIDIAN;
+
+let segF='ALL', regF='ALL', periodF='TTM', tabF='t1';
+let chartRefs = {};
+
+function destroyChart(name){ if(chartRefs[name]) { chartRefs[name].destroy(); delete chartRefs[name]; } }
+function fmtPct(v){ return (v>=0?'+':'') + v.toFixed(1) + '%'; }
+function fmt$(v){ return '$'+v.toFixed(1)+'M'; }
+function fmtBps(v){ return (v>=0?'+':'')+Math.round(v)+' bps'; }
+
+/* =========================================================
+   DATA AUDIT — Tab 4 standalone reader depth
+   Sub-tests, action breakdowns, and full-universe attribution
+   live here (not in meridian_data.js, which is shared).
+   ========================================================= */
+const CHECK_SUBTESTS = {
+  1: [
+    { dim:'Granularity',     name:'Customer-level (not contact-level)',                threshold:'1 row per legal entity',    state:'Mostly OK — 4 instances of contact-as-customer in Sage legacy', verdict:'warn' },
+    { dim:'Completeness',    name:'Revenue tied to canonical customer ID',             threshold:'≥98% of $',            state:'96.4% — 14 customers under 3+ name variants',                  verdict:'warn' },
+    { dim:'Refresh latency', name:'Customer master sync ERP ↔ CRM',                threshold:'Nightly',                   state:'Nightly NetSuite↔Salesforce; weekly for Sage legacy',     verdict:'warn' },
+    { dim:'Join keys',       name:'Sage customer_id ↔ NetSuite entity_id ↔ Salesforce account_id', threshold:'1:1 mapping', state:'Crosswalk exists for 87% — 13% need dedup table',        verdict:'warn' }
+  ],
+  6: [
+    { dim:'Historical depth', name:'≥48 months continuous customer revenue',        threshold:'≥48 months',          state:'24 months clean post-NetSuite (Oct 2023+); pre-2022 archive offline', verdict:'fail' },
+    { dim:'Completeness',     name:'Line-item revenue stitched across ERP migration',   threshold:'≥95% of $ matched',   state:'Pre-2022 Sage line-items in cold storage — needs restore',    verdict:'fail' },
+    { dim:'Join keys',        name:'Customer ID stable across migration cutover',       threshold:'1:1 mapping',              state:'18% of customers re-IDd during 2022 migration — broken link',     verdict:'fail' },
+    { dim:'Granularity',      name:'Quarterly aggregation reproducible from line-item', threshold:'Reconciles to GL within ±0.5%', state:'Pre-2022 only available at quarter-aggregate level',           verdict:'fail' }
+  ],
+  10: [
+    { dim:'Historical depth', name:'≥24 months of structured price-change records', threshold:'≥24 months',         state:'18 months (Jan 2024+) — pre-2024 changes in commercial team emails', verdict:'warn' },
+    { dim:'Granularity',      name:'Per-SKU per-effective-date with % change and scope', threshold:'SKU × effective date', state:'Granularity OK; gaps in scope tagging (~12% missing)',             verdict:'warn' },
+    { dim:'Refresh latency',  name:'Logged within 5 business days of price change',     threshold:'≤5 days',             state:'Median 3 days; tail of stale entries up to 28 days',                verdict:'warn' },
+    { dim:'Join keys',        name:'Price action ↔ invoice line via SKU + date',    threshold:'≥95% match',          state:'94% — orphan changes for retired SKUs',                             verdict:'warn' }
+  ],
+  11: [
+    { dim:'Granularity',      name:'Tariff $ allocated to SKU at line-item',            threshold:'SKU-level',                state:'Captured at PO landed-cost only — no SKU allocation key',          verdict:'fail' },
+    { dim:'Completeness',     name:'Tariff coverage by import $',                       threshold:'≥90% of tariff $',    state:'100% of tariff $ captured at PO; 0% allocated to SKU',             verdict:'fail' },
+    { dim:'Join keys',        name:'PO line ↔ BOM ↔ SKU allocation key',       threshold:'BOM mapping required',     state:'BOM coverage 88% (gaps in NorthPlate + VerdeCure) — BOM-to-SKU mapping dependency', verdict:'warn' },
+    { dim:'Refresh latency',  name:'Tariff schedule updated when HTS codes change',     threshold:'Within 30 days',           state:'Manual broker update — last refresh 47 days ago',                  verdict:'warn' }
+  ],
+  12: [
+    { dim:'Granularity',      name:'FX rate applied at transaction date (not month-avg)', threshold:'Per transaction',        state:'NetSuite per-txn; legacy Sage uses monthly avg (~14% of $)',       verdict:'warn' },
+    { dim:'Completeness',     name:'FX coverage of foreign-currency revenue',           threshold:'≥90% of foreign $',   state:'86% on per-txn rate — short of threshold; legacy Sage shortfall',  verdict:'warn' },
+    { dim:'Refresh latency',  name:'Treasury FX feed updated daily',                    threshold:'Daily',                    state:'Daily Reuters feed for NetSuite; clean',                           verdict:'pass' },
+    { dim:'Join keys',        name:'FX rate keyed by ISO currency × date',          threshold:'1:1 mapping',              state:'Clean for NetSuite; legacy Sage joins on month_id only',           verdict:'warn' }
+  ],
+  13: [
+    { dim:'Granularity',      name:'Revenue partitionable by acquired entity',          threshold:'Per transaction',          state:'Entity flag on every txn since Q3 2024 NetSuite consolidation',    verdict:'pass' },
+    { dim:'Completeness',     name:'Entity tag populated on every line',                threshold:'≥95% of months',      state:'100% post-Q3 2024; pre-consolidation tagged via reverse-lookup',   verdict:'pass' },
+    { dim:'Historical depth', name:'≥24 months of clean entity partition',          threshold:'≥24 months',         state:'NorthPlate since Q1 2023 acquisition (10 quarters); clean',        verdict:'pass' },
+    { dim:'Join keys',        name:'Entity_id ↔ GL company code ↔ P&L segment', threshold:'1:1 mapping',            state:'Clean — single source of truth in NetSuite subsidiary table',      verdict:'pass' }
+  ],
+  14: [
+    { dim:'Completeness',     name:'Acquisition date populated for every customer',    threshold:'100%',                     state:'94% — 32 legacy customers default to 1/1/2018 placeholder',        verdict:'warn' },
+    { dim:'Granularity',      name:'Date precision: month or finer',                    threshold:'≤month',              state:'Month-level for 91%; quarter-level for legacy 9%',                 verdict:'warn' },
+    { dim:'Join keys',        name:'Customer ID ↔ acquisition date ↔ first invoice', threshold:'1:1 mapping',      state:'Clean for canonical IDs; depends on the Customer ID dedup check',             verdict:'warn' },
+    { dim:'Historical depth', name:'Cohort traceable across full revenue window',      threshold:'≥48 months',          state:'OK back to 2021; pre-2021 cohorts collapse to "pre-2018"',         verdict:'warn' }
+  ],
+  16: [
+    { dim:'Historical depth', name:'≥24 months of monthly list-price snapshots',   threshold:'≥24 snapshots',       state:'0 snapshots — current catalog only; no version control',           verdict:'fail' },
+    { dim:'Refresh latency',  name:'Catalog snapshotted on first business day of month', threshold:'Monthly',                 state:'No process — overwritten in place on each catalog change',         verdict:'fail' },
+    { dim:'Granularity',      name:'Snapshot at SKU × customer-tier level',         threshold:'SKU × tier',          state:'Current catalog has tier breakouts; not historical',               verdict:'fail' },
+    { dim:'Join keys',        name:'Catalog snapshot ↔ price action log ↔ invoice', threshold:'≥95% reconcile', state:'Cannot test — no historical catalog to join against',              verdict:'fail' }
+  ],
+  17: [
+    { dim:'Completeness',     name:'BOMs exist for every active SKU',                  threshold:'100% of SKUs',             state:'88% — VerdeCure SKUs still in Excel (~12% gap)',                   verdict:'warn' },
+    { dim:'Granularity',      name:'BOM at component × quantity × source-country', threshold:'Component-level',      state:'Component-level for NCC + NorthPlate; VerdeCure aggregated',       verdict:'warn' },
+    { dim:'Refresh latency',  name:'BOM updates flow to ERP within 1 engineering cycle', threshold:'≤5 days',            state:'NetSuite BOMs current; VerdeCure Excel updates lag 2-3 weeks',     verdict:'warn' },
+    { dim:'Join keys',        name:'BOM component ↔ PO ↔ tariff classification', threshold:'1:1 mapping',           state:'88% mapped; VerdeCure components not yet tied to HTS codes',       verdict:'warn' }
+  ],
+  19: [
+    { dim:'Completeness',     name:'Every NorthPlate SKU mapped to canonical product family', threshold:'100% mapped',       state:'88% — 12% still in catch-all "Coatings — General"',                verdict:'warn' },
+    { dim:'Granularity',      name:'SKU × family × sub-family hierarchy',      threshold:'3-level hierarchy',        state:'Hierarchy defined; rollups inconsistent for orphan SKUs',          verdict:'warn' },
+    { dim:'Join keys',        name:'NorthPlate SKU_id ↔ NCC product family code',  threshold:'1:1 mapping',              state:'Crosswalk exists; 88% complete (SKU rationalization finishes the remaining 12%)',    verdict:'warn' },
+    { dim:'Refresh latency',  name:'New-SKU intake reviewed by product master within 5 days', threshold:'≤5 days',       state:'NCC clean; NorthPlate intake batched monthly (~30 day lag)',        verdict:'warn' }
+  ]
+};
+
+const ACTION_DETAILS = {
+  A1:  ['Engage IT to restore Sage line-item archive from cold storage (vendor SLA: 10 business days)',
+        'Reconcile restored line-items to GL totals by quarter (±0.5% tolerance)',
+        'Re-key 18% of customer IDs broken by 2022 migration cutover',
+        'Run dedup pass against current canonical customer master (depends on the customer-ID dedup table)',
+        'Sign-off by Portco CFO on reconstructed 2020–2022 revenue series'],
+  A3:  ['Map BOM components to HTS tariff codes (broker-assisted)',
+        'Build allocation key: tariff $ → SKU via BOM-weighted standard cost',
+        'Validate allocation against 3 sample months; reconcile to PO landed-cost'],
+  A4:  ['Tag remaining 12% of NorthPlate SKUs to canonical product family',
+        'Update Salesforce + NetSuite product master simultaneously',
+        'Backfill historical transactions to apply new family code',
+        'Validate Where it came from segment / region attribution re-runs cleanly'],
+  A5:  ['Pull customer master from Sage, NetSuite, and Salesforce',
+        'Fuzzy-match on name + address + tax_id (manual review on ≥85% confidence)',
+        'Publish canonical customer_id crosswalk table to data warehouse',
+        'Wire 14 known multi-variant customers to canonical IDs'],
+  A8:  ['Define price-action log schema: SKU, effective date, % change, scope, approver',
+        'Stand up monthly catalog snapshot job (first business day, automated)',
+        'Backfill price actions from Jan 2024 to present from commercial team records',
+        'Wire log to invoice-line join via SKU + effective date'],
+  A10: ['Pull legacy Sage transaction dates for foreign-currency revenue',
+        'Apply treasury FX rate at transaction date (replace monthly avg)',
+        'Restate prior-period FX impact in the Growth bridge waterfall'],
+  A14: ['Identify 32 legacy customers with 1/1/2018 placeholder acquisition date',
+        'Cross-reference first invoice date in Sage line-item history',
+        'Update customer master with corrected acquisition date',
+        'Re-run Where it came from + Underlying engine cohort math to validate'],
+  A15: ['Export VerdeCure BOMs from Excel to standard format',
+        'Map components to ERP item master + HTS tariff codes',
+        'Migrate to NetSuite BOM module with standard cost rollup',
+        'Validate against historical production records (3 sample months)']
+};
+
+// Which checks are relevant to this analysis vs. another dashboard's analysis
+const CHECK_DASHBOARDS = {
+  1:  { relevant:true  },
+  2:  { relevant:false },
+  3:  { relevant:false },
+  4:  { relevant:false },
+  5:  { relevant:false },
+  6:  { relevant:true  },
+  7:  { relevant:false },
+  8:  { relevant:false },
+  9:  { relevant:false },
+  10: { relevant:true  },
+  11: { relevant:true  },
+  12: { relevant:true  },
+  13: { relevant:true  },
+  14: { relevant:true  },
+  15: { relevant:false },
+  16: { relevant:true  },
+  17: { relevant:true  },
+  18: { relevant:false },
+  19: { relevant:true  },
+  20: { relevant:false }
+};
+
+/* =========================================================
+   CENTRALIZED SCALE-FACTOR TABLES (Revenue Bridge dashboard)
+   ---------------------------------------------------------
+   Revenue shares (TTM, from MERIDIAN.facts):
+     Segment: Protein 58.7%, Prepared 30.0%, Coatings 11.3%
+     Region:  US 56.9%, EMEA 24.2%, LATAM 12.6%, APAC 6.3%
+   ALL key = revenue-weighted average, NOT 1.00.
+   ========================================================= */
+
+/* Per-segment story-arc dictionaries — each segment has its OWN base series
+   so cohort charts tell distinct stories (per playbook section 4). */
+const RB_COHORT_BY_SEG = {
+  Protein: {
+    // [FY2023, FY2024, FY2025, TTM] same-store organic / new-customer / churn
+    sameCust: [2.4, 3.0, 4.5, 3.5],
+    newCust:  [1.4, 1.2, 3.3, 3.7],
+    churn:    [-0.2, -0.3, -0.4, -0.5]
+    // Healthy throughout — strong cohort (matches Protein.organicGrowthByPeriod)
+  },
+  Prepared: {
+    sameCust: [1.4, 1.9, 2.6, 2.5],
+    newCust:  [0.9, 1.0, 1.3, 1.0],
+    churn:    [-0.4, -0.5, -0.7, -1.0]
+    // Flat to cooling — middle
+  },
+  Coatings: {
+    sameCust: [1.6, 2.6, 4.5, 3.8],
+    newCust:  [1.0, 1.5, 2.5, 2.8],
+    churn:    [-0.6, -1.0, -1.5, -1.8]
+    // M&A bolt-on ramp then stalls — the "double-click" moment
+  }
+};
+
+// ALL = revenue-weighted (Protein 0.587, Prepared 0.30, Coatings 0.113)
+const RB_COHORT_ALL = {
+  sameCust: [2.05, 2.62, 3.79, 3.23],
+  newCust:  [1.23, 1.16, 2.62, 2.71],
+  churn:    [-0.31, -0.44, -0.61, -0.80]
+};
+
+const RB_SAMECUST_SEG = { ALL: 1.0, Protein: 1.1, Prepared: 1.0, Coatings: 0.8 };
+const RB_SAMECUST_REG = { ALL: 1.0, US: 1.0, EMEA: 0.9, LATAM: 1.1, APAC: 0.8 };
+
+const RB_FX_REG = { ALL: 0.19, US: 0.00, EMEA: 0.40, LATAM: 0.60, APAC: 0.30 };
+
+// Real volume growth (after stripping price, M&A, FX, new logos)
+const RB_REALVOL_SEG = { ALL: 0.55, Protein: 0.95, Prepared: 0.30, Coatings: -0.15 };
+const RB_REALVOL_REG = { ALL: 0.60, US: 0.70, EMEA: 0.50, LATAM: 0.85, APAC: 0.40 };
+
+const RB_PERIOD_PRICE = { TTM: 1.00, FY2025: 1.05, FY2024: 0.65, FY2023: 0.45 };
+
+// Index trajectory targets (per segment, per region)
+const RB_PRICE_END_SEG = { ALL: 110.0, Protein: 111.8, Prepared: 109.2, Coatings: 106.5 };
+const RB_PRICE_END_REG = { ALL: 109.7, US: 110.8, EMEA: 108.8, LATAM: 106.5, APAC: 112.4 };
+const RB_COST_END_SEG  = { ALL: 113.4, Protein: 113.6, Prepared: 112.0, Coatings: 115.5 };
+const RB_COST_END_REG  = { ALL: 113.2, US: 114.2, EMEA: 112.0, LATAM: 111.0, APAC: 112.5 };
+
+function rbF(table, key){ return table[key] !== undefined ? table[key] : table.ALL; }
+
+/* =========================================================
+   FILTER MATH — buildView() is THE SINGLE SOURCE OF TRUTH.
+   Aggregates come from MERIDIAN.query (granular facts).
+   ========================================================= */
+function periodLabel(k){
+  return k==='TTM' ? 'TTM' : ('FY '+k.slice(2));
+}
+
+function priorPeriodKey(k){
+  if(k==='TTM') return 'FY2025';
+  if(k==='FY2025') return 'FY2024';
+  if(k==='FY2024') return 'FY2023';
+  return 'FY2023';
+}
+
+function bridgeComponents(periodK, segK, regK){
+  let price=0, volume=0, mix=0;
+  const segKeys = (segK==='ALL') ? ['Protein','Prepared','Coatings'] : [segK];
+  segKeys.forEach(function(sk){
+    const s = M.segments[sk];
+    if(!s) return;
+    const share = (segK==='ALL') ? (s.sharePctByPeriod[periodK]/100) : 1;
+    price  += (s.priceContrib[periodK]  || 0) * share;
+    volume += (s.volumeContrib[periodK] || 0) * share;
+    mix    += (s.mixContrib[periodK]    || 0) * share;
+  });
+  // Region overlay
+  if(regK!=='ALL' && M.regions[regK]){
+    const r = M.regions[regK];
+    price = +(price*0.6 + r.priceRealization*0.85*0.4).toFixed(3);
+    volume = +(volume*0.6 + Math.max(0, r.organicGrowth - r.priceRealization*0.85)*0.4).toFixed(3);
+  }
+  return { price:+price.toFixed(2), volume:+volume.toFixed(2), mix:+mix.toFixed(2) };
+}
+
+function mnaAndFx(periodK, segK, regK, reportedGrowth, organicGrowth){
+  let mna = 0, fx = 0;
+  if(segK==='ALL' && regK==='ALL'){
+    if(periodK==='TTM')      { mna = M.pvm.fy25toTTMBridge.mna; fx = M.pvm.fy25toTTMBridge.fx; }
+    else if(periodK==='FY2025'){ mna = M.pvm.fy24to25Bridge.mna; fx = M.pvm.fy24to25Bridge.fx; }
+    else {
+      const resid = reportedGrowth - organicGrowth;
+      mna = +Math.max(0, resid - 0.3).toFixed(1);
+      fx  = +(resid - mna).toFixed(1);
+    }
+    return { mna:+mna, fx:+fx };
+  }
+  let mnaShare = 0;
+  if(segK==='Coatings') mnaShare = 0.60;       // NorthPlate
+  else if(segK==='Protein') mnaShare = 0.35;   // VerdeCure
+  else if(segK==='Prepared') mnaShare = 0.05;
+  else mnaShare = 1.0;
+  let regShare = 1.0;
+  if(regK!=='ALL') regShare = (M.regions[regK].sharePct/100);
+  let baseMna;
+  if(periodK==='TTM')      baseMna = M.pvm.fy25toTTMBridge.mna;
+  else if(periodK==='FY2025') baseMna = M.pvm.fy24to25Bridge.mna;
+  else baseMna = Math.max(0, reportedGrowth - organicGrowth - 0.3);
+  mna = +(baseMna * mnaShare * regShare).toFixed(2);
+  if(regK!=='ALL') fx = M.regions[regK].fxImpact;
+  else {
+    if(periodK==='TTM') fx = M.pvm.fy25toTTMBridge.fx;
+    else if(periodK==='FY2025') fx = M.pvm.fy24to25Bridge.fx;
+    else fx = +(reportedGrowth - organicGrowth - baseMna).toFixed(1);
+  }
+  return { mna:+mna, fx:+fx };
+}
+
+function buildView(){
+  const k = periodF;
+  const priorK = priorPeriodKey(k);
+  // SINGLE SOURCE OF TRUTH: aggregate facts via query()
+  const cur   = M.query({seg:segF, reg:regF}, k);
+  const prior = M.query({seg:segF, reg:regF}, priorK);
+  // FY2023 has no FY2022 facts — use FY2023 * 0.92 as PY proxy.
+  if(k === 'FY2023'){
+    prior.rev = +(cur.rev * 0.92).toFixed(3);
+  }
+
+  const bc = bridgeComponents(k, segF, regF);
+  const reported = prior.rev > 0 ? +(((cur.rev/prior.rev) - 1) * 100).toFixed(2) : 0;
+  const organic = +(bc.price + bc.volume + bc.mix).toFixed(2);
+  const mf = mnaAndFx(k, segF, regF, reported, organic);
+
+  let sameCust = M.pvm.sameCustomerOrganic[k];
+  sameCust = sameCust * rbF(RB_SAMECUST_SEG, segF) * rbF(RB_SAMECUST_REG, regF);
+
+  return {
+    revenue: +cur.rev.toFixed(2),
+    prior:   +prior.rev.toFixed(2),
+    n:       cur.n,
+    reported: reported,
+    organic:  organic,
+    price:    bc.price,
+    volume:   bc.volume,
+    mix:      bc.mix,
+    mna:      mf.mna,
+    fx:       mf.fx,
+    sameCust: +sameCust.toFixed(2),
+    label:    periodLabel(priorK)+' → '+periodLabel(k)
+  };
+}
+
+function refreshHeadline(){
+  const v = buildView();
+  const lbl = periodLabel(periodF);
+  document.getElementById('kpiHeadline').textContent =
+    lbl + ' $' + v.revenue.toFixed(1) + 'M  ·  Reported ' + fmtPct(v.reported) +
+    '  ·  Organic ' + fmtPct(v.organic) + '  ·  Same-customer ' + fmtPct(v.sameCust);
+}
+
+/* ============== TAB 1 RENDER ============== */
+function renderTab1(){
+  const v = buildView();
+  const lbl = periodLabel(periodF);
+  const prevLbl = periodLabel(priorPeriodKey(periodF));
+
+  document.getElementById('t1Reported').textContent = fmtPct(v.reported);
+  document.getElementById('t1ReportedUnit').textContent =
+    lbl + ' ' + fmt$(v.revenue) + '  ·  vs PY ' + fmt$(v.prior);
+  const abs = v.revenue - v.prior;
+  document.getElementById('t1ReportedAbs').textContent = (abs>=0?'+':'')+'$'+abs.toFixed(1)+'M absolute';
+
+  document.getElementById('t1Organic').textContent = fmtPct(v.organic);
+  document.getElementById('t1PV').textContent =
+    fmtPct(v.price)+' price  ·  '+fmtPct(v.volume)+' volume';
+
+  document.getElementById('t1MA').textContent = fmtPct(v.mna);
+  const maD = v.prior * v.mna/100;
+  document.getElementById('t1MAabs').textContent = (maD>=0?'+':'')+'$'+maD.toFixed(1)+'M absolute';
+
+  document.getElementById('t1FX').textContent = fmtPct(v.fx);
+  const fxD = v.prior * v.fx/100;
+  document.getElementById('t1FXabs').textContent = (fxD>=0?'+':'')+'$'+fxD.toFixed(1)+'M absolute';
+
+  document.getElementById('t1BridgeLabel').textContent = prevLbl + ' → ' + lbl;
+
+  /* Waterfall: Prior + Price + Volume + Mix + M&A + FX = Current ($M, exact).
+     Algorithm: delta = current - prior, M&A/FX from %, organicDelta split
+     signed-proportionally across price/vol/mix, residual absorbed into price. */
+  destroyChart('t1bridge');
+  const py = v.prior;
+  const current = v.revenue;
+  const delta = +(current - py).toFixed(4);
+
+  let mnaD = +(py * v.mna/100).toFixed(3);
+  let fxDol = +(py * v.fx/100).toFixed(3);
+
+  const organicDelta = +(delta - mnaD - fxDol).toFixed(4);
+
+  const rawShares = [v.price, v.volume, v.mix];
+  const absSum = rawShares.reduce((a,b)=>a+Math.abs(b),0);
+  let priceD, volD, mixD;
+  if(absSum > 0){
+    const signedSum = rawShares.reduce((a,b)=>a+b,0);
+    if(Math.abs(signedSum) > 1e-6){
+      const kFac = organicDelta / signedSum;
+      priceD = +(v.price * kFac).toFixed(3);
+      volD   = +(v.volume * kFac).toFixed(3);
+      mixD   = +(v.mix * kFac).toFixed(3);
+    } else {
+      priceD = +(Math.sign(v.price) * Math.abs(v.price)/absSum * Math.abs(organicDelta)).toFixed(3);
+      volD   = +(Math.sign(v.volume) * Math.abs(v.volume)/absSum * Math.abs(organicDelta)).toFixed(3);
+      mixD   = +(Math.sign(v.mix) * Math.abs(v.mix)/absSum * Math.abs(organicDelta)).toFixed(3);
+    }
+  } else {
+    priceD = +(organicDelta/3).toFixed(3);
+    volD   = +(organicDelta/3).toFixed(3);
+    mixD   = +(organicDelta/3).toFixed(3);
+  }
+
+  // Absorb rounding residual into priceD so the bridge sums exactly
+  const sumSteps = +(priceD + volD + mixD + mnaD + fxDol).toFixed(4);
+  const residual = +(delta - sumSteps).toFixed(4);
+  if(Math.abs(residual) > 0){
+    priceD = +(priceD + residual).toFixed(3);
+  }
+
+  const wfLabels = [prevLbl, 'Price', 'Volume', 'Mix', 'M&A', 'FX', lbl];
+  const deltas = [null, priceD, volD, mixD, mnaD, fxDol, null];
+  const anchors = [py, null, null, null, null, null, current];
+
+  const invisibleBase = [];
+  const valueData    = [];
+  const barColors    = [];
+  let cum = py;
+  for(let i=0; i<wfLabels.length; i++){
+    if(anchors[i] !== null){
+      invisibleBase.push(0);
+      valueData.push(anchors[i]);
+      barColors.push(NCC.navy);
+    } else {
+      const d = deltas[i];
+      if(d >= 0){
+        invisibleBase.push(cum);
+        valueData.push(d);
+      } else {
+        invisibleBase.push(cum + d);
+        valueData.push(Math.abs(d));
+      }
+      if(i===1)      barColors.push(NCC.gold);
+      else if(i===2) barColors.push(NCC.green);
+      else if(i===3) barColors.push(NCC.red);
+      else if(i===4) barColors.push(NCC.navy);
+      else if(i===5) barColors.push(NCC.slate);
+      cum += d;
+    }
+  }
+
+  const allBottoms = invisibleBase.map((b,i)=> anchors[i]!==null ? 0 : b);
+  const allTops    = invisibleBase.map((b,i)=> b + valueData[i]);
+  const yMinRaw = Math.min(...allBottoms.filter(x=>x>0), py, current);
+  const yMaxRaw = Math.max(...allTops);
+  const span    = Math.max(1, yMaxRaw - yMinRaw);
+  const yMin    = Math.max(0, yMinRaw - span*0.35);
+  const yMax    = yMaxRaw + span*0.20;
+
+  chartRefs.t1bridge = new Chart(document.getElementById('t1Bridge'),{
+    type:'bar',
+    data:{labels:wfLabels, datasets:[
+      {
+        label:'_base', data:invisibleBase,
+        backgroundColor:'rgba(0,0,0,0)', borderColor:'rgba(0,0,0,0)',
+        stack:'wf', categoryPercentage:.62, barPercentage:.85,
+        datalabels:{display:false}
+      },
+      {
+        label:'$M', data:valueData, backgroundColor:barColors,
+        borderRadius:0, stack:'wf', categoryPercentage:.62, barPercentage:.85
+      }
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{display:false},
+        tooltip:{filter:c=>c.datasetIndex===1, callbacks:{
+          label:c=>{
+            const i = c.dataIndex;
+            if(anchors[i] !== null) return wfLabels[i]+': '+fmt$(anchors[i]);
+            const d = deltas[i];
+            return wfLabels[i]+': '+(d>=0?'+':'−')+'$'+Math.abs(d).toFixed(1)+'M';
+          }
+        }},
+        datalabels:{display:ctx=>ctx.datasetIndex===1, anchor:'end', align:'top',
+          color:NCC.navyDeep, font:{weight:700,size:10},
+          formatter:(val,ctx)=>{
+            const i = ctx.dataIndex;
+            if(anchors[i] !== null) return '$'+anchors[i].toFixed(1)+'M';
+            const d = deltas[i];
+            return (d>=0?'+':'−')+'$'+Math.abs(d).toFixed(1)+'M';
+          }}
+      },
+      scales:{
+        x:{stacked:true, grid:{display:false}, ticks:{font:{size:11}}},
+        y:{stacked:true, beginAtZero:false, min:yMin, max:yMax, grid:{color:NCC.border},
+           title:{display:true,text:'$M',font:{size:11}}, ticks:{callback:v=>'$'+(+v).toFixed(1)+'M'}}
+      }
+    }
+  });
+
+  /* 12-Quarter Revenue Trend — aggregate facts directly per quarter for filter intersection */
+  destroyChart('t1trend');
+  const qs = M.quarters;
+  const labels12 = qs.map(q=>q.q);
+  const series = qs.map(function(q){
+    let sum = 0;
+    M.facts.forEach(function(f){
+      if(f.q !== q.q) return;
+      if(segF !== 'ALL' && f.seg !== segF) return;
+      if(regF !== 'ALL' && f.reg !== regF) return;
+      sum += f.rev;
+    });
+    return +sum.toFixed(2);
+  });
+
+  chartRefs.t1trend = new Chart(document.getElementById('t1Trend'),{
+    type:'bar',
+    data:{labels:labels12, datasets:[
+      {label:'Revenue $M', data:series, backgroundColor:NCC.navy,
+        categoryPercentage:.7, barPercentage:.85}
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:c=> 'Revenue: '+fmt$(c.parsed.y)}},
+        datalabels:{display:true, anchor:'end', align:'top', color:NCC.navyDeep,
+          font:{weight:700,size:9}, formatter:v=>'$'+v.toFixed(1)}
+      },
+      scales:{
+        x:{grid:{display:false}, ticks:{font:{size:10}}},
+        y:{beginAtZero:false, grid:{color:NCC.border},
+          title:{display:true,text:'$M per quarter',font:{size:11}},
+          ticks:{callback:v=>'$'+v.toFixed(1)+'M'}}
+      }
+    }
+  });
+}
+
+/* ============== TAB 2 RENDER ============== */
+function renderTab2(){
+  const v = buildView();
+  const k = periodF;
+
+  // Segment tiles — read from MERIDIAN.query for each segment in current period & region.
+  const segs = ['Protein','Prepared','Coatings'];
+  const segData = {};
+  let segTotal = 0;
+  segs.forEach(function(s){
+    const q = M.query({seg:s, reg:regF}, k);
+    segData[s] = { rev:q.rev, n:q.n };
+    segTotal += q.rev;
+  });
+  function segOrganic(s){ return M.segments[s].organicGrowthByPeriod[k]; }
+  function segPriceVol(s){
+    return { price: M.segments[s].priceContrib[k], volume: M.segments[s].volumeContrib[k] };
+  }
+
+  function setSegTile(s, idRev, idUnit, idBullet){
+    const sd = segData[s];
+    const pv = segPriceVol(s);
+    document.getElementById(idRev).textContent = fmt$(sd.rev);
+    document.getElementById(idUnit).textContent =
+      (segTotal>0 ? (sd.rev/segTotal*100).toFixed(1) : '0')+'% of revenue  ·  Organic '+fmtPct(segOrganic(s));
+    document.getElementById(idBullet).textContent =
+      'Price '+fmtPct(pv.price)+' / Volume '+fmtPct(pv.volume);
+  }
+  setSegTile('Protein',  't2Protein',  't2ProteinUnit',  't2ProteinBullet');
+  setSegTile('Prepared', 't2Prepared', 't2PreparedUnit', 't2PreparedBullet');
+  setSegTile('Coatings', 't2Coatings', 't2CoatingsUnit', 't2CoatingsBullet');
+
+  // Same-store tile (filter-responsive)
+  document.getElementById('t2SameStore').textContent = fmtPct(v.sameCust);
+  document.getElementById('t2SameStoreUnit').textContent =
+    'Existing customers, ex-new logos · '+periodLabel(k);
+
+  /* Segment contribution chart */
+  destroyChart('t2seg');
+  const segLabels = segs.map(s=> M.segments[s].label);
+  const segReported = [], segOrg = [], segMA = [], segFX = [], segMix = [];
+  segs.forEach(function(s){
+    const seg = M.segments[s];
+    segOrg.push(seg.organicGrowthByPeriod[k]);
+    segMix.push(seg.mixContrib[k]);
+    let mnaShare = (s==='Coatings') ? 0.60 : (s==='Protein' ? 0.35 : 0.05);
+    let baseMna = (k==='TTM') ? M.pvm.fy25toTTMBridge.mna :
+                  (k==='FY2025') ? M.pvm.fy24to25Bridge.mna : 0.5;
+    segMA.push(+(baseMna * mnaShare).toFixed(2));
+    const fxVal = (regF !== 'ALL') ? M.regions[regF].fxImpact :
+                  ((k==='TTM') ? M.pvm.fy25toTTMBridge.fx :
+                   (k==='FY2025') ? M.pvm.fy24to25Bridge.fx : 0);
+    segFX.push(fxVal);
+    const reported = seg.organicGrowthByPeriod[k] + (baseMna * mnaShare) + fxVal;
+    segReported.push(+reported.toFixed(2));
+  });
+
+  chartRefs.t2seg = new Chart(document.getElementById('t2Segment'),{
+    data:{labels:segLabels, datasets:[
+      {type:'bar', label:'Organic',     data:segOrg,  backgroundColor:NCC.green,     stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'bar', label:'M&A',         data:segMA,   backgroundColor:NCC.navy,      stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'bar', label:'FX',          data:segFX,   backgroundColor:NCC.slateLite, stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'bar', label:'Mix',         data:segMix,  backgroundColor:NCC.gold,      stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'line', label:'Reported %', data:segReported, borderColor:NCC.navyDeep,
+       backgroundColor:NCC.navyDeep, pointRadius:5, pointStyle:'rectRot', borderWidth:0, showLine:false}
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=> c.dataset.label+': '+fmtPct(c.parsed.y)+' pts'}},
+        datalabels:{display:ctx=> ctx.dataset.type==='line',
+          align:'top', anchor:'end', color:NCC.navyDeep, font:{weight:700,size:11}, formatter:v=>fmtPct(v)}
+      },
+      scales:{
+        x:{grid:{display:false}},
+        y:{stacked:true, beginAtZero:true, grid:{color:NCC.border},
+          title:{display:true,text:'Growth contribution (pp)',font:{size:11}},
+          ticks:{callback:v=>(+v).toFixed(1)+'%'}}
+      }
+    }
+  });
+
+  /* Region attribution chart */
+  destroyChart('t2reg');
+  const regs = ['US','EMEA','LATAM','APAC'];
+  const regOrg = [], regMA = [], regFX = [], regMix = [], regReported = [];
+  regs.forEach(function(r){
+    const reg = M.regions[r];
+    const perScale = (k==='TTM' || k==='FY2025') ? 1.0 : (k==='FY2024' ? 0.6 : 0.4);
+    regOrg.push(+(reg.organicGrowth * perScale).toFixed(2));
+    let baseMna = (k==='TTM') ? M.pvm.fy25toTTMBridge.mna :
+                  (k==='FY2025') ? M.pvm.fy24to25Bridge.mna : 0.5;
+    let segMnaShare = (segF==='Coatings') ? 0.60 : (segF==='Protein' ? 0.35 :
+                       (segF==='Prepared' ? 0.05 : 1.0));
+    regMA.push(+(baseMna * (reg.sharePct/100) * segMnaShare).toFixed(2));
+    regFX.push(reg.fxImpact);
+    regMix.push(-0.2);
+    const reported = (reg.organicGrowth*perScale) + (baseMna * (reg.sharePct/100) * segMnaShare) + reg.fxImpact + (-0.2);
+    regReported.push(+reported.toFixed(2));
+  });
+
+  chartRefs.t2reg = new Chart(document.getElementById('t2Region'),{
+    data:{labels:regs, datasets:[
+      {type:'bar', label:'Organic',     data:regOrg,  backgroundColor:NCC.green,     stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'bar', label:'M&A',         data:regMA,   backgroundColor:NCC.navy,      stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'bar', label:'FX',          data:regFX,   backgroundColor:NCC.slateLite, stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'bar', label:'Mix',         data:regMix,  backgroundColor:NCC.gold,      stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'line', label:'Reported %', data:regReported, borderColor:NCC.navyDeep,
+       backgroundColor:NCC.navyDeep, pointRadius:5, pointStyle:'rectRot', borderWidth:0, showLine:false}
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=> c.dataset.label+': '+fmtPct(c.parsed.y)+' pts'}},
+        datalabels:{display:ctx=> ctx.dataset.type==='line',
+          align:'top', anchor:'end', color:NCC.navyDeep, font:{weight:700,size:11}, formatter:v=>fmtPct(v)}
+      },
+      scales:{
+        x:{grid:{display:false}},
+        y:{stacked:true, beginAtZero:true, grid:{color:NCC.border},
+          title:{display:true,text:'Growth contribution (pp)',font:{size:11}},
+          ticks:{callback:v=>(+v).toFixed(1)+'%'}}
+      }
+    }
+  });
+
+  /* Cohort same-store: per-segment story arc */
+  destroyChart('t2coh');
+  const pers = ['FY2023','FY2024','FY2025','TTM'];
+  const perLbls = pers.map(periodLabel);
+  const segData2 = (segF === 'ALL') ? RB_COHORT_ALL : RB_COHORT_BY_SEG[segF];
+  const regGrowthF = rbF(RB_SAMECUST_REG, regF);
+  const sameStore = segData2.sameCust.map(v=> +(v * regGrowthF).toFixed(2));
+  const newCust   = segData2.newCust.map(v=> +v.toFixed(2));
+  const churn     = segData2.churn.map(v=> +v.toFixed(2));
+  const organicTot = sameStore.map((v,i)=> +(v + newCust[i] + churn[i]).toFixed(2));
+
+  chartRefs.t2coh = new Chart(document.getElementById('t2Cohort'),{
+    type:'line',
+    data:{labels:perLbls, datasets:[
+      {label:'Same-store organic', data:sameStore, backgroundColor:'rgba(30,39,97,0.70)',
+        borderColor:NCC.navy, fill:'origin', tension:.25, pointRadius:3, borderWidth:2, stack:'pos'},
+      {label:'New-customer revenue', data:newCust, backgroundColor:'rgba(44,95,45,0.60)',
+        borderColor:NCC.green, fill:'-1', tension:.25, pointRadius:3, borderWidth:2, stack:'pos'},
+      {label:'Churn drag', data:churn, backgroundColor:'rgba(178,34,52,0.55)',
+        borderColor:NCC.red, fill:'origin', tension:.25, pointRadius:3, borderWidth:2, stack:'neg'},
+      {type:'line', label:'Organic total', data:organicTot, stack:'tot',
+        borderColor:NCC.navyDeep, borderDash:[6,4], borderWidth:2, pointRadius:4,
+        pointStyle:'rectRot', backgroundColor:NCC.navyDeep, fill:false}
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=> c.dataset.label+': '+c.parsed.y.toFixed(1)+'%'}}
+      },
+      scales:{
+        x:{grid:{display:false}},
+        y:{stacked:true, grid:{color:NCC.border},
+          title:{display:true,text:'Organic growth contribution (pp)',font:{size:11}},
+          ticks:{callback:v=>(+v).toFixed(1)+'%'},
+          suggestedMin:-2.5, suggestedMax:8}
+      }
+    }
+  });
+
+  /* Drill table */
+  const tb = document.querySelector('#t2Table tbody');
+  let rows = [];
+  rows.push({hdr:'BY SEGMENT'});
+  segs.forEach(function(s, i){
+    rows.push({
+      name: M.segments[s].label,
+      revenue: segData[s].rev,
+      reported: segReported[i],
+      organic: segOrg[i],
+      ma: segMA[i],
+      fx: segFX[i],
+      mix: segMix[i]
+    });
+  });
+  rows.push({hdr:'BY REGION'});
+  regs.forEach(function(r, i){
+    const q = M.query({seg:segF, reg:r}, k);
+    rows.push({
+      name: r,
+      revenue: q.rev,
+      reported: regReported[i],
+      organic: regOrg[i],
+      ma: regMA[i],
+      fx: regFX[i],
+      mix: regMix[i]
+    });
+  });
+  tb.innerHTML = rows.map(r=>{
+    if(r.hdr) return '<tr><td colspan="7" style="background:var(--mist);font-size:10px;letter-spacing:.12em;font-weight:700;color:var(--navy)">'+r.hdr+'</td></tr>';
+    const cls = v => v>=0?'pos':'neg';
+    return '<tr>'+
+      '<td><strong>'+r.name+'</strong></td>'+
+      '<td style="text-align:right">$'+r.revenue.toFixed(1)+'M</td>'+
+      '<td style="text-align:right" class="'+cls(r.reported)+'">'+fmtPct(r.reported)+'</td>'+
+      '<td style="text-align:right" class="'+cls(r.organic)+'">'+fmtPct(r.organic)+'</td>'+
+      '<td style="text-align:right">'+fmtPct(r.ma)+'</td>'+
+      '<td style="text-align:right" class="'+cls(r.fx)+'">'+fmtPct(r.fx)+'</td>'+
+      '<td style="text-align:right">'+fmtPct(r.mix)+'</td>'+
+    '</tr>';
+  }).join('');
+}
+
+/* ============== TAB 3 RENDER ============== */
+function scaleIndexSeries(baseSeries, baseEnd, targetEnd){
+  const baseRise = baseEnd - 100;
+  const targetRise = targetEnd - 100;
+  const ratio = baseRise === 0 ? 1 : (targetRise / baseRise);
+  return baseSeries.map(v => +(100 + (v - 100) * ratio).toFixed(2));
+}
+
+function renderTab3(){
+  const v = buildView();
+  const k = periodF;
+
+  document.getElementById('t3SameCust').textContent = fmtPct(v.sameCust);
+  document.getElementById('t3SameCustUnit').textContent =
+    'Ex-new logos, ex-acquired revenue · '+periodLabel(k);
+
+  const realVol = +((rbF(RB_REALVOL_SEG, segF) * rbF(RB_REALVOL_REG, regF))).toFixed(2);
+  document.getElementById('t3RealVol').textContent = fmtPct(realVol);
+
+  // Price/cost index
+  const qs = M.quarters;
+  const basePrice = qs.map(q=>q.priceIdx);
+  const baseCost  = qs.map(q=>q.costIdx);
+  const baseEndP = basePrice[basePrice.length-1];
+  const baseEndC = baseCost[baseCost.length-1];
+
+  const segPEnd = rbF(RB_PRICE_END_SEG, segF);
+  const regPEnd = rbF(RB_PRICE_END_REG, regF);
+  const segCEnd = rbF(RB_COST_END_SEG, segF);
+  const regCEnd = rbF(RB_COST_END_REG, regF);
+  let targetP, targetC;
+  if(segF!=='ALL' && regF!=='ALL'){
+    targetP = (segPEnd + regPEnd)/2;
+    targetC = (segCEnd + regCEnd)/2;
+  } else if(segF!=='ALL'){ targetP = segPEnd; targetC = segCEnd; }
+  else if(regF!=='ALL'){ targetP = regPEnd; targetC = regCEnd; }
+  else { targetP = baseEndP; targetC = baseEndC; }
+
+  const priceSer = scaleIndexSeries(basePrice, baseEndP, targetP);
+  const costSer  = scaleIndexSeries(baseCost,  baseEndC, targetC);
+
+  // YoY at the most-recent quarter
+  const recentPriceYoY = ((priceSer[12]/priceSer[8])-1)*100;
+  const recentCostYoY  = ((costSer[12]/costSer[8])-1)*100;
+  const sp = Math.round((recentPriceYoY - recentCostYoY)*100);
+  document.getElementById('t3Spread').textContent = fmtBps(sp);
+  document.getElementById('t3SpreadUnit').textContent =
+    'Price '+fmtPct(recentPriceYoY)+'  ·  Input cost '+fmtPct(recentCostYoY);
+
+  const maTail = (k==='TTM') ? M.pvm.fy25toTTMBridge.mna : M.pvm.fy24to25Bridge.mna;
+  document.getElementById('t3MAtail').textContent = '-'+maTail.toFixed(1)+'%';
+  let tailNarr = 'NorthPlate anniv. Apr-26  ·  carry-in normalizes';
+  if(segF==='Coatings') tailNarr = 'Coatings M&A bolt-on tails off  ·  cycle-out exposure';
+  else if(segF==='Protein') tailNarr = 'VerdeCure carry-in normalizes Q2-26';
+  document.getElementById('t3MAtailBullet').textContent = tailNarr;
+
+  /* 5-year stacked */
+  destroyChart('t3yr');
+  const years = ['FY 2021','FY 2022','FY 2023','FY 2024','FY 2025','TTM'];
+  function periodBridge(pk){
+    if(pk==='FY2025') return { organic:M.pvm.fy24to25Bridge.organic, ma:M.pvm.fy24to25Bridge.mna, fx:M.pvm.fy24to25Bridge.fx, mix:M.pvm.fy24to25Bridge.mix };
+    if(pk==='TTM')    return { organic:M.pvm.fy25toTTMBridge.organic, ma:M.pvm.fy25toTTMBridge.mna, fx:M.pvm.fy25toTTMBridge.fx, mix:M.pvm.fy25toTTMBridge.mix };
+    let org=0, mi=0;
+    ['Protein','Prepared','Coatings'].forEach(function(s){
+      const seg=M.segments[s], share=seg.sharePctByPeriod[pk]/100;
+      org += seg.organicGrowthByPeriod[pk] * share;
+      mi  += (seg.mixContrib[pk]||0) * share;
+    });
+    return { organic:+org.toFixed(2), ma:(pk==='FY2024'?2.0:1.5), fx:(pk==='FY2024'?0:0.5), mix:+mi.toFixed(2) };
+  }
+  function segScale(){ return rbF(RB_REALVOL_SEG, segF); }
+  function regScale(){ return rbF(RB_REALVOL_REG, regF); }
+  const scl = (segF==='ALL' && regF==='ALL') ? 1.0 : Math.max(0.1, segScale()*regScale());
+
+  const orgArr = [3.0*scl, 4.5*scl, periodBridge('FY2023').organic*scl, periodBridge('FY2024').organic*scl, periodBridge('FY2025').organic*scl, periodBridge('TTM').organic*scl];
+  const maArr  = [0.0,     2.5,     0.5,                                periodBridge('FY2024').ma,          periodBridge('FY2025').ma,         periodBridge('TTM').ma];
+  const fxArr  = [0.5,    -1.0,    -0.5*regScale(),                     periodBridge('FY2024').fx,          periodBridge('FY2025').fx,         periodBridge('TTM').fx];
+  const mixArr = [1.0,     3.5,     periodBridge('FY2023').mix,         periodBridge('FY2024').mix,         periodBridge('FY2025').mix,         periodBridge('TTM').mix];
+  const realOrg = orgArr.map((o,i)=> +(Math.max(0.2, o*0.35)).toFixed(2));
+
+  chartRefs.t3yr = new Chart(document.getElementById('t3FiveYr'),{
+    data:{labels:years, datasets:[
+      {type:'bar', label:'Organic (incl. price)', data:orgArr.map(x=>+x.toFixed(2)), backgroundColor:NCC.green, stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'bar', label:'M&A',                   data:maArr.map(x=>+x.toFixed(2)),  backgroundColor:NCC.navy,  stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'bar', label:'FX',                    data:fxArr.map(x=>+x.toFixed(2)),  backgroundColor:NCC.slateLite, stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'bar', label:'Mix',                   data:mixArr.map(x=>+x.toFixed(2)), backgroundColor:NCC.gold,  stack:'g', categoryPercentage:.55, barPercentage:.85},
+      {type:'line', label:'Real organic (ex-price)', data:realOrg, borderColor:NCC.red,
+       backgroundColor:NCC.red, tension:.2, pointRadius:4, borderWidth:2.5, borderDash:[6,4]}
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=> c.dataset.label+': '+fmtPct(c.parsed.y)+' pts'}}
+      },
+      scales:{
+        x:{grid:{display:false}},
+        y:{stacked:true, beginAtZero:true, grid:{color:NCC.border},
+          title:{display:true,text:'Growth contribution (pp)',font:{size:11}},
+          ticks:{callback:v=>(+v).toFixed(1)+'%'}}
+      }
+    }
+  });
+
+  /* Price index vs cost index */
+  destroyChart('t3pc');
+  chartRefs.t3pc = new Chart(document.getElementById('t3PriceCost'),{
+    data:{labels:qs.map(q=>q.q), datasets:[
+      {type:'line', label:'Price index', data:priceSer, borderColor:NCC.gold, backgroundColor:NCC.gold,
+       tension:.2, pointRadius:3, borderWidth:2.5, fill:false},
+      {type:'line', label:'Input cost index', data:costSer, borderColor:NCC.red, backgroundColor:NCC.red,
+       tension:.2, pointRadius:3, borderWidth:2.5, fill:false, borderDash:[6,4]}
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=> c.dataset.label+': '+c.parsed.y.toFixed(1)}}
+      },
+      scales:{
+        x:{grid:{display:false}, ticks:{font:{size:10}}},
+        y:{grid:{color:NCC.border},
+           title:{display:true,text:'Index (Q1-23 = 100)',font:{size:11}},
+           ticks:{callback:v=>v.toFixed(0)}}
+      }
+    }
+  });
+
+  /* Same-store organic line */
+  destroyChart('t3ss');
+  const pers = ['FY2023','FY2024','FY2025','TTM'];
+  const perLbls = pers.map(periodLabel);
+  const ss = (segF==='ALL') ? RB_COHORT_ALL : RB_COHORT_BY_SEG[segF];
+  const ssRegF = rbF(RB_SAMECUST_REG, regF);
+  const blendedOrganic = ss.sameCust.map((v,i)=> +((v + ss.newCust[i] + ss.churn[i])*ssRegF).toFixed(2));
+  const sameCust = ss.sameCust.map(v=> +(v*ssRegF).toFixed(2));
+  const sameCustExPrice = sameCust.map(v=> +(Math.max(0.1, v*0.30)).toFixed(2));
+
+  chartRefs.t3ss = new Chart(document.getElementById('t3SameStore'),{
+    data:{labels:perLbls, datasets:[
+      {type:'line', label:'Blended organic', data:blendedOrganic, borderColor:NCC.green, backgroundColor:NCC.green,
+       tension:.2, pointRadius:3, borderWidth:2.5, fill:false},
+      {type:'line', label:'Same-customer organic', data:sameCust, borderColor:NCC.navy, backgroundColor:NCC.navy,
+       tension:.2, pointRadius:3, borderWidth:2.5, fill:false},
+      {type:'line', label:'Same-customer ex-price', data:sameCustExPrice, borderColor:NCC.red, backgroundColor:NCC.red,
+       tension:.2, pointRadius:3, borderWidth:2.5, fill:false, borderDash:[6,4]}
+    ]},
+    options:{
+      maintainAspectRatio:false, responsive:true,
+      plugins:{legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=> c.dataset.label+': '+fmtPct(c.parsed.y)}}},
+      scales:{
+        x:{grid:{display:false}},
+        y:{beginAtZero:true,grid:{color:NCC.border},
+           title:{display:true,text:'Growth (%)',font:{size:11}}, ticks:{callback:v=>v+'%'}}
+      }
+    }
+  });
+}
+
+/* ============== TAB 4 RENDER — DATA AUDIT ============== */
+const T4 = {
+  relevantCheckIds: [1, 6, 10, 11, 12, 13, 14, 16, 17, 19],
+  // Per-check overlay (have/format/clean) + which Revenue Bridge charts use it + fixing action.
+  // Chart codes are abstract: G1 = Growth bridge, G2 = Where it came from, G3 = Underlying engine
+  byId: {
+    1:  { tabs:['G1','G2'],      have:'pass', format:'warn', clean:'warn', actionRef:'A5' },
+    6:  { tabs:['G3'],           have:'fail', format:'fail', clean:'fail', actionRef:'A1' },
+    10: { tabs:['G1','G3'],      have:'warn', format:'pass', clean:'warn', actionRef:'A8' },
+    11: { tabs:['G3'],           have:'warn', format:'fail', clean:'warn', actionRef:'A3' },
+    12: { tabs:['G1','G2'],      have:'pass', format:'warn', clean:'pass', actionRef:'A10' },
+    13: { tabs:['G1','G2'],      have:'pass', format:'pass', clean:'pass', actionRef:'—' },
+    14: { tabs:['G2','G3'],      have:'pass', format:'pass', clean:'warn', actionRef:'A14' },
+    16: { tabs:['G1','G3'],      have:'fail', format:'fail', clean:'fail', actionRef:'A8' },
+    17: { tabs:['G3'],           have:'warn', format:'warn', clean:'warn', actionRef:'A15, A3' },
+    19: { tabs:['G2'],           have:'warn', format:'warn', clean:'warn', actionRef:'A4' }
+  },
+  relevantActionIds: ['A1','A3','A4','A5','A8','A10','A14','A15']
+};
+
+// Human-readable chart names for the Revenue Bridge analysis
+const CHART_NAMES = {
+  G1: 'Growth bridge',
+  G2: 'Where it came from',
+  G3: 'Underlying engine'
+};
+
+const DASHBOARD_NAMES = {
+  4:  'Revenue Bridge (this analysis)',
+  5:  'Gross Margin analysis',
+  6:  'Working Capital analysis',
+  7:  'Recurring/Aftermarket analysis',
+  8:  'M&A Synergy analysis',
+  15: 'Pricing-Volume-Mix analysis',
+  16: 'Tariff Pass-Through analysis'
+};
+
+// For non-relevant checks: which other analysis/chart they feed
+const CHECK_DASHBOARD_CHART = {
+  2:  { dashId:7, chart:'Revenue mix chart' },
+  3:  { dashId:7, chart:'Aftermarket revenue trend chart' },
+  4:  { dashId:8, chart:'Acquired-vs-organic revenue chart' },
+  5:  { dashId:7, chart:'Aftermarket margin trend chart' },
+  7:  { dashId:7, chart:'Aftermarket margin trend chart' },
+  8:  { dashId:8, chart:'Acquired-vs-organic revenue chart' },
+  9:  { dashId:8, chart:'Acquired-vs-organic revenue chart' },
+  15: { dashId:6, chart:'Customer deposits trend chart' },
+  18: { dashId:6, chart:'Customer deposits trend chart' },
+  20: { dashId:5, chart:'Aftermarket margin trend chart' }
+};
+
+function actionNameById(aid){
+  const a = M.actionItems.find(x=>x.id===aid);
+  return a ? a.action : '';
+}
+function checkNameById(cid){
+  const ch = M.dataChecks.find(c=>c.id===cid);
+  return ch ? ch.area : '';
+}
+function truncate(s, n){
+  if(!s) return '';
+  if(s.length <= n) return s;
+  return s.slice(0, n-1).replace(/\s+\S*$/,'') + '…';
+}
+
+function chartChipsHTML(tabCodes){
+  return tabCodes.map(t=>'<span class="chart-chip">'+
+    (CHART_NAMES[t]||t)+'</span>').join('');
+}
+
+function fixesNamesHTML(unblockIds, relevantOnly){
+  const ids = relevantOnly
+    ? unblockIds.filter(u=>T4.relevantCheckIds.includes(u))
+    : unblockIds.slice();
+  const useIds = ids.length ? ids : unblockIds.slice();
+  const names = useIds.map(checkNameById).filter(n=>n);
+  if(!names.length) return '<span style="color:var(--slate-lite)">&mdash;</span>';
+  const full = names.join(' + ');
+  if(names.length <= 2){
+    return '<span class="fixes-list" title="'+full.replace(/"/g,'&quot;')+'">'+names.join(' + ')+'</span>';
+  }
+  const head = names[0] + ' + ' + (names.length - 1) + ' more';
+  return '<span class="fixes-list" title="'+full.replace(/"/g,'&quot;')+'">'+head+'</span>';
+}
+
+function fixedByNamesHTML(actionRef){
+  if(!actionRef || actionRef==='—' || actionRef==='-'){
+    return '<span style="color:var(--slate-lite)">&mdash;</span>';
+  }
+  const ids = actionRef.split(',').map(s=>s.trim()).filter(s=>s);
+  const names = ids.map(actionNameById).filter(n=>n);
+  if(!names.length) return '<span style="color:var(--slate-lite)">&mdash;</span>';
+  const joined = names.join(' + ');
+  const shown = truncate(joined, 48);
+  return '<span class="fix-name" title="'+joined.replace(/"/g,'&quot;')+'">'+shown+'</span>';
+}
+
+function ynGlyph(v){
+  if(v==='pass') return '<span class="glyph-pass">&#10003;</span>';
+  if(v==='warn') return '<span class="glyph-warn">&#9888;</span>';
+  return '<span class="glyph-fail">&#10007;</span>';
+}
+function statusPill(s){
+  if(s==='pass') return '<span class="status-cell status-pass">&#x1F7E2; Ready</span>';
+  if(s==='warn') return '<span class="status-cell status-warn">&#x1F7E1; Workable with gaps</span>';
+  return '<span class="status-cell status-fail">&#x1F534; Illustrative &mdash; fix required</span>';
+}
+function aggregateStatus(checkStatus, overlay){
+  const order = {pass:0, warn:1, fail:2};
+  const arr = [checkStatus, overlay.format, overlay.clean, overlay.have];
+  let worst = 'pass';
+  arr.forEach(v=>{ if(order[v] > order[worst]) worst = v; });
+  return worst;
+}
+function ownerClass(owner){
+  if(/Sponsor/i.test(owner))        return 'owner-Sponsor';
+  if(/Portco IT/i.test(owner))      return 'owner-PortcoIT';
+  if(/Portco Ops/i.test(owner))     return 'owner-PortcoOps';
+  if(/Portco Finance/i.test(owner)) return 'owner-PortcoFinance';
+  if(/Commercial/i.test(owner))     return 'owner-Commercial';
+  if(/CFO/i.test(owner))            return 'owner-CFO';
+  if(/Service/i.test(owner))        return 'owner-Service';
+  if(/Treasury/i.test(owner))       return 'owner-Treasury';
+  if(/Sales Ops/i.test(owner))      return 'owner-SalesOps';
+  if(/Admin/i.test(owner))          return 'owner-Admin';
+  if(/IT/i.test(owner))             return 'owner-IT';
+  return 'owner-Admin';
+}
+
+function renderTab4(){
+  const ids = T4.relevantCheckIds;
+  const checksMap = {};
+  M.dataChecks.forEach(c=>{ checksMap[c.id] = c; });
+
+  let nReady=0, nWorkable=0, nGap=0;
+  ids.forEach(id=>{
+    const ch = checksMap[id];
+    const ov = T4.byId[id];
+    const agg = aggregateStatus(ch.status, ov);
+    if(agg==='pass') nReady++;
+    else if(agg==='warn') nWorkable++;
+    else nGap++;
+  });
+  document.getElementById('t4Needed').textContent = ids.length;
+  document.getElementById('t4Ready').textContent = nReady;
+  document.getElementById('t4Workable').textContent = nWorkable;
+  document.getElementById('t4Gap').textContent = nGap;
+
+  const actions = M.actionItems.filter(a => T4.relevantActionIds.includes(a.id));
+  const maxWeeks = actions.reduce((a,b)=>Math.max(a,b.weeks),0);
+  const sumWeeks = actions.reduce((a,b)=>a+b.weeks,0);
+  document.getElementById('t4Totals').innerHTML =
+    'Total fix  &middot;  ' +
+    '<strong>~' + maxWeeks + ' weeks</strong> (critical path)  &middot;  ' +
+    sumWeeks + ' analyst-weeks total across ' + actions.length + ' workstreams';
+
+  const sortedIds = ids.slice().sort((a,b)=>a-b);
+  const sbody = document.querySelector('#t4Scorecard tbody');
+  sbody.innerHTML = sortedIds.map(id=>{
+    const ch = checksMap[id];
+    const ov = T4.byId[id];
+    const agg = aggregateStatus(ch.status, ov);
+    const chartChips = chartChipsHTML(ov.tabs);
+    return '<tr data-check-id="'+id+'">'+
+      '<td><strong>'+ch.area+'</strong><div style="color:var(--slate);font-size:11px;margin-top:2px">'+ch.check+'</div>'+
+        (ch.detail?'<div style="color:var(--slate-lite);font-size:10.5px;margin-top:2px">'+ch.detail+'</div>':'')+'</td>'+
+      '<td>'+chartChips+'</td>'+
+      '<td class="ctr">'+ynGlyph(ov.have)+'</td>'+
+      '<td class="ctr">'+ynGlyph(ov.format)+'</td>'+
+      '<td class="ctr">'+ynGlyph(ov.clean)+'</td>'+
+      '<td>'+statusPill(agg)+'</td>'+
+      '<td>'+fixedByNamesHTML(ov.actionRef)+'</td>'+
+    '</tr>';
+  }).join('');
+  sbody.querySelectorAll('tr').forEach(tr=>{
+    tr.addEventListener('click', ()=> openCheckDetail(parseInt(tr.dataset.checkId,10)));
+  });
+
+  const priorityOrder = {Critical:0, High:1, Medium:2};
+  const sorted = actions.slice().sort((a,b)=>{
+    const p = priorityOrder[a.priority] - priorityOrder[b.priority];
+    if(p!==0) return p;
+    return a.weeks - b.weeks;
+  });
+  const abody = document.querySelector('#t4Actions tbody');
+  abody.innerHTML = sorted.map(a=>{
+    const oc = ownerClass(a.owner);
+    const fixesCell = fixesNamesHTML(a.unblocks, true);
+    return '<tr data-action-id="'+a.id+'">'+
+      '<td><strong>'+a.action+'</strong>'+
+        '<div style="color:var(--slate);font-size:11px;margin-top:3px">Lever: '+a.lever+'</div></td>'+
+      '<td><span class="owner-pill '+oc+'">'+a.owner+'</span></td>'+
+      '<td class="right"><strong>'+a.weeks+' wks</strong></td>'+
+      '<td class="ctr"><span class="pri-pill pri-'+a.priority+'">'+a.priority+'</span></td>'+
+      '<td>'+fixesCell+'</td>'+
+    '</tr>';
+  }).join('');
+  abody.querySelectorAll('tr').forEach(tr=>{
+    tr.addEventListener('click', ()=> openActionDetail(tr.dataset.actionId));
+  });
+}
+
+/* ============== TAB 4 DETAIL PANELS ============== */
+function _statusBadgeHTML(s){
+  const txt = s==='pass'?'Ready' : s==='warn'?'Workable with gaps' : 'Fix required';
+  return '&#9679; ' + txt;
+}
+function _verdictChip(v){
+  if(v==='pass') return '<span class="ck-pass">&#10003; Pass</span>';
+  if(v==='warn') return '<span class="ck-warn">&#9888; Warn</span>';
+  return '<span class="ck-fail">&#10007; Fail</span>';
+}
+
+function openCheckDetail(checkId){
+  const ch = M.dataChecks.find(c=>c.id===checkId);
+  const ov = T4.byId[checkId];
+  if(!ch || !ov) return;
+  const agg = aggregateStatus(ch.status, ov);
+  const subs = CHECK_SUBTESTS[checkId] || [];
+
+  document.getElementById('apTitle').innerHTML = ch.area;
+  const chartNamesList = ov.tabs.map(t=>CHART_NAMES[t]||t).join(' chart, ') + ' chart';
+  document.getElementById('apSubtitle').innerHTML = 'Used to build: '+chartNamesList;
+  const sEl = document.getElementById('apStatus');
+  const cls = agg==='pass'?'green' : agg==='warn'?'yellow' : 'red';
+  sEl.className = 'astatus ' + cls;
+  sEl.innerHTML = _statusBadgeHTML(agg);
+
+  const descHtml =
+    '<div style="font-size:12px;line-height:1.55;color:var(--navy-ink)">'+
+    '<div><strong>Check:</strong> '+ch.check+'</div>'+
+    '<div style="margin-top:4px"><strong>Threshold:</strong> '+ch.threshold+'</div>'+
+    (ch.detail?'<div style="margin-top:4px;color:var(--slate)"><strong style="color:var(--navy-ink)">Current state:</strong> '+ch.detail+'</div>':'')+
+    '</div>';
+
+  let subHtml = '';
+  if(subs.length){
+    subHtml = '<table class="subtest-tbl"><thead><tr><th>Dimension</th><th>Sub-test</th><th style="width:90px">Threshold</th><th style="width:48px" class="right">Result</th></tr></thead><tbody>'+
+      subs.map(s=>'<tr><td>'+s.dim+'</td><td><strong>'+s.name+'</strong>'+
+        '<div style="color:var(--slate);margin-top:3px;font-size:10.5px">'+s.state+'</div></td>'+
+        '<td style="font-size:10.5px">'+s.threshold+'</td>'+
+        '<td class="right">'+_verdictChip(s.verdict)+'</td></tr>').join('')+
+      '</tbody></table>';
+  } else {
+    subHtml = '<div style="color:var(--slate);font-size:11px;font-style:italic">Sub-tests not defined for this check.</div>';
+  }
+
+  const actionRefs = (ov.actionRef||'').split(',').map(s=>s.trim()).filter(s=>s && s!=='—');
+  let fixHtml = '';
+  if(actionRefs.length){
+    fixHtml = actionRefs.map(aid=>{
+      const a = M.actionItems.find(x=>x.id===aid);
+      if(!a) return '';
+      const oc = ownerClass(a.owner);
+      return '<div class="fix-card" data-action-id="'+a.id+'">'+
+        '<div><strong>'+a.action+'</strong></div>'+
+        '<div class="fc-row">'+
+          '<span><strong>Portco contact:</strong> <span class="owner-pill '+oc+'">'+a.owner+'</span></span>'+
+          '<span><strong>Effort:</strong> '+a.weeks+' wks</span>'+
+        '</div>'+
+        '<div class="fc-row">'+
+          '<span><strong>Priority:</strong> <span class="pri-pill pri-'+a.priority+'">'+a.priority+'</span></span>'+
+          '<span><strong>Lever:</strong> '+a.lever+'</span>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  } else {
+    fixHtml = '<div style="color:var(--slate);font-size:11px;font-style:italic">No fix required &mdash; check is passing.</div>';
+  }
+
+  const fixedBySummary = actionRefs.length
+    ? actionRefs.map(aid=>{
+        const a = M.actionItems.find(x=>x.id===aid);
+        if(!a) return '';
+        return a.action + ' (' + a.owner + ', ' + a.weeks + ' wk' + (a.weeks===1?'':'s') + ')';
+      }).filter(s=>s).join('; ')
+    : '';
+  const statusText = agg==='pass'?'Ready' : agg==='warn'?'Workable with gaps' : 'Illustrative — fix required';
+  const summaryHtml =
+    '<div style="font-size:12px;line-height:1.7;color:var(--navy-ink);padding:8px 12px;background:var(--mist);border-left:3px solid var(--navy);margin-bottom:14px">'+
+    '<div><strong>Status:</strong> '+statusText+'</div>'+
+    '<div><strong>Used to build:</strong> '+chartNamesList+'</div>'+
+    (fixedBySummary
+      ? '<div><strong>Fixed by:</strong> '+fixedBySummary+'</div>'
+      : '<div><strong>Fixed by:</strong> &mdash; (no fix required)</div>')+
+    '</div>';
+
+  document.getElementById('apBody').innerHTML =
+    summaryHtml +
+    '<h4>A &middot; Description</h4>' + descHtml +
+    '<h4>B &middot; Sub-tests</h4>' + subHtml +
+    '<h4>C &middot; Fixing action</h4>' + fixHtml +
+    '<button class="close-btn" onclick="closeAudit()">Close</button>';
+
+  document.getElementById('auditPanel').classList.add('open');
+  document.getElementById('auditPanel').setAttribute('aria-hidden','false');
+  document.getElementById('scrim').classList.add('open');
+}
+
+function openActionDetail(actionId){
+  const a = M.actionItems.find(x=>x.id===actionId);
+  if(!a) return;
+  const oc = ownerClass(a.owner);
+
+  document.getElementById('apTitle').innerHTML = a.action;
+  document.getElementById('apSubtitle').innerHTML =
+    'Portco contact: '+a.owner+' &middot; Effort: '+a.weeks+' wk'+(a.weeks===1?'':'s')+' &middot; '+
+    'Priority: '+a.priority+' &middot; Lever: '+a.lever;
+  const sEl = document.getElementById('apStatus');
+  const cls = a.priority==='Critical'?'red' : a.priority==='High'?'yellow' : 'green';
+  sEl.className = 'astatus ' + cls;
+  sEl.innerHTML = '&#9679; '+a.priority;
+
+  const metaHtml =
+    '<div class="fix-card" style="border-left-color:var(--navy)">'+
+      '<div class="fc-row" style="margin-top:0">'+
+        '<span><strong>Portco contact:</strong> <span class="owner-pill '+oc+'">'+a.owner+'</span></span>'+
+        '<span><strong>Effort:</strong> '+a.weeks+' wks</span>'+
+      '</div>'+
+      '<div class="fc-row">'+
+        '<span><strong>Priority:</strong> <span class="pri-pill pri-'+a.priority+'">'+a.priority+'</span></span>'+
+        '<span><strong>Lever:</strong> '+a.lever+'</span>'+
+      '</div>'+
+    '</div>';
+
+  const fixesHtml = '<table><thead><tr><th>Data gap</th><th style="width:200px">Used in</th></tr></thead><tbody>'+
+    a.unblocks.map(uid=>{
+      const ch = M.dataChecks.find(c=>c.id===uid);
+      const ov = T4.byId[uid];
+      const inRB = T4.relevantCheckIds.includes(uid);
+      let usedIn;
+      if(inRB && ov){
+        usedIn = ov.tabs.map(t=>CHART_NAMES[t]||t).join(' chart, ') + ' chart';
+      } else {
+        const meta = CHECK_DASHBOARD_CHART[uid];
+        if(meta && DASHBOARD_NAMES[meta.dashId]){
+          usedIn = DASHBOARD_NAMES[meta.dashId]+' &mdash; '+meta.chart;
+        } else {
+          usedIn = '(other analysis)';
+        }
+      }
+      const dimStyle = inRB ? '' : 'opacity:0.55';
+      const tailNote = inRB ? '' : ' <em>(other analysis)</em>';
+      return '<tr style="'+dimStyle+'" data-check-id="'+uid+'">'+
+        '<td><strong>'+(ch?ch.area:'(unknown)')+'</strong>'+
+          (ch?'<div style="color:var(--slate);margin-top:2px;font-size:10.5px">'+ch.check+'</div>':'')+
+        '</td>'+
+        '<td style="font-size:10.5px">'+usedIn+tailNote+'</td></tr>';
+    }).join('') +
+    '</tbody></table>';
+
+  const det = ACTION_DETAILS[a.id] || [];
+  let effortHtml;
+  if(det.length){
+    effortHtml = '<ol class="effort-list">'+det.map(d=>'<li>'+d+'</li>').join('')+'</ol>';
+  } else {
+    effortHtml = '<div style="color:var(--slate);font-size:11px;font-style:italic">Effort breakdown not defined for this action.</div>';
+  }
+
+  document.getElementById('apBody').innerHTML =
+    '<h4>A &middot; Action metadata</h4>' + metaHtml +
+    '<h4>B &middot; Fixes these data gaps</h4>' + fixesHtml +
+    '<h4>C &middot; Effort breakdown</h4>' + effortHtml +
+    '<button class="close-btn" onclick="closeAudit()">Close</button>';
+
+  document.getElementById('auditPanel').classList.add('open');
+  document.getElementById('auditPanel').setAttribute('aria-hidden','false');
+  document.getElementById('scrim').classList.add('open');
+}
+
+function openCheckUniverse(){
+  document.getElementById('apTitle').innerHTML = 'Full check universe';
+  document.getElementById('apSubtitle').innerHTML = 'All 20 checks NCC tracks &middot; 10 used by the Revenue Bridge analysis';
+  const sEl = document.getElementById('apStatus');
+  sEl.className = 'astatus yellow';
+  sEl.innerHTML = '&#9679; 10 of 20 relevant to this analysis';
+
+  const all = M.dataChecks.slice().sort((a,b)=>a.id-b.id);
+  const rowsHtml = all.map(ch=>{
+    const meta = CHECK_DASHBOARDS[ch.id] || { relevant:false };
+    const dim = meta.relevant ? '' : ' dim';
+    const badge = ch.status==='pass' ? '<span class="ubadge pass">&#9679; Ready</span>'
+                : ch.status==='warn' ? '<span class="ubadge warn">&#9679; Workable</span>'
+                :                       '<span class="ubadge fail">&#9679; Fix req\'d</span>';
+    let dashLabel;
+    if(meta.relevant){
+      const ov = T4.byId[ch.id];
+      const charts = ov ? ov.tabs.map(t=>CHART_NAMES[t]||t).join(' chart, ') + ' chart' : 'this analysis';
+      dashLabel = '<span style="color:var(--navy);font-weight:700">Used to build: '+
+        charts+'</span> <span style="color:var(--slate);font-weight:400">&larr; (this analysis)</span>';
+    } else {
+      const chartMeta = CHECK_DASHBOARD_CHART[ch.id];
+      if(chartMeta && DASHBOARD_NAMES[chartMeta.dashId]){
+        dashLabel = 'Used in: '+DASHBOARD_NAMES[chartMeta.dashId]+' &mdash; '+chartMeta.chart+
+          '  <span style="color:var(--slate-lite)">(not used here)</span>';
+      } else {
+        dashLabel = 'Used in: (other analysis) <span style="color:var(--slate-lite)">(not used here)</span>';
+      }
+    }
+    return '<div class="univ-row'+dim+'" data-check-id="'+ch.id+'">'+
+      '<div><div class="uname"><strong>'+ch.area+'</strong> &mdash; '+ch.check+'</div>'+
+        '<div class="udash">'+dashLabel+'</div></div>'+
+      '<div>'+badge+'</div>'+
+    '</div>';
+  }).join('');
+
+  const summary =
+    '<div style="font-size:11.5px;color:var(--slate);line-height:1.55;margin-bottom:10px">'+
+    'NCC tracks a master spec of <strong style="color:var(--navy-ink)">20 data quality checks</strong> across the seven dashboards in the sell-side data audit pack. '+
+    'This <strong style="color:var(--navy-ink)">Revenue Bridge analysis</strong> depends on <strong style="color:var(--navy-ink)">10 of them</strong>. The other 10 are grayed out below and serve different analyses (Recurring/Aftermarket, M&amp;A Synergy, Working Capital, Gross Margin).'+
+    '</div>';
+
+  document.getElementById('apBody').innerHTML =
+    '<h4>A &middot; Coverage summary</h4>' + summary +
+    '<h4>B &middot; All 20 checks</h4>' + rowsHtml +
+    '<button class="close-btn" onclick="closeAudit()">Close</button>';
+
+  document.getElementById('auditPanel').classList.add('open');
+  document.getElementById('auditPanel').setAttribute('aria-hidden','false');
+  document.getElementById('scrim').classList.add('open');
+}
+
+function closeAudit(){
+  document.getElementById('auditPanel').classList.remove('open');
+  document.getElementById('auditPanel').setAttribute('aria-hidden','true');
+  document.getElementById('scrim').classList.remove('open');
+}
+
+/* ============== TAB SWITCH ============== */
+function showTab(t){
+  tabF = t;
+  document.querySelectorAll('.tab').forEach(b=>{
+    const on = b.dataset.tab===t;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-selected', on?'true':'false');
+  });
+  document.querySelectorAll('.tabpane').forEach(p=>{
+    p.classList.toggle('active', p.id==='pane-'+t);
+  });
+  if(t==='t1') renderTab1();
+  if(t==='t2') renderTab2();
+  if(t==='t3') renderTab3();
+  if(t==='t4') renderTab4();
+}
+
+/* ============== WIRING ============== */
+document.querySelectorAll('.tab').forEach(b=>{
+  b.addEventListener('click', ()=> showTab(b.dataset.tab));
+});
+document.querySelectorAll('.ribbon .rcell').forEach(c=>{
+  c.addEventListener('click', ()=>{
+    if(c.dataset.jump){ showTab(c.dataset.jump); }
+  });
+});
+document.getElementById('apClose').addEventListener('click', closeAudit);
+document.getElementById('scrim').addEventListener('click', closeAudit);
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeAudit(); });
+document.getElementById('t4ViewAll').addEventListener('click', function(e){ e.preventDefault(); openCheckUniverse(); });
+
+document.getElementById('segFilter').onchange    = (e)=>{ segF=e.target.value; refreshHeadline(); rerender(); };
+document.getElementById('regFilter').onchange    = (e)=>{ regF=e.target.value; refreshHeadline(); rerender(); };
+document.getElementById('periodFilter').onchange = (e)=>{ periodF=e.target.value; refreshHeadline(); rerender(); };
+
+function rerender(){
+  if(tabF==='t1') renderTab1();
+  if(tabF==='t2') renderTab2();
+  if(tabF==='t3') renderTab3();
+  if(tabF==='t4') renderTab4();
+}
+
+/* Initial render */
+refreshHeadline();
+renderTab1();
+showTab('t1');
+</script>
+</body>
+</html>
