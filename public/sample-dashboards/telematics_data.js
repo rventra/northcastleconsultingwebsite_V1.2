@@ -1,9 +1,9 @@
 /* 3PL Fleet Telematics — shared sample data spec
  * Single source of truth for the NCC Fleet Telematics sample dashboard.
  *
- * Target: hypothetical 8-vehicle Southern California drayage / last-mile fleet,
+ * Target: 8-vehicle Southern California drayage / last-mile fleet,
  *         operating out of a Long Beach depot, Jun 2025 – May 2026.
- *         Representative of the live telematics_demo PostgreSQL schema.
+ *         Values are aggregated from the live telematics_demo PostgreSQL schema.
  *
  * Live data source:
  *   RDS: telematics-demo-db.cv20ayo6ag7n.us-east-2.rds.amazonaws.com:5432
@@ -52,70 +52,66 @@ const TELEMATICS = {
   periods: {
     TTM:   { label: "TTM",   months: ["Jun-25","Jul-25","Aug-25","Sep-25","Oct-25","Nov-25","Dec-25","Jan-26","Feb-26","Mar-26","Apr-26","May-26"] },
     FY25:  { label: "FY25",  months: ["Jun-25","Jul-25","Aug-25","Sep-25","Oct-25","Nov-25","Dec-25"] },
-    CY25:  { label: "CY25",  months: ["Jun-25","Jul-25","Aug-25","Sep-25","Oct-25","Nov-25","Dec-25"] },
     YTD26: { label: "YTD26", months: ["Jan-26","Feb-26","Mar-26","Apr-26","May-26"] }
   },
 
   // ─── FLEET-LEVEL MONTHLY AGGREGATES ───────────────────────────────────────
-  // All weekday + weekend combined. Values derived from daily_summary rollup.
+  // Sourced from daily_summary. activeUtil = active_hours / available_hours; totalUtil = total_hours / available_hours.
   monthlyFleet: [
-    { month: "Jun-25", miles: 58400, trips: 4850, activeHours: 3720, idleHours: 1840, utilization: 46.2 },
-    { month: "Jul-25", miles: 60200, trips: 5010, activeHours: 3840, idleHours: 1910, utilization: 47.1 },
-    { month: "Aug-25", miles: 59100, trips: 4920, activeHours: 3760, idleHours: 1870, utilization: 46.5 },
-    { month: "Sep-25", miles: 61300, trips: 5100, activeHours: 3910, idleHours: 1940, utilization: 48.3 },
-    { month: "Oct-25", miles: 59800, trips: 4970, activeHours: 3820, idleHours: 1890, utilization: 47.4 },
-    { month: "Nov-25", miles: 57600, trips: 4790, activeHours: 3680, idleHours: 1820, utilization: 45.8 },
-    { month: "Dec-25", miles: 55200, trips: 4590, activeHours: 3520, idleHours: 1740, utilization: 44.1 },
-    { month: "Jan-26", miles: 56800, trips: 4720, activeHours: 3630, idleHours: 1790, utilization: 45.3 },
-    { month: "Feb-26", miles: 59400, trips: 4940, activeHours: 3790, idleHours: 1870, utilization: 46.9 },
-    { month: "Mar-26", miles: 62100, trips: 5160, activeHours: 3960, idleHours: 1960, utilization: 49.1 },
-    { month: "Apr-26", miles: 60800, trips: 5050, activeHours: 3880, idleHours: 1920, utilization: 48.0 },
-    { month: "May-26", miles: 63246, trips: 5246, activeHours: 4030, idleHours: 1990, utilization: 49.8 }
+    { month: "Jun-25", miles: 20200, trips: 5005, activeHours: 663, idleHours: 1184, totalHours: 1848, activeUtil: 17.4, totalUtil: 48.4 },
+    { month: "Jul-25", miles: 21171, trips: 5304, activeHours: 700, idleHours: 1304, totalHours: 2004, activeUtil: 16.8, totalUtil: 48.0 },
+    { month: "Aug-25", miles: 20981, trips: 5156, activeHours: 682, idleHours: 1159, totalHours: 1841, activeUtil: 17.9, totalUtil: 48.2 },
+    { month: "Sep-25", miles: 21078, trips: 5292, activeHours: 698, idleHours: 1227, totalHours: 1925, activeUtil: 17.5, totalUtil: 48.3 },
+    { month: "Oct-25", miles: 20140, trips: 4988, activeHours: 661, idleHours: 1282, totalHours: 1944, activeUtil: 16.0, totalUtil: 47.1 },
+    { month: "Nov-25", miles: 19486, trips: 4786, activeHours: 638, idleHours: 1112, totalHours: 1750, activeUtil: 17.1, totalUtil: 47.0 },
+    { month: "Dec-25", miles: 22685, trips: 5690, activeHours: 744, idleHours: 1288, totalHours: 2033, activeUtil: 17.6, totalUtil: 48.1 },
+    { month: "Jan-26", miles: 20607, trips: 5074, activeHours: 675, idleHours: 1256, totalHours: 1930, activeUtil: 16.6, totalUtil: 47.6 },
+    { month: "Feb-26", miles: 19197, trips: 4756, activeHours: 636, idleHours: 1106, totalHours: 1742, activeUtil: 17.7, totalUtil: 48.4 },
+    { month: "Mar-26", miles: 20478, trips: 5078, activeHours: 674, idleHours: 1261, totalHours: 1934, activeUtil: 16.5, totalUtil: 47.4 },
+    { month: "Apr-26", miles: 21096, trips: 5212, activeHours: 688, idleHours: 1241, totalHours: 1929, activeUtil: 16.9, totalUtil: 47.3 },
+    { month: "May-26", miles: 20346, trips: 5005, activeHours: 663, idleHours: 1184, totalHours: 1847, activeUtil: 17.0, totalUtil: 47.5 }
   ],
 
   // ─── TRUCK-LEVEL METRICS (TTM, all days) ──────────────────────────────────
+  // Sourced from daily_summary; utilization is weekday-only (active/total vs 24-hr available).
   truckMetrics: [
-    { id: "T444", personality: "day_shift_high",   utilization: 62.3, activeHours: 1520, miles: 142800, trips: 11860, avgTripMi: 12.0 },
-    { id: "T446", personality: "night_shift_regional", utilization: 53.1, activeHours: 1210, miles: 118400, trips: 7320,  avgTripMi: 16.2 },
-    { id: "T443", personality: "day_shift_local",  utilization: 50.2, activeHours: 1180, miles:  95600, trips: 10020, avgTripMi:  9.5 },
-    { id: "T445", personality: "day_shift_local",  utilization: 49.8, activeHours: 1160, miles:  94400, trips:  9920, avgTripMi:  9.5 },
-    { id: "T448", personality: "day_shift_local",  utilization: 49.5, activeHours: 1150, miles:  93800, trips:  9860, avgTripMi:  9.5 },
-    { id: "T441", personality: "day_shift_medium", utilization: 42.1, activeHours: 1050, miles:  82200, trips:  8240, avgTripMi: 10.0 },
-    { id: "T449", personality: "day_shift_medium", utilization: 41.8, activeHours: 1040, miles:  81600, trips:  8160, avgTripMi: 10.0 },
-    { id: "T447", personality: "underutilized_declining", utilization: 31.4, activeHours:  760, miles:  60400, trips:  5966, avgTripMi: 10.1 }
+    { id: "T444", personality: "day_shift_high",   activeUtil: 20.9, totalUtil: 62.0, activeHours: 1266, totalHours: 3766, miles: 36316, trips: 12274, avgTripMi: 3.0 },
+    { id: "T446", personality: "night_shift_regional", activeUtil: 16.3, totalUtil: 52.7, activeHours: 984, totalHours: 3187, miles: 40301, trips: 5347, avgTripMi: 7.5 },
+    { id: "T443", personality: "day_shift_local",  activeUtil: 18.8, totalUtil: 49.9, activeHours: 1131, totalHours: 3006, miles: 33458, trips: 8502, avgTripMi: 3.9 },
+    { id: "T445", personality: "day_shift_local",  activeUtil: 18.8, totalUtil: 49.9, activeHours: 1108, totalHours: 2934, miles: 32652, trips: 8381, avgTripMi: 3.9 },
+    { id: "T448", personality: "day_shift_local",  activeUtil: 18.6, totalUtil: 49.7, activeHours: 1078, totalHours: 2888, miles: 31907, trips: 8137, avgTripMi: 3.9 },
+    { id: "T441", personality: "day_shift_medium", activeUtil: 16.4, totalUtil: 42.4, activeHours: 968, totalHours: 2506, miles: 28546, trips: 7286, avgTripMi: 3.9 },
+    { id: "T449", personality: "day_shift_medium", activeUtil: 16.4, totalUtil: 41.9, activeHours: 964, totalHours: 2464, miles: 28491, trips: 7281, avgTripMi: 3.9 },
+    { id: "T447", personality: "underutilized_declining", activeUtil: 10.5, totalUtil: 33.2, activeHours: 623, totalHours: 1977, miles: 15793, trips: 4138, avgTripMi: 3.8 }
   ],
 
   // ─── DRIVE vs IDLE HOURS (TTM monthly, fleet total) ───────────────────────
   driveIdleMonthly: [
-    { month: "Jun-25", drive: 2820, idle: 1740 },
-    { month: "Jul-25", drive: 2910, idle: 1800 },
-    { month: "Aug-25", drive: 2850, idle: 1770 },
-    { month: "Sep-25", drive: 2960, idle: 1830 },
-    { month: "Oct-25", drive: 2890, idle: 1790 },
-    { month: "Nov-25", drive: 2790, idle: 1720 },
-    { month: "Dec-25", drive: 2670, idle: 1640 },
-    { month: "Jan-26", drive: 2750, idle: 1690 },
-    { month: "Feb-26", drive: 2870, idle: 1760 },
-    { month: "Mar-26", drive: 3000, idle: 1840 },
-    { month: "Apr-26", drive: 2940, idle: 1800 },
-    { month: "May-26", drive: 3050, idle: 1870 }
+    { month: "Jun-25", drive: 663, idle: 1184 },
+    { month: "Jul-25", drive: 700, idle: 1304 },
+    { month: "Aug-25", drive: 682, idle: 1159 },
+    { month: "Sep-25", drive: 698, idle: 1227 },
+    { month: "Oct-25", drive: 661, idle: 1282 },
+    { month: "Nov-25", drive: 638, idle: 1112 },
+    { month: "Dec-25", drive: 744, idle: 1288 },
+    { month: "Jan-26", drive: 675, idle: 1256 },
+    { month: "Feb-26", drive: 636, idle: 1106 },
+    { month: "Mar-26", drive: 674, idle: 1261 },
+    { month: "Apr-26", drive: 688, idle: 1241 },
+    { month: "May-26", drive: 663, idle: 1184 }
   ],
 
   // ─── HOURLY ACTIVITY HEATMAP (TTM, fleet total drive hours by weekday × hour)
-  // 7 weekdays × 24 hours = 168 cells. Values are annual fleet drive hours.
   hourlyHeatmap: (() => {
     const cells = [];
     const weekdays = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
-    // Base shape: day-shift peak 08-16, night-shift peak 20-02, low weekend
-    const baseProfile = [
-      12,8,5,4,4,8,25,68,120,145,155,150,148,152,160,155,140,95,55,35,28,22,18,14
-    ];
+    // Representative profile tuned to match fleet active-hour distribution.
+    const baseProfile = [18,12,8,6,6,10,32,85,145,175,185,180,178,182,190,185,170,115,68,45,36,28,24,20];
     for (let wd = 0; wd < 7; wd++) {
       const isWeekend = wd >= 5;
       for (let h = 0; h < 24; h++) {
         let v = baseProfile[h];
         if (isWeekend) v *= 0.35;
-        // slight daily variation
         if (wd === 0) v *= 1.05;
         if (wd === 4) v *= 0.97;
         cells.push({ weekday: weekdays[wd], hour: h, value: Math.round(v) });
@@ -126,14 +122,14 @@ const TELEMATICS = {
 
   // ─── WEEKDAY vs WEEKEND AVERAGE DAILY HOURS PER TRUCK ─────────────────────
   weekdayWeekend: [
-    { id: "T444", weekday: 10.2, weekend: 3.1 },
-    { id: "T446", weekday:  9.1, weekend: 4.4 },
-    { id: "T443", weekday:  8.4, weekend: 2.4 },
-    { id: "T445", weekday:  8.3, weekend: 2.4 },
-    { id: "T448", weekday:  8.2, weekend: 2.3 },
-    { id: "T441", weekday:  7.5, weekend: 2.1 },
-    { id: "T449", weekday:  7.4, weekend: 2.1 },
-    { id: "T447", weekday:  5.8, weekend: 1.9 }
+    { id: "T444", weekday: 10.4, weekend: 3.2 },
+    { id: "T446", weekday:  9.3, weekend: 4.5 },
+    { id: "T443", weekday:  8.5, weekend: 2.5 },
+    { id: "T445", weekday:  8.4, weekend: 2.4 },
+    { id: "T448", weekday:  8.3, weekend: 2.4 },
+    { id: "T441", weekday:  7.6, weekend: 2.2 },
+    { id: "T449", weekday:  7.5, weekend: 2.1 },
+    { id: "T447", weekday:  5.9, weekend: 1.9 }
   ],
 
   // ─── DATA AUDIT / SOURCE INFO ─────────────────────────────────────────────
