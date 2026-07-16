@@ -337,6 +337,79 @@ export default function DashboardingDataPortalPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
+          LIVE DEMO — Fleet Telematics Dashboard
+      ═══════════════════════════════════════════════════════════════ */}
+      <div className="py-20 md:py-28 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-5 gap-12 items-center">
+            {/* Left — CTA Card */}
+            <div className="lg:col-span-2">
+              <div className="bg-gradient-to-br from-[#5B21B6] to-[#7C3AED] rounded-2xl p-10 text-white">
+                <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-6">
+                  <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Interactive Fleet Dashboard</h3>
+                <p className="text-white/80 mb-8 leading-relaxed text-lg">
+                  Explore a live demo powered by 720,000+ GPS data points across an 8-vehicle fleet. Real-time KPIs, utilization heatmaps, trip analytics, and filterable trend analysis.
+                </p>
+                <a
+                  href="https://main.d2pzfdprrzy6zu.amplifyapp.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 bg-white text-[#5B21B6] px-8 py-4 rounded-lg font-bold hover:bg-white/90 transition-colors text-base"
+                >
+                  Launch Dashboard
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Right — Stats + Features */}
+            <div className="lg:col-span-3">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+                {[
+                  { value: '720,970', label: 'GPS Data Points' },
+                  { value: '61,346', label: 'Trips Analyzed' },
+                  { value: '8', label: 'Fleet Vehicles' },
+                  { value: '12', label: 'Months of Data' },
+                ].map((stat, i) => (
+                  <div key={i} className="text-center">
+                    <p className="text-3xl font-bold text-[#5B21B6]">{stat.value}</p>
+                    <p className="text-xs text-[#051c2c]/50 mt-1 uppercase tracking-wider">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+              <h3 className="text-xl font-bold text-[#051c2c] mb-6">What's Inside the Demo</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                {[
+                  'Fleet utilization trends across 8 vehicles with personality filters',
+                  'Trip volume, duration, and mileage analytics by vehicle',
+                  'Hourly activity heatmaps by vehicle and day of week',
+                  'Drive vs idle time breakdowns with interactive drill-down',
+                  'Filterable by date range, vehicle, personality, and day type',
+                  'Exportable charts and shareable URL state for every filter combination',
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 text-[#051c2c]/70 text-sm">
+                    <span className="mt-0.5 w-5 h-5 bg-[#5B21B6]/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg className="w-3 h-3 text-[#5B21B6]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════
           CTA
       ═══════════════════════════════════════════════════════════════ */}
       <div className="bg-[#051c2c] py-20 md:py-28 px-6">
