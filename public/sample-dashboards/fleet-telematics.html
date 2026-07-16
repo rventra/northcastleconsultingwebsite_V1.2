@@ -171,16 +171,19 @@ footer.ncc strong{color:var(--slate)}
     <div class="tile" style="--accent:var(--gold)">
       <div class="tag">GROSS UTILIZATION</div>
       <div class="label">Active hours ÷ available hours</div>
-      <div class="big" id="t1ActiveUtil">17.0%</div>
+      <div class="big" id="t1ActiveUtil">17.1%</div>
       <div class="unit" id="t1ActiveUtilUnit">Drive time only vs weekday × 24</div>
-      <div class="bullets"><div id="t1ActiveUtilNote">~4.1 hrs drive per truck-day</div></div>
+      <div class="bullets">
+        <div>~4.1 hrs drive per truck-day</div>
+        <div id="t1TotalUtilInline">Total util: 47.8%</div>
+      </div>
     </div>
     <div class="tile" style="--accent:var(--green)">
-      <div class="tag">TOTAL UTILIZATION</div>
-      <div class="label">Total hours ÷ available hours</div>
-      <div class="big" id="t1TotalUtil">47.4%</div>
-      <div class="unit" id="t1TotalUtilUnit">Drive + idle/transition vs weekday × 24</div>
-      <div class="bullets"><div id="t1TotalUtilNote">~11.4 hrs logged per truck-day</div></div>
+      <div class="tag">TOTAL HOURS LOGGED</div>
+      <div class="label">Drive + idle / transition</div>
+      <div class="big" id="t1TotalHours">22.7K</div>
+      <div class="unit" id="t1TotalHoursUnit">TTM fleet hours</div>
+      <div class="bullets"><div id="t1TotalHoursNote">~11.4 hrs logged per truck-day</div></div>
     </div>
   </div>
 
@@ -419,8 +422,9 @@ function updateKPIs(){
   document.getElementById('t1TripsUnit').textContent = `${state.period} delivery trips`;
   document.getElementById('t1ActiveUtil').textContent = fmtPct(avgActiveUtil);
   document.getElementById('t1ActiveUtilUnit').textContent = `Drive time only vs weekday × 24`;
-  document.getElementById('t1TotalUtil').textContent = fmtPct(avgTotalUtil);
-  document.getElementById('t1TotalUtilUnit').textContent = `Drive + idle/transition vs weekday × 24`;
+  document.getElementById('t1TotalUtilInline').textContent = `Total util: ${fmtPct(avgTotalUtil)}`;
+  document.getElementById('t1TotalHours').textContent = fmtK(totalHours);
+  document.getElementById('t1TotalHoursUnit').textContent = `${state.period} fleet hours`;
 }
 
 function renderTruckTable(){
