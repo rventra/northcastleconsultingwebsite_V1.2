@@ -47,8 +47,8 @@
 
   main{padding:44px 0 64px;}
 
-  .cards{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
-  @media (max-width:720px){ .cards{grid-template-columns:1fr;} header.hero h1{font-size:30px;} }
+  .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:980px){ .cards{grid-template-columns:1fr;} header.hero h1{font-size:30px;} }
 
   .card{
     display:flex; flex-direction:column;
@@ -119,6 +119,16 @@
             <div class="kicker">Revenue · Growth Drivers</div>
             <h2>Revenue Bridge</h2>
             <p>Decomposes total revenue growth into organic, M&amp;A, FX, and price-volume effects — isolating what actually moved the top line.</p>
+            <span class="go">Open dashboard <span class="arrow">&rarr;</span></span>
+          </div>
+        </a>
+
+        <a class="card" href="/sample-dashboards/fleet-telematics.html">
+          <div class="top"></div>
+          <div class="body">
+            <div class="kicker">Operations · Fleet</div>
+            <h2>Fleet Telematics</h2>
+            <p>Utilization, trip activity, and hourly operating patterns for an 8-vehicle 3PL fleet — built on the live telematics_demo PostgreSQL schema.</p>
             <span class="go">Open dashboard <span class="arrow">&rarr;</span></span>
           </div>
         </a>

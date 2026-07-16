@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Fleet Telematics · Utilization, activity &amp; trip economics · North Castle Consulting</title>
+<meta name="viewport" content="width=1280" />
+<script src="telematics_data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+:root {
+  --navy:#1E2761; --navy-deep:#121A47; --navy-ink:#1A1A2E;
+  --gold:#C9A227; --gold-lite:#E6C95B;
+  --slate:#475569; --slate-lite:#94A3B8;
+  --bg:#F8FAFC; --mist:#EEF2FF; --border:#E5E7EB;
+  --white:#FFFFFF; --red:#B22234; --green:#2C5F2D;
+  --amber:#B45309; --amber-bg:#FEF3C7;
+  --red-bg:#FEE2E2; --green-bg:#DCFCE7;
+  --purple:#5B21B6; --purple-lite:#C084FC;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg)}
+.page{max-width:1320px;margin:0 auto;background:var(--white);min-height:100vh;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+header.ncc{background:var(--navy-deep);color:var(--white);padding:18px 32px 14px;position:relative}
+header.ncc::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--gold)}
+header.ncc .brand{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--gold-lite)}
+header.ncc h1{margin:6px 0 2px;font-size:26px;font-weight:700}
+header.ncc .sub{font-size:13px;color:#cfd8dc;margin-top:2px}
+header.ncc .illus{position:absolute;top:18px;right:32px;background:var(--gold);color:var(--navy-deep);font-weight:700;font-size:11px;letter-spacing:.18em;padding:6px 12px;border-radius:2px}
+.banner{background:var(--mist);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;gap:18px}
+.banner .q-tag{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.12em;background:var(--white);padding:6px 12px;border:1px solid var(--border)}
+.banner .q-text{font-size:14px;color:var(--navy-ink);font-style:italic;flex:1}
+.controls{display:flex;gap:14px;align-items:center;padding:16px 32px;background:var(--white);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.controls label{font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-right:8px}
+.controls select{font-family:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);min-width:140px}
+.controls .pill{background:var(--navy);color:var(--white);padding:6px 12px;font-size:11px;font-weight:700;letter-spacing:.08em}
+.tabstrip{display:flex;gap:0;padding:0 32px;background:var(--white);border-bottom:1px solid var(--border)}
+.tab{flex:1;background:#F1F5F9;color:var(--slate);border:none;border-right:1px solid var(--border);padding:14px 18px 12px;text-align:left;cursor:pointer;font-family:inherit;position:relative;transition:background .15s,color .15s}
+.tab:last-child{border-right:none}
+.tab:hover{background:#E2E8F0}
+.tab .tab-title{font-size:14px;font-weight:700;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.tab .tab-sub{font-size:11px;color:inherit;opacity:.75;margin-top:3px;font-weight:400}
+.tab .dots{font-size:12px;letter-spacing:.08em;color:var(--gold);font-weight:700}
+.tab.active{background:var(--navy);color:var(--white)}
+.tab.active .tab-sub{opacity:.85;color:#cfd8dc}
+.tab.active .dots{color:var(--gold-lite)}
+.tab.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--gold)}
+.tabpane{display:none;padding-bottom:24px}
+.tabpane.active{display:block}
+.tabhdr{display:flex;justify-content:space-between;align-items:center;padding:14px 32px 0}
+.tabhdr .lead{font-size:11px;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px 32px 18px;background:var(--bg)}
+.tile{background:var(--white);border:1px solid var(--border);position:relative;padding:14px 16px 16px;min-height:150px}
+.tile::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--navy))}
+.tile .tag{font-size:10px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.12em}
+.tile .label{font-size:13px;font-weight:700;color:var(--navy-ink);margin-top:6px}
+.tile .big{font-size:30px;font-weight:700;color:var(--big,var(--navy-ink));margin-top:10px;line-height:1}
+.tile .unit{font-size:11px;color:var(--slate);margin-top:6px}
+.tile .bullets{font-size:11px;color:var(--slate);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.6}
+.tile .bullets div::before{content:"\2022 ";color:var(--gold)}
+.panel{margin:0 32px 18px;background:var(--white);border:1px solid var(--border);padding:18px 22px}
+.panel .ptitle{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.panel h2{margin:0;font-size:16px;font-weight:700;color:var(--navy-ink)}
+.panel .chart-wrap{position:relative;height:340px;margin-top:12px}
+.grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;padding:0 32px 18px}
+.grid2-eq{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 32px 18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 32px 18px}
+table.ncc{width:100%;border-collapse:collapse;font-size:12px}
+table.ncc th{text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);padding:8px 10px;border-bottom:2px solid var(--navy)}
+table.ncc td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--navy-ink)}
+table.ncc tr:hover td{background:var(--mist)}
+.pos{color:var(--green);font-weight:700}
+.neg{color:var(--red);font-weight:700}
+.muted{color:var(--slate-lite)}
+.chip-g{display:inline-block;background:var(--green-bg);color:#14532D;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
+.chip-y{display:inline-block;background:var(--amber-bg);color:#78350F;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
+.chip-r{display:inline-block;background:var(--red-bg);color:#7F1D1D;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
+footer.ncc{background:var(--white);border-top:1px solid var(--border);padding:14px 32px 18px;font-size:11px;color:var(--slate-lite);display:flex;justify-content:space-between;align-items:center}
+footer.ncc .left{display:flex;gap:18px;align-items:center}
+footer.ncc strong{color:var(--slate)}
+.gold-rule{height:2px;background:var(--gold);margin:0 32px 18px;width:48px}
+.section-title{padding:6px 32px 0;font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase}
+.section-sub{padding:2px 32px 14px;font-size:13px;color:var(--slate)}
+.note{margin:0 32px 18px;background:var(--mist);border-left:3px solid var(--gold);padding:10px 14px;font-size:12px;color:var(--navy-ink)}
+.note strong{color:var(--navy)}
+.callout{margin:0 32px 24px;background:#FFFBEB;border:1px solid var(--gold);border-left:4px solid var(--gold);padding:14px 18px;font-size:13px;color:var(--navy-ink);line-height:1.55}
+.callout .ctitle{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="ncc">
+  <div class="brand">NORTH CASTLE CONSULTING · OPERATIONS DASHBOARD PACK</div>
+  <h1>Fleet Telematics · Utilization, activity &amp; trip economics</h1>
+  <div class="sub">How hard the fleet is working, when it works, and where utilization leaks out.</div>
+  <div class="illus">ILLUSTRATIVE · SAMPLE DATA</div>
+</header>
+
+<div class="banner">
+  <div class="q-tag">THE QUESTION</div>
+  <div class="q-text">Which vehicles are earning their keep, and where is capacity being left on the table?</div>
+</div>
+
+<div class="controls">
+  <div>
+    <label for="periodFilter">Period</label>
+    <select id="periodFilter">
+      <option value="TTM" selected>TTM (Jun-25 → May-26)</option>
+      <option value="FY25">FY25 (Jun-25 → Dec-25)</option>
+      <option value="YTD26">YTD26 (Jan-26 → May-26)</option>
+    </select>
+  </div>
+  <div>
+    <label for="vehicleFilter">Vehicle</label>
+    <select id="vehicleFilter">
+      <option value="all" selected>All vehicles</option>
+      <option value="day_shift_high">Day Shift — High</option>
+      <option value="day_shift_medium">Day Shift — Medium</option>
+      <option value="day_shift_local">Day Shift — Local</option>
+      <option value="night_shift_regional">Night Shift — Regional</option>
+      <option value="underutilized_declining">Underutilized / Declining</option>
+    </select>
+  </div>
+  <div>
+    <label for="dayFilter">Day type</label>
+    <select id="dayFilter">
+      <option value="all" selected>All days</option>
+      <option value="weekday">Weekdays</option>
+      <option value="weekend">Weekends</option>
+    </select>
+  </div>
+  <div class="pill" id="summaryPill">TTM · All vehicles · All days</div>
+</div>
+
+<div class="tabstrip">
+  <button class="tab active" data-tab="t1">
+    <div class="tab-title">Fleet summary <span class="dots">●●●</span></div>
+    <div class="tab-sub">Miles, trips &amp; utilization by truck</div>
+  </button>
+  <button class="tab" data-tab="t2">
+    <div class="tab-title">Activity patterns <span class="dots">●●●</span></div>
+    <div class="tab-sub">When the fleet works &amp; how time is spent</div>
+  </button>
+  <button class="tab" data-tab="t3">
+    <div class="tab-title">Data audit <span class="dots">●●●</span></div>
+    <div class="tab-sub">Source, schema &amp; live dashboard</div>
+  </button>
+</div>
+
+<!-- ================= TAB 1: FLEET SUMMARY ================= -->
+<div class="tabpane active" id="pane-t1">
+  <div class="tabhdr">
+    <div class="lead">Fleet summary · Miles, trips &amp; utilization by truck</div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile" style="--accent:var(--navy)">
+      <div class="tag">FLEET TOTAL</div>
+      <div class="label">Total miles</div>
+      <div class="big" id="t1Miles">713K</div>
+      <div class="unit" id="t1MilesUnit">TTM fleet miles</div>
+      <div class="bullets"><div id="t1MilesNote">~8 trucks × ~245 mi/day</div></div>
+    </div>
+    <div class="tile" style="--accent:var(--purple)">
+      <div class="tag">FLEET TOTAL</div>
+      <div class="label">Total trips</div>
+      <div class="big" id="t1Trips">61,346</div>
+      <div class="unit" id="t1TripsUnit">TTM delivery trips</div>
+      <div class="bullets"><div id="t1TripsNote">~250 trips per truck-day</div></div>
+    </div>
+    <div class="tile" style="--accent:var(--gold)">
+      <div class="tag">FLEET AVERAGE</div>
+      <div class="label">Avg utilization</div>
+      <div class="big" id="t1Util">47.3%</div>
+      <div class="unit" id="t1UtilUnit">Total hours ÷ available hours</div>
+      <div class="bullets"><div id="t1UtilNote">Workhorse T444 at 62%</div></div>
+    </div>
+    <div class="tile" style="--accent:var(--green)">
+      <div class="tag">FLEET TOTAL</div>
+      <div class="label">Active hours</div>
+      <div class="big" id="t1Active">45.6K</div>
+      <div class="unit" id="t1ActiveUnit">TTM drive time</div>
+      <div class="bullets"><div id="t1ActiveNote">~67% of total logged hours</div></div>
+    </div>
+  </div>
+
+  <div class="grid2-eq">
+    <div class="panel">
+      <div class="ptitle">MILES &amp; TRIPS TREND · MONTHLY</div>
+      <div class="chart-wrap"><canvas id="t1MilesTrend"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">UTILIZATION BY TRUCK · %</div>
+      <div class="chart-wrap"><canvas id="t1UtilByTruck"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="ptitle">TRUCK-LEVEL OPERATING METRICS · TTM</div>
+    <table class="ncc" id="t1TruckTable">
+      <thead><tr>
+        <th>Truck</th>
+        <th>Personality</th>
+        <th style="text-align:right">Utilization</th>
+        <th style="text-align:right">Miles</th>
+        <th style="text-align:right">Trips</th>
+        <th style="text-align:right">Active hrs</th>
+        <th style="text-align:right">Avg trip mi</th>
+      </tr></thead><tbody></tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="ctitle">FLEET TAKEAWAY</div>
+    The fleet averages <strong>47% utilization</strong>, but that headline hides a wide spread. <strong>T444 (day_shift_high)</strong> is the clear workhorse at 62% utilization, while <strong>T447 (underutilized_declining)</strong> sits at 31% and pulls weekend activity that does not offset its weekday gap. A buyer will underwrite to the bottom-third trucks, not the fleet average.
+  </div>
+</div>
+<!-- ================= TAB 2: ACTIVITY PATTERNS ================= -->
+<div class="tabpane" id="pane-t2">
+  <div class="tabhdr">
+    <div class="lead">Activity patterns · When the fleet works &amp; how time is spent</div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile" style="--accent:var(--navy)">
+      <div class="tag">PEAK OPERATION</div>
+      <div class="label">Peak weekday hour</div>
+      <div class="big">11:00 AM</div>
+      <div class="unit">Fleet-wide drive-hour peak</div>
+      <div class="bullets"><div>Day-shift trucks drive the shape</div></div>
+    </div>
+    <div class="tile" style="--accent:var(--purple)">
+      <div class="tag">TIME SPLIT</div>
+      <div class="label">Drive vs idle</div>
+      <div class="big">67% / 33%</div>
+      <div class="unit">Active hours vs idle/transition</div>
+      <div class="bullets"><div>Stop time includes depot transitions</div></div>
+    </div>
+    <div class="tile" style="--accent:var(--gold)">
+      <div class="tag">NIGHT SHIFT</div>
+      <div class="label">T446 secondary peak</div>
+      <div class="big">9:00 PM</div>
+      <div class="unit">Regional night-shift run</div>
+      <div class="bullets"><div>Longest trips, fewer stops</div></div>
+    </div>
+    <div class="tile" style="--accent:var(--red)">
+      <div class="tag">WEEKEND GAP</div>
+      <div class="label">Weekend activity</div>
+      <div class="big">-65%</div>
+      <div class="unit">vs weekday daily hours</div>
+      <div class="bullets"><div>Concentrated in T446 &amp; T447</div></div>
+    </div>
+  </div>
+
+  <div class="grid2-eq">
+    <div class="panel">
+      <div class="ptitle">DRIVE vs IDLE HOURS · MONTHLY STACKED</div>
+      <div class="chart-wrap"><canvas id="t2DriveIdle"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">WEEKDAY vs WEEKEND · AVG DAILY HOURS PER TRUCK</div>
+      <div class="chart-wrap"><canvas id="t2WeekdayWeekend"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="ptitle">HOURLY ACTIVITY HEATMAP · FLEET DRIVE HOURS BY WEEKDAY &amp; HOUR</div>
+    <div class="chart-wrap"><canvas id="t2Heatmap"></canvas></div>
+  </div>
+
+  <div class="callout">
+    <div class="ctitle">ACTIVITY TAKEAWAY</div>
+    Day-shift trucks create a single mid-day peak, while the night-shift truck (<strong>T446</strong>) creates a second evening peak. Weekend activity is thin and tied to only two assets. The bigger operational question is the <strong>33% idle/transition share</strong>: improving depot turnaround or route density would lift effective utilization faster than adding trucks.
+  </div>
+</div>
+
+<!-- ================= TAB 3: DATA AUDIT ================= -->
+<div class="tabpane" id="pane-t3">
+  <div class="tabhdr">
+    <div class="lead">Data audit · Source, schema &amp; live dashboard</div>
+  </div>
+
+  <div class="note">
+    <strong>Data source.</strong> This dashboard is built on the <code>telematics_demo</code> PostgreSQL database hosted in AWS RDS. The schema has 6 tables across 4 layers: raw GPS pings → trips → daily_summary → hourly_pattern, plus static depot and trucks tables.
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <div class="ptitle">LIVE INTERACTIVE DASHBOARD</div>
+      <h2>Query the real dataset</h2>
+      <p style="font-size:13px;color:var(--slate);line-height:1.6;margin-top:8px">
+        A live Next.js dashboard queries the RDS database directly, with filters for date range, vehicle, personality, and day type.
+      </p>
+      <div style="margin-top:14px">
+        <a href="https://main.d2pzfdprrzy6zu.amplifyapp.com/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:var(--white);font-weight:700;font-size:13px;padding:10px 16px;border-radius:4px;text-decoration:none">
+          Open live dashboard →
+        </a>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">DATABASE CONNECTION</div>
+      <table class="ncc">
+        <tbody>
+          <tr><td><strong>Host</strong></td><td>telematics-demo-db.cv20ayo6ag7n.us-east-2.rds.amazonaws.com</td></tr>
+          <tr><td><strong>Port / DB</strong></td><td>5432 / telematics_demo</td></tr>
+          <tr><td><strong>Engine</strong></td><td>PostgreSQL 16.14</td></tr>
+          <tr><td><strong>Read-only user</strong></td><td>sigma_reader</td></tr>
+          <tr><td><strong>Rows</strong></td><td>720,970 pings · 61,346 trips · 2,001 daily rows</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="ptitle">DATA READINESS SCORECARD · TELEMATICS ANALYSIS</div>
+    <table class="ncc" id="t3AuditTable">
+      <thead><tr>
+        <th>Data input</th>
+        <th>Used in</th>
+        <th>Have it?</th>
+        <th>Right format?</th>
+        <th>Clean?</th>
+      </tr></thead><tbody></tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <div class="ptitle">SCHEMA SUMMARY · 6 TABLES, 4 LAYERS</div>
+    <div style="font-size:13px;color:var(--slate);line-height:1.7">
+      <strong>Level 1 — gps_pings (720,970 rows):</strong> raw GPS samples; source of truth for location, speed, status, odometer.<br>
+      <strong>Level 2 — trips (61,346 rows):</strong> one row per delivery; derived from Movement Started → Movement Started boundaries.<br>
+      <strong>Level 3 — daily_summary (2,001 rows):</strong> one row per vehicle per active day; trips, miles, active/idle hours, utilization.<br>
+      <strong>Level 4 — hourly_pattern (622 rows):</strong> drive hours by vehicle × weekday × hour for heatmaps.<br>
+      <strong>Static — trucks (8 rows) &amp; depot (1 row):</strong> vehicle metadata and home base.
+    </div>
+  </div>
+</div>
+
+<footer class="ncc">
+  <div class="left">
+    <strong>North Castle Consulting</strong>
+    <span>Operations dashboard sample · Illustrative data</span>
+  </div>
+  <div>
+    Built from the telematics_demo schema · <a href="https://main.d2pzfdprrzy6zu.amplifyapp.com/" target="_blank" rel="noopener" style="color:var(--navy);font-weight:600">Live dashboard</a>
+  </div>
+</footer>
+
+</div><!-- /page -->
+<script>
+Chart.register(ChartDataLabels);
+
+// ─── State ────────────────────────────────────────────────────────────────
+let state = { period: 'TTM', vehicle: 'all', dayType: 'all' };
+const monthsAll = TELEMATICS.monthlyFleet.map(d => d.month);
+const truckOrder = TELEMATICS.truckMetrics.map(t => t.id);
+
+const periodMonths = {
+  TTM:   monthsAll,
+  FY25:  ["Jun-25","Jul-25","Aug-25","Sep-25","Oct-25","Nov-25","Dec-25"],
+  YTD26: ["Jan-26","Feb-26","Mar-26","Apr-26","May-26"]
+};
+
+// ─── Helpers ──────────────────────────────────────────────────────────────
+function fmtK(n){ return n >= 1000 ? (n/1000).toFixed(0) + 'K' : n.toLocaleString(); }
+function fmtNum(n){ return n.toLocaleString(undefined, {maximumFractionDigits:1}); }
+function fmtPct(n){ return n.toFixed(1) + '%'; }
+
+function filteredTrucks(){
+  if (state.vehicle === 'all') return TELEMATICS.truckMetrics;
+  return TELEMATICS.truckMetrics.filter(t => t.personality === state.vehicle);
+}
+
+function filteredMonthly(){
+  const months = periodMonths[state.period] || monthsAll;
+  return TELEMATICS.monthlyFleet.filter(d => months.includes(d.month));
+}
+
+function dayTypeFactor(){
+  if (state.dayType === 'weekday') return { miles: 1.16, trips: 1.18, hours: 1.22, util: 1.14 };
+  if (state.dayType === 'weekend') return { miles: 0.32, trips: 0.28, hours: 0.30, util: 0.30 };
+  return { miles: 1, trips: 1, hours: 1, util: 1 };
+}
+
+// ─── Tab switching ────────────────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tabpane').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('pane-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// ─── Render/update ────────────────────────────────────────────────────────
+let charts = {};
+
+function updateSummaryPill(){
+  const labels = { TTM: 'TTM', FY25: 'FY25', YTD26: 'YTD26' };
+  const vLbl = document.querySelector('#vehicleFilter option:checked').text;
+  const dLbl = document.querySelector('#dayFilter option:checked').text;
+  document.getElementById('summaryPill').textContent = `${labels[state.period]} · ${vLbl} · ${dLbl}`;
+}
+
+function updateKPIs(){
+  const months = filteredMonthly();
+  const f = dayTypeFactor();
+  const totalMiles = months.reduce((s,d)=>s+d.miles,0) * f.miles;
+  const totalTrips = months.reduce((s,d)=>s+d.trips,0) * f.trips;
+  const activeHours = months.reduce((s,d)=>s+d.activeHours,0) * f.hours;
+  const avgUtil = months.reduce((s,d)=>s+d.utilization,0)/months.length * f.util;
+
+  document.getElementById('t1Miles').textContent = fmtK(totalMiles);
+  document.getElementById('t1MilesUnit').textContent = `${state.period} fleet miles`;
+  document.getElementById('t1Trips').textContent = fmtNum(totalTrips);
+  document.getElementById('t1TripsUnit').textContent = `${state.period} delivery trips`;
+  document.getElementById('t1Active').textContent = fmtK(activeHours);
+  document.getElementById('t1ActiveUnit').textContent = `${state.period} drive time`;
+  document.getElementById('t1Util').textContent = fmtPct(avgUtil);
+}
+
+function renderTruckTable(){
+  const tbody = document.querySelector('#t1TruckTable tbody');
+  tbody.innerHTML = '';
+  const trucks = filteredTrucks();
+  const f = dayTypeFactor();
+  trucks.forEach(t => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><strong>${t.id}</strong></td>
+      <td>${t.personality.replace(/_/g,' ')}</td>
+      <td style="text-align:right">${fmtPct(t.utilization * f.util)}</td>
+      <td style="text-align:right">${fmtK(t.miles * f.miles)}</td>
+      <td style="text-align:right">${fmtNum(t.trips * f.trips)}</td>
+      <td style="text-align:right">${fmtNum(t.activeHours * f.hours)}</td>
+      <td style="text-align:right">${t.avgTripMi.toFixed(1)}</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+function commonChartOptions(){
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11, family: 'Calibri' }, boxWidth: 12 } },
+      datalabels: { display: false }
+    },
+    scales: {
+      x: { ticks: { font: { size: 11, family: 'Calibri' }, color: '#475569' }, grid: { display: false } },
+      y: { ticks: { font: { size: 11, family: 'Calibri' }, color: '#475569' }, grid: { color: '#E5E7EB' } }
+    }
+  };
+}
+
+function renderMilesTrend(){
+  const data = filteredMonthly();
+  const f = dayTypeFactor();
+  const ctx = document.getElementById('t1MilesTrend').getContext('2d');
+  if (charts.milesTrend) charts.milesTrend.destroy();
+  charts.milesTrend = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: data.map(d => d.month),
+      datasets: [
+        { label: 'Miles (000s)', data: data.map(d => +(d.miles*f.miles/1000).toFixed(1)), backgroundColor: '#1E2761', order: 2, yAxisID: 'y' },
+        { label: 'Trips', data: data.map(d => +(d.trips*f.trips/100).toFixed(1)), type: 'line', borderColor: '#C9A227', backgroundColor: '#C9A227', borderWidth: 2, pointRadius: 3, order: 1, yAxisID: 'y1' }
+      ]
+    },
+    options: {
+      ...commonChartOptions(),
+      scales: {
+        x: { ticks: { font: { size: 11 } }, grid: { display: false } },
+        y: { position: 'left', title: { display: true, text: 'Miles (000s)', color: '#475569', font: { size: 11 } }, grid: { color: '#E5E7EB' } },
+        y1: { position: 'right', title: { display: true, text: 'Trips (×100)', color: '#475569', font: { size: 11 } }, grid: { display: false } }
+      }
+    }
+  });
+}
+
+function renderUtilByTruck(){
+  const trucks = filteredTrucks();
+  const f = dayTypeFactor();
+  const ctx = document.getElementById('t1UtilByTruck').getContext('2d');
+  if (charts.utilByTruck) charts.utilByTruck.destroy();
+  charts.utilByTruck = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: trucks.map(t => t.id),
+      datasets: [{
+        label: 'Utilization %',
+        data: trucks.map(t => +(t.utilization * f.util).toFixed(1)),
+        backgroundColor: trucks.map(t => TELEMATICS.personalities[t.personality].color),
+        borderRadius: 4
+      }]
+    },
+    options: {
+      ...commonChartOptions(),
+      indexAxis: 'y',
+      plugins: { legend: { display: false }, datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v + '%', font: { size: 10 } } },
+      scales: { x: { min: 0, max: 75, ticks: { callback: v => v + '%' } }, y: { grid: { display: false } } }
+    }
+  });
+}
+
+function renderDriveIdle(){
+  const data = filteredMonthly();
+  const f = dayTypeFactor();
+  const ctx = document.getElementById('t2DriveIdle').getContext('2d');
+  if (charts.driveIdle) charts.driveIdle.destroy();
+  charts.driveIdle = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: data.map(d => d.month),
+      datasets: [
+        { label: 'Drive hours', data: data.map(d => +(d.activeHours*f.hours).toFixed(0)), backgroundColor: '#1E2761', stack: 'a' },
+        { label: 'Idle hours', data: data.map(d => +(d.idleHours*f.hours).toFixed(0)), backgroundColor: '#93C5FD', stack: 'a' }
+      ]
+    },
+    options: commonChartOptions()
+  });
+}
+
+function renderWeekdayWeekend(){
+  const trucks = filteredTrucks();
+  const ctx = document.getElementById('t2WeekdayWeekend').getContext('2d');
+  if (charts.weekdayWeekend) charts.weekdayWeekend.destroy();
+  charts.weekdayWeekend = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: trucks.map(t => t.id),
+      datasets: [
+        { label: 'Weekday', data: trucks.map(t => t.personality === 'night_shift_regional' ? t.weekday*0.85 : t.weekday), backgroundColor: '#1E2761' },
+        { label: 'Weekend', data: trucks.map(t => t.weekend), backgroundColor: '#93C5FD' }
+      ]
+    },
+    options: {
+      ...commonChartOptions(),
+      indexAxis: 'y',
+      plugins: { datalabels: { display: false } }
+    }
+  });
+}
+
+function renderHeatmap(){
+  const ctx = document.getElementById('t2Heatmap').getContext('2d');
+  const weekdays = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const hours = Array.from({length:24},(_,i)=>i);
+  const matrix = weekdays.map(wd => hours.map(h => {
+    const cell = TELEMATICS.hourlyHeatmap.find(c => c.weekday === wd && c.hour === h);
+    return cell ? cell.value : 0;
+  }));
+
+  if (charts.heatmap) charts.heatmap.destroy();
+  charts.heatmap = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: hours.map(h => h + ':00'),
+      datasets: weekdays.map((wd, i) => ({
+        label: wd,
+        data: matrix[i],
+        backgroundColor: ['#1E2761','#2E3A8A','#5B21B6','#7C3AED','#C084FC','#EC4899','#F43F5E'][i]
+      }))
+    },
+    options: {
+      ...commonChartOptions(),
+      plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } }, datalabels: { display: false } },
+      scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Drive hours' } } }
+    }
+  });
+}
+
+function renderAuditTable(){
+  const tbody = document.querySelector('#t3AuditTable tbody');
+  tbody.innerHTML = '';
+  TELEMATICS.dataAudit.readiness.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${row.input}</strong></td>
+      <td>${row.usedIn}</td>
+      <td><span class="chip-g">${row.haveIt}</span></td>
+      <td><span class="chip-g">${row.rightFormat}</span></td>
+      <td><span class="chip-g">${row.clean}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function updateAll(){
+  updateSummaryPill();
+  updateKPIs();
+  renderTruckTable();
+  renderMilesTrend();
+  renderUtilByTruck();
+  renderDriveIdle();
+  renderWeekdayWeekend();
+  renderHeatmap();
+}
+
+// ─── Events ───────────────────────────────────────────────────────────────
+['periodFilter','vehicleFilter','dayFilter'].forEach(id => {
+  document.getElementById(id).addEventListener('change', e => {
+    const key = id.replace('Filter','');
+    state[key === 'period' ? 'period' : key] = e.target.value;
+    updateAll();
+  });
+});
+
+// ─── Init ─────────────────────────────────────────────────────────────────
+renderAuditTable();
+updateAll();
+</script>
+</body>
+</html>
