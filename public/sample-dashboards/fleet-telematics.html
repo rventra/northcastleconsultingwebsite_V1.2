@@ -30,10 +30,34 @@ header.ncc .illus{position:absolute;top:18px;right:32px;background:var(--gold);c
 .banner{background:var(--mist);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;gap:18px}
 .banner .q-tag{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.12em;background:var(--white);padding:6px 12px;border:1px solid var(--border)}
 .banner .q-text{font-size:14px;color:var(--navy-ink);font-style:italic;flex:1}
-.controls{display:flex;gap:14px;align-items:center;padding:16px 32px;background:var(--white);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.controls{display:flex;gap:14px;align-items:flex-start;padding:16px 32px;background:var(--white);border-bottom:1px solid var(--border);flex-wrap:wrap}
 .controls label{font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-right:8px}
 .controls select{font-family:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);min-width:140px}
-.controls .pill{background:var(--navy);color:var(--white);padding:6px 12px;font-size:11px;font-weight:700;letter-spacing:.08em}
+.controls .pill{background:var(--navy);color:var(--white);padding:6px 12px;font-size:11px;font-weight:700;letter-spacing:.08em;white-space:nowrap;margin-top:22px}
+
+/* Period picker — Power BI-style multi-select year/month */
+.period-picker{background:var(--white);border:1px solid var(--border);padding:10px 14px 12px;font-family:inherit;min-width:340px;max-width:380px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.period-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.period-count{font-size:11px;color:var(--slate);font-weight:600;letter-spacing:.04em}
+.period-actions a{font-size:11px;color:var(--navy);font-weight:700;letter-spacing:.04em;text-decoration:none;cursor:pointer}
+.period-actions a:hover{text-decoration:underline}
+.period-actions span{color:var(--slate-lite);margin:0 5px;font-size:10px}
+.period-section{margin-top:10px}
+.period-section-title{font-size:10px;color:var(--slate);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.period-years{display:flex;flex-wrap:wrap;gap:6px}
+.period-year-check{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--border);background:var(--white);cursor:pointer;font-size:12px;font-weight:700;color:var(--slate);border-radius:3px;user-select:none;transition:border-color .12s,background .12s,color .12s}
+.period-year-check:hover{border-color:var(--navy);color:var(--navy)}
+.period-year-check input{margin:0;cursor:pointer;accent-color:var(--navy)}
+.period-year-check.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.period-year-check.on input{accent-color:#fff}
+.period-year-check.partial{background:var(--navy);color:#fff;border-color:var(--navy);opacity:.55}
+.period-year-group{margin-bottom:8px}
+.period-year-group-label{font-size:11px;font-weight:700;color:var(--slate);letter-spacing:.06em;margin-bottom:5px;padding-left:2px}
+.period-months{display:flex;flex-wrap:wrap;gap:5px;padding-left:2px}
+.period-month{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:24px;padding:0 9px;font-size:11px;font-weight:600;border-radius:12px;cursor:pointer;user-select:none;border:1px solid var(--border);background:var(--white);color:var(--slate);transition:background .12s,color .12s,border-color .12s}
+.period-month:hover{border-color:var(--navy);color:var(--navy)}
+.period-month.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.period-month.dim{opacity:.4;pointer-events:none}
 .tabstrip{display:flex;gap:0;padding:0 32px;background:var(--white);border-bottom:1px solid var(--border)}
 .tab{flex:1;background:#F1F5F9;color:var(--slate);border:none;border-right:1px solid var(--border);padding:14px 18px 12px;text-align:left;cursor:pointer;font-family:inherit;position:relative;transition:background .15s,color .15s}
 .tab:last-child{border-right:none}
@@ -103,12 +127,25 @@ footer.ncc strong{color:var(--slate)}
 
 <div class="controls">
   <div>
-    <label for="periodFilter">Period</label>
-    <select id="periodFilter">
-      <option value="TTM" selected>TTM (Jun-25 → May-26)</option>
-      <option value="FY25">FY25 (Jun-25 → Dec-25)</option>
-      <option value="YTD26">YTD26 (Jan-26 → May-26)</option>
-    </select>
+    <label>Period</label>
+    <div class="period-picker" id="periodPicker" role="group" aria-label="Filter by year and month">
+      <div class="period-head">
+        <span class="period-count" id="periodCount">12 of 12 months</span>
+        <span class="period-actions">
+          <a href="#" data-period-action="all">All</a>
+          <span>·</span>
+          <a href="#" data-period-action="none">None</a>
+        </span>
+      </div>
+      <div class="period-section">
+        <div class="period-section-title">Years</div>
+        <div class="period-years" id="periodYears"></div>
+      </div>
+      <div class="period-section">
+        <div class="period-section-title">Months</div>
+        <div class="period-year-groups" id="periodMonthGroups"></div>
+      </div>
+    </div>
   </div>
   <div>
     <label for="vehicleFilter">Vehicle</label>
@@ -443,14 +480,18 @@ footer.ncc strong{color:var(--slate)}
 Chart.register(ChartDataLabels);
 
 // ─── State ────────────────────────────────────────────────────────────────
-let state = { period: 'TTM', vehicle: 'all', dayType: 'all' };
+let state = { selectedMonths: TELEMATICS.monthlyFleet.map(d => d.month), vehicle: 'all', dayType: 'all' };
 const monthsAll = TELEMATICS.monthlyFleet.map(d => d.month);
-
-const periodMonths = {
-  TTM:   monthsAll,
-  FY25:  ["Jun-25","Jul-25","Aug-25","Sep-25","Oct-25","Nov-25","Dec-25"],
-  YTD26: ["Jan-26","Feb-26","Mar-26","Apr-26","May-26"]
-};
+// Group months by year for the picker UI (Power BI style: year checkboxes, then month chips per year)
+const yearGroups = (function(){
+  const groups = {};
+  monthsAll.forEach(m => {
+    const yr = '20' + m.split('-')[1];
+    if (!groups[yr]) groups[yr] = [];
+    groups[yr].push(m);
+  });
+  return Object.keys(groups).sort().map(yr => ({ year: yr, months: groups[yr] }));
+})();
 
 // ─── Helpers ──────────────────────────────────────────────────────────────
 function fmtK(n){ return n >= 1000 ? (n/1000).toFixed(0) + 'K' : n.toLocaleString(); }
@@ -464,7 +505,7 @@ function filteredTrucks(){
 
 // Get monthly data filtered by vehicle and period
 function filteredMonthly(){
-  const months = periodMonths[state.period] || monthsAll;
+  const months = state.selectedMonths;
   if (state.vehicle === 'all'){
     return TELEMATICS.monthlyFleet.filter(d => months.includes(d.month));
   }
@@ -517,10 +558,26 @@ document.querySelectorAll('.tab').forEach(tab => {
 let charts = {};
 
 function updateSummaryPill(){
-  const labels = { TTM: 'TTM', FY25: 'FY25', YTD26: 'YTD26' };
   const vLbl = document.querySelector('#vehicleFilter option:checked').text;
   const dLbl = document.querySelector('#dayFilter option:checked').text;
-  document.getElementById('summaryPill').textContent = `${labels[state.period]} · ${vLbl} · ${dLbl}`;
+  document.getElementById('summaryPill').textContent = `${periodLabel()} · ${vLbl} · ${dLbl}`;
+}
+
+// Render the selected-month range as a short label for the summary pill.
+// Examples: "TTM", "FY25 (7 mo)", "YTD26 (5 mo)", "Jun-25 → Mar-26 (10 mo)", "Mar-26 (1 mo)"
+function periodLabel(){
+  const sel = state.selectedMonths;
+  if (sel.length === 0) return 'No months';
+  if (sel.length === monthsAll.length) return 'TTM';
+  // Detect fiscal-year-like contiguous ranges that match the data layout
+  const sorted = [...sel].sort((a,b) => monthsAll.indexOf(a) - monthsAll.indexOf(b));
+  const firstIdx = monthsAll.indexOf(sorted[0]);
+  const lastIdx  = monthsAll.indexOf(sorted[sorted.length - 1]);
+  const contiguous = (lastIdx - firstIdx + 1) === sel.length;
+  if (contiguous && sorted[0] === 'Jun-25' && sorted[sorted.length-1] === 'Dec-25') return 'FY25 (' + sel.length + ' mo)';
+  if (contiguous && sorted[0] === 'Jan-26' && sorted[sorted.length-1] === 'May-26') return 'YTD26 (' + sel.length + ' mo)';
+  if (sel.length === 1) return sorted[0];
+  return sorted[0] + ' → ' + sorted[sorted.length - 1] + ' (' + sel.length + ' mo)';
 }
 
 function updateKPIs(){
@@ -572,14 +629,14 @@ function updateKPIs(){
   }, 0) / data.length : 0;
 
   document.getElementById('t1Miles').textContent = fmtK(totalMiles);
-  document.getElementById('t1MilesUnit').textContent = `${state.period} fleet miles`;
+  document.getElementById('t1MilesUnit').textContent = `${periodLabel()} fleet miles`;
   document.getElementById('t1Trips').textContent = fmtNum(totalTrips);
-  document.getElementById('t1TripsUnit').textContent = `${state.period} delivery trips`;
+  document.getElementById('t1TripsUnit').textContent = `${periodLabel()} delivery trips`;
   document.getElementById('t1ActiveUtil').textContent = fmtPct(avgActiveUtil);
   document.getElementById('t1ActiveUtilUnit').textContent = `Drive time only vs weekday × 24`;
   document.getElementById('t1TotalUtilInline').textContent = `Total util: ${fmtPct(avgTotalUtil)}`;
   document.getElementById('t1TotalHours').textContent = fmtK(totalHours);
-  document.getElementById('t1TotalHoursUnit').textContent = `${state.period} fleet hours`;
+  document.getElementById('t1TotalHoursUnit').textContent = `${periodLabel()} fleet hours`;
 }
 
 function renderTruckTable(){
@@ -943,26 +1000,28 @@ function renderT3TripMiDistribution(){
 
 // Approximate mapping of selected period to weeks/days for the 52-week and 365-day charts.
 // Each month ≈ 52/12 weeks ≈ 30.4 days. Slight rounding is acceptable per spec.
-const _allMonthsList = ["Jun-25","Jul-25","Aug-25","Sep-25","Oct-25","Nov-25","Dec-25","Jan-26","Feb-26","Mar-26","Apr-26","May-26"];
+// Period is now driven by state.selectedMonths — the slice bounds are derived from the
+// min/max month in the selection so users get the correct window for any combination.
+const _allMonthsList = monthsAll;
 const _daysPerMonthList = {"Jun-25":30,"Jul-25":31,"Aug-25":31,"Sep-25":30,"Oct-25":31,"Nov-25":30,"Dec-25":31,"Jan-26":31,"Feb-26":28,"Mar-26":31,"Apr-26":30,"May-26":31};
+function _periodBounds(){
+  // Returns the contiguous index range [minIdx, maxIdx) spanned by the selected months.
+  // For non-contiguous selections (e.g., user picks Jun + Dec), uses the outermost range
+  // so the time-series charts show the full window — gaps are fine, charts just look flat there.
+  if (state.selectedMonths.length === 0) return { startIdx: 0, endIdx: 0 };
+  const idxs = state.selectedMonths.map(m => _allMonthsList.indexOf(m)).filter(i => i >= 0);
+  return { startIdx: Math.min(...idxs), endIdx: Math.max(...idxs) + 1 };
+}
 function _periodWeeks(){
-  const months = periodMonths[state.period] || monthsAll;
-  const startIdx = _allMonthsList.indexOf(months[0]);
-  const endIdx = _allMonthsList.indexOf(months[months.length - 1]) + 1;
+  const { startIdx, endIdx } = _periodBounds();
   return { start: Math.round(startIdx * 52 / 12), end: Math.min(52, Math.round(endIdx * 52 / 12)) };
 }
 function _periodDays(){
-  const months = periodMonths[state.period] || monthsAll;
+  const { startIdx, endIdx } = _periodBounds();
   let startDay = 0;
-  for (const m of _allMonthsList){
-    if (m === months[0]) break;
-    startDay += _daysPerMonthList[m];
-  }
-  let endDay = 0;
-  for (const m of _allMonthsList){
-    endDay += _daysPerMonthList[m];
-    if (m === months[months.length - 1]) break;
-  }
+  for (let i = 0; i < startIdx; i++) startDay += _daysPerMonthList[_allMonthsList[i]];
+  let endDay = startDay;
+  for (let i = startIdx; i < endIdx; i++) endDay += _daysPerMonthList[_allMonthsList[i]];
   return { start: startDay, end: endDay };
 }
 
@@ -1102,15 +1161,105 @@ function updateAll(){
 }
 
 // ─── Events ───────────────────────────────────────────────────────────────
-['periodFilter','vehicleFilter','dayFilter'].forEach(id => {
+['vehicleFilter','dayFilter'].forEach(id => {
   document.getElementById(id).addEventListener('change', e => {
     const key = id.replace('Filter','');
-    state[key === 'period' ? 'period' : key] = e.target.value;
+    state[key === 'day' ? 'dayType' : key] = e.target.value;
     updateAll();
   });
 });
 
+// ─── Period picker (Power BI-style year/month multi-select) ────────────────
+const _monthShort = {'Jan':'Jan','Feb':'Feb','Mar':'Mar','Apr':'Apr','May':'May','Jun':'Jun','Jul':'Jul','Aug':'Aug','Sep':'Sep','Oct':'Oct','Nov':'Nov','Dec':'Dec'};
+
+function renderPeriodPicker(){
+  const yearsContainer = document.getElementById('periodYears');
+  yearsContainer.innerHTML = yearGroups.map(grp => `
+    <label class="period-year-check" data-year="${grp.year}">
+      <input type="checkbox" id="periodYear_${grp.year}" />
+      <span>${grp.year}</span>
+    </label>
+  `).join('');
+
+  const monthContainer = document.getElementById('periodMonthGroups');
+  monthContainer.innerHTML = yearGroups.map(grp => `
+    <div class="period-year-group" data-year="${grp.year}">
+      <div class="period-year-group-label">${grp.year}</div>
+      <div class="period-months">
+        ${grp.months.map(m => `<span class="period-month" data-month="${m}">${m.split('-')[0]}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  // Year checkbox toggles all that year's months
+  yearGroups.forEach(grp => {
+    document.getElementById(`periodYear_${grp.year}`).addEventListener('change', e => {
+      const on = e.target.checked;
+      if (on) {
+        state.selectedMonths = Array.from(new Set([...state.selectedMonths, ...grp.months]));
+      } else {
+        state.selectedMonths = state.selectedMonths.filter(m => !grp.months.includes(m));
+      }
+      syncPeriodPicker();
+      updateAll();
+    });
+  });
+  // Month chips toggle individually
+  monthContainer.querySelectorAll('.period-month').forEach(el => {
+    el.addEventListener('click', () => {
+      const m = el.dataset.month;
+      if (state.selectedMonths.includes(m)) {
+        state.selectedMonths = state.selectedMonths.filter(x => x !== m);
+      } else {
+        state.selectedMonths = [...state.selectedMonths, m].sort((a, b) => monthsAll.indexOf(a) - monthsAll.indexOf(b));
+      }
+      syncPeriodPicker();
+      updateAll();
+    });
+  });
+  // All / None actions
+  document.querySelectorAll('[data-period-action]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      if (el.dataset.periodAction === 'all') {
+        state.selectedMonths = monthsAll.slice();
+      } else {
+        state.selectedMonths = [];
+      }
+      syncPeriodPicker();
+      updateAll();
+    });
+  });
+  syncPeriodPicker();
+}
+
+function syncPeriodPicker(){
+  // Month chip on/off
+  document.querySelectorAll('.period-month').forEach(el => {
+    el.classList.toggle('on', state.selectedMonths.includes(el.dataset.month));
+  });
+  // Year checkbox + partial state
+  yearGroups.forEach(grp => {
+    const cb = document.getElementById(`periodYear_${grp.year}`);
+    const wrap = cb.closest('.period-year-check');
+    const selectedCount = grp.months.filter(m => state.selectedMonths.includes(m)).length;
+    if (selectedCount === 0) {
+      cb.checked = false; cb.indeterminate = false;
+      wrap.classList.remove('on', 'partial');
+    } else if (selectedCount === grp.months.length) {
+      cb.checked = true; cb.indeterminate = false;
+      wrap.classList.add('on'); wrap.classList.remove('partial');
+    } else {
+      cb.checked = false; cb.indeterminate = true;
+      wrap.classList.remove('on'); wrap.classList.add('partial');
+    }
+  });
+  // Count badge
+  document.getElementById('periodCount').textContent = `${state.selectedMonths.length} of ${monthsAll.length} months`;
+}
+
 // ─── Init ─────────────────────────────────────────────────────────────────
+renderPeriodPicker();
 renderAuditTable();
 updateAll();
 </script>
