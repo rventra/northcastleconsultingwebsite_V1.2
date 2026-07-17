@@ -363,6 +363,137 @@ const TELEMATICS = {
     { id: "T449", weekday: 10.0, weekend: 9.4 }
   ],
 
+  // Per-truck hourly drive-hour profile (avg per weekday, 24 values per truck).
+  // Day-shift trucks: plateau 08:00–16:00 peaking 13:00.
+  // T446 (night_shift_regional): peaks 23:00, ~90% of hours in 18:00–06:00.
+  // T447 (underutilized_declining): low amplitude across the day.
+  // Amplitudes scale with each truck's share of TTM active hours / 260 weekdays.
+  truckHourly: (function(){
+    const truckActiveHours = {
+      T441: 968, T443: 1131, T444: 1266, T445: 1108,
+      T446: 984,  T447: 623,  T448: 1078, T449: 964
+    };
+    const personalities = {
+      T441: "day_shift_medium", T443: "day_shift_local", T444: "day_shift_high",
+      T445: "day_shift_local", T446: "night_shift_regional",
+      T447: "underutilized_declining", T448: "day_shift_local", T449: "day_shift_medium"
+    };
+    // Day-shift profile (relative weights; renormalized below so sum=1.0)
+    const dayShiftShape = [
+      0.005, 0.005, 0.005, 0.005, 0.005, 0.005,
+      0.020, 0.050, 0.075, 0.075, 0.075, 0.075,
+      0.075, 0.100, 0.075, 0.075, 0.075, 0.040,
+      0.020, 0.015, 0.010, 0.010, 0.010, 0.005
+    ];
+    // Night-shift profile (T446) — peak at hour 23 (index 23)
+    const nightShiftShape = [
+      0.080, 0.050, 0.030, 0.020, 0.010, 0.010,
+      0.020, 0.010, 0.005, 0.005, 0.005, 0.005,
+      0.005, 0.005, 0.010, 0.020, 0.060, 0.080,
+      0.090, 0.110, 0.120, 0.140, 0.150, 0.160
+    ];
+    // Underutilized profile (T447) — low amplitude, mild day shape
+    const underutilizedShape = [
+      0.020, 0.020, 0.020, 0.020, 0.020, 0.020,
+      0.040, 0.070, 0.100, 0.110, 0.110, 0.100,
+      0.100, 0.110, 0.100, 0.100, 0.090, 0.060,
+      0.030, 0.030, 0.020, 0.020, 0.020, 0.020
+    ];
+    const profiles = {
+      day_shift_high:          dayShiftShape,
+      day_shift_medium:        dayShiftShape,
+      day_shift_local:         dayShiftShape,
+      night_shift_regional:    nightShiftShape,
+      underutilized_declining: underutilizedShape
+    };
+    const normalize = (arr) => {
+      const s = arr.reduce((a,b) => a+b, 0);
+      return arr.map(v => v / s);
+    };
+    const daysPerYear = 260; // weekdays in TTM
+    return Object.keys(truckActiveHours).map(id => {
+      const shape = normalize(profiles[personalities[id]]);
+      const perHourAvg = truckActiveHours[id] / daysPerYear;
+      const hours = shape.map(s => +(s * perHourAvg).toFixed(3));
+      return { id: id, hours: hours };
+    });
+  })(),
+
+  // Trip economics per truck — drive min/trip, stop min/trip, avg trip miles
+  tripEconomics: [
+    { id: "T441", driveMin: 8.0,  stopMin: 12.7, avgTripMi: 3.9 },
+    { id: "T443", driveMin: 8.0,  stopMin: 13.2, avgTripMi: 3.9 },
+    { id: "T444", driveMin: 6.2,  stopMin: 12.2, avgTripMi: 3.0 },
+    { id: "T445", driveMin: 7.9,  stopMin: 13.1, avgTripMi: 3.9 },
+    { id: "T446", driveMin: 11.0, stopMin: 24.7, avgTripMi: 7.5 },
+    { id: "T447", driveMin: 9.0,  stopMin: 19.6, avgTripMi: 3.8 },
+    { id: "T448", driveMin: 7.9,  stopMin: 13.3, avgTripMi: 3.9 },
+    { id: "T449", driveMin: 7.9,  stopMin: 12.4, avgTripMi: 3.9 }
+  ],
+
+  // Weekly miles per truck (52 weeks, deterministic sine/noise).
+  // Each truck's weekly average = its TTM miles / 52, gentle monthly seasonality,
+  // T447 trends downward across the year.
+  weeklyMiles: (function(){
+    const truckTTMMiles = {
+      T441: 28546, T443: 33458, T444: 36316, T445: 32652,
+      T446: 40301, T447: 15793, T448: 31907, T449: 28491
+    };
+    const out = {};
+    Object.keys(truckTTMMiles).forEach((id, ti) => {
+      const avg = truckTTMMiles[id] / 52;
+      const arr = [];
+      for (let w = 0; w < 52; w++){
+        const seasonality = 1 + 0.10 * Math.sin((w / 52) * Math.PI * 2);
+        const phase = ti * 0.7;
+        const noise = 0.05 * Math.sin((w + phase) * 1.3) + 0.03 * Math.cos((w + phase) * 2.7);
+        const trend = (id === "T447") ? (1 - (w / 52) * 0.25) : 1;
+        arr.push(+(avg * seasonality * (1 + noise) * trend).toFixed(1));
+      }
+      out[id] = arr;
+    });
+    return out;
+  })(),
+
+  // Daily fleet trip count (365 days). Weekly cycle (weekday ≈195, weekend ≈30)
+  // scaled so each calendar month sums to the monthlyFleet.trips total.
+  dailyTrips: (function(){
+    const monthlyTrips = {
+      "Jun-25": 5005, "Jul-25": 5304, "Aug-25": 5156, "Sep-25": 5292,
+      "Oct-25": 4988, "Nov-25": 4786, "Dec-25": 5690, "Jan-26": 5074,
+      "Feb-26": 4756, "Mar-26": 5078, "Apr-26": 5212, "May-26": 5005
+    };
+    const daysInMonth = {
+      "Jun-25": 30, "Jul-25": 31, "Aug-25": 31, "Sep-25": 30,
+      "Oct-25": 31, "Nov-25": 30, "Dec-25": 31, "Jan-26": 31,
+      "Feb-26": 28, "Mar-26": 31, "Apr-26": 30, "May-26": 31
+    };
+    const months = ["Jun-25","Jul-25","Aug-25","Sep-25","Oct-25","Nov-25","Dec-25","Jan-26","Feb-26","Mar-26","Apr-26","May-26"];
+    const result = [];
+    let dayIdx = 0;
+    // Jun 1 2025 = Sunday → dayIdx%7 = 0 (Sun), 6 (Sat) are weekend
+    for (const m of months){
+      const dim = daysInMonth[m];
+      const total = monthlyTrips[m];
+      const monthly = [];
+      let monthSum = 0;
+      for (let d = 0; d < dim; d++){
+        const dow = (dayIdx + d) % 7;
+        const isWeekend = (dow === 0 || dow === 6);
+        const target = isWeekend ? 30 : 195;
+        monthly.push(target);
+        monthSum += target;
+      }
+      const scale = total / monthSum;
+      for (let d = 0; d < dim; d++){
+        const noise = 1 + 0.04 * Math.sin((dayIdx + d) * 0.9);
+        result.push(+((monthly[d] * scale) * noise).toFixed(1));
+      }
+      dayIdx += dim;
+    }
+    return result;
+  })(),
+
   dataAudit: {
     readiness: [
       { input: "gps_pings (source of truth)",          usedIn: "Trip boundaries, speed, location",       haveIt: "Ready",   rightFormat: "Ready",   clean: "Ready" },

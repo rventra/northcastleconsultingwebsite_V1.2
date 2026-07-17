@@ -135,17 +135,21 @@ footer.ncc strong{color:var(--slate)}
   <div class="pill" id="summaryPill">TTM · All vehicles · All days</div>
 </div>
 
-<div class="tabstrip">
-  <button class="tab active" data-tab="t1">
-    <div class="tab-title">Fleet summary <span class="dots">●●●</span></div>
+<div class="tabstrip" role="tablist">
+  <button class="tab active" data-tab="t1" role="tab" aria-selected="true" aria-controls="pane-t1">
+    <div class="tab-title">Fleet summary <span class="dots">&#9679;&#9675;&#9675;&#9675;</span></div>
     <div class="tab-sub">Miles, trips &amp; utilization by truck</div>
   </button>
-  <button class="tab" data-tab="t2">
-    <div class="tab-title">Activity patterns <span class="dots">●●●</span></div>
+  <button class="tab" data-tab="t2" role="tab" aria-selected="false" aria-controls="pane-t2">
+    <div class="tab-title">Activity patterns <span class="dots">&#9679;&#9679;&#9675;&#9675;</span></div>
     <div class="tab-sub">When the fleet works &amp; how time is spent</div>
   </button>
-  <button class="tab" data-tab="t3">
-    <div class="tab-title">Data audit <span class="dots">●●●</span></div>
+  <button class="tab" data-tab="t3" role="tab" aria-selected="false" aria-controls="pane-t3">
+    <div class="tab-title">Trip economics <span class="dots">&#9679;&#9679;&#9679;&#9675;</span></div>
+    <div class="tab-sub">Duration, distance &amp; daily cadence</div>
+  </button>
+  <button class="tab" data-tab="t4" role="tab" aria-selected="false" aria-controls="pane-t4">
+    <div class="tab-title">Data audit <span class="dots">&#9679;&#9679;&#9679;&#9679;</span></div>
     <div class="tab-sub">Source, schema &amp; live dashboard</div>
   </button>
 </div>
@@ -198,6 +202,17 @@ footer.ncc strong{color:var(--slate)}
     <div class="panel">
       <div class="ptitle">GROSS UTILIZATION BY TRUCK · ACTIVE HOURS ÷ AVAILABLE HOURS</div>
       <div class="chart-wrap"><canvas id="t1UtilByTruck"></canvas></div>
+    </div>
+  </div>
+
+  <div class="grid2-eq">
+    <div class="panel">
+      <div class="ptitle">UTILIZATION TREND · MONTHLY · GROSS vs TOTAL</div>
+      <div class="chart-wrap"><canvas id="t1UtilTrend"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">ACTIVE HOURS BY TRUCK · TTM</div>
+      <div class="chart-wrap"><canvas id="t1ActiveHoursByTruck"></canvas></div>
     </div>
   </div>
 
@@ -275,14 +290,84 @@ footer.ncc strong{color:var(--slate)}
     <div class="chart-wrap"><canvas id="t2Heatmap"></canvas></div>
   </div>
 
+  <div class="panel">
+    <div class="ptitle">PEAK HOURS BY TRUCK · AVG DRIVE HOURS PER WEEKDAY HOUR</div>
+    <div class="chart-wrap"><canvas id="t2PeakHoursByTruck"></canvas></div>
+  </div>
+
   <div class="callout">
     <div class="ctitle">ACTIVITY TAKEAWAY</div>
     Day-shift trucks create a broad mid-day plateau (08:00–16:00), while the night-shift truck (<strong>T446</strong>) operates 17:00–05:00 with its peak at 11 PM. Weekend activity exists on only 2 of 8 trucks (<strong>T441</strong> and <strong>T447</strong>). The bigger operational question is the <strong>64% idle/transition share</strong>: improving depot turnaround or route density would lift effective utilization faster than adding trucks.
   </div>
 </div>
 
-<!-- ================= TAB 3: DATA AUDIT ================= -->
-<div class="tabpane" id="pane-t3">
+<!-- ================= TAB 3: TRIP ECONOMICS ================= -->
+<div class="tabpane" id="pane-t3" role="tabpanel" aria-labelledby="tab-t3">
+  <div class="tabhdr">
+    <div class="lead">Trip economics · Duration, distance &amp; daily cadence</div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile" style="--accent:var(--navy)">
+      <div class="tag">TRIP TIME</div>
+      <div class="label">Avg drive / trip</div>
+      <div class="big" id="t3DriveMin">7.9 min</div>
+      <div class="unit" id="t3DriveMinUnit">Avg drive minutes per trip</div>
+      <div class="bullets"><div>T446 highest at 11.0 min · T444 lowest at 6.2</div></div>
+    </div>
+    <div class="tile" style="--accent:var(--purple)">
+      <div class="tag">STOP TIME</div>
+      <div class="label">Avg stop / trip</div>
+      <div class="big" id="t3StopMin">14.3 min</div>
+      <div class="unit" id="t3StopMinUnit">Idle + transition between trips</div>
+      <div class="bullets"><div>Stop exceeds drive across the fleet</div></div>
+    </div>
+    <div class="tile" style="--accent:var(--gold)">
+      <div class="tag">TRIP DISTANCE</div>
+      <div class="label">Avg trip miles</div>
+      <div class="big" id="t3AvgMi">4.0 mi</div>
+      <div class="unit" id="t3AvgMiUnit">Per-delivery average</div>
+      <div class="bullets"><div>T446 = 7.5 mi · regional line-haul profile</div></div>
+    </div>
+    <div class="tile" style="--accent:var(--green)">
+      <div class="tag">DAILY CADENCE</div>
+      <div class="label">Trips / active day</div>
+      <div class="big" id="t3TripsPerDay">31</div>
+      <div class="unit" id="t3TripsPerDayUnit">Trips per truck-day</div>
+      <div class="bullets"><div>Fleet avg, weekday-weighted</div></div>
+    </div>
+  </div>
+
+  <div class="grid2-eq">
+    <div class="panel">
+      <div class="ptitle">AVG TRIP DURATION BY TRUCK · DRIVE + STOP MINUTES</div>
+      <div class="chart-wrap"><canvas id="t3TripDuration"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">TRIP MILES DISTRIBUTION · AVG MILES PER TRIP</div>
+      <div class="chart-wrap"><canvas id="t3TripMiDistribution"></canvas></div>
+    </div>
+  </div>
+
+  <div class="grid2-eq">
+    <div class="panel">
+      <div class="ptitle">MILES PER TRUCK PER WEEK · 52-WEEK ROLLING</div>
+      <div class="chart-wrap"><canvas id="t3WeeklyMiles"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="ptitle">DAILY TRIP COUNT · FLEET 365-DAY VIEW</div>
+      <div class="chart-wrap"><canvas id="t3DailyTrips"></canvas></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="ctitle">TRIP ECONOMICS TAKEAWAY</div>
+    <strong>T446</strong> does fewer but much longer trips — 7.5 mi average and 11.0 drive minutes — a regional line-haul profile. The rest of the fleet runs short local drayage trips around 3.9 mi and 8 minutes. <strong>Stop time exceeds drive time across the fleet</strong>, reinforcing the depot-turnaround opportunity: improving route density and dock flow would lift effective utilization faster than adding trucks.
+  </div>
+</div>
+
+<!-- ================= TAB 4: DATA AUDIT ================= -->
+<div class="tabpane" id="pane-t4" role="tabpanel" aria-labelledby="tab-t4">
   <div class="tabhdr">
     <div class="lead">Data audit · Source, schema &amp; live dashboard</div>
   </div>
@@ -417,9 +502,13 @@ function getDayTypeScale(){
 // ─── Tab switching ────────────────────────────────────────────────────────
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
     document.querySelectorAll('.tabpane').forEach(p => p.classList.remove('active'));
     tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
     document.getElementById('pane-' + tab.dataset.tab).classList.add('active');
   });
 });
@@ -458,18 +547,28 @@ function updateKPIs(){
     totalHours = totalHours * scale.weRatio;
   }
 
-  // Compute utilization from filtered data
+  // Compute utilization from filtered data using per-month AVG(daily_hours/24) values.
+  // Note: total_hours / (days × truckCount × 24) is the wrong methodology per the
+  // telematics CLAUDE.md gotcha; it understates util by ~40%. Use monthlyFleet.activeUtil
+  // when fleet-wide, or per-truck daily avg when a single truck is selected.
   const avgActiveUtil = data.length > 0 ? data.reduce((s,d) => {
-    const truckCount = state.vehicle === 'all' ? 8 : filteredTrucks().length;
-    const daysInMonth = { 'Jun-25':30,'Jul-25':31,'Aug-25':31,'Sep-25':30,'Oct-25':31,'Nov-25':30,'Dec-25':31,'Jan-26':31,'Feb-26':28,'Mar-26':31,'Apr-26':30,'May-26':31 };
-    const avail = (daysInMonth[d.month] || 30) * truckCount * 24;
-    return s + (d.activeHours / avail * 100);
+    if (state.vehicle !== 'all') {
+      // Per-truck: average of daily activeHours/24 across the month's weekdays
+      // Approximation: monthly active hours / weekdays-in-month / 24, expressed as %
+      const daysInMonth = { 'Jun-25':30,'Jul-25':31,'Aug-25':31,'Sep-25':30,'Oct-25':31,'Nov-25':30,'Dec-25':31,'Jan-26':31,'Feb-26':28,'Mar-26':31,'Apr-26':30,'May-26':31 };
+      const wdPerMonth = { 'Jun-25':21,'Jul-25':23,'Aug-25':21,'Sep-25':22,'Oct-25':23,'Nov-25':20,'Dec-25':23,'Jan-26':22,'Feb-26':20,'Mar-26':22,'Apr-26':22,'May-26':21 };
+      const wd = wdPerMonth[d.month] || 21;
+      return s + (d.activeHours / (wd * 24) * 100);
+    }
+    return s + d.activeUtil;
   }, 0) / data.length : 0;
   const avgTotalUtil = data.length > 0 ? data.reduce((s,d) => {
-    const truckCount = state.vehicle === 'all' ? 8 : filteredTrucks().length;
-    const daysInMonth = { 'Jun-25':30,'Jul-25':31,'Aug-25':31,'Sep-25':30,'Oct-25':31,'Nov-25':30,'Dec-25':31,'Jan-26':31,'Feb-26':28,'Mar-26':31,'Apr-26':30,'May-26':31 };
-    const avail = (daysInMonth[d.month] || 30) * truckCount * 24;
-    return s + (d.totalHours / avail * 100);
+    if (state.vehicle !== 'all') {
+      const wdPerMonth = { 'Jun-25':21,'Jul-25':23,'Aug-25':21,'Sep-25':22,'Oct-25':23,'Nov-25':20,'Dec-25':23,'Jan-26':22,'Feb-26':20,'Mar-26':22,'Apr-26':22,'May-26':21 };
+      const wd = wdPerMonth[d.month] || 21;
+      return s + (d.totalHours / (wd * 24) * 100);
+    }
+    return s + d.totalUtil;
   }, 0) / data.length : 0;
 
   document.getElementById('t1Miles').textContent = fmtK(totalMiles);
@@ -550,18 +649,100 @@ function renderUtilByTruck(){
     type: 'bar',
     data: {
       labels: trucks.map(t => t.id),
+      datasets: [
+        {
+          label: 'Gross utilization %',
+          data: trucks.map(t => +t.activeUtil.toFixed(1)),
+          backgroundColor: trucks.map(t => TELEMATICS.personalities[t.personality].color),
+          borderRadius: 4,
+          datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v + '%', font: { size: 10 } }
+        },
+        {
+          type: 'line',
+          label: 'fleet avg (17.1%)',
+          data: trucks.map(() => 17.1),
+          borderColor: '#C9A227',
+          backgroundColor: '#C9A227',
+          borderDash: [6, 4],
+          borderWidth: 2,
+          pointRadius: 0,
+          fill: false,
+          order: 0,
+          datalabels: { display: false }
+        }
+      ]
+    },
+    options: {
+      ...commonChartOptions(),
+      indexAxis: 'y',
+      plugins: {
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+            filter: (item) => item.text && item.text.indexOf('fleet avg') === 0,
+            font: { size: 10, family: 'Calibri' },
+            boxWidth: 18,
+            padding: 8
+          }
+        },
+        datalabels: { display: false }
+      },
+      scales: { x: { min: 0, max: 30, ticks: { callback: v => v + '%' } }, y: { grid: { display: false } } }
+    }
+  });
+}
+
+function renderT1UtilTrend(){
+  const data = filteredMonthly();
+  const ctx = document.getElementById('t1UtilTrend').getContext('2d');
+  if (charts.t1UtilTrend) charts.t1UtilTrend.destroy();
+  // When a single truck is selected, monthlyFleet fields (activeUtil/totalUtil) are absent.
+  // Compute util from activeHours/totalHours using weekday count per month.
+  const wdPerMonth = { 'Jun-25':21,'Jul-25':23,'Aug-25':21,'Sep-25':22,'Oct-25':23,'Nov-25':20,'Dec-25':23,'Jan-26':22,'Feb-26':20,'Mar-26':22,'Apr-26':22,'May-26':21 };
+  const grossSeries = data.map(d => d.activeUtil !== undefined ? d.activeUtil : (d.activeHours / ((wdPerMonth[d.month] || 21) * 24) * 100));
+  const totalSeries = data.map(d => d.totalUtil  !== undefined ? d.totalUtil  : (d.totalHours  / ((wdPerMonth[d.month] || 21) * 24) * 100));
+  charts.t1UtilTrend = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.map(d => d.month),
+      datasets: [
+        { label: 'Gross util %', data: grossSeries, borderColor: '#1E2761', backgroundColor: '#1E2761', borderWidth: 2, pointRadius: 3, tension: 0.25, fill: false, datalabels: { display: false } },
+        { label: 'Total util %', data: totalSeries, borderColor: '#C9A227', backgroundColor: '#C9A227', borderWidth: 2, pointRadius: 3, tension: 0.25, fill: false, datalabels: { display: false } }
+      ]
+    },
+    options: {
+      ...commonChartOptions(),
+      scales: {
+        y: { min: 0, max: 70, ticks: { callback: v => v + '%' }, grid: { color: '#E5E7EB' } },
+        x: { ticks: { font: { size: 11 } }, grid: { display: false } }
+      }
+    }
+  });
+}
+
+function renderT1ActiveHoursByTruck(){
+  const trucks = filteredTrucks();
+  const sorted = [...trucks].sort((a,b) => b.activeHours - a.activeHours);
+  const ctx = document.getElementById('t1ActiveHoursByTruck').getContext('2d');
+  if (charts.t1ActiveHoursByTruck) charts.t1ActiveHoursByTruck.destroy();
+  charts.t1ActiveHoursByTruck = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: sorted.map(t => t.id),
       datasets: [{
-        label: 'Gross utilization %',
-        data: trucks.map(t => +t.activeUtil.toFixed(1)),
-        backgroundColor: trucks.map(t => TELEMATICS.personalities[t.personality].color),
-        borderRadius: 4
+        label: 'Active hours',
+        data: sorted.map(t => t.activeHours),
+        backgroundColor: sorted.map(t => TELEMATICS.personalities[t.personality].color),
+        borderRadius: 4,
+        datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v.toLocaleString(), font: { size: 10 } }
       }]
     },
     options: {
       ...commonChartOptions(),
       indexAxis: 'y',
-      plugins: { legend: { display: false }, datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v + '%', font: { size: 10 } } },
-      scales: { x: { min: 0, max: 30, ticks: { callback: v => v + '%' } }, y: { grid: { display: false } } }
+      plugins: { legend: { display: false }, datalabels: { display: false } },
+      scales: { x: { ticks: { callback: v => v.toLocaleString() } }, y: { grid: { display: false } } }
     }
   });
 }
@@ -635,6 +816,256 @@ function renderHeatmap(){
   });
 }
 
+function renderPeakHoursByTruck(){
+  const trucks = filteredTrucks();
+  const ctx = document.getElementById('t2PeakHoursByTruck').getContext('2d');
+  const datasets = trucks.map(t => {
+    const profile = TELEMATICS.truckHourly.find(p => p.id === t.id);
+    const isT446 = (t.id === 'T446');
+    return {
+      label: t.id,
+      data: profile ? profile.hours.slice() : new Array(24).fill(0),
+      borderColor: TELEMATICS.personalities[t.personality].color,
+      backgroundColor: TELEMATICS.personalities[t.personality].color,
+      borderWidth: isT446 ? 3 : 1.5,
+      pointRadius: 0,
+      tension: 0.3,
+      fill: false,
+      datalabels: { display: false }
+    };
+  });
+  if (charts.peakHoursByTruck) charts.peakHoursByTruck.destroy();
+  charts.peakHoursByTruck = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: Array.from({length:24}, (_,i) => i + ':00'),
+      datasets: datasets
+    },
+    options: {
+      ...commonChartOptions(),
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10, family: 'Calibri' } } },
+        datalabels: { display: false }
+      },
+      scales: {
+        y: { title: { display: true, text: 'Avg drive hours / weekday hr', font: { size: 11 } }, grid: { color: '#E5E7EB' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+function renderT3Kpis(){
+  const trucks = filteredTrucks();
+  if (trucks.length === 0) return;
+  const econ = trucks.map(t => {
+    const e = TELEMATICS.tripEconomics.find(x => x.id === t.id);
+    return { id: t.id, driveMin: e ? e.driveMin : 0, stopMin: e ? e.stopMin : 0, avgTripMi: e ? e.avgTripMi : 0, trips: t.trips };
+  });
+  const totalTrips = econ.reduce((s,e) => s + e.trips, 0);
+  if (totalTrips === 0) return;
+  const avgDrive = econ.reduce((s,e) => s + e.driveMin * e.trips, 0) / totalTrips;
+  const avgStop  = econ.reduce((s,e) => s + e.stopMin  * e.trips, 0) / totalTrips;
+  const avgMi    = econ.reduce((s,e) => s + e.avgTripMi * e.trips, 0) / totalTrips;
+  document.getElementById('t3DriveMin').textContent = avgDrive.toFixed(1) + ' min';
+  document.getElementById('t3StopMin').textContent  = avgStop.toFixed(1) + ' min';
+  document.getElementById('t3AvgMi').textContent    = avgMi.toFixed(1) + ' mi';
+  // Trips per active day — approximate: 260 weekdays per truck per year
+  const totalActiveDays = trucks.length * 260;
+  const tripsPerDay = Math.round(totalTrips / totalActiveDays);
+  document.getElementById('t3TripsPerDay').textContent = tripsPerDay;
+}
+
+function renderT3TripDuration(){
+  const trucks = filteredTrucks();
+  const sorted = [...trucks].sort((a,b) => {
+    const ea = TELEMATICS.tripEconomics.find(x => x.id === a.id);
+    const eb = TELEMATICS.tripEconomics.find(x => x.id === b.id);
+    const totA = (ea ? ea.driveMin + ea.stopMin : 0);
+    const totB = (eb ? eb.driveMin + eb.stopMin : 0);
+    return totB - totA;
+  });
+  const ctx = document.getElementById('t3TripDuration').getContext('2d');
+  if (charts.t3TripDuration) charts.t3TripDuration.destroy();
+  charts.t3TripDuration = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: sorted.map(t => t.id),
+      datasets: [
+        { label: 'Drive min', data: sorted.map(t => { const e = TELEMATICS.tripEconomics.find(x => x.id === t.id); return e ? e.driveMin : 0; }), backgroundColor: '#1E2761', stack: 'a', borderRadius: 2, datalabels: { display: true, anchor: 'center', align: 'center', color: '#FFFFFF', font: { size: 10, weight: 'bold' } } },
+        { label: 'Stop min',  data: sorted.map(t => { const e = TELEMATICS.tripEconomics.find(x => x.id === t.id); return e ? e.stopMin : 0; }),  backgroundColor: '#93C5FD', stack: 'a', borderRadius: 2, datalabels: { display: true, anchor: 'center', align: 'center', color: '#1E2761', font: { size: 10, weight: 'bold' } } }
+      ]
+    },
+    options: {
+      ...commonChartOptions(),
+      indexAxis: 'y',
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 12 } },
+        datalabels: { display: false }
+      },
+      scales: {
+        x: { stacked: true, ticks: { callback: v => v + ' min' }, grid: { color: '#E5E7EB' } },
+        y: { stacked: true, grid: { display: false } }
+      }
+    }
+  });
+}
+
+function renderT3TripMiDistribution(){
+  const trucks = filteredTrucks();
+  const sorted = [...trucks].sort((a,b) => {
+    const ea = TELEMATICS.tripEconomics.find(x => x.id === a.id);
+    const eb = TELEMATICS.tripEconomics.find(x => x.id === b.id);
+    return (eb ? eb.avgTripMi : 0) - (ea ? ea.avgTripMi : 0);
+  });
+  const ctx = document.getElementById('t3TripMiDistribution').getContext('2d');
+  if (charts.t3TripMiDistribution) charts.t3TripMiDistribution.destroy();
+  charts.t3TripMiDistribution = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: sorted.map(t => t.id),
+      datasets: [{
+        label: 'Avg trip miles',
+        data: sorted.map(t => { const e = TELEMATICS.tripEconomics.find(x => x.id === t.id); return e ? e.avgTripMi : 0; }),
+        backgroundColor: sorted.map(t => t.id === 'T446' ? '#C9A227' : TELEMATICS.personalities[t.personality].color),
+        borderRadius: 4,
+        datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v.toFixed(1) + ' mi', font: { size: 10 } }
+      }]
+    },
+    options: {
+      ...commonChartOptions(),
+      indexAxis: 'y',
+      plugins: { legend: { display: false }, datalabels: { display: false } },
+      scales: { x: { ticks: { callback: v => v + ' mi' } }, y: { grid: { display: false } } }
+    }
+  });
+}
+
+// Approximate mapping of selected period to weeks/days for the 52-week and 365-day charts.
+// Each month ≈ 52/12 weeks ≈ 30.4 days. Slight rounding is acceptable per spec.
+const _allMonthsList = ["Jun-25","Jul-25","Aug-25","Sep-25","Oct-25","Nov-25","Dec-25","Jan-26","Feb-26","Mar-26","Apr-26","May-26"];
+const _daysPerMonthList = {"Jun-25":30,"Jul-25":31,"Aug-25":31,"Sep-25":30,"Oct-25":31,"Nov-25":30,"Dec-25":31,"Jan-26":31,"Feb-26":28,"Mar-26":31,"Apr-26":30,"May-26":31};
+function _periodWeeks(){
+  const months = periodMonths[state.period] || monthsAll;
+  const startIdx = _allMonthsList.indexOf(months[0]);
+  const endIdx = _allMonthsList.indexOf(months[months.length - 1]) + 1;
+  return { start: Math.round(startIdx * 52 / 12), end: Math.min(52, Math.round(endIdx * 52 / 12)) };
+}
+function _periodDays(){
+  const months = periodMonths[state.period] || monthsAll;
+  let startDay = 0;
+  for (const m of _allMonthsList){
+    if (m === months[0]) break;
+    startDay += _daysPerMonthList[m];
+  }
+  let endDay = 0;
+  for (const m of _allMonthsList){
+    endDay += _daysPerMonthList[m];
+    if (m === months[months.length - 1]) break;
+  }
+  return { start: startDay, end: endDay };
+}
+
+function renderT3WeeklyMiles(){
+  const trucks = filteredTrucks();
+  const ctx = document.getElementById('t3WeeklyMiles').getContext('2d');
+  const { start, end } = _periodWeeks();
+  const datasets = trucks.map(t => ({
+    label: t.id,
+    data: (TELEMATICS.weeklyMiles[t.id] || []).slice(start, end),
+    borderColor: TELEMATICS.personalities[t.personality].color,
+    backgroundColor: TELEMATICS.personalities[t.personality].color,
+    borderWidth: 1.5,
+    pointRadius: 0,
+    tension: 0.25,
+    fill: false,
+    datalabels: { display: false }
+  }));
+  const labels = [];
+  for (let w = start; w < end; w++) labels.push('W' + (w + 1).toString().padStart(2, '0'));
+  if (charts.t3WeeklyMiles) charts.t3WeeklyMiles.destroy();
+  charts.t3WeeklyMiles = new Chart(ctx, {
+    type: 'line',
+    data: { labels: labels, datasets: datasets },
+    options: {
+      ...commonChartOptions(),
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
+        datalabels: { display: false }
+      },
+      scales: {
+        y: { title: { display: true, text: 'Miles / week', font: { size: 11 } }, grid: { color: '#E5E7EB' } },
+        x: { ticks: { font: { size: 9 }, maxTicksLimit: 13 }, grid: { display: false } }
+      }
+    }
+  });
+}
+
+function renderT3DailyTrips(){
+  const ctx = document.getElementById('t3DailyTrips').getContext('2d');
+  const { start, end } = _periodDays();
+  const sliceData = TELEMATICS.dailyTrips.slice(start, end);
+  const rolling = [];
+  for (let i = 0; i < sliceData.length; i++){
+    const wStart = Math.max(0, i - 6);
+    const window = sliceData.slice(wStart, i + 1);
+    rolling.push(window.reduce((a,b) => a+b, 0) / window.length);
+  }
+  // Build sparse x labels: month name at first day of each month
+  const labels = sliceData.map((_, i) => {
+    const day = start + i;
+    let offset = 0;
+    for (const m of _allMonthsList){
+      if (day === offset) return m.slice(0, 3);
+      offset += _daysPerMonthList[m];
+    }
+    return '';
+  });
+  if (charts.t3DailyTrips) charts.t3DailyTrips.destroy();
+  charts.t3DailyTrips = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Daily trips',
+          data: sliceData,
+          borderColor: '#1E2761',
+          backgroundColor: 'rgba(30,39,97,0.08)',
+          borderWidth: 1,
+          pointRadius: 0,
+          tension: 0.2,
+          fill: true,
+          datalabels: { display: false }
+        },
+        {
+          label: '7-day rolling avg',
+          data: rolling,
+          borderColor: '#C9A227',
+          backgroundColor: '#C9A227',
+          borderDash: [6, 4],
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.25,
+          fill: false,
+          datalabels: { display: false }
+        }
+      ]
+    },
+    options: {
+      ...commonChartOptions(),
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } },
+        datalabels: { display: false }
+      },
+      scales: {
+        y: { title: { display: true, text: 'Trips / day', font: { size: 11 } }, grid: { color: '#E5E7EB' } },
+        x: { ticks: { font: { size: 10 }, autoSkip: true, maxRotation: 0 }, grid: { display: false } }
+      }
+    }
+  });
+}
+
 function renderAuditTable(){
   const tbody = document.querySelector('#t3AuditTable tbody');
   tbody.innerHTML = '';
@@ -657,9 +1088,17 @@ function updateAll(){
   renderTruckTable();
   renderMilesTrend();
   renderUtilByTruck();
+  renderT1UtilTrend();
+  renderT1ActiveHoursByTruck();
   renderDriveIdle();
   renderWeekdayWeekend();
   renderHeatmap();
+  renderPeakHoursByTruck();
+  renderT3Kpis();
+  renderT3TripDuration();
+  renderT3TripMiDistribution();
+  renderT3WeeklyMiles();
+  renderT3DailyTrips();
 }
 
 // ─── Events ───────────────────────────────────────────────────────────────
