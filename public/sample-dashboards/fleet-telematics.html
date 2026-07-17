@@ -114,11 +114,14 @@ footer.ncc strong{color:var(--slate)}
     <label for="vehicleFilter">Vehicle</label>
     <select id="vehicleFilter">
       <option value="all" selected>All vehicles</option>
-      <option value="day_shift_high">Day Shift — High</option>
-      <option value="day_shift_medium">Day Shift — Medium</option>
-      <option value="day_shift_local">Day Shift — Local</option>
-      <option value="night_shift_regional">Night Shift — Regional</option>
-      <option value="underutilized_declining">Underutilized / Declining</option>
+      <option value="T441">T441</option>
+      <option value="T443">T443</option>
+      <option value="T444">T444</option>
+      <option value="T445">T445</option>
+      <option value="T446">T446</option>
+      <option value="T447">T447</option>
+      <option value="T448">T448</option>
+      <option value="T449">T449</option>
     </select>
   </div>
   <div>
@@ -371,7 +374,7 @@ function fmtPct(n){ return n.toFixed(1) + '%'; }
 
 function filteredTrucks(){
   if (state.vehicle === 'all') return TELEMATICS.truckMetrics;
-  return TELEMATICS.truckMetrics.filter(t => t.personality === state.vehicle);
+  return TELEMATICS.truckMetrics.filter(t => t.id === state.vehicle);
 }
 
 // Get monthly data filtered by vehicle and period
@@ -382,7 +385,7 @@ function filteredMonthly(){
   }
   // Filter monthlyByTruck by selected vehicle IDs and period
   const truckIds = TELEMATICS.truckMetrics
-    .filter(t => t.personality === state.vehicle)
+    .filter(t => t.id === state.vehicle)
     .map(t => t.id);
   const rows = TELEMATICS.monthlyByTruck
     .filter(d => truckIds.includes(d.id) && months.includes(d.month));
