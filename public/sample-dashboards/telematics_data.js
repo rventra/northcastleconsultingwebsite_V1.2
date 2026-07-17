@@ -177,14 +177,14 @@ const TELEMATICS = {
 
   // Truck-level TTM (utilization = AVG(daily_hours / 24) across weekdays)
   truckMetrics: [
-    { id: "T444", activeUtil: 20.9, totalUtil: 62.0, activeHours: 1266, totalHours: 3766, miles: 36316, trips: 12274, avgTripMi: 3.0 },
-    { id: "T445", activeUtil: 18.8, totalUtil: 49.9, activeHours: 1108, totalHours: 2934, miles: 32652, trips: 8381, avgTripMi: 3.9 },
-    { id: "T443", activeUtil: 18.8, totalUtil: 49.9, activeHours: 1131, totalHours: 3006, miles: 33458, trips: 8502, avgTripMi: 3.9 },
-    { id: "T448", activeUtil: 18.6, totalUtil: 49.7, activeHours: 1078, totalHours: 2888, miles: 31907, trips: 8137, avgTripMi: 3.9 },
-    { id: "T449", activeUtil: 16.4, totalUtil: 41.7, activeHours: 964, totalHours: 2464, miles: 28491, trips: 7281, avgTripMi: 3.9 },
-    { id: "T446", activeUtil: 16.3, totalUtil: 52.7, activeHours: 984, totalHours: 3187, miles: 40301, trips: 5347, avgTripMi: 7.5 },
-    { id: "T441", activeUtil: 16.1, totalUtil: 41.8, activeHours: 968, totalHours: 2506, miles: 28546, trips: 7286, avgTripMi: 3.9 },
-    { id: "T447", activeUtil: 10.0, totalUtil: 31.2, activeHours: 623, totalHours: 1977, miles: 15793, trips: 4138, avgTripMi: 3.8 }
+    { id: "T444", personality: "day_shift_high", activeUtil: 20.9, totalUtil: 62.0, activeHours: 1266, totalHours: 3766, miles: 36316, trips: 12274, avgTripMi: 3.0 },
+    { id: "T445", personality: "day_shift_local", activeUtil: 18.8, totalUtil: 49.9, activeHours: 1108, totalHours: 2934, miles: 32652, trips: 8381, avgTripMi: 3.9 },
+    { id: "T443", personality: "day_shift_local", activeUtil: 18.8, totalUtil: 49.9, activeHours: 1131, totalHours: 3006, miles: 33458, trips: 8502, avgTripMi: 3.9 },
+    { id: "T448", personality: "day_shift_local", activeUtil: 18.6, totalUtil: 49.7, activeHours: 1078, totalHours: 2888, miles: 31907, trips: 8137, avgTripMi: 3.9 },
+    { id: "T449", personality: "day_shift_medium", activeUtil: 16.4, totalUtil: 41.7, activeHours: 964, totalHours: 2464, miles: 28491, trips: 7281, avgTripMi: 3.9 },
+    { id: "T446", personality: "night_shift_regional", activeUtil: 16.3, totalUtil: 52.7, activeHours: 984, totalHours: 3187, miles: 40301, trips: 5347, avgTripMi: 7.5 },
+    { id: "T441", personality: "day_shift_medium", activeUtil: 16.1, totalUtil: 41.8, activeHours: 968, totalHours: 2506, miles: 28546, trips: 7286, avgTripMi: 3.9 },
+    { id: "T447", personality: "underutilized_declining", activeUtil: 10.0, totalUtil: 31.2, activeHours: 623, totalHours: 1977, miles: 15793, trips: 4138, avgTripMi: 3.8 }
   ],
 
   // Drive vs idle hours (fleet monthly)
