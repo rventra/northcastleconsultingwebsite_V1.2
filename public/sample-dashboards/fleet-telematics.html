@@ -30,13 +30,12 @@ header.ncc .illus{position:absolute;top:18px;right:32px;background:var(--gold);c
 .banner{background:var(--mist);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;gap:18px}
 .banner .q-tag{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.12em;background:var(--white);padding:6px 12px;border:1px solid var(--border)}
 .banner .q-text{font-size:14px;color:var(--navy-ink);font-style:italic;flex:1}
-.controls{display:flex;gap:14px;align-items:flex-start;padding:16px 32px;background:var(--white);border-bottom:1px solid var(--border);flex-wrap:wrap}
-.controls label{font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-right:8px}
-.controls select{font-family:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);min-width:140px}
-.controls .pill{background:var(--navy);color:var(--white);padding:6px 12px;font-size:11px;font-weight:700;letter-spacing:.08em;white-space:nowrap;margin-top:22px}
+.controls{display:grid;grid-template-columns:minmax(360px,1fr) 200px 200px;gap:28px;align-items:start;padding:18px 32px 22px;background:var(--mist);border-bottom:1px solid var(--border)}
+.controls label{font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px}
+.controls select{font-family:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);width:100%;min-width:0}
 
 /* Period slider — dual-thumb range over the 12 months */
-.period-slider{background:var(--white);border:1px solid var(--border);padding:12px 16px 14px;font-family:inherit;min-width:340px;max-width:380px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.period-slider{background:var(--white);border:1px solid var(--border);padding:12px 16px 14px;font-family:inherit;width:100%;box-shadow:0 1px 2px rgba(15,23,42,.04)}
 .period-slider-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
 .period-slider-meta{font-size:12px;font-weight:700;color:var(--navy-ink);letter-spacing:.02em}
 .period-slider-actions a{font-size:11px;color:var(--navy);font-weight:700;letter-spacing:.04em;text-decoration:none;cursor:pointer}
@@ -163,7 +162,6 @@ footer.ncc strong{color:var(--slate)}
       <option value="weekend">Weekends</option>
     </select>
   </div>
-  <div class="pill" id="summaryPill">TTM · All vehicles · All days</div>
 </div>
 
 <div class="tabstrip" role="tablist">
@@ -548,13 +546,7 @@ document.querySelectorAll('.tab').forEach(tab => {
 // ─── Render/update ────────────────────────────────────────────────────────
 let charts = {};
 
-function updateSummaryPill(){
-  const vLbl = document.querySelector('#vehicleFilter option:checked').text;
-  const dLbl = document.querySelector('#dayFilter option:checked').text;
-  document.getElementById('summaryPill').textContent = `${periodLabel()} · ${vLbl} · ${dLbl}`;
-}
-
-// Render the selected-month range as a short label for the summary pill.
+// Render the selected-month range as a short label for the unit text inside KPIs.
 // Examples: "TTM", "FY25 (7 mo)", "YTD26 (5 mo)", "Jun-25 → Mar-26 (10 mo)", "Mar-26 (1 mo)"
 function periodLabel(){
   const sel = state.selectedMonths;
@@ -1156,7 +1148,6 @@ function renderAuditTable(){
 }
 
 function updateAll(){
-  updateSummaryPill();
   updateKPIs();
   renderTruckTable();
   renderMilesTrend();
