@@ -16,7 +16,7 @@
   --white:#FFFFFF; --red:#B22234; --green:#2C5F2D;
   --amber:#B45309; --amber-bg:#FEF3C7;
   --red-bg:#FEE2E2; --green-bg:#DCFCE7;
-  --purple:#5B21B6; --purple-lite:#C084FC;
+  --purple:#4A5E8A; --purple-lite:#94A3B8;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg)}
@@ -35,29 +35,28 @@ header.ncc .illus{position:absolute;top:18px;right:32px;background:var(--gold);c
 .controls select{font-family:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);min-width:140px}
 .controls .pill{background:var(--navy);color:var(--white);padding:6px 12px;font-size:11px;font-weight:700;letter-spacing:.08em;white-space:nowrap;margin-top:22px}
 
-/* Period picker — Power BI-style multi-select year/month */
-.period-picker{background:var(--white);border:1px solid var(--border);padding:10px 14px 12px;font-family:inherit;min-width:340px;max-width:380px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
-.period-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-.period-count{font-size:11px;color:var(--slate);font-weight:600;letter-spacing:.04em}
-.period-actions a{font-size:11px;color:var(--navy);font-weight:700;letter-spacing:.04em;text-decoration:none;cursor:pointer}
-.period-actions a:hover{text-decoration:underline}
-.period-actions span{color:var(--slate-lite);margin:0 5px;font-size:10px}
-.period-section{margin-top:10px}
-.period-section-title{font-size:10px;color:var(--slate);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
-.period-years{display:flex;flex-wrap:wrap;gap:6px}
-.period-year-check{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--border);background:var(--white);cursor:pointer;font-size:12px;font-weight:700;color:var(--slate);border-radius:3px;user-select:none;transition:border-color .12s,background .12s,color .12s}
-.period-year-check:hover{border-color:var(--navy);color:var(--navy)}
-.period-year-check input{margin:0;cursor:pointer;accent-color:var(--navy)}
-.period-year-check.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.period-year-check.on input{accent-color:#fff}
-.period-year-check.partial{background:var(--navy);color:#fff;border-color:var(--navy);opacity:.55}
-.period-year-group{margin-bottom:8px}
-.period-year-group-label{font-size:11px;font-weight:700;color:var(--slate);letter-spacing:.06em;margin-bottom:5px;padding-left:2px}
-.period-months{display:flex;flex-wrap:wrap;gap:5px;padding-left:2px}
-.period-month{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:24px;padding:0 9px;font-size:11px;font-weight:600;border-radius:12px;cursor:pointer;user-select:none;border:1px solid var(--border);background:var(--white);color:var(--slate);transition:background .12s,color .12s,border-color .12s}
-.period-month:hover{border-color:var(--navy);color:var(--navy)}
-.period-month.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.period-month.dim{opacity:.4;pointer-events:none}
+/* Period slider — dual-thumb range over the 12 months */
+.period-slider{background:var(--white);border:1px solid var(--border);padding:12px 16px 14px;font-family:inherit;min-width:340px;max-width:380px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.period-slider-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.period-slider-meta{font-size:12px;font-weight:700;color:var(--navy-ink);letter-spacing:.02em}
+.period-slider-actions a{font-size:11px;color:var(--navy);font-weight:700;letter-spacing:.04em;text-decoration:none;cursor:pointer}
+.period-slider-actions a:hover{text-decoration:underline}
+.period-slider-track{position:relative;height:6px;background:var(--mist);border-radius:3px;margin:18px 10px 6px;cursor:pointer}
+.period-slider-fill{position:absolute;top:0;bottom:0;background:var(--navy);border-radius:3px;pointer-events:none}
+.period-slider-thumb{position:absolute;top:50%;width:18px;height:18px;background:var(--white);border:2px solid var(--navy);border-radius:50%;transform:translate(-50%,-50%);cursor:grab;box-shadow:0 1px 3px rgba(15,23,42,.22);z-index:2}
+.period-slider-thumb:hover{border-color:var(--navy-deep);box-shadow:0 1px 4px rgba(15,23,42,.3)}
+.period-slider-thumb:active{cursor:grabbing}
+.period-slider-ticks{display:flex;justify-content:space-between;padding:8px 6px 0;font-size:9.5px;color:var(--slate-lite);font-weight:600;letter-spacing:.02em;user-select:none}
+.period-slider-ticks span{flex:1;text-align:center;white-space:nowrap}
+.period-slider-ticks span:first-child{text-align:left}
+.period-slider-ticks span:last-child{text-align:right}
+
+/* Dual-section tile (top + bottom stat in one card) */
+.dual-top,.dual-bot{padding:2px 0}
+.dual-top{border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:10px}
+.dual-label{font-size:10px;color:var(--slate);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.dual-big{font-size:22px;font-weight:700;color:var(--navy-ink);margin-top:4px;line-height:1}
+.dual-unit{font-size:10px;color:var(--slate-lite);margin-top:3px}
 .tabstrip{display:flex;gap:0;padding:0 32px;background:var(--white);border-bottom:1px solid var(--border)}
 .tab{flex:1;background:#F1F5F9;color:var(--slate);border:none;border-right:1px solid var(--border);padding:14px 18px 12px;text-align:left;cursor:pointer;font-family:inherit;position:relative;transition:background .15s,color .15s}
 .tab:last-child{border-right:none}
@@ -74,6 +73,7 @@ header.ncc .illus{position:absolute;top:18px;right:32px;background:var(--gold);c
 .tabhdr{display:flex;justify-content:space-between;align-items:center;padding:14px 32px 0}
 .tabhdr .lead{font-size:11px;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;font-weight:700}
 .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px 32px 18px;background:var(--bg)}
+.tiles.tiles-5{grid-template-columns:repeat(5,1fr)}
 .tile{background:var(--white);border:1px solid var(--border);position:relative;padding:14px 16px 16px;min-height:150px}
 .tile::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--navy))}
 .tile .tag{font-size:10px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.12em}
@@ -128,23 +128,17 @@ footer.ncc strong{color:var(--slate)}
 <div class="controls">
   <div>
     <label>Period</label>
-    <div class="period-picker" id="periodPicker" role="group" aria-label="Filter by year and month">
-      <div class="period-head">
-        <span class="period-count" id="periodCount">12 of 12 months</span>
-        <span class="period-actions">
-          <a href="#" data-period-action="all">All</a>
-          <span>·</span>
-          <a href="#" data-period-action="none">None</a>
-        </span>
+    <div class="period-slider" id="periodSlider" role="group" aria-label="Filter by month range">
+      <div class="period-slider-info">
+        <span class="period-slider-meta" id="periodMeta">All 12 months</span>
+        <span class="period-slider-actions"><a href="#" data-period-action="all">Reset</a></span>
       </div>
-      <div class="period-section">
-        <div class="period-section-title">Years</div>
-        <div class="period-years" id="periodYears"></div>
+      <div class="period-slider-track" id="periodSliderTrack">
+        <div class="period-slider-fill" id="periodSliderFill"></div>
+        <div class="period-slider-thumb" id="periodStartThumb" data-thumb="start" aria-label="Start month"></div>
+        <div class="period-slider-thumb" id="periodEndThumb" data-thumb="end" aria-label="End month"></div>
       </div>
-      <div class="period-section">
-        <div class="period-section-title">Months</div>
-        <div class="period-year-groups" id="periodMonthGroups"></div>
-      </div>
+      <div class="period-slider-ticks" id="periodSliderTicks"></div>
     </div>
   </div>
   <div>
@@ -197,37 +191,46 @@ footer.ncc strong{color:var(--slate)}
     <div class="lead">Fleet summary · Miles, trips &amp; utilization by truck</div>
   </div>
 
-  <div class="tiles">
+  <div class="tiles tiles-5">
     <div class="tile" style="--accent:var(--navy)">
       <div class="tag">FLEET TOTAL</div>
       <div class="label">Total miles</div>
       <div class="big" id="t1Miles">247K</div>
       <div class="unit" id="t1MilesUnit">TTM fleet miles</div>
-      <div class="bullets"><div id="t1MilesNote">8 trucks × 85 mi/day avg</div></div>
     </div>
     <div class="tile" style="--accent:var(--purple)">
       <div class="tag">FLEET TOTAL</div>
       <div class="label">Total trips</div>
       <div class="big" id="t1Trips">61,346</div>
       <div class="unit" id="t1TripsUnit">TTM delivery trips</div>
-      <div class="bullets"><div id="t1TripsNote">21 trips per truck-day avg</div></div>
     </div>
     <div class="tile" style="--accent:var(--gold)">
       <div class="tag">GROSS UTILIZATION</div>
       <div class="label">Active hours ÷ available hours</div>
       <div class="big" id="t1ActiveUtil">17.0%</div>
       <div class="unit" id="t1ActiveUtilUnit">Weekday avg: daily drive hrs ÷ 24</div>
-      <div class="bullets">
-        <div>Avg 2.8 hrs drive per truck-day</div>
-        <div id="t1TotalUtilInline">Total util: 47.4%</div>
-      </div>
+      <div class="unit" style="color:var(--navy);font-weight:700;margin-top:4px" id="t1TotalUtilInline">Total util: 47.4%</div>
     </div>
     <div class="tile" style="--accent:var(--green)">
       <div class="tag">TOTAL HOURS LOGGED</div>
       <div class="label">Drive + idle / transition</div>
       <div class="big" id="t1TotalHours">22.7K</div>
       <div class="unit" id="t1TotalHoursUnit">TTM fleet hours</div>
-      <div class="bullets"><div id="t1TotalHoursNote">7.8 hrs logged per truck-day avg</div></div>
+    </div>
+    <div class="tile" style="--accent:var(--slate)">
+      <div class="tag">CADENCE</div>
+      <div class="dual">
+        <div class="dual-top">
+          <div class="dual-label">Days in period</div>
+          <div class="dual-big" id="t1NetWorkingDays">—</div>
+          <div class="dual-unit">Calendar days across selected months</div>
+        </div>
+        <div class="dual-bot">
+          <div class="dual-label">Avg trips / day</div>
+          <div class="dual-big" id="t1AvgTripsPerWD">—</div>
+          <div class="dual-unit">Total trips ÷ days in period</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -237,7 +240,7 @@ footer.ncc strong{color:var(--slate)}
       <div class="chart-wrap"><canvas id="t1MilesTrend"></canvas></div>
     </div>
     <div class="panel">
-      <div class="ptitle">GROSS UTILIZATION BY TRUCK · ACTIVE HOURS ÷ AVAILABLE HOURS</div>
+      <div class="ptitle">GROSS UTILIZATION BY TRUCK</div>
       <div class="chart-wrap"><canvas id="t1UtilByTruck"></canvas></div>
     </div>
   </div>
@@ -248,13 +251,13 @@ footer.ncc strong{color:var(--slate)}
       <div class="chart-wrap"><canvas id="t1UtilTrend"></canvas></div>
     </div>
     <div class="panel">
-      <div class="ptitle">ACTIVE HOURS BY TRUCK · TTM</div>
+      <div class="ptitle">ACTIVE HOURS BY TRUCK</div>
       <div class="chart-wrap"><canvas id="t1ActiveHoursByTruck"></canvas></div>
     </div>
   </div>
 
   <div class="panel">
-    <div class="ptitle">TRUCK-LEVEL OPERATING METRICS · TTM</div>
+    <div class="ptitle">TRUCK-LEVEL OPERATING METRICS</div>
     <table class="ncc" id="t1TruckTable">
       <thead><tr>
         <th>Truck</th>
@@ -269,10 +272,6 @@ footer.ncc strong{color:var(--slate)}
     </table>
   </div>
 
-  <div class="callout">
-    <div class="ctitle">FLEET TAKEAWAY</div>
-    The fleet logs <strong>47% total utilization</strong> of weekday available hours, but only <strong>17% gross utilization</strong> when measured as drive time. That 30-point gap is idle and transition time. <strong>T444</strong> is the clear workhorse at 21% gross / 62% total utilization, while <strong>T447</strong> sits at 10% gross / 31% total. A buyer will underwrite to active-hour productivity, not total hours logged.
-  </div>
 </div>
 <!-- ================= TAB 2: ACTIVITY PATTERNS ================= -->
 <div class="tabpane" id="pane-t2">
@@ -286,28 +285,24 @@ footer.ncc strong{color:var(--slate)}
       <div class="label">Peak weekday hour</div>
       <div class="big">1:00 PM</div>
       <div class="unit">Fleet-wide drive-hour peak (Thu 13:00)</div>
-      <div class="bullets"><div>Plateau 08:00–16:00 across day shifts</div></div>
     </div>
     <div class="tile" style="--accent:var(--purple)">
       <div class="tag">TIME SPLIT</div>
       <div class="label">Drive vs idle</div>
       <div class="big">36% / 64%</div>
       <div class="unit">Active hours vs idle/transition</div>
-      <div class="bullets"><div>Stop time includes depot transitions</div></div>
     </div>
     <div class="tile" style="--accent:var(--gold)">
       <div class="tag">NIGHT SHIFT</div>
       <div class="label">T446 peak hour</div>
       <div class="big">11:00 PM</div>
       <div class="unit">Regional night-shift run (23:00)</div>
-      <div class="bullets"><div>Active 17:00–05:00, off 06:00–15:00</div></div>
     </div>
     <div class="tile" style="--accent:var(--red)">
       <div class="tag">WEEKEND GAP</div>
       <div class="label">Weekend activity</div>
       <div class="big">6 of 8</div>
       <div class="unit">trucks have zero weekend days</div>
-      <div class="bullets"><div>Only T441 (4 days) &amp; T447 (14 days)</div></div>
     </div>
   </div>
 
@@ -332,10 +327,6 @@ footer.ncc strong{color:var(--slate)}
     <div class="chart-wrap"><canvas id="t2PeakHoursByTruck"></canvas></div>
   </div>
 
-  <div class="callout">
-    <div class="ctitle">ACTIVITY TAKEAWAY</div>
-    Day-shift trucks create a broad mid-day plateau (08:00–16:00), while the night-shift truck (<strong>T446</strong>) operates 17:00–05:00 with its peak at 11 PM. Weekend activity exists on only 2 of 8 trucks (<strong>T441</strong> and <strong>T447</strong>). The bigger operational question is the <strong>64% idle/transition share</strong>: improving depot turnaround or route density would lift effective utilization faster than adding trucks.
-  </div>
 </div>
 
 <!-- ================= TAB 3: TRIP ECONOMICS ================= -->
@@ -350,28 +341,24 @@ footer.ncc strong{color:var(--slate)}
       <div class="label">Avg drive / trip</div>
       <div class="big" id="t3DriveMin">7.9 min</div>
       <div class="unit" id="t3DriveMinUnit">Avg drive minutes per trip</div>
-      <div class="bullets"><div>T446 highest at 11.0 min · T444 lowest at 6.2</div></div>
     </div>
     <div class="tile" style="--accent:var(--purple)">
       <div class="tag">STOP TIME</div>
       <div class="label">Avg stop / trip</div>
       <div class="big" id="t3StopMin">14.3 min</div>
       <div class="unit" id="t3StopMinUnit">Idle + transition between trips</div>
-      <div class="bullets"><div>Stop exceeds drive across the fleet</div></div>
     </div>
     <div class="tile" style="--accent:var(--gold)">
       <div class="tag">TRIP DISTANCE</div>
       <div class="label">Avg trip miles</div>
       <div class="big" id="t3AvgMi">4.0 mi</div>
       <div class="unit" id="t3AvgMiUnit">Per-delivery average</div>
-      <div class="bullets"><div>T446 = 7.5 mi · regional line-haul profile</div></div>
     </div>
     <div class="tile" style="--accent:var(--green)">
       <div class="tag">DAILY CADENCE</div>
       <div class="label">Trips / active day</div>
       <div class="big" id="t3TripsPerDay">31</div>
       <div class="unit" id="t3TripsPerDayUnit">Trips per truck-day</div>
-      <div class="bullets"><div>Fleet avg, weekday-weighted</div></div>
     </div>
   </div>
 
@@ -397,10 +384,6 @@ footer.ncc strong{color:var(--slate)}
     </div>
   </div>
 
-  <div class="callout">
-    <div class="ctitle">TRIP ECONOMICS TAKEAWAY</div>
-    <strong>T446</strong> does fewer but much longer trips — 7.5 mi average and 11.0 drive minutes — a regional line-haul profile. The rest of the fleet runs short local drayage trips around 3.9 mi and 8 minutes. <strong>Stop time exceeds drive time across the fleet</strong>, reinforcing the depot-turnaround opportunity: improving route density and dock flow would lift effective utilization faster than adding trucks.
-  </div>
 </div>
 
 <!-- ================= TAB 4: DATA AUDIT ================= -->
@@ -528,16 +511,24 @@ function filteredMonthly(){
   return months.map(m => byMonth[m]).filter(Boolean);
 }
 
-// Weekday/weekend ratio for scaling (computed from weekdayWeekend data)
-function getDayTypeScale(){
-  const trucks = filteredTrucks();
-  if (trucks.length === 0) return { wdRatio: 1, weRatio: 0 };
-  // Average weekday/weekend ratio across selected trucks
-  const wwData = TELEMATICS.weekdayWeekend.filter(w => trucks.some(t => t.id === w.id));
-  const avgWd = wwData.reduce((s,w) => s + w.weekday, 0) / wwData.length;
-  const avgWe = wwData.reduce((s,w) => s + w.weekend, 0) / wwData.length;
-  const avgAll = (avgWd * 5 + avgWe * 2) / 7; // weighted by days per week
-  return { wdRatio: avgWd / avgAll, weRatio: avgWe / avgAll };
+// Day-type share for scaling (from dailyTrips array).
+// Returns the fraction of fleet trip volume that occurs on days matching state.dayType.
+// Uses the same ratio for miles/hours since trips, miles, and hours correlate closely.
+// weekday = Mon–Fri (dow 1..5), weekend = Sat/Sun (dow 0, 6). Jun-25 day 0 = Sunday.
+function getDayTypeFactor(){
+  if (state.dayType === 'all') return 1;
+  const { start, end } = _periodDays();
+  const slice = TELEMATICS.dailyTrips.slice(start, Math.min(end, TELEMATICS.dailyTrips.length));
+  if (slice.length === 0) return 0;
+  let total = 0, matching = 0;
+  for (let i = 0; i < slice.length; i++){
+    const dow = (start + i) % 7;
+    const isWknd = (dow === 0 || dow === 6);
+    const matches = state.dayType === 'weekend' ? isWknd : !isWknd;
+    total += slice[i];
+    if (matches) matching += slice[i];
+  }
+  return total > 0 ? matching / total : 0;
 }
 
 // ─── Tab switching ────────────────────────────────────────────────────────
@@ -580,6 +571,30 @@ function periodLabel(){
   return sorted[0] + ' → ' + sorted[sorted.length - 1] + ' (' + sel.length + ' mo)';
 }
 
+// Calendar days in the selected period (sum of daysInMonth across selected months).
+// When day-type filter is active, count only matching days within that window.
+function computeCadence(){
+  if (state.selectedMonths.length === 0) return { days: 0, avg: 0 };
+  let days;
+  if (state.dayType === 'all'){
+    days = state.selectedMonths.reduce((s,m) => s + _daysPerMonthList[m], 0);
+  } else {
+    // Count matching days from the calendar
+    const { start, end } = _periodDays();
+    days = 0;
+    for (let i = start; i < end; i++){
+      const dow = i % 7;
+      const isWknd = (dow === 0 || dow === 6);
+      const matches = state.dayType === 'weekend' ? isWknd : !isWknd;
+      if (matches) days++;
+    }
+  }
+  let totalTrips = filteredMonthly().reduce((s,d) => s + d.trips, 0);
+  if (state.dayType !== 'all') totalTrips = Math.round(totalTrips * getDayTypeFactor());
+  const avg = days > 0 ? Math.round(totalTrips / days) : 0;
+  return { days, avg };
+}
+
 function updateKPIs(){
   const data = filteredMonthly();
   if (data.length === 0) return;
@@ -589,19 +604,13 @@ function updateKPIs(){
   let activeHours = data.reduce((s,d) => s + d.activeHours, 0);
   let totalHours = data.reduce((s,d) => s + d.totalHours, 0);
 
-  // Apply day type scaling if filtering by weekday/weekend
-  if (state.dayType === 'weekday'){
-    const scale = getDayTypeScale();
-    totalMiles = Math.round(totalMiles * scale.wdRatio);
-    totalTrips = Math.round(totalTrips * scale.wdRatio);
-    activeHours = activeHours * scale.wdRatio;
-    totalHours = totalHours * scale.wdRatio;
-  } else if (state.dayType === 'weekend'){
-    const scale = getDayTypeScale();
-    totalMiles = Math.round(totalMiles * scale.weRatio);
-    totalTrips = Math.round(totalTrips * scale.weRatio);
-    activeHours = activeHours * scale.weRatio;
-    totalHours = totalHours * scale.weRatio;
+  // Apply day-type factor if filtering by weekday/weekend (same ratio across miles/trips/hours)
+  const dayFactor = state.dayType === 'all' ? 1 : getDayTypeFactor();
+  if (dayFactor !== 1){
+    totalMiles = Math.round(totalMiles * dayFactor);
+    totalTrips = Math.round(totalTrips * dayFactor);
+    activeHours = activeHours * dayFactor;
+    totalHours = totalHours * dayFactor;
   }
 
   // Compute utilization from filtered data using per-month AVG(daily_hours/24) values.
@@ -637,6 +646,11 @@ function updateKPIs(){
   document.getElementById('t1TotalUtilInline').textContent = `Total util: ${fmtPct(avgTotalUtil)}`;
   document.getElementById('t1TotalHours').textContent = fmtK(totalHours);
   document.getElementById('t1TotalHoursUnit').textContent = `${periodLabel()} fleet hours`;
+
+  // Cadence card (5th tile) — net working days + avg trips per working day
+  const cad = computeCadence();
+  document.getElementById('t1NetWorkingDays').textContent = fmtNum(cad.days);
+  document.getElementById('t1AvgTripsPerWD').textContent = fmtNum(cad.avg);
 }
 
 function renderTruckTable(){
@@ -814,7 +828,7 @@ function renderDriveIdle(){
       labels: data.map(d => d.month),
       datasets: [
         { label: 'Drive hours', data: data.map(d => +d.activeHours.toFixed(0)), backgroundColor: '#1E2761', stack: 'a' },
-        { label: 'Idle hours', data: data.map(d => +d.idleHours.toFixed(0)), backgroundColor: '#93C5FD', stack: 'a' }
+        { label: 'Idle hours', data: data.map(d => +d.idleHours.toFixed(0)), backgroundColor: '#94A3B8', stack: 'a' }
       ]
     },
     options: commonChartOptions()
@@ -834,7 +848,7 @@ function renderWeekdayWeekend(){
       labels: trucks.map(t => t.id),
       datasets: [
         { label: 'Weekday', data: trucks.map(t => wwMap[t.id] ? wwMap[t.id].weekday : 0), backgroundColor: '#1E2761' },
-        { label: 'Weekend', data: trucks.map(t => wwMap[t.id] ? wwMap[t.id].weekend : 0), backgroundColor: '#93C5FD' }
+        { label: 'Weekend', data: trucks.map(t => wwMap[t.id] ? wwMap[t.id].weekend : 0), backgroundColor: '#94A3B8' }
       ]
     },
     options: {
@@ -862,7 +876,7 @@ function renderHeatmap(){
       datasets: weekdays.map((wd, i) => ({
         label: wd,
         data: matrix[i],
-        backgroundColor: ['#1E2761','#2E3A8A','#5B21B6','#7C3AED','#C084FC','#EC4899','#F43F5E'][i]
+        backgroundColor: ['#1E2761','#475569','#64748B','#94A3B8','#CBD5E1','#E2E8F0','#F1F5F9'][i]
       }))
     },
     options: {
@@ -950,7 +964,7 @@ function renderT3TripDuration(){
       labels: sorted.map(t => t.id),
       datasets: [
         { label: 'Drive min', data: sorted.map(t => { const e = TELEMATICS.tripEconomics.find(x => x.id === t.id); return e ? e.driveMin : 0; }), backgroundColor: '#1E2761', stack: 'a', borderRadius: 2, datalabels: { display: true, anchor: 'center', align: 'center', color: '#FFFFFF', font: { size: 10, weight: 'bold' } } },
-        { label: 'Stop min',  data: sorted.map(t => { const e = TELEMATICS.tripEconomics.find(x => x.id === t.id); return e ? e.stopMin : 0; }),  backgroundColor: '#93C5FD', stack: 'a', borderRadius: 2, datalabels: { display: true, anchor: 'center', align: 'center', color: '#1E2761', font: { size: 10, weight: 'bold' } } }
+        { label: 'Stop min',  data: sorted.map(t => { const e = TELEMATICS.tripEconomics.find(x => x.id === t.id); return e ? e.stopMin : 0; }),  backgroundColor: '#94A3B8', stack: 'a', borderRadius: 2, datalabels: { display: true, anchor: 'center', align: 'center', color: '#1E2761', font: { size: 10, weight: 'bold' } } }
       ]
     },
     options: {
@@ -1169,97 +1183,94 @@ function updateAll(){
   });
 });
 
-// ─── Period picker (Power BI-style year/month multi-select) ────────────────
-const _monthShort = {'Jan':'Jan','Feb':'Feb','Mar':'Mar','Apr':'Apr','May':'May','Jun':'Jun','Jul':'Jul','Aug':'Aug','Sep':'Sep','Oct':'Oct','Nov':'Nov','Dec':'Dec'};
+// ─── Period slider (dual-thumb range over the 12 months) ───────────────────
+function renderPeriodSlider(){
+  const track     = document.getElementById('periodSliderTrack');
+  const startThumb = document.getElementById('periodStartThumb');
+  const endThumb   = document.getElementById('periodEndThumb');
+  const fill      = document.getElementById('periodSliderFill');
+  const meta      = document.getElementById('periodMeta');
+  const ticks     = document.getElementById('periodSliderTicks');
 
-function renderPeriodPicker(){
-  const yearsContainer = document.getElementById('periodYears');
-  yearsContainer.innerHTML = yearGroups.map(grp => `
-    <label class="period-year-check" data-year="${grp.year}">
-      <input type="checkbox" id="periodYear_${grp.year}" />
-      <span>${grp.year}</span>
-    </label>
-  `).join('');
+  // Tick marks: short labels (Jun, Jul, ...) so all 12 fit under the track
+  const tickShort = {'Jun-25':'Jun','Jul-25':'Jul','Aug-25':'Aug','Sep-25':'Sep','Oct-25':'Oct','Nov-25':'Nov','Dec-25':'Dec','Jan-26':'Jan','Feb-26':'Feb','Mar-26':'Mar','Apr-26':'Apr','May-26':'May'};
+  ticks.innerHTML = monthsAll.map(m => `<span>${tickShort[m]}</span>`).join('');
 
-  const monthContainer = document.getElementById('periodMonthGroups');
-  monthContainer.innerHTML = yearGroups.map(grp => `
-    <div class="period-year-group" data-year="${grp.year}">
-      <div class="period-year-group-label">${grp.year}</div>
-      <div class="period-months">
-        ${grp.months.map(m => `<span class="period-month" data-month="${m}">${m.split('-')[0]}</span>`).join('')}
-      </div>
-    </div>
-  `).join('');
+  // Initialize thumb positions from state.selectedMonths (defensive)
+  let startIdx = monthsAll.indexOf(state.selectedMonths[0]);
+  let endIdx   = monthsAll.indexOf(state.selectedMonths[state.selectedMonths.length - 1]);
+  if (startIdx < 0) startIdx = 0;
+  if (endIdx   < 0 || endIdx < startIdx) endIdx = monthsAll.length - 1;
 
-  // Year checkbox toggles all that year's months
-  yearGroups.forEach(grp => {
-    document.getElementById(`periodYear_${grp.year}`).addEventListener('change', e => {
-      const on = e.target.checked;
-      if (on) {
-        state.selectedMonths = Array.from(new Set([...state.selectedMonths, ...grp.months]));
-      } else {
-        state.selectedMonths = state.selectedMonths.filter(m => !grp.months.includes(m));
-      }
-      syncPeriodPicker();
-      updateAll();
-    });
-  });
-  // Month chips toggle individually
-  monthContainer.querySelectorAll('.period-month').forEach(el => {
-    el.addEventListener('click', () => {
-      const m = el.dataset.month;
-      if (state.selectedMonths.includes(m)) {
-        state.selectedMonths = state.selectedMonths.filter(x => x !== m);
-      } else {
-        state.selectedMonths = [...state.selectedMonths, m].sort((a, b) => monthsAll.indexOf(a) - monthsAll.indexOf(b));
-      }
-      syncPeriodPicker();
-      updateAll();
-    });
-  });
-  // All / None actions
-  document.querySelectorAll('[data-period-action]').forEach(el => {
-    el.addEventListener('click', e => {
+  function pct(i){ return (i / (monthsAll.length - 1)) * 100; }
+
+  function updateUI(){
+    startThumb.style.left = pct(startIdx) + '%';
+    endThumb.style.left   = pct(endIdx) + '%';
+    fill.style.left  = pct(startIdx) + '%';
+    fill.style.width = (pct(endIdx) - pct(startIdx)) + '%';
+
+    state.selectedMonths = monthsAll.slice(startIdx, endIdx + 1);
+    const sel = state.selectedMonths;
+    if (sel.length === monthsAll.length) meta.textContent = 'All ' + sel.length + ' months';
+    else if (sel.length === 1) meta.textContent = sel[0];
+    else meta.textContent = sel[0] + ' → ' + sel[sel.length - 1] + ' · ' + sel.length + ' mo';
+    updateAll();
+  }
+
+  function dragThumb(thumb, isStart){
+    thumb.addEventListener('mousedown', e => {
       e.preventDefault();
-      if (el.dataset.periodAction === 'all') {
-        state.selectedMonths = monthsAll.slice();
-      } else {
-        state.selectedMonths = [];
-      }
-      syncPeriodPicker();
-      updateAll();
+      const onMove = ev => {
+        const rect = track.getBoundingClientRect();
+        const x = Math.max(0, Math.min(rect.width, ev.clientX - rect.left));
+        const idx = Math.round((x / rect.width) * (monthsAll.length - 1));
+        if (isStart) startIdx = Math.min(idx, endIdx);
+        else         endIdx   = Math.max(idx, startIdx);
+        updateUI();
+      };
+      const onUp = () => {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+      };
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
     });
-  });
-  syncPeriodPicker();
-}
+  }
+  dragThumb(startThumb, true);
+  dragThumb(endThumb, false);
 
-function syncPeriodPicker(){
-  // Month chip on/off
-  document.querySelectorAll('.period-month').forEach(el => {
-    el.classList.toggle('on', state.selectedMonths.includes(el.dataset.month));
-  });
-  // Year checkbox + partial state
-  yearGroups.forEach(grp => {
-    const cb = document.getElementById(`periodYear_${grp.year}`);
-    const wrap = cb.closest('.period-year-check');
-    const selectedCount = grp.months.filter(m => state.selectedMonths.includes(m)).length;
-    if (selectedCount === 0) {
-      cb.checked = false; cb.indeterminate = false;
-      wrap.classList.remove('on', 'partial');
-    } else if (selectedCount === grp.months.length) {
-      cb.checked = true; cb.indeterminate = false;
-      wrap.classList.add('on'); wrap.classList.remove('partial');
-    } else {
-      cb.checked = false; cb.indeterminate = true;
-      wrap.classList.remove('on'); wrap.classList.add('partial');
+  // Click on track = move the thumb that has room in the click direction.
+  // When thumbs are co-located, prefer to expand (end if click is right of them, start if left).
+  track.addEventListener('click', e => {
+    if (e.target === startThumb || e.target === endThumb) return;
+    const rect = track.getBoundingClientRect();
+    const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+    const idx = Math.round((x / rect.width) * (monthsAll.length - 1));
+    if (idx > endIdx)        endIdx   = idx;
+    else if (idx < startIdx) startIdx = idx;
+    else {
+      const distStart = Math.abs(idx - startIdx);
+      const distEnd   = Math.abs(idx - endIdx);
+      if (distStart <= distEnd) startIdx = Math.min(idx, endIdx);
+      else                      endIdx   = Math.max(idx, startIdx);
     }
+    updateUI();
   });
-  // Count badge
-  document.getElementById('periodCount').textContent = `${state.selectedMonths.length} of ${monthsAll.length} months`;
+
+  // Reset = full range
+  document.querySelector('[data-period-action="all"]').addEventListener('click', e => {
+    e.preventDefault();
+    startIdx = 0;
+    endIdx   = monthsAll.length - 1;
+    updateUI();
+  });
+
+  updateUI();
 }
 
 // ─── Init ─────────────────────────────────────────────────────────────────
-renderPeriodPicker();
+renderPeriodSlider();
 renderAuditTable();
 updateAll();
 </script>

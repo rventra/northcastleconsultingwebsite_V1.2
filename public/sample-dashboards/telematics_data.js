@@ -45,11 +45,11 @@ const TELEMATICS = {
   ],
 
   personalities: {
-    day_shift_high:          { label: "Day Shift — High",              color: "#5B21B6" },
-    day_shift_medium:        { label: "Day Shift — Medium",            color: "#7C3AED" },
-    day_shift_local:         { label: "Day Shift — Local",             color: "#C084FC" },
-    night_shift_regional:    { label: "Night Shift — Regional",        color: "#EC4899" },
-    underutilized_declining: { label: "Underutilized / Declining", color: "#F43F5E" }
+    day_shift_high:          { label: "Day Shift — High",              color: "#1E2761" },
+    day_shift_medium:        { label: "Day Shift — Medium",            color: "#4A5E8A" },
+    day_shift_local:         { label: "Day Shift — Local",             color: "#94A3B8" },
+    night_shift_regional:    { label: "Night Shift — Regional",        color: "#6B8E9B" },
+    underutilized_declining: { label: "Underutilized / Declining", color: "#B8A88A" }
   },
 
   periods: {
