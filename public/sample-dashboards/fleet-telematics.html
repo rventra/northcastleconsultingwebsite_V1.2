@@ -20,19 +20,22 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg)}
-.page{max-width:1320px;margin:0 auto;background:var(--white);min-height:100vh;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.layout{display:grid;grid-template-columns:300px 1fr;align-items:start;max-width:1640px;margin:0 auto;background:var(--white);min-height:100vh;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.sidebar{position:sticky;top:0;align-self:start;height:100vh;background:var(--white);border-right:1px solid var(--border);padding:28px 24px;overflow-y:auto}
+.sidebar-section-title{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.sidebar-filter{margin-bottom:22px}
+.sidebar-filter label{display:block;font-size:11px;font-weight:700;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.sidebar-filter select{font-family:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);width:100%;min-width:0}
+.sidebar-footer{margin-top:32px;padding-top:20px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px}
+.sidebar-footer a{font-size:12px;color:var(--navy);font-weight:700;text-decoration:none;letter-spacing:.02em}
+.sidebar-footer a:hover{text-decoration:underline}
+.page{background:var(--white);min-height:100vh}
 header.ncc{background:var(--navy-deep);color:var(--white);padding:18px 32px 14px;position:relative}
 header.ncc::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--gold)}
 header.ncc .brand{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--gold-lite)}
 header.ncc h1{margin:6px 0 2px;font-size:26px;font-weight:700}
 header.ncc .sub{font-size:13px;color:#cfd8dc;margin-top:2px}
 header.ncc .illus{position:absolute;top:18px;right:32px;background:var(--gold);color:var(--navy-deep);font-weight:700;font-size:11px;letter-spacing:.18em;padding:6px 12px;border-radius:2px}
-.banner{background:var(--mist);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;gap:18px}
-.banner .q-tag{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.12em;background:var(--white);padding:6px 12px;border:1px solid var(--border)}
-.banner .q-text{font-size:14px;color:var(--navy-ink);font-style:italic;flex:1}
-.controls{display:grid;grid-template-columns:minmax(360px,1fr) 200px 200px;gap:28px;align-items:start;padding:18px 32px 22px;background:var(--mist);border-bottom:1px solid var(--border)}
-.controls label{font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px}
-.controls select{font-family:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);width:100%;min-width:0}
 
 /* Period slider — dual-thumb range over the 12 months */
 .period-slider{background:var(--white);border:1px solid var(--border);padding:12px 16px 14px;font-family:inherit;width:100%;box-shadow:0 1px 2px rgba(15,23,42,.04)}
@@ -111,21 +114,11 @@ footer.ncc strong{color:var(--slate)}
 </style>
 </head>
 <body>
-<div class="page">
-<header class="ncc">
-  <div class="brand">NORTH CASTLE CONSULTING · OPERATIONS DASHBOARD PACK</div>
-  <h1>Fleet Telematics · Utilization, activity &amp; trip economics</h1>
-  <div class="sub">How hard the fleet is working, when it works, and where utilization leaks out.</div>
-  <div class="illus">ILLUSTRATIVE · SAMPLE DATA</div>
-</header>
+<div class="layout">
+<aside class="sidebar">
+  <div class="sidebar-section-title">Filters</div>
 
-<div class="banner">
-  <div class="q-tag">THE QUESTION</div>
-  <div class="q-text">Which vehicles are earning their keep, and where is capacity being left on the table?</div>
-</div>
-
-<div class="controls">
-  <div>
+  <div class="sidebar-filter">
     <label>Period</label>
     <div class="period-slider" id="periodSlider" role="group" aria-label="Filter by month range">
       <div class="period-slider-info">
@@ -140,7 +133,8 @@ footer.ncc strong{color:var(--slate)}
       <div class="period-slider-ticks" id="periodSliderTicks"></div>
     </div>
   </div>
-  <div>
+
+  <div class="sidebar-filter">
     <label for="vehicleFilter">Vehicle</label>
     <select id="vehicleFilter">
       <option value="all" selected>All vehicles</option>
@@ -154,7 +148,8 @@ footer.ncc strong{color:var(--slate)}
       <option value="T449">T449</option>
     </select>
   </div>
-  <div>
+
+  <div class="sidebar-filter">
     <label for="dayFilter">Day type</label>
     <select id="dayFilter">
       <option value="all" selected>All days</option>
@@ -162,7 +157,20 @@ footer.ncc strong{color:var(--slate)}
       <option value="weekend">Weekends</option>
     </select>
   </div>
-</div>
+
+  <div class="sidebar-footer">
+    <a href="https://main.d2pzfdprrzy6zu.amplifyapp.com/" target="_blank" rel="noopener">Live dashboard ↗</a>
+    <a href="https://northcastleconsulting.com/sample-dashboards/">All sample dashboards</a>
+  </div>
+</aside>
+
+<div class="page">
+<header class="ncc">
+  <div class="brand">NORTH CASTLE CONSULTING · OPERATIONS DASHBOARD PACK</div>
+  <h1>Fleet Telematics · Utilization, activity &amp; trip economics</h1>
+  <div class="sub">How hard the fleet is working, when it works, and where utilization leaks out.</div>
+  <div class="illus">ILLUSTRATIVE · SAMPLE DATA</div>
+</header>
 
 <div class="tabstrip" role="tablist">
   <button class="tab active" data-tab="t1" role="tab" aria-selected="true" aria-controls="pane-t1">
@@ -373,11 +381,11 @@ footer.ncc strong{color:var(--slate)}
 
   <div class="grid2-eq">
     <div class="panel">
-      <div class="ptitle">MILES PER TRUCK PER WEEK · 52-WEEK ROLLING</div>
+      <div class="ptitle">MILES PER TRUCK PER WEEK</div>
       <div class="chart-wrap"><canvas id="t3WeeklyMiles"></canvas></div>
     </div>
     <div class="panel">
-      <div class="ptitle">DAILY TRIP COUNT · FLEET 365-DAY VIEW</div>
+      <div class="ptitle">DAILY TRIPS · FLEET</div>
       <div class="chart-wrap"><canvas id="t3DailyTrips"></canvas></div>
     </div>
   </div>
@@ -457,6 +465,7 @@ footer.ncc strong{color:var(--slate)}
 </footer>
 
 </div><!-- /page -->
+</div><!-- /layout -->
 <script>
 Chart.register(ChartDataLabels);
 
@@ -482,6 +491,42 @@ function fmtPct(n){ return n.toFixed(1) + '%'; }
 function filteredTrucks(){
   if (state.vehicle === 'all') return TELEMATICS.truckMetrics;
   return TELEMATICS.truckMetrics.filter(t => t.id === state.vehicle);
+}
+
+// Aggregate monthlyByTruck by selected period + vehicle + day-type.
+// Used by Tab 1 per-truck charts (util-by-truck, active-hours-by-truck, table) which
+// previously read TTM truckMetrics and ignored filters. The day-type factor scales
+// miles/trips/hours uniformly; util is recomputed from the scaled activeHours.
+const WD_PER_MONTH = {'Jun-25':21,'Jul-25':23,'Aug-25':21,'Sep-25':22,'Oct-25':23,'Nov-25':20,'Dec-25':23,'Jan-26':22,'Feb-26':20,'Mar-26':22,'Apr-26':22,'May-26':21};
+function filteredTruckAggregates(){
+  const months = state.selectedMonths;
+  const truckIds = state.vehicle === 'all'
+    ? TELEMATICS.truckMetrics.map(t => t.id)
+    : [state.vehicle];
+  const f = state.dayType === 'all' ? 1 : getDayTypeFactor();
+  const wdCount = months.reduce((s,m) => s + (WD_PER_MONTH[m] || 21), 0);
+
+  return truckIds.map(id => {
+    const tm = TELEMATICS.truckMetrics.find(x => x.id === id);
+    const rows = TELEMATICS.monthlyByTruck.filter(d => d.id === id && months.includes(d.month));
+    const miles       = rows.reduce((s,r) => s + r.miles, 0);
+    const trips       = rows.reduce((s,r) => s + r.trips, 0);
+    const activeHours = rows.reduce((s,r) => s + r.activeHours, 0);
+    const totalHours  = rows.reduce((s,r) => s + r.totalHours, 0);
+    const activeHoursF = activeHours * f;
+    const totalHoursF  = totalHours  * f;
+    return {
+      id: tm.id,
+      personality: tm.personality,
+      miles:       miles * f,
+      trips:       trips * f,
+      activeHours: activeHoursF,
+      totalHours:  totalHoursF,
+      activeUtil: wdCount > 0 ? (activeHoursF / (wdCount * 24)) * 100 : 0,
+      totalUtil:  wdCount > 0 ? (totalHoursF  / (wdCount * 24)) * 100 : 0,
+      avgTripMi:  trips > 0 ? miles / trips : 0
+    };
+  });
 }
 
 // Get monthly data filtered by vehicle and period
@@ -648,7 +693,7 @@ function updateKPIs(){
 function renderTruckTable(){
   const tbody = document.querySelector('#t1TruckTable tbody');
   tbody.innerHTML = '';
-  const trucks = filteredTrucks();
+  const trucks = filteredTruckAggregates();
   trucks.forEach(t => {
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -705,7 +750,10 @@ function renderMilesTrend(){
 }
 
 function renderUtilByTruck(){
-  const trucks = filteredTrucks();
+  const trucks = filteredTruckAggregates();
+  // Fleet-avg gross util for the selected period (single-truck view recomputes from hours)
+  const monthly = filteredMonthly();
+  const fleetAvg = monthly.length > 0 ? monthly.reduce((s,d) => s + d.activeUtil, 0) / monthly.length : 0;
   const ctx = document.getElementById('t1UtilByTruck').getContext('2d');
   if (charts.utilByTruck) charts.utilByTruck.destroy();
   charts.utilByTruck = new Chart(ctx, {
@@ -722,8 +770,8 @@ function renderUtilByTruck(){
         },
         {
           type: 'line',
-          label: 'fleet avg (17.1%)',
-          data: trucks.map(() => 17.1),
+          label: 'fleet avg (' + (fleetAvg.toFixed(1)) + '%)',
+          data: trucks.map(() => fleetAvg),
           borderColor: '#C9A227',
           backgroundColor: '#C9A227',
           borderDash: [6, 4],
@@ -785,7 +833,7 @@ function renderT1UtilTrend(){
 }
 
 function renderT1ActiveHoursByTruck(){
-  const trucks = filteredTrucks();
+  const trucks = filteredTruckAggregates();
   const sorted = [...trucks].sort((a,b) => b.activeHours - a.activeHours);
   const ctx = document.getElementById('t1ActiveHoursByTruck').getContext('2d');
   if (charts.t1ActiveHoursByTruck) charts.t1ActiveHoursByTruck.destroy();
@@ -828,21 +876,32 @@ function renderDriveIdle(){
 }
 
 function renderWeekdayWeekend(){
-  const trucks = filteredTrucks();
+  const trucks = filteredTrucks(); // IDs only; weekdayWeekend data is TTM, scaled by period
   const ctx = document.getElementById('t2WeekdayWeekend').getContext('2d');
   if (charts.weekdayWeekend) charts.weekdayWeekend.destroy();
-  // Use real weekday/weekend data from RDS
   const wwMap = {};
   TELEMATICS.weekdayWeekend.forEach(w => wwMap[w.id] = w);
+  // weekdayWeekend is TTM (12 months); scale linearly for partial periods.
+  // Approximation only — no per-truck per-month day-type split exists in the data.
+  const periodScale = state.selectedMonths.length / 12;
+  const datasets = [];
+  if (state.dayType === 'all' || state.dayType === 'weekday'){
+    datasets.push({
+      label: 'Weekday',
+      data: trucks.map(t => wwMap[t.id] ? wwMap[t.id].weekday * periodScale : 0),
+      backgroundColor: '#1E2761'
+    });
+  }
+  if (state.dayType === 'all' || state.dayType === 'weekend'){
+    datasets.push({
+      label: 'Weekend',
+      data: trucks.map(t => wwMap[t.id] ? wwMap[t.id].weekend * periodScale : 0),
+      backgroundColor: '#94A3B8'
+    });
+  }
   charts.weekdayWeekend = new Chart(ctx, {
     type: 'bar',
-    data: {
-      labels: trucks.map(t => t.id),
-      datasets: [
-        { label: 'Weekday', data: trucks.map(t => wwMap[t.id] ? wwMap[t.id].weekday : 0), backgroundColor: '#1E2761' },
-        { label: 'Weekend', data: trucks.map(t => wwMap[t.id] ? wwMap[t.id].weekend : 0), backgroundColor: '#94A3B8' }
-      ]
-    },
+    data: { labels: trucks.map(t => t.id), datasets: datasets },
     options: {
       ...commonChartOptions(),
       indexAxis: 'y',
@@ -853,12 +912,30 @@ function renderWeekdayWeekend(){
 
 function renderHeatmap(){
   const ctx = document.getElementById('t2Heatmap').getContext('2d');
-  const weekdays = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const allWeekdays = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const allColors   = ['#1E2761','#475569','#64748B','#94A3B8','#CBD5E1','#E2E8F0','#F1F5F9'];
+
+  // Day-type filter: choose which weekdays to show
+  let weekdays, colors;
+  if (state.dayType === 'weekday'){
+    weekdays = allWeekdays.slice(0, 5); // Mon–Fri
+    colors   = allColors.slice(0, 5);
+  } else if (state.dayType === 'weekend'){
+    weekdays = allWeekdays.slice(5);    // Sat–Sun
+    colors   = allColors.slice(5);
+  } else {
+    weekdays = allWeekdays;
+    colors   = allColors;
+  }
+
   const hours = Array.from({length:24},(_,i)=>i);
   const matrix = weekdays.map(wd => hours.map(h => {
     const cell = TELEMATICS.hourlyHeatmap.find(c => c.weekday === wd && c.hour === h);
     return cell ? cell.value : 0;
   }));
+
+  // hourlyHeatmap is a weekly pattern; scale by period length to reflect the selected range.
+  const periodScale = state.selectedMonths.length / 12;
 
   if (charts.heatmap) charts.heatmap.destroy();
   charts.heatmap = new Chart(ctx, {
@@ -867,8 +944,8 @@ function renderHeatmap(){
       labels: hours.map(h => h + ':00'),
       datasets: weekdays.map((wd, i) => ({
         label: wd,
-        data: matrix[i],
-        backgroundColor: ['#1E2761','#475569','#64748B','#94A3B8','#CBD5E1','#E2E8F0','#F1F5F9'][i]
+        data: matrix[i].map(v => v * periodScale),
+        backgroundColor: colors[i]
       }))
     },
     options: {
@@ -1069,16 +1146,37 @@ function renderT3WeeklyMiles(){
 function renderT3DailyTrips(){
   const ctx = document.getElementById('t3DailyTrips').getContext('2d');
   const { start, end } = _periodDays();
-  const sliceData = TELEMATICS.dailyTrips.slice(start, end);
+  const slice = TELEMATICS.dailyTrips.slice(start, end);
+
+  // Filter by day-type: keep only days matching the filter (Jun 1 2025 = Sunday → dow 0..6).
+  let data, dayIdx;
+  if (state.dayType === 'all'){
+    data = slice;
+    dayIdx = slice.map((_, i) => start + i);
+  } else {
+    const isWkndDay = (idx) => { const dow = idx % 7; return dow === 0 || dow === 6; };
+    const matches = state.dayType === 'weekend' ? isWkndDay : (idx => !isWkndDay(idx));
+    data = [];
+    dayIdx = [];
+    for (let i = 0; i < slice.length; i++){
+      const absIdx = start + i;
+      if (matches(absIdx)){
+        data.push(slice[i]);
+        dayIdx.push(absIdx);
+      }
+    }
+  }
+
+  // 7-day rolling average over the filtered series
   const rolling = [];
-  for (let i = 0; i < sliceData.length; i++){
+  for (let i = 0; i < data.length; i++){
     const wStart = Math.max(0, i - 6);
-    const window = sliceData.slice(wStart, i + 1);
+    const window = data.slice(wStart, i + 1);
     rolling.push(window.reduce((a,b) => a+b, 0) / window.length);
   }
-  // Build sparse x labels: month name at first day of each month
-  const labels = sliceData.map((_, i) => {
-    const day = start + i;
+  // Build sparse x labels: month name at first day of each month (uses absolute day index)
+  const labels = data.map((_, i) => {
+    const day = dayIdx[i];
     let offset = 0;
     for (const m of _allMonthsList){
       if (day === offset) return m.slice(0, 3);
@@ -1094,7 +1192,7 @@ function renderT3DailyTrips(){
       datasets: [
         {
           label: 'Daily trips',
-          data: sliceData,
+          data: data,
           borderColor: '#1E2761',
           backgroundColor: 'rgba(30,39,97,0.08)',
           borderWidth: 1,
