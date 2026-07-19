@@ -19,95 +19,146 @@
   --purple:#4A5E8A; --purple-lite:#94A3B8;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg)}
+html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg);font-variant-numeric:tabular-nums;line-height:1.5}
 .layout{display:grid;grid-template-columns:300px 1fr;align-items:start;max-width:1640px;margin:0 auto;background:var(--white);min-height:100vh;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
 .sidebar{position:sticky;top:0;align-self:start;height:100vh;background:var(--white);border-right:1px solid var(--border);padding:28px 24px;overflow-y:auto}
-.sidebar-section-title{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.sidebar-section-title{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.16em;text-transform:uppercase;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .sidebar-filter{margin-bottom:22px}
-.sidebar-filter label{display:block;font-size:11px;font-weight:700;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
-.sidebar-filter select{font-family:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);width:100%;min-width:0}
+.sidebar-filter label{display:block;font-size:11.5px;font-weight:700;color:var(--slate);letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}
+.sidebar-filter select{font-family:inherit;font-size:13.5px;padding:8px 10px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);width:100%;min-width:0}
 .sidebar-footer{margin-top:32px;padding-top:20px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px}
-.sidebar-footer a{font-size:12px;color:var(--navy);font-weight:700;text-decoration:none;letter-spacing:.02em}
+.sidebar-footer a{font-size:12.5px;color:var(--navy);font-weight:700;text-decoration:none;letter-spacing:.02em}
 .sidebar-footer a:hover{text-decoration:underline}
+
+/* Sidebar DATA section */
+.sidebar-data-source{font-size:12px;color:var(--navy-ink);line-height:1.5;margin-bottom:12px}
+.sidebar-data-source code{font-family:Calibri,"Segoe UI",monospace;font-weight:700;font-size:13px;color:var(--navy);background:var(--mist);padding:2px 6px}
+.sidebar-data-source .muted{color:var(--slate-lite);font-size:11.5px}
+.sidebar-data-tables{list-style:none;padding:0;margin:0 0 14px}
+.sidebar-data-tables li{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border);font-size:12.5px;color:var(--navy-ink)}
+.sidebar-data-tables li:last-child{border-bottom:none}
+.sidebar-data-tables li span{font-weight:600}
+.sidebar-data-tables li b{font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+.sidebar-data-btn{display:block;width:100%;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--white);background:var(--navy);border:none;padding:9px 12px;cursor:pointer;transition:background .15s}
+.sidebar-data-btn:hover{background:var(--navy-deep)}
+
+/* Data modal */
+.data-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center}
+.data-modal[hidden]{display:none}
+.data-modal-backdrop{position:absolute;inset:0;background:rgba(15,23,42,.55)}
+.data-modal-panel{position:relative;background:var(--white);width:min(960px,92vw);max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(15,23,42,.4)}
+.data-modal-head{display:flex;justify-content:space-between;align-items:flex-start;padding:22px 26px 18px;border-bottom:1px solid var(--border);gap:18px}
+.data-modal-eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--navy);text-transform:uppercase;margin-bottom:6px}
+.data-modal-head h2{margin:0;font-size:20px;font-weight:700;color:var(--navy-ink);letter-spacing:-.01em}
+.data-modal-sub{font-size:13px;color:var(--slate);margin-top:6px;line-height:1.4;max-width:680px}
+.data-modal-close{background:transparent;border:1px solid var(--border);width:32px;height:32px;font-size:22px;line-height:1;color:var(--slate);cursor:pointer;flex-shrink:0;font-family:inherit}
+.data-modal-close:hover{background:var(--mist);color:var(--navy)}
+.data-modal-body{flex:1;overflow:hidden;display:flex;min-height:0}
+.data-modal-nav{width:230px;flex-shrink:0;background:var(--bg);border-right:1px solid var(--border);padding:14px 12px;overflow-y:auto}
+.data-modal-nav-item{display:block;width:100%;text-align:left;font-family:inherit;background:transparent;border:1px solid transparent;border-left:3px solid transparent;padding:9px 11px;margin-bottom:4px;cursor:pointer;color:var(--navy-ink);font-size:12.5px;line-height:1.35;transition:background .12s,border-color .12s}
+.data-modal-nav-item:hover{background:var(--white);border-color:var(--border)}
+.data-modal-nav-item.active{background:var(--white);border-color:var(--border);border-left-color:var(--gold)}
+.data-modal-nav-label{display:block;font-weight:700;font-size:13px;color:var(--navy)}
+.data-modal-nav-meta{display:block;font-size:11px;color:var(--slate);font-variant-numeric:tabular-nums;margin-top:2px;letter-spacing:.02em}
+.data-modal-nav-desc{display:block;font-size:11.5px;color:var(--slate);margin-top:3px;line-height:1.35}
+.data-modal-content{flex:1;overflow:auto;padding:18px 22px}
+.data-modal-table{font-size:12.5px}
 .page{background:var(--white);min-height:100vh}
-header.ncc{background:var(--navy-deep);color:var(--white);padding:18px 32px 14px;position:relative}
+header.ncc{background:var(--navy-deep);color:var(--white);padding:22px 32px 16px;position:relative}
 header.ncc::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--gold)}
-header.ncc .brand{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--gold-lite)}
-header.ncc h1{margin:6px 0 2px;font-size:26px;font-weight:700}
-header.ncc .sub{font-size:13px;color:#cfd8dc;margin-top:2px}
-header.ncc .illus{position:absolute;top:18px;right:32px;background:var(--gold);color:var(--navy-deep);font-weight:700;font-size:11px;letter-spacing:.18em;padding:6px 12px;border-radius:2px}
+header.ncc .brand{font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--gold-lite)}
+header.ncc h1{margin:8px 0 4px;font-size:28px;font-weight:700;letter-spacing:-.01em}
+header.ncc .sub{font-size:14px;color:#cfd8dc;margin-top:4px}
+header.ncc .illus{position:absolute;top:22px;right:32px;background:var(--gold);color:var(--navy-deep);font-weight:700;font-size:11px;letter-spacing:.18em;padding:6px 12px;border-radius:2px}
 
 /* Period slider — dual-thumb range over the 12 months */
-.period-slider{background:var(--white);border:1px solid var(--border);padding:12px 16px 14px;font-family:inherit;width:100%;box-shadow:0 1px 2px rgba(15,23,42,.04)}
-.period-slider-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.period-slider-meta{font-size:12px;font-weight:700;color:var(--navy-ink);letter-spacing:.02em}
-.period-slider-actions a{font-size:11px;color:var(--navy);font-weight:700;letter-spacing:.04em;text-decoration:none;cursor:pointer}
+.period-slider{background:var(--white);border:1px solid var(--border);padding:14px 18px 16px;font-family:inherit;width:100%;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.period-slider-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.period-slider-meta{font-size:13px;font-weight:700;color:var(--navy-ink);letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.period-slider-actions a{font-size:11.5px;color:var(--navy);font-weight:700;letter-spacing:.04em;text-decoration:none;cursor:pointer}
 .period-slider-actions a:hover{text-decoration:underline}
-.period-slider-track{position:relative;height:6px;background:var(--mist);border-radius:3px;margin:18px 10px 6px;cursor:pointer}
+.period-slider-track{position:relative;height:6px;background:var(--mist);border-radius:3px;margin:20px 10px 8px;cursor:pointer}
 .period-slider-fill{position:absolute;top:0;bottom:0;background:var(--navy);border-radius:3px;pointer-events:none}
 .period-slider-thumb{position:absolute;top:50%;width:18px;height:18px;background:var(--white);border:2px solid var(--navy);border-radius:50%;transform:translate(-50%,-50%);cursor:grab;box-shadow:0 1px 3px rgba(15,23,42,.22);z-index:2}
 .period-slider-thumb:hover{border-color:var(--navy-deep);box-shadow:0 1px 4px rgba(15,23,42,.3)}
 .period-slider-thumb:active{cursor:grabbing}
-.period-slider-ticks{display:flex;justify-content:space-between;padding:8px 6px 0;font-size:9.5px;color:var(--slate-lite);font-weight:600;letter-spacing:.02em;user-select:none}
+.period-slider-ticks{display:flex;justify-content:space-between;padding:10px 6px 0;font-size:10.5px;color:var(--slate-lite);font-weight:600;letter-spacing:.02em;user-select:none}
 .period-slider-ticks span{flex:1;text-align:center;white-space:nowrap}
 .period-slider-ticks span:first-child{text-align:left}
 .period-slider-ticks span:last-child{text-align:right}
 
 /* Dual-section tile (top + bottom stat in one card) */
 .dual-top,.dual-bot{padding:2px 0}
-.dual-top{border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:10px}
-.dual-label{font-size:10px;color:var(--slate);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.dual-big{font-size:22px;font-weight:700;color:var(--navy-ink);margin-top:4px;line-height:1}
-.dual-unit{font-size:10px;color:var(--slate-lite);margin-top:3px}
-.tabstrip{display:flex;gap:0;padding:0 32px;background:var(--white);border-bottom:1px solid var(--border)}
-.tab{flex:1;background:#F1F5F9;color:var(--slate);border:none;border-right:1px solid var(--border);padding:14px 18px 12px;text-align:left;cursor:pointer;font-family:inherit;position:relative;transition:background .15s,color .15s}
+.dual-top{border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:12px}
+.dual-label{font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.dual-big{font-size:24px;font-weight:700;color:var(--navy-ink);margin-top:6px;line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
+.dual-unit{font-size:11px;color:var(--slate);margin-top:4px}
+.tabstrip{display:flex;gap:0;padding:0 32px;background:var(--white);border-bottom:1px solid var(--border);position:relative}
+.tabstrip::after{content:"";position:absolute;left:32px;right:32px;bottom:-1px;height:2px;background:var(--gold);opacity:.85}
+.tab{flex:1;background:#F1F5F9;color:var(--slate);border:none;border-right:1px solid var(--border);padding:16px 20px 14px;text-align:left;cursor:pointer;font-family:inherit;position:relative;transition:background .15s,color .15s}
 .tab:last-child{border-right:none}
 .tab:hover{background:#E2E8F0}
-.tab .tab-title{font-size:14px;font-weight:700;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
-.tab .tab-sub{font-size:11px;color:inherit;opacity:.75;margin-top:3px;font-weight:400}
-.tab .dots{font-size:12px;letter-spacing:.08em;color:var(--gold);font-weight:700}
+.tab .tab-title{font-size:15px;font-weight:700;letter-spacing:.01em;display:flex;align-items:center;gap:10px}
+.tab .tab-sub{font-size:12.5px;color:inherit;opacity:.75;margin-top:4px;font-weight:400;line-height:1.4}
+.tab .dots{font-size:13px;letter-spacing:.08em;color:var(--gold);font-weight:700}
 .tab.active{background:var(--navy);color:var(--white)}
 .tab.active .tab-sub{opacity:.85;color:#cfd8dc}
 .tab.active .dots{color:var(--gold-lite)}
 .tab.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--gold)}
 .tabpane{display:none;padding-bottom:24px}
 .tabpane.active{display:block}
-.tabhdr{display:flex;justify-content:space-between;align-items:center;padding:14px 32px 0}
-.tabhdr .lead{font-size:11px;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;font-weight:700}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px 32px 18px;background:var(--bg)}
+.tabhdr{display:flex;justify-content:space-between;align-items:center;padding:16px 32px 0}
+.tabhdr .lead{font-size:11.5px;color:var(--slate);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:16px 32px 22px;background:var(--bg)}
 .tiles.tiles-5{grid-template-columns:repeat(5,1fr)}
-.tile{background:var(--white);border:1px solid var(--border);position:relative;padding:14px 16px 16px;min-height:150px}
+.tile{background:var(--white);border:1px solid var(--border);position:relative;padding:16px 18px 18px;min-height:158px}
 .tile::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--navy))}
-.tile .tag{font-size:10px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.12em}
-.tile .label{font-size:13px;font-weight:700;color:var(--navy-ink);margin-top:6px}
-.tile .big{font-size:30px;font-weight:700;color:var(--big,var(--navy-ink));margin-top:10px;line-height:1}
-.tile .unit{font-size:11px;color:var(--slate);margin-top:6px}
+.tile .tag{font-size:10.5px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.16em}
+.tile .label{font-size:14.5px;font-weight:700;color:var(--navy-ink);margin-top:8px;line-height:1.25}
+.tile .big{font-size:34px;font-weight:700;color:var(--big,var(--navy-ink));margin-top:12px;line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
+.tile .unit{font-size:12.5px;color:var(--slate);margin-top:8px;line-height:1.4}
 .tile .bullets{font-size:11px;color:var(--slate);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.6}
 .tile .bullets div::before{content:"\2022 ";color:var(--gold)}
-.panel{margin:0 32px 18px;background:var(--white);border:1px solid var(--border);padding:18px 22px}
-.panel .ptitle{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-.panel h2{margin:0;font-size:16px;font-weight:700;color:var(--navy-ink)}
-.panel .chart-wrap{position:relative;height:340px;margin-top:12px}
+.panel{margin:0 32px 18px;background:var(--white);border:1px solid var(--border);padding:20px 24px 22px}
+.panel .ptitle{font-size:11.5px;font-weight:700;color:var(--navy);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.panel h2{margin:0;font-size:17px;font-weight:700;color:var(--navy-ink)}
+.panel .chart-wrap{position:relative;height:340px;margin-top:14px}
 .grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;padding:0 32px 18px}
 .grid2-eq{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 32px 18px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 32px 18px}
-table.ncc{width:100%;border-collapse:collapse;font-size:12px}
-table.ncc th{text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);padding:8px 10px;border-bottom:2px solid var(--navy)}
-table.ncc td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--navy-ink)}
+table.ncc{width:100%;border-collapse:collapse;font-size:13px}
+table.ncc th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);padding:10px 12px;border-bottom:2px solid var(--navy)}
+table.ncc td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--navy-ink)}
 table.ncc tr:hover td{background:var(--mist)}
+/* Truck-level table: drill-down + total */
+table.ncc tr.drill-row{cursor:pointer;transition:background .12s}
+table.ncc tr.drill-row td:first-child{position:relative}
+.chevron{display:inline-block;margin-left:8px;font-size:10px;color:var(--slate);transition:transform .15s;vertical-align:middle}
+tr.drill-row.open .chevron{transform:rotate(90deg);color:var(--navy)}
+tr.drill-row.open td{background:var(--mist)}
+tr.drill-detail td{background:var(--white);padding:14px 18px 18px;border-bottom:2px solid var(--navy)}
+.drill-content{display:grid;grid-template-columns:1fr;gap:10px}
+.drill-content-head{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy)}
+.drill-content-head b{font-size:13px;color:var(--navy-ink);letter-spacing:0;text-transform:none;font-weight:700}
+.drill-content table{width:100%;border-collapse:collapse;font-size:12px;background:var(--white);border:1px solid var(--border)}
+.drill-content th{text-align:left;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);padding:7px 10px;background:var(--bg);border-bottom:1px solid var(--border)}
+.drill-content td{padding:6px 10px;border-bottom:1px solid var(--border);color:var(--navy-ink);font-variant-numeric:tabular-nums}
+.drill-content tr:last-child td{border-bottom:none}
+tr.total-row td{background:var(--navy);color:var(--white);font-weight:700;border-bottom:none}
+tr.total-row td:first-child{letter-spacing:.1em;text-transform:uppercase;font-size:11px;padding-top:12px;padding-bottom:12px}
 .pos{color:var(--green);font-weight:700}
 .neg{color:var(--red);font-weight:700}
 .muted{color:var(--slate-lite)}
-.chip-g{display:inline-block;background:var(--green-bg);color:#14532D;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
-.chip-y{display:inline-block;background:var(--amber-bg);color:#78350F;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
-.chip-r{display:inline-block;background:var(--red-bg);color:#7F1D1D;font-weight:700;font-size:11px;padding:2px 8px;border-radius:2px}
-footer.ncc{background:var(--white);border-top:1px solid var(--border);padding:14px 32px 18px;font-size:11px;color:var(--slate-lite);display:flex;justify-content:space-between;align-items:center}
+.chip-g{display:inline-block;background:var(--green-bg);color:#14532D;font-weight:700;font-size:11.5px;padding:3px 9px;border-radius:2px}
+.chip-y{display:inline-block;background:var(--amber-bg);color:#78350F;font-weight:700;font-size:11.5px;padding:3px 9px;border-radius:2px}
+.chip-r{display:inline-block;background:var(--red-bg);color:#7F1D1D;font-weight:700;font-size:11.5px;padding:3px 9px;border-radius:2px}
+footer.ncc{background:var(--white);border-top:1px solid var(--border);padding:16px 32px 20px;font-size:12px;color:var(--slate-lite);display:flex;justify-content:space-between;align-items:center}
 footer.ncc .left{display:flex;gap:18px;align-items:center}
 footer.ncc strong{color:var(--slate)}
 .gold-rule{height:2px;background:var(--gold);margin:0 32px 18px;width:48px}
-.section-title{padding:6px 32px 0;font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase}
-.section-sub{padding:2px 32px 14px;font-size:13px;color:var(--slate)}
-.note{margin:0 32px 18px;background:var(--mist);border-left:3px solid var(--gold);padding:10px 14px;font-size:12px;color:var(--navy-ink)}
+.section-title{padding:6px 32px 0;font-size:11.5px;font-weight:700;color:var(--navy);letter-spacing:.14em;text-transform:uppercase}
+.section-sub{padding:2px 32px 14px;font-size:13.5px;color:var(--slate)}
+.note{margin:0 32px 18px;background:var(--mist);border-left:3px solid var(--gold);padding:11px 14px;font-size:12.5px;color:var(--navy-ink)}
 .note strong{color:var(--navy)}
 .callout{margin:0 32px 24px;background:#FFFBEB;border:1px solid var(--gold);border-left:4px solid var(--gold);padding:14px 18px;font-size:13px;color:var(--navy-ink);line-height:1.55}
 .callout .ctitle{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
@@ -158,6 +209,24 @@ footer.ncc strong{color:var(--slate)}
     </select>
   </div>
 
+  <div class="sidebar-section" style="margin-top:28px">
+    <div class="sidebar-section-title">Data</div>
+    <div class="sidebar-data">
+      <div class="sidebar-data-source">
+        <code>telematics_demo</code><br>
+        <span class="muted">RDS Postgres 16.14</span>
+      </div>
+      <ul class="sidebar-data-tables">
+        <li><span>gps_pings</span><b>720,970</b></li>
+        <li><span>trips</span><b>61,346</b></li>
+        <li><span>daily_summary</span><b>2,001</b></li>
+        <li><span>hourly_pattern</span><b>144</b></li>
+        <li><span>trucks · depot</span><b>8 · 1</b></li>
+      </ul>
+      <button class="sidebar-data-btn" id="dataDrawerBtn" type="button">View underlying records →</button>
+    </div>
+  </div>
+
   <div class="sidebar-footer">
     <a href="https://main.d2pzfdprrzy6zu.amplifyapp.com/" target="_blank" rel="noopener">Live dashboard ↗</a>
     <a href="https://northcastleconsulting.com/sample-dashboards/">All sample dashboards</a>
@@ -174,7 +243,7 @@ footer.ncc strong{color:var(--slate)}
 
 <div class="tabstrip" role="tablist">
   <button class="tab active" data-tab="t1" role="tab" aria-selected="true" aria-controls="pane-t1">
-    <div class="tab-title">Fleet summary <span class="dots">&#9679;&#9675;&#9675;&#9675;</span></div>
+    <div class="tab-title">Fleet summary <span class="dots">&#9679;&#9675;&#9675;</span></div>
     <div class="tab-sub">Miles, trips &amp; utilization by truck</div>
   </button>
   <button class="tab" data-tab="t2" role="tab" aria-selected="false" aria-controls="pane-t2">
@@ -182,12 +251,8 @@ footer.ncc strong{color:var(--slate)}
     <div class="tab-sub">When the fleet works &amp; how time is spent</div>
   </button>
   <button class="tab" data-tab="t3" role="tab" aria-selected="false" aria-controls="pane-t3">
-    <div class="tab-title">Trip economics <span class="dots">&#9679;&#9679;&#9679;&#9675;</span></div>
+    <div class="tab-title">Trip economics <span class="dots">&#9679;&#9679;&#9679;</span></div>
     <div class="tab-sub">Duration, distance &amp; daily cadence</div>
-  </button>
-  <button class="tab" data-tab="t4" role="tab" aria-selected="false" aria-controls="pane-t4">
-    <div class="tab-title">Data audit <span class="dots">&#9679;&#9679;&#9679;&#9679;</span></div>
-    <div class="tab-sub">Source, schema &amp; live dashboard</div>
   </button>
 </div>
 
@@ -246,7 +311,7 @@ footer.ncc strong{color:var(--slate)}
       <div class="chart-wrap"><canvas id="t1MilesTrend"></canvas></div>
     </div>
     <div class="panel">
-      <div class="ptitle">GROSS UTILIZATION BY TRUCK</div>
+      <div class="ptitle" id="t1UtilByTruckTitle">GROSS UTILIZATION BY TRUCK</div>
       <div class="chart-wrap"><canvas id="t1UtilByTruck"></canvas></div>
     </div>
   </div>
@@ -390,68 +455,6 @@ footer.ncc strong{color:var(--slate)}
     </div>
   </div>
 
-</div>
-
-<!-- ================= TAB 4: DATA AUDIT ================= -->
-<div class="tabpane" id="pane-t4" role="tabpanel" aria-labelledby="tab-t4">
-  <div class="tabhdr">
-    <div class="lead">Data audit · Source, schema &amp; live dashboard</div>
-  </div>
-
-  <div class="note">
-    <strong>Data source.</strong> This dashboard is built on the <code>telematics_demo</code> PostgreSQL database hosted in AWS RDS. The schema has 6 tables across 4 layers: raw GPS pings → trips → daily_summary → hourly_pattern, plus static depot and trucks tables.
-  </div>
-
-  <div class="grid2">
-    <div class="panel">
-      <div class="ptitle">LIVE INTERACTIVE DASHBOARD</div>
-      <h2>Query the real dataset</h2>
-      <p style="font-size:13px;color:var(--slate);line-height:1.6;margin-top:8px">
-        A live Next.js dashboard queries the RDS database directly, with filters for date range, vehicle, personality, and day type.
-      </p>
-      <div style="margin-top:14px">
-        <a href="https://main.d2pzfdprrzy6zu.amplifyapp.com/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:var(--white);font-weight:700;font-size:13px;padding:10px 16px;border-radius:4px;text-decoration:none">
-          Open live dashboard →
-        </a>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="ptitle">DATABASE CONNECTION</div>
-      <table class="ncc">
-        <tbody>
-          <tr><td><strong>Host</strong></td><td>telematics-demo-db.cv20ayo6ag7n.us-east-2.rds.amazonaws.com</td></tr>
-          <tr><td><strong>Port / DB</strong></td><td>5432 / telematics_demo</td></tr>
-          <tr><td><strong>Engine</strong></td><td>PostgreSQL 16.14</td></tr>
-          <tr><td><strong>Read-only user</strong></td><td>sigma_reader</td></tr>
-          <tr><td><strong>Rows</strong></td><td>720,970 pings · 61,346 trips · 2,001 daily rows</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="ptitle">DATA READINESS SCORECARD · TELEMATICS ANALYSIS</div>
-    <table class="ncc" id="t3AuditTable">
-      <thead><tr>
-        <th>Data input</th>
-        <th>Used in</th>
-        <th>Have it?</th>
-        <th>Right format?</th>
-        <th>Clean?</th>
-      </tr></thead><tbody></tbody>
-    </table>
-  </div>
-
-  <div class="panel">
-    <div class="ptitle">SCHEMA SUMMARY · 6 TABLES, 4 LAYERS</div>
-    <div style="font-size:13px;color:var(--slate);line-height:1.7">
-      <strong>Level 1 — gps_pings (720,970 rows):</strong> raw GPS samples; source of truth for location, speed, status, odometer.<br>
-      <strong>Level 2 — trips (61,346 rows):</strong> one row per delivery; derived from Movement Started → Movement Started boundaries.<br>
-      <strong>Level 3 — daily_summary (2,001 rows):</strong> one row per vehicle per active day; trips, miles, active/idle hours, utilization.<br>
-      <strong>Level 4 — hourly_pattern (144 cells):</strong> fleet drive hours by weekday × hour for heatmaps.<br>
-      <strong>Static — trucks (8 rows) &amp; depot (1 row):</strong> vehicle metadata and home base.
-    </div>
-  </div>
 </div>
 
 <footer class="ncc">
@@ -694,10 +697,13 @@ function renderTruckTable(){
   const tbody = document.querySelector('#t1TruckTable tbody');
   tbody.innerHTML = '';
   const trucks = filteredTruckAggregates();
+
   trucks.forEach(t => {
     const row = document.createElement('tr');
+    row.classList.add('drill-row');
+    row.dataset.truckId = t.id;
     row.innerHTML = `
-      <td><strong>${t.id}</strong></td>
+      <td><strong>${t.id}</strong><span class="chevron">▸</span></td>
       <td>${t.personality.replace(/_/g,' ')}</td>
       <td style="text-align:right">${fmtPct(t.activeUtil)}</td>
       <td style="text-align:right">${fmtPct(t.totalUtil)}</td>
@@ -706,8 +712,97 @@ function renderTruckTable(){
       <td style="text-align:right">${fmtNum(t.activeHours)}</td>
       <td style="text-align:right">${t.avgTripMi.toFixed(1)}</td>
     `;
+    row.addEventListener('click', () => toggleTruckDrillDown(t.id, row));
     tbody.appendChild(row);
   });
+
+  // TOTAL row — only when viewing all vehicles (otherwise it's just the one truck)
+  if (state.vehicle === 'all' && trucks.length > 1){
+    const totalMiles = trucks.reduce((s,t) => s + t.miles, 0);
+    const totalTrips = trucks.reduce((s,t) => s + t.trips, 0);
+    const totalActHrs = trucks.reduce((s,t) => s + t.activeHours, 0);
+    const totalTotHrs = trucks.reduce((s,t) => s + t.totalHours, 0);
+    const wdCount = state.selectedMonths.reduce((s,m) => s + (WD_PER_MONTH[m] || 21), 0);
+    const avgActiveUtil = wdCount > 0 ? (totalActHrs / (wdCount * 24)) * 100 : 0;
+    const avgTotalUtil  = wdCount > 0 ? (totalTotHrs / (wdCount * 24)) * 100 : 0;
+    const avgTripMi = totalTrips > 0 ? totalMiles / totalTrips : 0;
+    const totalRow = document.createElement('tr');
+    totalRow.classList.add('total-row');
+    totalRow.innerHTML = `
+      <td>FLEET TOTAL · ${trucks.length} TRUCKS</td>
+      <td>${periodLabel()}</td>
+      <td style="text-align:right">${fmtPct(avgActiveUtil)}</td>
+      <td style="text-align:right">${fmtPct(avgTotalUtil)}</td>
+      <td style="text-align:right">${fmtK(totalMiles)}</td>
+      <td style="text-align:right">${fmtNum(totalTrips)}</td>
+      <td style="text-align:right">${fmtNum(totalActHrs)}</td>
+      <td style="text-align:right">${avgTripMi.toFixed(1)}</td>
+    `;
+    tbody.appendChild(totalRow);
+  }
+}
+
+function toggleTruckDrillDown(truckId, row){
+  // Close any other open drill-downs (single-expand accordion)
+  document.querySelectorAll('tr.drill-row.open').forEach(r => {
+    if (r !== row) {
+      r.classList.remove('open');
+      const next = r.nextElementSibling;
+      if (next && next.classList.contains('drill-detail')) next.remove();
+    }
+  });
+
+  const existing = row.nextElementSibling;
+  if (existing && existing.classList.contains('drill-detail')){
+    existing.remove();
+    row.classList.remove('open');
+    return;
+  }
+  row.classList.add('open');
+
+  const months = state.selectedMonths;
+  const rows = TELEMATICS.monthlyByTruck
+    .filter(d => d.id === truckId && months.includes(d.month))
+    .sort((a, b) => months.indexOf(a.month) - months.indexOf(b.month));
+
+  const detail = document.createElement('tr');
+  detail.classList.add('drill-detail');
+  detail.innerHTML = `
+    <td colspan="8">
+      <div class="drill-content">
+        <div class="drill-content-head">
+          <span>${truckId} · MONTHLY BREAKDOWN · <b>${rows.length} of ${months.length} months</b></span>
+          <span>${state.dayType === 'all' ? 'All days' : state.dayType === 'weekday' ? 'Weekdays' : 'Weekends'}</span>
+        </div>
+        <table>
+          <thead><tr>
+            <th>Month</th>
+            <th style="text-align:right">Miles</th>
+            <th style="text-align:right">Trips</th>
+            <th style="text-align:right">Active hrs</th>
+            <th style="text-align:right">Idle hrs</th>
+            <th style="text-align:right">Total hrs</th>
+            <th style="text-align:right">Avg trip mi</th>
+          </tr></thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr>
+                <td>${r.month}</td>
+                <td style="text-align:right">${fmtNum(r.miles)}</td>
+                <td style="text-align:right">${fmtNum(r.trips)}</td>
+                <td style="text-align:right">${r.activeHours.toFixed(1)}</td>
+                <td style="text-align:right">${r.idleHours.toFixed(1)}</td>
+                <td style="text-align:right">${r.totalHours.toFixed(1)}</td>
+                <td style="text-align:right">${r.trips > 0 ? (r.miles / r.trips).toFixed(1) : '—'}</td>
+              </tr>
+            `).join('')}
+            ${rows.length === 0 ? '<tr><td colspan="7" style="text-align:center;color:var(--slate);padding:14px">No records for the selected period.</td></tr>' : ''}
+          </tbody>
+        </table>
+      </div>
+    </td>
+  `;
+  row.after(detail);
 }
 
 function commonChartOptions(){
@@ -715,12 +810,12 @@ function commonChartOptions(){
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { position: 'bottom', labels: { font: { size: 11, family: 'Calibri' }, boxWidth: 12 } },
+      legend: { position: 'bottom', labels: { font: { size: 12, family: 'Calibri' }, boxWidth: 12, padding: 12 } },
       datalabels: { display: false }
     },
     scales: {
-      x: { ticks: { font: { size: 11, family: 'Calibri' }, color: '#475569' }, grid: { display: false } },
-      y: { ticks: { font: { size: 11, family: 'Calibri' }, color: '#475569' }, grid: { color: '#E5E7EB' } }
+      x: { ticks: { font: { size: 12, family: 'Calibri' }, color: '#475569' }, grid: { display: false } },
+      y: { ticks: { font: { size: 12, family: 'Calibri' }, color: '#475569' }, grid: { color: '#E5E7EB' } }
     }
   };
 }
@@ -741,9 +836,9 @@ function renderMilesTrend(){
     options: {
       ...commonChartOptions(),
       scales: {
-        x: { ticks: { font: { size: 11 } }, grid: { display: false } },
-        y: { position: 'left', title: { display: true, text: 'Miles (000s)', color: '#475569', font: { size: 11 } }, grid: { color: '#E5E7EB' } },
-        y1: { position: 'right', title: { display: true, text: 'Trips (×100)', color: '#475569', font: { size: 11 } }, grid: { display: false } }
+        x: { ticks: { font: { size: 12 } }, grid: { display: false } },
+        y: { position: 'left', title: { display: true, text: 'Miles (000s)', color: '#475569', font: { size: 12 } }, grid: { color: '#E5E7EB' } },
+        y1: { position: 'right', title: { display: true, text: 'Trips (×100)', color: '#475569', font: { size: 12 } }, grid: { display: false } }
       }
     }
   });
@@ -756,6 +851,9 @@ function renderUtilByTruck(){
   const fleetAvg = monthly.length > 0 ? monthly.reduce((s,d) => s + d.activeUtil, 0) / monthly.length : 0;
   const ctx = document.getElementById('t1UtilByTruck').getContext('2d');
   if (charts.utilByTruck) charts.utilByTruck.destroy();
+  // Update panel title with dynamic fleet avg
+  const titleEl = document.getElementById('t1UtilByTruckTitle');
+  if (titleEl) titleEl.textContent = 'GROSS UTILIZATION BY TRUCK · FLEET AVG ' + fleetAvg.toFixed(1) + '%';
   charts.utilByTruck = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -766,16 +864,16 @@ function renderUtilByTruck(){
           data: trucks.map(t => +t.activeUtil.toFixed(1)),
           backgroundColor: trucks.map(t => TELEMATICS.personalities[t.personality].color),
           borderRadius: 4,
-          datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v + '%', font: { size: 10 } }
+          datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v + '%', font: { size: 11 } }
         },
         {
           type: 'line',
-          label: 'fleet avg (' + (fleetAvg.toFixed(1)) + '%)',
+          label: 'fleet avg',
           data: trucks.map(() => fleetAvg),
           borderColor: '#C9A227',
           backgroundColor: '#C9A227',
-          borderDash: [6, 4],
-          borderWidth: 2,
+          borderDash: [10, 5],
+          borderWidth: 2.5,
           pointRadius: 0,
           fill: false,
           order: 0,
@@ -787,17 +885,9 @@ function renderUtilByTruck(){
       ...commonChartOptions(),
       indexAxis: 'y',
       plugins: {
-        legend: {
-          display: true,
-          position: 'bottom',
-          labels: {
-            filter: (item) => item.text && item.text.indexOf('fleet avg') === 0,
-            font: { size: 10, family: 'Calibri' },
-            boxWidth: 18,
-            padding: 8
-          }
-        },
-        datalabels: { display: false }
+        legend: { display: false },
+        datalabels: { display: false },
+        tooltip: { enabled: false }
       },
       scales: { x: { min: 0, max: 30, ticks: { callback: v => v + '%' } }, y: { grid: { display: false } } }
     }
@@ -826,7 +916,7 @@ function renderT1UtilTrend(){
       ...commonChartOptions(),
       scales: {
         y: { min: 0, max: 70, ticks: { callback: v => v + '%' }, grid: { color: '#E5E7EB' } },
-        x: { ticks: { font: { size: 11 } }, grid: { display: false } }
+        x: { ticks: { font: { size: 12 } }, grid: { display: false } }
       }
     }
   });
@@ -846,7 +936,7 @@ function renderT1ActiveHoursByTruck(){
         data: sorted.map(t => t.activeHours),
         backgroundColor: sorted.map(t => TELEMATICS.personalities[t.personality].color),
         borderRadius: 4,
-        datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v.toLocaleString(), font: { size: 10 } }
+        datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v.toLocaleString(), font: { size: 11 } }
       }]
     },
     options: {
@@ -950,7 +1040,7 @@ function renderHeatmap(){
     },
     options: {
       ...commonChartOptions(),
-      plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } }, datalabels: { display: false } },
+      plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 11 } } }, datalabels: { display: false } },
       scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Drive hours' } } }
     }
   });
@@ -988,7 +1078,7 @@ function renderPeakHoursByTruck(){
         datalabels: { display: false }
       },
       scales: {
-        y: { title: { display: true, text: 'Avg drive hours / weekday hr', font: { size: 11 } }, grid: { color: '#E5E7EB' } },
+        y: { title: { display: true, text: 'Avg drive hours / weekday hr', font: { size: 12 } }, grid: { color: '#E5E7EB' } },
         x: { grid: { display: false } }
       }
     }
@@ -1069,7 +1159,7 @@ function renderT3TripMiDistribution(){
         data: sorted.map(t => { const e = TELEMATICS.tripEconomics.find(x => x.id === t.id); return e ? e.avgTripMi : 0; }),
         backgroundColor: sorted.map(t => t.id === 'T446' ? '#C9A227' : TELEMATICS.personalities[t.personality].color),
         borderRadius: 4,
-        datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v.toFixed(1) + ' mi', font: { size: 10 } }
+        datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v.toFixed(1) + ' mi', font: { size: 11 } }
       }]
     },
     options: {
@@ -1132,11 +1222,11 @@ function renderT3WeeklyMiles(){
     options: {
       ...commonChartOptions(),
       plugins: {
-        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
+        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11 } } },
         datalabels: { display: false }
       },
       scales: {
-        y: { title: { display: true, text: 'Miles / week', font: { size: 11 } }, grid: { color: '#E5E7EB' } },
+        y: { title: { display: true, text: 'Miles / week', font: { size: 12 } }, grid: { color: '#E5E7EB' } },
         x: { ticks: { font: { size: 9 }, maxTicksLimit: 13 }, grid: { display: false } }
       }
     }
@@ -1218,31 +1308,20 @@ function renderT3DailyTrips(){
     options: {
       ...commonChartOptions(),
       plugins: {
-        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } },
+        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
         datalabels: { display: false }
       },
       scales: {
-        y: { title: { display: true, text: 'Trips / day', font: { size: 11 } }, grid: { color: '#E5E7EB' } },
-        x: { ticks: { font: { size: 10 }, autoSkip: true, maxRotation: 0 }, grid: { display: false } }
+        y: { title: { display: true, text: 'Trips / day', font: { size: 12 } }, grid: { color: '#E5E7EB' } },
+        x: { ticks: { font: { size: 12 }, autoSkip: true, maxRotation: 0 }, grid: { display: false } }
       }
     }
   });
 }
 
 function renderAuditTable(){
-  const tbody = document.querySelector('#t3AuditTable tbody');
-  tbody.innerHTML = '';
-  TELEMATICS.dataAudit.readiness.forEach(row => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td><strong>${row.input}</strong></td>
-      <td>${row.usedIn}</td>
-      <td><span class="chip-g">${row.haveIt}</span></td>
-      <td><span class="chip-g">${row.rightFormat}</span></td>
-      <td><span class="chip-g">${row.clean}</span></td>
-    `;
-    tbody.appendChild(tr);
-  });
+  // Obsolete — Data Audit tab removed; underlying-records modal replaces this.
+  return;
 }
 
 function updateAll(){
@@ -1362,6 +1441,89 @@ function renderPeriodSlider(){
 renderPeriodSlider();
 renderAuditTable();
 updateAll();
+</script>
+
+<!-- Underlying-records modal (opened from sidebar DATA section) -->
+<div class="data-modal" id="dataModal" role="dialog" aria-modal="true" aria-labelledby="dataModalTitle" hidden>
+  <div class="data-modal-backdrop" id="dataModalBackdrop"></div>
+  <div class="data-modal-panel">
+    <div class="data-modal-head">
+      <div>
+        <div class="data-modal-eyebrow">SOURCE DATA · RDS</div>
+        <h2 id="dataModalTitle">Underlying records · telematics_demo</h2>
+        <div class="data-modal-sub">Click any table to preview its first records. Underlying source for every chart on this dashboard.</div>
+      </div>
+      <button class="data-modal-close" id="dataModalClose" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="data-modal-body" id="dataModalBody"></div>
+  </div>
+</div>
+
+<script>
+// Data modal — render sample records for each source table when opened
+(function(){
+  const modal = document.getElementById('dataModal');
+  const body  = document.getElementById('dataModalBody');
+  const openBtn  = document.getElementById('dataDrawerBtn');
+  const closeBtn = document.getElementById('dataModalClose');
+  const backdrop = document.getElementById('dataModalBackdrop');
+
+  const samples = {
+    trucks: TELEMATICS.trucks.slice(0, 8),
+    monthlyFleet: TELEMATICS.monthlyFleet.slice(0, 12),
+    monthlyByTruck: TELEMATICS.monthlyByTruck.slice(0, 12),
+    truckMetrics: TELEMATICS.truckMetrics.slice(0, 8),
+    tripEconomics: TELEMATICS.tripEconomics.slice(0, 8),
+    weekdayWeekend: TELEMATICS.weekdayWeekend.slice(0, 8),
+    hourlyHeatmap: TELEMATICS.hourlyHeatmap.slice(0, 24)
+  };
+  const tableInfo = [
+    { id: 'trucks',          label: 'trucks · 8 rows',          desc: 'Vehicle metadata (id, model, year, personality)' },
+    { id: 'monthlyFleet',    label: 'monthlyFleet · 12 rows',    desc: 'Fleet-wide monthly aggregates (per month)' },
+    { id: 'monthlyByTruck',  label: 'monthlyByTruck · 96 rows',  desc: 'Per-truck per-month aggregates (drives per-truck charts)' },
+    { id: 'truckMetrics',    label: 'truckMetrics · 8 rows',     desc: 'TTM per-truck summary (active util, total util, trips, miles)' },
+    { id: 'tripEconomics',   label: 'tripEconomics · 8 rows',    desc: 'Per-truck trip averages (drive min, stop min, avg mi)' },
+    { id: 'weekdayWeekend',  label: 'weekdayWeekend · 8 rows',   desc: 'Per-truck weekday vs weekend hour split' },
+    { id: 'hourlyHeatmap',   label: 'hourlyHeatmap · 168 cells', desc: 'Fleet drive hours by weekday × hour' }
+  ];
+
+  function renderTable(id){
+    const rows = samples[id];
+    if (!rows || !rows.length) return '<p>No sample data.</p>';
+    const cols = Object.keys(rows[0]);
+    const head = '<tr>' + cols.map(c => '<th>' + c + '</th>').join('') + '</tr>';
+    const body = rows.map(r => '<tr>' + cols.map(c => '<td>' + (typeof r[c] === 'number' ? (r[c] % 1 === 0 ? r[c].toLocaleString() : r[c].toFixed(1)) : (r[c] === undefined ? '' : r[c])) + '</td>').join('') + '</tr>').join('');
+    return '<table class="ncc data-modal-table"><thead>' + head + '</thead><tbody>' + body + '</tbody></table>';
+  }
+
+  function renderModal(){
+    const nav = '<div class="data-modal-nav">' + tableInfo.map(t =>
+      '<button type="button" class="data-modal-nav-item" data-table="' + t.id + '">' +
+        '<span class="data-modal-nav-label">' + t.label.split(' · ')[0] + '</span>' +
+        '<span class="data-modal-nav-meta">' + t.label.split(' · ')[1] + '</span>' +
+        '<span class="data-modal-nav-desc">' + t.desc + '</span>' +
+      '</button>'
+    ).join('') + '</div>';
+    body.innerHTML = nav +
+      '<div class="data-modal-content" id="dataModalContent">' + renderTable('trucks') + '</div>';
+    body.querySelectorAll('.data-modal-nav-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        body.querySelectorAll('.data-modal-nav-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('dataModalContent').innerHTML = renderTable(btn.dataset.table);
+      });
+    });
+    body.querySelector('.data-modal-nav-item').classList.add('active');
+  }
+
+  function open(){ renderModal(); modal.hidden = false; document.body.style.overflow = 'hidden'; }
+  function close(){ modal.hidden = true; document.body.style.overflow = ''; }
+
+  openBtn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
+})();
 </script>
 </body>
 </html>
