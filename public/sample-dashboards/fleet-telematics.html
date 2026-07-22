@@ -52,13 +52,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tile.clickable:hover .tile-view-hint{opacity:.85}
 .tile.clickable .tile-view-hint::before{content:"";display:inline-block;width:7px;height:7px;border:1.5px solid var(--gold);border-radius:50%}
 
-/* KPI definitions strip — explains the metrics at a glance */
-.kpi-defs{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:6px 32px 14px;background:var(--bg);font-size:11.5px;color:var(--slate)}
-.kpi-defs-label{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.14em;text-transform:uppercase;margin-right:6px}
-.kpi-defs-item b{color:var(--navy);font-weight:700}
-.kpi-defs-item:not(:last-child)::after{content:"·";margin-left:18px;color:var(--slate-lite)}
-
-/* Dual-section cadence: each half is also clickable */
+/* Gross Utilization tile — definitions appear on hover (elegant reveal) */
 .dual.clickable{cursor:pointer}
 .dual.clickable:hover .dual-label{color:var(--navy)}
 
@@ -146,9 +140,24 @@ header.ncc .illus{background:var(--gold);color:var(--navy-deep);font-weight:700;
 .tile .bullets{font-size:10.5px;color:var(--slate);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);line-height:1.5}
 .tile .bullets div::before{content:"\2022 ";color:var(--gold)}
 
-/* Gross Utilization tile — embeds the four metric definitions inline */
+/* Gross Utilization tile — definitions appear on hover (elegant reveal) */
 .tile.util-tile{min-height:158px}
-.tile .tile-defs{margin:8px 0 0;padding:7px 0 0;border-top:1px solid var(--border);font-size:10.5px;color:var(--slate);line-height:1.4;display:grid;grid-template-columns:max-content 1fr;column-gap:6px;row-gap:3px}
+.tile .tile-defs{
+  margin:0;padding:0;border-top:none;
+  font-size:10.5px;color:var(--slate);line-height:1.45;
+  display:grid;grid-template-columns:max-content 1fr;column-gap:8px;row-gap:4px;
+  /* Hidden by default; revealed on hover with a smooth slide-up */
+  max-height:0;opacity:0;overflow:hidden;
+  margin-top:0;border-top:none;
+  transition:max-height .25s ease, opacity .2s ease .05s, margin-top .25s ease, padding-top .25s ease, border-top-color .2s ease;
+  border-top:1px solid transparent;
+}
+.tile.util-tile:hover .tile-defs,
+.tile.util-tile:focus-within .tile-defs{
+  max-height:140px;opacity:1;
+  margin-top:8px;padding-top:7px;
+  border-top-color:var(--border);
+}
 .tile .tile-defs dt{margin:0;font-weight:400}
 .tile .tile-defs dt b{color:var(--navy);font-weight:700;font-size:10.5px;letter-spacing:.02em}
 .tile .tile-defs dd{margin:0;color:var(--slate)}
@@ -335,15 +344,6 @@ footer.ncc strong{color:var(--slate)}
       </div>
     </div>
   </div>
-
-  <div class="kpi-defs">
-    <span class="kpi-defs-label">Definitions</span>
-    <span class="kpi-defs-item"><b>Gross utilization</b> = active (drive) hours ÷ available hours on weekdays</span>
-    <span class="kpi-defs-item"><b>Total utilization</b> = drive + idle hours ÷ available hours on weekdays</span>
-    <span class="kpi-defs-item"><b>Active hours</b> = time the truck is moving</span>
-    <span class="kpi-defs-item"><b>Idle hours</b> = stopped engine between trips / at customer</span>
-  </div>
-
   <div class="grid2-eq">
     <div class="panel">
       <div class="ptitle">MILES &amp; TRIPS TREND · MONTHLY</div>
