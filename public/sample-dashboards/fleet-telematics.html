@@ -195,8 +195,8 @@ footer.ncc strong{color:var(--slate)}
     <label>Period</label>
     <div class="period-slider" id="periodSlider" role="group" aria-label="Filter by date range">
       <div class="period-slider-info">
-        <span class="period-slider-meta" id="periodMeta">All 365 days</span>
-        <span class="period-slider-actions"><a href="#" data-period-action="all">Reset</a></span>
+        <span class="period-slider-meta" id="periodMeta">Jun 1 → May 31</span>
+        <span class="period-slider-actions"><a href="#" data-period-action="today">Today</a> · <a href="#" data-period-action="all">Reset</a></span>
       </div>
       <div class="period-slider-track" id="periodSliderTrack">
         <div class="period-slider-fill" id="periodSliderFill"></div>
@@ -1099,12 +1099,13 @@ function renderUtilByTruck(){
           label: 'fleet avg',
           data: trucks.map(() => fleetAvg),
           borderColor: '#C9A227',
-          backgroundColor: '#C9A227',
-          borderDash: [10, 5],
-          borderWidth: 2.5,
+          borderWidth: 3,
+          borderDash: [], /* Solid line vs dashed */
           pointRadius: 0,
+          pointHoverRadius: 0,
+          spanGaps: true,
           fill: false,
-          order: 0,
+          order: -1, /* Make sure average line is visible beneath bars */
           datalabels: { display: false }
         }
       ]
@@ -1737,6 +1738,14 @@ function renderPeriodSlider(){
     e.preventDefault();
     startDay = 0;
     endDay = TOTAL_DAYS - 1;
+    updateUI();
+  });
+
+  // Set to just today (last day of range = May 31, 2026 which is day 364)
+  document.querySelector('[data-period-action="today"]').addEventListener('click', e => {
+    e.preventDefault();
+    startDay = TOTAL_DAYS - 1;  // Last day of range (e.g., May 31, 2026)
+    endDay = TOTAL_DAYS - 1;    // Same day for just.today
     updateUI();
   });
 
