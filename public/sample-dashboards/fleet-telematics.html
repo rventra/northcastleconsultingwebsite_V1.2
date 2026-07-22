@@ -52,6 +52,12 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tile.clickable:hover .tile-view-hint{opacity:.85}
 .tile.clickable .tile-view-hint::before{content:"";display:inline-block;width:7px;height:7px;border:1.5px solid var(--gold);border-radius:50%}
 
+/* KPI definitions strip — explains the metrics at a glance */
+.kpi-defs{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:6px 32px 14px;background:var(--bg);font-size:11.5px;color:var(--slate)}
+.kpi-defs-label{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.14em;text-transform:uppercase;margin-right:6px}
+.kpi-defs-item b{color:var(--navy);font-weight:700}
+.kpi-defs-item:not(:last-child)::after{content:"·";margin-left:18px;color:var(--slate-lite)}
+
 /* Dual-section cadence: each half is also clickable */
 .dual.clickable{cursor:pointer}
 .dual.clickable:hover .dual-label{color:var(--navy)}
@@ -83,12 +89,15 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .data-modal-content{flex:1;overflow:auto;padding:18px 22px}
 .data-modal-table{font-size:12.5px}
 .page{background:var(--white);min-height:100vh}
-header.ncc{background:var(--navy-deep);color:var(--white);padding:18px 32px 14px;position:relative}
+header.ncc{background:var(--navy-deep);color:var(--white);padding:8px 32px;display:flex;justify-content:space-between;align-items:center;position:relative}
 header.ncc::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--gold)}
-header.ncc .brand{font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--gold-lite)}
-header.ncc h1{margin:6px 0 2px;font-size:22px;font-weight:700;letter-spacing:-.01em}
-header.ncc .sub{font-size:13px;color:#cfd8dc;margin-top:2px;font-weight:400}
-header.ncc .illus{position:absolute;top:18px;right:32px;background:var(--gold);color:var(--navy-deep);font-weight:700;font-size:10px;letter-spacing:.16em;padding:5px 10px;border-radius:2px}
+header.ncc .brand{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--gold-lite)}
+header.ncc .illus{background:var(--gold);color:var(--navy-deep);font-weight:700;font-size:9.5px;letter-spacing:.16em;padding:4px 9px;border-radius:2px}
+
+/* Sidebar title block (mass-tort pattern: title + subtitle live in the sidebar) */
+.sidebar-title{font-size:18px;font-weight:700;color:var(--navy);margin:0 0 4px;letter-spacing:.04em}
+.sidebar .subtitle{font-size:11px;color:var(--slate);margin-bottom:24px;line-height:1.45}
+.sidebar .subtitle .muted{color:var(--slate-lite);font-size:10.5px}
 
 /* Period slider — dual-thumb range over the 12 months */
 .period-slider{background:var(--white);border:1px solid var(--border);padding:14px 18px 16px;font-family:inherit;width:100%;box-shadow:0 1px 2px rgba(15,23,42,.04)}
@@ -112,36 +121,34 @@ header.ncc .illus{position:absolute;top:18px;right:32px;background:var(--gold);c
 .dual-label{font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 .dual-big{font-size:24px;font-weight:700;color:var(--navy-ink);margin-top:6px;line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
 .dual-unit{font-size:11px;color:var(--slate);margin-top:4px}
-.tabstrip{display:flex;gap:0;padding:0 32px;background:var(--white);border-bottom:1px solid var(--border);position:relative}
+.tabstrip{display:flex;gap:0;padding:0 32px;background:var(--white);border-bottom:1px solid var(--border);position:relative;top:0;z-index:50}
 .tabstrip::after{content:"";position:absolute;left:32px;right:32px;bottom:-1px;height:2px;background:var(--gold);opacity:.85}
-.tab{flex:1;background:#F1F5F9;color:var(--slate);border:none;border-right:1px solid var(--border);padding:12px 20px 10px;text-align:left;cursor:pointer;font-family:inherit;position:relative;transition:background .15s,color .15s}
+.tab{flex:1;background:transparent;color:var(--slate);border:none;padding:14px 22px 12px;text-align:left;cursor:pointer;font-family:inherit;position:relative;transition:color .15s;border-bottom:3px solid transparent;letter-spacing:.02em}
+.tab:hover{color:var(--navy)}
 .tab:last-child{border-right:none}
-.tab:hover{background:#E2E8F0}
-.tab .tab-title{font-size:14px;font-weight:700;letter-spacing:.01em;display:flex;align-items:center;gap:10px}
-.tab .tab-sub{font-size:11.5px;color:inherit;opacity:.75;margin-top:2px;font-weight:400;line-height:1.4}
-.tab .dots{font-size:13px;letter-spacing:.08em;color:var(--gold);font-weight:700}
-.tab.active{background:var(--navy);color:var(--white)}
-.tab.active .tab-sub{opacity:.85;color:#cfd8dc}
-.tab.active .dots{color:var(--gold-lite)}
-.tab.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--gold)}
+.tab .tab-title{font-size:13px;font-weight:700;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+.tab .tab-sub{font-size:11px;color:inherit;opacity:.7;margin-top:2px;font-weight:400;line-height:1.4}
+.tab .dots{font-size:10px;letter-spacing:.1em;color:var(--gold-lite);font-weight:700}
+.tab.active{color:var(--navy);border-bottom-color:var(--gold)}
+.tab.active .tab-sub{opacity:.85}
+.tab.active .dots{color:var(--gold)}
 .tabpane{display:none;padding-bottom:24px}
 .tabpane.active{display:block}
-.tabhdr{display:flex;justify-content:space-between;align-items:center;padding:16px 32px 0}
-.tabhdr .lead{font-size:11.5px;color:var(--slate);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px 32px 18px;background:var(--bg)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;padding:14px 32px 12px;background:var(--bg)}
 .tiles.tiles-5{grid-template-columns:repeat(5,1fr)}
-.tile{background:var(--white);border:1px solid var(--border);position:relative;padding:12px 16px 14px;min-height:120px}
-.tile::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent,var(--navy))}
-.tile .tag{font-size:10px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.14em}
-.tile .label{font-size:13.5px;font-weight:700;color:var(--navy-ink);margin-top:4px;line-height:1.2}
-.tile .big{font-size:28px;font-weight:700;color:var(--big,var(--navy-ink));margin-top:6px;line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
-.tile .unit{font-size:11.5px;color:var(--slate);margin-top:4px;line-height:1.3}
+.tile{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--accent,var(--gold));position:relative;padding:14px 16px 16px;min-height:108px;cursor:default}
+.tile.clickable{cursor:pointer;transition:box-shadow .12s,border-color .12s}
+.tile.clickable:hover{border-color:var(--navy);box-shadow:0 2px 6px rgba(15,23,42,.07)}
+.tile .tag{font-size:10.5px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.14em;text-transform:uppercase}
+.tile .label{font-size:13px;font-weight:700;color:var(--navy-ink);margin-top:4px;line-height:1.2}
+.tile .big{font-size:26px;font-weight:700;color:var(--big,var(--navy));margin:4px 0 2px;line-height:1.1;letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
+.tile .unit{font-size:11px;color:var(--slate-lite);margin-top:2px}
 .tile .bullets{font-size:10.5px;color:var(--slate);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);line-height:1.5}
 .tile .bullets div::before{content:"\2022 ";color:var(--gold)}
-.panel{margin:0 32px 14px;background:var(--white);border:1px solid var(--border);padding:14px 22px 16px}
-.panel .ptitle{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.panel{margin:0 32px 18px;background:var(--white);border:1px solid var(--border);padding:16px 18px}
+.panel .ptitle{font-size:13px;font-weight:700;color:var(--navy);margin:0 0 14px;letter-spacing:.04em;text-transform:uppercase}
 .panel h2{margin:0;font-size:16px;font-weight:700;color:var(--navy-ink)}
-.panel .chart-wrap{position:relative;height:280px;margin-top:10px}
+.panel .chart-wrap{position:relative;height:300px;margin-top:0}
 .grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;padding:0 32px 18px}
 .grid2-eq{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 32px 18px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 32px 18px}
@@ -177,18 +184,14 @@ tr.total-row td:first-child{letter-spacing:.1em;text-transform:uppercase;font-si
 footer.ncc{background:var(--white);border-top:1px solid var(--border);padding:16px 32px 20px;font-size:12px;color:var(--slate-lite);display:flex;justify-content:space-between;align-items:center}
 footer.ncc .left{display:flex;gap:18px;align-items:center}
 footer.ncc strong{color:var(--slate)}
-.gold-rule{height:2px;background:var(--gold);margin:0 32px 18px;width:48px}
-.section-title{padding:6px 32px 0;font-size:11.5px;font-weight:700;color:var(--navy);letter-spacing:.14em;text-transform:uppercase}
-.section-sub{padding:2px 32px 14px;font-size:13.5px;color:var(--slate)}
-.note{margin:0 32px 18px;background:var(--mist);border-left:3px solid var(--gold);padding:11px 14px;font-size:12.5px;color:var(--navy-ink)}
-.note strong{color:var(--navy)}
-.callout{margin:0 32px 24px;background:#FFFBEB;border:1px solid var(--gold);border-left:4px solid var(--gold);padding:14px 18px;font-size:13px;color:var(--navy-ink);line-height:1.55}
-.callout .ctitle{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
 </style>
 </head>
 <body>
 <div class="layout">
 <aside class="sidebar">
+  <h1 class="sidebar-title">Fleet Telematics</h1>
+  <div class="subtitle">Utilization, activity &amp; trip economics<br/><span class="muted">Jun 2025 – May 2026 · 8 trucks</span></div>
+
   <div class="sidebar-section-title">Filters</div>
 
   <div class="sidebar-filter">
@@ -257,8 +260,6 @@ footer.ncc strong{color:var(--slate)}
 <div class="page">
 <header class="ncc">
   <div class="brand">NORTH CASTLE CONSULTING · OPERATIONS DASHBOARD PACK</div>
-  <h1>Fleet Telematics</h1>
-  <div class="sub">Utilization, activity &amp; trip economics</div>
   <div class="illus">ILLUSTRATIVE · SAMPLE DATA</div>
 </header>
 
@@ -279,59 +280,55 @@ footer.ncc strong{color:var(--slate)}
 
 <!-- ================= TAB 1: FLEET SUMMARY ================= -->
 <div class="tabpane active" id="pane-t1">
-  <div class="tabhdr">
-    <div class="lead">Fleet summary · Miles, trips &amp; utilization by truck</div>
-  </div>
-
   <div class="tiles tiles-5">
     <div class="tile clickable" style="--accent:var(--navy)" onclick="drillTile('miles')">
-      <div class="tile-view-hint">View records</div>
-      <div class="tag">FLEET TOTAL</div>
-      <div class="label">Total miles</div>
+      <div class="tag">TOTAL MILES</div>
+      <div class="label">Fleet miles driven</div>
       <div class="big" id="t1Miles">247K</div>
-      <div class="unit" id="t1MilesUnit">Fleet miles</div>
+      <div class="unit" id="t1MilesUnit">in selected period</div>
     </div>
     <div class="tile clickable" style="--accent:var(--purple)" onclick="drillTile('trips')">
-      <div class="tile-view-hint">View records</div>
-      <div class="tag">FLEET TOTAL</div>
-      <div class="label">Total trips</div>
+      <div class="tag">TOTAL TRIPS</div>
+      <div class="label">Delivery trips</div>
       <div class="big" id="t1Trips">61,346</div>
-      <div class="unit" id="t1TripsUnit">Delivery trips</div>
+      <div class="unit" id="t1TripsUnit">in selected period</div>
     </div>
     <div class="tile clickable" style="--accent:var(--gold)" onclick="drillTile('activeUtil')">
-      <div class="tile-view-hint">View records</div>
       <div class="tag">GROSS UTILIZATION</div>
-      <div class="label">Active hours ÷ available hours</div>
+      <div class="label">Drive time only</div>
       <div class="big" id="t1ActiveUtil">17.0%</div>
-      <div class="unit" id="t1ActiveUtilUnit">Avg weekday: drive hrs ÷ 24</div>
-      <div class="unit" style="color:var(--navy);font-weight:700;margin-top:4px" id="t1TotalUtilInline">Total util: 47.4%</div>
-      <div class="bullets">
-        <div><b>Gross</b> = drive time only</div>
-        <div><b>Total</b> = drive + idle time</div>
-      </div>
+      <div class="unit" id="t1ActiveUtilUnit">avg weekday active hrs ÷ 24</div>
+      <div class="unit" style="color:var(--navy);font-weight:700;margin-top:6px;font-size:12px" id="t1TotalUtilInline">Total util: 47.4%</div>
     </div>
     <div class="tile clickable" style="--accent:var(--green)" onclick="drillTile('totalHours')">
-      <div class="tile-view-hint">View records</div>
-      <div class="tag">TOTAL HOURS LOGGED</div>
+      <div class="tag">TOTAL HOURS</div>
       <div class="label">Drive + idle / transition</div>
       <div class="big" id="t1TotalHours">22.7K</div>
-      <div class="unit" id="t1TotalHoursUnit">Fleet hours</div>
+      <div class="unit" id="t1TotalHoursUnit">fleet hours logged</div>
     </div>
     <div class="tile" style="--accent:var(--slate)">
       <div class="tag">CADENCE</div>
       <div class="dual">
         <div class="dual-top clickable" onclick="drillTile('cadenceDays')">
-          <div class="dual-label">Days in period <span class="tile-view-hint" style="position:static;display:inline-flex;margin-left:6px;opacity:.85">View records</span></div>
+          <div class="dual-label">Days in period</div>
           <div class="dual-big" id="t1NetWorkingDays">—</div>
-          <div class="dual-unit">Calendar days across selected months</div>
+          <div class="dual-unit">calendar days across selected months</div>
         </div>
         <div class="dual-bot clickable" onclick="drillTile('cadenceAvg')">
-          <div class="dual-label">Avg trips / day <span class="tile-view-hint" style="position:static;display:inline-flex;margin-left:6px;opacity:.85">View records</span></div>
+          <div class="dual-label">Avg trips / day</div>
           <div class="dual-big" id="t1AvgTripsPerWD">—</div>
-          <div class="dual-unit">Total trips ÷ days in period</div>
+          <div class="dual-unit">total trips ÷ days in period</div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="kpi-defs">
+    <span class="kpi-defs-label">Definitions</span>
+    <span class="kpi-defs-item"><b>Gross utilization</b> = active (drive) hours ÷ available hours on weekdays</span>
+    <span class="kpi-defs-item"><b>Total utilization</b> = drive + idle hours ÷ available hours on weekdays</span>
+    <span class="kpi-defs-item"><b>Active hours</b> = time the truck is moving</span>
+    <span class="kpi-defs-item"><b>Idle hours</b> = stopped engine between trips / at customer</span>
   </div>
 
   <div class="grid2-eq">
@@ -375,9 +372,6 @@ footer.ncc strong{color:var(--slate)}
 </div>
 <!-- ================= TAB 2: ACTIVITY PATTERNS ================= -->
 <div class="tabpane" id="pane-t2">
-  <div class="tabhdr">
-    <div class="lead">Activity patterns · When the fleet works &amp; how time is spent</div>
-  </div>
 
   <div class="tiles">
     <div class="tile" style="--accent:var(--navy)">
@@ -431,9 +425,6 @@ footer.ncc strong{color:var(--slate)}
 
 <!-- ================= TAB 3: TRIP ECONOMICS ================= -->
 <div class="tabpane" id="pane-t3" role="tabpanel" aria-labelledby="tab-t3">
-  <div class="tabhdr">
-    <div class="lead">Trip economics · Duration, distance &amp; daily cadence</div>
-  </div>
 
   <div class="tiles">
     <div class="tile" style="--accent:var(--navy)">
@@ -1080,12 +1071,21 @@ function renderUtilByTruck(){
   const trucks = filteredTruckAggregates();
   // Fleet-avg gross util for the selected period (single-truck view recomputes from hours)
   const monthly = filteredMonthly();
-  const fleetAvg = monthly.length > 0 ? monthly.reduce((s,d) => s + d.activeUtil, 0) / monthly.length : 0;
+  // Compute fleetAvg safely — `monthly` may include rows without `activeUtil`
+  // (e.g. when a single truck is selected, rows come from `monthlyByTruck` which has hours but no util%).
+  // In that case compute from activeHours/(weekdays*24)*100.
+  const WD = {'Jun-25':21,'Jul-25':23,'Aug-25':21,'Sep-25':22,'Oct-25':23,'Nov-25':20,'Dec-25':23,'Jan-26':22,'Feb-26':20,'Mar-26':22,'Apr-26':22,'May-26':21};
+  const utilForRow = d => (d.activeUtil !== undefined)
+    ? d.activeUtil
+    : ((WD[d.month] || 21) > 0 ? (d.activeHours / ((WD[d.month] || 21) * 24) * 100) : 0);
+  const fleetAvg = monthly.length > 0
+    ? monthly.reduce((s,d) => s + utilForRow(d), 0) / monthly.length
+    : 0;
   const ctx = document.getElementById('t1UtilByTruck').getContext('2d');
   if (charts.utilByTruck) charts.utilByTruck.destroy();
   // Update panel title with dynamic fleet avg
   const titleEl = document.getElementById('t1UtilByTruckTitle');
-  if (titleEl) titleEl.textContent = 'GROSS UTILIZATION BY TRUCK · Fleet avg = ' + fleetAvg.toFixed(1) + '% (red dashed line)';
+  if (titleEl) titleEl.textContent = 'GROSS UTILIZATION BY TRUCK · FLEET AVG ' + fleetAvg.toFixed(1) + '% (red dashed line)';
   charts.utilByTruck = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1100,7 +1100,7 @@ function renderUtilByTruck(){
         },
         {
           type: 'line',
-          label: 'Fleet Average: ' + fleetAvg.toFixed(1) + '%',
+          label: 'fleet avg ' + fleetAvg.toFixed(1) + '%',
           data: trucks.map(() => fleetAvg),
           borderColor: '#B22234',
           borderWidth: 4,
@@ -1128,7 +1128,7 @@ function renderUtilByTruck(){
             generateLabels: function(chart) {
               return [
                 {
-                  text: 'Fleet Average: ' + fleetAvg.toFixed(1) + '% (red dashed line)',
+                  text: 'fleet avg ' + fleetAvg.toFixed(1) + '% (red dashed line)',
                   fillStyle: '#B22234',
                   strokeStyle: '#B22234',
                   lineWidth: 3,
@@ -1635,7 +1635,9 @@ function updateAll(){
   });
 });
 
-// ─── Period slider (dual-thumb range over the 12 months) ───────────────────
+// ─── Period slider (dual-thumb range over the 12 months, snaps to month boundaries) ─────────────────
+// The data layer aggregates monthly, so the slider works in months (Jun-25, Jul-25, ...).
+// Drag snaps to the nearest month so the displayed window always matches the available data.
 function renderPeriodSlider(){
   const track     = document.getElementById('periodSliderTrack');
   const startThumb = document.getElementById('periodStartThumb');
@@ -1644,92 +1646,52 @@ function renderPeriodSlider(){
   const meta      = document.getElementById('periodMeta');
   const ticks     = document.getElementById('periodSliderTicks');
 
-  // Total day range from June 1, 2025 to May 31, 2026: 365 days
-  const TOTAL_DAYS = 365;
+  // Total selectable months (Jun-25..May-26)
+  const TOTAL = monthsAll.length; // 12
 
-  // Show monthly markers on slider (same ticks as previously for orientation)
+  // Tick labels for each month
   const tickShort = {"Jun-25":"Jun","Jul-25":"Jul","Aug-25":"Aug","Sep-25":"Sep","Oct-25":"Oct","Nov-25":"Nov","Dec-25":"Dec","Jan-26":"Jan","Feb-26":"Feb","Mar-26":"Mar","Apr-26":"Apr","May-26":"May"};
   ticks.innerHTML = monthsAll.map(m => `<span>${tickShort[m]}</span>`).join('');
 
-  // Track day indices instead of month indices (0-364)
-  let startDay = 0;
-  let endDay   = TOTAL_DAYS - 1;  // 364
+  // Track indices into monthsAll (0..TOTAL-1)
+  let startIdx = 0;
+  let endIdx   = TOTAL - 1;
 
-  // Initialize position based on selected months
+  // Initialize from state.selectedMonths
   if (state.selectedMonths.length > 0) {
-    const startMonth = state.selectedMonths[0];
-    const endMonth = state.selectedMonths[state.selectedMonths.length - 1];
-
-    // Simple mapping of month to approximately matching day in our 365-day period
-    const monthDayMap = {
-      "Jun-25": 0, "Jul-25": 30, "Aug-25": 61, "Sep-25": 91,
-      "Oct-25": 122, "Nov-25": 152, "Dec-25": 183, "Jan-26": 214,
-      "Feb-26": 245, "Mar-26": 273, "Apr-26": 304, "May-26": 334
-    };
-
-    startDay = monthDayMap[startMonth] || 0;
-    endDay = Object.keys(monthDayMap).includes(endMonth) ? Math.min(monthDayMap[endMonth] + 30, TOTAL_DAYS - 1) : TOTAL_DAYS - 1;
+    const firstMonth = state.selectedMonths[0];
+    const lastMonth  = state.selectedMonths[state.selectedMonths.length - 1];
+    const s = monthsAll.indexOf(firstMonth);
+    const e = monthsAll.indexOf(lastMonth);
+    if (s >= 0) startIdx = s;
+    if (e >= 0) endIdx = e;
+    if (endIdx < startIdx) endIdx = startIdx;
   }
 
-  function pct(x) {
-    return (x / (TOTAL_DAYS - 1)) * 100;
-  }
-
-  function monthsForDayRange(sDay, eDay) {
-    const result = [];
-
-    // Define day ranges for each month based on actual day counts
-    const monthRanges = [
-      {id: "Jun-25", start: 0, end: 29},     // 30 days
-      {id: "Jul-25", start: 30, end: 60},    // 31 days
-      {id: "Aug-25", start: 61, end: 91},    // 31 days
-      {id: "Sep-25", start: 92, end: 121},   // 30 days
-      {id: "Oct-25", start: 122, end: 152},  // 31 days
-      {id: "Nov-25", start: 153, end: 181},  // 30 days
-      {id: "Dec-25", start: 182, end: 212},  // 31 days
-      {id: "Jan-26", start: 213, end: 243},  // 31 days
-      {id: "Feb-26", start: 244, end: 271},  // 28 days
-      {id: "Mar-26", start: 272, end: 302},  // 31 days
-      {id: "Apr-26", start: 303, end: 332},  // 30 days
-      {id: "May-26", start: 333, end: 364}   // 31 days
-    ];
-
-    for (const range of monthRanges) {
-      // Check if selected day range overlaps with this month's days
-      if (!(eDay < range.start || sDay > range.end)) {
-        result.push(range.id);
-      }
-    }
-
-    return result;
-  }
-
-  function dayToDateString(d) {
-    const startDate = new Date('2025-06-01');
-    startDate.setDate(startDate.getDate() + d);
-    const monthLabel = startDate.toLocaleString('en-US', {month: 'short'});
-    return monthLabel + ' ' + startDate.getDate();
+  function pct(i) {
+    return (i / (TOTAL - 1)) * 100;
   }
 
   function updateUI() {
     // Update thumb and fill positions on the slider
-    startThumb.style.left = pct(startDay) + '%';
-    endThumb.style.left   = pct(endDay) + '%';
-    fill.style.left  = pct(startDay) + '%';
-    fill.style.width = (pct(endDay) - pct(startDay)) + '%';
+    startThumb.style.left = pct(startIdx) + '%';
+    endThumb.style.left   = pct(endIdx) + '%';
+    fill.style.left  = pct(startIdx) + '%';
+    fill.style.width = (pct(endIdx) - pct(startIdx)) + '%';
 
-    // Calculate state.selectedMonths based on day range
-    state.selectedMonths = monthsForDayRange(startDay, endDay);
+    // Update state.selectedMonths from the index range
+    state.selectedMonths = monthsAll.slice(startIdx, endIdx + 1);
+    const sel = state.selectedMonths;
+    const monthCount = sel.length;
+    const firstLabel = tickShort[sel[0]];
+    const lastLabel  = tickShort[sel[sel.length - 1]];
 
-    // Update display to show actual dates and day count
-    const totalSelectedDays = endDay - startDay + 1;
-    const startDateLabel = dayToDateString(startDay);
-    const endDateLabel = dayToDateString(endDay);
-
-    if (startDay === 0 && endDay === TOTAL_DAYS - 1) {
-      meta.textContent = `${startDateLabel} → ${endDateLabel}`;
+    if (monthCount === TOTAL) {
+      meta.textContent = `All ${monthCount} months`;
+    } else if (monthCount === 1) {
+      meta.textContent = `1 month · ${sel[0]}`;
     } else {
-      meta.textContent = `${startDateLabel} → ${endDateLabel} · ${totalSelectedDays} days`;
+      meta.textContent = `${firstLabel} → ${lastLabel} · ${monthCount} months`;
     }
 
     // Update all dependent visuals
@@ -1742,10 +1704,11 @@ function renderPeriodSlider(){
       const moveHandler = moveEvt => {
         const rect = track.getBoundingClientRect();
         const pos = Math.max(0, Math.min(rect.width, moveEvt.clientX - rect.left));
-        const dayIndex = Math.round((pos / rect.width) * (TOTAL_DAYS - 1));
+        // Snap to nearest month index (0..TOTAL-1)
+        const idx = Math.round((pos / rect.width) * (TOTAL - 1));
 
-        if (isStartThumb) startDay = Math.min(dayIndex, endDay);
-        else endDay = Math.max(dayIndex, startDay);
+        if (isStartThumb) startIdx = Math.min(idx, endIdx);
+        else endIdx = Math.max(idx, startIdx);
 
         updateUI();
       };
@@ -1768,40 +1731,35 @@ function renderPeriodSlider(){
     if (e.target === startThumb || e.target === endThumb) return;
     const rect = track.getBoundingClientRect();
     const pos = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
-    const clickedDay = Math.round((pos / rect.width) * (TOTAL_DAYS - 1));
+    const idx = Math.round((pos / rect.width) * (TOTAL - 1));
 
-    // Adjust closest side to clicked position
-    if (clickedDay < startDay) {
-      startDay = clickedDay;
-    } else if (clickedDay > endDay) {
-      endDay = clickedDay;
+    if (idx < startIdx) {
+      startIdx = idx;
+    } else if (idx > endIdx) {
+      endIdx = idx;
     } else {
-      // Clicked within current range - expand outward
-      const leftDiff = startDay - clickedDay;
-      const rightDiff = clickedDay - endDay;
-
-      if (Math.abs(leftDiff) < Math.abs(rightDiff)) {
-        startDay = clickedDay;
-      } else {
-        endDay = clickedDay;
-      }
+      // Clicked within current range - move closest thumb to clicked position
+      const distStart = Math.abs(idx - startIdx);
+      const distEnd   = Math.abs(idx - endIdx);
+      if (distStart <= distEnd) startIdx = Math.min(idx, endIdx);
+      else                      endIdx   = Math.max(idx, startIdx);
     }
     updateUI();
   });
 
-  // Reset to full date range
+  // Reset = full range
   document.querySelector('[data-period-action="all"]').addEventListener('click', e => {
     e.preventDefault();
-    startDay = 0;
-    endDay = TOTAL_DAYS - 1;
+    startIdx = 0;
+    endIdx   = TOTAL - 1;
     updateUI();
   });
 
-  // Set to just today (last day of range = May 31, 2026 which is day 364)
+  // Today = the most recent month with data (May-26, the last in the range)
   document.querySelector('[data-period-action="today"]').addEventListener('click', e => {
     e.preventDefault();
-    startDay = TOTAL_DAYS - 1;  // Last day of range (e.g., May 31, 2026)
-    endDay = TOTAL_DAYS - 1;    // Same day for just.today
+    startIdx = TOTAL - 1;
+    endIdx   = TOTAL - 1;
     updateUI();
   });
 
