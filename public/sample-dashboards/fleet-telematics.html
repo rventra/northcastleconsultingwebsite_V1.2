@@ -145,6 +145,13 @@ header.ncc .illus{background:var(--gold);color:var(--navy-deep);font-weight:700;
 .tile .unit{font-size:11px;color:var(--slate-lite);margin-top:2px}
 .tile .bullets{font-size:10.5px;color:var(--slate);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);line-height:1.5}
 .tile .bullets div::before{content:"\2022 ";color:var(--gold)}
+
+/* Gross Utilization tile — embeds the four metric definitions inline */
+.tile.util-tile{min-height:158px}
+.tile .tile-defs{margin:8px 0 0;padding:7px 0 0;border-top:1px solid var(--border);font-size:10.5px;color:var(--slate);line-height:1.4;display:grid;grid-template-columns:max-content 1fr;column-gap:6px;row-gap:3px}
+.tile .tile-defs dt{margin:0;font-weight:400}
+.tile .tile-defs dt b{color:var(--navy);font-weight:700;font-size:10.5px;letter-spacing:.02em}
+.tile .tile-defs dd{margin:0;color:var(--slate)}
 .panel{margin:0 32px 18px;background:var(--white);border:1px solid var(--border);padding:16px 18px}
 .panel .ptitle{font-size:13px;font-weight:700;color:var(--navy);margin:0 0 14px;letter-spacing:.04em;text-transform:uppercase}
 .panel h2{margin:0;font-size:16px;font-weight:700;color:var(--navy-ink)}
@@ -293,12 +300,18 @@ footer.ncc strong{color:var(--slate)}
       <div class="big" id="t1Trips">61,346</div>
       <div class="unit" id="t1TripsUnit">in selected period</div>
     </div>
-    <div class="tile clickable" style="--accent:var(--gold)" onclick="drillTile('activeUtil')">
+    <div class="tile clickable util-tile" style="--accent:var(--gold)" onclick="drillTile('activeUtil')">
       <div class="tag">GROSS UTILIZATION</div>
       <div class="label">Drive time only</div>
       <div class="big" id="t1ActiveUtil">17.0%</div>
       <div class="unit" id="t1ActiveUtilUnit">avg weekday active hrs ÷ 24</div>
       <div class="unit" style="color:var(--navy);font-weight:700;margin-top:6px;font-size:12px" id="t1TotalUtilInline">Total util: 47.4%</div>
+      <dl class="tile-defs">
+        <dt><b>Gross utilization</b></dt><dd>active (drive) hrs ÷ available hrs on weekdays</dd>
+        <dt><b>Total utilization</b></dt><dd>drive + idle hrs ÷ available hrs on weekdays</dd>
+        <dt><b>Active hours</b></dt><dd>time the truck is moving</dd>
+        <dt><b>Idle hours</b></dt><dd>stopped engine between trips / at customer</dd>
+      </dl>
     </div>
     <div class="tile clickable" style="--accent:var(--green)" onclick="drillTile('totalHours')">
       <div class="tag">TOTAL HOURS</div>
