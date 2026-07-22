@@ -128,20 +128,20 @@ header.ncc .illus{position:absolute;top:22px;right:32px;background:var(--gold);c
 .tabpane.active{display:block}
 .tabhdr{display:flex;justify-content:space-between;align-items:center;padding:16px 32px 0}
 .tabhdr .lead{font-size:11.5px;color:var(--slate);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:16px 32px 22px;background:var(--bg)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px 32px 18px;background:var(--bg)}
 .tiles.tiles-5{grid-template-columns:repeat(5,1fr)}
-.tile{background:var(--white);border:1px solid var(--border);position:relative;padding:16px 18px 18px;min-height:158px}
-.tile::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--navy))}
-.tile .tag{font-size:10.5px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.16em}
-.tile .label{font-size:14.5px;font-weight:700;color:var(--navy-ink);margin-top:8px;line-height:1.25}
-.tile .big{font-size:34px;font-weight:700;color:var(--big,var(--navy-ink));margin-top:12px;line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
-.tile .unit{font-size:12.5px;color:var(--slate);margin-top:8px;line-height:1.4}
-.tile .bullets{font-size:11px;color:var(--slate);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.6}
+.tile{background:var(--white);border:1px solid var(--border);position:relative;padding:12px 16px 14px;min-height:120px}
+.tile::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent,var(--navy))}
+.tile .tag{font-size:10px;font-weight:700;color:var(--accent,var(--navy));letter-spacing:.14em}
+.tile .label{font-size:13.5px;font-weight:700;color:var(--navy-ink);margin-top:4px;line-height:1.2}
+.tile .big{font-size:28px;font-weight:700;color:var(--big,var(--navy-ink));margin-top:6px;line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
+.tile .unit{font-size:11.5px;color:var(--slate);margin-top:4px;line-height:1.3}
+.tile .bullets{font-size:10.5px;color:var(--slate);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);line-height:1.5}
 .tile .bullets div::before{content:"\2022 ";color:var(--gold)}
-.panel{margin:0 32px 18px;background:var(--white);border:1px solid var(--border);padding:20px 24px 22px}
-.panel .ptitle{font-size:11.5px;font-weight:700;color:var(--navy);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
-.panel h2{margin:0;font-size:17px;font-weight:700;color:var(--navy-ink)}
-.panel .chart-wrap{position:relative;height:340px;margin-top:14px}
+.panel{margin:0 32px 14px;background:var(--white);border:1px solid var(--border);padding:14px 22px 16px}
+.panel .ptitle{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.panel h2{margin:0;font-size:16px;font-weight:700;color:var(--navy-ink)}
+.panel .chart-wrap{position:relative;height:280px;margin-top:10px}
 .grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;padding:0 32px 18px}
 .grid2-eq{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 32px 18px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 32px 18px}
@@ -289,14 +289,14 @@ footer.ncc strong{color:var(--slate)}
       <div class="tag">FLEET TOTAL</div>
       <div class="label">Total miles</div>
       <div class="big" id="t1Miles">247K</div>
-      <div class="unit" id="t1MilesUnit">TTM fleet miles</div>
+      <div class="unit" id="t1MilesUnit">Fleet miles</div>
     </div>
     <div class="tile clickable" style="--accent:var(--purple)" onclick="drillTile('trips')">
       <div class="tile-view-hint">View records</div>
       <div class="tag">FLEET TOTAL</div>
       <div class="label">Total trips</div>
       <div class="big" id="t1Trips">61,346</div>
-      <div class="unit" id="t1TripsUnit">TTM delivery trips</div>
+      <div class="unit" id="t1TripsUnit">Delivery trips</div>
     </div>
     <div class="tile clickable" style="--accent:var(--gold)" onclick="drillTile('activeUtil')">
       <div class="tile-view-hint">View records</div>
@@ -311,7 +311,7 @@ footer.ncc strong{color:var(--slate)}
       <div class="tag">TOTAL HOURS LOGGED</div>
       <div class="label">Drive + idle / transition</div>
       <div class="big" id="t1TotalHours">22.7K</div>
-      <div class="unit" id="t1TotalHoursUnit">TTM fleet hours</div>
+      <div class="unit" id="t1TotalHoursUnit">Fleet hours</div>
     </div>
     <div class="tile" style="--accent:var(--slate)">
       <div class="tag">CADENCE</div>
@@ -873,14 +873,14 @@ function updateKPIs(){
   }, 0) / data.length : 0;
 
   document.getElementById('t1Miles').textContent = fmtK(totalMiles);
-  document.getElementById('t1MilesUnit').textContent = `${periodLabel()} fleet miles`;
+  document.getElementById('t1MilesUnit').textContent = `Fleet miles`;
   document.getElementById('t1Trips').textContent = fmtNum(totalTrips);
-  document.getElementById('t1TripsUnit').textContent = `${periodLabel()} delivery trips`;
+  document.getElementById('t1TripsUnit').textContent = `Delivery trips`;
   document.getElementById('t1ActiveUtil').textContent = fmtPct(avgActiveUtil);
   document.getElementById('t1ActiveUtilUnit').textContent = `Drive time only vs weekday × 24`;
   document.getElementById('t1TotalUtilInline').textContent = `Total util: ${fmtPct(avgTotalUtil)}`;
   document.getElementById('t1TotalHours').textContent = fmtK(totalHours);
-  document.getElementById('t1TotalHoursUnit').textContent = `${periodLabel()} fleet hours`;
+  document.getElementById('t1TotalHoursUnit').textContent = `Fleet hours`;
 
   // Cadence card (5th tile) — net working days + avg trips per working day
   const cad = computeCadence();
