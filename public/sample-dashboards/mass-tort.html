@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Mass Tort · Case Valuation &amp; Analytics · North Castle Consulting</title>
+<meta name="viewport" content="width=1280" />
+<script src="mass_tort_data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+:root {
+  --navy:#1E2761; --navy-deep:#121A47; --navy-ink:#1A1A2E;
+  --gold:#C9A227; --gold-lite:#E6C95B;
+  --slate:#475569; --slate-lite:#94A3B8;
+  --bg:#F8FAFC; --mist:#EEF2FF; --border:#E5E7EB;
+  --white:#FFFFFF; --red:#B22234; --green:#2C5F2D;
+  --amber:#B45309; --amber-bg:#FEF3C7;
+  --red-bg:#FEE2E2; --green-bg:#DCFCE7;
+  --purple:#4A5E8A; --purple-lite:#94A3B8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg);font-variant-numeric:tabular-nums;line-height:1.5}
+.layout{display:grid;grid-template-columns:300px 1fr;align-items:start;max-width:1640px;margin:0 auto;background:var(--white);min-height:100vh;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.sidebar{position:sticky;top:0;align-self:start;height:100vh;background:var(--white);border-right:1px solid var(--border);padding:28px 24px;overflow-y:auto}
+.sidebar h1{font-size:18px;font-weight:700;color:var(--navy);margin:0 0 4px;letter-spacing:.04em}
+.sidebar .subtitle{font-size:11px;color:var(--slate);margin-bottom:24px;line-height:1.4}
+.sidebar-section-title{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.16em;text-transform:uppercase;margin:24px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.sidebar-filter{margin-bottom:18px}
+.sidebar-filter label{display:block;font-size:11.5px;font-weight:700;color:var(--slate);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.sidebar-filter select,.sidebar-filter input{font-family:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);width:100%;min-width:0}
+.sidebar-filter select:focus,.sidebar-filter input:focus{outline:none;border-color:var(--navy)}
+.sidebar-data-tables{list-style:none;padding:0;margin:0 0 14px;font-size:12.5px;color:var(--navy-ink)}
+.sidebar-data-tables li{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border)}
+.sidebar-data-tables li:last-child{border-bottom:none}
+.sidebar-data-tables li b{font-weight:700;color:var(--navy)}
+.sidebar-footer{margin-top:auto;padding-top:18px;border-top:1px solid var(--border);font-size:11.5px;color:var(--slate)}
+.tab-strip{background:var(--white);border-bottom:1px solid var(--border);display:flex;padding:0 28px;position:sticky;top:0;z-index:50}
+.tab{padding:14px 22px;font-size:13px;font-weight:700;color:var(--slate);cursor:pointer;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;letter-spacing:.02em}
+.tab:hover{color:var(--navy)}
+.tab.active{color:var(--navy);border-bottom-color:var(--gold)}
+.content{padding:22px 28px}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:18px}
+.tile{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--gold);padding:14px 16px;position:relative}
+.tile-label{font-size:10.5px;font-weight:700;color:var(--slate);letter-spacing:.14em;text-transform:uppercase}
+.tile-value{font-size:26px;font-weight:700;color:var(--navy);margin:4px 0 2px;line-height:1.1}
+.tile-sub{font-size:11px;color:var(--slate-lite)}
+.chart-card{background:var(--white);border:1px solid var(--border);padding:16px 18px;margin-bottom:18px}
+.chart-card h3{font-size:13px;font-weight:700;color:var(--navy);margin:0 0 14px;letter-spacing:.04em;text-transform:uppercase}
+.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px}
+.chart-grid canvas{max-height:280px}
+.tier-tile{border-left-color:var(--gold)}
+.tier-tile.tier-1{border-left-color:var(--gold)}
+.tier-tile.tier-2{border-left-color:var(--purple)}
+.tier-tile.tier-3{border-left-color:var(--amber)}
+.tier-tile.tier-4{border-left-color:var(--red)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* NL Query tab */
+.nl-container{max-width:920px}
+.nl-textarea{width:100%;min-height:100px;padding:12px 14px;font-family:inherit;font-size:14px;border:1px solid var(--border);background:var(--white);resize:vertical;line-height:1.5}
+.nl-textarea:focus{outline:none;border-color:var(--navy)}
+.nl-examples{background:var(--mist);border:1px solid var(--border);padding:10px 14px;margin-bottom:12px;font-size:12px}
+.nl-examples summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+.nl-examples ul{margin:8px 0 0;padding-left:20px;color:var(--slate)}
+.nl-examples li{cursor:pointer;padding:3px 0}
+.nl-examples li:hover{color:var(--navy);text-decoration:underline}
+.nl-actions{margin:12px 0;display:flex;gap:10px;align-items:center}
+.btn{font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--white);background:var(--navy);border:none;padding:10px 18px;cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--navy-deep)}
+.btn:disabled{background:var(--slate-lite);cursor:not-allowed}
+.btn-ghost{background:transparent;color:var(--navy);border:1px solid var(--border)}
+.btn-ghost:hover{background:var(--mist)}
+.nl-result{margin-top:18px}
+.nl-message{padding:12px 16px;margin-bottom:12px;font-size:13px;border:1px solid var(--border)}
+.nl-message.success{background:var(--green-bg);border-color:var(--green);color:#1B5E20}
+.nl-message.error{background:var(--red-bg);border-color:var(--red);color:var(--red)}
+.nl-message.clarify{background:var(--amber-bg);border-color:var(--amber);color:var(--amber)}
+.nl-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.nl-table th,.nl-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
+.nl-table th{background:var(--mist);font-weight:700;color:var(--navy);position:sticky;top:0}
+.nl-table-wrap{max-height:440px;overflow:auto;border:1px solid var(--border)}
+.nl-sql{background:var(--navy-ink);color:#94A3B8;padding:12px 14px;font-family:Consolas,monospace;font-size:12px;overflow:auto;margin-top:8px;line-height:1.5}
+
+/* Valuation table */
+.val-table{width:100%;border-collapse:collapse;font-size:12px}
+.val-table th,.val-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
+.val-table th{background:var(--mist);font-weight:700;color:var(--navy);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.tier-pill{display:inline-block;padding:2px 8px;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:2px;color:var(--white)}
+.tier-pill.t1{background:var(--gold);color:var(--navy-ink)}
+.tier-pill.t2{background:var(--purple)}
+.tier-pill.t3{background:var(--amber)}
+.tier-pill.t4{background:var(--red)}
+.val-table-wrap{max-height:520px;overflow:auto;border:1px solid var(--border)}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <h1>Mass Tort Analytics</h1>
+  <div class="subtitle">MDL 3004 &middot; Southern District of Illinois<br/>Paraquat Products Liability Litigation</div>
+
+  <div class="sidebar-section-title" style="margin-top:0">Filters</div>
+
+  <div class="sidebar-filter">
+    <label>Matter Status</label>
+    <select id="filterStatus">
+      <option value="all">All Statuses</option>
+      <option value="open">Open</option>
+      <option value="closed">Closed</option>
+      <option value="settled">Settled</option>
+      <option value="on_hold">On Hold</option>
+      <option value="dismissed">Dismissed</option>
+    </select>
+  </div>
+
+  <div class="sidebar-filter">
+    <label>Matter Type</label>
+    <select id="filterType">
+      <option value="all">All Types</option>
+      <option value="personal_injury">Personal Injury</option>
+      <option value="wrongful_death">Wrongful Death</option>
+      <option value="loss_of_consortium">Loss of Consortium</option>
+      <option value="medical_monitoring">Medical Monitoring</option>
+    </select>
+  </div>
+
+  <div class="sidebar-filter">
+    <label>Diagnosis</label>
+    <select id="filterDiagnosis">
+      <option value="all">All Diagnoses</option>
+      <option value="parkinsons_disease">Parkinson's Disease</option>
+      <option value="parkinsonism_unspecified">Parkinsonism (Unspec)</option>
+      <option value="multiple_system_atrophy">MSA</option>
+      <option value="progressive_supranuclear_palsy">PSP</option>
+      <option value="corticobasal_degeneration">CBD</option>
+      <option value="drug_induced_parkinsonism">Drug-Induced</option>
+      <option value="vascular_parkinsonism">Vascular</option>
+      <option value="dementia_with_lewy_bodies">DLB</option>
+    </select>
+  </div>
+
+  <div class="sidebar-filter">
+    <label>Tier (Valuation)</label>
+    <select id="filterTier">
+      <option value="all">All Tiers</option>
+      <option value="1">Tier 1 (Strongest)</option>
+      <option value="2">Tier 2</option>
+      <option value="3">Tier 3</option>
+      <option value="4">Tier 4 (Weakest)</option>
+    </select>
+  </div>
+
+  <div class="sidebar-section-title">Data Tables</div>
+  <ul class="sidebar-data-tables">
+    <li><span>PQ_claimants</span><b id="cnt_claimants">&mdash;</b></li>
+    <li><span>PQ_matters</span><b id="cnt_matters">&mdash;</b></li>
+    <li><span>PQ_matter_products</span><b id="cnt_matter_products">&mdash;</b></li>
+    <li><span>PQ_diagnoses</span><b id="cnt_diagnoses">&mdash;</b></li>
+    <li><span>PQ_medical_records</span><b id="cnt_records">&mdash;</b></li>
+    <li><span>PQ_record_pins</span><b id="cnt_pins">&mdash;</b></li>
+  </ul>
+
+  <div class="sidebar-footer">
+    Paraquat &middot; v2 schema<br/>
+    Synthetic data for demo only
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main>
+  <div class="tab-strip">
+    <div class="tab active" data-tab="t1">Case Pipeline</div>
+    <div class="tab" data-tab="t2">Exposure</div>
+    <div class="tab" data-tab="t3">Medical</div>
+    <div class="tab" data-tab="t4">Evidence</div>
+    <div class="tab" data-tab="t5">Valuation</div>
+    <div class="tab" data-tab="t6">NL Query</div>
+  </div>
+
+  <div class="content">
+
+    <!-- TAB 1: Case Pipeline -->
+    <div class="tab-content active" id="t1">
+      <div class="kpi-row" id="kpi-row-1"></div>
+      <div class="chart-grid">
+        <div class="chart-card"><h3>Matters by Status</h3><canvas id="chartStatus"></canvas></div>
+        <div class="chart-card"><h3>Matters by Type</h3><canvas id="chartType"></canvas></div>
+        <div class="chart-card"><h3>Filing Timeline</h3><canvas id="chartFiling"></canvas></div>
+        <div class="chart-card"><h3>Firm Workload</h3><canvas id="chartFirms"></canvas></div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Exposure -->
+    <div class="tab-content" id="t2">
+      <div class="kpi-row" id="kpi-row-2"></div>
+      <div class="chart-grid">
+        <div class="chart-card"><h3>Exposure by Setting</h3><canvas id="chartSetting"></canvas></div>
+        <div class="chart-card"><h3>Direct vs Indirect Exposure</h3><canvas id="chartExType"></canvas></div>
+        <div class="chart-card"><h3>Application Method</h3><canvas id="chartMethod"></canvas></div>
+        <div class="chart-card"><h3>Exposure Duration</h3><canvas id="chartDuration"></canvas></div>
+        <div class="chart-card"><h3>First Exposure Year</h3><canvas id="chartTimeline"></canvas></div>
+        <div class="chart-card"><h3>Products Used</h3><canvas id="chartProducts"></canvas></div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Medical -->
+    <div class="tab-content" id="t3">
+      <div class="kpi-row" id="kpi-row-3"></div>
+      <div class="chart-grid">
+        <div class="chart-card"><h3>Diagnosis Distribution</h3><canvas id="chartDx"></canvas></div>
+        <div class="chart-card"><h3>Diagnosis Certainty</h3><canvas id="chartCertainty"></canvas></div>
+        <div class="chart-card"><h3>Top Symptoms</h3><canvas id="chartSymptoms"></canvas></div>
+        <div class="chart-card"><h3>Levodopa Response</h3><canvas id="chartLevodopa"></canvas></div>
+        <div class="chart-card"><h3>Latency by Setting</h3><canvas id="chartLatency"></canvas></div>
+        <div class="chart-card"><h3>Latency Distribution</h3><canvas id="chartLatencyDist"></canvas></div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Evidence -->
+    <div class="tab-content" id="t4">
+      <div class="kpi-row" id="kpi-row-4"></div>
+      <div class="chart-grid">
+        <div class="chart-card"><h3>Receipts: Claimed vs Verified</h3><canvas id="chartReceipts"></canvas></div>
+        <div class="chart-card"><h3>Licenses: Claimed vs Verified</h3><canvas id="chartLicenses"></canvas></div>
+        <div class="chart-card"><h3>Evidence by Type</h3><canvas id="chartEvidenceType"></canvas></div>
+        <div class="chart-card"><h3>Pin Coverage</h3><canvas id="chartPinCoverage"></canvas></div>
+        <div class="chart-card"><h3>Settlement Pipeline</h3><canvas id="chartSettlement"></canvas></div>
+        <div class="chart-card"><h3>Monthly Update Compliance</h3><canvas id="chartCompliance"></canvas></div>
+      </div>
+    </div>
+
+    <!-- TAB 5: Valuation -->
+    <div class="tab-content" id="t5">
+      <div class="kpi-row" id="kpi-row-5"></div>
+      <div class="chart-grid">
+        <div class="chart-card"><h3>Tier Distribution</h3><canvas id="chartTierDist"></canvas></div>
+        <div class="chart-card"><h3>Score Histogram</h3><canvas id="chartScoreHist"></canvas></div>
+        <div class="chart-card"><h3>Tier Breakdown by Firm</h3><canvas id="chartTierByFirm"></canvas></div>
+        <div class="chart-card"><h3>Avg Score by Exposure Setting</h3><canvas id="chartScoreBySetting"></canvas></div>
+        <div class="chart-card"><h3>Expected Recovery Range by Tier</h3><canvas id="chartRecoveryByTier"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3>Top 25 Highest-Valued Matters</h3>
+        <div class="val-table-wrap">
+          <table class="val-table" id="valTable">
+            <thead><tr><th>Tier</th><th>Matter</th><th>Claimant</th><th>Firm</th><th>Diagnosis</th><th>Score</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: NL Query -->
+    <div class="tab-content nl-container" id="t6">
+      <div class="chart-card">
+        <h3>Ask the Database</h3>
+        <p style="margin:0 0 12px;font-size:12.5px;color:var(--slate)">Type a question in plain English. The system will convert it to SQL against the paraquat_tort database and run it.</p>
+        <details class="nl-examples">
+          <summary>Example queries</summary>
+          <ul>
+            <li>Show me all open matters in Illinois with Parkinson's disease diagnosis</li>
+            <li>Top 10 cases by settlement amount with verified receipts</li>
+            <li>Average exposure duration for cases with definitive diagnosis</li>
+            <li>Open matters where the statute of limitations is within the next 90 days</li>
+            <li>Count of matters by firm and tier</li>
+            <li>Claimants exposed for over 20 years with no PPE</li>
+            <li>Monthly update compliance rate by firm</li>
+            <li>Average settlement amount by exposure type (direct vs indirect)</li>
+          </ul>
+        </details>
+        <textarea class="nl-textarea" id="nlQuery" placeholder="e.g. Show me all open Tier 1 matters with confirmed Parkinson's diagnosis"></textarea>
+        <div class="nl-actions">
+          <button class="btn" id="nlRunBtn">Run Query</button>
+          <button class="btn btn-ghost" id="nlClearBtn">Clear</button>
+          <span id="nlStatus" style="font-size:12px;color:var(--slate)"></span>
+        </div>
+        <div class="nl-result" id="nlResult"></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</div>
+
+<script>
+// ====================================================================
+// DATA + DESIGN TOKENS
+// ====================================================================
+
+const D = window.MT;
+let charts = {};
+const TIER_COLORS = ['#C9A227', '#4A5E8A', '#B45309', '#B22234'];
+const TIER_NAMES = {1: 'Tier 1', 2: 'Tier 2', 3: 'Tier 3', 4: 'Tier 4'};
+
+// Update sidebar counts
+function updateCounts() {
+  document.getElementById('cnt_claimants').textContent = D.totalClaimants?.toLocaleString() || '—';
+  document.getElementById('cnt_matters').textContent = D.totalMatters?.toLocaleString() || '—';
+  document.getElementById('cnt_matter_products').textContent = (D.totalMatterProducts||0).toLocaleString();
+  document.getElementById('cnt_diagnoses').textContent = D.totalDiagnoses?.toLocaleString() || '—';
+  document.getElementById('cnt_records').textContent = D.totalRecords?.toLocaleString() || '—';
+  document.getElementById('cnt_pins').textContent = D.totalPins?.toLocaleString() || '—';
+}
+
+// ====================================================================
+// CASE VALUATION SCORING (client-side)
+// ====================================================================
+
+function scoreCase(c) {
+  // Weights: diagnosis 30, exposure 20, evidence 15, records 10,
+  //          latency 10, symptoms 10, levodopa 5
+  const W = {Dx:30, Exp:20, Ev:15, Rec:10, Lat:10, Sym:10, Lev:5};
+
+  // 1. Diagnosis certainty (0-10)
+  let dx = 0;
+  if (c.primaryDiagnosis) {
+    const cond = c.primaryDiagnosis;
+    if (cond === 'parkinsons_disease') dx = 8;
+    else if (cond === 'parkinsonism_unspecified') dx = 6;
+    else dx = 4; // atypical
+  }
+
+  // 2. Exposure duration (years)
+  let exp = 0;
+  if (c.exposureYears != null) {
+    if (c.exposureYears >= 30) exp = 10;
+    else if (c.exposureYears >= 20) exp = 8;
+    else if (c.exposureYears >= 10) exp = 6;
+    else if (c.exposureYears >= 5) exp = 4;
+    else exp = 2;
+  }
+
+  // 3. Evidence verification
+  let ev = 0;
+  if (c.receiptsVerified && c.licenseVerified) ev = 10;
+  else if (c.receiptsVerified || c.licenseVerified) ev = 5;
+
+  // 4. Medical records count
+  let rec = 0;
+  if (c.recordCount >= 3) rec = 10;
+  else if (c.recordCount == 2) rec = 6;
+  else if (c.recordCount == 1) rec = 3;
+
+  // 5. Latency (10-25 = sweet spot)
+  let lat = 0;
+  if (c.latencyYears != null) {
+    if (c.latencyYears >= 10 && c.latencyYears <= 25) lat = 10;
+    else if (c.latencyYears >= 5 && c.latencyYears < 10) lat = 7;
+    else if (c.latencyYears > 25) lat = 5;
+    else lat = 2;
+  }
+
+  // 6. Symptom severity (avg 1-5)
+  let sym = 0;
+  if (c.avgSymptomSeverity != null) {
+    if (c.avgSymptomSeverity >= 4) sym = 10;
+    else if (c.avgSymptomSeverity >= 3) sym = 6;
+    else if (c.avgSymptomSeverity >= 1) sym = 3;
+  }
+
+  // 7. Levodopa response
+  let lev = 0;
+  if (c.levodopaResponse === 'robust') lev = 10;
+  else if (c.levodopaResponse === 'moderate') lev = 7;
+  else if (c.levodopaResponse === 'minimal') lev = 3;
+
+  const raw = (dx*W.Dx + exp*W.Exp + ev*W.Ev + rec*W.Rec +
+               lat*W.Lat + sym*W.Sym + lev*W.Lev) / 100;
+  const score = Math.round(raw * 10) / 10; // 0-10 scale
+
+  let tier = 4;
+  if (raw >= 8) tier = 1;
+  else if (raw >= 6) tier = 2;
+  else if (raw >= 4) tier = 3;
+
+  return { score, tier, rawScore: raw };
+}
+
+function scoreAllCases() {
+  if (!D.cases) return [];
+  return D.cases.map(c => ({ ...c, ...scoreCase(c) }));
+}
+
+function tierRecoveryRange(tier) {
+  return ({
+    1: { low: 500000, high: 2000000, label: '$500K - $2M' },
+    2: { low: 100000, high: 500000,  label: '$100K - $500K' },
+    3: { low: 25000,  high: 100000,  label: '$25K - $100K' },
+    4: { low: 0,      high: 25000,   label: '<$25K' },
+  })[tier];
+}
+
+// ====================================================================
+// CHART HELPERS
+// ====================================================================
+
+function destroy(id) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } }
+
+function doughnut(id, labels, data, colors) {
+  destroy(id);
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  charts[id] = new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels, datasets: [{ data, backgroundColor: colors || TIER_COLORS }] },
+    options: {
+      responsive: true, cutout: '60%',
+      plugins: { legend: { position: 'right', labels: { font: { size: 11 }, boxWidth: 12 } },
+                 datalabels: { color: '#fff', font: { weight: 700, size: 11 }, formatter: v => v } }
+    }
+  });
+}
+
+function bar(id, labels, datasets, opts = {}) {
+  destroy(id);
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  charts[id] = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      indexAxis: opts.horizontal ? 'y' : 'x',
+      responsive: true,
+      plugins: { legend: { display: (datasets.length > 1), labels: { font: { size: 11 }, boxWidth: 12 } },
+                 datalabels: opts.datalabels || { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+        y: { grid: { color: '#F1F5F9' }, ticks: { font: { size: 10 } } }
+      }
+    }
+  });
+}
+
+function stackedBar(id, labels, datasets) {
+  destroy(id);
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  charts[id] = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      indexAxis: 'y', responsive: true,
+      plugins: { legend: { labels: { font: { size: 11 }, boxWidth: 12 } } },
+      scales: {
+        x: { stacked: true, grid: { color: '#F1F5F9' }, ticks: { font: { size: 10 } } },
+        y: { stacked: true, grid: { display: false }, ticks: { font: { size: 10 } } }
+      }
+    }
+  });
+}
+
+function line(id, labels, datasets) {
+  destroy(id);
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  charts[id] = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: (datasets.length > 1), labels: { font: { size: 11 } } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+        y: { grid: { color: '#F1F5F9' }, ticks: { font: { size: 10 } } }
+      }
+    }
+  });
+}
+
+// ====================================================================
+// KPI TILES
+// ====================================================================
+
+function renderKPIs() {
+  // Tab 1
+  const openMatters = D.mattersByStatus?.find(s => s.status === 'open')?.count || 0;
+  const kpi1 = document.getElementById('kpi-row-1');
+  kpi1.innerHTML = `
+    <div class="tile"><div class="tile-label">Total Claimants</div><div class="tile-value">${D.totalClaimants?.toLocaleString()}</div><div class="tile-sub">${D.totalMatters?.toLocaleString()} matters</div></div>
+    <div class="tile"><div class="tile-label">Open Matters</div><div class="tile-value">${openMatters.toLocaleString()}</div><div class="tile-sub">of ${D.totalMatters?.toLocaleString()}</div></div>
+    <div class="tile"><div class="tile-label">Avg Latency</div><div class="tile-value">${(D.avgLatency || 0).toFixed(1)} yrs</div><div class="tile-sub">exposure to diagnosis</div></div>
+    <div class="tile"><div class="tile-label">Law Firms</div><div class="tile-value">${D.totalFirms}</div><div class="tile-sub">counsel firms</div></div>`;
+
+  // Tab 2
+  const farmPct = D.exposureBySetting?.find(s => s.setting === 'farm')?.count || 0;
+  const kpi2 = document.getElementById('kpi-row-2');
+  kpi2.innerHTML = `
+    <div class="tile"><div class="tile-label">Matters w/ Exposure</div><div class="tile-value">${farmPct.toLocaleString()}</div><div class="tile-sub">farm setting</div></div>
+    <div class="tile"><div class="tile-label">Avg Duration</div><div class="tile-value">${(D.avgExposureYears || 0).toFixed(1)} yrs</div><div class="tile-sub">per matter</div></div>
+    <div class="tile"><div class="tile-label">PPE Usage</div><div class="tile-value">${(D.ppeUsage?.find(p=>p.ppe_status==='PPE Used')?.count||0)}</div><div class="tile-sub">reported PPE use</div></div>
+    <div class="tile"><div class="tile-label">Direct / Indirect</div><div class="tile-value">${D.exposureByType?.find(e=>e.exposure_type==='direct')?.count||0} / ${D.exposureByType?.find(e=>e.exposure_type==='indirect')?.count||0}</div><div class="tile-sub">exposure types</div></div>`;
+
+  // Tab 3
+  const pdCount = D.diagnosisDistribution?.find(d => d.condition === 'parkinsons_disease')?.count || 0;
+  const kpi3 = document.getElementById('kpi-row-3');
+  kpi3.innerHTML = `
+    <div class="tile"><div class="tile-label">Diagnoses</div><div class="tile-value">${D.totalDiagnoses?.toLocaleString()}</div><div class="tile-sub">${Math.round(pdCount/D.totalDiagnoses*100)}% Parkinson's</div></div>
+    <div class="tile"><div class="tile-label">Medical Records</div><div class="tile-value">${D.totalRecords?.toLocaleString()}</div><div class="tile-sub">chart bundles</div></div>
+    <div class="tile"><div class="tile-label">Record Pins</div><div class="tile-value">${D.totalPins?.toLocaleString()}</div><div class="tile-sub">facts pinned</div></div>
+    <div class="tile"><div class="tile-label">Providers</div><div class="tile-value">${D.totalProviders}</div><div class="tile-sub">facilities</div></div>`;
+
+  // Tab 4
+  const eGap = D.evidenceGap?.[0] || {};
+  const kpi4 = document.getElementById('kpi-row-4');
+  kpi4.innerHTML = `
+    <div class="tile"><div class="tile-label">Receipts Claimed</div><div class="tile-value">${(eGap.receipts_claimed||0).toLocaleString()}</div><div class="tile-sub">verified: ${(eGap.receipts_verified||0).toLocaleString()}</div></div>
+    <div class="tile"><div class="tile-label">Licenses Claimed</div><div class="tile-value">${(eGap.license_claimed||0).toLocaleString()}</div><div class="tile-sub">verified: ${(eGap.license_verified||0).toLocaleString()}</div></div>
+    <div class="tile"><div class="tile-label">Open Update Rate</div><div class="tile-value">${Math.round((D.monthlyUpdateCompliance?.[0]?.sent||0) / Math.max((D.monthlyUpdateCompliance?.[0]?.sent||0) + (D.monthlyUpdateCompliance?.[0]?.not_sent||0), 1) * 100)}%</div><div class="tile-sub">monthly client comm</div></div>
+    <div class="tile"><div class="tile-label">Settled Matters</div><div class="tile-value">${D.settlementStatus?.find(s=>s.settlement_status==='accepted')?.count||0}</div><div class="tile-sub">of ${D.totalMatters}</div></div>`;
+
+  // Tab 5 — Valuation
+  const scored = scoreAllCases();
+  const tierCounts = [1,2,3,4].map(t => scored.filter(c => c.tier === t).length);
+  const avgScore = scored.length ? (scored.reduce((s,c) => s + c.score, 0) / scored.length).toFixed(1) : '0.0';
+  const kpi5 = document.getElementById('kpi-row-5');
+  kpi5.innerHTML = `
+    <div class="tile tier-tile tier-1"><div class="tile-label">Tier 1</div><div class="tile-value">${tierCounts[0]}</div><div class="tile-sub">$500K - $2M+ expected</div></div>
+    <div class="tile tier-tile tier-2"><div class="tile-label">Tier 2</div><div class="tile-value">${tierCounts[1]}</div><div class="tile-sub">$100K - $500K</div></div>
+    <div class="tile tier-tile tier-3"><div class="tile-label">Tier 3</div><div class="tile-value">${tierCounts[2]}</div><div class="tile-sub">$25K - $100K</div></div>
+    <div class="tile tier-tile tier-4"><div class="tile-label">Tier 4</div><div class="tile-value">${tierCounts[3]}</div><div class="tile-sub"><$25K / non-viable</div></div>
+    <div class="tile"><div class="tile-label">Avg Score</div><div class="tile-value">${avgScore}</div><div class="tile-sub">across ${scored.length} matters</div></div>`;
+}
+
+// ====================================================================
+// CHART RENDERERS
+// ====================================================================
+
+function renderTab1() {
+  const STATUS_COLORS = {open:'#1E2761', settled:'#2C5F2D', closed:'#94A3B8', on_hold:'#B45309', dismissed:'#B22234'};
+  doughnut('chartStatus',
+    D.mattersByStatus.map(s => s.status),
+    D.mattersByStatus.map(s => s.count),
+    D.mattersByStatus.map(s => STATUS_COLORS[s.status] || '#94A3B8'));
+  bar('chartType',
+    D.mattersByType.map(t => t.matter_type.replace(/_/g, ' ')),
+    [{ label: 'Matters', data: D.mattersByType.map(t => t.count), backgroundColor: '#1E2761' }]);
+  line('chartFiling',
+    D.mattersByMonth.map(m => m.month),
+    [{ label: 'Filings', data: D.mattersByMonth.map(m => m.count), borderColor: '#1E2761', backgroundColor: '#1E276120', fill: true, tension: 0.25 }]);
+  stackedBar('chartFirms',
+    D.firmWorkload.map(f => f.firm_name.length > 30 ? f.firm_name.slice(0, 28) + '…' : f.firm_name),
+    [
+      { label: 'Open',   data: D.firmWorkload.map(f => f.open_matters),   backgroundColor: '#1E2761' },
+      { label: 'Settled',data: D.firmWorkload.map(f => f.settled_matters||0), backgroundColor: '#2C5F2D' },
+      { label: 'Closed', data: D.firmWorkload.map(f => f.closed_matters), backgroundColor: '#94A3B8' },
+      { label: 'On Hold',data: D.firmWorkload.map(f => f.on_hold_matters), backgroundColor: '#B45309' },
+      { label: 'Dismissed', data: D.firmWorkload.map(f => f.dismissed_matters), backgroundColor: '#B22234' },
+    ]);
+}
+
+function renderTab2() {
+  doughnut('chartSetting', D.exposureBySetting.map(s => s.setting.replace(/_/g,' ')), D.exposureBySetting.map(s => s.count));
+  doughnut('chartExType', D.exposureByType.map(t => t.exposure_type), D.exposureByType.map(t => t.count), ['#1E2761', '#C9A227']);
+  bar('chartMethod',
+    D.exposureByMethod.map(m => m.application_method.replace(/_/g, ' ')),
+    [{ label: 'Episodes', data: D.exposureByMethod.map(m => m.count), backgroundColor: '#1E2761' }],
+    { horizontal: true });
+  bar('chartDuration',
+    D.exposureDuration.map(d => d.duration_bucket),
+    [{ label: 'Matters', data: D.exposureDuration.map(d => d.count), backgroundColor: '#4A5E8A' }]);
+  line('chartTimeline',
+    D.exposureTimeline.map(t => t.year),
+    [{ label: 'First exposures', data: D.exposureTimeline.map(t => t.count), borderColor: '#C9A227', backgroundColor: '#C9A22730', fill: true, tension: 0.25 }]);
+  bar('chartProducts',
+    D.products.map(p => p.product_name.length > 24 ? p.product_name.slice(0,22)+'…' : p.product_name),
+    [{ label: 'Matters using', data: D.products.map(p => p.matter_count), backgroundColor: '#1E2761' }],
+    { horizontal: true });
+}
+
+function renderTab3() {
+  doughnut('chartDx',
+    D.diagnosisDistribution.map(d => d.condition.replace(/_/g, ' ')),
+    D.diagnosisDistribution.map(d => d.count));
+  doughnut('chartCertainty',
+    D.diagnosisCertainty.map(c => c.certainty),
+    D.diagnosisCertainty.map(c => c.count),
+    ['#2C5F2D', '#1E2761', '#B45309']);
+  bar('chartSymptoms',
+    D.symptomDistribution.map(s => s.symptom),
+    [{ label: 'Cases', data: D.symptomDistribution.map(s => s.count), backgroundColor: '#1E2761' }],
+    { horizontal: true });
+  doughnut('chartLevodopa',
+    D.levodopaResponse.map(r => r.levodopa_response),
+    D.levodopaResponse.map(r => r.count),
+    ['#2C5F2D', '#1E2761', '#B45309', '#B22234']);
+  bar('chartLatency',
+    D.latencyBySetting.map(l => l.setting.replace(/_/g, ' ')),
+    [{ label: 'Avg latency (yrs)', data: D.latencyBySetting.map(l => l.avg_latency_years), backgroundColor: '#C9A227' }]);
+  bar('chartLatencyDist',
+    D.latencyDistribution.map(l => l.latency_bucket),
+    [{ label: 'Matters', data: D.latencyDistribution.map(l => l.count), backgroundColor: '#4A5E8A' }]);
+}
+
+function renderTab4() {
+  const eg = D.evidenceGap?.[0] || {};
+  stackedBar('chartReceipts',
+    ['Receipts'],
+    [
+      { label: 'Verified', data: [eg.receipts_verified||0], backgroundColor: '#2C5F2D' },
+      { label: 'Claimed only', data: [(eg.receipts_claimed||0) - (eg.receipts_verified||0)], backgroundColor: '#B45309' },
+      { label: 'Not claimed', data: [D.totalMatters - (eg.receipts_claimed||0)], backgroundColor: '#E5E7EB' },
+    ]);
+  stackedBar('chartLicenses',
+    ['Licenses'],
+    [
+      { label: 'Verified', data: [eg.license_verified||0], backgroundColor: '#2C5F2D' },
+      { label: 'Claimed only', data: [(eg.license_claimed||0) - (eg.license_verified||0)], backgroundColor: '#B45309' },
+      { label: 'Not claimed', data: [D.totalMatters - (eg.license_claimed||0)], backgroundColor: '#E5E7EB' },
+    ]);
+  stackedBar('chartEvidenceType',
+    D.evidenceByType.map(e => e.evidence_type.replace(/_/g, ' ')),
+    [
+      { label: 'Verified', data: D.evidenceByType.map(e => e.verified), backgroundColor: '#2C5F2D' },
+      { label: 'Unverified', data: D.evidenceByType.map(e => e.unverified), backgroundColor: '#B45309' },
+    ]);
+  bar('chartPinCoverage',
+    D.pinCoverage.map(p => p.fact_table.replace(/_/g,' ')),
+    [{ label: 'Pins', data: D.pinCoverage.map(p => p.count), backgroundColor: '#C9A227' }],
+    { horizontal: true });
+  bar('chartSettlement',
+    D.settlementStatus.map(s => s.settlement_status),
+    [{ label: 'Matters', data: D.settlementStatus.map(s => s.count), backgroundColor: '#1E2761' }]);
+  const mc = D.monthlyUpdateCompliance?.[0] || {};
+  stackedBar('chartCompliance',
+    ['Open matters'],
+    [
+      { label: 'Sent', data: [mc.sent||0], backgroundColor: '#2C5F2D' },
+      { label: 'Not sent', data: [mc.not_sent||0], backgroundColor: '#B22234' },
+    ]);
+}
+
+function renderTab5() {
+  const scored = scoreAllCases();
+
+  // Tier distribution
+  const tierCounts = [1,2,3,4].map(t => scored.filter(c => c.tier === t).length);
+  doughnut('chartTierDist',
+    ['Tier 1', 'Tier 2', 'Tier 3', 'Tier 4'],
+    tierCounts,
+    TIER_COLORS);
+
+  // Score histogram
+  const buckets = ['0-2','2-4','4-6','6-8','8-10'];
+  const bucketCounts = [0,0,0,0,0];
+  scored.forEach(c => {
+    const idx = Math.min(Math.floor(c.score/2), 4);
+    bucketCounts[idx]++;
+  });
+  bar('chartScoreHist', buckets,
+    [{ label: 'Cases', data: bucketCounts, backgroundColor: TIER_COLORS }],
+    { datalabels: { display: true, anchor: 'end', align: 'top', color: '#1E2761',
+                    font: { weight: 700 }, formatter: v => v } });
+
+  // Tier by firm
+  const firms = [...new Set(scored.map(c => c.firm))];
+  const tierByFirm = firms.map(f => ({
+    firm: f,
+    t1: scored.filter(c => c.firm === f && c.tier === 1).length,
+    t2: scored.filter(c => c.firm === f && c.tier === 2).length,
+    t3: scored.filter(c => c.firm === f && c.tier === 3).length,
+    t4: scored.filter(c => c.firm === f && c.tier === 4).length,
+  }));
+  stackedBar('chartTierByFirm',
+    tierByFirm.map(t => t.firm.length > 26 ? t.firm.slice(0,24)+'…' : t.firm),
+    [
+      { label: 'Tier 1', data: tierByFirm.map(t => t.t1), backgroundColor: TIER_COLORS[0] },
+      { label: 'Tier 2', data: tierByFirm.map(t => t.t2), backgroundColor: TIER_COLORS[1] },
+      { label: 'Tier 3', data: tierByFirm.map(t => t.t3), backgroundColor: TIER_COLORS[2] },
+      { label: 'Tier 4', data: tierByFirm.map(t => t.t4), backgroundColor: TIER_COLORS[3] },
+    ]);
+
+  // Avg score by setting
+  const settings = [...new Set(scored.map(c => c.exposureSetting).filter(Boolean))];
+  const avgBySetting = settings.map(s => ({
+    setting: s,
+    avg: scored.filter(c => c.exposureSetting === s).reduce((a,c)=>a+c.score,0) / scored.filter(c => c.exposureSetting === s).length
+  }));
+  bar('chartScoreBySetting',
+    avgBySetting.map(a => a.setting.replace(/_/g,' ')),
+    [{ label: 'Avg score', data: avgBySetting.map(a => a.avg), backgroundColor: '#C9A227' }]);
+
+  // Recovery by tier
+  const recoveryMidpoints = [1, 2, 3, 4].map(t => {
+    const r = tierRecoveryRange(t);
+    return (r.low + r.high) / 2;
+  });
+  bar('chartRecoveryByTier',
+    ['Tier 1', 'Tier 2', 'Tier 3', 'Tier 4'],
+    [{ label: 'Expected mid-range ($)', data: recoveryMidpoints, backgroundColor: TIER_COLORS }]);
+
+  // Top 25 table
+  const top = scored.sort((a,b) => b.score - a.score).slice(0, 25);
+  const tbody = document.querySelector('#valTable tbody');
+  tbody.innerHTML = top.map(c => `
+    <tr>
+      <td><span class="tier-pill t${c.tier}">T${c.tier}</span></td>
+      <td>${(c.docket || '').slice(0, 16)}</td>
+      <td>${c.claimantName}</td>
+      <td>${c.firm}</td>
+      <td>${c.primaryDiagnosis ? c.primaryDiagnosis.replace(/_/g, ' ') : '—'}</td>
+      <td><b>${c.score.toFixed(1)}</b></td>
+    </tr>`).join('');
+}
+
+// ====================================================================
+// NL QUERY TAB
+// ====================================================================
+
+const API_URL = window.MT_CONFIG?.apiUrl || ''; // set via window.MT_CONFIG in production
+
+async function runNLQuery() {
+  const query = document.getElementById('nlQuery').value.trim();
+  if (!query) {
+    showNLResult({ type: 'error', message: 'Please enter a question.' });
+    return;
+  }
+  const btn = document.getElementById('nlRunBtn');
+  btn.disabled = true;
+  document.getElementById('nlStatus').textContent = 'Querying…';
+
+  try {
+    const res = await fetch(API_URL || '/query', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query })
+    });
+    const data = await res.json();
+
+    if (data.needs_clarification) {
+      showNLResult({ type: 'clarify', message: data.message, suggestions: data.suggestions || [] });
+    } else if (data.error) {
+      showNLResult({ type: 'error', message: data.error });
+    } else {
+      showNLResult({ type: 'success', ...data });
+    }
+  } catch (err) {
+    showNLResult({ type: 'error', message: 'Network error: ' + err.message + (API_URL ? '' : ' (API URL not configured — set window.MT_CONFIG.apiUrl)') });
+  } finally {
+    btn.disabled = false;
+    document.getElementById('nlStatus').textContent = '';
+  }
+}
+
+function showNLResult({ type, message, suggestions, sql, columns, rows }) {
+  const el = document.getElementById('nlResult');
+  if (type === 'error') {
+    el.innerHTML = `<div class="nl-message error"><b>Error:</b> ${message}</div>`;
+    return;
+  }
+  if (type === 'clarify') {
+    el.innerHTML = `
+      <div class="nl-message clarify"><b>Need more information</b><br/>${message}</div>
+      ${suggestions && suggestions.length ? `<div style="font-size:12px;color:var(--slate);margin-top:8px">Try one of these:</div>
+      <ul style="font-size:12.5px;color:var(--navy);margin:6px 0 0 0">${suggestions.map(s => `<li>${s}</li>`).join('')}</ul>` : ''}`;
+    return;
+  }
+  // success
+  const tableHtml = renderResultsTable(columns, rows);
+  const csvButton = rows.length ? `<button class="btn btn-ghost" onclick="downloadCSV(${JSON.stringify(columns)}, ${JSON.stringify(rows)}, '${escapeAttr(sql)}')">Download CSV</button>` : '';
+  const sqlSection = sql ? `<details style="margin:10px 0"><summary style="cursor:pointer;font-size:12px;color:var(--navy);font-weight:700;letter-spacing:.06em">Generated SQL</summary><pre class="nl-sql">${escapeHtml(sql)}</pre></details>` : '';
+  el.innerHTML = `
+    <div class="nl-message success"><b>${rows.length} rows returned</b>${message ? ` &middot; ${escapeHtml(message)}` : ''}</div>
+    ${sqlSection}
+    ${csvButton}
+    ${tableHtml}`;
+}
+
+function renderResultsTable(columns, rows) {
+  if (!rows || !rows.length) return '<div style="font-size:12px;color:var(--slate);margin-top:8px">No rows.</div>';
+  const header = columns.map(c => `<th>${escapeHtml(c)}</th>`).join('');
+  const body = rows.map(row => `<tr>${columns.map(c => `<td>${escapeHtml(String(row[c] ?? ''))}</td>`).join('')}</tr>`).join('');
+  return `<div class="nl-table-wrap"><table class="nl-table"><thead><tr>${header}</tr></thead><tbody>${body}</tbody></table></div>`;
+}
+
+function downloadCSV(columns, rows, sql) {
+  const csv = [columns.join(',')]
+    .concat(rows.map(r => columns.map(c => {
+      const v = r[c] == null ? '' : String(r[c]);
+      return /[",\n]/.test(v) ? `"${v.replace(/"/g,'""')}"` : v;
+    }).join(',')))
+    .join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'query_results.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function escapeAttr(s) { return escapeHtml(s).replace(/'/g, '&#39;'); }
+
+// Wire up examples
+document.addEventListener('click', e => {
+  if (e.target.matches('.nl-examples li')) {
+    document.getElementById('nlQuery').value = e.target.textContent;
+  }
+});
+
+document.getElementById('nlRunBtn').addEventListener('click', runNLQuery);
+document.getElementById('nlClearBtn').addEventListener('click', () => {
+  document.getElementById('nlQuery').value = '';
+  document.getElementById('nlResult').innerHTML = '';
+});
+
+// ====================================================================
+// TAB SWITCHING
+// ====================================================================
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+    const tabId = tab.dataset.tab;
+    if (tabId === 't1') renderTab1();
+    else if (tabId === 't2') renderTab2();
+    else if (tabId === 't3') renderTab3();
+    else if (tabId === 't4') renderTab4();
+    else if (tabId === 't5') renderTab5();
+  });
+});
+
+// ====================================================================
+// INIT
+// ====================================================================
+
+updateCounts();
+renderKPIs();
+renderTab1();
+
+// If NL query is opened first, allow backend to be specified via prompt
+if (!API_URL) {
+  console.log('NL Query: API URL not set. To enable, set window.MT_CONFIG.apiUrl before loading this script.');
+}
+</script>
+</body>
+</html>
