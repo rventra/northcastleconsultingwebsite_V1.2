@@ -29,6 +29,12 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .sidebar-filter label{display:block;font-size:11.5px;font-weight:700;color:var(--slate);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
 .sidebar-filter select,.sidebar-filter input{font-family:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--border);background:var(--white);color:var(--navy-ink);width:100%;min-width:0}
 .sidebar-filter select:focus,.sidebar-filter input:focus{outline:none;border-color:var(--navy)}
+.sidebar-filter-status{margin:18px 0 14px;padding:12px 14px;background:var(--mist);border:1px solid var(--gold);border-radius:6px}
+.filter-count{font-size:12px;color:var(--navy);margin-bottom:8px;line-height:1.4}
+.filter-count b{color:var(--gold);font-weight:700;font-variant-numeric:tabular-nums}
+.btn-clear-filters{width:100%;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--white);background:var(--navy);border:none;padding:6px 10px;cursor:pointer;text-transform:uppercase}
+.btn-clear-filters:hover{background:var(--navy-deep)}
+.unfiltered-note{font-size:10px;color:var(--slate-lite);font-style:italic;margin-top:4px}
 .sidebar-data-tables{list-style:none;padding:0;margin:0 0 14px;font-size:12.5px;color:var(--navy-ink)}
 .sidebar-data-tables li{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--border)}
 .sidebar-data-tables li:last-child{border-bottom:none}
@@ -151,6 +157,13 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
       <option value="3">Tier 3</option>
       <option value="4">Tier 4 (Weakest)</option>
     </select>
+  </div>
+
+  <div class="sidebar-filter-status" id="filterStatusIndicator" style="display:none">
+    <div class="filter-count">
+      <b id="filteredCount">0</b> of <b id="totalCount">0</b> matters
+    </div>
+    <button class="btn-clear-filters" id="btnClearFilters">Clear filters</button>
   </div>
 
   <div class="sidebar-section-title">Data Tables</div>
@@ -296,6 +309,118 @@ let charts = {};
 const TIER_COLORS = ['#C9A227', '#4A5E8A', '#B45309', '#B22234'];
 const TIER_NAMES = {1: 'Tier 1', 2: 'Tier 2', 3: 'Tier 3', 4: 'Tier 4'};
 
+// ====================================================================
+// FILTER STATE
+// ====================================================================
+// All charts that depend on per-case data filter D.cases through this state.
+// Tabs that show aggregate-only data (medical, evidence, settlement) display
+// a small "all data" note when filters are active since their underlying
+// data is not per-matter.
+
+const state = { status: 'all', type: 'all', diagnosis: 'all', tier: 'all' };
+
+function anyFilterActive() {
+  return state.status !== 'all' || state.type !== 'all'
+      || state.diagnosis !== 'all' || state.tier !== 'all';
+}
+
+// Get filtered cases (with scores if not already set)
+function getFilteredCases() {
+  if (!D.cases) return [];
+  // Ensure scores are set on each case
+  D.cases.forEach(c => {
+    if (c.score === undefined) Object.assign(c, scoreCase(c));
+  });
+  return D.cases.filter(c => {
+    if (state.status !== 'all' && c.status !== state.status) return false;
+    if (state.type !== 'all' && c.matter_type !== state.type) return false;
+    if (state.diagnosis !== 'all' && c.primary_diagnosis !== state.diagnosis) return false;
+    if (state.tier !== 'all' && c.tier !== parseInt(state.tier)) return false;
+    return true;
+  });
+}
+
+// Helpers for client-side aggregation from filtered cases
+function countBy(arr, key) {
+  const map = {};
+  arr.forEach(item => {
+    const k = item[key] || 'unknown';
+    map[k] = (map[k] || 0) + 1;
+  });
+  return Object.entries(map)
+    .map(([k, count]) => ({ [key]: k, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+function groupByMonth(arr, dateField = 'open_date') {
+  const map = {};
+  arr.forEach(c => {
+    // Cases don't have open_date yet — synthesize from docket or skip
+    const d = c[dateField];
+    if (!d) return;
+    const key = d.slice(0, 7); // YYYY-MM
+    map[key] = (map[key] || 0) + 1;
+  });
+  return Object.entries(map)
+    .map(([month, count]) => ({ month, count }))
+    .sort((a, b) => a.month.localeCompare(b.month));
+}
+
+// Update the filter status indicator in the sidebar
+function updateFilterStatus() {
+  const filtered = getFilteredCases();
+  const el = document.getElementById('filterStatusIndicator');
+  if (!el) return;
+  if (anyFilterActive()) {
+    el.style.display = 'block';
+    document.getElementById('filteredCount').textContent = filtered.length.toLocaleString();
+    document.getElementById('totalCount').textContent = D.cases.length.toLocaleString();
+  } else {
+    el.style.display = 'none';
+  }
+}
+
+// Re-render whatever tab is currently active
+function refreshActiveTab() {
+  const active = document.querySelector('.tab.active');
+  if (!active) return;
+  const tabId = active.dataset.tab;
+  if (tabId === 't1') renderTab1();
+  else if (tabId === 't2') renderTab2();
+  else if (tabId === 't3') renderTab3();
+  else if (tabId === 't4') renderTab4();
+  else if (tabId === 't5') renderTab5();
+  updateFilterStatus();
+}
+
+// Wire up filter event listeners
+function initFilters() {
+  ['filterStatus', 'filterType', 'filterDiagnosis', 'filterTier'].forEach(id => {
+    const sel = document.getElementById(id);
+    if (!sel) return;
+    sel.addEventListener('change', (e) => {
+      // Map id to state key
+      const key = id.replace('filter', '').toLowerCase();
+      state[key] = e.target.value;
+      refreshActiveTab();
+    });
+  });
+  const clearBtn = document.getElementById('btnClearFilters');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      state.status = 'all';
+      state.type = 'all';
+      state.diagnosis = 'all';
+      state.tier = 'all';
+      document.getElementById('filterStatus').value = 'all';
+      document.getElementById('filterType').value = 'all';
+      document.getElementById('filterDiagnosis').value = 'all';
+      document.getElementById('filterTier').value = 'all';
+      refreshActiveTab();
+    });
+  }
+}
+
 // Update sidebar counts
 function updateCounts() {
   document.getElementById('cnt_claimants').textContent = D.totalClaimants?.toLocaleString() || '—';
@@ -381,8 +506,9 @@ function scoreCase(c) {
 }
 
 function scoreAllCases() {
-  if (!D.cases) return [];
-  return D.cases.map(c => ({ ...c, ...scoreCase(c) }));
+  // Operates on the currently filtered cases so tier counts and scoring
+  // respect the user's sidebar filters.
+  return getFilteredCases().map(c => ({ ...c, ...scoreCase(c) }));
 }
 
 function tierRecoveryRange(tier) {
@@ -476,14 +602,18 @@ function line(id, labels, datasets) {
 // ====================================================================
 
 function renderKPIs() {
-  // Tab 1
-  const openMatters = D.mattersByStatus?.find(s => s.status === 'open')?.count || 0;
+  // Tab 1 (filter-aware via getFilteredCases)
+  const cases = getFilteredCases();
+  const filterActive = anyFilterActive();
+  const openMatters = cases.filter(c => c.status === 'open').length;
+  const uniqueFirms = new Set(cases.map(c => c.firm).filter(Boolean)).size;
+  const totalLabel = D.totalMatters?.toLocaleString() || '0';
   const kpi1 = document.getElementById('kpi-row-1');
   kpi1.innerHTML = `
-    <div class="tile"><div class="tile-label">Total Claimants</div><div class="tile-value">${D.totalClaimants?.toLocaleString()}</div><div class="tile-sub">${D.totalMatters?.toLocaleString()} matters</div></div>
-    <div class="tile"><div class="tile-label">Open Matters</div><div class="tile-value">${openMatters.toLocaleString()}</div><div class="tile-sub">of ${D.totalMatters?.toLocaleString()}</div></div>
+    <div class="tile"><div class="tile-label">${filterActive ? 'Filtered Matters' : 'Total Matters'}</div><div class="tile-value">${cases.length.toLocaleString()}</div><div class="tile-sub">${filterActive ? `of ${totalLabel}` : 'all matters'}</div></div>
+    <div class="tile"><div class="tile-label">Open Matters</div><div class="tile-value">${openMatters.toLocaleString()}</div><div class="tile-sub">${filterActive ? 'in selection' : `of ${totalLabel}`}</div></div>
     <div class="tile"><div class="tile-label">Avg Latency</div><div class="tile-value">${(D.avgLatency || 0).toFixed(1)} yrs</div><div class="tile-sub">exposure to diagnosis</div></div>
-    <div class="tile"><div class="tile-label">Law Firms</div><div class="tile-value">${D.totalFirms}</div><div class="tile-sub">counsel firms</div></div>`;
+    <div class="tile"><div class="tile-label">Law Firms</div><div class="tile-value">${uniqueFirms}</div><div class="tile-sub">${filterActive ? 'in selection' : 'counsel firms'}</div></div>`;
 
   // Tab 2
   const farmPct = D.exposureBySetting?.find(s => s.setting === 'farm')?.count || 0;
@@ -531,24 +661,45 @@ function renderKPIs() {
 
 function renderTab1() {
   const STATUS_COLORS = {open:'#1E2761', settled:'#2C5F2D', closed:'#94A3B8', on_hold:'#B45309', dismissed:'#B22234'};
+  const cases = getFilteredCases();
+  const filterActive = anyFilterActive();
+
+  // Matters by Status (filter-aware)
+  const byStatus = countBy(cases, 'status');
   doughnut('chartStatus',
-    D.mattersByStatus.map(s => s.status),
-    D.mattersByStatus.map(s => s.count),
-    D.mattersByStatus.map(s => STATUS_COLORS[s.status] || '#94A3B8'));
+    byStatus.map(s => s.status),
+    byStatus.map(s => s.count),
+    byStatus.map(s => STATUS_COLORS[s.status] || '#94A3B8'));
+
+  // Matters by Type (filter-aware)
+  const byType = countBy(cases, 'matter_type');
   bar('chartType',
-    D.mattersByType.map(t => t.matter_type.replace(/_/g, ' ')),
-    [{ label: 'Matters', data: D.mattersByType.map(t => t.count), backgroundColor: '#1E2761' }]);
+    byType.map(t => (t.matter_type || 'unknown').replace(/_/g, ' ')),
+    [{ label: 'Matters', data: byType.map(t => t.count), backgroundColor: '#1E2761' }]);
+
+  // Filing Timeline (pre-aggregated - note if filtered)
   line('chartFiling',
     D.mattersByMonth.map(m => m.month),
-    [{ label: 'Filings', data: D.mattersByMonth.map(m => m.count), borderColor: '#1E2761', backgroundColor: '#1E276120', fill: true, tension: 0.25 }]);
+    [{ label: filterActive ? 'Filings (all matters)' : 'Filings',
+       data: D.mattersByMonth.map(m => m.count),
+       borderColor: '#1E2761', backgroundColor: '#1E276120', fill: true, tension: 0.25 }]);
+
+  // Firm Workload (filter-aware — computed from cases)
+  const byFirm = {};
+  cases.forEach(c => {
+    if (!c.firm) return;
+    if (!byFirm[c.firm]) byFirm[c.firm] = { firm: c.firm, open: 0, settled: 0, closed: 0, on_hold: 0, dismissed: 0 };
+    if (byFirm[c.firm][c.status] !== undefined) byFirm[c.firm][c.status]++;
+  });
+  const firmArr = Object.values(byFirm).sort((a, b) => (b.open+b.settled+b.closed+b.on_hold+b.dismissed) - (a.open+a.settled+a.closed+a.on_hold+a.dismissed));
   stackedBar('chartFirms',
-    D.firmWorkload.map(f => f.firm_name.length > 30 ? f.firm_name.slice(0, 28) + '…' : f.firm_name),
+    firmArr.map(f => f.firm.length > 30 ? f.firm.slice(0, 28) + '…' : f.firm),
     [
-      { label: 'Open',   data: D.firmWorkload.map(f => f.open_matters),   backgroundColor: '#1E2761' },
-      { label: 'Settled',data: D.firmWorkload.map(f => f.settled_matters||0), backgroundColor: '#2C5F2D' },
-      { label: 'Closed', data: D.firmWorkload.map(f => f.closed_matters), backgroundColor: '#94A3B8' },
-      { label: 'On Hold',data: D.firmWorkload.map(f => f.on_hold_matters), backgroundColor: '#B45309' },
-      { label: 'Dismissed', data: D.firmWorkload.map(f => f.dismissed_matters), backgroundColor: '#B22234' },
+      { label: 'Open',      data: firmArr.map(f => f.open),      backgroundColor: '#1E2761' },
+      { label: 'Settled',   data: firmArr.map(f => f.settled),   backgroundColor: '#2C5F2D' },
+      { label: 'Closed',    data: firmArr.map(f => f.closed),    backgroundColor: '#94A3B8' },
+      { label: 'On Hold',   data: firmArr.map(f => f.on_hold),   backgroundColor: '#B45309' },
+      { label: 'Dismissed', data: firmArr.map(f => f.dismissed), backgroundColor: '#B22234' },
     ]);
 }
 
@@ -836,6 +987,7 @@ document.querySelectorAll('.tab').forEach(tab => {
 updateCounts();
 renderKPIs();
 renderTab1();
+initFilters();
 
 // If NL query is opened first, allow backend to be specified via prompt
 if (!API_URL) {
