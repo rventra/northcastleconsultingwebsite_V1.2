@@ -303,8 +303,12 @@ footer.ncc strong{color:var(--slate)}
       <div class="tag">GROSS UTILIZATION</div>
       <div class="label">Active hours ÷ available hours</div>
       <div class="big" id="t1ActiveUtil">17.0%</div>
-      <div class="unit" id="t1ActiveUtilUnit">Weekday avg: daily drive hrs ÷ 24</div>
+      <div class="unit" id="t1ActiveUtilUnit">Avg weekday: drive hrs ÷ 24</div>
       <div class="unit" style="color:var(--navy);font-weight:700;margin-top:4px" id="t1TotalUtilInline">Total util: 47.4%</div>
+      <div class="bullets">
+        <div><b>Gross</b> = drive time only</div>
+        <div><b>Total</b> = drive + idle time</div>
+      </div>
     </div>
     <div class="tile clickable" style="--accent:var(--green)" onclick="drillTile('totalHours')">
       <div class="tile-view-hint">View records</div>
@@ -1081,7 +1085,7 @@ function renderUtilByTruck(){
   if (charts.utilByTruck) charts.utilByTruck.destroy();
   // Update panel title with dynamic fleet avg
   const titleEl = document.getElementById('t1UtilByTruckTitle');
-  if (titleEl) titleEl.textContent = 'GROSS UTILIZATION BY TRUCK (Fleet avg: ' + fleetAvg.toFixed(1) + '% shown as red dashed line)';
+  if (titleEl) titleEl.textContent = 'GROSS UTILIZATION BY TRUCK · Fleet avg = ' + fleetAvg.toFixed(1) + '% (red dashed line)';
   charts.utilByTruck = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1092,20 +1096,20 @@ function renderUtilByTruck(){
           data: trucks.map(t => +t.activeUtil.toFixed(1)),
           backgroundColor: trucks.map(t => TELEMATICS.personalities[t.personality].color),
           borderRadius: 4,
-          datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v + '%', font: { size: 11 } }
+          datalabels: { display: true, anchor: 'end', align: 'end', formatter: v => v + '%', font: { size: 11, weight: 'bold' }, color: '#1E2761' }
         },
         {
           type: 'line',
-          label: 'fleet avg',
+          label: 'Fleet Average: ' + fleetAvg.toFixed(1) + '%',
           data: trucks.map(() => fleetAvg),
-          borderColor: '#B22234', /* Red color for strong visibility */
+          borderColor: '#B22234',
           borderWidth: 4,
-          borderDash: [12, 4], /* Clear dashed pattern */
+          borderDash: [12, 4],
           pointRadius: 0,
           pointHoverRadius: 0,
           spanGaps: true,
           fill: false,
-          order: -1, /* Make sure average line is visible beneath bars */
+          order: -1,
           datalabels: { display: false }
         }
       ]
@@ -1114,11 +1118,63 @@ function renderUtilByTruck(){
       ...commonChartOptions(),
       indexAxis: 'y',
       plugins: {
-        legend: { display: false },
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+            font: { size: 12, family: 'Calibri', weight: 'bold' },
+            boxWidth: 20,
+            padding: 12,
+            generateLabels: function(chart) {
+              return [
+                {
+                  text: 'Fleet Average: ' + fleetAvg.toFixed(1) + '% (red dashed line)',
+                  fillStyle: '#B22234',
+                  strokeStyle: '#B22234',
+                  lineWidth: 3,
+                  lineDash: [6, 3],
+                  hidden: false,
+                  datasetIndex: 1
+                }
+              ];
+            }
+          }
+        },
         datalabels: { display: false },
-        tooltip: { enabled: false }
+        tooltip: {
+          enabled: true,
+          backgroundColor: 'rgba(30, 39, 97, 0.95)',
+          titleColor: '#C9A227',
+          bodyColor: '#FFFFFF',
+          titleFont: { size: 13, weight: 'bold' },
+          bodyFont: { size: 12 },
+          padding: 10,
+          cornerRadius: 4,
+          displayColors: false,
+          callbacks: {
+            title: function(items) {
+              return items[0].label + ' · Gross Utilization';
+            },
+            label: function(item) {
+              if (item.datasetIndex === 0) {
+                return 'Active hours ÷ available hours: ' + item.parsed.x.toFixed(1) + '%';
+              } else {
+                return 'Fleet Average: ' + fleetAvg.toFixed(1) + '%';
+              }
+            }
+          }
+        }
       },
-      scales: { x: { min: 0, max: 30, ticks: { callback: v => v + '%' } }, y: { grid: { display: false } } }
+      scales: {
+        x: {
+          min: 0,
+          max: 30,
+          ticks: { callback: v => v + '%', font: { size: 11 } },
+          grid: { color: '#E5E7EB' },
+          title: { display: true, text: 'Gross Utilization %', font: { size: 11, weight: 'bold' }, color: '#475569' }
+        },
+        y: { grid: { display: false } }
+      }
     }
   });
 }
