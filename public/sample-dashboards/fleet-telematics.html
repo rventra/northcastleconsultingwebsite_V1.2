@@ -493,7 +493,14 @@ footer.ncc strong{color:var(--slate)}
 Chart.register(ChartDataLabels);
 
 // ─── State ────────────────────────────────────────────────────────────────
-let state = { selectedMonths: TELEMATICS.monthlyFleet.map(d => d.month), vehicle: 'all', dayType: 'all' };
+// Date range for the period filter: 0-indexed days from Jun 1, 2025 (day 0)
+// to May 31, 2026 (day 364). State stores day indices; charts aggregate from
+// TELEMATICS.dailyFleet filtered by this range + vehicle + dayType.
+let state = {
+  selectedDays: Array.from({length: 365}, (_, i) => i), // all days by default
+  vehicle: 'all',
+  dayType: 'all'
+};
 const monthsAll = TELEMATICS.monthlyFleet.map(d => d.month);
 // Group months by year for the picker UI (Power BI style: year checkboxes, then month chips per year)
 const yearGroups = (function(){
@@ -516,85 +523,137 @@ function filteredTrucks(){
   return TELEMATICS.truckMetrics.filter(t => t.id === state.vehicle);
 }
 
-// Aggregate monthlyByTruck by selected period + vehicle + day-type.
-// Used by Tab 1 per-truck charts (util-by-truck, active-hours-by-truck, table) which
-// previously read TTM truckMetrics and ignored filters. The day-type factor scales
-// miles/trips/hours uniformly; util is recomputed from the scaled activeHours.
-const WD_PER_MONTH = {'Jun-25':21,'Jul-25':23,'Aug-25':21,'Sep-25':22,'Oct-25':23,'Nov-25':20,'Dec-25':23,'Jan-26':22,'Feb-26':20,'Mar-26':22,'Apr-26':22,'May-26':21};
+// Day index for a given date string ('2025-06-15' → index from Jun-1-2025 = 14).
+// The dataset spans Jun-1-2025 (day 0) through May-31-2026 (day 364).
+const _DAY0_MS = new Date('2025-06-01').getTime();
+function dayIndexForDate(dateStr){
+  return Math.round((new Date(dateStr).getTime() - _DAY0_MS) / 86400000);
+}
+
+// Returns an array of TELEMATICS.dailyFleet rows filtered by current period + vehicle + dayType.
+function filteredDailyFleet(){
+  const daySet = state.selectedDays.length === 365 ? null : new Set(state.selectedDays);
+  const wantAllVehicles = (state.vehicle === 'all');
+  const wantAllPersonalities = (!state.personalities || state.personalities.length === 0);
+  const wantAllDayTypes = (state.dayType === 'all');
+  const personalityById = {};
+  TELEMATICS.trucks.forEach(t => { personalityById[t.id] = t.personality; });
+
+  return TELEMATICS.dailyFleet.filter(r => {
+    if (daySet && !daySet.has(dayIndexForDate(r.date))) return false;
+    if (!wantAllVehicles && r.vehicle_id !== state.vehicle) return false;
+    if (!wantAllPersonalities && !state.personalities.includes(personalityById[r.vehicle_id])) return false;
+    if (!wantAllDayTypes) {
+      const isWknd = !r.is_weekday;
+      const matches = state.dayType === 'weekend' ? isWknd : !isWknd;
+      if (!matches) return false;
+    }
+    return true;
+  });
+}
+
+// Returns the weekdays (Mon-Fri) count for the currently selected period.
+// Used in the util denominator. Day-type filter is applied separately.
+function selectedWeekdayCount(){
+  if (state.dayType === 'weekend') return 0; // weekend-only periods have no weekday denominator
+  const daySet = state.selectedDays.length === 365 ? null : new Set(state.selectedDays);
+  let count = 0;
+  TELEMATICS.dailyFleet.forEach(r => {
+    if (daySet && !daySet.has(dayIndexForDate(r.date))) return;
+    if (r.is_weekday) count += 1;
+  });
+  return count;
+}
+
+// Aggregate per-truck totals across the selected period from dailyFleet.
+// Used by Tab 1 per-truck charts (util-by-truck, active-hours-by-truck, table).
+// Util is recomputed from the filtered activeHours over the (filtered) weekday count.
 function filteredTruckAggregates(){
-  const months = state.selectedMonths;
   const truckIds = state.vehicle === 'all'
     ? TELEMATICS.truckMetrics.map(t => t.id)
     : [state.vehicle];
-  const f = state.dayType === 'all' ? 1 : getDayTypeFactor();
-  const wdCount = months.reduce((s,m) => s + (WD_PER_MONTH[m] || 21), 0);
+  const rows = filteredDailyFleet();
 
   return truckIds.map(id => {
     const tm = TELEMATICS.truckMetrics.find(x => x.id === id);
-    const rows = TELEMATICS.monthlyByTruck.filter(d => d.id === id && months.includes(d.month));
-    const miles       = rows.reduce((s,r) => s + r.miles, 0);
-    const trips       = rows.reduce((s,r) => s + r.trips, 0);
-    const activeHours = rows.reduce((s,r) => s + r.activeHours, 0);
-    const totalHours  = rows.reduce((s,r) => s + r.totalHours, 0);
-    const activeHoursF = activeHours * f;
-    const totalHoursF  = totalHours  * f;
+    const mine = rows.filter(r => r.vehicle_id === id);
+    const miles       = mine.reduce((s,r) => s + r.miles, 0);
+    const trips       = mine.reduce((s,r) => s + r.trips, 0);
+    const activeHours = mine.reduce((s,r) => s + r.active_hours, 0);
+    const idleHours   = mine.reduce((s,r) => s + r.idle_hours, 0);
+    const totalHours  = mine.reduce((s,r) => s + r.total_hours, 0);
+    // Weekday count for the period, *within the rows we kept* — this already
+    // respects dayType filter, so we can use it directly for util.
+    const wdCount = mine.reduce((s,r) => s + (r.is_weekday ? 1 : 0), 0);
     return {
       id: tm.id,
       personality: tm.personality,
-      miles:       miles * f,
-      trips:       trips * f,
-      activeHours: activeHoursF,
-      totalHours:  totalHoursF,
-      activeUtil: wdCount > 0 ? (activeHoursF / (wdCount * 24)) * 100 : 0,
-      totalUtil:  wdCount > 0 ? (totalHoursF  / (wdCount * 24)) * 100 : 0,
+      miles:       +miles.toFixed(1),
+      trips:       trips,
+      activeHours: +activeHours.toFixed(1),
+      totalHours:  +totalHours.toFixed(1),
+      activeUtil: wdCount > 0 ? (activeHours / (wdCount * 24)) * 100 : 0,
+      totalUtil:  wdCount > 0 ? (totalHours  / (wdCount * 24)) * 100 : 0,
       avgTripMi:  trips > 0 ? miles / trips : 0
     };
   });
 }
 
-// Get monthly data filtered by vehicle and period
+// Get monthly data filtered by vehicle and period.
+// Aggregates dailyFleet rows by month (YYYY-MM). Returns the same shape as
+// the old monthlyFleet: { month, miles, trips, activeHours, idleHours, totalHours,
+//                          activeUtil, totalUtil } — util recomputed from
+// the per-month weekday count so partial-month selections are accurate.
 function filteredMonthly(){
-  const months = state.selectedMonths;
-  if (state.vehicle === 'all'){
-    return TELEMATICS.monthlyFleet.filter(d => months.includes(d.month));
-  }
-  // Filter monthlyByTruck by selected vehicle IDs and period
-  const truckIds = TELEMATICS.truckMetrics
-    .filter(t => t.id === state.vehicle)
-    .map(t => t.id);
-  const rows = TELEMATICS.monthlyByTruck
-    .filter(d => truckIds.includes(d.id) && months.includes(d.month));
-  // Aggregate by month
+  const rows = filteredDailyFleet();
   const byMonth = {};
   rows.forEach(r => {
-    if (!byMonth[r.month]) byMonth[r.month] = { month: r.month, miles: 0, trips: 0, activeHours: 0, idleHours: 0, totalHours: 0 };
-    byMonth[r.month].miles += r.miles;
-    byMonth[r.month].trips += r.trips;
-    byMonth[r.month].activeHours += r.activeHours;
-    byMonth[r.month].idleHours += r.idleHours;
-    byMonth[r.month].totalHours += r.totalHours;
+    const m = r.date.slice(0, 7); // 'YYYY-MM'
+    if (!byMonth[m]) byMonth[m] = {
+      month: r.date.slice(0, 7) + ' (filtered)',
+      miles: 0, trips: 0, activeHours: 0, idleHours: 0, totalHours: 0,
+      wdCount: 0, weekdayActiveHrs: 0, weekdayTotalHrs: 0
+    };
+    const k = byMonth[m];
+    k.miles += r.miles;
+    k.trips += r.trips;
+    k.activeHours += r.active_hours;
+    k.idleHours += r.idle_hours;
+    k.totalHours += r.total_hours;
+    if (r.is_weekday) {
+      k.wdCount += 1;
+      k.weekdayActiveHrs += r.active_hours;
+      k.weekdayTotalHrs += r.total_hours;
+    }
   });
-  return months.map(m => byMonth[m]).filter(Boolean);
+  return Object.entries(byMonth)
+    .sort(([a],[b]) => a < b ? -1 : 1)
+    .map(([ym, k]) => ({
+      month: monthLabelFromYM(ym),
+      miles: k.miles,
+      trips: k.trips,
+      activeHours: k.activeHours,
+      idleHours: k.idleHours,
+      totalHours: k.totalHours,
+      // Gross util = AVG(daily_active_hours / 24) on weekdays in this month slice
+      activeUtil: k.wdCount > 0 ? (k.weekdayActiveHrs / (k.wdCount * 24)) * 100 : 0,
+      totalUtil:  k.wdCount > 0 ? (k.weekdayTotalHrs  / (k.wdCount * 24)) * 100 : 0
+    }));
 }
 
-// Day-type share for scaling (from dailyTrips array).
-// Returns the fraction of fleet trip volume that occurs on days matching state.dayType.
-// Uses the same ratio for miles/hours since trips, miles, and hours correlate closely.
-// weekday = Mon–Fri (dow 1..5), weekend = Sat/Sun (dow 0, 6). Jun-25 day 0 = Sunday.
+const _monthAbbr = { '06':'Jun-25','07':'Jul-25','08':'Aug-25','09':'Sep-25','10':'Oct-25','11':'Nov-25','12':'Dec-25','01':'Jan-26','02':'Feb-26','03':'Mar-26','04':'Apr-26','05':'May-26' };
+function monthLabelFromYM(ym){
+  // ym is 'YYYY-MM'
+  const yr = ym.slice(2,4); // '25' or '26'
+  const mm = ym.slice(5,7);
+  return ({ '06':'Jun','07':'Jul','08':'Aug','09':'Sep','10':'Oct','11':'Nov','12':'Dec','01':'Jan','02':'Feb','03':'Mar','04':'Apr','05':'May' })[mm] + '-' + yr;
+}
+
+// Day-type share for scaling (legacy - dayType is now applied directly in
+// filteredDailyFleet() so this factor is always 1. Kept for callers that
+// reference it, but should be considered vestigial.)
 function getDayTypeFactor(){
-  if (state.dayType === 'all') return 1;
-  const { start, end } = _periodDays();
-  const slice = TELEMATICS.dailyTrips.slice(start, Math.min(end, TELEMATICS.dailyTrips.length));
-  if (slice.length === 0) return 0;
-  let total = 0, matching = 0;
-  for (let i = 0; i < slice.length; i++){
-    const dow = (start + i) % 7;
-    const isWknd = (dow === 0 || dow === 6);
-    const matches = state.dayType === 'weekend' ? isWknd : !isWknd;
-    total += slice[i];
-    if (matches) matching += slice[i];
-  }
-  return total > 0 ? matching / total : 0;
+  return 1;
 }
 
 // ─── Tab switching ────────────────────────────────────────────────────────
@@ -614,67 +673,110 @@ document.querySelectorAll('.tab').forEach(tab => {
 // ─── Render/update ────────────────────────────────────────────────────────
 let charts = {};
 
-// Render the selected-month range as a short label for the unit text inside KPIs.
-// Examples: "TTM", "FY25 (7 mo)", "YTD26 (5 mo)", "Jun-25 → Mar-26 (10 mo)", "Mar-26 (1 mo)"
+// Render the selected-day range as a short label for the unit text inside KPIs.
+// Examples: "All 365 days", "FY25 (Jul → Dec, 213 days)", "Jun 1 → May 31, 365 days"
 function periodLabel(){
-  const sel = state.selectedMonths;
-  if (sel.length === 0) return 'No months';
-  if (sel.length === monthsAll.length) return 'TTM';
-  // Detect fiscal-year-like contiguous ranges that match the data layout
-  const sorted = [...sel].sort((a,b) => monthsAll.indexOf(a) - monthsAll.indexOf(b));
-  const firstIdx = monthsAll.indexOf(sorted[0]);
-  const lastIdx  = monthsAll.indexOf(sorted[sorted.length - 1]);
-  const contiguous = (lastIdx - firstIdx + 1) === sel.length;
-  if (contiguous && sorted[0] === 'Jun-25' && sorted[sorted.length-1] === 'Dec-25') return 'FY25 (' + sel.length + ' mo)';
-  if (contiguous && sorted[0] === 'Jan-26' && sorted[sorted.length-1] === 'May-26') return 'YTD26 (' + sel.length + ' mo)';
-  if (sel.length === 1) return sorted[0];
-  return sorted[0] + ' → ' + sorted[sorted.length - 1] + ' (' + sel.length + ' mo)';
+  const sel = state.selectedDays || [];
+  if (sel.length === 0) return 'No days';
+  if (sel.length === 365) return 'All days';
+  const firstDate = new Date('2025-06-01');
+  firstDate.setDate(firstDate.getDate() + sel[0]);
+  const lastDate = new Date('2025-06-01');
+  lastDate.setDate(lastDate.getDate() + sel[sel.length - 1]);
+  const fmt = d => d.toLocaleString('en-US', { month: 'short', day: 'numeric' });
+  return `${fmt(firstDate)} → ${fmt(lastDate)}, ${sel.length} days`;
 }
 
-// Calendar days in the selected period (sum of daysInMonth across selected months).
-// When day-type filter is active, count only matching days within that window.
+// Calendar days in the selected period. With day-type filter active, count
+// only matching days within the selected window. Driven by state.selectedDays
+// (array of 0-364 day indices) so the count is exact, not month-rounded.
+// Counts DISTINCT days, not per-vehicle rows.
 function computeCadence(){
-  if (state.selectedMonths.length === 0) return { days: 0, avg: 0 };
+  if (!state.selectedDays || state.selectedDays.length === 0) return { days: 0, avg: 0 };
   let days;
   if (state.dayType === 'all'){
-    days = state.selectedMonths.reduce((s,m) => s + _daysPerMonthList[m], 0);
+    days = state.selectedDays.length;
   } else {
-    // Count matching days from the calendar
-    const { start, end } = _periodDays();
     days = 0;
-    for (let i = start; i < end; i++){
-      const dow = i % 7;
-      const isWknd = (dow === 0 || dow === 6);
+    const daySet = new Set(state.selectedDays);
+    const seenDays = new Set();
+    TELEMATICS.dailyFleet.forEach(r => {
+      if (!daySet.has(dayIndexForDate(r.date))) return;
+      const isWknd = !r.is_weekday;
       const matches = state.dayType === 'weekend' ? isWknd : !isWknd;
-      if (matches) days++;
-    }
+      if (!matches) return;
+      seenDays.add(r.date);  // dedupe: count each calendar day once
+    });
+    days = seenDays.size;
   }
-  let totalTrips = filteredMonthly().reduce((s,d) => s + d.trips, 0);
-  if (state.dayType !== 'all') totalTrips = Math.round(totalTrips * getDayTypeFactor());
+  let totalTrips = filteredDailyFleet().reduce((s,r) => s + r.trips, 0);
   const avg = days > 0 ? Math.round(totalTrips / days) : 0;
   return { days, avg };
 }
 
 // ─── Drill to records (KPI tile / chart clicks) ───────────────────────────
-// Returns daily_summary rows filtered by current period + vehicle + day-type.
-// This is the canonical "underlying data" for most KPIs on Tab 1.
+// Returns per-truck per-month rows aggregated from the filtered daily data.
+// Shape is intentionally identical to the old monthlyByTruck rows so the
+// downstream `drillTile()` branch can keep its `r.month` references.
+// "Scaled by day-type factor" is now a no-op because `filteredDailyFleet()`
+// already applies the dayType filter directly.
 function drillRecordsDailySummary(){
-  const months = state.selectedMonths;
-  const truckIds = state.vehicle === 'all'
-    ? TELEMATICS.truckMetrics.map(t => t.id)
-    : [state.vehicle];
-  return TELEMATICS.monthlyByTruck
-    .filter(d => truckIds.includes(d.id) && months.includes(d.month))
-    .map(r => ({
-      truck: r.id,
-      month: r.month,
-      miles: +r.miles.toFixed(1),
-      trips: r.trips,
-      activeHours: +r.activeHours.toFixed(1),
-      idleHours: +r.idleHours.toFixed(1),
-      totalHours: +r.totalHours.toFixed(1),
-      avgTripMi: r.trips > 0 ? +(r.miles / r.trips).toFixed(2) : 0
-    }));
+  const daily = filteredDailyFleet();
+  const byMonth = {};
+  daily.forEach(r => {
+    const m = r.date.slice(0, 7);
+    if (!byMonth[m]) byMonth[m] = { month: m, miles: 0, trips: 0, activeHours: 0, idleHours: 0, totalHours: 0 };
+    const k = byMonth[m];
+    k.miles += r.miles;
+    k.trips += r.trips;
+    k.activeHours += r.active_hours;
+    k.idleHours += r.idle_hours;
+    k.totalHours += r.total_hours;
+  });
+  // Attach vehicle_id (we need it for the drill table; pick the first
+  // truck in the filtered set if the user picked one, otherwise any).
+  const truckId = state.vehicle === 'all' ? null : state.vehicle;
+  return Object.entries(byMonth)
+    .sort(([a],[b]) => a < b ? -1 : 1)
+    .flatMap(([m, k]) => {
+      // For fleet-wide drill, the table shows one row per truck×month, not
+      // one row per month. Build that here.
+      if (truckId) {
+        const avgMi = k.trips > 0 ? k.miles / k.trips : 0;
+        return [{ truck: truckId, month: mLabel(m),
+          miles: +k.miles.toFixed(1), trips: k.trips,
+          activeHours: +k.activeHours.toFixed(1), idleHours: +k.idleHours.toFixed(1),
+          totalHours: +k.totalHours.toFixed(1), avgTripMi: +avgMi.toFixed(2) }];
+      }
+      // Fleet view: emit one row per vehicle that had activity in this month
+      const seen = new Set();
+      daily.filter(r => r.date.startsWith(m)).forEach(r => {
+        if (seen.has(r.vehicle_id)) return;
+        seen.add(r.vehicle_id);
+      });
+      return Array.from(seen).map(vid => {
+        const vrows = daily.filter(r => r.date.startsWith(m) && r.vehicle_id === vid);
+        const vMiles = vrows.reduce((s,r) => s + r.miles, 0);
+        const vTrips = vrows.reduce((s,r) => s + r.trips, 0);
+        return {
+          truck: vid,
+          month: mLabel(m),
+          miles: +vMiles.toFixed(1),
+          trips: vTrips,
+          activeHours: +vrows.reduce((s,r) => s + r.active_hours, 0).toFixed(1),
+          idleHours: +vrows.reduce((s,r) => s + r.idle_hours, 0).toFixed(1),
+          totalHours: +vrows.reduce((s,r) => s + r.total_hours, 0).toFixed(1),
+          avgTripMi: vTrips > 0 ? +(vMiles / vTrips).toFixed(2) : 0
+        };
+      });
+    });
+}
+
+const _monthMap = {'01':'Jan','02':'Feb','03':'Mar','04':'Apr','05':'May','06':'Jun','07':'Jul','08':'Aug','09':'Sep','10':'Oct','11':'Nov','12':'Dec'};
+function mLabel(ym){
+  const y = ym.slice(2,4);
+  const m = ym.slice(5,7);
+  return (_monthMap[m] || m) + '-' + y;
 }
 
 // Open the records modal pre-populated for one of the Tab 1 KPIs.
@@ -766,35 +868,33 @@ function drillTile(tile){
       rows
     });
   } else if (tile === 'cadenceDays'){
-    // Drill to calendar: list each month in period with its day count
-    const months = state.selectedMonths;
-    const daysRow = state.dayType === 'all'
-      ? months.map(m => ({ month:m, days:_daysPerMonthList[m], context:'all days' }))
-      : (() => {
-          const { start, end } = _periodDays();
-          const out = [];
-          const dayMonth = (dayIdx) => {
-            let off = 0;
-            for (const m of months){
-              const dim = _daysPerMonthList[m];
-              if (dayIdx < off + dim) return { month:m, offsetInMonth: dayIdx - off };
-              off += dim;
-            }
-            return null;
-          };
-          for (let i = start; i < end; i++){
-            const dow = i % 7;
-            const isWknd = (dow === 0 || dow === 6);
-            const matches = state.dayType === 'weekend' ? isWknd : !isWknd;
-            if (matches){
-              const inMonth = dayMonth(i);
-              const last = out[out.length - 1];
-              if (last && last.month === inMonth.month) last.days += 1;
-              else out.push({ month: inMonth.month, days: 1, context: state.dayType === 'weekday' ? 'weekday' : 'weekend' });
-            }
-          }
-          return out;
-        })();
+    // Drill to calendar: list each month in period with its day count.
+    // Driven by state.selectedDays + state.dayType.
+    const daySet = new Set(state.selectedDays);
+    const out = [];
+    const seen = {}; // month -> day count
+
+    // Build a per-month grouping from dailyFleet respecting daySet + dayType
+    const monthOf = (dateStr) => dateStr.slice(0, 7);
+    const seenMonths = new Set();
+    TELEMATICS.dailyFleet.forEach(r => {
+      if (!daySet.has(dayIndexForDate(r.date))) return;
+      const isWknd = !r.is_weekday;
+      const matches = state.dayType === 'weekend' ? isWknd :
+                     state.dayType === 'weekday' ? !isWknd : true;
+      if (!matches) return;
+      const m = monthOf(r.date);
+      seenMonths.add(m);
+      seen[m] = (seen[m] || 0) + 1;
+    });
+
+    const monthOrder = Array.from(seenMonths).sort();
+    const daysRow = monthOrder.map(m => ({
+      month: mLabel(m),
+      days: seen[m],
+      context: state.dayType === 'all' ? 'all days' : state.dayType
+    }));
+
     window.openRecordsDrill({
       eyebrow: 'UNDERLYING RECORDS · calendar',
       title: 'Days in period',
@@ -827,21 +927,26 @@ function wdCount(m){ const wm = WD_PER_MONTH; return wm[m] || 21; }
 
 function updateKPIs(){
   const data = filteredMonthly();
-  if (data.length === 0) return;
+  if (data.length === 0){
+    // Clear KPI tiles when nothing matches the filter so stale totals
+    // (e.g. from a previous filter state) don't linger on the page.
+    document.getElementById('t1Miles').textContent = '0';
+    document.getElementById('t1Trips').textContent = '0';
+    document.getElementById('t1ActiveUtil').textContent = '0.0%';
+    document.getElementById('t1TotalHours').textContent = '0';
+    document.getElementById('t1TotalUtilInline').textContent = 'Total util: 0.0%';
+    document.getElementById('t1NetWorkingDays').textContent = '0';
+    document.getElementById('t1AvgTripsPerWD').textContent = '0';
+    return;
+  }
 
   let totalMiles = data.reduce((s,d) => s + d.miles, 0);
   let totalTrips = data.reduce((s,d) => s + d.trips, 0);
   let activeHours = data.reduce((s,d) => s + d.activeHours, 0);
   let totalHours = data.reduce((s,d) => s + d.totalHours, 0);
 
-  // Apply day-type factor if filtering by weekday/weekend (same ratio across miles/trips/hours)
-  const dayFactor = state.dayType === 'all' ? 1 : getDayTypeFactor();
-  if (dayFactor !== 1){
-    totalMiles = Math.round(totalMiles * dayFactor);
-    totalTrips = Math.round(totalTrips * dayFactor);
-    activeHours = activeHours * dayFactor;
-    totalHours = totalHours * dayFactor;
-  }
+  // Day-type filter is applied directly inside filteredDailyFleet(); the
+  // returned totals are already the correct filtered totals — no scaling needed.
 
   // Compute utilization from filtered data using per-month AVG(daily_hours/24) values.
   // Note: total_hours / (days × truckCount × 24) is the wrong methodology per the
@@ -912,7 +1017,7 @@ function renderTruckTable(){
     const totalTrips = trucks.reduce((s,t) => s + t.trips, 0);
     const totalActHrs = trucks.reduce((s,t) => s + t.activeHours, 0);
     const totalTotHrs = trucks.reduce((s,t) => s + t.totalHours, 0);
-    const wdCount = state.selectedMonths.reduce((s,m) => s + (WD_PER_MONTH[m] || 21), 0);
+    const wdCount = selectedWeekdayCount();
     const avgActiveUtil = wdCount > 0 ? (totalActHrs / (wdCount * 24)) * 100 : 0;
     const avgTotalUtil  = wdCount > 0 ? (totalTotHrs / (wdCount * 24)) * 100 : 0;
     const avgTripMi = totalTrips > 0 ? totalMiles / totalTrips : 0;
@@ -950,10 +1055,21 @@ function toggleTruckDrillDown(truckId, row){
   }
   row.classList.add('open');
 
-  const months = state.selectedMonths;
-  const rows = TELEMATICS.monthlyByTruck
-    .filter(d => d.id === truckId && months.includes(d.month))
-    .sort((a, b) => months.indexOf(a.month) - months.indexOf(b.month));
+  // Aggregate per-month rows from filteredDailyFleet for the truck's drill-down.
+  const filtered = filteredDailyFleet().filter(r => r.vehicle_id === truckId);
+  const byMonth = {};
+  filtered.forEach(r => {
+    const m = r.date.slice(0, 7);
+    if (!byMonth[m]) byMonth[m] = { id: truckId, month: m, miles: 0, trips: 0, activeHours: 0, idleHours: 0, totalHours: 0 };
+    const k = byMonth[m];
+    k.miles += r.miles;
+    k.trips += r.trips;
+    k.activeHours += r.active_hours;
+    k.idleHours += r.idle_hours;
+    k.totalHours += r.total_hours;
+  });
+  const monthKeys = Object.keys(byMonth).sort();
+  const rows = monthKeys.map(m => byMonth[m]).map(r => ({ ...r, month: mLabel(r.month) }));
 
   const detail = document.createElement('tr');
   detail.classList.add('drill-detail');
@@ -971,7 +1087,7 @@ function toggleTruckDrillDown(truckId, row){
     <td colspan="8">
       <div class="drill-content">
         <div class="drill-content-head">
-          <span>${truckId} · MONTHLY BREAKDOWN · <b>${rows.length} of ${months.length} months</b></span>
+          <span>${truckId} · MONTHLY BREAKDOWN · <b>${rows.length} months</b></span>
           <span>
             ${state.dayType === 'all' ? 'All days' : state.dayType === 'weekday' ? 'Weekdays' : 'Weekends'}
             <button type="button" class="drill-export-btn" data-truck="${truckId}">Export CSV ↓</button>
@@ -1256,9 +1372,9 @@ function renderWeekdayWeekend(){
   if (charts.weekdayWeekend) charts.weekdayWeekend.destroy();
   const wwMap = {};
   TELEMATICS.weekdayWeekend.forEach(w => wwMap[w.id] = w);
-  // weekdayWeekend is TTM (12 months); scale linearly for partial periods.
-  // Approximation only — no per-truck per-month day-type split exists in the data.
-  const periodScale = state.selectedMonths.length / 12;
+  // weekdayWeekend is TTM (12 months / 365 days); scale linearly by selected days.
+  // Approximation only — no per-truck per-day day-type split exists in the data.
+  const periodScale = (state.selectedDays ? state.selectedDays.length : 365) / 365;
   const datasets = [];
   if (state.dayType === 'all' || state.dayType === 'weekday'){
     datasets.push({
@@ -1310,7 +1426,7 @@ function renderHeatmap(){
   }));
 
   // hourlyHeatmap is a weekly pattern; scale by period length to reflect the selected range.
-  const periodScale = state.selectedMonths.length / 12;
+  const periodScale = (state.selectedDays ? state.selectedDays.length : 365) / 365;
 
   if (charts.heatmap) charts.heatmap.destroy();
   charts.heatmap = new Chart(ctx, {
@@ -1462,24 +1578,19 @@ function renderT3TripMiDistribution(){
 const _allMonthsList = monthsAll;
 const _daysPerMonthList = {"Jun-25":30,"Jul-25":31,"Aug-25":31,"Sep-25":30,"Oct-25":31,"Nov-25":30,"Dec-25":31,"Jan-26":31,"Feb-26":28,"Mar-26":31,"Apr-26":30,"May-26":31};
 function _periodBounds(){
-  // Returns the contiguous index range [minIdx, maxIdx) spanned by the selected months.
-  // For non-contiguous selections (e.g., user picks Jun + Dec), uses the outermost range
-  // so the time-series charts show the full window — gaps are fine, charts just look flat there.
-  if (state.selectedMonths.length === 0) return { startIdx: 0, endIdx: 0 };
-  const idxs = state.selectedMonths.map(m => _allMonthsList.indexOf(m)).filter(i => i >= 0);
-  return { startIdx: Math.min(...idxs), endIdx: Math.max(...idxs) + 1 };
+  // Returns the day-index range [minDay, maxDay+1) spanned by state.selectedDays.
+  if (!state.selectedDays || state.selectedDays.length === 0) return { startIdx: 0, endIdx: 0 };
+  return { startIdx: state.selectedDays[0], endIdx: state.selectedDays[state.selectedDays.length - 1] + 1 };
 }
 function _periodWeeks(){
   const { startIdx, endIdx } = _periodBounds();
-  return { start: Math.round(startIdx * 52 / 12), end: Math.min(52, Math.round(endIdx * 52 / 12)) };
+  // 52 weeks / 365 days. Slice weekly array by day/7.
+  return { start: Math.floor(startIdx / 7), end: Math.ceil(endIdx / 7) };
 }
 function _periodDays(){
+  // With the day-based state, startIdx/endIdx ARE the day indices.
   const { startIdx, endIdx } = _periodBounds();
-  let startDay = 0;
-  for (let i = 0; i < startIdx; i++) startDay += _daysPerMonthList[_allMonthsList[i]];
-  let endDay = startDay;
-  for (let i = startIdx; i < endIdx; i++) endDay += _daysPerMonthList[_allMonthsList[i]];
-  return { start: startDay, end: endDay };
+  return { start: startIdx, end: endIdx };
 }
 
 function renderT3WeeklyMiles(){
@@ -1519,26 +1630,42 @@ function renderT3WeeklyMiles(){
 
 function renderT3DailyTrips(){
   const ctx = document.getElementById('t3DailyTrips').getContext('2d');
-  const { start, end } = _periodDays();
-  const slice = TELEMATICS.dailyTrips.slice(start, end);
-
-  // Filter by day-type: keep only days matching the filter (Jun 1 2025 = Sunday → dow 0..6).
-  let data, dayIdx;
-  if (state.dayType === 'all'){
-    data = slice;
-    dayIdx = slice.map((_, i) => start + i);
-  } else {
-    const isWkndDay = (idx) => { const dow = idx % 7; return dow === 0 || dow === 6; };
-    const matches = state.dayType === 'weekend' ? isWkndDay : (idx => !isWkndDay(idx));
-    data = [];
-    dayIdx = [];
-    for (let i = 0; i < slice.length; i++){
-      const absIdx = start + i;
-      if (matches(absIdx)){
-        data.push(slice[i]);
-        dayIdx.push(absIdx);
-      }
-    }
+  // Aggregate trips per day from filtered daily rows (already dayType-filtered).
+  const byDay = {};
+  filteredDailyFleet().forEach(r => {
+    const idx = dayIndexForDate(r.date);
+    byDay[idx] = (byDay[idx] || 0) + r.trips;
+  });
+  // Build the (day, value) series over every selected day that survived the
+  // dayType filter. When dayType is "all", every selected day appears; when
+  // dayType is weekday or weekend, only matching days appear (e.g. ~260
+  // weekdays, ~105 weekends over the full year). Days without records get 0.
+  const daySet = new Set(state.selectedDays);
+  const isWkndByIdx = (idx) => {
+    const d = new Date('2025-06-01');
+    d.setDate(d.getDate() + idx);
+    const dow = d.getDay(); // 0=Sun, 6=Sat
+    return dow === 0 || dow === 6;
+  };
+  const days = state.selectedDays.filter(idx => {
+    if (state.dayType === 'all') return true;
+    const isWknd = isWkndByIdx(idx);
+    return state.dayType === 'weekend' ? isWknd : !isWknd;
+  });
+  const data = days.map(d => byDay[d] || 0);
+  const dayIdx = days;
+  // If no days match (e.g. dayType='weekend' + T444), build an empty chart.
+  if (days.length === 0){
+    if (charts.t3DailyTrips) charts.t3DailyTrips.destroy();
+    charts.t3DailyTrips = new Chart(ctx, {
+      type: 'line',
+      data: { labels: [], datasets: [
+        { label: 'Daily trips', data: [], borderColor: '#1E2761', borderWidth: 1, pointRadius: 0 },
+        { label: '7-day rolling avg', data: [], borderColor: '#C9A227', borderDash: [6, 4], borderWidth: 2, pointRadius: 0 }
+      ] },
+      options: commonChartOptions()
+    });
+    return;
   }
 
   // 7-day rolling average over the filtered series
@@ -1635,9 +1762,11 @@ function updateAll(){
   });
 });
 
-// ─── Period slider (dual-thumb range over the 12 months, snaps to month boundaries) ─────────────────
-// The data layer aggregates monthly, so the slider works in months (Jun-25, Jul-25, ...).
-// Drag snaps to the nearest month so the displayed window always matches the available data.
+// ─── Period slider (dual-thumb range over the 365 individual days) ─────────────────
+// Day 0 = Jun 1, 2025; Day 364 = May 31, 2026. Drag to any day; the dataset
+// aggregates per-day so any range is exact. Charts that show monthly shapes
+// (miles trend, util trend, etc.) recompute their monthly sums from the filtered
+// daily rows so partial-month selections produce accurate metrics.
 function renderPeriodSlider(){
   const track     = document.getElementById('periodSliderTrack');
   const startThumb = document.getElementById('periodStartThumb');
@@ -1646,55 +1775,58 @@ function renderPeriodSlider(){
   const meta      = document.getElementById('periodMeta');
   const ticks     = document.getElementById('periodSliderTicks');
 
-  // Total selectable months (Jun-25..May-26)
-  const TOTAL = monthsAll.length; // 12
+  // Total day range (Jun 1, 2025 to May 31, 2026 = 365 days; index 0..364)
+  const TOTAL = 365;
+  const DATES = []; // index → Date object for fast lookup
+  {
+    const d = new Date('2025-06-01');
+    for (let i = 0; i < TOTAL; i++) {
+      DATES.push(new Date(d.getTime() + i * 86400000));
+    }
+  }
 
-  // Tick labels for each month
+  // Tick labels per month-start position (for the visible scale under the slider)
   const tickShort = {"Jun-25":"Jun","Jul-25":"Jul","Aug-25":"Aug","Sep-25":"Sep","Oct-25":"Oct","Nov-25":"Nov","Dec-25":"Dec","Jan-26":"Jan","Feb-26":"Feb","Mar-26":"Mar","Apr-26":"Apr","May-26":"May"};
   ticks.innerHTML = monthsAll.map(m => `<span>${tickShort[m]}</span>`).join('');
 
-  // Track indices into monthsAll (0..TOTAL-1)
-  let startIdx = 0;
-  let endIdx   = TOTAL - 1;
+  // Track day indices (0..TOTAL-1)
+  let startDay = 0;
+  let endDay   = TOTAL - 1;
 
-  // Initialize from state.selectedMonths
-  if (state.selectedMonths.length > 0) {
-    const firstMonth = state.selectedMonths[0];
-    const lastMonth  = state.selectedMonths[state.selectedMonths.length - 1];
-    const s = monthsAll.indexOf(firstMonth);
-    const e = monthsAll.indexOf(lastMonth);
-    if (s >= 0) startIdx = s;
-    if (e >= 0) endIdx = e;
-    if (endIdx < startIdx) endIdx = startIdx;
+  // Initialize from state.selectedDays
+  if (state.selectedDays && state.selectedDays.length > 0 && state.selectedDays.length < TOTAL) {
+    startDay = state.selectedDays[0];
+    endDay   = state.selectedDays[state.selectedDays.length - 1];
   }
 
-  function pct(i) {
-    return (i / (TOTAL - 1)) * 100;
+  function pct(d) { return (d / (TOTAL - 1)) * 100; }
+
+  // Format a day index as "Jun 1" / "May 31"
+  function formatDay(idx) {
+    const d = DATES[idx];
+    return d.toLocaleString('en-US', { month: 'short', day: 'numeric' });
   }
 
   function updateUI() {
-    // Update thumb and fill positions on the slider
-    startThumb.style.left = pct(startIdx) + '%';
-    endThumb.style.left   = pct(endIdx) + '%';
-    fill.style.left  = pct(startIdx) + '%';
-    fill.style.width = (pct(endIdx) - pct(startIdx)) + '%';
+    // Update thumb and fill positions
+    startThumb.style.left = pct(startDay) + '%';
+    endThumb.style.left   = pct(endDay) + '%';
+    fill.style.left  = pct(startDay) + '%';
+    fill.style.width = (pct(endDay) - pct(startDay)) + '%';
 
-    // Update state.selectedMonths from the index range
-    state.selectedMonths = monthsAll.slice(startIdx, endIdx + 1);
-    const sel = state.selectedMonths;
-    const monthCount = sel.length;
-    const firstLabel = tickShort[sel[0]];
-    const lastLabel  = tickShort[sel[sel.length - 1]];
+    // Write selectedDays to state (array of day indices)
+    state.selectedDays = [];
+    for (let i = startDay; i <= endDay; i++) state.selectedDays.push(i);
+    const dayCount = state.selectedDays.length;
 
-    if (monthCount === TOTAL) {
-      meta.textContent = `All ${monthCount} months`;
-    } else if (monthCount === 1) {
-      meta.textContent = `1 month · ${sel[0]}`;
+    // Update label
+    if (dayCount === TOTAL) {
+      meta.textContent = `All ${dayCount} days`;
+    } else if (dayCount === 1) {
+      meta.textContent = formatDay(startDay);
     } else {
-      meta.textContent = `${firstLabel} → ${lastLabel} · ${monthCount} months`;
+      meta.textContent = `${formatDay(startDay)} → ${formatDay(endDay)} · ${dayCount} days`;
     }
-
-    // Update all dependent visuals
     updateAll();
   }
 
@@ -1704,45 +1836,35 @@ function renderPeriodSlider(){
       const moveHandler = moveEvt => {
         const rect = track.getBoundingClientRect();
         const pos = Math.max(0, Math.min(rect.width, moveEvt.clientX - rect.left));
-        // Snap to nearest month index (0..TOTAL-1)
-        const idx = Math.round((pos / rect.width) * (TOTAL - 1));
-
-        if (isStartThumb) startIdx = Math.min(idx, endIdx);
-        else endIdx = Math.max(idx, startIdx);
-
+        const dayIdx = Math.round((pos / rect.width) * (TOTAL - 1));
+        if (isStartThumb) startDay = Math.min(dayIdx, endDay);
+        else              endDay   = Math.max(dayIdx, startDay);
         updateUI();
       };
-
       const upHandler = () => {
         document.removeEventListener('mousemove', moveHandler);
         document.removeEventListener('mouseup', upHandler);
       };
-
       document.addEventListener('mousemove', moveHandler);
       document.addEventListener('mouseup', upHandler);
     });
   }
-
   setupDragListener(startThumb, true);
   setupDragListener(endThumb, false);
 
-  // Handle clicking on the track to adjust range
+  // Click on track = move closest thumb
   track.addEventListener('click', e => {
     if (e.target === startThumb || e.target === endThumb) return;
     const rect = track.getBoundingClientRect();
     const pos = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
     const idx = Math.round((pos / rect.width) * (TOTAL - 1));
-
-    if (idx < startIdx) {
-      startIdx = idx;
-    } else if (idx > endIdx) {
-      endIdx = idx;
-    } else {
-      // Clicked within current range - move closest thumb to clicked position
-      const distStart = Math.abs(idx - startIdx);
-      const distEnd   = Math.abs(idx - endIdx);
-      if (distStart <= distEnd) startIdx = Math.min(idx, endIdx);
-      else                      endIdx   = Math.max(idx, startIdx);
+    if (idx < startDay)      startDay = idx;
+    else if (idx > endDay)   endDay   = idx;
+    else {
+      const distStart = Math.abs(idx - startDay);
+      const distEnd   = Math.abs(idx - endDay);
+      if (distStart <= distEnd) startDay = Math.min(idx, endDay);
+      else                      endDay   = Math.max(idx, startDay);
     }
     updateUI();
   });
@@ -1750,16 +1872,16 @@ function renderPeriodSlider(){
   // Reset = full range
   document.querySelector('[data-period-action="all"]').addEventListener('click', e => {
     e.preventDefault();
-    startIdx = 0;
-    endIdx   = TOTAL - 1;
+    startDay = 0;
+    endDay   = TOTAL - 1;
     updateUI();
   });
 
-  // Today = the most recent month with data (May-26, the last in the range)
+  // Today = the last day of the range (May 31, 2026 = day 364)
   document.querySelector('[data-period-action="today"]').addEventListener('click', e => {
     e.preventDefault();
-    startIdx = TOTAL - 1;
-    endIdx   = TOTAL - 1;
+    startDay = TOTAL - 1;
+    endDay   = TOTAL - 1;
     updateUI();
   });
 
@@ -1771,6 +1893,9 @@ renderPeriodSlider();
 renderAuditTable();
 updateAll();
 </script>
+
+<!-- ============================================================
+     Two-mode records modal:
 
 <!-- ============================================================
      Two-mode records modal:
