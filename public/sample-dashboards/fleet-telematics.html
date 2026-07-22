@@ -193,15 +193,15 @@ footer.ncc strong{color:var(--slate)}
 
   <div class="sidebar-filter">
     <label>Period</label>
-    <div class="period-slider" id="periodSlider" role="group" aria-label="Filter by month range">
+    <div class="period-slider" id="periodSlider" role="group" aria-label="Filter by date range">
       <div class="period-slider-info">
-        <span class="period-slider-meta" id="periodMeta">All 12 months</span>
+        <span class="period-slider-meta" id="periodMeta">All 365 days</span>
         <span class="period-slider-actions"><a href="#" data-period-action="all">Reset</a></span>
       </div>
       <div class="period-slider-track" id="periodSliderTrack">
         <div class="period-slider-fill" id="periodSliderFill"></div>
-        <div class="period-slider-thumb" id="periodStartThumb" data-thumb="start" aria-label="Start month"></div>
-        <div class="period-slider-thumb" id="periodEndThumb" data-thumb="end" aria-label="End month"></div>
+        <div class="period-slider-thumb" id="periodStartThumb" data-thumb="start" aria-label="Start date"></div>
+        <div class="period-slider-thumb" id="periodEndThumb" data-thumb="end" aria-label="End date"></div>
       </div>
       <div class="period-slider-ticks" id="periodSliderTicks"></div>
     </div>
@@ -1401,8 +1401,7 @@ function renderT3TripMiDistribution(){
 
 // Approximate mapping of selected period to weeks/days for the 52-week and 365-day charts.
 // Each month ≈ 52/12 weeks ≈ 30.4 days. Slight rounding is acceptable per spec.
-// Period is now driven by state.selectedMonths — the slice bounds are derived from the
-// min/max month in the selection so users get the correct window for any combination.
+// Now driven by state.month selections mapped to accurate day ranges for true day-level selection.
 const _allMonthsList = monthsAll;
 const _daysPerMonthList = {"Jun-25":30,"Jul-25":31,"Aug-25":31,"Sep-25":30,"Oct-25":31,"Nov-25":30,"Dec-25":31,"Jan-26":31,"Feb-26":28,"Mar-26":31,"Apr-26":30,"May-26":31};
 function _periodBounds(){
@@ -1588,77 +1587,156 @@ function renderPeriodSlider(){
   const meta      = document.getElementById('periodMeta');
   const ticks     = document.getElementById('periodSliderTicks');
 
-  // Tick marks: short labels (Jun, Jul, ...) so all 12 fit under the track
-  const tickShort = {'Jun-25':'Jun','Jul-25':'Jul','Aug-25':'Aug','Sep-25':'Sep','Oct-25':'Oct','Nov-25':'Nov','Dec-25':'Dec','Jan-26':'Jan','Feb-26':'Feb','Mar-26':'Mar','Apr-26':'Apr','May-26':'May'};
+  // Total day range from June 1, 2025 to May 31, 2026: 365 days
+  const TOTAL_DAYS = 365;
+
+  // Show monthly markers on slider (same ticks as previously for orientation)
+  const tickShort = {"Jun-25":"Jun","Jul-25":"Jul","Aug-25":"Aug","Sep-25":"Sep","Oct-25":"Oct","Nov-25":"Nov","Dec-25":"Dec","Jan-26":"Jan","Feb-26":"Feb","Mar-26":"Mar","Apr-26":"Apr","May-26":"May"};
   ticks.innerHTML = monthsAll.map(m => `<span>${tickShort[m]}</span>`).join('');
 
-  // Initialize thumb positions from state.selectedMonths (defensive)
-  let startIdx = monthsAll.indexOf(state.selectedMonths[0]);
-  let endIdx   = monthsAll.indexOf(state.selectedMonths[state.selectedMonths.length - 1]);
-  if (startIdx < 0) startIdx = 0;
-  if (endIdx   < 0 || endIdx < startIdx) endIdx = monthsAll.length - 1;
+  // Track day indices instead of month indices (0-364)
+  let startDay = 0;
+  let endDay   = TOTAL_DAYS - 1;  // 364
 
-  function pct(i){ return (i / (monthsAll.length - 1)) * 100; }
+  // Initialize position based on selected months
+  if (state.selectedMonths.length > 0) {
+    const startMonth = state.selectedMonths[0];
+    const endMonth = state.selectedMonths[state.selectedMonths.length - 1];
 
-  function updateUI(){
-    startThumb.style.left = pct(startIdx) + '%';
-    endThumb.style.left   = pct(endIdx) + '%';
-    fill.style.left  = pct(startIdx) + '%';
-    fill.style.width = (pct(endIdx) - pct(startIdx)) + '%';
+    // Simple mapping of month to approximately matching day in our 365-day period
+    const monthDayMap = {
+      "Jun-25": 0, "Jul-25": 30, "Aug-25": 61, "Sep-25": 91,
+      "Oct-25": 122, "Nov-25": 152, "Dec-25": 183, "Jan-26": 214,
+      "Feb-26": 245, "Mar-26": 273, "Apr-26": 304, "May-26": 334
+    };
 
-    state.selectedMonths = monthsAll.slice(startIdx, endIdx + 1);
-    const sel = state.selectedMonths;
-    if (sel.length === monthsAll.length) meta.textContent = 'All ' + sel.length + ' months';
-    else if (sel.length === 1) meta.textContent = sel[0];
-    else meta.textContent = sel[0] + ' → ' + sel[sel.length - 1] + ' · ' + sel.length + ' mo';
+    startDay = monthDayMap[startMonth] || 0;
+    endDay = Object.keys(monthDayMap).includes(endMonth) ? Math.min(monthDayMap[endMonth] + 30, TOTAL_DAYS - 1) : TOTAL_DAYS - 1;
+  }
+
+  function pct(x) {
+    return (x / (TOTAL_DAYS - 1)) * 100;
+  }
+
+  function monthsForDayRange(sDay, eDay) {
+    const result = [];
+
+    // Define day ranges for each month based on actual day counts
+    const monthRanges = [
+      {id: "Jun-25", start: 0, end: 29},     // 30 days
+      {id: "Jul-25", start: 30, end: 60},    // 31 days
+      {id: "Aug-25", start: 61, end: 91},    // 31 days
+      {id: "Sep-25", start: 92, end: 121},   // 30 days
+      {id: "Oct-25", start: 122, end: 152},  // 31 days
+      {id: "Nov-25", start: 153, end: 181},  // 30 days
+      {id: "Dec-25", start: 182, end: 212},  // 31 days
+      {id: "Jan-26", start: 213, end: 243},  // 31 days
+      {id: "Feb-26", start: 244, end: 271},  // 28 days
+      {id: "Mar-26", start: 272, end: 302},  // 31 days
+      {id: "Apr-26", start: 303, end: 332},  // 30 days
+      {id: "May-26", start: 333, end: 364}   // 31 days
+    ];
+
+    for (const range of monthRanges) {
+      // Check if selected day range overlaps with this month's days
+      if (!(eDay < range.start || sDay > range.end)) {
+        result.push(range.id);
+      }
+    }
+
+    return result;
+  }
+
+  function dayToDateString(d) {
+    const startDate = new Date('2025-06-01');
+    startDate.setDate(startDate.getDate() + d);
+    const monthLabel = startDate.toLocaleString('en-US', {month: 'short'});
+    return monthLabel + ' ' + startDate.getDate();
+  }
+
+  function updateUI() {
+    // Update thumb and fill positions on the slider
+    startThumb.style.left = pct(startDay) + '%';
+    endThumb.style.left   = pct(endDay) + '%';
+    fill.style.left  = pct(startDay) + '%';
+    fill.style.width = (pct(endDay) - pct(startDay)) + '%';
+
+    // Calculate state.selectedMonths based on day range
+    state.selectedMonths = monthsForDayRange(startDay, endDay);
+
+    // Update display to show actual dates and day count
+    const totalSelectedDays = endDay - startDay + 1;
+    const startDateLabel = dayToDateString(startDay);
+    const endDateLabel = dayToDateString(endDay);
+
+    if (startDay === 0 && endDay === TOTAL_DAYS - 1) {
+      meta.textContent = `All ${totalSelectedDays} days`;
+    } else {
+      meta.textContent = `${startDateLabel} → ${endDateLabel} · ${totalSelectedDays} days`;
+    }
+
+    // Update all dependent visuals
     updateAll();
   }
 
-  function dragThumb(thumb, isStart){
+  function setupDragListener(thumb, isStartThumb) {
     thumb.addEventListener('mousedown', e => {
       e.preventDefault();
-      const onMove = ev => {
+      const moveHandler = moveEvt => {
         const rect = track.getBoundingClientRect();
-        const x = Math.max(0, Math.min(rect.width, ev.clientX - rect.left));
-        const idx = Math.round((x / rect.width) * (monthsAll.length - 1));
-        if (isStart) startIdx = Math.min(idx, endIdx);
-        else         endIdx   = Math.max(idx, startIdx);
+        const pos = Math.max(0, Math.min(rect.width, moveEvt.clientX - rect.left));
+        const dayIndex = Math.round((pos / rect.width) * (TOTAL_DAYS - 1));
+
+        if (isStartThumb) startDay = Math.min(dayIndex, endDay);
+        else endDay = Math.max(dayIndex, startDay);
+
         updateUI();
       };
-      const onUp = () => {
-        document.removeEventListener('mousemove', onMove);
-        document.removeEventListener('mouseup', onUp);
+
+      const upHandler = () => {
+        document.removeEventListener('mousemove', moveHandler);
+        document.removeEventListener('mouseup', upHandler);
       };
-      document.addEventListener('mousemove', onMove);
-      document.addEventListener('mouseup', onUp);
+
+      document.addEventListener('mousemove', moveHandler);
+      document.addEventListener('mouseup', upHandler);
     });
   }
-  dragThumb(startThumb, true);
-  dragThumb(endThumb, false);
 
-  // Click on track = move the thumb that has room in the click direction.
-  // When thumbs are co-located, prefer to expand (end if click is right of them, start if left).
+  setupDragListener(startThumb, true);
+  setupDragListener(endThumb, false);
+
+  // Handle clicking on the track to adjust range
   track.addEventListener('click', e => {
     if (e.target === startThumb || e.target === endThumb) return;
     const rect = track.getBoundingClientRect();
-    const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
-    const idx = Math.round((x / rect.width) * (monthsAll.length - 1));
-    if (idx > endIdx)        endIdx   = idx;
-    else if (idx < startIdx) startIdx = idx;
-    else {
-      const distStart = Math.abs(idx - startIdx);
-      const distEnd   = Math.abs(idx - endIdx);
-      if (distStart <= distEnd) startIdx = Math.min(idx, endIdx);
-      else                      endIdx   = Math.max(idx, startIdx);
+    const pos = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+    const clickedDay = Math.round((pos / rect.width) * (TOTAL_DAYS - 1));
+
+    // Adjust closest side to clicked position
+    if (clickedDay < startDay) {
+      startDay = clickedDay;
+    } else if (clickedDay > endDay) {
+      endDay = clickedDay;
+    } else {
+      // Clicked within current range - expand outward
+      const leftDiff = startDay - clickedDay;
+      const rightDiff = clickedDay - endDay;
+
+      if (Math.abs(leftDiff) < Math.abs(rightDiff)) {
+        startDay = clickedDay;
+      } else {
+        endDay = clickedDay;
+      }
     }
     updateUI();
   });
 
-  // Reset = full range
+  // Reset to full date range
   document.querySelector('[data-period-action="all"]').addEventListener('click', e => {
     e.preventDefault();
-    startIdx = 0;
-    endIdx   = monthsAll.length - 1;
+    startDay = 0;
+    endDay = TOTAL_DAYS - 1;
     updateUI();
   });
 
