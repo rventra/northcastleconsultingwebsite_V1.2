@@ -1081,7 +1081,7 @@ function renderUtilByTruck(){
   if (charts.utilByTruck) charts.utilByTruck.destroy();
   // Update panel title with dynamic fleet avg
   const titleEl = document.getElementById('t1UtilByTruckTitle');
-  if (titleEl) titleEl.textContent = 'GROSS UTILIZATION BY TRUCK · FLEET AVG: ' + fleetAvg.toFixed(1) + '%';
+  if (titleEl) titleEl.textContent = 'GROSS UTILIZATION BY TRUCK (Fleet avg: ' + fleetAvg.toFixed(1) + '% shown as red dashed line)';
   charts.utilByTruck = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1098,9 +1098,9 @@ function renderUtilByTruck(){
           type: 'line',
           label: 'fleet avg',
           data: trucks.map(() => fleetAvg),
-          borderColor: '#C9A227',
-          borderWidth: 3,
-          borderDash: [], /* Solid line vs dashed */
+          borderColor: '#B22234', /* Red color for strong visibility */
+          borderWidth: 4,
+          borderDash: [12, 4], /* Clear dashed pattern */
           pointRadius: 0,
           pointHoverRadius: 0,
           spanGaps: true,
@@ -1671,7 +1671,7 @@ function renderPeriodSlider(){
     const endDateLabel = dayToDateString(endDay);
 
     if (startDay === 0 && endDay === TOTAL_DAYS - 1) {
-      meta.textContent = `All ${totalSelectedDays} days`;
+      meta.textContent = `${startDateLabel} → ${endDateLabel}`;
     } else {
       meta.textContent = `${startDateLabel} → ${endDateLabel} · ${totalSelectedDays} days`;
     }
