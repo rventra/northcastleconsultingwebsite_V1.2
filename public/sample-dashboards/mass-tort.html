@@ -98,6 +98,26 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tier-pill.t3{background:var(--amber)}
 .tier-pill.t4{background:var(--red)}
 .val-table-wrap{max-height:520px;overflow:auto;border:1px solid var(--border)}
+
+/* Executive Summary tab */
+.exec-stamp{font-size:11px;color:var(--slate-lite);font-style:italic}
+.exec-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:1100px){.exec-grid{grid-template-columns:1fr}}
+.exec-card{background:var(--white);border:1px solid var(--border);padding:16px 18px;margin-bottom:16px}
+.exec-card h3{font-size:13px;font-weight:700;color:var(--navy);margin:0 0 12px;letter-spacing:.04em;text-transform:uppercase}
+.exec-card p,.exec-card li{font-size:12.5px;color:var(--navy-ink)}
+.exec-flag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.06em;color:var(--amber);background:var(--amber-bg);border:1px solid var(--amber);padding:1px 6px;border-radius:2px;text-transform:uppercase;vertical-align:middle}
+.ruling-list{list-style:none;margin:0;padding:0}
+.ruling-list li{padding:8px 10px;border-bottom:1px solid var(--border);font-size:12.5px;display:flex;gap:12px;align-items:baseline}
+.ruling-list li:last-child{border-bottom:none}
+.ruling-date{font-weight:700;color:var(--navy);white-space:nowrap;min-width:118px;font-variant-numeric:tabular-nums}
+.ruling-hl{background:var(--amber-bg);border-left:3px solid var(--gold)}
+.watch-list{margin:0;padding-left:20px}
+.watch-list li{margin-bottom:8px}
+.src-list{font-size:11.5px;color:var(--slate);margin:0;padding-left:18px;columns:2;column-gap:28px}
+.src-list li{margin-bottom:4px;break-inside:avoid}
+.src-list a{color:var(--navy)}
+.exec-foot{font-size:11px;color:var(--slate-lite);font-style:italic;margin-top:6px;border-top:1px solid var(--border);padding-top:10px}
 </style>
 </head>
 <body>
@@ -115,10 +135,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <select id="filterStatus">
       <option value="all">All Statuses</option>
       <option value="open">Open</option>
+      <option value="pending_close">Pending to be Closed</option>
       <option value="closed">Closed</option>
-      <option value="settled">Settled</option>
-      <option value="on_hold">On Hold</option>
-      <option value="dismissed">Dismissed</option>
     </select>
   </div>
 
@@ -180,7 +198,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 <!-- MAIN CONTENT -->
 <main>
   <div class="tab-strip">
-    <div class="tab active" data-tab="t1">Case Pipeline</div>
+    <div class="tab active" data-tab="t0">Executive Summary</div>
+    <div class="tab" data-tab="t1">Case Pipeline</div>
     <div class="tab" data-tab="t2">Exposure</div>
     <div class="tab" data-tab="t3">Medical</div>
     <div class="tab" data-tab="t4">Evidence</div>
@@ -190,14 +209,107 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 
   <div class="content">
 
+    <!-- TAB 0: Executive Summary -->
+    <div class="tab-content active" id="t0">
+      <div class="exec-card">
+        <h3>Executive Summary — Paraquat MDL 3004 &amp; Roundup Comparator</h3>
+        <p style="margin:0"><span class="exec-stamp">As of 2026-07-23 &middot; docket facts from public sources; portfolio figures are synthetic demo data</span></p>
+      </div>
+
+      <div class="exec-grid">
+        <div class="exec-card">
+          <h3>Docket State — MDL 3004 (S.D. Ill.)</h3>
+          <p><b>~6,665 pending federal actions</b> (Jul 2026) <span class="exec-flag">reported · second-hand</span><br/>
+          <span style="font-size:11.5px;color:var(--slate)">Trend: 6,470 (Dec 2025) → 6,542 (Apr 2026) → 6,580 (May–Jun 2026) → 6,665 (Jul 2026); 8,257 total ever filed as of 2026-01-16. Parallel Philadelphia CCP docket: <b>1,952 pending</b> (Jul 2026).</span></p>
+          <p style="margin-bottom:6px"><b>Posture: settlement administration phase</b></p>
+          <ul class="watch-list">
+            <li>Master Settlement Agreement signed <b>2025-08-04</b> — terms confidential, amount not public; covers MDL + California state cases.</li>
+            <li>Qualified settlement fund approved <b>Mar 2026</b>; lien administrator appointed <b>Feb 2026</b>.</li>
+            <li>Bellwether track vacated/stayed — Oct 2025 MDL trial vacated 2025-09-29 (Doc. 5719); current activity is settlement administration + noncompliance dismissals (27 member cases dismissed 2026-06-10, CMO-10), not trials.</li>
+            <li>Syngenta filed a preemption MSJ <b>Feb 2026</b> and is ending global paraquat production by end of June 2026.</li>
+          </ul>
+        </div>
+
+        <div class="exec-card">
+          <h3>Portfolio Snapshot (This Book)</h3>
+          <div class="kpi-row" id="execPortfolio" style="margin-bottom:0"></div>
+        </div>
+      </div>
+
+      <div class="exec-card">
+        <h3>Key Rulings Timeline</h3>
+        <ul class="ruling-list">
+          <li><span class="ruling-date">2023-09/10</span><span><b>Durnell v. Monsanto</b> trial, Circuit Court of the City of St. Louis, MO — $1.25M strict-liability failure-to-warn verdict.</span></li>
+          <li><span class="ruling-date">2023-11 → 2025-09-30</span><span><b>Anderson/Draeger/Gunther</b>, Cole Cty. MO — $1.56B verdict reduced to $611M and affirmed; Missouri Supreme Court declined review 2025-09-30.</span></li>
+          <li><span class="ruling-date">2024-01/06</span><span><b>McKivison</b>, Philadelphia — $2.25B verdict reduced to ~$400M.</span></li>
+          <li class="ruling-hl"><span class="ruling-date">2024-04-17</span><span><b>MDL 3004 Doc. 5237 — Wells Daubert exclusion.</b> Judge Rosenstengel excluded Dr. Martin Wells, plaintiffs' sole general-causation expert, after a 4-day Daubert hearing; the first bellwether pool collapsed days later and a new pool had to be ordered (Jan 2025).</span></li>
+          <li><span class="ruling-date">2025-03-21</span><span><b>Barnes</b>, Cobb Cty. GA — $2.1B verdict ($65M compensatory + $2B punitive).</span></li>
+          <li><span class="ruling-date">2025-05</span><span><b>Caranci</b>, Pa. Super. Ct. — $177M verdict stands.</span></li>
+          <li><span class="ruling-date">2025-09-29</span><span><b>MDL 3004 Doc. 5719</b> — stay extended; October 2025 bellwether trial vacated.</span></li>
+          <li><span class="ruling-date">2025-11</span><span><b>Dennis</b>, Cal. Ct. App. — $28M verdict upheld.</span></li>
+          <li><span class="ruling-date">2026-01-27/29</span><span><b>Mertens</b>, Philadelphia CCP — first-ever paraquat jury trial ended in a confidential eve-of-trial settlement.</span></li>
+          <li class="ruling-hl"><span class="ruling-date">2026-06-25</span><span><b>Monsanto v. Durnell, SCOTUS No. 24-1068 — 7–2 for Bayer: FIFRA preempts state failure-to-warn claims requiring warnings beyond EPA-approved labels.</b> Industry-changing for both Roundup and paraquat — directly strengthens Syngenta's pending preemption motion in MDL 3004.</span></li>
+        </ul>
+      </div>
+
+      <div class="exec-grid">
+        <div class="exec-card">
+          <h3>Comparator: Roundup (MDL 2741)</h3>
+          <ul class="watch-list">
+            <li><b>~3,920 pending</b> in MDL 2741 (N.D. Cal.) as of Jul 2026; ~61,000 active total; ~100,000 claims resolved for ~$11B. Judge Chhabria issued a Suggestion of Remand 2026-01-05.</li>
+            <li><b>$7.25B class settlement</b> (current + future claims) announced 2026-02-17; preliminary approval 2026-03-04 (Judge Timothy Boyer, St. Louis 22nd Cir.); objectors' federal removal remanded 2026-06-17. Final-approval hearing held <b>2026-07-09</b> — outcome pending <span class="exec-flag">not verified</span></li>
+            <li>Bayer has ~$16B provisioned in total reserves; <b>Durnell</b> (above) is a SCOTUS preemption win that narrows future failure-to-warn exposure.</li>
+            <li><b>Implication for paraquat:</b> Syngenta filed a preemption MSJ in Feb 2026 — the Durnell holding materially improves its odds and its leverage over non-settling inventory.</li>
+          </ul>
+        </div>
+
+        <div class="exec-card">
+          <h3>What a PE Reviewer Should Watch</h3>
+          <ul class="watch-list">
+            <li><b>Settlement-administration milestones</b> — QSF claims-submission rates, lien-administrator throughput, and timing of first disbursements under the MSA; these set the real pace of recovery.</li>
+            <li><b>Syngenta's preemption MSJ (filed Feb 2026)</b> — post-Durnell, a grant could gut failure-to-warn theories for opt-out and non-eligible inventory.</li>
+            <li><b>Opt-out firm inventory</b> — the MSA excludes clients of specific opt-out firms; watch how that inventory is priced, tried, or folded back in.</li>
+            <li><b>Philadelphia CCP bellwethers</b> — Mertens settled on the eve of trial; the next bellwether was set for 2026-04-13 (outcome unverified) and 1,952 cases remain pending. A plaintiff verdict there would re-price the opt-out tail.</li>
+            <li><b>EPA regulatory track</b> — Syngenta is ending global paraquat production by end of June 2026 while advocates press for a ban; regulatory action affects both future claims and public narrative.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exec-card">
+        <h3>Sources</h3>
+        <ul class="src-list">
+          <li>Wisner Baum paraquat lawsuit timeline (updated 2026-07-16) — <a href="https://www.wisnerbaum.com/toxic-tort-law/paraquat-parkinsons-lawsuit/">wisnerbaum.com</a></li>
+          <li>Tavrn paraquat lawsuit update (JPML stats, second-hand) — <a href="https://www.tavrn.ai/blog/parkinsons-paraquat-lawsuit-update">tavrn.ai</a></li>
+          <li>Beyond Pesticides (2026-02-11) — <a href="https://beyondpesticides.org/dailynewsblog/2026/02/as-litigation-and-settlements-mount-for-the-weed-killer-paraquat-advocates-call-for-a-ban-and-adoption-of-toxic-free-alternatives/">beyondpesticides.org</a></li>
+          <li>Motley Rice paraquat lawsuit page — <a href="https://www.motleyrice.com/toxic-exposure/paraquat-lawsuit">motleyrice.com</a></li>
+          <li>Wells Daubert order, MDL 3004 Doc. 5237 (S.D. Ill.) — <a href="https://www.ilsd.uscourts.gov/sites/ilsd/files/ParaquatOrder-Wells.pdf">ilsd.uscourts.gov</a></li>
+          <li>CourtListener: In re Paraquat MDL 3004 lead docket — <a href="https://www.courtlistener.com/docket/59988561/in-re-paraquat-products-liability-litigation-v-syngenta-crop-protection/">courtlistener.com</a></li>
+          <li>Syngenta H1 2025 Report, Note 12 — <a href="https://www.syngenta.com/sites/default/files/2025-08/SyngentaAG-2025-H1Results-FINAL_2.pdf">syngenta.com</a></li>
+          <li>Syngenta Financial Report 2025 — <a href="https://www.syngenta.com/sites/default/files/2026-03/Financial%20Report%202025_0.pdf">syngenta.com</a></li>
+          <li>Monsanto v. Durnell, SCOTUS No. 24-1068 (opinion PDF) — <a href="https://www.supremecourt.gov/opinions/25pdf/24-1068_n7ip.pdf">supremecourt.gov</a></li>
+          <li>C&amp;EN coverage of Durnell — <a href="https://cen.acs.org/policy/litigation/bayer-monsanto-glyphosate-roundup-pesticide-label-warning-supreme-court/104/web/2026/06">cen.acs.org</a></li>
+          <li>IMLA Durnell case page — <a href="https://imla.org/legal-advocacy/">imla.org</a></li>
+          <li>Drugwatch Roundup settlements (Jul 2026 count) — <a href="https://www.drugwatch.com/legal/roundup-settlements/">drugwatch.com</a></li>
+          <li>law.com: $7.25B Roundup settlement removal remanded — <a href="https://www.law.com/2026/06/17/in-a-win-for-bayer-federal-judge-remands-725b-roundup-settlement/">law.com</a></li>
+          <li>CourtListener: In re Roundup MDL 2741 (JPML-side) — <a href="https://www.courtlistener.com/docket/4579168/in-re-roundup-products-liability-litigation/">courtlistener.com</a></li>
+          <li>Missouri Independent: Anderson judgment review declined — <a href="https://missouriindependent.com/2025/10/09/missouri-supreme-court-refuses-to-review-600-million-judgement-in-roundup-cancer-lawsuit/">missouriindependent.com</a></li>
+          <li>Bayer litigation statement: Barnes — <a href="https://www.bayer.com/en/litigation-statement/barnes">bayer.com</a></li>
+          <li>Sokolove Roundup lawsuit updates — <a href="https://www.sokolovelaw.com/product-liability/monsanto-roundup/lawsuit-updates/">sokolovelaw.com</a></li>
+          <li>Octus: McKivison / Bayer SCOTUS petition — <a href="https://octus.com/resources/articles/bayer-faces-roundup-pcb-lawsuits-scotus-petition-filed/">octus.com</a></li>
+          <li>Lawsuit Information Center: paraquat settlement amounts — <a href="https://www.lawsuit-information-center.com/paraquat-lawsuit-settlement-amount.html">lawsuit-information-center.com</a></li>
+        </ul>
+        <div class="exec-foot">Docket facts from public sources (CourtListener, court websites, company filings) as of 2026-07-23. Portfolio data is synthetic, for demo only.</div>
+      </div>
+    </div>
+
     <!-- TAB 1: Case Pipeline -->
-    <div class="tab-content active" id="t1">
+    <div class="tab-content" id="t1">
       <div class="kpi-row" id="kpi-row-1"></div>
       <div class="chart-grid">
         <div class="chart-card"><h3>Matters by Status</h3><canvas id="chartStatus"></canvas></div>
         <div class="chart-card"><h3>Matters by Acquisition Year</h3><canvas id="chartAcq"></canvas></div>
         <div class="chart-card"><h3>Filing Timeline</h3><canvas id="chartFiling"></canvas></div>
-        <div class="chart-card"><h3>Firm Workload</h3><canvas id="chartFirms"></canvas></div>
+        <div class="chart-card"><h3>Close Reasons</h3><canvas id="chartCloseReasons"></canvas></div>
       </div>
     </div>
 
@@ -317,15 +429,30 @@ function anyFilterActive() {
       || state.diagnosis !== 'all' || state.tier !== 'all';
 }
 
+// 3-bucket display status, recomputed live against the real current date.
+// closed = terminal status OR close notification older than 30 days;
+// pending_close = notification within the last 30 days; else open.
+function statusBucketOf(c) {
+  const notif = c.closeNotificationDate ? new Date(c.closeNotificationDate + 'T00:00:00') : null;
+  const cutoff = new Date();
+  cutoff.setHours(0, 0, 0, 0);
+  cutoff.setDate(cutoff.getDate() - 30);
+  if (c.status === 'closed' || c.status === 'dismissed' || c.status === 'settled'
+      || (notif && notif < cutoff)) return 'closed';
+  if (notif) return 'pending_close';
+  return 'open';
+}
+
 // Get filtered cases (with scores if not already set)
 function getFilteredCases() {
   if (!D.cases) return [];
-  // Ensure scores are set on each case
+  // Ensure scores and live status buckets are set on each case
   D.cases.forEach(c => {
     if (c.score === undefined) Object.assign(c, scoreCase(c));
+    c.statusBucket = statusBucketOf(c);
   });
   return D.cases.filter(c => {
-    if (state.status !== 'all' && c.status !== state.status) return false;
+    if (state.status !== 'all' && c.statusBucket !== state.status) return false;
     if (state.type !== 'all' && c.matter_type !== state.type) return false;
     if (state.diagnosis !== 'all' && c.dxBucket !== state.diagnosis) return false;
     if (state.tier !== 'all' && c.tier !== parseInt(state.tier)) return false;
@@ -609,28 +736,34 @@ function line(id, labels, datasets) {
 // ====================================================================
 
 function renderTab1() {
-  const STATUS_COLORS = {open:'#1E2761', settled:'#2C5F2D', closed:'#94A3B8', on_hold:'#B45309', dismissed:'#B22234'};
+  const BUCKET_COLORS = {open:'#1E2761', pending_close:'#B45309', closed:'#94A3B8'};
+  const BUCKET_LABELS = {open:'Open', pending_close:'Pending to be Closed', closed:'Closed'};
   const cases = getFilteredCases();
   const filterActive = anyFilterActive();
 
   // KPI tiles (filter-aware)
-  const openMatters = cases.filter(c => c.status === 'open').length;
+  const openMatters = cases.filter(c => c.statusBucket === 'open').length;
+  const pendingClose = cases.filter(c => c.statusBucket === 'pending_close').length;
   const uniqueFirms = new Set(cases.map(c => c.firm).filter(Boolean)).size;
   const latVals = cases.map(c => c.latencyYears).filter(v => v != null);
   const avgLat = latVals.length ? latVals.reduce((a, b) => a + b, 0) / latVals.length : 0;
   const totalLabel = D.totalMatters?.toLocaleString() || '0';
+  const letterDate = cases.find(c => c.lastUpdateLetterDate)?.lastUpdateLetterDate || '—';
   document.getElementById('kpi-row-1').innerHTML = `
     <div class="tile"><div class="tile-label">${filterActive ? 'Filtered Matters' : 'Total Matters'}</div><div class="tile-value">${cases.length.toLocaleString()}</div><div class="tile-sub">${filterActive ? `of ${totalLabel}` : 'all matters'}</div></div>
     <div class="tile"><div class="tile-label">Open Matters</div><div class="tile-value">${openMatters.toLocaleString()}</div><div class="tile-sub">${filterActive ? 'in selection' : `of ${totalLabel}`}</div></div>
+    <div class="tile"><div class="tile-label">Pending Close</div><div class="tile-value">${pendingClose.toLocaleString()}</div><div class="tile-sub">notification sent &lt; 30 days</div></div>
+    <div class="tile"><div class="tile-label">Last Claimant Update Letter</div><div class="tile-value" style="font-size:20px">${letterDate}</div><div class="tile-sub">mass send to all claimants</div></div>
     <div class="tile"><div class="tile-label">Avg Latency</div><div class="tile-value">${avgLat.toFixed(1)} yrs</div><div class="tile-sub">${filterActive ? 'in selection' : 'exposure to diagnosis'}</div></div>
     <div class="tile"><div class="tile-label">Law Firms</div><div class="tile-value">${uniqueFirms}</div><div class="tile-sub">${filterActive ? 'in selection' : 'counsel firms'}</div></div>`;
 
-  // Matters by Status (filter-aware)
-  const byStatus = countBy(cases, 'status');
+  // Matters by Status (3-bucket model, filter-aware)
+  const BUCKET_ORDER = ['open', 'pending_close', 'closed'];
+  const bucketCounts = BUCKET_ORDER.map(b => cases.filter(c => c.statusBucket === b).length);
   doughnut('chartStatus',
-    byStatus.map(s => s.status),
-    byStatus.map(s => s.count),
-    byStatus.map(s => STATUS_COLORS[s.status] || '#94A3B8'));
+    BUCKET_ORDER.map(b => BUCKET_LABELS[b]),
+    bucketCounts,
+    BUCKET_ORDER.map(b => BUCKET_COLORS[b]));
 
   // Matters by Acquisition Year (intake date, falling back to open date)
   const acq = {};
@@ -653,23 +786,25 @@ function renderTab1() {
     [{ label: 'Filings', data: byMonth.map(m => m.count),
        borderColor: '#1E2761', backgroundColor: '#1E276120', fill: true, tension: 0.25 }]);
 
-  // Firm Workload (filter-aware — computed from cases)
-  const byFirm = {};
-  cases.forEach(c => {
-    if (!c.firm) return;
-    if (!byFirm[c.firm]) byFirm[c.firm] = { firm: c.firm, open: 0, settled: 0, closed: 0, on_hold: 0, dismissed: 0 };
-    if (byFirm[c.firm][c.status] !== undefined) byFirm[c.firm][c.status]++;
-  });
-  const firmArr = Object.values(byFirm).sort((a, b) => (b.open+b.settled+b.closed+b.on_hold+b.dismissed) - (a.open+a.settled+a.closed+a.on_hold+a.dismissed));
-  stackedBar('chartFirms',
-    firmArr.map(f => f.firm.length > 30 ? f.firm.slice(0, 28) + '…' : f.firm),
-    [
-      { label: 'Open',      data: firmArr.map(f => f.open),      backgroundColor: '#1E2761' },
-      { label: 'Settled',   data: firmArr.map(f => f.settled),   backgroundColor: '#2C5F2D' },
-      { label: 'Closed',    data: firmArr.map(f => f.closed),    backgroundColor: '#94A3B8' },
-      { label: 'On Hold',   data: firmArr.map(f => f.on_hold),   backgroundColor: '#B45309' },
-      { label: 'Dismissed', data: firmArr.map(f => f.dismissed), backgroundColor: '#B22234' },
-    ]);
+  // Close Reasons (filter-aware — closed + pending-close cases in selection)
+  const CLOSE_REASON_ORDER = [
+    ['exposure_criteria', 'Exposure Criteria'],
+    ['injury_criteria', 'Injury Criteria'],
+    ['client_no_contact', 'Client No Contact'],
+    ['claimant_withdrew', 'Claimant Withdrew'],
+    ['sol_expired', 'SOL Expired'],
+    ['deceased_no_estate', 'Deceased – No Estate'],
+    ['duplicate_or_merged', 'Duplicate or Merged'],
+    ['documentation_insufficient', 'Documentation Insufficient'],
+    ['other', 'Other'],
+  ];
+  const closable = cases.filter(c => (c.statusBucket === 'closed' || c.statusBucket === 'pending_close') && c.closeReason);
+  const reasonCounts = {};
+  closable.forEach(c => { reasonCounts[c.closeReason] = (reasonCounts[c.closeReason] || 0) + 1; });
+  bar('chartCloseReasons',
+    CLOSE_REASON_ORDER.map(([, label]) => label),
+    [{ label: 'Matters', data: CLOSE_REASON_ORDER.map(([key]) => reasonCounts[key] || 0), backgroundColor: '#1E2761' }],
+    { horizontal: true });
 }
 
 function renderTab2() {
@@ -805,7 +940,7 @@ function renderTab4() {
   const recVerified = cases.filter(c => c.receiptsVerified).length;
   const licClaimed = cases.filter(c => c.licenseClaimed).length;
   const licVerified = cases.filter(c => c.licenseVerified).length;
-  const openCases = cases.filter(c => c.status === 'open');
+  const openCases = cases.filter(c => c.statusBucket === 'open');
   const sent = openCases.filter(c => c.monthlyUpdateSent).length;
   const settled = cases.filter(c => c.settlementStatus === 'accepted').length;
 
@@ -890,7 +1025,7 @@ function renderTab5() {
   const now = new Date(); now.setHours(0, 0, 0, 0);
   const in90 = new Date(now.getTime() + 90 * 86400000);
   const solCount = scored.filter(c => {
-    if (c.status !== 'open' || !c.statuteOfLimitations) return false;
+    if (c.statusBucket !== 'open' || !c.statuteOfLimitations) return false;
     const d = new Date(c.statuteOfLimitations);
     return d >= now && d <= in90;
   }).length;
@@ -978,6 +1113,34 @@ function renderTab5() {
 }
 
 // ====================================================================
+// EXECUTIVE SUMMARY TAB (t0) — portfolio snapshot computed client-side
+// ====================================================================
+
+function renderExecSummary() {
+  const el = document.getElementById('execPortfolio');
+  if (!el || !D.cases) return;
+  const cases = D.cases;
+  cases.forEach(c => { c.statusBucket = statusBucketOf(c); });
+  const portfolio = cases.filter(c => c.settlementStatus === 'accepted' && c.settlementAmount != null)
+                         .reduce((s, c) => s + c.settlementAmount, 0);
+  const tCounts = [1, 2, 3, 4].map(t => cases.filter(c => c.tier === t).length);
+  const pending = cases.filter(c => c.statusBucket === 'pending_close').length;
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const in90 = new Date(now.getTime() + 90 * 86400000);
+  const sol = cases.filter(c => {
+    if (c.statusBucket !== 'open' || !c.statuteOfLimitations) return false;
+    const d = new Date(c.statuteOfLimitations);
+    return d >= now && d <= in90;
+  }).length;
+  el.innerHTML = `
+    <div class="tile"><div class="tile-label">Matters</div><div class="tile-value">${cases.length.toLocaleString()}</div><div class="tile-sub">in this book</div></div>
+    <div class="tile"><div class="tile-label">Portfolio Value</div><div class="tile-value">${fmtMoney(portfolio)}</div><div class="tile-sub">accepted settlements</div></div>
+    <div class="tile"><div class="tile-label">Tier Mix</div><div class="tile-value" style="font-size:18px">${tCounts[0]} / ${tCounts[1]} / ${tCounts[2]} / ${tCounts[3]}</div><div class="tile-sub">T1 / T2 / T3 / T4</div></div>
+    <div class="tile"><div class="tile-label">Pending Close</div><div class="tile-value">${pending}</div><div class="tile-sub">notification sent &lt; 30 days</div></div>
+    <div class="tile"><div class="tile-label">SOL &lt; 90 Days</div><div class="tile-value">${sol}</div><div class="tile-sub">open matters at risk</div></div>`;
+}
+
+// ====================================================================
 // NL QUERY TAB
 // ====================================================================
 
@@ -987,6 +1150,10 @@ async function runNLQuery() {
   const query = document.getElementById('nlQuery').value.trim();
   if (!query) {
     showNLResult({ type: 'error', message: 'Please enter a question.' });
+    return;
+  }
+  if (!API_URL) {
+    showNLResult({ type: 'error', message: 'NL backend not configured — set window.MT_CONFIG.apiUrl to the query endpoint.' });
     return;
   }
   const btn = document.getElementById('nlRunBtn');
@@ -1105,7 +1272,7 @@ document.querySelectorAll('.tab').forEach(tab => {
 // ====================================================================
 
 updateCounts();
-renderTab1();
+renderExecSummary();
 initFilters();
 
 // If NL query is opened first, allow backend to be specified via prompt
