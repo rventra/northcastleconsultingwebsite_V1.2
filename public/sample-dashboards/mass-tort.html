@@ -1020,8 +1020,10 @@ function renderTab5() {
   // KPI tiles (filter-aware)
   const tierCountsKpi = [1,2,3,4].map(t => scored.filter(c => c.tier === t).length);
   const avgScore = scored.length ? (scored.reduce((s, c) => s + c.score, 0) / scored.length).toFixed(1) : '0.0';
-  const portfolio = scored.filter(c => c.settlementStatus === 'accepted' && c.settlementAmount != null)
-                          .reduce((s, c) => s + c.settlementAmount, 0);
+  const realized = scored.filter(c => c.settlementStatus === 'accepted' && c.settlementAmount != null)
+                         .reduce((s, c) => s + c.settlementAmount, 0);
+  const expected = scored.filter(c => c.settlementStatus !== 'accepted')
+                         .reduce((s, c) => { const r = tierRecoveryRange(c.tier); return s + (r.low + r.high) / 2; }, 0);
   const now = new Date(); now.setHours(0, 0, 0, 0);
   const in90 = new Date(now.getTime() + 90 * 86400000);
   const solCount = scored.filter(c => {
@@ -1035,7 +1037,8 @@ function renderTab5() {
     <div class="tile tier-tile tier-2"><div class="tile-label">Tier 2</div><div class="tile-value">${tierCountsKpi[1]}</div><div class="tile-sub">${tierSub(2)}</div></div>
     <div class="tile tier-tile tier-3"><div class="tile-label">Tier 3</div><div class="tile-value">${tierCountsKpi[2]}</div><div class="tile-sub">${tierSub(3)}</div></div>
     <div class="tile tier-tile tier-4"><div class="tile-label">Tier 4</div><div class="tile-value">${tierCountsKpi[3]}</div><div class="tile-sub">${tierSub(4)}</div></div>
-    <div class="tile"><div class="tile-label">Portfolio Value</div><div class="tile-value">${fmtMoney(portfolio)}</div><div class="tile-sub">accepted settlements</div></div>
+    <div class="tile"><div class="tile-label">Realized Value</div><div class="tile-value">${fmtMoney(realized)}</div><div class="tile-sub">accepted settlements</div></div>
+    <div class="tile"><div class="tile-label">Expected Value</div><div class="tile-value">${fmtMoney(expected)}</div><div class="tile-sub">tier midpoint &times; open inventory</div></div>
     <div class="tile"><div class="tile-label">SOL &lt; 90 Days</div><div class="tile-value">${solCount.toLocaleString()}</div><div class="tile-sub">open matters at risk</div></div>
     <div class="tile"><div class="tile-label">Avg Score</div><div class="tile-value">${avgScore}</div><div class="tile-sub">across ${scored.length} matters</div></div>`;
 
@@ -1121,8 +1124,10 @@ function renderExecSummary() {
   if (!el || !D.cases) return;
   const cases = D.cases;
   cases.forEach(c => { c.statusBucket = statusBucketOf(c); });
-  const portfolio = cases.filter(c => c.settlementStatus === 'accepted' && c.settlementAmount != null)
-                         .reduce((s, c) => s + c.settlementAmount, 0);
+  const realized = cases.filter(c => c.settlementStatus === 'accepted' && c.settlementAmount != null)
+                        .reduce((s, c) => s + c.settlementAmount, 0);
+  const expected = cases.filter(c => c.settlementStatus !== 'accepted' && c.tier)
+                        .reduce((s, c) => { const r = tierRecoveryRange(c.tier); return s + (r.low + r.high) / 2; }, 0);
   const tCounts = [1, 2, 3, 4].map(t => cases.filter(c => c.tier === t).length);
   const pending = cases.filter(c => c.statusBucket === 'pending_close').length;
   const now = new Date(); now.setHours(0, 0, 0, 0);
@@ -1134,7 +1139,8 @@ function renderExecSummary() {
   }).length;
   el.innerHTML = `
     <div class="tile"><div class="tile-label">Matters</div><div class="tile-value">${cases.length.toLocaleString()}</div><div class="tile-sub">in this book</div></div>
-    <div class="tile"><div class="tile-label">Portfolio Value</div><div class="tile-value">${fmtMoney(portfolio)}</div><div class="tile-sub">accepted settlements</div></div>
+    <div class="tile"><div class="tile-label">Realized Value</div><div class="tile-value">${fmtMoney(realized)}</div><div class="tile-sub">accepted settlements</div></div>
+    <div class="tile"><div class="tile-label">Expected Value</div><div class="tile-value">${fmtMoney(expected)}</div><div class="tile-sub">tier midpoint &times; open inventory</div></div>
     <div class="tile"><div class="tile-label">Tier Mix</div><div class="tile-value" style="font-size:18px">${tCounts[0]} / ${tCounts[1]} / ${tCounts[2]} / ${tCounts[3]}</div><div class="tile-sub">T1 / T2 / T3 / T4</div></div>
     <div class="tile"><div class="tile-label">Pending Close</div><div class="tile-value">${pending}</div><div class="tile-sub">notification sent &lt; 30 days</div></div>
     <div class="tile"><div class="tile-label">SOL &lt; 90 Days</div><div class="tile-value">${sol}</div><div class="tile-sub">open matters at risk</div></div>`;
