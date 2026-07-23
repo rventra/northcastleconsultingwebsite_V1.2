@@ -1,9 +1,9 @@
 // Mass Tort Dashboard — Generated Data
 // Source: RDS paraquat_tort (v2 schema)
-// Generated: 2026-07-23T15:49:02.931769
+// Generated: 2026-07-23T16:07:26.699741
 // DO NOT EDIT — regenerate with: python build_data_js.py
 
-window.MT_CONFIG = { apiUrl: "" };
+window.MT_CONFIG = { apiUrl: "https://207zs98l9k.execute-api.us-east-2.amazonaws.com/query" };
 
 window.MT = {
   "totalClaimants": 500,
