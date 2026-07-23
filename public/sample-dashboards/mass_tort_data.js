@@ -1,6 +1,6 @@
 // Mass Tort Dashboard — Generated Data
 // Source: RDS paraquat_tort (v2 schema)
-// Generated: 2026-07-23T12:38:26.780917
+// Generated: 2026-07-23T13:37:55.082528
 // DO NOT EDIT — regenerate with: python build_data_js.py
 
 window.MT = {
@@ -1183,9 +1183,37 @@ window.MT = {
       "lastDxDate": "2025-02-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-03-03",
+      "intakeDate": "2023-02-24",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-12-05",
+      "monthlyUpdateSent": true,
       "exposureYears": 22.00958247775496,
       "latencyYears": 25.144421629021217,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hyposmia",
+        "micrographia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -1212,9 +1240,47 @@ window.MT = {
       "lastDxDate": "2025-12-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-10-23",
+      "intakeDate": "2022-10-15",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-07-06",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.997946611909651,
       "latencyYears": 18.12183436002738,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -1241,9 +1307,42 @@ window.MT = {
       "lastDxDate": "2017-03-09",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-11-23",
+      "intakeDate": "2023-11-14",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-01-18",
+      "monthlyUpdateSent": true,
       "exposureYears": 14.056125941136209,
       "latencyYears": 17.99315537303217,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "autonomic dysfunction",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -1270,9 +1369,36 @@ window.MT = {
       "lastDxDate": "2012-01-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-07-01",
+      "intakeDate": "2021-06-15",
+      "applicationMethod": "other",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2014-02-12",
+      "monthlyUpdateSent": true,
       "exposureYears": 4.0,
       "latencyYears": 19.67145790554415,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1992,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -1299,9 +1425,45 @@ window.MT = {
       "lastDxDate": "2023-02-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-09-05",
+      "intakeDate": "2022-08-20",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-07-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 18.99794661190965,
       "latencyYears": 34.71047227926078,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1988,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -1328,9 +1490,47 @@ window.MT = {
       "lastDxDate": "2018-07-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-02-23",
+      "intakeDate": "2023-02-17",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-12-24",
+      "monthlyUpdateSent": true,
       "exposureYears": 9.664613278576317,
       "latencyYears": 6.182067077344285,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Helmquat 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -1357,9 +1557,35 @@ window.MT = {
       "lastDxDate": "2016-04-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-10-16",
+      "intakeDate": "2022-10-04",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-07-20",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.786447638603696,
       "latencyYears": 2.086242299794661,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Firestorm 3SL",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -1386,9 +1612,40 @@ window.MT = {
       "lastDxDate": "2024-04-10",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-12-14",
+      "intakeDate": "2022-12-08",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-12-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 34.20396988364134,
       "latencyYears": 38.05612594113621,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1986,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -1415,9 +1672,34 @@ window.MT = {
       "lastDxDate": "2025-12-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-11-16",
+      "intakeDate": "2023-11-10",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-03-05",
+      "monthlyUpdateSent": true,
       "exposureYears": 14.702258726899384,
       "latencyYears": 18.622861054072555,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -1444,9 +1726,47 @@ window.MT = {
       "lastDxDate": "2015-05-24",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-11-21",
+      "intakeDate": "2021-11-14",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2017-10-01",
+      "monthlyUpdateSent": false,
       "exposureYears": 51.22245037645448,
       "latencyYears": 44.616016427104725,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1970,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -1473,9 +1793,37 @@ window.MT = {
       "lastDxDate": "2025-12-21",
       "settlementStatus": "negotiating",
       "settlementAmount": 80000.0,
+      "openDate": "2024-12-26",
+      "intakeDate": "2024-12-14",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-10-17",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.41615331964408,
       "latencyYears": 12.388774811772759,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Helmquat 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -1502,9 +1850,30 @@ window.MT = {
       "lastDxDate": "2025-12-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-08-12",
+      "intakeDate": "2022-07-26",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-09-01",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.0,
       "latencyYears": 17.7056810403833,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "alien limb phenomenon",
+        "limb apraxia"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -1531,9 +1900,34 @@ window.MT = {
       "lastDxDate": "2017-08-11",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-05-01",
+      "intakeDate": "2023-04-18",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-03-28",
+      "monthlyUpdateSent": false,
       "exposureYears": 18.85284052019165,
       "latencyYears": 14.464065708418891,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -1560,9 +1954,35 @@ window.MT = {
       "lastDxDate": "2025-03-03",
       "settlementStatus": "accepted",
       "settlementAmount": 56410.15,
+      "openDate": "2021-07-23",
+      "intakeDate": "2021-07-03",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2026-12-14",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.191649555099247,
       "latencyYears": 15.36208076659822,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Firestorm 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "akathisia",
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -1589,9 +2009,35 @@ window.MT = {
       "lastDxDate": "2022-02-16",
       "settlementStatus": "accepted",
       "settlementAmount": 100000.0,
+      "openDate": "2023-05-03",
+      "intakeDate": "2023-04-13",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-07-26",
+      "monthlyUpdateSent": false,
       "exposureYears": 16.0,
       "latencyYears": 37.61806981519507,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1984,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -1618,9 +2064,40 @@ window.MT = {
       "lastDxDate": "2012-03-01",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-08-03",
+      "intakeDate": "2025-07-20",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2014-02-27",
+      "monthlyUpdateSent": true,
       "exposureYears": 36.73648186173853,
       "latencyYears": 26.902121834360027,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1985,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -1647,9 +2124,41 @@ window.MT = {
       "lastDxDate": "2020-03-09",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-09-05",
+      "intakeDate": "2022-08-25",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-10-01",
+      "monthlyUpdateSent": true,
       "exposureYears": 17.27310061601643,
       "latencyYears": 15.460643394934976,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Firestorm 3SL",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_genetic_tests"
+      ],
       "tier": 2
     },
     {
@@ -1676,9 +2185,35 @@ window.MT = {
       "lastDxDate": "2024-10-17",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2021-11-20",
+      "intakeDate": "2021-11-11",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-02-04",
+      "monthlyUpdateSent": false,
       "exposureYears": 9.64271047227926,
       "latencyYears": 12.438056125941136,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -1705,9 +2240,39 @@ window.MT = {
       "lastDxDate": "2025-12-29",
       "settlementStatus": "accepted",
       "settlementAmount": 88590.55,
+      "openDate": "2024-08-17",
+      "intakeDate": "2024-08-02",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-01-04",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.324435318275154,
       "latencyYears": 10.318959616700889,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -1734,9 +2299,45 @@ window.MT = {
       "lastDxDate": "2010-01-24",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-03-28",
+      "intakeDate": "2025-03-21",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2011-08-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.0,
       "latencyYears": 33.65366187542779,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1976,
+      "productNames": [
+        "Firestorm 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -1763,9 +2364,41 @@ window.MT = {
       "lastDxDate": "2025-12-11",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-01-14",
+      "intakeDate": "2024-12-26",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-05-18",
+      "monthlyUpdateSent": true,
       "exposureYears": 23.140314852840522,
       "latencyYears": 27.085557837097877,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Firestorm 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -1792,9 +2425,38 @@ window.MT = {
       "lastDxDate": "2025-12-27",
       "settlementStatus": "negotiating",
       "settlementAmount": 29543.85,
+      "openDate": "2023-10-25",
+      "intakeDate": "2023-10-10",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-07-17",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.999315537303216,
       "latencyYears": 14.080766598220396,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -1821,9 +2483,34 @@ window.MT = {
       "lastDxDate": "2006-06-20",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-11-29",
+      "intakeDate": "2022-11-13",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2008-06-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 45.267624914442166,
       "latencyYears": 29.73579739904175,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1976,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -1850,9 +2537,44 @@ window.MT = {
       "lastDxDate": "2018-05-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-12-08",
+      "intakeDate": "2023-12-03",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-01-23",
+      "monthlyUpdateSent": true,
       "exposureYears": 39.76728268309377,
       "latencyYears": 40.28747433264887,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1978,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -1879,9 +2601,47 @@ window.MT = {
       "lastDxDate": "2025-12-20",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-10-02",
+      "intakeDate": "2022-09-20",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-10-21",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.093086926762492,
       "latencyYears": 12.062970568104038,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "postural instability",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -1908,9 +2668,38 @@ window.MT = {
       "lastDxDate": "2016-02-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-06-21",
+      "intakeDate": "2021-06-05",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-09-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 4.0,
       "latencyYears": 11.55920602327173,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -1937,9 +2726,38 @@ window.MT = {
       "lastDxDate": "2025-05-10",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-09-21",
+      "intakeDate": "2024-09-15",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-02-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 56.941820670773446,
       "latencyYears": 60.36139630390144,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1964,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -1966,9 +2784,41 @@ window.MT = {
       "lastDxDate": "2020-11-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-05-28",
+      "intakeDate": "2023-05-08",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-09-10",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.998631074606434,
       "latencyYears": 27.28268309377139,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -1995,9 +2845,36 @@ window.MT = {
       "lastDxDate": "2019-11-18",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2022-02-22",
+      "intakeDate": "2022-02-13",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2021-11-09",
+      "monthlyUpdateSent": false,
       "exposureYears": 34.223134839151264,
       "latencyYears": 45.82614647501711,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1974,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -2024,9 +2901,43 @@ window.MT = {
       "lastDxDate": "2025-07-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-02-20",
+      "intakeDate": "2025-02-05",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-11-23",
+      "monthlyUpdateSent": false,
       "exposureYears": 16.607802874743328,
       "latencyYears": 26.99520876112252,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Helmquat 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -2053,9 +2964,38 @@ window.MT = {
       "lastDxDate": "2025-12-28",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-10-15",
+      "intakeDate": "2021-09-27",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-07-10",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.6331279945242985,
       "latencyYears": 11.624914442162902,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -2082,9 +3022,46 @@ window.MT = {
       "lastDxDate": "2018-11-28",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-12-26",
+      "intakeDate": "2021-12-12",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-06-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 28.79397672826831,
       "latencyYears": 25.702943189596166,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -2111,9 +3088,41 @@ window.MT = {
       "lastDxDate": "2025-02-18",
       "settlementStatus": "accepted",
       "settlementAmount": 313783.62,
+      "openDate": "2024-04-25",
+      "intakeDate": "2024-04-07",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-07-24",
+      "monthlyUpdateSent": false,
       "exposureYears": 20.410677618069816,
       "latencyYears": 23.54551676933607,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Helmquat 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -2140,9 +3149,41 @@ window.MT = {
       "lastDxDate": "2024-02-02",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2024-06-11",
+      "intakeDate": "2024-05-27",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-04-28",
+      "monthlyUpdateSent": false,
       "exposureYears": 20.0,
       "latencyYears": 25.53593429158111,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -2169,9 +3210,44 @@ window.MT = {
       "lastDxDate": "2017-09-14",
       "settlementStatus": "offered",
       "settlementAmount": 203281.67,
+      "openDate": "2024-09-14",
+      "intakeDate": "2024-09-06",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2019-05-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 10.277891854893909,
       "latencyYears": 5.982203969883641,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -2198,9 +3274,39 @@ window.MT = {
       "lastDxDate": "2025-12-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-02-18",
+      "intakeDate": "2022-02-03",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-05-16",
+      "monthlyUpdateSent": true,
       "exposureYears": 5.9986310746064335,
       "latencyYears": 17.49486652977413,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -2227,9 +3333,38 @@ window.MT = {
       "lastDxDate": "2024-10-09",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-04-10",
+      "intakeDate": "2023-04-05",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-01-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.58590006844627,
       "latencyYears": 15.359342915811089,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -2256,9 +3391,48 @@ window.MT = {
       "lastDxDate": "2024-11-11",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-02-28",
+      "intakeDate": "2024-02-21",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-07-16",
+      "monthlyUpdateSent": false,
       "exposureYears": 34.17932922655715,
       "latencyYears": 37.04312114989733,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1987,
+      "productNames": [
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia",
+        "dysphagia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -2285,9 +3459,41 @@ window.MT = {
       "lastDxDate": "2025-12-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-09-18",
+      "intakeDate": "2023-09-05",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-11-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.40041067761807,
       "latencyYears": 11.364818617385353,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_family_histories",
+        "pq_genetic_tests"
+      ],
       "tier": 2
     },
     {
@@ -2314,9 +3520,37 @@ window.MT = {
       "lastDxDate": "2018-07-31",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-06-04",
+      "intakeDate": "2025-05-29",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-04-05",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.997946611909651,
       "latencyYears": 24.57221081451061,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -2343,9 +3577,38 @@ window.MT = {
       "lastDxDate": "2007-02-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-09-17",
+      "intakeDate": "2024-09-12",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2008-09-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 18.99794661190965,
       "latencyYears": 8.432580424366872,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -2372,9 +3635,42 @@ window.MT = {
       "lastDxDate": "2025-12-10",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-05-13",
+      "intakeDate": "2024-04-29",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-11-19",
+      "monthlyUpdateSent": true,
       "exposureYears": 9.00205338809035,
       "latencyYears": 12.944558521560575,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -2401,9 +3697,38 @@ window.MT = {
       "lastDxDate": "2024-07-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-01-20",
+      "intakeDate": "2025-01-14",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-02-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.652977412731006,
       "latencyYears": 9.158110882956878,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -2430,9 +3755,39 @@ window.MT = {
       "lastDxDate": "2015-01-28",
       "settlementStatus": "negotiating",
       "settlementAmount": 31259.58,
+      "openDate": "2023-04-29",
+      "intakeDate": "2023-04-17",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2016-11-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 50.992470910335385,
       "latencyYears": 44.068446269678304,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1971,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "rigidity",
+        "urinary incontinence"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -2459,9 +3814,41 @@ window.MT = {
       "lastDxDate": "2013-03-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-10-12",
+      "intakeDate": "2025-09-29",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2015-06-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 28.0,
       "latencyYears": 46.38740588637919,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1966,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "constipation",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -2488,9 +3875,44 @@ window.MT = {
       "lastDxDate": "2025-12-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-07-04",
+      "intakeDate": "2023-06-22",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-10-20",
+      "monthlyUpdateSent": true,
       "exposureYears": 14.819986310746064,
       "latencyYears": 18.8145106091718,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -2517,9 +3939,42 @@ window.MT = {
       "lastDxDate": "2025-12-31",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-01-28",
+      "intakeDate": "2023-01-20",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-04-29",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.478439425051334,
       "latencyYears": 17.478439425051334,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -2546,9 +4001,44 @@ window.MT = {
       "lastDxDate": "2018-05-28",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-05-30",
+      "intakeDate": "2022-05-21",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-04-23",
+      "monthlyUpdateSent": true,
       "exposureYears": 0.999315537303217,
       "latencyYears": 35.93429158110883,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1982,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -2575,9 +4065,44 @@ window.MT = {
       "lastDxDate": "2022-04-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-05-13",
+      "intakeDate": "2025-04-30",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-04-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 25.492128678986994,
       "latencyYears": 25.78781656399726,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1996,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -2604,9 +4129,48 @@ window.MT = {
       "lastDxDate": "2011-06-25",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-01-05",
+      "intakeDate": "2021-12-20",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2013-01-12",
+      "monthlyUpdateSent": false,
       "exposureYears": 49.83983572895277,
       "latencyYears": 39.32101300479124,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1972,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_family_histories",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -2633,9 +4197,43 @@ window.MT = {
       "lastDxDate": "2025-12-31",
       "settlementStatus": "offered",
       "settlementAmount": 176630.12,
+      "openDate": "2023-03-25",
+      "intakeDate": "2023-03-09",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-08-02",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.111567419575634,
       "latencyYears": 17.111567419575632,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -2662,9 +4260,39 @@ window.MT = {
       "lastDxDate": "2024-07-11",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-11-10",
+      "intakeDate": "2021-11-05",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-02-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 28.8870636550308,
       "latencyYears": 31.41409993155373,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_smoking_histories",
+        "pq_genetic_tests"
+      ],
       "tier": 3
     },
     {
@@ -2691,9 +4319,38 @@ window.MT = {
       "lastDxDate": "2016-07-25",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-02-03",
+      "intakeDate": "2024-01-28",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-10-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 28.0,
       "latencyYears": 40.82956878850103,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1975,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "akathisia",
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -2720,9 +4377,41 @@ window.MT = {
       "lastDxDate": "2018-03-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-06-04",
+      "intakeDate": "2022-05-16",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-03-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 31.572895277207394,
       "latencyYears": 27.813826146475016,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -2749,9 +4438,46 @@ window.MT = {
       "lastDxDate": "2021-09-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-11-08",
+      "intakeDate": "2024-11-03",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2023-08-12",
+      "monthlyUpdateSent": true,
       "exposureYears": 18.765229295003422,
       "latencyYears": 18.439425051334702,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -2778,9 +4504,43 @@ window.MT = {
       "lastDxDate": "2024-11-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-03-07",
+      "intakeDate": "2022-02-22",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-07-20",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.763860369609855,
       "latencyYears": 23.65776865160849,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -2807,9 +4567,41 @@ window.MT = {
       "lastDxDate": "2025-10-13",
       "settlementStatus": "negotiating",
       "settlementAmount": 44458.77,
+      "openDate": "2025-07-10",
+      "intakeDate": "2025-06-21",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-05-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.0,
       "latencyYears": 30.184804928131417,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1995,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_smoking_histories",
+        "pq_family_histories",
+        "pq_genetic_tests"
+      ],
       "tier": 3
     },
     {
@@ -2836,9 +4628,37 @@ window.MT = {
       "lastDxDate": "2015-07-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-12-04",
+      "intakeDate": "2022-11-23",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-10-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.56331279945243,
       "latencyYears": 7.129363449691992,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -2865,9 +4685,31 @@ window.MT = {
       "lastDxDate": "2010-05-14",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-05-01",
+      "intakeDate": "2024-04-14",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2012-04-02",
+      "monthlyUpdateSent": true,
       "exposureYears": 5.9986310746064335,
       "latencyYears": 17.163586584531142,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "asymmetric rigidity",
+        "cortical sensory loss"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -2894,9 +4736,43 @@ window.MT = {
       "lastDxDate": "2014-03-08",
       "settlementStatus": "accepted",
       "settlementAmount": 43919.26,
+      "openDate": "2024-07-23",
+      "intakeDate": "2024-07-14",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2015-11-17",
+      "monthlyUpdateSent": false,
       "exposureYears": 9.998631074606434,
       "latencyYears": 4.865160848733744,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -2923,9 +4799,41 @@ window.MT = {
       "lastDxDate": "2009-06-14",
       "settlementStatus": "accepted",
       "settlementAmount": 32446.79,
+      "openDate": "2025-02-09",
+      "intakeDate": "2025-01-24",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2011-07-31",
+      "monthlyUpdateSent": false,
       "exposureYears": 10.99794661190965,
       "latencyYears": 15.507186858316222,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "hyposmia",
+        "micrographia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -2952,9 +4860,37 @@ window.MT = {
       "lastDxDate": "2018-12-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-02-09",
+      "intakeDate": "2025-01-22",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2021-06-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 10.442162902121835,
       "latencyYears": 7.436002737850787,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -2981,9 +4917,44 @@ window.MT = {
       "lastDxDate": "2025-07-16",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-07-07",
+      "intakeDate": "2024-06-17",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-01-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.775496235455168,
       "latencyYears": 11.315537303216974,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -3010,9 +4981,40 @@ window.MT = {
       "lastDxDate": "2025-09-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-08-15",
+      "intakeDate": "2024-08-07",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-09-26",
+      "monthlyUpdateSent": true,
       "exposureYears": 0.999315537303217,
       "latencyYears": 35.78370978781656,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1989,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -3039,9 +5041,42 @@ window.MT = {
       "lastDxDate": "2025-05-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-02-23",
+      "intakeDate": "2022-02-04",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-04-29",
+      "monthlyUpdateSent": true,
       "exposureYears": 26.99794661190965,
       "latencyYears": 58.5927446954141,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1966,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -3068,9 +5103,44 @@ window.MT = {
       "lastDxDate": "2022-05-28",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-03-21",
+      "intakeDate": "2023-03-10",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-11-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 1.998631074606434,
       "latencyYears": 56.049281314168375,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1966,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "parkinsonism",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -3097,9 +5167,44 @@ window.MT = {
       "lastDxDate": "2024-10-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-01-06",
+      "intakeDate": "2025-01-01",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2026-11-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.9897330595482545,
       "latencyYears": 9.809719370294319,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -3126,9 +5231,32 @@ window.MT = {
       "lastDxDate": "2017-02-04",
       "settlementStatus": "accepted",
       "settlementAmount": 57415.64,
+      "openDate": "2025-07-27",
+      "intakeDate": "2025-07-13",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2019-03-17",
+      "monthlyUpdateSent": false,
       "exposureYears": 29.998631074606433,
       "latencyYears": 26.967830253251197,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -3155,9 +5283,32 @@ window.MT = {
       "lastDxDate": "2014-05-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-03-10",
+      "intakeDate": "2023-02-28",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2016-04-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 21.415468856947296,
       "latencyYears": 13.796030116358658,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2000,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_genetic_tests"
+      ],
       "tier": 2
     },
     {
@@ -3184,9 +5335,41 @@ window.MT = {
       "lastDxDate": "2015-04-30",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-11-11",
+      "intakeDate": "2023-10-23",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-06-05",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.777549623545518,
       "latencyYears": 10.105407255304586,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -3213,9 +5396,37 @@ window.MT = {
       "lastDxDate": "2025-12-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-10-01",
+      "intakeDate": "2021-09-19",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-03-12",
+      "monthlyUpdateSent": false,
       "exposureYears": 14.959616700889802,
       "latencyYears": 18.937713894592743,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "fluctuating cognition",
+        "parkinsonism",
+        "REM sleep behavior disorder",
+        "visual hallucinations"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -3242,9 +5453,43 @@ window.MT = {
       "lastDxDate": "2025-03-04",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-01-26",
+      "intakeDate": "2023-01-18",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-07-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 17.308692676249144,
       "latencyYears": 28.659822039698838,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1996,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hyposmia",
+        "micrographia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories",
+        "pq_family_histories",
+        "pq_genetic_tests"
+      ],
       "tier": 3
     },
     {
@@ -3271,9 +5516,51 @@ window.MT = {
       "lastDxDate": "2025-12-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-05-22",
+      "intakeDate": "2022-05-14",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-12-13",
+      "monthlyUpdateSent": true,
       "exposureYears": 0.999315537303217,
       "latencyYears": 11.460643394934976,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -3300,9 +5587,52 @@ window.MT = {
       "lastDxDate": "2025-03-03",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2022-08-04",
+      "intakeDate": "2022-07-15",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-04-28",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.954140999315538,
       "latencyYears": 10.124572210814511,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "rigidity",
+        "urinary incontinence"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -3329,9 +5659,38 @@ window.MT = {
       "lastDxDate": "2021-08-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-07-24",
+      "intakeDate": "2025-07-04",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-04-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 17.593429158110883,
       "latencyYears": 17.245722108145106,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat 2L AG",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -3358,9 +5717,48 @@ window.MT = {
       "lastDxDate": "2023-02-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-12-25",
+      "intakeDate": "2025-12-06",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-04-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 31.994524298425734,
       "latencyYears": 43.43052703627652,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1979,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -3387,9 +5785,48 @@ window.MT = {
       "lastDxDate": "2021-03-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-09-23",
+      "intakeDate": "2022-09-17",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-09-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.997946611909651,
       "latencyYears": 32.323066392881586,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1988,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "fluctuating cognition",
+        "parkinsonism",
+        "REM sleep behavior disorder",
+        "rigidity",
+        "visual hallucinations"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 4
     },
     {
@@ -3416,9 +5853,35 @@ window.MT = {
       "lastDxDate": "2023-09-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-02-11",
+      "intakeDate": "2023-01-30",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-08-18",
+      "monthlyUpdateSent": true,
       "exposureYears": 42.37371663244353,
       "latencyYears": 44.11772758384668,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1979,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -3445,9 +5908,30 @@ window.MT = {
       "lastDxDate": "2025-12-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-08-01",
+      "intakeDate": "2023-07-18",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-09-25",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.436687200547571,
       "latencyYears": 10.392881587953456,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "dysphagia",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -3474,9 +5958,43 @@ window.MT = {
       "lastDxDate": "2025-12-17",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-06-27",
+      "intakeDate": "2022-06-14",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-06-25",
+      "monthlyUpdateSent": false,
       "exposureYears": 19.104722792607802,
       "latencyYears": 23.066392881587955,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -3503,9 +6021,43 @@ window.MT = {
       "lastDxDate": "2025-12-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-04-15",
+      "intakeDate": "2024-04-04",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-06-17",
+      "monthlyUpdateSent": true,
       "exposureYears": 1.998631074606434,
       "latencyYears": 11.41409993155373,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -3532,9 +6084,34 @@ window.MT = {
       "lastDxDate": "2025-12-25",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2021-11-06",
+      "intakeDate": "2021-10-18",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-07-11",
+      "monthlyUpdateSent": false,
       "exposureYears": 9.924709103353868,
       "latencyYears": 13.908281998631075,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "autonomic dysfunction",
+        "dysarthria",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_family_histories",
+        "pq_genetic_tests"
+      ],
       "tier": 4
     },
     {
@@ -3561,9 +6138,36 @@ window.MT = {
       "lastDxDate": "2011-10-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-10-20",
+      "intakeDate": "2024-10-12",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2013-06-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 11.58110882956879,
       "latencyYears": 1.3360711841204653,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2010,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -3590,9 +6194,33 @@ window.MT = {
       "lastDxDate": "2025-12-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-10-14",
+      "intakeDate": "2025-10-07",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-12-18",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.997946611909651,
       "latencyYears": 12.114989733059549,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "parkinsonism",
+        "REM sleep behavior disorder",
+        "rigidity",
+        "visual hallucinations"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -3619,9 +6247,43 @@ window.MT = {
       "lastDxDate": "2025-12-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-04-07",
+      "intakeDate": "2023-03-19",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-08-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.161533196440793,
       "latencyYears": 24.095824777549623,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Firestorm 3SL",
+        "Paraquat 2L AG",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -3648,9 +6310,43 @@ window.MT = {
       "lastDxDate": "2006-09-28",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-12-17",
+      "intakeDate": "2024-12-02",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2008-04-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 26.04791238877481,
       "latencyYears": 16.01368925393566,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat 2L AG",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "rigidity",
+        "urinary incontinence"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -3677,9 +6373,46 @@ window.MT = {
       "lastDxDate": "2017-03-21",
       "settlementStatus": "offered",
       "settlementAmount": 172731.91,
+      "openDate": "2021-10-07",
+      "intakeDate": "2021-09-23",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2019-09-14",
+      "monthlyUpdateSent": true,
       "exposureYears": 14.99794661190965,
       "latencyYears": 15.457905544147843,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "constipation",
+        "postural instability",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -3706,9 +6439,43 @@ window.MT = {
       "lastDxDate": "2016-03-16",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2024-09-19",
+      "intakeDate": "2024-09-04",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-10-26",
+      "monthlyUpdateSent": false,
       "exposureYears": 20.0,
       "latencyYears": 31.32101300479124,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1984,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -3735,9 +6502,43 @@ window.MT = {
       "lastDxDate": "2012-01-11",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-06-19",
+      "intakeDate": "2025-06-14",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2014-06-10",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.999315537303216,
       "latencyYears": 14.483230663928817,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1997,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "rigidity",
+        "urinary incontinence"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -3764,9 +6565,40 @@ window.MT = {
       "lastDxDate": "2020-12-23",
       "settlementStatus": "accepted",
       "settlementAmount": 40196.38,
+      "openDate": "2025-11-06",
+      "intakeDate": "2025-10-19",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-10-01",
+      "monthlyUpdateSent": false,
       "exposureYears": 28.8186173853525,
       "latencyYears": 27.797399041752225,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Concentrate 3SL",
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -3793,9 +6625,38 @@ window.MT = {
       "lastDxDate": "2014-12-25",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-09-06",
+      "intakeDate": "2025-08-23",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2016-08-31",
+      "monthlyUpdateSent": true,
       "exposureYears": 37.65639972621492,
       "latencyYears": 30.639288158795345,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1984,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 1
     },
     {
@@ -3822,9 +6683,43 @@ window.MT = {
       "lastDxDate": "2020-08-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-07-08",
+      "intakeDate": "2022-06-27",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-05-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 49.84531143052703,
       "latencyYears": 48.506502395619435,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1972,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -3851,9 +6746,46 @@ window.MT = {
       "lastDxDate": "2014-12-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-02-06",
+      "intakeDate": "2024-01-24",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-05-28",
+      "monthlyUpdateSent": false,
       "exposureYears": 2.9979466119096507,
       "latencyYears": 32.558521560574945,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1982,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -3880,9 +6812,44 @@ window.MT = {
       "lastDxDate": "2018-04-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-01-04",
+      "intakeDate": "2023-12-15",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-11-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.0,
       "latencyYears": 27.83299110198494,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories",
+        "pq_genetic_tests"
+      ],
       "tier": 3
     },
     {
@@ -3909,9 +6876,36 @@ window.MT = {
       "lastDxDate": "2010-09-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-06-23",
+      "intakeDate": "2021-06-07",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2013-01-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 18.48596851471595,
       "latencyYears": 7.200547570157426,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -3938,9 +6932,46 @@ window.MT = {
       "lastDxDate": "2023-06-25",
       "settlementStatus": "accepted",
       "settlementAmount": 73111.03,
+      "openDate": "2024-03-08",
+      "intakeDate": "2024-02-24",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2025-08-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.999315537303216,
       "latencyYears": 15.271731690622861,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -3967,9 +6998,38 @@ window.MT = {
       "lastDxDate": "2021-03-10",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-12-22",
+      "intakeDate": "2021-12-14",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-08-02",
+      "monthlyUpdateSent": true,
       "exposureYears": 9.248459958932239,
       "latencyYears": 8.438056125941136,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "akathisia",
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 4
     },
     {
@@ -3996,9 +7056,39 @@ window.MT = {
       "lastDxDate": "2025-12-26",
       "settlementStatus": "accepted",
       "settlementAmount": 109828.91,
+      "openDate": "2022-01-11",
+      "intakeDate": "2021-12-22",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-10-11",
+      "monthlyUpdateSent": false,
       "exposureYears": 2.9979466119096507,
       "latencyYears": 24.05475701574264,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -4025,9 +7115,44 @@ window.MT = {
       "lastDxDate": "2017-01-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-10-23",
+      "intakeDate": "2022-10-04",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-01-22",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.38466803559206,
       "latencyYears": 1.4072553045859,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 4
     },
     {
@@ -4054,9 +7179,31 @@ window.MT = {
       "lastDxDate": "2020-01-01",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-03-27",
+      "intakeDate": "2024-03-15",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-05-16",
+      "monthlyUpdateSent": false,
       "exposureYears": 25.99315537303217,
       "latencyYears": 23.994524298425734,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1996,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -4083,9 +7230,38 @@ window.MT = {
       "lastDxDate": "2024-01-11",
       "settlementStatus": "accepted",
       "settlementAmount": 82499.69,
+      "openDate": "2023-04-25",
+      "intakeDate": "2023-04-15",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-09-20",
+      "monthlyUpdateSent": false,
       "exposureYears": 15.89596167008898,
       "latencyYears": 17.924709103353866,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2006,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hypomimia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -4112,9 +7288,32 @@ window.MT = {
       "lastDxDate": "2024-07-24",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-08-19",
+      "intakeDate": "2023-08-05",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2026-04-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 26.99794661190965,
       "latencyYears": 43.351129363449694,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1981,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -4141,9 +7340,43 @@ window.MT = {
       "lastDxDate": "2023-05-14",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-06-10",
+      "intakeDate": "2024-06-05",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2025-07-27",
+      "monthlyUpdateSent": false,
       "exposureYears": 10.99794661190965,
       "latencyYears": 55.67419575633128,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1967,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "constipation",
+        "micrographia",
+        "postural instability",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -4170,9 +7403,38 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-10-05",
+      "intakeDate": "2022-09-30",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": false,
       "exposureYears": 4.0,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 4
     },
     {
@@ -4199,9 +7461,49 @@ window.MT = {
       "lastDxDate": "2022-03-09",
       "settlementStatus": "offered",
       "settlementAmount": 41112.91,
+      "openDate": "2023-11-30",
+      "intakeDate": "2023-11-11",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-05-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 27.66050650239562,
       "latencyYears": 27.8466803559206,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Firestorm 3SL",
+        "Helmquat 3SL",
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -4228,9 +7530,47 @@ window.MT = {
       "lastDxDate": "2025-12-29",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2022-08-07",
+      "intakeDate": "2022-07-27",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-12-28",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.251882272416154,
       "latencyYears": 12.24640657084189,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -4257,9 +7597,37 @@ window.MT = {
       "lastDxDate": "2025-12-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-10-03",
+      "intakeDate": "2021-09-21",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-10-27",
+      "monthlyUpdateSent": true,
       "exposureYears": 14.179329226557153,
       "latencyYears": 18.116358658453116,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "gait disturbance",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -4286,9 +7654,46 @@ window.MT = {
       "lastDxDate": "2018-02-17",
       "settlementStatus": "offered",
       "settlementAmount": 80000.0,
+      "openDate": "2023-04-23",
+      "intakeDate": "2023-04-09",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-01-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 44.813141683778234,
       "latencyYears": 40.94455852156057,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1977,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -4315,9 +7720,46 @@ window.MT = {
       "lastDxDate": "2020-03-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-11-16",
+      "intakeDate": "2025-10-31",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-04-27",
+      "monthlyUpdateSent": true,
       "exposureYears": 28.93908281998631,
       "latencyYears": 27.121149897330596,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Helmquat 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "rigidity",
+        "urinary incontinence"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -4344,9 +7786,51 @@ window.MT = {
       "lastDxDate": "2024-11-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-12-09",
+      "intakeDate": "2022-11-30",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-02-17",
+      "monthlyUpdateSent": true,
       "exposureYears": 27.482546201232033,
       "latencyYears": 30.38740588637919,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -4373,9 +7857,38 @@ window.MT = {
       "lastDxDate": "2020-06-29",
       "settlementStatus": "offered",
       "settlementAmount": 111170.01,
+      "openDate": "2025-07-29",
+      "intakeDate": "2025-07-19",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-02-19",
+      "monthlyUpdateSent": true,
       "exposureYears": 26.99794661190965,
       "latencyYears": 44.511978097193705,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1975,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -4402,9 +7915,46 @@ window.MT = {
       "lastDxDate": "2018-02-06",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-02-24",
+      "intakeDate": "2025-02-05",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-08-23",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.999315537303216,
       "latencyYears": 34.351813826146476,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1983,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_encounters",
+        "pq_encounters",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -4431,9 +7981,38 @@ window.MT = {
       "lastDxDate": "2025-09-23",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2022-03-29",
+      "intakeDate": "2022-03-18",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-05-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.881587953456537,
       "latencyYears": 12.61054072553046,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "orthostatic hypotension"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -4460,9 +8039,42 @@ window.MT = {
       "lastDxDate": "2015-08-25",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2023-10-08",
+      "intakeDate": "2023-09-20",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2017-11-16",
+      "monthlyUpdateSent": false,
       "exposureYears": 24.0,
       "latencyYears": 40.355920602327174,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1975,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_genetic_tests"
+      ],
       "tier": 3
     },
     {
@@ -4489,9 +8101,45 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-05-27",
+      "intakeDate": "2022-05-19",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": true,
       "exposureYears": 12.676249144421629,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 4
     },
     {
@@ -4518,9 +8166,41 @@ window.MT = {
       "lastDxDate": "2022-06-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-11-23",
+      "intakeDate": "2023-11-04",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-08-23",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.999315537303218,
       "latencyYears": 41.38809034907597,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1981,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -4547,9 +8227,42 @@ window.MT = {
       "lastDxDate": "2021-07-03",
       "settlementStatus": "offered",
       "settlementAmount": 163023.19,
+      "openDate": "2024-10-18",
+      "intakeDate": "2024-10-01",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2023-04-01",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.0,
       "latencyYears": 28.31211498973306,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -4576,9 +8289,40 @@ window.MT = {
       "lastDxDate": "2017-12-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-07-13",
+      "intakeDate": "2022-06-30",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-12-20",
+      "monthlyUpdateSent": false,
       "exposureYears": 0.999315537303217,
       "latencyYears": 10.64476386036961,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -4605,9 +8349,35 @@ window.MT = {
       "lastDxDate": "2014-04-16",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-09-02",
+      "intakeDate": "2023-08-27",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2016-02-17",
+      "monthlyUpdateSent": true,
       "exposureYears": 34.35455167693361,
       "latencyYears": 26.64476386036961,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1987,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses"
+      ],
       "tier": 2
     },
     {
@@ -4634,9 +8404,42 @@ window.MT = {
       "lastDxDate": "2025-12-04",
       "settlementStatus": "negotiating",
       "settlementAmount": 58898.48,
+      "openDate": "2025-07-16",
+      "intakeDate": "2025-07-11",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-06-13",
+      "monthlyUpdateSent": false,
       "exposureYears": 11.980835044490075,
       "latencyYears": 15.906913073237508,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2010,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -4663,9 +8466,32 @@ window.MT = {
       "lastDxDate": "2025-12-29",
       "settlementStatus": "accepted",
       "settlementAmount": 27651.77,
+      "openDate": "2023-01-09",
+      "intakeDate": "2022-12-21",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-04-16",
+      "monthlyUpdateSent": false,
       "exposureYears": 2.9979466119096507,
       "latencyYears": 13.382614647501711,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -4692,9 +8518,49 @@ window.MT = {
       "lastDxDate": "2025-01-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-08-30",
+      "intakeDate": "2022-08-16",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-07-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.216290212183434,
       "latencyYears": 19.23066392881588,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Helmquat 3SL",
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -4721,9 +8587,34 @@ window.MT = {
       "lastDxDate": "2018-11-16",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2025-06-06",
+      "intakeDate": "2025-05-20",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2020-12-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 27.04722792607803,
       "latencyYears": 23.923340177960302,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -4750,9 +8641,46 @@ window.MT = {
       "lastDxDate": "2011-05-10",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-08-06",
+      "intakeDate": "2021-07-24",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2013-03-19",
+      "monthlyUpdateSent": true,
       "exposureYears": 31.025325119780973,
       "latencyYears": 20.380561259411362,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL",
+        "Paraquat 2L AG",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -4779,9 +8707,43 @@ window.MT = {
       "lastDxDate": "2022-10-20",
       "settlementStatus": "negotiating",
       "settlementAmount": 40207.39,
+      "openDate": "2024-12-03",
+      "intakeDate": "2024-11-26",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-11-24",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.0,
       "latencyYears": 37.29774127310061,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1985,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -4808,9 +8770,36 @@ window.MT = {
       "lastDxDate": "2007-04-03",
       "settlementStatus": "negotiating",
       "settlementAmount": 250476.97,
+      "openDate": "2023-04-25",
+      "intakeDate": "2023-04-10",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2009-06-29",
+      "monthlyUpdateSent": true,
       "exposureYears": 28.0,
       "latencyYears": 22.472279260780287,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1984,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -4837,9 +8826,42 @@ window.MT = {
       "lastDxDate": "2020-12-30",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-03-28",
+      "intakeDate": "2024-03-12",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-09-11",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.969199178644764,
       "latencyYears": 15.967145790554415,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -4866,9 +8888,44 @@ window.MT = {
       "lastDxDate": "2021-07-03",
       "settlementStatus": "offered",
       "settlementAmount": 167376.18,
+      "openDate": "2023-10-28",
+      "intakeDate": "2023-10-19",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-05-13",
+      "monthlyUpdateSent": true,
       "exposureYears": 4.0,
       "latencyYears": 9.149897330595483,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -4895,9 +8952,31 @@ window.MT = {
       "lastDxDate": "2020-10-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-05-17",
+      "intakeDate": "2022-05-12",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2023-01-31",
+      "monthlyUpdateSent": true,
       "exposureYears": 14.99794661190965,
       "latencyYears": 42.48596851471595,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1978,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -4924,9 +9003,47 @@ window.MT = {
       "lastDxDate": "2025-12-04",
       "settlementStatus": "accepted",
       "settlementAmount": 38533.32,
+      "openDate": "2021-09-19",
+      "intakeDate": "2021-09-04",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-02-11",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.138261464750171,
       "latencyYears": 10.064339493497604,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -4953,9 +9070,39 @@ window.MT = {
       "lastDxDate": "2022-01-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-05-19",
+      "intakeDate": "2022-05-14",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-04-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 5.9986310746064335,
       "latencyYears": 8.980150581793293,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Firestorm 3SL",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -4982,9 +9129,38 @@ window.MT = {
       "lastDxDate": "2025-12-28",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-12-24",
+      "intakeDate": "2025-12-06",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-02-12",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.30527036276523,
       "latencyYears": 10.297056810403832,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -5011,9 +9187,47 @@ window.MT = {
       "lastDxDate": "2018-07-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-03-30",
+      "intakeDate": "2024-03-24",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-10-10",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.709103353867214,
       "latencyYears": 9.256673511293634,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "fluctuating cognition",
+        "parkinsonism",
+        "rigidity",
+        "visual hallucinations"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -5040,9 +9254,36 @@ window.MT = {
       "lastDxDate": "2020-03-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-04-16",
+      "intakeDate": "2024-04-04",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2022-05-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 1.998631074606434,
       "latencyYears": 19.926078028747433,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2000,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -5069,9 +9310,31 @@ window.MT = {
       "lastDxDate": "2025-05-10",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-01-24",
+      "intakeDate": "2023-01-15",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-01-12",
+      "monthlyUpdateSent": false,
       "exposureYears": 17.02943189596167,
       "latencyYears": 20.386036960985628,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -5098,9 +9361,36 @@ window.MT = {
       "lastDxDate": "2025-12-06",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-09-03",
+      "intakeDate": "2023-08-15",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-03-31",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.998631074606434,
       "latencyYears": 18.360027378507873,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -5127,9 +9417,46 @@ window.MT = {
       "lastDxDate": "2017-01-14",
       "settlementStatus": "negotiating",
       "settlementAmount": 132824.56,
+      "openDate": "2025-11-03",
+      "intakeDate": "2025-10-14",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-09-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 50.217659137577,
       "latencyYears": 45.256673511293634,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1971,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "hyposmia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -5156,9 +9483,47 @@ window.MT = {
       "lastDxDate": "2016-06-27",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-04-28",
+      "intakeDate": "2023-04-15",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-04-10",
+      "monthlyUpdateSent": true,
       "exposureYears": 22.31895961670089,
       "latencyYears": 16.80766598220397,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "hyposmia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -5185,9 +9550,37 @@ window.MT = {
       "lastDxDate": "2022-10-15",
       "settlementStatus": "offered",
       "settlementAmount": 80000.0,
+      "openDate": "2024-10-11",
+      "intakeDate": "2024-10-05",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-02-27",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.999315537303216,
       "latencyYears": 19.863107460643395,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -5214,9 +9607,42 @@ window.MT = {
       "lastDxDate": "2012-02-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-10-31",
+      "intakeDate": "2024-10-16",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2013-09-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 18.584531143052704,
       "latencyYears": 8.725530458590006,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -5243,9 +9669,44 @@ window.MT = {
       "lastDxDate": "2012-10-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-03-11",
+      "intakeDate": "2024-02-22",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2015-03-23",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.999315537303216,
       "latencyYears": 35.42505133470226,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1977,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -5272,9 +9733,49 @@ window.MT = {
       "lastDxDate": "2023-03-01",
       "settlementStatus": "accepted",
       "settlementAmount": 286885.0,
+      "openDate": "2022-05-29",
+      "intakeDate": "2022-05-10",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2025-01-16",
+      "monthlyUpdateSent": false,
       "exposureYears": 0.999315537303217,
       "latencyYears": 31.11567419575633,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1992,
+      "productNames": [
+        "Firestorm 3SL",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -5301,9 +9802,38 @@ window.MT = {
       "lastDxDate": "2025-12-01",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-01-14",
+      "intakeDate": "2023-01-03",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-01-11",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.09034907597536,
       "latencyYears": 24.008213552361397,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -5330,9 +9860,39 @@ window.MT = {
       "lastDxDate": "2025-05-13",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-03-19",
+      "intakeDate": "2025-03-01",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-09-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.999315537303216,
       "latencyYears": 17.415468856947296,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -5359,9 +9919,34 @@ window.MT = {
       "lastDxDate": "2023-03-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-08-15",
+      "intakeDate": "2024-08-10",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-07-19",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.529089664613279,
       "latencyYears": 8.750171115674195,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -5388,9 +9973,46 @@ window.MT = {
       "lastDxDate": "2010-09-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-10-28",
+      "intakeDate": "2025-10-09",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2012-07-12",
+      "monthlyUpdateSent": false,
       "exposureYears": 19.189596167008897,
       "latencyYears": 7.9342915811088295,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories",
+        "pq_genetic_tests"
+      ],
       "tier": 3
     },
     {
@@ -5417,9 +10039,39 @@ window.MT = {
       "lastDxDate": "2016-09-01",
       "settlementStatus": "negotiating",
       "settlementAmount": 65465.58,
+      "openDate": "2023-11-28",
+      "intakeDate": "2023-11-13",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-03-26",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.997946611909651,
       "latencyYears": 20.670773442847366,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1995,
+      "productNames": [
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "gait disturbance",
+        "rigidity",
+        "urinary incontinence"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -5446,9 +10098,41 @@ window.MT = {
       "lastDxDate": "2025-12-12",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-08-07",
+      "intakeDate": "2022-07-29",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-06-24",
+      "monthlyUpdateSent": false,
       "exposureYears": 9.374401095140314,
       "latencyYears": 13.322381930184806,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -5475,9 +10159,43 @@ window.MT = {
       "lastDxDate": "2006-11-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-10-18",
+      "intakeDate": "2024-10-09",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2009-04-20",
+      "monthlyUpdateSent": true,
       "exposureYears": 56.49007529089665,
       "latencyYears": 41.34154688569473,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1965,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone Inteon",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -5504,9 +10222,32 @@ window.MT = {
       "lastDxDate": "2021-09-07",
       "settlementStatus": "accepted",
       "settlementAmount": 74509.14,
+      "openDate": "2021-07-13",
+      "intakeDate": "2021-07-03",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-01-22",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.744695414099931,
       "latencyYears": 12.429842573579739,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Firestorm 3SL",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -5533,9 +10274,36 @@ window.MT = {
       "lastDxDate": "2025-07-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-11-19",
+      "intakeDate": "2021-10-30",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-09-16",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.052703627652293,
       "latencyYears": 10.611909650924025,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -5562,9 +10330,40 @@ window.MT = {
       "lastDxDate": "2024-08-04",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-06-05",
+      "intakeDate": "2021-05-29",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-10-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 11.603011635865846,
       "latencyYears": 14.195756331279945,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2010,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -5591,9 +10390,41 @@ window.MT = {
       "lastDxDate": "2016-03-27",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-09-18",
+      "intakeDate": "2025-09-13",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2018-01-28",
+      "monthlyUpdateSent": false,
       "exposureYears": 26.39835728952772,
       "latencyYears": 20.635181382614647,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1995,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -5620,9 +10451,44 @@ window.MT = {
       "lastDxDate": "2005-03-20",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-05-29",
+      "intakeDate": "2025-05-09",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2007-01-24",
+      "monthlyUpdateSent": true,
       "exposureYears": 33.91649555099247,
       "latencyYears": 17.13347022587269,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1988,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -5649,9 +10515,36 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-07-23",
+      "intakeDate": "2021-07-07",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": true,
       "exposureYears": 12.33949349760438,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL",
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms"
+      ],
       "tier": 4
     },
     {
@@ -5678,9 +10571,47 @@ window.MT = {
       "lastDxDate": "2020-01-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-07-02",
+      "intakeDate": "2022-06-27",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-08-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.18069815195072,
       "latencyYears": 14.193018480492814,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Firestorm 3SL",
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -5707,9 +10638,42 @@ window.MT = {
       "lastDxDate": "2023-10-27",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-04-01",
+      "intakeDate": "2025-03-21",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-07-23",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.290212183436003,
       "latencyYears": 10.11088295687885,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -5736,9 +10700,33 @@ window.MT = {
       "lastDxDate": "2023-01-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-03-11",
+      "intakeDate": "2023-03-04",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-12-11",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.277891854893908,
       "latencyYears": 7.326488706365503,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "hyposmia",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -5765,9 +10753,40 @@ window.MT = {
       "lastDxDate": "2021-11-25",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-02-14",
+      "intakeDate": "2024-01-30",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-10-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 52.14784394250513,
       "latencyYears": 57.1088295687885,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1964,
+      "productNames": [
+        "Firestorm 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -5794,9 +10813,47 @@ window.MT = {
       "lastDxDate": "2022-09-17",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-08-18",
+      "intakeDate": "2022-08-13",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-03-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 24.380561259411362,
       "latencyYears": 25.09240246406571,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1997,
+      "productNames": [
+        "Helmquat 3SL",
+        "Paraquat 2L AG",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -5823,9 +10880,40 @@ window.MT = {
       "lastDxDate": "2025-12-01",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-05-12",
+      "intakeDate": "2024-04-25",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-02-17",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.027378507871322,
       "latencyYears": 19.94524298425736,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Helmquat 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "asymmetric rigidity",
+        "limb apraxia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -5852,9 +10940,39 @@ window.MT = {
       "lastDxDate": "2018-03-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-06-17",
+      "intakeDate": "2024-06-07",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-11-04",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.999315537303216,
       "latencyYears": 16.774811772758383,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -5881,9 +10999,41 @@ window.MT = {
       "lastDxDate": "2021-02-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-06-28",
+      "intakeDate": "2022-06-08",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-05-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 26.431211498973305,
       "latencyYears": 36.662559890485966,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1984,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "hyposmia",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -5910,9 +11060,34 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-04-14",
+      "intakeDate": "2023-03-26",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": true,
       "exposureYears": 27.08829568788501,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms"
+      ],
       "tier": 4
     },
     {
@@ -5939,9 +11114,42 @@ window.MT = {
       "lastDxDate": "2022-03-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-10-21",
+      "intakeDate": "2023-10-16",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-04-18",
+      "monthlyUpdateSent": true,
       "exposureYears": 42.37645448323067,
       "latencyYears": 42.55715263518138,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1979,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -5968,9 +11176,39 @@ window.MT = {
       "lastDxDate": "2020-12-13",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-07-15",
+      "intakeDate": "2025-06-27",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-12-20",
+      "monthlyUpdateSent": true,
       "exposureYears": 26.157426420260094,
       "latencyYears": 25.1088295687885,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1995,
+      "productNames": [
+        "Helmquat 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia",
+        "early falls"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -5997,9 +11235,39 @@ window.MT = {
       "lastDxDate": "2025-12-26",
       "settlementStatus": "accepted",
       "settlementAmount": 79539.85,
+      "openDate": "2025-09-08",
+      "intakeDate": "2025-08-31",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-06-20",
+      "monthlyUpdateSent": false,
       "exposureYears": 2.9979466119096507,
       "latencyYears": 25.333333333333332,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2000,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -6026,9 +11294,46 @@ window.MT = {
       "lastDxDate": "2015-12-04",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-07-01",
+      "intakeDate": "2025-06-20",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-08-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 5.9986310746064335,
       "latencyYears": 32.72826830937714,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1983,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "fluctuating cognition",
+        "parkinsonism",
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 4
     },
     {
@@ -6055,9 +11360,40 @@ window.MT = {
       "lastDxDate": "2012-04-17",
       "settlementStatus": "negotiating",
       "settlementAmount": 36282.9,
+      "openDate": "2025-09-05",
+      "intakeDate": "2025-08-27",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2013-11-22",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.859685147159478,
       "latencyYears": 7.15400410677618,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -6084,9 +11420,44 @@ window.MT = {
       "lastDxDate": "2017-08-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-11-01",
+      "intakeDate": "2023-10-13",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2019-09-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.917180013689254,
       "latencyYears": 33.073237508555785,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1984,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -6113,9 +11484,46 @@ window.MT = {
       "lastDxDate": "2017-09-27",
       "settlementStatus": "accepted",
       "settlementAmount": 362488.7,
+      "openDate": "2025-04-03",
+      "intakeDate": "2025-03-16",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-06-05",
+      "monthlyUpdateSent": false,
       "exposureYears": 43.53182751540041,
       "latencyYears": 39.27173169062286,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1978,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -6142,9 +11550,48 @@ window.MT = {
       "lastDxDate": "2010-06-09",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-03-30",
+      "intakeDate": "2025-03-10",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2012-02-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 11.854893908282,
       "latencyYears": 0.2929500342231348,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2010,
+      "productNames": [
+        "Firestorm 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -6171,9 +11618,46 @@ window.MT = {
       "lastDxDate": "2024-06-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-11-23",
+      "intakeDate": "2023-11-13",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-03-11",
+      "monthlyUpdateSent": false,
       "exposureYears": 14.99794661190965,
       "latencyYears": 17.464750171115675,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2006,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -6200,9 +11684,47 @@ window.MT = {
       "lastDxDate": "2019-11-14",
       "settlementStatus": "offered",
       "settlementAmount": 38626.87,
+      "openDate": "2021-10-29",
+      "intakeDate": "2021-10-12",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-05-29",
+      "monthlyUpdateSent": true,
       "exposureYears": 22.99794661190965,
       "latencyYears": 26.51334702258727,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -6229,9 +11751,41 @@ window.MT = {
       "lastDxDate": "2024-11-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-06-09",
+      "intakeDate": "2021-05-31",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-08-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 28.982888432580424,
       "latencyYears": 31.857631759069132,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -6258,9 +11812,43 @@ window.MT = {
       "lastDxDate": "2025-12-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-08-29",
+      "intakeDate": "2025-08-20",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-12-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 1.998631074606434,
       "latencyYears": 19.89322381930185,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2006,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -6287,9 +11875,42 @@ window.MT = {
       "lastDxDate": "2011-08-30",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-07-09",
+      "intakeDate": "2024-06-25",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2013-05-29",
+      "monthlyUpdateSent": false,
       "exposureYears": 48.17796030116359,
       "latencyYears": 37.83983572895277,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1973,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "micrographia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -6316,9 +11937,39 @@ window.MT = {
       "lastDxDate": "2025-02-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-05-23",
+      "intakeDate": "2023-05-16",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-07-27",
+      "monthlyUpdateSent": true,
       "exposureYears": 44.06570841889117,
       "latencyYears": 59.3347022587269,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1965,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "gait disturbance",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -6345,9 +11996,48 @@ window.MT = {
       "lastDxDate": "2016-10-14",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-08-25",
+      "intakeDate": "2023-08-05",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-03-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.999315537303216,
       "latencyYears": 21.34428473648186,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1995,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -6374,9 +12064,44 @@ window.MT = {
       "lastDxDate": "2025-12-10",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-09-17",
+      "intakeDate": "2024-08-30",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-02-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 21.82067077344285,
       "latencyYears": 25.763175906913073,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2000,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -6403,9 +12128,39 @@ window.MT = {
       "lastDxDate": "2020-12-11",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-02-11",
+      "intakeDate": "2025-01-24",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-04-05",
+      "monthlyUpdateSent": true,
       "exposureYears": 21.998631074606433,
       "latencyYears": 44.51745379876797,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1976,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -6432,9 +12187,31 @@ window.MT = {
       "lastDxDate": "2005-02-24",
       "settlementStatus": "accepted",
       "settlementAmount": 190401.08,
+      "openDate": "2022-02-12",
+      "intakeDate": "2022-01-31",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2007-06-11",
+      "monthlyUpdateSent": false,
       "exposureYears": 21.998631074606433,
       "latencyYears": 15.915126625598905,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1989,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "rigidity",
+        "urinary incontinence"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -6461,9 +12238,43 @@ window.MT = {
       "lastDxDate": "2025-12-10",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-11-01",
+      "intakeDate": "2024-10-13",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-10-17",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.320328542094456,
       "latencyYears": 16.262833675564682,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -6490,9 +12301,38 @@ window.MT = {
       "lastDxDate": "2025-12-13",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2024-12-15",
+      "intakeDate": "2024-11-28",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-02-28",
+      "monthlyUpdateSent": false,
       "exposureYears": 10.35728952772074,
       "latencyYears": 14.30800821355236,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "akathisia",
+        "bradykinesia",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -6519,9 +12359,48 @@ window.MT = {
       "lastDxDate": "2025-12-20",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2022-04-06",
+      "intakeDate": "2022-03-24",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-12-21",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.150581793292266,
       "latencyYears": 16.12046543463381,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia",
+        "dysphagia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -6548,9 +12427,33 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-08-12",
+      "intakeDate": "2022-08-06",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": false,
       "exposureYears": 24.399726214921287,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1997,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "rigidity",
+        "urinary incontinence"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms"
+      ],
       "tier": 4
     },
     {
@@ -6577,9 +12480,35 @@ window.MT = {
       "lastDxDate": "2009-03-27",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-03-20",
+      "intakeDate": "2022-03-11",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2010-10-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 39.937029431895965,
       "latencyYears": 27.173169062286107,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1982,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -6606,9 +12535,38 @@ window.MT = {
       "lastDxDate": "2025-07-24",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-10-04",
+      "intakeDate": "2021-09-21",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-06-06",
+      "monthlyUpdateSent": true,
       "exposureYears": 19.958932238193018,
       "latencyYears": 23.520876112251884,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Firestorm 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -6635,9 +12593,46 @@ window.MT = {
       "lastDxDate": "2025-12-10",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-05-04",
+      "intakeDate": "2023-04-17",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-05-30",
+      "monthlyUpdateSent": false,
       "exposureYears": 7.326488706365503,
       "latencyYears": 11.268993839835728,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -6664,9 +12659,36 @@ window.MT = {
       "lastDxDate": "2023-08-11",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-05-22",
+      "intakeDate": "2022-05-08",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2025-05-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 11.41409993155373,
       "latencyYears": 26.73511293634497,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1996,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "hyposmia",
+        "postural instability",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -6693,9 +12715,50 @@ window.MT = {
       "lastDxDate": "2007-11-20",
       "settlementStatus": "negotiating",
       "settlementAmount": 57561.7,
+      "openDate": "2022-04-28",
+      "intakeDate": "2022-04-15",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2010-04-18",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.40520191649555,
       "latencyYears": 2.291581108829569,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -6722,9 +12785,46 @@ window.MT = {
       "lastDxDate": "2008-05-10",
       "settlementStatus": "offered",
       "settlementAmount": 34350.82,
+      "openDate": "2024-04-28",
+      "intakeDate": "2024-04-08",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2010-03-18",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.997946611909651,
       "latencyYears": 9.300479123887747,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "alien limb phenomenon",
+        "asymmetric rigidity",
+        "cortical sensory loss",
+        "limb apraxia",
+        "myoclonus"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -6751,9 +12851,39 @@ window.MT = {
       "lastDxDate": "2021-07-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-12-10",
+      "intakeDate": "2023-11-29",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-09-29",
+      "monthlyUpdateSent": true,
       "exposureYears": 26.7378507871321,
       "latencyYears": 26.313483915126625,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1995,
+      "productNames": [
+        "Firestorm 3SL",
+        "Helmquat 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -6780,9 +12910,49 @@ window.MT = {
       "lastDxDate": "2009-03-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-08-24",
+      "intakeDate": "2023-08-08",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2011-03-22",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.306639288158795,
       "latencyYears": 3.3018480492813143,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -6809,9 +12979,39 @@ window.MT = {
       "lastDxDate": "2017-06-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-10-27",
+      "intakeDate": "2025-10-15",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-01-24",
+      "monthlyUpdateSent": true,
       "exposureYears": 44.747433264887064,
       "latencyYears": 40.2217659137577,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1977,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Gramoxone Inteon",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -6838,9 +13038,39 @@ window.MT = {
       "lastDxDate": "2005-06-11",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-01-06",
+      "intakeDate": "2025-01-01",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2007-11-12",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.997946611909651,
       "latencyYears": 38.78165639972622,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1966,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -6867,9 +13097,33 @@ window.MT = {
       "lastDxDate": "2024-12-01",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-06-10",
+      "intakeDate": "2023-05-28",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-02-16",
+      "monthlyUpdateSent": false,
       "exposureYears": 9.998631074606434,
       "latencyYears": 30.56810403832991,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -6896,9 +13150,40 @@ window.MT = {
       "lastDxDate": "2025-12-17",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-03-15",
+      "intakeDate": "2022-03-02",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-03-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 11.019849418206707,
       "latencyYears": 14.981519507186858,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2010,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "alien limb phenomenon",
+        "asymmetric rigidity",
+        "cortical sensory loss",
+        "limb apraxia",
+        "myoclonus"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -6925,9 +13210,35 @@ window.MT = {
       "lastDxDate": "2024-07-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-11-02",
+      "intakeDate": "2021-10-18",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-01-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.0,
       "latencyYears": 29.793292265571527,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -6954,9 +13265,43 @@ window.MT = {
       "lastDxDate": "2019-03-02",
       "settlementStatus": "negotiating",
       "settlementAmount": 144888.27,
+      "openDate": "2024-09-06",
+      "intakeDate": "2024-08-22",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-05-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.670773442847365,
       "latencyYears": 5.83709787816564,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hyposmia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -6983,9 +13328,35 @@ window.MT = {
       "lastDxDate": "2017-09-14",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-12-01",
+      "intakeDate": "2024-11-17",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-05-06",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.0,
       "latencyYears": 29.77138945927447,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1987,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -7012,9 +13383,44 @@ window.MT = {
       "lastDxDate": "2025-05-14",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-01-19",
+      "intakeDate": "2023-12-31",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-08-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 36.69267624914442,
       "latencyYears": 44.41889117043121,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1980,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -7041,9 +13447,35 @@ window.MT = {
       "lastDxDate": "2025-12-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-12-17",
+      "intakeDate": "2023-12-05",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-09-02",
+      "monthlyUpdateSent": true,
       "exposureYears": 9.344284736481862,
       "latencyYears": 13.273100616016427,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "fluctuating cognition",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -7070,9 +13502,44 @@ window.MT = {
       "lastDxDate": "2021-01-04",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-11-26",
+      "intakeDate": "2024-11-19",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2022-10-02",
+      "monthlyUpdateSent": true,
       "exposureYears": 4.0,
       "latencyYears": 38.79808350444901,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1982,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -7099,9 +13566,40 @@ window.MT = {
       "lastDxDate": "2023-12-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-04-17",
+      "intakeDate": "2023-04-12",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2025-12-01",
+      "monthlyUpdateSent": false,
       "exposureYears": 37.01026694045174,
       "latencyYears": 38.98425735797399,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1984,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -7128,9 +13626,43 @@ window.MT = {
       "lastDxDate": "2025-12-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-07-13",
+      "intakeDate": "2023-06-26",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-03-11",
+      "monthlyUpdateSent": false,
       "exposureYears": 9.689253935660506,
       "latencyYears": 13.612594113620808,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "hyposmia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -7157,9 +13689,33 @@ window.MT = {
       "lastDxDate": "2019-02-19",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2024-11-02",
+      "intakeDate": "2024-10-23",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-10-02",
+      "monthlyUpdateSent": false,
       "exposureYears": 16.61601642710472,
       "latencyYears": 13.752224503764545,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_family_histories",
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -7186,9 +13742,48 @@ window.MT = {
       "lastDxDate": "2007-11-30",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-09-30",
+      "intakeDate": "2024-09-19",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2010-05-26",
+      "monthlyUpdateSent": false,
       "exposureYears": 19.526351813826146,
       "latencyYears": 5.4401095140314855,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -7215,9 +13810,37 @@ window.MT = {
       "lastDxDate": "2024-10-16",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-07-31",
+      "intakeDate": "2021-07-16",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-04-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 15.36208076659822,
       "latencyYears": 18.154688569472963,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2006,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "autonomic dysfunction",
+        "bradykinesia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -7244,9 +13867,39 @@ window.MT = {
       "lastDxDate": "2015-07-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-04-11",
+      "intakeDate": "2025-03-28",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-02-18",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.999315537303218,
       "latencyYears": 48.38329911019849,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1967,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -7273,9 +13926,43 @@ window.MT = {
       "lastDxDate": "2023-10-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-05-15",
+      "intakeDate": "2022-05-08",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-08-22",
+      "monthlyUpdateSent": true,
       "exposureYears": 30.61738535249829,
       "latencyYears": 32.421629021218344,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1991,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "postural instability",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -7302,9 +13989,40 @@ window.MT = {
       "lastDxDate": "2018-12-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-06-07",
+      "intakeDate": "2021-05-23",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-10-11",
+      "monthlyUpdateSent": true,
       "exposureYears": 17.232032854209447,
       "latencyYears": 14.18754277891855,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -7331,9 +14049,40 @@ window.MT = {
       "lastDxDate": "2022-01-31",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2022-02-06",
+      "intakeDate": "2022-01-21",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-04-05",
+      "monthlyUpdateSent": false,
       "exposureYears": 50.078028747433265,
       "latencyYears": 54.49965776865161,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1967,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -7360,9 +14109,33 @@ window.MT = {
       "lastDxDate": "2020-05-25",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-08-21",
+      "intakeDate": "2024-08-08",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2022-03-16",
+      "monthlyUpdateSent": false,
       "exposureYears": 22.12183436002738,
       "latencyYears": 20.520191649555098,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_medications",
+        "pq_genetic_tests"
+      ],
       "tier": 2
     },
     {
@@ -7389,9 +14162,46 @@ window.MT = {
       "lastDxDate": "2025-12-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-12-29",
+      "intakeDate": "2024-12-09",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-01-18",
+      "monthlyUpdateSent": true,
       "exposureYears": 1.998631074606434,
       "latencyYears": 12.85968514715948,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Firestorm 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -7418,9 +14228,41 @@ window.MT = {
       "lastDxDate": "2017-12-17",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-08-13",
+      "intakeDate": "2025-07-24",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2019-08-22",
+      "monthlyUpdateSent": false,
       "exposureYears": 22.99794661190965,
       "latencyYears": 33.4839151266256,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1984,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -7447,9 +14289,43 @@ window.MT = {
       "lastDxDate": "2018-09-24",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-05-17",
+      "intakeDate": "2025-05-09",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2020-07-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 4.0,
       "latencyYears": 30.31895961670089,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1988,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "fluctuating cognition",
+        "REM sleep behavior disorder",
+        "rigidity",
+        "visual hallucinations"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -7476,9 +14352,41 @@ window.MT = {
       "lastDxDate": "2025-06-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-10-16",
+      "intakeDate": "2023-10-01",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-06-24",
+      "monthlyUpdateSent": true,
       "exposureYears": 5.566050650239562,
       "latencyYears": 26.559890485968516,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Firestorm 3SL",
+        "Paraquat Concentrate 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "micrographia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -7505,9 +14413,45 @@ window.MT = {
       "lastDxDate": "2024-12-01",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-07-22",
+      "intakeDate": "2023-07-15",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-08-19",
+      "monthlyUpdateSent": true,
       "exposureYears": 34.86652977412731,
       "latencyYears": 37.78507871321013,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1987,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -7534,9 +14478,48 @@ window.MT = {
       "lastDxDate": "2018-08-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-08-27",
+      "intakeDate": "2023-08-15",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-09-12",
+      "monthlyUpdateSent": false,
       "exposureYears": 20.999315537303218,
       "latencyYears": 23.44147843942505,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1995,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -7563,9 +14546,34 @@ window.MT = {
       "lastDxDate": "2024-01-30",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2025-11-15",
+      "intakeDate": "2025-11-07",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-09-29",
+      "monthlyUpdateSent": false,
       "exposureYears": 9.998631074606434,
       "latencyYears": 24.45722108145106,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -7592,9 +14600,51 @@ window.MT = {
       "lastDxDate": "2023-05-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-11-16",
+      "intakeDate": "2021-11-02",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-03-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.958247775496236,
       "latencyYears": 22.2943189596167,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_genetic_tests",
+        "pq_genetic_tests"
+      ],
       "tier": 2
     },
     {
@@ -7621,9 +14671,35 @@ window.MT = {
       "lastDxDate": "2025-12-13",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-07-30",
+      "intakeDate": "2025-07-22",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-12-01",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.039014373716633,
       "latencyYears": 10.989733059548255,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "postural instability"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -7650,9 +14726,46 @@ window.MT = {
       "lastDxDate": "2018-09-17",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2022-11-12",
+      "intakeDate": "2022-11-05",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-07-20",
+      "monthlyUpdateSent": false,
       "exposureYears": 9.212867898699521,
       "latencyYears": 5.924709103353867,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -7679,9 +14792,46 @@ window.MT = {
       "lastDxDate": "2020-11-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-10-01",
+      "intakeDate": "2022-09-16",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2023-03-24",
+      "monthlyUpdateSent": true,
       "exposureYears": 28.960985626283367,
       "latencyYears": 47.06091718001369,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1973,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "asymmetric rigidity",
+        "cortical sensory loss",
+        "limb apraxia",
+        "myoclonus"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -7708,9 +14858,36 @@ window.MT = {
       "lastDxDate": "2020-01-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-09-17",
+      "intakeDate": "2024-09-02",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-07-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 13.998631074606434,
       "latencyYears": 21.95482546201232,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "REM sleep behavior disorder",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -7737,9 +14914,39 @@ window.MT = {
       "lastDxDate": "2025-12-16",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-02-03",
+      "intakeDate": "2023-01-22",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-04-27",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.9637234770705,
       "latencyYears": 24.922655715263517,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Firestorm 3SL",
+        "Paraquat 2L AG",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "postural instability",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -7766,9 +14973,46 @@ window.MT = {
       "lastDxDate": "2022-09-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-07-13",
+      "intakeDate": "2021-07-04",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2024-09-04",
+      "monthlyUpdateSent": true,
       "exposureYears": 21.998631074606433,
       "latencyYears": 45.39082819986311,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1977,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia",
+        "dysphagia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -7795,9 +15039,51 @@ window.MT = {
       "lastDxDate": "2011-02-04",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-11-26",
+      "intakeDate": "2022-11-12",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2012-11-22",
+      "monthlyUpdateSent": false,
       "exposureYears": 30.075290896646134,
       "latencyYears": 19.170431211498972,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1991,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -7824,9 +15110,33 @@ window.MT = {
       "lastDxDate": "2019-03-10",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-09-18",
+      "intakeDate": "2025-09-09",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-01-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 4.0,
       "latencyYears": 44.087611225188226,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1975,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -7853,9 +15163,33 @@ window.MT = {
       "lastDxDate": "2022-01-24",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-07-26",
+      "intakeDate": "2025-07-20",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-08-23",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.50239561943874,
       "latencyYears": 6.568104038329911,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -7882,9 +15216,37 @@ window.MT = {
       "lastDxDate": "2025-01-20",
       "settlementStatus": "accepted",
       "settlementAmount": 44744.31,
+      "openDate": "2022-04-01",
+      "intakeDate": "2022-03-18",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-02-28",
+      "monthlyUpdateSent": false,
       "exposureYears": 16.142368240930868,
       "latencyYears": 19.197809719370294,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone Inteon",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -7911,9 +15273,36 @@ window.MT = {
       "lastDxDate": "2025-12-10",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2024-02-15",
+      "intakeDate": "2024-02-08",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-11-17",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.914442162902121,
       "latencyYears": 12.856947296372347,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -7940,9 +15329,35 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "accepted",
       "settlementAmount": 9324.35,
+      "openDate": "2025-10-26",
+      "intakeDate": "2025-10-08",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": false,
       "exposureYears": 16.999315537303218,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "slowness of movement"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_encounters",
+        "pq_symptoms"
+      ],
       "tier": 4
     },
     {
@@ -7969,9 +15384,34 @@ window.MT = {
       "lastDxDate": "2025-12-29",
       "settlementStatus": "negotiating",
       "settlementAmount": 56405.79,
+      "openDate": "2025-04-20",
+      "intakeDate": "2025-04-15",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-04-11",
+      "monthlyUpdateSent": true,
       "exposureYears": 4.0,
       "latencyYears": 27.956194387405887,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -7998,9 +15438,42 @@ window.MT = {
       "lastDxDate": "2025-07-04",
       "settlementStatus": "negotiating",
       "settlementAmount": 114205.72,
+      "openDate": "2025-02-10",
+      "intakeDate": "2025-01-29",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-09-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.1533196440794,
       "latencyYears": 23.66050650239562,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -8027,9 +15500,46 @@ window.MT = {
       "lastDxDate": "2020-10-11",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-10-24",
+      "intakeDate": "2024-10-07",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-09-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 47.9917864476386,
       "latencyYears": 46.770704996577685,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1974,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -8056,9 +15566,41 @@ window.MT = {
       "lastDxDate": "2005-12-21",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2023-05-15",
+      "intakeDate": "2023-05-10",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2007-10-10",
+      "monthlyUpdateSent": false,
       "exposureYears": 13.998631074606434,
       "latencyYears": 26.981519507186857,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1978,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -8085,9 +15627,44 @@ window.MT = {
       "lastDxDate": "2024-05-16",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-05-08",
+      "intakeDate": "2022-04-25",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-05-29",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.362765229295003,
       "latencyYears": 8.736481861738536,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -8114,9 +15691,44 @@ window.MT = {
       "lastDxDate": "2024-04-12",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-08-18",
+      "intakeDate": "2025-08-09",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-06-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 10.261464750171116,
       "latencyYears": 12.542094455852157,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "alien limb phenomenon",
+        "asymmetric rigidity",
+        "cortical sensory loss",
+        "limb apraxia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -8143,9 +15755,43 @@ window.MT = {
       "lastDxDate": "2018-07-13",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-06-09",
+      "intakeDate": "2022-05-30",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-05-27",
+      "monthlyUpdateSent": true,
       "exposureYears": 14.99794661190965,
       "latencyYears": 24.777549623545518,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "autonomic dysfunction",
+        "dysarthria",
+        "orthostatic hypotension"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -8172,9 +15818,44 @@ window.MT = {
       "lastDxDate": "2025-12-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-08-09",
+      "intakeDate": "2025-07-26",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-03-12",
+      "monthlyUpdateSent": false,
       "exposureYears": 15.030800821355236,
       "latencyYears": 18.951403148528406,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2006,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_family_histories",
+        "pq_genetic_tests",
+        "pq_genetic_tests"
+      ],
       "tier": 2
     },
     {
@@ -8201,9 +15882,45 @@ window.MT = {
       "lastDxDate": "2025-12-09",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-07-11",
+      "intakeDate": "2025-06-23",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-04-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 10.351813826146476,
       "latencyYears": 14.291581108829568,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -8230,9 +15947,34 @@ window.MT = {
       "lastDxDate": "2023-08-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-09-21",
+      "intakeDate": "2023-09-09",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-11-03",
+      "monthlyUpdateSent": false,
       "exposureYears": 14.652977412731007,
       "latencyYears": 16.303901437371664,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -8259,9 +16001,41 @@ window.MT = {
       "lastDxDate": "2011-05-24",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-08-20",
+      "intakeDate": "2025-08-05",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2013-10-24",
+      "monthlyUpdateSent": true,
       "exposureYears": 54.64750171115674,
       "latencyYears": 44.04106776180698,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1967,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_smoking_histories",
+        "pq_family_histories",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -8288,9 +16062,37 @@ window.MT = {
       "lastDxDate": "2025-12-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-04-07",
+      "intakeDate": "2025-03-27",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-03-31",
+      "monthlyUpdateSent": true,
       "exposureYears": 17.973990417522245,
       "latencyYears": 21.930184804928132,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -8317,9 +16119,43 @@ window.MT = {
       "lastDxDate": "2013-12-31",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-10-30",
+      "intakeDate": "2022-10-13",
+      "applicationMethod": "other",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2016-02-27",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.999315537303216,
       "latencyYears": 27.906913073237508,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1986,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -8346,9 +16182,40 @@ window.MT = {
       "lastDxDate": "2009-08-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-11-24",
+      "intakeDate": "2023-11-10",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2011-03-10",
+      "monthlyUpdateSent": false,
       "exposureYears": 51.90143737166324,
       "latencyYears": 39.488021902806295,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1970,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 1
     },
     {
@@ -8375,9 +16242,49 @@ window.MT = {
       "lastDxDate": "2022-10-20",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-06-26",
+      "intakeDate": "2022-06-11",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2024-06-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 14.05886379192334,
       "latencyYears": 15.58110882956879,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -8404,9 +16311,39 @@ window.MT = {
       "lastDxDate": "2007-10-16",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2023-10-01",
+      "intakeDate": "2023-09-22",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2009-06-20",
+      "monthlyUpdateSent": false,
       "exposureYears": 10.99794661190965,
       "latencyYears": 22.39561943874059,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1985,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "constipation",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -8433,9 +16370,40 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-11-24",
+      "intakeDate": "2023-11-13",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": true,
       "exposureYears": 12.999315537303216,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1980,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "slowness of movement",
+        "stiffness",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_genetic_tests"
+      ],
       "tier": 4
     },
     {
@@ -8462,9 +16430,37 @@ window.MT = {
       "lastDxDate": "2025-09-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-12-28",
+      "intakeDate": "2022-12-14",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-12-16",
+      "monthlyUpdateSent": false,
       "exposureYears": 20.999315537303218,
       "latencyYears": 43.99452429842574,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1981,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -8491,9 +16487,30 @@ window.MT = {
       "lastDxDate": "2024-05-25",
       "settlementStatus": "accepted",
       "settlementAmount": 72995.75,
+      "openDate": "2025-01-20",
+      "intakeDate": "2025-01-04",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2026-03-30",
+      "monthlyUpdateSent": false,
       "exposureYears": 1.998631074606434,
       "latencyYears": 10.677618069815194,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "REM sleep behavior disorder",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -8520,9 +16537,42 @@ window.MT = {
       "lastDxDate": "2016-11-16",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-09-25",
+      "intakeDate": "2022-09-11",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2018-12-14",
+      "monthlyUpdateSent": true,
       "exposureYears": 10.217659137577002,
       "latencyYears": 5.0951403148528405,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "postural instability",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -8549,9 +16599,39 @@ window.MT = {
       "lastDxDate": "2014-02-12",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-11-07",
+      "intakeDate": "2021-10-25",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2016-06-22",
+      "monthlyUpdateSent": true,
       "exposureYears": 28.999315537303218,
       "latencyYears": 29.245722108145106,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1984,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -8578,9 +16658,40 @@ window.MT = {
       "lastDxDate": "2025-03-04",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-11-04",
+      "intakeDate": "2025-10-22",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-12-13",
+      "monthlyUpdateSent": true,
       "exposureYears": 17.998631074606433,
       "latencyYears": 26.51334702258727,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -8607,9 +16718,35 @@ window.MT = {
       "lastDxDate": "2012-12-11",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-01-24",
+      "intakeDate": "2023-01-12",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2014-10-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 22.234086242299796,
       "latencyYears": 13.180013689253936,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hyposmia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -8636,9 +16773,42 @@ window.MT = {
       "lastDxDate": "2010-07-14",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-09-16",
+      "intakeDate": "2022-09-06",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2012-05-17",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.0,
       "latencyYears": 31.572895277207394,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1978,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -8665,9 +16835,36 @@ window.MT = {
       "lastDxDate": "2016-11-29",
       "settlementStatus": "negotiating",
       "settlementAmount": 39100.18,
+      "openDate": "2024-01-01",
+      "intakeDate": "2023-12-18",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-06-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 18.65845311430527,
       "latencyYears": 13.571526351813826,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Helmquat 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -8694,9 +16891,40 @@ window.MT = {
       "lastDxDate": "2016-12-28",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-04-14",
+      "intakeDate": "2025-03-26",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-03-12",
+      "monthlyUpdateSent": true,
       "exposureYears": 0.999315537303217,
       "latencyYears": 34.98699520876112,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1982,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -8723,9 +16951,35 @@ window.MT = {
       "lastDxDate": "2025-12-16",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-10-29",
+      "intakeDate": "2022-10-19",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-10-03",
+      "monthlyUpdateSent": false,
       "exposureYears": 13.653661875427789,
       "latencyYears": 17.61259411362081,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -8752,9 +17006,41 @@ window.MT = {
       "lastDxDate": "2024-09-08",
       "settlementStatus": "accepted",
       "settlementAmount": 500000.0,
+      "openDate": "2024-07-16",
+      "intakeDate": "2024-07-05",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-11-01",
+      "monthlyUpdateSent": false,
       "exposureYears": 14.99794661190965,
       "latencyYears": 19.411362080766597,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -8781,9 +17067,36 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-06-29",
+      "intakeDate": "2024-06-13",
+      "applicationMethod": "other",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": false,
       "exposureYears": 8.0,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1989,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "autonomic dysfunction",
+        "bradykinesia",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms"
+      ],
       "tier": 4
     },
     {
@@ -8810,9 +17123,46 @@ window.MT = {
       "lastDxDate": "2021-08-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-05-01",
+      "intakeDate": "2025-04-19",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2024-01-20",
+      "monthlyUpdateSent": false,
       "exposureYears": 42.691307323750856,
       "latencyYears": 42.313483915126625,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1979,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Helmquat 3SL",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 1
     },
     {
@@ -8839,9 +17189,32 @@ window.MT = {
       "lastDxDate": "2025-12-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-11-22",
+      "intakeDate": "2023-11-05",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-03-18",
+      "monthlyUpdateSent": true,
       "exposureYears": 17.045859000684462,
       "latencyYears": 21.023956194387406,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -8868,9 +17241,45 @@ window.MT = {
       "lastDxDate": "2024-12-26",
       "settlementStatus": "negotiating",
       "settlementAmount": 98305.82,
+      "openDate": "2024-10-19",
+      "intakeDate": "2024-10-02",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-03-12",
+      "monthlyUpdateSent": true,
       "exposureYears": 22.99794661190965,
       "latencyYears": 34.559890485968516,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -8897,9 +17306,42 @@ window.MT = {
       "lastDxDate": "2008-10-12",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-10-08",
+      "intakeDate": "2024-09-30",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2010-12-20",
+      "monthlyUpdateSent": false,
       "exposureYears": 10.99794661190965,
       "latencyYears": 15.279945242984258,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hyposmia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -8926,9 +17368,45 @@ window.MT = {
       "lastDxDate": "2020-06-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-01-23",
+      "intakeDate": "2022-01-15",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2022-05-12",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.369609856262834,
       "latencyYears": 6.803559206023272,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -8955,9 +17433,37 @@ window.MT = {
       "lastDxDate": "2015-11-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-08-12",
+      "intakeDate": "2024-07-27",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-07-04",
+      "monthlyUpdateSent": true,
       "exposureYears": 11.60848733744011,
       "latencyYears": 5.44558521560575,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2010,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hypomimia",
+        "postural instability",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -8984,9 +17490,35 @@ window.MT = {
       "lastDxDate": "2019-05-31",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-04-29",
+      "intakeDate": "2022-04-16",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-07-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 4.139630390143737,
       "latencyYears": 7.967145790554415,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Firestorm 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -9013,9 +17545,44 @@ window.MT = {
       "lastDxDate": "2025-12-03",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2025-09-10",
+      "intakeDate": "2025-08-22",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-02-07",
+      "monthlyUpdateSent": false,
       "exposureYears": 4.999315537303217,
       "latencyYears": 12.172484599589323,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hyposmia",
+        "postural instability",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -9042,9 +17609,49 @@ window.MT = {
       "lastDxDate": "2024-04-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-08-13",
+      "intakeDate": "2021-08-02",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2025-12-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 14.99794661190965,
       "latencyYears": 20.826830937713893,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_genetic_tests"
+      ],
       "tier": 2
     },
     {
@@ -9071,9 +17678,32 @@ window.MT = {
       "lastDxDate": "2025-12-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-07-28",
+      "intakeDate": "2024-07-23",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-02-17",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.999315537303216,
       "latencyYears": 16.407939767282684,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "parkinsonism",
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -9100,9 +17730,40 @@ window.MT = {
       "lastDxDate": "2011-04-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-10-03",
+      "intakeDate": "2025-09-23",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2013-05-31",
+      "monthlyUpdateSent": false,
       "exposureYears": 26.99794661190965,
       "latencyYears": 30.71047227926078,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1980,
+      "productNames": [
+        "Firestorm 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_family_histories",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -9129,9 +17790,31 @@ window.MT = {
       "lastDxDate": "2006-11-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-03-26",
+      "intakeDate": "2024-03-19",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2009-05-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 29.998631074606433,
       "latencyYears": 18.622861054072555,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1988,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -9158,9 +17841,36 @@ window.MT = {
       "lastDxDate": "2008-06-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-05-24",
+      "intakeDate": "2023-05-17",
+      "applicationMethod": "other",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2010-07-02",
+      "monthlyUpdateSent": true,
       "exposureYears": 17.998631074606433,
       "latencyYears": 40.69815195071869,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1967,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -9187,9 +17897,43 @@ window.MT = {
       "lastDxDate": "2017-07-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-07-04",
+      "intakeDate": "2022-06-23",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2019-11-22",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.870636550308006,
       "latencyYears": 21.05133470225873,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1996,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 1
     },
     {
@@ -9216,9 +17960,33 @@ window.MT = {
       "lastDxDate": "2022-11-06",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-04-25",
+      "intakeDate": "2022-04-14",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-10-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.0,
       "latencyYears": 25.440109514031484,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1997,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "rigidity",
+        "urinary incontinence"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -9245,9 +18013,40 @@ window.MT = {
       "lastDxDate": "2021-03-12",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-12-19",
+      "intakeDate": "2023-11-29",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2023-08-29",
+      "monthlyUpdateSent": false,
       "exposureYears": 14.99794661190965,
       "latencyYears": 19.11567419575633,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "alien limb phenomenon",
+        "asymmetric rigidity",
+        "cortical sensory loss",
+        "limb apraxia",
+        "myoclonus"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -9274,9 +18073,50 @@ window.MT = {
       "lastDxDate": "2022-08-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-02-18",
+      "intakeDate": "2023-02-12",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-08-16",
+      "monthlyUpdateSent": true,
       "exposureYears": 29.659137577002053,
       "latencyYears": 30.258726899383984,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1992,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -9303,9 +18143,37 @@ window.MT = {
       "lastDxDate": "2025-12-19",
       "settlementStatus": "offered",
       "settlementAmount": 36230.98,
+      "openDate": "2021-07-18",
+      "intakeDate": "2021-07-04",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-03-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 11.50444900752909,
       "latencyYears": 15.471594798083505,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2010,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -9332,9 +18200,39 @@ window.MT = {
       "lastDxDate": "2025-11-27",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2025-08-22",
+      "intakeDate": "2025-08-16",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-10-23",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.870636550308008,
       "latencyYears": 16.777549623545518,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "fluctuating cognition",
+        "parkinsonism",
+        "REM sleep behavior disorder",
+        "rigidity",
+        "visual hallucinations"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 2
     },
     {
@@ -9361,9 +18259,46 @@ window.MT = {
       "lastDxDate": "2016-02-05",
       "settlementStatus": "negotiating",
       "settlementAmount": 132911.01,
+      "openDate": "2025-02-03",
+      "intakeDate": "2025-01-27",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-04-29",
+      "monthlyUpdateSent": true,
       "exposureYears": 25.998631074606433,
       "latencyYears": 52.049281314168375,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1964,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -9390,9 +18325,46 @@ window.MT = {
       "lastDxDate": "2024-06-27",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-02-03",
+      "intakeDate": "2025-01-21",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-10-04",
+      "monthlyUpdateSent": true,
       "exposureYears": 5.9986310746064335,
       "latencyYears": 45.1937029431896,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1979,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "bradykinesia",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -9419,9 +18391,35 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-05-23",
+      "intakeDate": "2023-05-14",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": true,
       "exposureYears": 13.998631074606434,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "balance problems",
+        "stiffness"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 4
     },
     {
@@ -9448,9 +18446,34 @@ window.MT = {
       "lastDxDate": "2009-11-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-08-22",
+      "intakeDate": "2025-08-11",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2012-05-17",
+      "monthlyUpdateSent": false,
       "exposureYears": 14.740588637919233,
       "latencyYears": 27.707049965776864,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1982,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -9477,9 +18500,39 @@ window.MT = {
       "lastDxDate": "2006-08-03",
       "settlementStatus": "accepted",
       "settlementAmount": 177289.0,
+      "openDate": "2021-09-02",
+      "intakeDate": "2021-08-23",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2008-06-15",
+      "monthlyUpdateSent": false,
       "exposureYears": 19.72347707049966,
       "latencyYears": 4.312114989733059,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -9506,9 +18559,36 @@ window.MT = {
       "lastDxDate": "2024-11-29",
       "settlementStatus": "accepted",
       "settlementAmount": 78539.37,
+      "openDate": "2023-09-07",
+      "intakeDate": "2023-08-27",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-02-12",
+      "monthlyUpdateSent": false,
       "exposureYears": 9.256673511293634,
       "latencyYears": 12.16974674880219,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia",
+        "dysphagia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -9535,9 +18615,29 @@ window.MT = {
       "lastDxDate": "2025-10-23",
       "settlementStatus": "accepted",
       "settlementAmount": 27860.87,
+      "openDate": "2024-05-17",
+      "intakeDate": "2024-05-01",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-08-24",
+      "monthlyUpdateSent": false,
       "exposureYears": 9.998631074606434,
       "latencyYears": 24.747433264887064,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -9564,9 +18664,49 @@ window.MT = {
       "lastDxDate": "2025-12-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-12-17",
+      "intakeDate": "2025-12-02",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-07-20",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.15400410677618,
       "latencyYears": 11.132101300479125,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -9593,9 +18733,44 @@ window.MT = {
       "lastDxDate": "2020-12-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-06-09",
+      "intakeDate": "2021-05-28",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-08-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 13.111567419575634,
       "latencyYears": 12.035592060232718,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "dysphagia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -9622,9 +18797,47 @@ window.MT = {
       "lastDxDate": "2022-01-11",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-07-27",
+      "intakeDate": "2022-07-20",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-04-17",
+      "monthlyUpdateSent": false,
       "exposureYears": 35.30732375085558,
       "latencyYears": 35.337440109514034,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1986,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "akathisia",
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -9651,9 +18864,40 @@ window.MT = {
       "lastDxDate": "2012-10-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-12-18",
+      "intakeDate": "2025-11-28",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2014-06-01",
+      "monthlyUpdateSent": true,
       "exposureYears": 36.36139630390144,
       "latencyYears": 27.1813826146475,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1985,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "dysphagia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -9680,9 +18924,36 @@ window.MT = {
       "lastDxDate": "2019-10-15",
       "settlementStatus": "accepted",
       "settlementAmount": 238031.84,
+      "openDate": "2023-10-01",
+      "intakeDate": "2023-09-20",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-09-08",
+      "monthlyUpdateSent": false,
       "exposureYears": 53.322381930184804,
       "latencyYears": 51.110198494182065,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1968,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "constipation",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -9709,9 +18980,38 @@ window.MT = {
       "lastDxDate": "2009-09-27",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2025-07-21",
+      "intakeDate": "2025-07-10",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2011-11-09",
+      "monthlyUpdateSent": false,
       "exposureYears": 0.999315537303217,
       "latencyYears": 11.203285420944558,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -9738,9 +19038,38 @@ window.MT = {
       "lastDxDate": "2024-06-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-11-25",
+      "intakeDate": "2022-11-13",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-06-17",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.7180013689253935,
       "latencyYears": 10.146475017111568,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hyposmia",
+        "micrographia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -9767,9 +19096,36 @@ window.MT = {
       "lastDxDate": "2018-01-09",
       "settlementStatus": "accepted",
       "settlementAmount": 298368.23,
+      "openDate": "2021-12-02",
+      "intakeDate": "2021-11-14",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2020-06-17",
+      "monthlyUpdateSent": false,
       "exposureYears": 44.12320328542094,
       "latencyYears": 40.14784394250513,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1977,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -9796,9 +19152,50 @@ window.MT = {
       "lastDxDate": "2025-12-01",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-04-13",
+      "intakeDate": "2024-04-05",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-09-11",
+      "monthlyUpdateSent": true,
       "exposureYears": 22.874743326488705,
       "latencyYears": 26.792607802874745,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -9825,9 +19222,43 @@ window.MT = {
       "lastDxDate": "2022-06-18",
       "settlementStatus": "accepted",
       "settlementAmount": 38556.71,
+      "openDate": "2025-10-08",
+      "intakeDate": "2025-10-01",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-09-16",
+      "monthlyUpdateSent": false,
       "exposureYears": 32.72826830937714,
       "latencyYears": 40.10951403148528,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1982,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_encounters",
+        "pq_genetic_tests"
+      ],
       "tier": 3
     },
     {
@@ -9854,9 +19285,44 @@ window.MT = {
       "lastDxDate": "2024-07-27",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-09-10",
+      "intakeDate": "2024-08-22",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-11-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 18.85284052019165,
       "latencyYears": 21.423682409308693,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -9883,9 +19349,49 @@ window.MT = {
       "lastDxDate": "2025-12-13",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-04-30",
+      "intakeDate": "2023-04-18",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-10-29",
+      "monthlyUpdateSent": true,
       "exposureYears": 9.998631074606434,
       "latencyYears": 13.949349760438055,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -9912,9 +19418,43 @@ window.MT = {
       "lastDxDate": "2014-09-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-11-07",
+      "intakeDate": "2021-10-20",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2016-10-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.0,
       "latencyYears": 27.077344284736483,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1987,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories",
+        "pq_family_histories",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -9941,9 +19481,43 @@ window.MT = {
       "lastDxDate": "2011-07-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-01-19",
+      "intakeDate": "2022-01-05",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2013-11-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 27.20602327173169,
       "latencyYears": 16.71457905544148,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Helmquat 3SL",
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -9970,9 +19544,50 @@ window.MT = {
       "lastDxDate": "2024-12-26",
       "settlementStatus": "negotiating",
       "settlementAmount": 80000.0,
+      "openDate": "2025-01-12",
+      "intakeDate": "2024-12-31",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-08-15",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.997946611909651,
       "latencyYears": 54.41204654346338,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1970,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -9999,9 +19614,46 @@ window.MT = {
       "lastDxDate": "2010-03-17",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-01-06",
+      "intakeDate": "2021-12-19",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2012-08-02",
+      "monthlyUpdateSent": true,
       "exposureYears": 49.10335386721424,
       "latencyYears": 37.31143052703628,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1972,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "parkinsonism",
+        "rigidity",
+        "visual hallucinations"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -10028,9 +19680,42 @@ window.MT = {
       "lastDxDate": "2022-07-14",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-05-27",
+      "intakeDate": "2022-05-14",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-08-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 21.00479123887748,
       "latencyYears": 21.53867214236824,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2000,
+      "productNames": [
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -10057,9 +19742,33 @@ window.MT = {
       "lastDxDate": "2023-08-17",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-12-17",
+      "intakeDate": "2023-11-27",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2025-04-16",
+      "monthlyUpdateSent": true,
       "exposureYears": 4.999315537303217,
       "latencyYears": 10.896646132785763,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -10086,9 +19795,42 @@ window.MT = {
       "lastDxDate": "2018-03-31",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-03-04",
+      "intakeDate": "2024-02-16",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2020-02-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.804243668720055,
       "latencyYears": 10.050650239561945,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -10115,9 +19857,43 @@ window.MT = {
       "lastDxDate": "2018-08-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-05-22",
+      "intakeDate": "2023-05-12",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2020-08-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.781656399726215,
       "latencyYears": 3.4140999315537304,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Firestorm 3SL",
+        "Helmquat 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 4
     },
     {
@@ -10144,9 +19920,41 @@ window.MT = {
       "lastDxDate": "2018-07-06",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-07-25",
+      "intakeDate": "2024-07-07",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-01-27",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.40246406570842,
       "latencyYears": 12.914442162902121,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -10173,9 +19981,34 @@ window.MT = {
       "lastDxDate": "2015-06-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-10-11",
+      "intakeDate": "2025-10-06",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-03-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 1.998631074606434,
       "latencyYears": 28.84873374401095,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1986,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -10202,9 +20035,35 @@ window.MT = {
       "lastDxDate": "2025-12-14",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-06-14",
+      "intakeDate": "2024-06-03",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-12-31",
+      "monthlyUpdateSent": true,
       "exposureYears": 18.702258726899384,
       "latencyYears": 22.65571526351814,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "constipation",
+        "micrographia",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -10231,9 +20090,40 @@ window.MT = {
       "lastDxDate": "2024-08-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-03-11",
+      "intakeDate": "2025-03-04",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-09-19",
+      "monthlyUpdateSent": true,
       "exposureYears": 29.4072553045859,
       "latencyYears": 32.04106776180698,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1992,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -10260,9 +20150,42 @@ window.MT = {
       "lastDxDate": "2012-06-30",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-04-06",
+      "intakeDate": "2022-03-24",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2014-04-11",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.0,
       "latencyYears": 13.070499657768652,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -10289,9 +20212,39 @@ window.MT = {
       "lastDxDate": "2017-04-23",
       "settlementStatus": "accepted",
       "settlementAmount": 69085.55,
+      "openDate": "2024-05-09",
+      "intakeDate": "2024-04-27",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-04-15",
+      "monthlyUpdateSent": false,
       "exposureYears": 11.890485968514716,
       "latencyYears": 7.200547570157426,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2010,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -10318,9 +20271,37 @@ window.MT = {
       "lastDxDate": "2011-07-30",
       "settlementStatus": "accepted",
       "settlementAmount": 54539.28,
+      "openDate": "2021-12-23",
+      "intakeDate": "2021-12-09",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2013-08-30",
+      "monthlyUpdateSent": false,
       "exposureYears": 19.756331279945243,
       "latencyYears": 9.333333333333334,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -10347,9 +20328,38 @@ window.MT = {
       "lastDxDate": "2025-12-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-11-10",
+      "intakeDate": "2024-10-21",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-11-05",
+      "monthlyUpdateSent": false,
       "exposureYears": 7.425051334702259,
       "latencyYears": 11.353867214236825,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "micrographia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -10376,9 +20386,42 @@ window.MT = {
       "lastDxDate": "2009-04-30",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-04-17",
+      "intakeDate": "2025-04-01",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2011-09-04",
+      "monthlyUpdateSent": true,
       "exposureYears": 27.783709787816566,
       "latencyYears": 30.529774127310063,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1978,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -10405,9 +20448,36 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "accepted",
       "settlementAmount": 7188.4,
+      "openDate": "2022-08-26",
+      "intakeDate": "2022-08-13",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": false,
       "exposureYears": 5.9986310746064335,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "balance problems",
+        "stiffness",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 4
     },
     {
@@ -10434,9 +20504,42 @@ window.MT = {
       "lastDxDate": "2024-11-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-06-18",
+      "intakeDate": "2024-06-06",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-01-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 9.675564681724847,
       "latencyYears": 12.550308008213552,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -10463,9 +20566,44 @@ window.MT = {
       "lastDxDate": "2023-08-28",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-07-16",
+      "intakeDate": "2022-07-07",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-04-16",
+      "monthlyUpdateSent": true,
       "exposureYears": 24.79671457905544,
       "latencyYears": 26.45311430527036,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1997,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -10492,9 +20630,46 @@ window.MT = {
       "lastDxDate": "2024-08-24",
       "settlementStatus": "accepted",
       "settlementAmount": 52888.94,
+      "openDate": "2023-02-03",
+      "intakeDate": "2023-01-23",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-04-15",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.590006844626968,
       "latencyYears": 9.23750855578371,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -10521,9 +20696,40 @@ window.MT = {
       "lastDxDate": "2006-09-19",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2024-04-15",
+      "intakeDate": "2024-03-28",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2008-09-07",
+      "monthlyUpdateSent": false,
       "exposureYears": 26.89664613278576,
       "latencyYears": 11.613963039014374,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1995,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -10550,9 +20756,35 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-07-15",
+      "intakeDate": "2022-07-02",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": false,
       "exposureYears": 28.999315537303218,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1980,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms"
+      ],
       "tier": 4
     },
     {
@@ -10579,9 +20811,38 @@ window.MT = {
       "lastDxDate": "2007-05-04",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-11-03",
+      "intakeDate": "2022-10-17",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2009-06-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 5.9986310746064335,
       "latencyYears": 15.063655030800822,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1992,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -10608,9 +20869,37 @@ window.MT = {
       "lastDxDate": "2025-02-01",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-10-07",
+      "intakeDate": "2024-09-28",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-06-11",
+      "monthlyUpdateSent": false,
       "exposureYears": 28.999315537303218,
       "latencyYears": 35.011635865845314,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -10637,9 +20926,41 @@ window.MT = {
       "lastDxDate": "2009-11-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-03-24",
+      "intakeDate": "2025-03-12",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2011-07-13",
+      "monthlyUpdateSent": false,
       "exposureYears": 21.371663244353183,
       "latencyYears": 9.27583846680356,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2000,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat 2L AG",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -10666,9 +20987,43 @@ window.MT = {
       "lastDxDate": "2009-09-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-03-21",
+      "intakeDate": "2025-03-12",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2011-05-06",
+      "monthlyUpdateSent": true,
       "exposureYears": 40.86242299794661,
       "latencyYears": 32.30116358658453,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1977,
+      "productNames": [
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -10695,9 +21050,37 @@ window.MT = {
       "lastDxDate": "2007-08-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-05-20",
+      "intakeDate": "2023-05-04",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2009-11-16",
+      "monthlyUpdateSent": true,
       "exposureYears": 24.0,
       "latencyYears": 16.71457905544148,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "urinary incontinence"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -10724,9 +21107,41 @@ window.MT = {
       "lastDxDate": "2025-06-06",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2022-06-22",
+      "intakeDate": "2022-06-17",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-05-08",
+      "monthlyUpdateSent": false,
       "exposureYears": 17.45927446954141,
       "latencyYears": 20.889801505817932,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -10753,9 +21168,40 @@ window.MT = {
       "lastDxDate": "2020-12-09",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-05-28",
+      "intakeDate": "2025-05-18",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2023-05-29",
+      "monthlyUpdateSent": false,
       "exposureYears": 1.998631074606434,
       "latencyYears": 36.68993839835729,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1984,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -10782,9 +21228,39 @@ window.MT = {
       "lastDxDate": "2015-09-23",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2022-07-07",
+      "intakeDate": "2022-07-02",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-01-30",
+      "monthlyUpdateSent": false,
       "exposureYears": 1.998631074606434,
       "latencyYears": 15.876796714579056,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -10811,9 +21287,43 @@ window.MT = {
       "lastDxDate": "2019-01-13",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-12-06",
+      "intakeDate": "2025-11-21",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-01-21",
+      "monthlyUpdateSent": true,
       "exposureYears": 22.206707734428473,
       "latencyYears": 54.5242984257358,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1964,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "bradykinesia",
+        "orthostatic hypotension"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -10840,9 +21350,46 @@ window.MT = {
       "lastDxDate": "2025-12-27",
       "settlementStatus": "negotiating",
       "settlementAmount": 48576.07,
+      "openDate": "2024-11-15",
+      "intakeDate": "2024-11-02",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-12-26",
+      "monthlyUpdateSent": false,
       "exposureYears": 10.124572210814511,
       "latencyYears": 14.113620807665983,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -10869,9 +21416,47 @@ window.MT = {
       "lastDxDate": "2008-05-09",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-12-29",
+      "intakeDate": "2024-12-12",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2010-03-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 36.2984257357974,
       "latencyYears": 22.652977412731005,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1985,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -10898,9 +21483,44 @@ window.MT = {
       "lastDxDate": "2025-12-20",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-06-22",
+      "intakeDate": "2022-06-14",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-10-11",
+      "monthlyUpdateSent": true,
       "exposureYears": 15.537303216974674,
       "latencyYears": 19.50718685831622,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2006,
+      "productNames": [
+        "Firestorm 3SL",
+        "Paraquat 2L AG",
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "micrographia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 1
     },
     {
@@ -10927,9 +21547,46 @@ window.MT = {
       "lastDxDate": "2023-10-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-10-05",
+      "intakeDate": "2023-09-19",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-11-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 19.277207392197127,
       "latencyYears": 21.075975359342916,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -10956,9 +21613,49 @@ window.MT = {
       "lastDxDate": "2025-11-12",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-03-11",
+      "intakeDate": "2023-02-23",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-04-04",
+      "monthlyUpdateSent": true,
       "exposureYears": 34.469541409993155,
       "latencyYears": 49.451060917180016,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1976,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -10985,9 +21682,34 @@ window.MT = {
       "lastDxDate": "2025-12-03",
       "settlementStatus": "accepted",
       "settlementAmount": 38673.23,
+      "openDate": "2022-10-03",
+      "intakeDate": "2022-09-13",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-07-02",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.140999315537303,
       "latencyYears": 10.064339493497604,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -11014,9 +21736,41 @@ window.MT = {
       "lastDxDate": "2012-11-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-07-23",
+      "intakeDate": "2025-07-03",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2014-11-17",
+      "monthlyUpdateSent": true,
       "exposureYears": 36.01368925393566,
       "latencyYears": 31.83025325119781,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1981,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -11043,9 +21797,38 @@ window.MT = {
       "lastDxDate": "2024-09-30",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-03-30",
+      "intakeDate": "2022-03-12",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2026-08-23",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.3730321697467485,
       "latencyYears": 10.121834360027378,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -11072,9 +21855,37 @@ window.MT = {
       "lastDxDate": "2025-12-09",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-10-22",
+      "intakeDate": "2023-10-10",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-09-16",
+      "monthlyUpdateSent": false,
       "exposureYears": 0.999315537303217,
       "latencyYears": 14.028747433264886,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -11101,9 +21912,50 @@ window.MT = {
       "lastDxDate": "2006-02-09",
       "settlementStatus": "accepted",
       "settlementAmount": 31815.17,
+      "openDate": "2022-05-08",
+      "intakeDate": "2022-04-29",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2008-05-17",
+      "monthlyUpdateSent": false,
       "exposureYears": 21.765913757700204,
       "latencyYears": 5.87542778918549,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2000,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0",
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia",
+        "dysphagia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -11130,9 +21982,45 @@ window.MT = {
       "lastDxDate": "2020-01-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-07-09",
+      "intakeDate": "2023-06-28",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-01-11",
+      "monthlyUpdateSent": false,
       "exposureYears": 16.0,
       "latencyYears": 29.218343600273784,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -11159,9 +22047,41 @@ window.MT = {
       "lastDxDate": "2024-07-01",
       "settlementStatus": "negotiating",
       "settlementAmount": 123749.27,
+      "openDate": "2023-11-22",
+      "intakeDate": "2023-11-17",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-04-02",
+      "monthlyUpdateSent": true,
       "exposureYears": 29.998631074606433,
       "latencyYears": 45.22108145106092,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1979,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -11188,9 +22108,40 @@ window.MT = {
       "lastDxDate": "2022-12-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-11-18",
+      "intakeDate": "2025-11-04",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-04-26",
+      "monthlyUpdateSent": true,
       "exposureYears": 24.0,
       "latencyYears": 35.78918548939083,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1987,
+      "productNames": [
+        "Helmquat 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "bradykinesia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -11217,9 +22168,44 @@ window.MT = {
       "lastDxDate": "2025-06-20",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-01-25",
+      "intakeDate": "2025-01-16",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-01-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 1.998631074606434,
       "latencyYears": 33.95208761122519,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1991,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -11246,9 +22232,35 @@ window.MT = {
       "lastDxDate": "2021-02-27",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-11-13",
+      "intakeDate": "2022-10-25",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-05-31",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.621492128678987,
       "latencyYears": 11.780971937029431,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Firestorm 3SL",
+        "Helmquat 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_genetic_tests"
+      ],
       "tier": 3
     },
     {
@@ -11275,9 +22287,37 @@ window.MT = {
       "lastDxDate": "2025-03-24",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-07-07",
+      "intakeDate": "2023-06-28",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-08-12",
+      "monthlyUpdateSent": true,
       "exposureYears": 0.999315537303217,
       "latencyYears": 20.876112251882272,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "micrographia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -11304,9 +22344,39 @@ window.MT = {
       "lastDxDate": "2020-09-24",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-12-21",
+      "intakeDate": "2025-12-02",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2022-12-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 27.38945927446954,
       "latencyYears": 26.12183436002738,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "akathisia",
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -11333,9 +22403,42 @@ window.MT = {
       "lastDxDate": "2025-12-24",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-08-15",
+      "intakeDate": "2021-07-31",
+      "applicationMethod": "other",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-05-10",
+      "monthlyUpdateSent": true,
       "exposureYears": 19.27173169062286,
       "latencyYears": 23.252566735112936,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone Inteon",
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -11362,9 +22465,39 @@ window.MT = {
       "lastDxDate": "2017-07-24",
       "settlementStatus": "accepted",
       "settlementAmount": 150291.08,
+      "openDate": "2023-06-03",
+      "intakeDate": "2023-05-29",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-09-21",
+      "monthlyUpdateSent": false,
       "exposureYears": 15.203285420944558,
       "latencyYears": 10.765229295003422,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2006,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -11391,9 +22524,43 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2023-02-10",
+      "intakeDate": "2023-01-29",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": false,
       "exposureYears": 24.0,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "fatigue",
+        "slowness of movement",
+        "stiffness"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 4
     },
     {
@@ -11420,9 +22587,47 @@ window.MT = {
       "lastDxDate": "2025-12-14",
       "settlementStatus": "accepted",
       "settlementAmount": 64212.86,
+      "openDate": "2023-01-24",
+      "intakeDate": "2023-01-15",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-03-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 14.151950718685832,
       "latencyYears": 18.105407255304584,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Firestorm 3SL",
+        "Helmquat 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -11449,9 +22654,42 @@ window.MT = {
       "lastDxDate": "2025-12-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-09-15",
+      "intakeDate": "2022-08-30",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-10-10",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.658453114305271,
       "latencyYears": 10.652977412731007,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "dysphagia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -11478,9 +22716,48 @@ window.MT = {
       "lastDxDate": "2015-09-13",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-05-28",
+      "intakeDate": "2022-05-21",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-10-13",
+      "monthlyUpdateSent": true,
       "exposureYears": 51.40588637919233,
       "latencyYears": 45.106091718001366,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1970,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -11507,9 +22784,38 @@ window.MT = {
       "lastDxDate": "2018-09-28",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2025-04-25",
+      "intakeDate": "2025-04-17",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-06-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 45.30595482546201,
       "latencyYears": 43.36755646817249,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1975,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_family_histories",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -11536,9 +22842,44 @@ window.MT = {
       "lastDxDate": "2013-06-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-10-19",
+      "intakeDate": "2022-10-06",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2015-08-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 51.26078028747433,
       "latencyYears": 49.360711841204655,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1964,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -11565,9 +22906,50 @@ window.MT = {
       "lastDxDate": "2019-11-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-10-13",
+      "intakeDate": "2023-09-28",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2022-01-31",
+      "monthlyUpdateSent": false,
       "exposureYears": 10.99794661190965,
       "latencyYears": 48.5201916495551,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1971,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -11594,9 +22976,40 @@ window.MT = {
       "lastDxDate": "2010-08-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-07-06",
+      "intakeDate": "2024-06-18",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2012-06-30",
+      "monthlyUpdateSent": false,
       "exposureYears": 5.9986310746064335,
       "latencyYears": 20.358658453114305,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -11623,9 +23036,30 @@ window.MT = {
       "lastDxDate": "2020-02-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-09-03",
+      "intakeDate": "2025-08-24",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-03-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 23.745379876796715,
       "latencyYears": 21.880903490759753,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -11652,9 +23086,40 @@ window.MT = {
       "lastDxDate": "2025-01-19",
       "settlementStatus": "accepted",
       "settlementAmount": 500000.0,
+      "openDate": "2024-09-23",
+      "intakeDate": "2024-09-12",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-06-27",
+      "monthlyUpdateSent": false,
       "exposureYears": 20.97741273100616,
       "latencyYears": 24.030116358658454,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -11681,9 +23146,44 @@ window.MT = {
       "lastDxDate": "2025-09-02",
       "settlementStatus": "accepted",
       "settlementAmount": 311086.59,
+      "openDate": "2023-01-10",
+      "intakeDate": "2022-12-21",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-01-05",
+      "monthlyUpdateSent": false,
       "exposureYears": 31.01163586584531,
       "latencyYears": 34.68309377138946,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "micrographia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -11710,9 +23210,41 @@ window.MT = {
       "lastDxDate": "2025-12-16",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-04-25",
+      "intakeDate": "2024-04-16",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-01-18",
+      "monthlyUpdateSent": true,
       "exposureYears": 17.27857631759069,
       "latencyYears": 21.23750855578371,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -11739,9 +23271,38 @@ window.MT = {
       "lastDxDate": "2005-08-20",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-10-15",
+      "intakeDate": "2025-10-04",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2008-02-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.999315537303216,
       "latencyYears": 33.96577686516085,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1971,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "micrographia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -11768,9 +23329,40 @@ window.MT = {
       "lastDxDate": "2010-08-15",
       "settlementStatus": "negotiating",
       "settlementAmount": 80503.76,
+      "openDate": "2021-07-09",
+      "intakeDate": "2021-06-28",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2012-05-16",
+      "monthlyUpdateSent": true,
       "exposureYears": 49.998631074606436,
       "latencyYears": 38.620123203285424,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1972,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -11797,9 +23389,42 @@ window.MT = {
       "lastDxDate": "2023-11-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-07-13",
+      "intakeDate": "2025-07-08",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-09-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.997946611909651,
       "latencyYears": 21.973990417522245,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia",
+        "dysphagia",
+        "early falls"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -11826,9 +23451,35 @@ window.MT = {
       "lastDxDate": "2013-12-02",
       "settlementStatus": "accepted",
       "settlementAmount": 46358.93,
+      "openDate": "2025-02-20",
+      "intakeDate": "2025-02-07",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2015-12-21",
+      "monthlyUpdateSent": false,
       "exposureYears": 12.0,
       "latencyYears": 16.413415468856947,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1997,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -11855,9 +23506,45 @@ window.MT = {
       "lastDxDate": "2022-07-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-01-06",
+      "intakeDate": "2022-12-29",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-12-15",
+      "monthlyUpdateSent": false,
       "exposureYears": 4.0,
       "latencyYears": 26.220396988364133,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1996,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -11884,9 +23571,49 @@ window.MT = {
       "lastDxDate": "2015-11-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-02-25",
+      "intakeDate": "2024-02-18",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-11-30",
+      "monthlyUpdateSent": false,
       "exposureYears": 14.078028747433265,
       "latencyYears": 7.967145790554415,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Firestorm 3SL",
+        "Paraquat 2L AG",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -11913,9 +23640,38 @@ window.MT = {
       "lastDxDate": "2024-05-31",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2021-12-23",
+      "intakeDate": "2021-12-12",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-12-05",
+      "monthlyUpdateSent": false,
       "exposureYears": 34.288843258042434,
       "latencyYears": 43.41409993155373,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1980,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "dysarthria",
+        "orthostatic hypotension"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -11942,9 +23698,41 @@ window.MT = {
       "lastDxDate": "2018-12-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-02-10",
+      "intakeDate": "2025-02-03",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2020-07-05",
+      "monthlyUpdateSent": false,
       "exposureYears": 4.999315537303217,
       "latencyYears": 51.356605065023956,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1967,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "REM sleep behavior disorder",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 4
     },
     {
@@ -11971,9 +23759,43 @@ window.MT = {
       "lastDxDate": "2022-04-14",
       "settlementStatus": "accepted",
       "settlementAmount": 355473.63,
+      "openDate": "2022-08-30",
+      "intakeDate": "2022-08-17",
+      "applicationMethod": "cleanup_disposal",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-12-15",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.974674880219029,
       "latencyYears": 9.259411362080767,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -12000,9 +23822,45 @@ window.MT = {
       "lastDxDate": "2025-04-30",
       "settlementStatus": "negotiating",
       "settlementAmount": 41995.66,
+      "openDate": "2024-09-11",
+      "intakeDate": "2024-08-22",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-05-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.999315537303218,
       "latencyYears": 49.71663244353183,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1975,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -12029,9 +23887,44 @@ window.MT = {
       "lastDxDate": "2025-12-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-07-10",
+      "intakeDate": "2025-06-26",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-12-01",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.998631074606434,
       "latencyYears": 26.368240930869266,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -12058,9 +23951,36 @@ window.MT = {
       "lastDxDate": "2023-11-01",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-07-06",
+      "intakeDate": "2023-06-23",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2026-01-31",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.024640657084188,
       "latencyYears": 21.859000684462696,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "alien limb phenomenon",
+        "asymmetric rigidity",
+        "cortical sensory loss",
+        "limb apraxia",
+        "myoclonus"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -12087,9 +24007,45 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-06-01",
+      "intakeDate": "2025-05-24",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": true,
       "exposureYears": 21.998631074606433,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1980,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "autonomic dysfunction",
+        "bradykinesia",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 4
     },
     {
@@ -12116,9 +24072,44 @@ window.MT = {
       "lastDxDate": "2025-12-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-08-15",
+      "intakeDate": "2022-08-07",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-07-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.84873374401095,
       "latencyYears": 20.777549623545518,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "dysphagia",
+        "early falls"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -12145,9 +24136,37 @@ window.MT = {
       "lastDxDate": "2013-05-23",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2022-05-11",
+      "intakeDate": "2022-04-26",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2015-02-15",
+      "monthlyUpdateSent": false,
       "exposureYears": 30.392881587953458,
       "latencyYears": 21.78507871321013,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1991,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -12174,9 +24193,45 @@ window.MT = {
       "lastDxDate": "2023-09-17",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-09-03",
+      "intakeDate": "2023-08-23",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-07-26",
+      "monthlyUpdateSent": false,
       "exposureYears": 22.770704996577688,
       "latencyYears": 24.48186173853525,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone Inteon",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "parkinsonism",
+        "REM sleep behavior disorder",
+        "visual hallucinations"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -12203,9 +24258,35 @@ window.MT = {
       "lastDxDate": "2024-12-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-08-23",
+      "intakeDate": "2021-08-09",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-04-14",
+      "monthlyUpdateSent": false,
       "exposureYears": 14.08350444900753,
       "latencyYears": 22.088980150581794,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "akathisia",
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -12232,9 +24313,34 @@ window.MT = {
       "lastDxDate": "2025-12-13",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-04-25",
+      "intakeDate": "2022-04-18",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-12-07",
+      "monthlyUpdateSent": false,
       "exposureYears": 10.094455852156058,
       "latencyYears": 14.04517453798768,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -12261,9 +24367,43 @@ window.MT = {
       "lastDxDate": "2023-11-20",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-06-08",
+      "intakeDate": "2022-05-25",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2026-04-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.465434633812457,
       "latencyYears": 18.43668720054757,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -12290,9 +24430,38 @@ window.MT = {
       "lastDxDate": "2020-10-10",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-03-29",
+      "intakeDate": "2022-03-13",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2022-10-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 35.238877481177276,
       "latencyYears": 39.827515400410675,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1980,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -12319,9 +24488,43 @@ window.MT = {
       "lastDxDate": "2014-05-22",
       "settlementStatus": "accepted",
       "settlementAmount": 150755.75,
+      "openDate": "2022-07-05",
+      "intakeDate": "2022-06-23",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2016-07-15",
+      "monthlyUpdateSent": false,
       "exposureYears": 29.678302532511978,
       "latencyYears": 22.067077344284737,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1992,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "micrographia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -12348,9 +24551,48 @@ window.MT = {
       "lastDxDate": "2024-11-30",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-01-04",
+      "intakeDate": "2023-12-18",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-11-16",
+      "monthlyUpdateSent": true,
       "exposureYears": 19.06365503080082,
       "latencyYears": 21.97946611909651,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hyposmia",
+        "postural instability",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_genetic_tests"
+      ],
       "tier": 3
     },
     {
@@ -12377,9 +24619,39 @@ window.MT = {
       "lastDxDate": "2023-01-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-02-08",
+      "intakeDate": "2022-01-25",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2025-02-06",
+      "monthlyUpdateSent": true,
       "exposureYears": 21.730321697467488,
       "latencyYears": 22.78713210130048,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2000,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -12406,9 +24678,40 @@ window.MT = {
       "lastDxDate": "2020-02-25",
       "settlementStatus": "offered",
       "settlementAmount": 344733.42,
+      "openDate": "2022-08-31",
+      "intakeDate": "2022-08-11",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2022-01-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.431895961670088,
       "latencyYears": 11.58384668035592,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -12435,9 +24738,47 @@ window.MT = {
       "lastDxDate": "2021-11-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-08-06",
+      "intakeDate": "2023-07-26",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-12-14",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.550308008213552,
       "latencyYears": 16.4435318275154,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Helmquat 3SL",
+        "Paraquat 2L AG",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -12464,9 +24805,43 @@ window.MT = {
       "lastDxDate": "2023-06-25",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-01-04",
+      "intakeDate": "2022-12-20",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-06-04",
+      "monthlyUpdateSent": true,
       "exposureYears": 0.999315537303217,
       "latencyYears": 28.7419575633128,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -12493,9 +24868,45 @@ window.MT = {
       "lastDxDate": "2024-02-14",
       "settlementStatus": "accepted",
       "settlementAmount": 48498.67,
+      "openDate": "2024-03-18",
+      "intakeDate": "2024-03-01",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2026-07-09",
+      "monthlyUpdateSent": false,
       "exposureYears": 18.6694045174538,
       "latencyYears": 20.791238877481177,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "parkinsonism"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -12522,9 +24933,41 @@ window.MT = {
       "lastDxDate": "2025-12-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-07-24",
+      "intakeDate": "2024-07-13",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-09-03",
+      "monthlyUpdateSent": false,
       "exposureYears": 22.691307323750856,
       "latencyYears": 26.6694045174538,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 3
     },
     {
@@ -12551,9 +24994,42 @@ window.MT = {
       "lastDxDate": "2014-12-21",
       "settlementStatus": "negotiating",
       "settlementAmount": 258565.94,
+      "openDate": "2023-07-23",
+      "intakeDate": "2023-07-13",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2017-01-16",
+      "monthlyUpdateSent": true,
       "exposureYears": 56.120465434633815,
       "latencyYears": 49.09240246406571,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1965,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -12580,9 +25056,33 @@ window.MT = {
       "lastDxDate": "2008-11-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-04-17",
+      "intakeDate": "2023-04-08",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2010-09-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 20.999315537303218,
       "latencyYears": 32.309377138945926,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1976,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -12609,9 +25109,44 @@ window.MT = {
       "lastDxDate": "2022-07-14",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-11-19",
+      "intakeDate": "2022-11-13",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-02-19",
+      "monthlyUpdateSent": true,
       "exposureYears": 27.794661190965094,
       "latencyYears": 28.32854209445585,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1994,
+      "productNames": [
+        "Firestorm 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "akathisia",
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -12638,9 +25173,38 @@ window.MT = {
       "lastDxDate": "2025-10-18",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2024-01-26",
+      "intakeDate": "2024-01-07",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-01-30",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.0,
       "latencyYears": 29.724845995893222,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1996,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -12667,9 +25231,34 @@ window.MT = {
       "lastDxDate": "2018-06-04",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-11-04",
+      "intakeDate": "2022-10-25",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2020-02-09",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.0,
       "latencyYears": 18.245037645448324,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2000,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -12696,9 +25285,33 @@ window.MT = {
       "lastDxDate": "2013-03-09",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-11-06",
+      "intakeDate": "2024-10-29",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2014-12-31",
+      "monthlyUpdateSent": true,
       "exposureYears": 17.968514715947983,
       "latencyYears": 9.155373032169747,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -12725,9 +25338,47 @@ window.MT = {
       "lastDxDate": "2025-12-30",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-09-11",
+      "intakeDate": "2025-08-23",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-08-01",
+      "monthlyUpdateSent": true,
       "exposureYears": 11.983572895277208,
       "latencyYears": 15.980835044490075,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2010,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -12754,9 +25405,43 @@ window.MT = {
       "lastDxDate": "2025-09-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-09-13",
+      "intakeDate": "2024-09-02",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-03-02",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.490075290896645,
       "latencyYears": 24.216290212183434,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "alien limb phenomenon",
+        "asymmetric rigidity",
+        "cortical sensory loss",
+        "myoclonus"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -12783,9 +25468,43 @@ window.MT = {
       "lastDxDate": "2019-07-25",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-08-03",
+      "intakeDate": "2025-07-24",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-11-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 25.196440793976727,
       "latencyYears": 22.759753593429156,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1996,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "early falls"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -12812,9 +25531,43 @@ window.MT = {
       "lastDxDate": "2016-11-25",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-09-11",
+      "intakeDate": "2025-08-22",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2019-02-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.999315537303218,
       "latencyYears": 27.745379876796715,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1989,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -12841,9 +25594,50 @@ window.MT = {
       "lastDxDate": "2025-12-09",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2024-05-29",
+      "intakeDate": "2024-05-24",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-05-24",
+      "monthlyUpdateSent": false,
       "exposureYears": 7.619438740588638,
       "latencyYears": 11.55920602327173,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -12870,9 +25664,36 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-05-14",
+      "intakeDate": "2022-05-08",
+      "applicationMethod": "other",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": true,
       "exposureYears": 23.964407939767284,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [],
       "tier": 3
     },
     {
@@ -12899,9 +25720,39 @@ window.MT = {
       "lastDxDate": "2013-03-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-05-24",
+      "intakeDate": "2023-05-17",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2015-07-10",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.0,
       "latencyYears": 20.15879534565366,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1993,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -12928,9 +25779,36 @@ window.MT = {
       "lastDxDate": "2025-12-12",
       "settlementStatus": "accepted",
       "settlementAmount": 454783.32,
+      "openDate": "2023-06-24",
+      "intakeDate": "2023-06-10",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-11-15",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.073921971252567,
       "latencyYears": 12.021902806297057,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Firestorm 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -12957,9 +25835,38 @@ window.MT = {
       "lastDxDate": "2025-12-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-02-15",
+      "intakeDate": "2023-02-03",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-12-05",
+      "monthlyUpdateSent": true,
       "exposureYears": 10.028747433264886,
       "latencyYears": 14.004106776180699,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -12986,9 +25893,41 @@ window.MT = {
       "lastDxDate": "2025-12-27",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-03-25",
+      "intakeDate": "2025-03-16",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-03-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 5.9958932238193015,
       "latencyYears": 11.838466803559205,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -13015,9 +25954,33 @@ window.MT = {
       "lastDxDate": "2023-06-05",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-02-04",
+      "intakeDate": "2024-01-18",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-10-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.535249828884326,
       "latencyYears": 7.96167008898015,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "postural instability",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -13044,9 +26007,42 @@ window.MT = {
       "lastDxDate": "2023-11-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-07-25",
+      "intakeDate": "2025-07-10",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-08-13",
+      "monthlyUpdateSent": false,
       "exposureYears": 15.723477070499658,
       "latencyYears": 17.607118412046542,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2006,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -13073,9 +26069,37 @@ window.MT = {
       "lastDxDate": "2009-07-28",
       "settlementStatus": "negotiating",
       "settlementAmount": 8374.14,
+      "openDate": "2024-04-29",
+      "intakeDate": "2024-04-11",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2011-06-24",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.553045859000683,
       "latencyYears": 4.125941136208077,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "alien limb phenomenon",
+        "limb apraxia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_encounters",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 4
     },
     {
@@ -13102,9 +26126,41 @@ window.MT = {
       "lastDxDate": "2016-09-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-12-10",
+      "intakeDate": "2025-11-30",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2019-02-26",
+      "monthlyUpdateSent": false,
       "exposureYears": 29.998631074606433,
       "latencyYears": 36.290212183436005,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1980,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -13131,9 +26187,40 @@ window.MT = {
       "lastDxDate": "2013-07-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-04-18",
+      "intakeDate": "2022-04-12",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2015-08-28",
+      "monthlyUpdateSent": true,
       "exposureYears": 26.614647501711158,
       "latencyYears": 36.64065708418891,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1976,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -13160,9 +26247,47 @@ window.MT = {
       "lastDxDate": "2008-12-28",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-06-19",
+      "intakeDate": "2024-06-14",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2011-01-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 0.999315537303217,
       "latencyYears": 9.166324435318275,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -13189,9 +26314,35 @@ window.MT = {
       "lastDxDate": "2025-05-08",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2024-10-09",
+      "intakeDate": "2024-10-01",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-06-19",
+      "monthlyUpdateSent": false,
       "exposureYears": 7.638603696098563,
       "latencyYears": 10.989733059548255,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -13218,9 +26369,45 @@ window.MT = {
       "lastDxDate": "2025-12-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-11-19",
+      "intakeDate": "2021-11-05",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-11-27",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.579055441478439,
       "latencyYears": 10.55441478439425,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -13247,9 +26434,39 @@ window.MT = {
       "lastDxDate": "2011-02-26",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2023-12-17",
+      "intakeDate": "2023-11-27",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2013-07-29",
+      "monthlyUpdateSent": false,
       "exposureYears": 19.901437371663246,
       "latencyYears": 9.05681040383299,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2002,
+      "productNames": [
+        "Helmquat 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hypomimia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses"
+      ],
       "tier": 2
     },
     {
@@ -13276,9 +26493,37 @@ window.MT = {
       "lastDxDate": "2025-10-24",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-09-05",
+      "intakeDate": "2024-08-31",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-04-16",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.025325119780972,
       "latencyYears": 10.839151266255989,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Helmquat 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "hyposmia",
+        "postural instability",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -13305,9 +26550,34 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-06-29",
+      "intakeDate": "2021-06-13",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": true,
       "exposureYears": 13.998631074606434,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1989,
+      "productNames": [
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "slowness of movement",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_smoking_histories"
+      ],
       "tier": 4
     },
     {
@@ -13334,9 +26604,36 @@ window.MT = {
       "lastDxDate": "2024-02-26",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-08-18",
+      "intakeDate": "2025-08-12",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-05-24",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.569472963723477,
       "latencyYears": 22.72416153319644,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_genetic_tests"
+      ],
       "tier": 2
     },
     {
@@ -13363,9 +26660,39 @@ window.MT = {
       "lastDxDate": "2025-10-06",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-01-24",
+      "intakeDate": "2023-01-09",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-02-26",
+      "monthlyUpdateSent": true,
       "exposureYears": 49.53319644079398,
       "latencyYears": 53.29774127310061,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1972,
+      "productNames": [
+        "Firestorm 3SL",
+        "Gramoxone SL 2.0",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -13392,9 +26719,42 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-12-29",
+      "intakeDate": "2023-12-21",
+      "applicationMethod": "other",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": true,
       "exposureYears": 11.446954140999315,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2010,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 4
     },
     {
@@ -13421,9 +26781,34 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "negotiating",
       "settlementAmount": 32256.16,
+      "openDate": "2024-04-09",
+      "intakeDate": "2024-03-26",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": true,
       "exposureYears": 36.03285420944559,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1985,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "stiffness"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [],
       "tier": 3
     },
     {
@@ -13450,9 +26835,37 @@ window.MT = {
       "lastDxDate": "2018-01-06",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2024-12-06",
+      "intakeDate": "2024-11-21",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2020-04-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 13.998631074606434,
       "latencyYears": 14.182067077344286,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -13479,9 +26892,48 @@ window.MT = {
       "lastDxDate": "2025-04-03",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2025-12-23",
+      "intakeDate": "2025-12-11",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-12-10",
+      "monthlyUpdateSent": false,
       "exposureYears": 10.99794661190965,
       "latencyYears": 17.177275838466805,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia",
+        "dysphagia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -13508,9 +26960,39 @@ window.MT = {
       "lastDxDate": "2023-03-07",
       "settlementStatus": "accepted",
       "settlementAmount": 39189.9,
+      "openDate": "2024-10-05",
+      "intakeDate": "2024-09-23",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-11-08",
+      "monthlyUpdateSent": false,
       "exposureYears": 22.77344284736482,
       "latencyYears": 32.550308008213555,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -13537,9 +27019,39 @@ window.MT = {
       "lastDxDate": null,
       "settlementStatus": "negotiating",
       "settlementAmount": 8480.92,
+      "openDate": "2023-01-24",
+      "intakeDate": "2023-01-05",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": null,
+      "monthlyUpdateSent": true,
       "exposureYears": 20.109514031485283,
       "latencyYears": null,
       "dxBucket": "no_dx",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms"
+      ],
       "tier": 4
     },
     {
@@ -13566,9 +27078,32 @@ window.MT = {
       "lastDxDate": "2016-06-07",
       "settlementStatus": "accepted",
       "settlementAmount": 136863.15,
+      "openDate": "2022-03-04",
+      "intakeDate": "2022-02-16",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2018-06-23",
+      "monthlyUpdateSent": false,
       "exposureYears": 26.04791238877481,
       "latencyYears": 20.48186173853525,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1995,
+      "productNames": [
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -13595,9 +27130,43 @@ window.MT = {
       "lastDxDate": "2020-10-25",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2023-09-01",
+      "intakeDate": "2023-08-14",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2023-01-13",
+      "monthlyUpdateSent": false,
       "exposureYears": 25.38261464750171,
       "latencyYears": 24.199863107460644,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1996,
+      "productNames": [
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "asymmetric rigidity",
+        "cortical sensory loss",
+        "limb apraxia",
+        "myoclonus"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -13624,9 +27193,41 @@ window.MT = {
       "lastDxDate": "2025-09-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-11-27",
+      "intakeDate": "2022-11-22",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-12-01",
+      "monthlyUpdateSent": true,
       "exposureYears": 17.913757700205338,
       "latencyYears": 21.6290212183436,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -13653,9 +27254,51 @@ window.MT = {
       "lastDxDate": "2016-04-17",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-10-05",
+      "intakeDate": "2025-09-24",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-02-14",
+      "monthlyUpdateSent": true,
       "exposureYears": 33.79329226557152,
       "latencyYears": 28.087611225188226,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1988,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -13682,9 +27325,33 @@ window.MT = {
       "lastDxDate": "2020-12-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-05-31",
+      "intakeDate": "2025-05-14",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2022-09-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 31.633127994524298,
       "latencyYears": 30.598220396988363,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1990,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -13711,9 +27378,47 @@ window.MT = {
       "lastDxDate": "2018-03-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-06-27",
+      "intakeDate": "2022-06-16",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2020-03-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 11.75085557837098,
       "latencyYears": 7.917864476386037,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2010,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -13740,9 +27445,34 @@ window.MT = {
       "lastDxDate": "2017-05-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-12-31",
+      "intakeDate": "2024-12-26",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-06-27",
+      "monthlyUpdateSent": false,
       "exposureYears": 16.999315537303218,
       "latencyYears": 12.709103353867214,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -13769,9 +27499,40 @@ window.MT = {
       "lastDxDate": "2025-11-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-01-12",
+      "intakeDate": "2025-01-07",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-04-21",
+      "monthlyUpdateSent": true,
       "exposureYears": 9.475701574264203,
       "latencyYears": 13.36892539356605,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -13798,9 +27559,42 @@ window.MT = {
       "lastDxDate": "2025-12-19",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2023-06-19",
+      "intakeDate": "2023-06-09",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-12-16",
+      "monthlyUpdateSent": false,
       "exposureYears": 5.932922655715264,
       "latencyYears": 9.900068446269678,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2016,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -13827,9 +27621,41 @@ window.MT = {
       "lastDxDate": "2025-12-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-03-01",
+      "intakeDate": "2025-02-16",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-06-11",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.531143052703628,
       "latencyYears": 16.465434633812457,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -13856,9 +27682,47 @@ window.MT = {
       "lastDxDate": "2020-04-04",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-10-29",
+      "intakeDate": "2023-10-14",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-11-10",
+      "monthlyUpdateSent": true,
       "exposureYears": 4.999315537303217,
       "latencyYears": 20.12046543463381,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2000,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "postural instability",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -13885,9 +27749,34 @@ window.MT = {
       "lastDxDate": "2016-07-16",
       "settlementStatus": "negotiating",
       "settlementAmount": 196931.92,
+      "openDate": "2023-09-15",
+      "intakeDate": "2023-09-09",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-06-02",
+      "monthlyUpdateSent": true,
       "exposureYears": 22.543463381245722,
       "latencyYears": 17.084188911704313,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1999,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hypomimia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -13914,9 +27803,43 @@ window.MT = {
       "lastDxDate": "2023-01-19",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2022-06-12",
+      "intakeDate": "2022-05-29",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-03-24",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.852840520191649,
       "latencyYears": 7.904175222450377,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -13943,9 +27866,40 @@ window.MT = {
       "lastDxDate": "2023-12-09",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-01-22",
+      "intakeDate": "2024-01-17",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2025-12-07",
+      "monthlyUpdateSent": true,
       "exposureYears": 14.329911019849419,
       "latencyYears": 16.268309377138944,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "micrographia",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -13972,9 +27926,44 @@ window.MT = {
       "lastDxDate": "2013-02-25",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-12-15",
+      "intakeDate": "2024-11-25",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2014-12-24",
+      "monthlyUpdateSent": false,
       "exposureYears": 16.969199178644764,
       "latencyYears": 8.123203285420944,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Parazone 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -14001,9 +27990,34 @@ window.MT = {
       "lastDxDate": "2025-12-06",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-10-14",
+      "intakeDate": "2023-10-08",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-05-05",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.68993839835729,
       "latencyYears": 12.621492128678987,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "asymmetric rigidity",
+        "limb apraxia",
+        "myoclonus"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_genetic_tests"
+      ],
       "tier": 3
     },
     {
@@ -14030,9 +28044,40 @@ window.MT = {
       "lastDxDate": "2017-12-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-03-06",
+      "intakeDate": "2023-02-22",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2020-05-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 35.501711156741955,
       "latencyYears": 31.43600273785079,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1986,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "postural instability",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses"
+      ],
       "tier": 2
     },
     {
@@ -14059,9 +28104,45 @@ window.MT = {
       "lastDxDate": "2025-12-13",
       "settlementStatus": "accepted",
       "settlementAmount": 229195.8,
+      "openDate": "2023-02-17",
+      "intakeDate": "2023-01-28",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-11-24",
+      "monthlyUpdateSent": false,
       "exposureYears": 14.130047912388775,
       "latencyYears": 18.080766598220396,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2007,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -14088,9 +28169,47 @@ window.MT = {
       "lastDxDate": "2016-08-13",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-07-31",
+      "intakeDate": "2022-07-11",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2018-04-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.514031485284052,
       "latencyYears": 8.131416837782341,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -14117,9 +28236,39 @@ window.MT = {
       "lastDxDate": "2024-05-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-05-03",
+      "intakeDate": "2023-04-23",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-04-09",
+      "monthlyUpdateSent": true,
       "exposureYears": 26.60369609856263,
       "latencyYears": 28.993839835728952,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1995,
+      "productNames": [
+        "Firestorm 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "dysphagia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -14146,9 +28295,36 @@ window.MT = {
       "lastDxDate": "2022-09-08",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2021-11-23",
+      "intakeDate": "2021-11-07",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2025-02-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 18.600958247775495,
       "latencyYears": 19.288158795345655,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -14175,9 +28351,43 @@ window.MT = {
       "lastDxDate": "2012-05-04",
       "settlementStatus": "accepted",
       "settlementAmount": 221374.38,
+      "openDate": "2024-11-20",
+      "intakeDate": "2024-11-06",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2014-06-13",
+      "monthlyUpdateSent": false,
       "exposureYears": 43.14305270362765,
       "latencyYears": 33.4839151266256,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1978,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "hyposmia",
+        "micrographia",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -14204,9 +28414,47 @@ window.MT = {
       "lastDxDate": "2024-09-06",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-04-21",
+      "intakeDate": "2023-04-14",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-03-15",
+      "monthlyUpdateSent": false,
       "exposureYears": 16.095824777549623,
       "latencyYears": 18.77891854893908,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -14233,9 +28481,43 @@ window.MT = {
       "lastDxDate": "2025-04-12",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-06-18",
+      "intakeDate": "2025-05-31",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-01-31",
+      "monthlyUpdateSent": true,
       "exposureYears": 28.999315537303218,
       "latencyYears": 38.729637234770706,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1986,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "akathisia",
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -14262,9 +28544,44 @@ window.MT = {
       "lastDxDate": "2022-05-31",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-03-12",
+      "intakeDate": "2022-02-26",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-08-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 50.85284052019165,
       "latencyYears": 51.266255989048595,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1971,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -14291,9 +28608,43 @@ window.MT = {
       "lastDxDate": "2025-12-23",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-04-23",
+      "intakeDate": "2025-04-18",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-10-03",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.183436002737851,
       "latencyYears": 12.161533196440795,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2013,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -14320,9 +28671,37 @@ window.MT = {
       "lastDxDate": "2023-04-13",
       "settlementStatus": "accepted",
       "settlementAmount": 351754.39,
+      "openDate": "2021-12-20",
+      "intakeDate": "2021-12-12",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-06-26",
+      "monthlyUpdateSent": false,
       "exposureYears": 6.997946611909651,
       "latencyYears": 21.308692676249144,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Bonfire Herbicide"
+      ],
+      "symptomNames": [
+        "constipation",
+        "micrographia",
+        "REM sleep behavior disorder",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -14349,9 +28728,43 @@ window.MT = {
       "lastDxDate": "2007-05-17",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2023-06-26",
+      "intakeDate": "2023-06-20",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2009-04-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 38.1492128678987,
       "latencyYears": 24.161533196440793,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1983,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "autonomic dysfunction",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -14378,9 +28791,39 @@ window.MT = {
       "lastDxDate": "2024-04-18",
       "settlementStatus": "accepted",
       "settlementAmount": 60135.53,
+      "openDate": "2025-03-05",
+      "intakeDate": "2025-02-27",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-09-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 7.197809719370294,
       "latencyYears": 9.494866529774127,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -14407,9 +28850,36 @@ window.MT = {
       "lastDxDate": "2006-07-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-08-07",
+      "intakeDate": "2025-07-21",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2008-09-06",
+      "monthlyUpdateSent": true,
       "exposureYears": 55.526351813826146,
       "latencyYears": 40.07939767282683,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1966,
+      "productNames": [
+        "Helmquat 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -14436,9 +28906,42 @@ window.MT = {
       "lastDxDate": "2021-01-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-11-11",
+      "intakeDate": "2023-10-27",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-06-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 26.986995208761122,
       "latencyYears": 26.00684462696783,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1995,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Helmquat 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "hyposmia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters",
+        "pq_smoking_histories",
+        "pq_genetic_tests"
+      ],
       "tier": 2
     },
     {
@@ -14465,9 +28968,32 @@ window.MT = {
       "lastDxDate": "2019-05-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-01-31",
+      "intakeDate": "2025-01-16",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2021-02-27",
+      "monthlyUpdateSent": true,
       "exposureYears": 20.449007529089666,
       "latencyYears": 40.062970568104035,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1979,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -14494,9 +29020,41 @@ window.MT = {
       "lastDxDate": "2010-07-04",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-08-25",
+      "intakeDate": "2025-08-06",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2012-08-23",
+      "monthlyUpdateSent": true,
       "exposureYears": 18.034223134839152,
       "latencyYears": 6.54072553045859,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Helmquat 3SL",
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -14523,9 +29081,43 @@ window.MT = {
       "lastDxDate": "2025-12-28",
       "settlementStatus": "negotiating",
       "settlementAmount": 203864.63,
+      "openDate": "2025-09-14",
+      "intakeDate": "2025-08-25",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-07-25",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.670773442847365,
       "latencyYears": 16.66255989048597,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "postural instability"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 2
     },
     {
@@ -14552,9 +29144,40 @@ window.MT = {
       "lastDxDate": "2008-03-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-07-04",
+      "intakeDate": "2022-06-14",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2010-07-24",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.998631074606434,
       "latencyYears": 18.428473648186174,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1989,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -14581,9 +29204,31 @@ window.MT = {
       "lastDxDate": "2025-12-16",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-02-21",
+      "intakeDate": "2022-02-10",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-08-10",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.876112251882272,
       "latencyYears": 16.83504449007529,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2009,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -14610,9 +29255,40 @@ window.MT = {
       "lastDxDate": "2025-12-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-12-02",
+      "intakeDate": "2021-11-14",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-08-05",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.8172484599589325,
       "latencyYears": 10.754277891854894,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2015,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "postural instability",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 2
     },
     {
@@ -14639,9 +29315,34 @@ window.MT = {
       "lastDxDate": "2015-11-15",
       "settlementStatus": "accepted",
       "settlementAmount": 44025.24,
+      "openDate": "2023-10-24",
+      "intakeDate": "2023-10-17",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-01-23",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.0,
       "latencyYears": 14.403832991101986,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -14668,9 +29369,33 @@ window.MT = {
       "lastDxDate": "2016-12-04",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-11-18",
+      "intakeDate": "2023-11-06",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2018-12-12",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.999315537303218,
       "latencyYears": 34.52977412731006,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1982,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -14697,9 +29422,48 @@ window.MT = {
       "lastDxDate": "2011-08-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-11-11",
+      "intakeDate": "2024-11-01",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2013-10-26",
+      "monthlyUpdateSent": true,
       "exposureYears": 39.35934291581109,
       "latencyYears": 28.960985626283367,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1982,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -14726,9 +29490,38 @@ window.MT = {
       "lastDxDate": "2017-02-19",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-10-26",
+      "intakeDate": "2023-10-08",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-05-06",
+      "monthlyUpdateSent": false,
       "exposureYears": 10.902121834360027,
       "latencyYears": 6.039698836413415,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -14755,9 +29548,44 @@ window.MT = {
       "lastDxDate": "2022-02-22",
       "settlementStatus": "offered",
       "settlementAmount": 20000.0,
+      "openDate": "2023-07-01",
+      "intakeDate": "2023-06-23",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-09-14",
+      "monthlyUpdateSent": true,
       "exposureYears": 30.017796030116358,
       "latencyYears": 30.16290212183436,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1991,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "bradykinesia",
+        "dysarthria",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -14784,9 +29612,39 @@ window.MT = {
       "lastDxDate": "2021-12-28",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-11-24",
+      "intakeDate": "2022-11-11",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2023-11-14",
+      "monthlyUpdateSent": true,
       "exposureYears": 28.999315537303218,
       "latencyYears": 38.639288158795345,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1983,
+      "productNames": [
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "constipation",
+        "hyposmia",
+        "micrographia",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -14813,9 +29671,32 @@ window.MT = {
       "lastDxDate": "2005-11-16",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-09-02",
+      "intakeDate": "2025-08-28",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2008-04-17",
+      "monthlyUpdateSent": true,
       "exposureYears": 12.999315537303216,
       "latencyYears": 39.43052703627652,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1966,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -14842,9 +29723,38 @@ window.MT = {
       "lastDxDate": "2012-05-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-03-12",
+      "intakeDate": "2024-03-07",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2014-09-08",
+      "monthlyUpdateSent": false,
       "exposureYears": 40.82956878850103,
       "latencyYears": 31.1813826146475,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1981,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -14871,9 +29781,38 @@ window.MT = {
       "lastDxDate": "2007-06-13",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-04-09",
+      "intakeDate": "2024-03-28",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2009-01-21",
+      "monthlyUpdateSent": false,
       "exposureYears": 55.98083504449008,
       "latencyYears": 41.42915811088296,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1966,
+      "productNames": [
+        "Firestorm 3SL",
+        "Helmquat 3SL",
+        "Paraquat Concentrate 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -14900,9 +29839,36 @@ window.MT = {
       "lastDxDate": "2025-09-16",
       "settlementStatus": "accepted",
       "settlementAmount": 63315.11,
+      "openDate": "2022-12-09",
+      "intakeDate": "2022-11-23",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2028-03-02",
+      "monthlyUpdateSent": false,
       "exposureYears": 4.0,
       "latencyYears": 24.227241615331966,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2001,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -14929,9 +29895,39 @@ window.MT = {
       "lastDxDate": "2013-09-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-10-19",
+      "intakeDate": "2025-10-14",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2015-08-19",
+      "monthlyUpdateSent": true,
       "exposureYears": 17.809719370294317,
       "latencyYears": 9.516769336071183,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2004,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "dysarthria",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -14958,9 +29954,37 @@ window.MT = {
       "lastDxDate": "2021-11-05",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2025-04-08",
+      "intakeDate": "2025-03-19",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2024-04-18",
+      "monthlyUpdateSent": false,
       "exposureYears": 54.64202600958248,
       "latencyYears": 54.48870636550308,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1967,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 2
     },
     {
@@ -14987,9 +30011,42 @@ window.MT = {
       "lastDxDate": "2007-01-17",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2024-12-26",
+      "intakeDate": "2024-12-06",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2008-10-27",
+      "monthlyUpdateSent": false,
       "exposureYears": 9.998631074606434,
       "latencyYears": 42.46406570841889,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1964,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia",
+        "dysphagia",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 4
     },
     {
@@ -15016,9 +30073,39 @@ window.MT = {
       "lastDxDate": "2025-12-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-11-29",
+      "intakeDate": "2025-11-19",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-10-27",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.909650924024641,
       "latencyYears": 11.832991101984941,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "constipation",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": false
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses"
+      ],
       "tier": 2
     },
     {
@@ -15045,9 +30132,46 @@ window.MT = {
       "lastDxDate": "2014-06-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-11-26",
+      "intakeDate": "2022-11-16",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2016-03-20",
+      "monthlyUpdateSent": false,
       "exposureYears": 29.998631074606433,
       "latencyYears": 36.02737850787132,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1978,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "fluctuating cognition",
+        "parkinsonism",
+        "REM sleep behavior disorder"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        },
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_medications",
+        "pq_medications",
+        "pq_encounters",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -15074,9 +30198,32 @@ window.MT = {
       "lastDxDate": "2006-04-18",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-11-22",
+      "intakeDate": "2022-11-08",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2008-05-24",
+      "monthlyUpdateSent": true,
       "exposureYears": 40.59958932238193,
       "latencyYears": 24.895277207392198,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1981,
+      "productNames": [
+        "Paraquat Concentrate 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -15103,9 +30250,32 @@ window.MT = {
       "lastDxDate": "2025-12-21",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-10-21",
+      "intakeDate": "2023-10-07",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-07-21",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.997946611909651,
       "latencyYears": 13.579739904175222,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "rigidity"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_genetic_tests"
+      ],
       "tier": 3
     },
     {
@@ -15132,9 +30302,49 @@ window.MT = {
       "lastDxDate": "2025-08-06",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-11-12",
+      "intakeDate": "2021-11-07",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-04-22",
+      "monthlyUpdateSent": true,
       "exposureYears": 7.36208076659822,
       "latencyYears": 10.959616700889802,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2014,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone Inteon"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hyposmia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        },
+        {
+          "t": "affidavit",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -15161,9 +30371,45 @@ window.MT = {
       "lastDxDate": "2025-09-01",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-09-02",
+      "intakeDate": "2024-08-18",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-06-05",
+      "monthlyUpdateSent": true,
       "exposureYears": 9.946611909650924,
       "latencyYears": 13.61533196440794,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2012,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "axial rigidity",
+        "bradykinesia",
+        "dysphagia",
+        "early falls",
+        "vertical gaze palsy"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -15190,9 +30436,36 @@ window.MT = {
       "lastDxDate": "2017-12-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-08-26",
+      "intakeDate": "2021-08-13",
+      "applicationMethod": "handheld_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-08-10",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.00479123887748,
       "latencyYears": 14.622861054072553,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 2003,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "gait disturbance",
+        "resting tremor"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -15219,9 +30492,42 @@ window.MT = {
       "lastDxDate": "2015-12-03",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-04-17",
+      "intakeDate": "2022-04-04",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2017-10-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 10.99794661190965,
       "latencyYears": 35.05544147843943,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1980,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 3
     },
     {
@@ -15248,9 +30554,38 @@ window.MT = {
       "lastDxDate": "2014-09-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-04-09",
+      "intakeDate": "2023-04-02",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2016-04-01",
+      "monthlyUpdateSent": false,
       "exposureYears": 41.776865160848736,
       "latencyYears": 45.35523613963039,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1969,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Firestorm 3SL",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "affidavit",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -15277,9 +30612,42 @@ window.MT = {
       "lastDxDate": "2023-09-09",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-02-10",
+      "intakeDate": "2024-01-27",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2025-11-08",
+      "monthlyUpdateSent": true,
       "exposureYears": 16.520191649555098,
       "latencyYears": 18.209445585215605,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 2005,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Helmquat 3SL",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "hyposmia"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": false
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -15306,9 +30674,39 @@ window.MT = {
       "lastDxDate": "2021-03-14",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-06-03",
+      "intakeDate": "2021-05-14",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2023-04-01",
+      "monthlyUpdateSent": true,
       "exposureYears": 8.999315537303216,
       "latencyYears": 9.593429158110883,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2011,
+      "productNames": [
+        "Firestorm 3SL",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "postural instability",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -15335,9 +30733,36 @@ window.MT = {
       "lastDxDate": "2023-10-22",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-12-28",
+      "intakeDate": "2024-12-12",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-02-20",
+      "monthlyUpdateSent": false,
       "exposureYears": 45.15537303216975,
       "latencyYears": 46.96235455167693,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1976,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Gramoxone SL 2.0",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "postural instability"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications",
+        "pq_medications",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -15364,9 +30789,41 @@ window.MT = {
       "lastDxDate": "2017-06-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-11-08",
+      "intakeDate": "2021-11-03",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-10-20",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.0,
       "latencyYears": 24.826830937713893,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1992,
+      "productNames": [
+        "Firestorm 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "resting tremor",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -15393,9 +30850,41 @@ window.MT = {
       "lastDxDate": "2012-01-02",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2021-10-25",
+      "intakeDate": "2021-10-19",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2013-10-19",
+      "monthlyUpdateSent": true,
       "exposureYears": 18.795345653661876,
       "latencyYears": 15.367556468172484,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1996,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "micrographia",
+        "postural instability",
+        "REM sleep behavior disorder",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     },
     {
@@ -15422,9 +30911,41 @@ window.MT = {
       "lastDxDate": "2011-10-08",
       "settlementStatus": "offered",
       "settlementAmount": 287682.1,
+      "openDate": "2024-07-04",
+      "intakeDate": "2024-06-25",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2014-02-12",
+      "monthlyUpdateSent": true,
       "exposureYears": 48.02190280629706,
       "latencyYears": 37.790554414784395,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1973,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "hypomimia",
+        "hyposmia",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_family_histories"
+      ],
       "tier": 2
     },
     {
@@ -15451,9 +30972,36 @@ window.MT = {
       "lastDxDate": "2024-08-07",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2025-11-27",
+      "intakeDate": "2025-11-09",
+      "applicationMethod": "boom_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-05-09",
+      "monthlyUpdateSent": false,
       "exposureYears": 13.998631074606434,
       "latencyYears": 43.35386721423682,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1981,
+      "productNames": [
+        "Gramoxone Inteon",
+        "Paraquat 2L AG"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "micrographia",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -15480,9 +31028,39 @@ window.MT = {
       "lastDxDate": "2017-12-01",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-03-11",
+      "intakeDate": "2022-02-25",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2019-10-02",
+      "monthlyUpdateSent": true,
       "exposureYears": 6.997946611909651,
       "latencyYears": 29.16084873374401,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1988,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Herbicide 2L"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "orthostatic hypotension",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_medications"
+      ],
       "tier": 4
     },
     {
@@ -15509,9 +31087,43 @@ window.MT = {
       "lastDxDate": "2025-03-20",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-04-23",
+      "intakeDate": "2023-04-05",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-02-27",
+      "monthlyUpdateSent": false,
       "exposureYears": 1.998631074606434,
       "latencyYears": 26.67214236824093,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Occupational / Commercial",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Helmquat 3SL"
+      ],
+      "symptomNames": [
+        "akathisia",
+        "bradykinesia",
+        "rigidity",
+        "tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_smoking_histories"
+      ],
       "tier": 3
     },
     {
@@ -15538,9 +31150,43 @@ window.MT = {
       "lastDxDate": "2024-07-29",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2023-04-29",
+      "intakeDate": "2023-04-09",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2026-05-23",
+      "monthlyUpdateSent": true,
       "exposureYears": 30.913073237508556,
       "latencyYears": 44.14784394250513,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1980,
+      "productNames": [
+        "Paraquat Herbicide 2L",
+        "Quick-Quat 2.0 SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "hyposmia",
+        "postural instability",
+        "resting tremor"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_symptoms",
+        "pq_medications",
+        "pq_encounters"
+      ],
       "tier": 2
     },
     {
@@ -15567,9 +31213,37 @@ window.MT = {
       "lastDxDate": "2022-09-20",
       "settlementStatus": "declined",
       "settlementAmount": null,
+      "openDate": "2025-12-10",
+      "intakeDate": "2025-11-26",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": true,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2024-12-04",
+      "monthlyUpdateSent": false,
       "exposureYears": 5.9986310746064335,
       "latencyYears": 46.34360027378508,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Residential / Bystander",
+      "firstExposureYear": 1976,
+      "productNames": [
+        "Gramoxone SL 2.0"
+      ],
+      "symptomNames": [
+        "ataxia",
+        "autonomic dysfunction",
+        "bradykinesia",
+        "orthostatic hypotension"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_medications"
+      ],
       "tier": 3
     },
     {
@@ -15596,9 +31270,45 @@ window.MT = {
       "lastDxDate": "2025-12-15",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2022-12-15",
+      "intakeDate": "2022-12-07",
+      "applicationMethod": "backpack_sprayer",
+      "receiptsClaimed": false,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2027-07-30",
+      "monthlyUpdateSent": true,
       "exposureYears": 13.831622176591376,
       "latencyYears": 17.78781656399726,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Bonfire Herbicide",
+        "Paraquat Herbicide 2L",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "hypomimia",
+        "postural instability",
+        "resting tremor",
+        "rigidity"
+      ],
+      "evidenceItems": [
+        {
+          "t": "applicator_log",
+          "v": true
+        },
+        {
+          "t": "tax_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms"
+      ],
       "tier": 3
     },
     {
@@ -15625,9 +31335,42 @@ window.MT = {
       "lastDxDate": "2025-11-08",
       "settlementStatus": "none",
       "settlementAmount": null,
+      "openDate": "2024-06-15",
+      "intakeDate": "2024-06-04",
+      "applicationMethod": "mixing_loading",
+      "receiptsClaimed": false,
+      "licenseClaimed": true,
+      "statuteOfLimitations": "2027-06-16",
+      "monthlyUpdateSent": true,
       "exposureYears": 23.742642026009584,
       "latencyYears": 27.59753593429158,
       "dxBucket": "parkinsonism_other",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 1998,
+      "productNames": [
+        "Gramoxone SL 2.0",
+        "Paraquat Concentrate 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "gait disturbance",
+        "rigidity",
+        "urinary incontinence"
+      ],
+      "evidenceItems": [
+        {
+          "t": "tax_record",
+          "v": true
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters"
+      ],
       "tier": 3
     },
     {
@@ -15654,9 +31397,48 @@ window.MT = {
       "lastDxDate": "2025-12-21",
       "settlementStatus": "litigating",
       "settlementAmount": null,
+      "openDate": "2025-05-23",
+      "intakeDate": "2025-05-18",
+      "applicationMethod": "aerial_adjacent",
+      "receiptsClaimed": true,
+      "licenseClaimed": false,
+      "statuteOfLimitations": "2028-04-05",
+      "monthlyUpdateSent": false,
       "exposureYears": 8.0,
       "latencyYears": 17.73579739904175,
       "dxBucket": "parkinsons_disease",
+      "exposureCategory": "Agricultural",
+      "firstExposureYear": 2008,
+      "productNames": [
+        "Paraquat 2L AG",
+        "Parazone 3SL"
+      ],
+      "symptomNames": [
+        "bradykinesia",
+        "constipation",
+        "micrographia",
+        "resting tremor",
+        "rigidity",
+        "shuffling gait"
+      ],
+      "evidenceItems": [
+        {
+          "t": "purchase_receipt",
+          "v": true
+        },
+        {
+          "t": "employment_record",
+          "v": false
+        }
+      ],
+      "pinFactTables": [
+        "pq_diagnoses",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_symptoms",
+        "pq_encounters",
+        "pq_smoking_histories"
+      ],
       "tier": 2
     }
   ],

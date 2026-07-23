@@ -195,7 +195,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
       <div class="kpi-row" id="kpi-row-1"></div>
       <div class="chart-grid">
         <div class="chart-card"><h3>Matters by Status</h3><canvas id="chartStatus"></canvas></div>
-        <div class="chart-card"><h3>Matters by Type</h3><canvas id="chartType"></canvas></div>
+        <div class="chart-card"><h3>Matters by Acquisition Year</h3><canvas id="chartAcq"></canvas></div>
         <div class="chart-card"><h3>Filing Timeline</h3><canvas id="chartFiling"></canvas></div>
         <div class="chart-card"><h3>Firm Workload</h3><canvas id="chartFirms"></canvas></div>
       </div>
@@ -221,7 +221,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
         <div class="chart-card"><h3>Most Recent Diagnosis by Year</h3><canvas id="chartDxYear"></canvas></div>
         <div class="chart-card"><h3>Top Symptoms</h3><canvas id="chartSymptoms"></canvas></div>
         <div class="chart-card"><h3>Levodopa Response</h3><canvas id="chartLevodopa"></canvas></div>
-        <div class="chart-card"><h3>Latency by Setting</h3><canvas id="chartLatency"></canvas></div>
+        <div class="chart-card"><h3>Avg Latency by Exposure Category</h3><canvas id="chartLatency"></canvas></div>
         <div class="chart-card"><h3>Latency Distribution</h3><canvas id="chartLatencyDist"></canvas></div>
       </div>
     </div>
@@ -306,10 +306,9 @@ const TIER_NAMES = {1: 'Tier 1', 2: 'Tier 2', 3: 'Tier 3', 4: 'Tier 4'};
 // ====================================================================
 // FILTER STATE
 // ====================================================================
-// All charts that depend on per-case data filter D.cases through this state.
-// Tabs that show aggregate-only data (medical, evidence, settlement) display
-// a small "all data" note when filters are active since their underlying
-// data is not per-matter.
+// All charts and KPI tiles on tabs t1–t5 aggregate from the per-case dataset
+// (D.cases) filtered through this state, so sidebar filters apply everywhere.
+// Pre-aggregated D.* keys are retained in the data file for reference only.
 
 const state = { status: 'all', type: 'all', diagnosis: 'all', tier: 'all' };
 
@@ -521,12 +520,6 @@ function fmtMoney(v) {
   return '$' + Math.round(v);
 }
 
-function avgSettlementMap() {
-  const m = {};
-  (D.avgSettlementByTier || []).forEach(a => { if (a.avg != null) m[a.tier] = a.avg; });
-  return m;
-}
-
 // ====================================================================
 // CHART HELPERS
 // ====================================================================
@@ -608,66 +601,8 @@ function line(id, labels, datasets) {
 // KPI TILES
 // ====================================================================
 
-function renderKPIs() {
-  // Tab 1 (filter-aware via getFilteredCases)
-  const cases = getFilteredCases();
-  const filterActive = anyFilterActive();
-  const openMatters = cases.filter(c => c.status === 'open').length;
-  const uniqueFirms = new Set(cases.map(c => c.firm).filter(Boolean)).size;
-  const totalLabel = D.totalMatters?.toLocaleString() || '0';
-  const kpi1 = document.getElementById('kpi-row-1');
-  kpi1.innerHTML = `
-    <div class="tile"><div class="tile-label">${filterActive ? 'Filtered Matters' : 'Total Matters'}</div><div class="tile-value">${cases.length.toLocaleString()}</div><div class="tile-sub">${filterActive ? `of ${totalLabel}` : 'all matters'}</div></div>
-    <div class="tile"><div class="tile-label">Open Matters</div><div class="tile-value">${openMatters.toLocaleString()}</div><div class="tile-sub">${filterActive ? 'in selection' : `of ${totalLabel}`}</div></div>
-    <div class="tile"><div class="tile-label">Avg Latency</div><div class="tile-value">${(D.avgLatency || 0).toFixed(1)} yrs</div><div class="tile-sub">exposure to diagnosis</div></div>
-    <div class="tile"><div class="tile-label">Law Firms</div><div class="tile-value">${uniqueFirms}</div><div class="tile-sub">${filterActive ? 'in selection' : 'counsel firms'}</div></div>`;
-
-  // Tab 2
-  const farmPct = D.exposureBySetting?.find(s => s.setting === 'farm')?.count || 0;
-  const kpi2 = document.getElementById('kpi-row-2');
-  kpi2.innerHTML = `
-    <div class="tile"><div class="tile-label">Matters w/ Exposure</div><div class="tile-value">${farmPct.toLocaleString()}</div><div class="tile-sub">farm setting</div></div>
-    <div class="tile"><div class="tile-label">Avg Duration</div><div class="tile-value">${(D.avgExposureYears || 0).toFixed(1)} yrs</div><div class="tile-sub">per matter</div></div>
-    <div class="tile"><div class="tile-label">PPE Usage</div><div class="tile-value">${(D.ppeUsage?.find(p=>p.ppe_status==='PPE Used')?.count||0)}</div><div class="tile-sub">reported PPE use</div></div>
-    <div class="tile"><div class="tile-label">Direct / Indirect</div><div class="tile-value">${D.exposureByType?.find(e=>e.exposure_type==='direct')?.count||0} / ${D.exposureByType?.find(e=>e.exposure_type==='indirect')?.count||0}</div><div class="tile-sub">exposure types</div></div>`;
-
-  // Tab 3
-  const pdCount = D.diagnosisDistribution?.find(d => d.condition === 'parkinsons_disease')?.count || 0;
-  const kpi3 = document.getElementById('kpi-row-3');
-  kpi3.innerHTML = `
-    <div class="tile"><div class="tile-label">Diagnoses</div><div class="tile-value">${D.totalDiagnoses?.toLocaleString()}</div><div class="tile-sub">${Math.round(pdCount/D.totalDiagnoses*100)}% Parkinson's</div></div>
-    <div class="tile"><div class="tile-label">Medical Records</div><div class="tile-value">${D.totalRecords?.toLocaleString()}</div><div class="tile-sub">chart bundles</div></div>
-    <div class="tile"><div class="tile-label">Record Pins</div><div class="tile-value">${D.totalPins?.toLocaleString()}</div><div class="tile-sub">facts pinned</div></div>
-    <div class="tile"><div class="tile-label">Providers</div><div class="tile-value">${D.totalProviders}</div><div class="tile-sub">facilities</div></div>`;
-
-  // Tab 4
-  const eGap = D.evidenceGap?.[0] || {};
-  const kpi4 = document.getElementById('kpi-row-4');
-  kpi4.innerHTML = `
-    <div class="tile"><div class="tile-label">Receipts Claimed</div><div class="tile-value">${(eGap.receipts_claimed||0).toLocaleString()}</div><div class="tile-sub">verified: ${(eGap.receipts_verified||0).toLocaleString()}</div></div>
-    <div class="tile"><div class="tile-label">Licenses Claimed</div><div class="tile-value">${(eGap.license_claimed||0).toLocaleString()}</div><div class="tile-sub">verified: ${(eGap.license_verified||0).toLocaleString()}</div></div>
-    <div class="tile"><div class="tile-label">Open Update Rate</div><div class="tile-value">${Math.round((D.monthlyUpdateCompliance?.[0]?.sent||0) / Math.max((D.monthlyUpdateCompliance?.[0]?.sent||0) + (D.monthlyUpdateCompliance?.[0]?.not_sent||0), 1) * 100)}%</div><div class="tile-sub">monthly client comm</div></div>
-    <div class="tile"><div class="tile-label">Settled Matters</div><div class="tile-value">${D.settlementStatus?.find(s=>s.settlement_status==='accepted')?.count||0}</div><div class="tile-sub">of ${D.totalMatters}</div></div>`;
-
-  // Tab 5 — Valuation
-  const scored = scoreAllCases();
-  const tierCounts = [1,2,3,4].map(t => scored.filter(c => c.tier === t).length);
-  const avgScore = scored.length ? (scored.reduce((s,c) => s + c.score, 0) / scored.length).toFixed(1) : '0.0';
-  const avgByTier = avgSettlementMap();
-  const tierSub = t => {
-    const avg = avgByTier[t];
-    return `${tierRecoveryRange(t).label} · avg ${avg != null ? fmtMoney(avg) : '—'}`;
-  };
-  const kpi5 = document.getElementById('kpi-row-5');
-  kpi5.innerHTML = `
-    <div class="tile tier-tile tier-1"><div class="tile-label">Tier 1</div><div class="tile-value">${tierCounts[0]}</div><div class="tile-sub">${tierSub(1)}</div></div>
-    <div class="tile tier-tile tier-2"><div class="tile-label">Tier 2</div><div class="tile-value">${tierCounts[1]}</div><div class="tile-sub">${tierSub(2)}</div></div>
-    <div class="tile tier-tile tier-3"><div class="tile-label">Tier 3</div><div class="tile-value">${tierCounts[2]}</div><div class="tile-sub">${tierSub(3)}</div></div>
-    <div class="tile tier-tile tier-4"><div class="tile-label">Tier 4</div><div class="tile-value">${tierCounts[3]}</div><div class="tile-sub">${tierSub(4)}</div></div>
-    <div class="tile"><div class="tile-label">Portfolio Value</div><div class="tile-value">${fmtMoney(D.portfolioValue)}</div><div class="tile-sub">accepted settlements</div></div>
-    <div class="tile"><div class="tile-label">SOL &lt; 90 Days</div><div class="tile-value">${(D.solNext90Days ?? 0).toLocaleString()}</div><div class="tile-sub">open matters at risk</div></div>
-    <div class="tile"><div class="tile-label">Avg Score</div><div class="tile-value">${avgScore}</div><div class="tile-sub">across ${scored.length} matters</div></div>`;
-}
+// KPI tiles are rendered per tab inside each renderTabN() from the filtered
+// case set (see below), so every tile reflects the active sidebar filters.
 
 // ====================================================================
 // CHART RENDERERS
@@ -678,6 +613,18 @@ function renderTab1() {
   const cases = getFilteredCases();
   const filterActive = anyFilterActive();
 
+  // KPI tiles (filter-aware)
+  const openMatters = cases.filter(c => c.status === 'open').length;
+  const uniqueFirms = new Set(cases.map(c => c.firm).filter(Boolean)).size;
+  const latVals = cases.map(c => c.latencyYears).filter(v => v != null);
+  const avgLat = latVals.length ? latVals.reduce((a, b) => a + b, 0) / latVals.length : 0;
+  const totalLabel = D.totalMatters?.toLocaleString() || '0';
+  document.getElementById('kpi-row-1').innerHTML = `
+    <div class="tile"><div class="tile-label">${filterActive ? 'Filtered Matters' : 'Total Matters'}</div><div class="tile-value">${cases.length.toLocaleString()}</div><div class="tile-sub">${filterActive ? `of ${totalLabel}` : 'all matters'}</div></div>
+    <div class="tile"><div class="tile-label">Open Matters</div><div class="tile-value">${openMatters.toLocaleString()}</div><div class="tile-sub">${filterActive ? 'in selection' : `of ${totalLabel}`}</div></div>
+    <div class="tile"><div class="tile-label">Avg Latency</div><div class="tile-value">${avgLat.toFixed(1)} yrs</div><div class="tile-sub">${filterActive ? 'in selection' : 'exposure to diagnosis'}</div></div>
+    <div class="tile"><div class="tile-label">Law Firms</div><div class="tile-value">${uniqueFirms}</div><div class="tile-sub">${filterActive ? 'in selection' : 'counsel firms'}</div></div>`;
+
   // Matters by Status (filter-aware)
   const byStatus = countBy(cases, 'status');
   doughnut('chartStatus',
@@ -685,17 +632,25 @@ function renderTab1() {
     byStatus.map(s => s.count),
     byStatus.map(s => STATUS_COLORS[s.status] || '#94A3B8'));
 
-  // Matters by Type (filter-aware)
-  const byType = countBy(cases, 'matter_type');
-  bar('chartType',
-    byType.map(t => (t.matter_type || 'unknown').replace(/_/g, ' ')),
-    [{ label: 'Matters', data: byType.map(t => t.count), backgroundColor: '#1E2761' }]);
+  // Matters by Acquisition Year (intake date, falling back to open date)
+  const acq = {};
+  cases.forEach(c => {
+    const d = c.intakeDate || c.openDate;
+    if (!d) return;
+    const y = String(d).slice(0, 4);
+    acq[y] = (acq[y] || 0) + 1;
+  });
+  const acqYears = Object.keys(acq).sort();
+  bar('chartAcq', acqYears,
+    [{ label: 'Matters', data: acqYears.map(y => acq[y]), backgroundColor: '#1E2761' }],
+    { datalabels: { display: true, anchor: 'end', align: 'top', color: '#1E2761',
+                    font: { weight: 700 }, formatter: v => v } });
 
-  // Filing Timeline (pre-aggregated - note if filtered)
+  // Filing Timeline (filter-aware, by open month)
+  const byMonth = groupByMonth(cases, 'openDate');
   line('chartFiling',
-    D.mattersByMonth.map(m => m.month),
-    [{ label: filterActive ? 'Filings (all matters)' : 'Filings',
-       data: D.mattersByMonth.map(m => m.count),
+    byMonth.map(m => m.month),
+    [{ label: 'Filings', data: byMonth.map(m => m.count),
        borderColor: '#1E2761', backgroundColor: '#1E276120', fill: true, tension: 0.25 }]);
 
   // Firm Workload (filter-aware — computed from cases)
@@ -718,99 +673,236 @@ function renderTab1() {
 }
 
 function renderTab2() {
-  // Exposure Category — Direct vs Indirect (replaces old Setting + ExType doughnuts)
+  const cases = getFilteredCases();
+  const filterActive = anyFilterActive();
+
+  // KPI tiles (filter-aware)
+  const agrCount = cases.filter(c => c.exposureCategory === 'Agricultural').length;
+  const eyVals = cases.map(c => c.exposureYears).filter(v => v != null);
+  const avgEy = eyVals.length ? eyVals.reduce((a, b) => a + b, 0) / eyVals.length : 0;
+  const ppeCount = cases.filter(c => c.ppeUsed).length;
+  const directN = cases.filter(c => c.exposureType === 'direct').length;
+  const indirectN = cases.filter(c => c.exposureType === 'indirect').length;
+  document.getElementById('kpi-row-2').innerHTML = `
+    <div class="tile"><div class="tile-label">Agricultural</div><div class="tile-value">${agrCount.toLocaleString()}</div><div class="tile-sub">farm setting</div></div>
+    <div class="tile"><div class="tile-label">Avg Duration</div><div class="tile-value">${avgEy.toFixed(1)} yrs</div><div class="tile-sub">per matter${filterActive ? ' (filtered)' : ''}</div></div>
+    <div class="tile"><div class="tile-label">PPE Usage</div><div class="tile-value">${ppeCount}</div><div class="tile-sub">reported PPE use</div></div>
+    <div class="tile"><div class="tile-label">Direct / Indirect</div><div class="tile-value">${directN} / ${indirectN}</div><div class="tile-sub">exposure types</div></div>`;
+
+  // Exposure Category — Direct vs Indirect (per-case)
   const CAT_ORDER = ['Agricultural', 'Occupational / Commercial', 'Residential / Bystander'];
-  const cats = CAT_ORDER.map(cat => ({
-    cat,
-    direct: D.exposureByCategory?.find(e => e.category === cat && e.exposure_type === 'direct')?.count || 0,
-    indirect: D.exposureByCategory?.find(e => e.category === cat && e.exposure_type === 'indirect')?.count || 0,
-  }));
-  stackedBar('chartCategory',
-    cats.map(x => x.cat),
+  stackedBar('chartCategory', CAT_ORDER,
     [
-      { label: 'Direct', data: cats.map(x => x.direct), backgroundColor: '#1E2761' },
-      { label: 'Indirect', data: cats.map(x => x.indirect), backgroundColor: '#C9A227' },
+      { label: 'Direct',   data: CAT_ORDER.map(cat => cases.filter(c => c.exposureCategory === cat && c.exposureType === 'direct').length),   backgroundColor: '#1E2761' },
+      { label: 'Indirect', data: CAT_ORDER.map(cat => cases.filter(c => c.exposureCategory === cat && c.exposureType === 'indirect').length), backgroundColor: '#C9A227' },
     ]);
+
+  // Application Method (per-case)
+  const byMethod = countBy(cases.filter(c => c.applicationMethod), 'applicationMethod');
   bar('chartMethod',
-    D.exposureByMethod.map(m => m.application_method.replace(/_/g, ' ')),
-    [{ label: 'Episodes', data: D.exposureByMethod.map(m => m.count), backgroundColor: '#1E2761' }],
+    byMethod.map(m => m.applicationMethod.replace(/_/g, ' ')),
+    [{ label: 'Matters', data: byMethod.map(m => m.count), backgroundColor: '#1E2761' }],
     { horizontal: true });
-  bar('chartDuration',
-    D.exposureDuration.map(d => d.duration_bucket),
-    [{ label: 'Matters', data: D.exposureDuration.map(d => d.count), backgroundColor: '#4A5E8A' }]);
-  line('chartTimeline',
-    D.exposureTimeline.map(t => t.year),
-    [{ label: 'First exposures', data: D.exposureTimeline.map(t => t.count), borderColor: '#C9A227', backgroundColor: '#C9A22730', fill: true, tension: 0.25 }]);
+
+  // Exposure Duration (per-case exposure years)
+  const durLabels = ['< 5 yrs', '5-10 yrs', '10-20 yrs', '20-30 yrs', '30+ yrs'];
+  const durCounts = [0, 0, 0, 0, 0];
+  cases.forEach(c => {
+    const y = c.exposureYears;
+    if (y == null) return;
+    durCounts[y < 5 ? 0 : y < 10 ? 1 : y < 20 ? 2 : y < 30 ? 3 : 4]++;
+  });
+  bar('chartDuration', durLabels,
+    [{ label: 'Matters', data: durCounts, backgroundColor: '#4A5E8A' }]);
+
+  // First Exposure Year (per-case)
+  const yrMap = {};
+  cases.forEach(c => { if (c.firstExposureYear != null) yrMap[c.firstExposureYear] = (yrMap[c.firstExposureYear] || 0) + 1; });
+  const years = Object.keys(yrMap).sort();
+  line('chartTimeline', years,
+    [{ label: 'First exposures', data: years.map(y => yrMap[y]), borderColor: '#C9A227', backgroundColor: '#C9A22730', fill: true, tension: 0.25 }]);
+
+  // Products Used (counts over per-case product arrays)
+  const prodMap = {};
+  cases.forEach(c => (c.productNames || []).forEach(p => { prodMap[p] = (prodMap[p] || 0) + 1; }));
+  const prods = Object.entries(prodMap).map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count);
   bar('chartProducts',
-    D.products.map(p => p.product_name.length > 24 ? p.product_name.slice(0,22)+'…' : p.product_name),
-    [{ label: 'Matters using', data: D.products.map(p => p.matter_count), backgroundColor: '#1E2761' }],
+    prods.map(p => p.name.length > 24 ? p.name.slice(0, 22) + '…' : p.name),
+    [{ label: 'Matters using', data: prods.map(p => p.count), backgroundColor: '#1E2761' }],
     { horizontal: true });
 }
 
 function renderTab3() {
+  const cases = getFilteredCases();
+
+  // KPI tiles (filter-aware)
+  const dxCases = cases.filter(c => c.primaryDiagnosis);
+  const pdCount = cases.filter(c => c.dxBucket === 'parkinsons_disease').length;
+  const recTotal = cases.reduce((s, c) => s + (c.recordCount || 0), 0);
+  const pinTotal = cases.reduce((s, c) => s + (c.pinFactTables || []).length, 0);
+  const symTotal = cases.reduce((s, c) => s + (c.symptomNames || []).length, 0);
+  document.getElementById('kpi-row-3').innerHTML = `
+    <div class="tile"><div class="tile-label">Diagnoses</div><div class="tile-value">${dxCases.length.toLocaleString()}</div><div class="tile-sub">${dxCases.length ? Math.round(pdCount / dxCases.length * 100) : 0}% Parkinson's</div></div>
+    <div class="tile"><div class="tile-label">Medical Records</div><div class="tile-value">${recTotal.toLocaleString()}</div><div class="tile-sub">chart bundles</div></div>
+    <div class="tile"><div class="tile-label">Record Pins</div><div class="tile-value">${pinTotal.toLocaleString()}</div><div class="tile-sub">facts pinned</div></div>
+    <div class="tile"><div class="tile-label">Symptoms Logged</div><div class="tile-value">${symTotal.toLocaleString()}</div><div class="tile-sub">across selected matters</div></div>`;
+
+  // Diagnosis Distribution (3 buckets, per-case)
+  const DX_ORDER = [['parkinsons_disease', "Parkinson's Disease"], ['parkinsonism_other', 'Parkinsonism (Other)'], ['no_dx', 'Symptoms Only (No Dx)']];
   doughnut('chartDx',
-    D.diagnosisBuckets.map(b => b.label),
-    D.diagnosisBuckets.map(b => b.count),
+    DX_ORDER.map(([, label]) => label),
+    DX_ORDER.map(([key]) => cases.filter(c => c.dxBucket === key).length),
     ['#1E2761', '#4A5E8A', '#94A3B8']);
-  bar('chartDxYear',
-    D.diagnosisByYear.map(y => String(y.year)),
-    [{ label: 'Claimants', data: D.diagnosisByYear.map(y => y.count), backgroundColor: '#C9A227' }]);
+
+  // Most Recent Diagnosis by Year (per-case lastDxDate)
+  const dyMap = {};
+  cases.forEach(c => { if (c.lastDxDate) { const y = String(c.lastDxDate).slice(0, 4); dyMap[y] = (dyMap[y] || 0) + 1; } });
+  const dyYears = Object.keys(dyMap).sort();
+  bar('chartDxYear', dyYears,
+    [{ label: 'Matters', data: dyYears.map(y => dyMap[y]), backgroundColor: '#C9A227' }]);
+
+  // Top Symptoms (counts over per-case symptom arrays)
+  const symMap = {};
+  cases.forEach(c => (c.symptomNames || []).forEach(s => { symMap[s] = (symMap[s] || 0) + 1; }));
+  const syms = Object.entries(symMap).map(([symptom, count]) => ({ symptom, count })).sort((a, b) => b.count - a.count).slice(0, 20);
   bar('chartSymptoms',
-    D.symptomDistribution.map(s => s.symptom),
-    [{ label: 'Cases', data: D.symptomDistribution.map(s => s.count), backgroundColor: '#1E2761' }],
+    syms.map(s => s.symptom),
+    [{ label: 'Cases', data: syms.map(s => s.count), backgroundColor: '#1E2761' }],
     { horizontal: true });
+
+  // Levodopa Response (excluding not_tried / unknown)
+  const LEV_KEYS = ['robust', 'moderate', 'minimal'];
   doughnut('chartLevodopa',
-    D.levodopaResponse.map(r => r.levodopa_response),
-    D.levodopaResponse.map(r => r.count),
-    ['#2C5F2D', '#1E2761', '#B45309', '#B22234']);
-  bar('chartLatency',
-    D.latencyBySetting.map(l => l.setting.replace(/_/g, ' ')),
-    [{ label: 'Avg latency (yrs)', data: D.latencyBySetting.map(l => l.avg_latency_years), backgroundColor: '#C9A227' }]);
-  bar('chartLatencyDist',
-    D.latencyDistribution.map(l => l.latency_bucket),
-    [{ label: 'Matters', data: D.latencyDistribution.map(l => l.count), backgroundColor: '#4A5E8A' }]);
+    LEV_KEYS,
+    LEV_KEYS.map(k => cases.filter(c => c.levodopaResponse === k).length),
+    ['#2C5F2D', '#1E2761', '#B45309']);
+
+  // Avg Latency by Exposure Category (per-case latencyYears)
+  const CAT_ORDER = ['Agricultural', 'Occupational / Commercial', 'Residential / Bystander'];
+  const latByCat = CAT_ORDER.map(cat => {
+    const vals = cases.filter(c => c.exposureCategory === cat && c.latencyYears != null).map(c => c.latencyYears);
+    return vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length * 10) / 10 : 0;
+  });
+  bar('chartLatency', CAT_ORDER,
+    [{ label: 'Avg latency (yrs)', data: latByCat, backgroundColor: '#C9A227' }]);
+
+  // Latency Distribution (per-case latencyYears)
+  const latLabels = ['< 5 yrs', '5-10 yrs', '10-15 yrs', '15-20 yrs', '20-25 yrs', '25-30 yrs', '30+ yrs'];
+  const latCounts = [0, 0, 0, 0, 0, 0, 0];
+  cases.forEach(c => {
+    const l = c.latencyYears;
+    if (l == null) return;
+    latCounts[l < 5 ? 0 : l < 10 ? 1 : l < 15 ? 2 : l < 20 ? 3 : l < 25 ? 4 : l < 30 ? 5 : 6]++;
+  });
+  bar('chartLatencyDist', latLabels,
+    [{ label: 'Matters', data: latCounts, backgroundColor: '#4A5E8A' }]);
 }
 
 function renderTab4() {
-  const eg = D.evidenceGap?.[0] || {};
-  stackedBar('chartReceipts',
-    ['Receipts'],
+  const cases = getFilteredCases();
+
+  const recClaimed = cases.filter(c => c.receiptsClaimed).length;
+  const recVerified = cases.filter(c => c.receiptsVerified).length;
+  const licClaimed = cases.filter(c => c.licenseClaimed).length;
+  const licVerified = cases.filter(c => c.licenseVerified).length;
+  const openCases = cases.filter(c => c.status === 'open');
+  const sent = openCases.filter(c => c.monthlyUpdateSent).length;
+  const settled = cases.filter(c => c.settlementStatus === 'accepted').length;
+
+  // KPI tiles (filter-aware)
+  document.getElementById('kpi-row-4').innerHTML = `
+    <div class="tile"><div class="tile-label">Receipts Claimed</div><div class="tile-value">${recClaimed.toLocaleString()}</div><div class="tile-sub">verified: ${recVerified.toLocaleString()}</div></div>
+    <div class="tile"><div class="tile-label">Licenses Claimed</div><div class="tile-value">${licClaimed.toLocaleString()}</div><div class="tile-sub">verified: ${licVerified.toLocaleString()}</div></div>
+    <div class="tile"><div class="tile-label">Open Update Rate</div><div class="tile-value">${openCases.length ? Math.round(sent / openCases.length * 100) : 0}%</div><div class="tile-sub">monthly client comm</div></div>
+    <div class="tile"><div class="tile-label">Settled Matters</div><div class="tile-value">${settled}</div><div class="tile-sub">of ${cases.length.toLocaleString()} selected</div></div>`;
+
+  // Receipts / Licenses: claimed vs verified (per-case)
+  stackedBar('chartReceipts', ['Receipts'],
     [
-      { label: 'Verified', data: [eg.receipts_verified||0], backgroundColor: '#2C5F2D' },
-      { label: 'Claimed only', data: [(eg.receipts_claimed||0) - (eg.receipts_verified||0)], backgroundColor: '#B45309' },
-      { label: 'Not claimed', data: [D.totalMatters - (eg.receipts_claimed||0)], backgroundColor: '#E5E7EB' },
+      { label: 'Verified',     data: [recVerified],                 backgroundColor: '#2C5F2D' },
+      { label: 'Claimed only', data: [recClaimed - recVerified],    backgroundColor: '#B45309' },
+      { label: 'Not claimed',  data: [cases.length - recClaimed],   backgroundColor: '#E5E7EB' },
     ]);
-  stackedBar('chartLicenses',
-    ['Licenses'],
+  stackedBar('chartLicenses', ['Licenses'],
     [
-      { label: 'Verified', data: [eg.license_verified||0], backgroundColor: '#2C5F2D' },
-      { label: 'Claimed only', data: [(eg.license_claimed||0) - (eg.license_verified||0)], backgroundColor: '#B45309' },
-      { label: 'Not claimed', data: [D.totalMatters - (eg.license_claimed||0)], backgroundColor: '#E5E7EB' },
+      { label: 'Verified',     data: [licVerified],                 backgroundColor: '#2C5F2D' },
+      { label: 'Claimed only', data: [licClaimed - licVerified],    backgroundColor: '#B45309' },
+      { label: 'Not claimed',  data: [cases.length - licClaimed],   backgroundColor: '#E5E7EB' },
     ]);
+
+  // Evidence by Type (counts over per-case evidence items)
+  const evMap = {};
+  cases.forEach(c => (c.evidenceItems || []).forEach(e => {
+    if (!evMap[e.t]) evMap[e.t] = { verified: 0, unverified: 0 };
+    evMap[e.t][e.v ? 'verified' : 'unverified']++;
+  }));
+  const evTypes = Object.entries(evMap)
+    .map(([t, v]) => ({ t, verified: v.verified, unverified: v.unverified, total: v.verified + v.unverified }))
+    .sort((a, b) => b.total - a.total);
   stackedBar('chartEvidenceType',
-    D.evidenceByType.map(e => e.evidence_type.replace(/_/g, ' ')),
+    evTypes.map(e => e.t.replace(/_/g, ' ')),
     [
-      { label: 'Verified', data: D.evidenceByType.map(e => e.verified), backgroundColor: '#2C5F2D' },
-      { label: 'Unverified', data: D.evidenceByType.map(e => e.unverified), backgroundColor: '#B45309' },
+      { label: 'Verified',   data: evTypes.map(e => e.verified),   backgroundColor: '#2C5F2D' },
+      { label: 'Unverified', data: evTypes.map(e => e.unverified), backgroundColor: '#B45309' },
     ]);
+
+  // Pin Coverage (counts over per-case pin fact tables)
+  const pinMap = {};
+  cases.forEach(c => (c.pinFactTables || []).forEach(f => { pinMap[f] = (pinMap[f] || 0) + 1; }));
+  const pins = Object.entries(pinMap).map(([f, count]) => ({ f, count })).sort((a, b) => b.count - a.count);
   bar('chartPinCoverage',
-    D.pinCoverage.map(p => p.fact_table.replace(/_/g,' ')),
-    [{ label: 'Pins', data: D.pinCoverage.map(p => p.count), backgroundColor: '#C9A227' }],
+    pins.map(p => p.f.replace(/_/g, ' ')),
+    [{ label: 'Pins', data: pins.map(p => p.count), backgroundColor: '#C9A227' }],
     { horizontal: true });
+
+  // Settlement Pipeline (per-case settlement status)
+  const stMap = {};
+  cases.forEach(c => { const s = c.settlementStatus || 'none'; stMap[s] = (stMap[s] || 0) + 1; });
+  const sts = Object.entries(stMap).map(([s, count]) => ({ s, count })).sort((a, b) => b.count - a.count);
   bar('chartSettlement',
-    D.settlementStatus.map(s => s.settlement_status),
-    [{ label: 'Matters', data: D.settlementStatus.map(s => s.count), backgroundColor: '#1E2761' }]);
-  const mc = D.monthlyUpdateCompliance?.[0] || {};
-  stackedBar('chartCompliance',
-    ['Open matters'],
+    sts.map(x => x.s),
+    [{ label: 'Matters', data: sts.map(x => x.count), backgroundColor: '#1E2761' }]);
+
+  // Monthly Update Compliance (open matters in selection)
+  stackedBar('chartCompliance', ['Open matters'],
     [
-      { label: 'Sent', data: [mc.sent||0], backgroundColor: '#2C5F2D' },
-      { label: 'Not sent', data: [mc.not_sent||0], backgroundColor: '#B22234' },
+      { label: 'Sent',     data: [sent],                    backgroundColor: '#2C5F2D' },
+      { label: 'Not sent', data: [openCases.length - sent], backgroundColor: '#B22234' },
     ]);
 }
 
 function renderTab5() {
   const scored = scoreAllCases();
+
+  // Avg accepted settlement per tier, computed from the filtered set
+  const avgByTier = {};
+  [1, 2, 3, 4].forEach(t => {
+    const amts = scored.filter(c => c.tier === t && c.settlementStatus === 'accepted' && c.settlementAmount != null)
+                       .map(c => c.settlementAmount);
+    if (amts.length) avgByTier[t] = amts.reduce((a, b) => a + b, 0) / amts.length;
+  });
+
+  // KPI tiles (filter-aware)
+  const tierCountsKpi = [1,2,3,4].map(t => scored.filter(c => c.tier === t).length);
+  const avgScore = scored.length ? (scored.reduce((s, c) => s + c.score, 0) / scored.length).toFixed(1) : '0.0';
+  const portfolio = scored.filter(c => c.settlementStatus === 'accepted' && c.settlementAmount != null)
+                          .reduce((s, c) => s + c.settlementAmount, 0);
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const in90 = new Date(now.getTime() + 90 * 86400000);
+  const solCount = scored.filter(c => {
+    if (c.status !== 'open' || !c.statuteOfLimitations) return false;
+    const d = new Date(c.statuteOfLimitations);
+    return d >= now && d <= in90;
+  }).length;
+  const tierSub = t => `${tierRecoveryRange(t).label} · avg ${avgByTier[t] != null ? fmtMoney(avgByTier[t]) : '—'}`;
+  document.getElementById('kpi-row-5').innerHTML = `
+    <div class="tile tier-tile tier-1"><div class="tile-label">Tier 1</div><div class="tile-value">${tierCountsKpi[0]}</div><div class="tile-sub">${tierSub(1)}</div></div>
+    <div class="tile tier-tile tier-2"><div class="tile-label">Tier 2</div><div class="tile-value">${tierCountsKpi[1]}</div><div class="tile-sub">${tierSub(2)}</div></div>
+    <div class="tile tier-tile tier-3"><div class="tile-label">Tier 3</div><div class="tile-value">${tierCountsKpi[2]}</div><div class="tile-sub">${tierSub(3)}</div></div>
+    <div class="tile tier-tile tier-4"><div class="tile-label">Tier 4</div><div class="tile-value">${tierCountsKpi[3]}</div><div class="tile-sub">${tierSub(4)}</div></div>
+    <div class="tile"><div class="tile-label">Portfolio Value</div><div class="tile-value">${fmtMoney(portfolio)}</div><div class="tile-sub">accepted settlements</div></div>
+    <div class="tile"><div class="tile-label">SOL &lt; 90 Days</div><div class="tile-value">${solCount.toLocaleString()}</div><div class="tile-sub">open matters at risk</div></div>
+    <div class="tile"><div class="tile-label">Avg Score</div><div class="tile-value">${avgScore}</div><div class="tile-sub">across ${scored.length} matters</div></div>`;
 
   // Tier distribution
   const tierCounts = [1,2,3,4].map(t => scored.filter(c => c.tier === t).length);
@@ -859,8 +951,7 @@ function renderTab5() {
     avgBySetting.map(a => a.setting.replace(/_/g,' ')),
     [{ label: 'Avg score', data: avgBySetting.map(a => a.avg), backgroundColor: '#C9A227' }]);
 
-  // Recovery by tier — actual avg settlement where available, else range midpoint
-  const avgByTier = avgSettlementMap();
+  // Recovery by tier — actual avg settlement (filtered) where available, else range midpoint
   const recoveryVals = [1, 2, 3, 4].map(t => {
     if (avgByTier[t] != null) return avgByTier[t];
     const r = tierRecoveryRange(t);
@@ -1014,7 +1105,6 @@ document.querySelectorAll('.tab').forEach(tab => {
 // ====================================================================
 
 updateCounts();
-renderKPIs();
 renderTab1();
 initFilters();
 
