@@ -138,13 +138,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <select id="filterDiagnosis">
       <option value="all">All Diagnoses</option>
       <option value="parkinsons_disease">Parkinson's Disease</option>
-      <option value="parkinsonism_unspecified">Parkinsonism (Unspec)</option>
-      <option value="multiple_system_atrophy">MSA</option>
-      <option value="progressive_supranuclear_palsy">PSP</option>
-      <option value="corticobasal_degeneration">CBD</option>
-      <option value="drug_induced_parkinsonism">Drug-Induced</option>
-      <option value="vascular_parkinsonism">Vascular</option>
-      <option value="dementia_with_lewy_bodies">DLB</option>
+      <option value="parkinsonism_other">Parkinsonism (Other)</option>
+      <option value="no_dx">Symptoms Only (No Dx)</option>
     </select>
   </div>
 
@@ -210,8 +205,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <div class="tab-content" id="t2">
       <div class="kpi-row" id="kpi-row-2"></div>
       <div class="chart-grid">
-        <div class="chart-card"><h3>Exposure by Setting</h3><canvas id="chartSetting"></canvas></div>
-        <div class="chart-card"><h3>Direct vs Indirect Exposure</h3><canvas id="chartExType"></canvas></div>
+        <div class="chart-card"><h3>Exposure Category — Direct vs Indirect</h3><canvas id="chartCategory"></canvas></div>
         <div class="chart-card"><h3>Application Method</h3><canvas id="chartMethod"></canvas></div>
         <div class="chart-card"><h3>Exposure Duration</h3><canvas id="chartDuration"></canvas></div>
         <div class="chart-card"><h3>First Exposure Year</h3><canvas id="chartTimeline"></canvas></div>
@@ -224,7 +218,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
       <div class="kpi-row" id="kpi-row-3"></div>
       <div class="chart-grid">
         <div class="chart-card"><h3>Diagnosis Distribution</h3><canvas id="chartDx"></canvas></div>
-        <div class="chart-card"><h3>Diagnosis Certainty</h3><canvas id="chartCertainty"></canvas></div>
+        <div class="chart-card"><h3>Most Recent Diagnosis by Year</h3><canvas id="chartDxYear"></canvas></div>
         <div class="chart-card"><h3>Top Symptoms</h3><canvas id="chartSymptoms"></canvas></div>
         <div class="chart-card"><h3>Levodopa Response</h3><canvas id="chartLevodopa"></canvas></div>
         <div class="chart-card"><h3>Latency by Setting</h3><canvas id="chartLatency"></canvas></div>
@@ -334,7 +328,7 @@ function getFilteredCases() {
   return D.cases.filter(c => {
     if (state.status !== 'all' && c.status !== state.status) return false;
     if (state.type !== 'all' && c.matter_type !== state.type) return false;
-    if (state.diagnosis !== 'all' && c.primary_diagnosis !== state.diagnosis) return false;
+    if (state.diagnosis !== 'all' && c.dxBucket !== state.diagnosis) return false;
     if (state.tier !== 'all' && c.tier !== parseInt(state.tier)) return false;
     return true;
   });
@@ -520,6 +514,19 @@ function tierRecoveryRange(tier) {
   })[tier];
 }
 
+function fmtMoney(v) {
+  if (v == null || isNaN(v)) return '—';
+  if (v >= 1e6) return '$' + (v / 1e6).toFixed(2) + 'M';
+  if (v >= 1e3) return '$' + Math.round(v / 1e3) + 'K';
+  return '$' + Math.round(v);
+}
+
+function avgSettlementMap() {
+  const m = {};
+  (D.avgSettlementByTier || []).forEach(a => { if (a.avg != null) m[a.tier] = a.avg; });
+  return m;
+}
+
 // ====================================================================
 // CHART HELPERS
 // ====================================================================
@@ -646,12 +653,19 @@ function renderKPIs() {
   const scored = scoreAllCases();
   const tierCounts = [1,2,3,4].map(t => scored.filter(c => c.tier === t).length);
   const avgScore = scored.length ? (scored.reduce((s,c) => s + c.score, 0) / scored.length).toFixed(1) : '0.0';
+  const avgByTier = avgSettlementMap();
+  const tierSub = t => {
+    const avg = avgByTier[t];
+    return `${tierRecoveryRange(t).label} · avg ${avg != null ? fmtMoney(avg) : '—'}`;
+  };
   const kpi5 = document.getElementById('kpi-row-5');
   kpi5.innerHTML = `
-    <div class="tile tier-tile tier-1"><div class="tile-label">Tier 1</div><div class="tile-value">${tierCounts[0]}</div><div class="tile-sub">$500K - $2M+ expected</div></div>
-    <div class="tile tier-tile tier-2"><div class="tile-label">Tier 2</div><div class="tile-value">${tierCounts[1]}</div><div class="tile-sub">$100K - $500K</div></div>
-    <div class="tile tier-tile tier-3"><div class="tile-label">Tier 3</div><div class="tile-value">${tierCounts[2]}</div><div class="tile-sub">$25K - $100K</div></div>
-    <div class="tile tier-tile tier-4"><div class="tile-label">Tier 4</div><div class="tile-value">${tierCounts[3]}</div><div class="tile-sub"><$25K / non-viable</div></div>
+    <div class="tile tier-tile tier-1"><div class="tile-label">Tier 1</div><div class="tile-value">${tierCounts[0]}</div><div class="tile-sub">${tierSub(1)}</div></div>
+    <div class="tile tier-tile tier-2"><div class="tile-label">Tier 2</div><div class="tile-value">${tierCounts[1]}</div><div class="tile-sub">${tierSub(2)}</div></div>
+    <div class="tile tier-tile tier-3"><div class="tile-label">Tier 3</div><div class="tile-value">${tierCounts[2]}</div><div class="tile-sub">${tierSub(3)}</div></div>
+    <div class="tile tier-tile tier-4"><div class="tile-label">Tier 4</div><div class="tile-value">${tierCounts[3]}</div><div class="tile-sub">${tierSub(4)}</div></div>
+    <div class="tile"><div class="tile-label">Portfolio Value</div><div class="tile-value">${fmtMoney(D.portfolioValue)}</div><div class="tile-sub">accepted settlements</div></div>
+    <div class="tile"><div class="tile-label">SOL &lt; 90 Days</div><div class="tile-value">${(D.solNext90Days ?? 0).toLocaleString()}</div><div class="tile-sub">open matters at risk</div></div>
     <div class="tile"><div class="tile-label">Avg Score</div><div class="tile-value">${avgScore}</div><div class="tile-sub">across ${scored.length} matters</div></div>`;
 }
 
@@ -704,8 +718,19 @@ function renderTab1() {
 }
 
 function renderTab2() {
-  doughnut('chartSetting', D.exposureBySetting.map(s => s.setting.replace(/_/g,' ')), D.exposureBySetting.map(s => s.count));
-  doughnut('chartExType', D.exposureByType.map(t => t.exposure_type), D.exposureByType.map(t => t.count), ['#1E2761', '#C9A227']);
+  // Exposure Category — Direct vs Indirect (replaces old Setting + ExType doughnuts)
+  const CAT_ORDER = ['Agricultural', 'Occupational / Commercial', 'Residential / Bystander'];
+  const cats = CAT_ORDER.map(cat => ({
+    cat,
+    direct: D.exposureByCategory?.find(e => e.category === cat && e.exposure_type === 'direct')?.count || 0,
+    indirect: D.exposureByCategory?.find(e => e.category === cat && e.exposure_type === 'indirect')?.count || 0,
+  }));
+  stackedBar('chartCategory',
+    cats.map(x => x.cat),
+    [
+      { label: 'Direct', data: cats.map(x => x.direct), backgroundColor: '#1E2761' },
+      { label: 'Indirect', data: cats.map(x => x.indirect), backgroundColor: '#C9A227' },
+    ]);
   bar('chartMethod',
     D.exposureByMethod.map(m => m.application_method.replace(/_/g, ' ')),
     [{ label: 'Episodes', data: D.exposureByMethod.map(m => m.count), backgroundColor: '#1E2761' }],
@@ -724,12 +749,12 @@ function renderTab2() {
 
 function renderTab3() {
   doughnut('chartDx',
-    D.diagnosisDistribution.map(d => d.condition.replace(/_/g, ' ')),
-    D.diagnosisDistribution.map(d => d.count));
-  doughnut('chartCertainty',
-    D.diagnosisCertainty.map(c => c.certainty),
-    D.diagnosisCertainty.map(c => c.count),
-    ['#2C5F2D', '#1E2761', '#B45309']);
+    D.diagnosisBuckets.map(b => b.label),
+    D.diagnosisBuckets.map(b => b.count),
+    ['#1E2761', '#4A5E8A', '#94A3B8']);
+  bar('chartDxYear',
+    D.diagnosisByYear.map(y => String(y.year)),
+    [{ label: 'Claimants', data: D.diagnosisByYear.map(y => y.count), backgroundColor: '#C9A227' }]);
   bar('chartSymptoms',
     D.symptomDistribution.map(s => s.symptom),
     [{ label: 'Cases', data: D.symptomDistribution.map(s => s.count), backgroundColor: '#1E2761' }],
@@ -834,14 +859,18 @@ function renderTab5() {
     avgBySetting.map(a => a.setting.replace(/_/g,' ')),
     [{ label: 'Avg score', data: avgBySetting.map(a => a.avg), backgroundColor: '#C9A227' }]);
 
-  // Recovery by tier
-  const recoveryMidpoints = [1, 2, 3, 4].map(t => {
+  // Recovery by tier — actual avg settlement where available, else range midpoint
+  const avgByTier = avgSettlementMap();
+  const recoveryVals = [1, 2, 3, 4].map(t => {
+    if (avgByTier[t] != null) return avgByTier[t];
     const r = tierRecoveryRange(t);
     return (r.low + r.high) / 2;
   });
+  const usingActual = [1,2,3,4].some(t => avgByTier[t] != null);
   bar('chartRecoveryByTier',
     ['Tier 1', 'Tier 2', 'Tier 3', 'Tier 4'],
-    [{ label: 'Expected mid-range ($)', data: recoveryMidpoints, backgroundColor: TIER_COLORS }]);
+    [{ label: usingActual ? 'Avg settlement ($, actual)' : 'Expected mid-range ($)',
+       data: recoveryVals, backgroundColor: TIER_COLORS }]);
 
   // Top 25 table
   const top = scored.sort((a,b) => b.score - a.score).slice(0, 25);
