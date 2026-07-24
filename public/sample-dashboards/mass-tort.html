@@ -127,6 +127,35 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .src-list li{margin-bottom:4px;break-inside:avoid}
 .src-list a{color:var(--navy)}
 .exec-foot{font-size:11px;color:var(--slate-lite);font-style:italic;margin-top:6px;border-top:1px solid var(--border);padding-top:10px}
+
+/* Tier Panel (Executive Summary) — front-and-center on t0 for PE audience */
+.tier-total-strip{display:flex;gap:24px;flex-wrap:wrap;padding:10px 14px;background:var(--mist);border-radius:4px;margin-bottom:14px;font-size:12.5px;color:var(--slate)}
+.tier-total-strip b{color:var(--navy);font-variant-numeric:tabular-nums}
+.tier-uplift-total b{color:var(--gold);font-size:14px}
+.tier-row{display:grid;grid-template-columns:1fr;gap:8px;padding:14px 0;border-bottom:1px solid var(--border)}
+.tier-row:last-child{border-bottom:none}
+.tier-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tier-head .tier-pill{font-size:11px;padding:3px 10px}
+.tier-name{font-size:13px;font-weight:700;color:var(--navy);flex:1;min-width:200px}
+.tier-range-inputs{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.tier-range-inputs input{width:90px;padding:4px 6px;border:1px solid var(--border);border-radius:2px;font-family:inherit;font-size:12px;font-weight:700;color:var(--navy);text-align:right;background:var(--white)}
+.tier-range-inputs input:focus{outline:none;border-color:var(--gold);background:var(--mist)}
+.tier-stats{display:flex;gap:24px;flex-wrap:wrap;font-size:12.5px;color:var(--slate);padding:4px 0}
+.tier-stats b{color:var(--navy);font-variant-numeric:tabular-nums}
+.tier-stat-num{font-size:14px;font-weight:700}
+.tier-criteria{margin:0 0 0 18px;padding:0;font-size:11.5px;color:var(--slate);line-height:1.6}
+.tier-criteria li{margin-bottom:2px}
+.tier-wins{background:linear-gradient(90deg,var(--gold) 0%,transparent 80%);padding:8px 12px;border-left:3px solid var(--gold);border-radius:2px;font-size:12.5px;font-weight:700;color:var(--navy-ink);margin-top:4px}
+.tier-wins.empty{color:var(--slate-lite);font-style:italic;font-weight:400;background:transparent;border-left:3px solid var(--border)}
+.tier-foot{font-size:10.5px;color:var(--slate-lite);font-style:italic;margin-top:12px}
+
+/* Pain Rulings (Executive Summary) */
+.pain-card{display:grid;grid-template-columns:90px 1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:baseline}
+.pain-card:last-child{border-bottom:none}
+.pain-date{font-weight:700;color:var(--red);font-size:11px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pain-body{font-size:12.5px;color:var(--navy-ink)}
+.pain-body b{color:var(--navy)}
+.pain-impact{font-size:9.5px;font-weight:700;color:var(--white);background:var(--red);padding:3px 8px;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -226,24 +255,22 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
         <p style="margin:0"><span class="exec-stamp">As of 2026-07-23 &middot; docket facts from public sources; portfolio figures are synthetic demo data</span></p>
       </div>
 
-      <div class="exec-grid">
-        <div class="exec-card">
-          <h3>Docket State — MDL 3004 (S.D. Ill.)</h3>
-          <p><b>~6,665 pending federal actions</b> (Jul 2026) <span class="exec-flag">reported · second-hand</span><br/>
-          <span style="font-size:11.5px;color:var(--slate)">Trend: 6,470 (Dec 2025) → 6,542 (Apr 2026) → 6,580 (May–Jun 2026) → 6,665 (Jul 2026); 8,257 total ever filed as of 2026-01-16. Parallel Philadelphia CCP docket: <b>1,952 pending</b> (Jul 2026).</span></p>
-          <p style="margin-bottom:6px"><b>Posture: settlement administration phase</b></p>
-          <ul class="watch-list">
-            <li>Master Settlement Agreement signed <b>2025-08-04</b> — terms confidential, amount not public; covers MDL + California state cases.</li>
-            <li>Qualified settlement fund approved <b>Mar 2026</b>; lien administrator appointed <b>Feb 2026</b>.</li>
-            <li>Bellwether track vacated/stayed — Oct 2025 MDL trial vacated 2025-09-29 (Doc. 5719); current activity is settlement administration + noncompliance dismissals (27 member cases dismissed 2026-06-10, CMO-10), not trials.</li>
-            <li>Syngenta filed a preemption MSJ <b>Feb 2026</b> and is ending global paraquat production by end of June 2026.</li>
-          </ul>
+      <!-- Tier Panel — front and center for PE audience -->
+      <div class="exec-card">
+        <h3>Docket Value by Tier — <span style="font-weight:400;color:var(--slate-lite);text-transform:none;letter-spacing:0">ranges are editable; numbers recompute live</span></h3>
+        <div class="tier-total-strip">
+          <span><b id="totalOpenCount">0</b> open · <b id="totalClosedCount">0</b> closed</span>
+          <span>Total value at risk: <b id="totalValueAtRisk">$0</b></span>
+          <span class="tier-uplift-total">Incremental value on the table: <b id="totalUplift">$0</b></span>
         </div>
+        <div id="tierPanel"></div>
+        <div class="tier-foot">Tier criteria are the researched framework (Verus LLC, NYU bellwether paper, DOJ Camp Lejeune grid). Defaults are illustrative — adjust the per-tier ranges to match your MSA framework.</div>
+      </div>
 
-        <div class="exec-card">
-          <h3>Portfolio Snapshot (This Book)</h3>
-          <div class="kpi-row" id="execPortfolio" style="margin-bottom:0"></div>
-        </div>
+      <!-- Pain Rulings — what's hurting the docket -->
+      <div class="exec-card">
+        <h3>Recent Pain Rulings — What's Hurting the Docket</h3>
+        <div id="painRulings"></div>
       </div>
 
       <div class="exec-card">
@@ -425,6 +452,71 @@ let charts = {};
 const TIER_COLORS = ['#C9A227', '#4A5E8A', '#B45309', '#B22234'];
 const TIER_NAMES = {1: 'Tier 1', 2: 'Tier 2', 3: 'Tier 3', 4: 'Tier 4'};
 
+// Tier definitions — criteria-based, not score-band-based.
+// A case passes tier T iff it satisfies every check in TIER_DEFS[T].checks.
+// Tier 4 = "fails tier 3" (no checks; failure to meet T3 criteria).
+// Researched framework: Verus LLC valuation, NYU bellwether paper,
+// DOJ Camp Lejeune settlement grid (see briefs/pe-dashboard-iteration.md).
+const TIER_DEFS = {
+  1: { name: 'Confirmed PD + Verified Evidence',
+       checks: [
+         { key: 'parkinsons_disease', test: c => c.primaryDiagnosis === 'parkinsons_disease',
+           label: "Parkinson's Disease diagnosis" },
+         { key: 'verified_evidence', test: c => c.receiptsVerified || c.licenseVerified,
+           label: 'Verified license or receipts' },
+         { key: '10yr_exposure', test: c => c.exposureYears != null && c.exposureYears >= 10,
+           label: '≥10 years exposure' },
+         { key: '2_records', test: c => c.recordCount >= 2,
+           label: '≥2 medical records' },
+         { key: 'levodopa', test: c => c.levodopaResponse === 'robust' || c.levodopaResponse === 'moderate',
+           label: 'Levodopa response (robust/moderate)' },
+       ]},
+  2: { name: 'Probable PD + Documented Exposure',
+       checks: [
+         { key: 'any_pd_dx', test: c => c.dxBucket !== 'no_dx',
+           label: 'Any PD-spectrum diagnosis (incl. parkinsonism)' },
+         { key: 'documented_exposure', test: c => c.receiptsClaimed || c.licenseClaimed || c.receiptsVerified || c.licenseVerified,
+           label: 'Documented exposure (claimed or verified)' },
+         { key: '5yr_exposure', test: c => c.exposureYears != null && c.exposureYears >= 5,
+           label: '≥5 years exposure' },
+         { key: '1_record', test: c => c.recordCount >= 1,
+           label: '≥1 medical record' },
+       ]},
+  3: { name: 'Symptoms Only / Partial Evidence',
+       checks: [
+         { key: 'has_symptoms', test: c => (c.symptomNames || []).length > 0,
+           label: 'Symptoms logged' },
+         { key: 'some_exposure', test: c => c.receiptsClaimed || c.licenseClaimed || c.receiptsVerified || c.licenseVerified,
+           label: 'Some exposure evidence' },
+         { key: 'non_trivial', test: c => c.exposureYears == null || c.exposureYears >= 1,
+           label: 'At least 1 year exposure (or unknown)' },
+       ]},
+  4: { name: 'Marginal / Below Threshold', checks: [] },
+};
+
+// Assign a case to a tier by criteria pass-through. Returns 1..4.
+function caseTier(c) {
+  for (const t of [1, 2, 3]) {
+    if (TIER_DEFS[t].checks.every(chk => chk.test(c))) return t;
+  }
+  return 4;
+}
+
+// Labels of checks a case fails for a given tier.
+function missingFromTier(c, tier) {
+  return TIER_DEFS[tier].checks.filter(chk => !chk.test(c)).map(chk => chk.label);
+}
+
+// A "win" candidate is a case currently in tier N that is exactly one
+// criterion short of tier N-1. Returns { qualifies, missing[] }.
+// (For tier 4 wins, the target is tier 3; for tier 1 there are no wins.)
+function winCandidates(c, fromTier) {
+  const target = fromTier - 1;
+  if (target < 1) return { qualifies: false, missing: [] };
+  const missing = missingFromTier(c, target);
+  return { qualifies: missing.length === 1, missing };
+}
+
 // ====================================================================
 // FILTER STATE
 // ====================================================================
@@ -436,11 +528,17 @@ const state = { status: 'all', type: 'all', diagnosis: 'all', tier: 'all', cross
 
 // Cross-filter dimensions (PBI-style): chart clicks set these; they AND with
 // the sidebar dropdown filters above. Dims: statusBucket, dxBucket, tier,
-// exposureCategory, applicationMethod, closeReason, firm, levodopaResponse.
+// exposureCategory, applicationMethod, closeReason, firm, levodopaResponse,
+// intakeYear, durationBucket, productName, diagnosisYear, symptomName,
+// latencyBucket, evidenceType, factTable, settlementStatus.
 const CROSS_LABELS = {
   statusBucket: 'Status', dxBucket: 'Diagnosis', tier: 'Tier',
   exposureCategory: 'Category', applicationMethod: 'Method',
   closeReason: 'Close Reason', firm: 'Firm', levodopaResponse: 'Levodopa',
+  intakeYear: 'Intake Year', durationBucket: 'Exposure Duration',
+  productName: 'Product', diagnosisYear: 'Dx Year', symptomName: 'Symptom',
+  latencyBucket: 'Latency', evidenceType: 'Evidence Type', factTable: 'Fact Table',
+  settlementStatus: 'Settlement',
 };
 
 // Close-reason enum → display label (shared by chartCloseReasons and chips)
@@ -462,6 +560,7 @@ function crossDisplayValue(dim, v) {
   if (dim === 'applicationMethod') return v.replace(/_/g, ' ');
   if (dim === 'closeReason') { const f = CLOSE_REASON_ORDER.find(([k]) => k === v); return f ? f[1] : v; }
   if (dim === 'firm') return v.length > 24 ? v.slice(0, 22) + '…' : v;
+  if (dim === 'evidenceType') return v.replace(/_/g, ' ');
   return String(v);
 }
 
@@ -577,6 +676,16 @@ function getFilteredCases() {
     if (cross.closeReason && c.closeReason !== cross.closeReason) return false;
     if (cross.firm && c.firm !== cross.firm) return false;
     if (cross.levodopaResponse && c.levodopaResponse !== cross.levodopaResponse) return false;
+    // Derived / array-member cross-filters (per (b) scope)
+    if (cross.intakeYear) { const d = c.intakeDate || c.openDate; if (!d || String(d).slice(0, 4) !== String(cross.intakeYear)) return false; }
+    if (cross.durationBucket) { const y = c.exposureYears; const b = y == null ? null : (y < 5 ? '< 5 yrs' : y < 10 ? '5-10 yrs' : y < 20 ? '10-20 yrs' : y < 30 ? '20-30 yrs' : '30+ yrs'); if (b !== cross.durationBucket) return false; }
+    if (cross.productName && !(c.productNames || []).includes(cross.productName)) return false;
+    if (cross.diagnosisYear) { const d = c.lastDxDate; if (!d || String(d).slice(0, 4) !== String(cross.diagnosisYear)) return false; }
+    if (cross.symptomName && !(c.symptomNames || []).includes(cross.symptomName)) return false;
+    if (cross.latencyBucket) { const l = c.latencyYears; const b = l == null ? null : (l < 5 ? '< 5 yrs' : l < 10 ? '5-10 yrs' : l < 15 ? '10-15 yrs' : l < 20 ? '15-20 yrs' : l < 25 ? '20-25 yrs' : l < 30 ? '25-30 yrs' : '30+ yrs'); if (b !== cross.latencyBucket) return false; }
+    if (cross.evidenceType && !(c.evidenceItems || []).some(e => e.t === cross.evidenceType)) return false;
+    if (cross.factTable && !(c.pinFactTables || []).includes(cross.factTable)) return false;
+    if (cross.settlementStatus && (c.settlementStatus || 'none') !== cross.settlementStatus) return false;
     return true;
   });
 }
@@ -677,8 +786,9 @@ function updateCounts() {
 // ====================================================================
 
 function scoreCase(c) {
-  // Weights: diagnosis 30, exposure 20, evidence 15, records 10,
-  //          latency 10, symptoms 10, levodopa 5
+  // Continuous score (0–10) used by chartScoreHist / chartScoreBySetting /
+  // chartRecoveryByTier. Tier assignment is delegated to caseTier() (criteria-
+  // based, not score-band-based) so the tier definition lives in one place.
   const W = {Dx:30, Exp:20, Ev:15, Rec:10, Lat:10, Sym:10, Lev:5};
 
   // 1. Diagnosis certainty (0-10)
@@ -738,12 +848,7 @@ function scoreCase(c) {
                lat*W.Lat + sym*W.Sym + lev*W.Lev) / 100;
   const score = Math.round(raw * 10) / 10; // 0-10 scale
 
-  let tier = 4;
-  if (raw >= 8) tier = 1;
-  else if (raw >= 6) tier = 2;
-  else if (raw >= 4) tier = 3;
-
-  return { score, tier, rawScore: raw };
+  return { score, tier: caseTier(c), rawScore: raw };
 }
 
 function scoreAllCases() {
@@ -752,15 +857,31 @@ function scoreAllCases() {
   return getFilteredCases().map(c => ({ ...c, ...scoreCase(c) }));
 }
 
+// Editable per-tier dollar ranges (in-memory only; defaults are illustrative).
+// tierMid(t) gives the headline per-case value used by Expected Value / Value
+// at Risk / Wins uplift. Investor edits one input → every derived figure live.
+const tierDollars = {
+  1: { low: 50000,   high: 1000000 },
+  2: { low: 25000,   high: 500000  },
+  3: { low: 10000,   high: 150000  },
+  4: { low: 1000,    high: 50000   },
+};
+function tierMid(t)         { return (tierDollars[t].low + tierDollars[t].high) / 2; }
+function tierRangeLabel(t)  { return `$${fmtNumber(tierDollars[t].low)} – $${fmtNumber(tierDollars[t].high)}`; }
+
+// Kept for backwards compatibility with renderTab5 / renderExecSummary call sites
+// that previously read range.low / range.high. New code should use tierDollars +
+// tierMid() directly.
 function tierRecoveryRange(tier) {
-  return ({
-    1: { low: 500000, high: 2000000, label: '$500K - $2M' },
-    2: { low: 100000, high: 500000,  label: '$100K - $500K' },
-    3: { low: 25000,  high: 100000,  label: '$25K - $100K' },
-    4: { low: 0,      high: 25000,   label: '<$25K' },
-  })[tier];
+  return { low: tierDollars[tier].low, high: tierDollars[tier].high, label: tierRangeLabel(tier) };
 }
 
+function fmtNumber(v) {
+  if (v == null || isNaN(v)) return '—';
+  if (v >= 1e6) return (v / 1e6).toFixed(2) + 'M';
+  if (v >= 1e3) return Math.round(v / 1e3) + 'K';
+  return Math.round(v).toLocaleString();
+}
 function fmtMoney(v) {
   if (v == null || isNaN(v)) return '—';
   if (v >= 1e6) return '$' + (v / 1e6).toFixed(2) + 'M';
@@ -897,9 +1018,10 @@ function renderTab1() {
   });
   const acqYears = Object.keys(acq).sort();
   bar('chartAcq', acqYears,
-    [{ label: 'Matters', data: acqYears.map(y => acq[y]), backgroundColor: '#1E2761' }],
+    [{ label: 'Matters', data: acqYears.map(y => acq[y]), backgroundColor: xfade(acqYears, '#1E2761', state.cross.intakeYear) }],
     { datalabels: { display: true, anchor: 'end', align: 'top', color: '#1E2761',
                     font: { weight: 700 }, formatter: v => v } });
+  attachCrossFilter('chartAcq', 'intakeYear', acqYears);
 
   // Filing Timeline (filter-aware, by open month)
   const byMonth = groupByMonth(cases, 'openDate');
@@ -967,7 +1089,8 @@ function renderTab2() {
     durCounts[y < 5 ? 0 : y < 10 ? 1 : y < 20 ? 2 : y < 30 ? 3 : 4]++;
   });
   bar('chartDuration', durLabels,
-    [{ label: 'Matters', data: durCounts, backgroundColor: '#4A5E8A' }]);
+    [{ label: 'Matters', data: durCounts, backgroundColor: xfade(durLabels, '#4A5E8A', state.cross.durationBucket) }]);
+  attachCrossFilter('chartDuration', 'durationBucket', durLabels);
 
   // First Exposure Year (per-case)
   const yrMap = {};
@@ -980,10 +1103,13 @@ function renderTab2() {
   const prodMap = {};
   cases.forEach(c => (c.productNames || []).forEach(p => { prodMap[p] = (prodMap[p] || 0) + 1; }));
   const prods = Object.entries(prodMap).map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count);
+  const productNames = prods.map(p => p.name);
   bar('chartProducts',
     prods.map(p => p.name.length > 24 ? p.name.slice(0, 22) + '…' : p.name),
-    [{ label: 'Matters using', data: prods.map(p => p.count), backgroundColor: '#1E2761' }],
+    [{ label: 'Matters using', data: prods.map(p => p.count),
+       backgroundColor: xfade(productNames, '#1E2761', state.cross.productName) }],
     { horizontal: true });
+  attachCrossFilter('chartProducts', 'productName', productNames);
 }
 
 function renderTab3() {
@@ -1015,16 +1141,21 @@ function renderTab3() {
   cases.forEach(c => { if (c.lastDxDate) { const y = String(c.lastDxDate).slice(0, 4); dyMap[y] = (dyMap[y] || 0) + 1; } });
   const dyYears = Object.keys(dyMap).sort();
   bar('chartDxYear', dyYears,
-    [{ label: 'Matters', data: dyYears.map(y => dyMap[y]), backgroundColor: '#C9A227' }]);
+    [{ label: 'Matters', data: dyYears.map(y => dyMap[y]),
+       backgroundColor: xfade(dyYears, '#C9A227', state.cross.diagnosisYear) }]);
+  attachCrossFilter('chartDxYear', 'diagnosisYear', dyYears);
 
   // Top Symptoms (counts over per-case symptom arrays)
   const symMap = {};
   cases.forEach(c => (c.symptomNames || []).forEach(s => { symMap[s] = (symMap[s] || 0) + 1; }));
   const syms = Object.entries(symMap).map(([symptom, count]) => ({ symptom, count })).sort((a, b) => b.count - a.count).slice(0, 20);
+  const symptomNames = syms.map(s => s.symptom);
   bar('chartSymptoms',
     syms.map(s => s.symptom),
-    [{ label: 'Cases', data: syms.map(s => s.count), backgroundColor: '#1E2761' }],
+    [{ label: 'Cases', data: syms.map(s => s.count),
+       backgroundColor: xfade(symptomNames, '#1E2761', state.cross.symptomName) }],
     { horizontal: true });
+  attachCrossFilter('chartSymptoms', 'symptomName', symptomNames);
 
   // Levodopa Response (excluding not_tried / unknown)
   const LEV_KEYS = ['robust', 'moderate', 'minimal'];
@@ -1052,7 +1183,9 @@ function renderTab3() {
     latCounts[l < 5 ? 0 : l < 10 ? 1 : l < 15 ? 2 : l < 20 ? 3 : l < 25 ? 4 : l < 30 ? 5 : 6]++;
   });
   bar('chartLatencyDist', latLabels,
-    [{ label: 'Matters', data: latCounts, backgroundColor: '#4A5E8A' }]);
+    [{ label: 'Matters', data: latCounts, backgroundColor: xfade(latLabels, '#4A5E8A', state.cross.latencyBucket) }],
+    { horizontal: true });
+  attachCrossFilter('chartLatencyDist', 'latencyBucket', latLabels);
 }
 
 function renderTab4() {
@@ -1096,29 +1229,39 @@ function renderTab4() {
   const evTypes = Object.entries(evMap)
     .map(([t, v]) => ({ t, verified: v.verified, unverified: v.unverified, total: v.verified + v.unverified }))
     .sort((a, b) => b.total - a.total);
+  const evTypeKeys = evTypes.map(e => e.t);
   stackedBar('chartEvidenceType',
     evTypes.map(e => e.t.replace(/_/g, ' ')),
     [
-      { label: 'Verified',   data: evTypes.map(e => e.verified),   backgroundColor: '#2C5F2D' },
-      { label: 'Unverified', data: evTypes.map(e => e.unverified), backgroundColor: '#B45309' },
+      { label: 'Verified',   data: evTypes.map(e => e.verified),
+        backgroundColor: xfade(evTypeKeys, '#2C5F2D', state.cross.evidenceType) },
+      { label: 'Unverified', data: evTypes.map(e => e.unverified),
+        backgroundColor: xfade(evTypeKeys, '#B45309', state.cross.evidenceType) },
     ]);
+  attachCrossFilter('chartEvidenceType', 'evidenceType', evTypeKeys);
 
   // Pin Coverage (counts over per-case pin fact tables)
   const pinMap = {};
   cases.forEach(c => (c.pinFactTables || []).forEach(f => { pinMap[f] = (pinMap[f] || 0) + 1; }));
   const pins = Object.entries(pinMap).map(([f, count]) => ({ f, count })).sort((a, b) => b.count - a.count);
+  const factTables = pins.map(p => p.f);
   bar('chartPinCoverage',
     pins.map(p => p.f.replace(/_/g, ' ')),
-    [{ label: 'Pins', data: pins.map(p => p.count), backgroundColor: '#C9A227' }],
+    [{ label: 'Pins', data: pins.map(p => p.count),
+       backgroundColor: xfade(factTables, '#C9A227', state.cross.factTable) }],
     { horizontal: true });
+  attachCrossFilter('chartPinCoverage', 'factTable', factTables);
 
   // Settlement Pipeline (per-case settlement status)
   const stMap = {};
   cases.forEach(c => { const s = c.settlementStatus || 'none'; stMap[s] = (stMap[s] || 0) + 1; });
   const sts = Object.entries(stMap).map(([s, count]) => ({ s, count })).sort((a, b) => b.count - a.count);
+  const settlementValues = sts.map(x => x.s);
   bar('chartSettlement',
     sts.map(x => x.s),
-    [{ label: 'Matters', data: sts.map(x => x.count), backgroundColor: '#1E2761' }]);
+    [{ label: 'Matters', data: sts.map(x => x.count),
+       backgroundColor: xfade(settlementValues, '#1E2761', state.cross.settlementStatus) }]);
+  attachCrossFilter('chartSettlement', 'settlementStatus', settlementValues);
 
   // Monthly Update Compliance (open matters in selection)
   stackedBar('chartCompliance', ['Open matters'],
@@ -1241,34 +1384,147 @@ function renderTab5() {
 }
 
 // ====================================================================
-// EXECUTIVE SUMMARY TAB (t0) — portfolio snapshot computed client-side
+// EXECUTIVE SUMMARY TAB (t0) — tier panel + pain rulings + pitch
 // ====================================================================
 
-function renderExecSummary() {
-  const el = document.getElementById('execPortfolio');
-  if (!el || !D.cases) return;
+// Adverse rulings — the ones actively hurting the docket. Pulled from the
+// full Key Rulings Timeline below; surfaced here so an investor sees the
+// pain points without scrolling.
+const PAIN_RULINGS = [
+  { date: '2026-06-25', name: 'Monsanto v. Durnell (SCOTUS, 7-2)',
+    body: 'FIFRA preempts state failure-to-warn claims requiring warnings beyond EPA-approved labels. Industry-changing — directly strengthens Syngenta\'s pending preemption MSJ in MDL 3004.',
+    impact: 'Critical' },
+  { date: '2024-04-17', name: 'Wells Daubert exclusion (MDL 3004 Doc. 5237)',
+    body: 'Judge Rosenstengel excluded Dr. Martin Wells, plaintiffs\' sole general-causation expert. First bellwether pool collapsed; new pool had to be ordered (Jan 2025). Applies to all 2,000+ member cases.',
+    impact: 'Critical' },
+  { date: '2026-02',   name: 'Syngenta preemption MSJ (filed)',
+    body: 'Post-Durnell materially improves odds of dismissal. A grant could gut failure-to-warn theories for opt-out and non-eligible inventory.',
+    impact: 'High' },
+  { date: '2025-09-29', name: 'MDL 3004 Doc. 5719 — bellwether trial vacated',
+    body: 'October 2025 MDL trial stayed; current activity is settlement administration, not trials. Bellwether track replaced by settlement framework.',
+    impact: 'Medium' },
+];
+
+function renderPainRulings() {
+  const el = document.getElementById('painRulings');
+  if (!el) return;
+  el.innerHTML = PAIN_RULINGS.map(r => `
+    <div class="pain-card">
+      <span class="pain-date">${r.date}</span>
+      <span class="pain-body"><b>${r.name}</b> — ${r.body}</span>
+      <span class="pain-impact">${r.impact}</span>
+    </div>`).join('');
+}
+
+// Tier panel — built once per render, then updateTierPanelDerived() only
+// patches the text spans when an input changes (preserves input focus).
+function renderTierPanel() {
+  const panel = document.getElementById('tierPanel');
+  if (!panel || !D.cases) return;
   const cases = D.cases;
-  cases.forEach(c => { c.statusBucket = statusBucketOf(c); });
-  const realized = cases.filter(c => c.settlementStatus === 'accepted' && c.settlementAmount != null)
-                        .reduce((s, c) => s + c.settlementAmount, 0);
-  const expected = cases.filter(c => c.settlementStatus !== 'accepted' && c.tier)
-                        .reduce((s, c) => { const r = tierRecoveryRange(c.tier); return s + (r.low + r.high) / 2; }, 0);
-  const tCounts = [1, 2, 3, 4].map(t => cases.filter(c => c.tier === t).length);
-  const pending = cases.filter(c => c.statusBucket === 'pending_close').length;
-  const now = new Date(); now.setHours(0, 0, 0, 0);
-  const in90 = new Date(now.getTime() + 90 * 86400000);
-  const sol = cases.filter(c => {
-    if (c.statusBucket !== 'open' || !c.statuteOfLimitations) return false;
-    const d = new Date(c.statuteOfLimitations);
-    return d >= now && d <= in90;
-  }).length;
-  el.innerHTML = `
-    <div class="tile"><div class="tile-label">Matters</div><div class="tile-value">${cases.length.toLocaleString()}</div><div class="tile-sub">in this book</div></div>
-    <div class="tile"><div class="tile-label">Realized Value</div><div class="tile-value">${fmtMoney(realized)}</div><div class="tile-sub">accepted settlements</div></div>
-    <div class="tile"><div class="tile-label">Expected Value</div><div class="tile-value">${fmtMoney(expected)}</div><div class="tile-sub">tier midpoint &times; open inventory</div></div>
-    <div class="tile"><div class="tile-label">Tier Mix</div><div class="tile-value" style="font-size:18px">${tCounts[0]} / ${tCounts[1]} / ${tCounts[2]} / ${tCounts[3]}</div><div class="tile-sub">T1 / T2 / T3 / T4</div></div>
-    <div class="tile"><div class="tile-label">Pending Close</div><div class="tile-value">${pending}</div><div class="tile-sub">notification sent &lt; 30 days</div></div>
-    <div class="tile"><div class="tile-label">SOL &lt; 90 Days</div><div class="tile-value">${sol}</div><div class="tile-sub">open matters at risk</div></div>`;
+  cases.forEach(c => { c.statusBucket = statusBucketOf(c); if (c.tier === undefined) c.tier = caseTier(c); });
+
+  panel.innerHTML = [1, 2, 3, 4].map(t => {
+    const def = TIER_DEFS[t];
+    const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
+    const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
+    // Wins: cases in tier (t+1) that are exactly one criterion short of tier t.
+    const target = t + 1;
+    const winsArr = target <= 4 ? cases.filter(c => c.tier === target && winCandidates(c, target).qualifies) : [];
+    const winsCount = winsArr.length;
+    const perCaseLift = target <= 4 ? (tierMid(t) - tierMid(target)) : 0;
+    const totalLift = winsCount * perCaseLift;
+    const criteriaHtml = def.checks.length
+      ? def.checks.map(chk => `<li>${chk.label}</li>`).join('')
+      : '<li>All cases that fail to meet Tier 3 criteria.</li>';
+    const winsHtml = winsCount > 0
+      ? `<div class="tier-wins">▸ <b>${winsCount}</b> cases one criterion from Tier ${t} &rarr; +${fmtMoney(totalLift)} incremental (per case +${fmtMoney(perCaseLift)})</div>`
+      : `<div class="tier-wins empty">▸ No wins available to this tier</div>`;
+    return `
+      <div class="tier-row tier-${t}-row">
+        <div class="tier-head">
+          <span class="tier-pill t${t}">T${t}</span>
+          <span class="tier-name">${def.name}</span>
+          <span class="tier-range-inputs">
+            $<input type="number" data-tier="${t}" data-bound="low" value="${tierDollars[t].low}" min="0" step="1000" /> –
+            $<input type="number" data-tier="${t}" data-bound="high" value="${tierDollars[t].high}" min="0" step="1000" />
+          </span>
+        </div>
+        <div class="tier-stats">
+          <span><b class="tier-stat-num" id="tier-${t}-open">${open.toLocaleString()}</b> open</span>
+          <span><b class="tier-stat-num" id="tier-${t}-closed">${closed.toLocaleString()}</b> closed</span>
+          <span>Value at risk: <b id="tier-${t}-vrisk">${fmtMoney(tierMid(t) * open)}</b></span>
+        </div>
+        <ul class="tier-criteria">${criteriaHtml}</ul>
+        ${winsHtml}
+      </div>`;
+  }).join('');
+
+  // Wire input listeners
+  panel.querySelectorAll('input[data-tier]').forEach(inp => {
+    inp.addEventListener('input', updateTierPanelDerived);
+  });
+
+  updateTierPanelDerived();
+}
+
+function updateTierPanelDerived() {
+  if (!D.cases) return;
+  // Read current values from inputs (don't re-render — preserves focus)
+  document.querySelectorAll('#tierPanel input[data-tier]').forEach(inp => {
+    const t = parseInt(inp.dataset.tier, 10);
+    const bound = inp.dataset.bound;
+    const v = parseInt(inp.value, 10);
+    if (!isNaN(v) && v >= 0) tierDollars[t][bound] = v;
+  });
+  const cases = D.cases;
+  let totalOpen = 0, totalClosed = 0, totalValueAtRisk = 0, totalUplift = 0;
+  [1, 2, 3, 4].forEach(t => {
+    const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
+    const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
+    const target = t + 1;
+    const winsCount = target <= 4 ? cases.filter(c => c.tier === target && winCandidates(c, target).qualifies).length : 0;
+    const perCaseLift = target <= 4 ? (tierMid(t) - tierMid(target)) : 0;
+    const totalLift = winsCount * perCaseLift;
+    const vrisk = tierMid(t) * open;
+    totalOpen += open;
+    totalClosed += closed;
+    totalValueAtRisk += vrisk;
+    totalUplift += totalLift;
+    const openEl = document.getElementById(`tier-${t}-open`);
+    const closedEl = document.getElementById(`tier-${t}-closed`);
+    const vriskEl = document.getElementById(`tier-${t}-vrisk`);
+    if (openEl) openEl.textContent = open.toLocaleString();
+    if (closedEl) closedEl.textContent = closed.toLocaleString();
+    if (vriskEl) vriskEl.textContent = fmtMoney(vrisk);
+    // Update the wins row in-place
+    const row = document.querySelector(`.tier-${t}-row .tier-wins`);
+    if (row) {
+      if (winsCount > 0) {
+        row.className = 'tier-wins';
+        row.innerHTML = `▸ <b>${winsCount}</b> cases one criterion from Tier ${t} &rarr; +${fmtMoney(totalLift)} incremental (per case +${fmtMoney(perCaseLift)})`;
+      } else {
+        row.className = 'tier-wins empty';
+        row.innerHTML = '▸ No wins available to this tier';
+      }
+    }
+  });
+  const totalOpenEl = document.getElementById('totalOpenCount');
+  const totalClosedEl = document.getElementById('totalClosedCount');
+  const totalVrEl = document.getElementById('totalValueAtRisk');
+  const totalUpliftEl = document.getElementById('totalUplift');
+  if (totalOpenEl) totalOpenEl.textContent = totalOpen.toLocaleString();
+  if (totalClosedEl) totalClosedEl.textContent = totalClosed.toLocaleString();
+  if (totalVrEl) totalVrEl.textContent = fmtMoney(totalValueAtRisk);
+  if (totalUpliftEl) totalUpliftEl.textContent = fmtMoney(totalUplift);
+}
+
+// Replaces the previous Portfolio Snapshot — now just dispatches the new panels.
+function renderExecSummary() {
+  if (!D.cases) return;
+  D.cases.forEach(c => { c.statusBucket = statusBucketOf(c); if (c.tier === undefined) c.tier = caseTier(c); });
+  renderTierPanel();
+  renderPainRulings();
 }
 
 // ====================================================================

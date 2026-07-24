@@ -1,9 +1,9 @@
 // Mass Tort Dashboard — Generated Data
 // Source: RDS paraquat_tort (v2 schema)
-// Generated: 2026-07-23T16:07:26.699741
+// Generated: 2026-07-24T14:19:09.421804
 // DO NOT EDIT — regenerate with: python build_data_js.py
 
-window.MT_CONFIG = { apiUrl: "https://207zs98l9k.execute-api.us-east-2.amazonaws.com/query" };
+window.MT_CONFIG = { apiUrl: "" };
 
 window.MT = {
   "totalClaimants": 500,
@@ -1220,7 +1220,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 52,
@@ -1291,7 +1291,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 467,
@@ -1357,7 +1357,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 496,
@@ -1486,7 +1486,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 87,
@@ -1557,7 +1557,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 233,
@@ -1616,7 +1616,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 354,
@@ -1680,7 +1680,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 371,
@@ -1870,7 +1870,7 @@ window.MT = {
         "pq_encounters",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 289,
@@ -1924,7 +1924,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 114,
@@ -1982,7 +1982,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 171,
@@ -2041,7 +2041,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 96,
@@ -2100,7 +2100,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 56,
@@ -2164,7 +2164,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 448,
@@ -2351,7 +2351,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 454,
@@ -2420,7 +2420,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 138,
@@ -2485,7 +2485,7 @@ window.MT = {
         "pq_medications",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 2,
@@ -2547,7 +2547,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 499,
@@ -2673,7 +2673,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 146,
@@ -2868,7 +2868,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 328,
@@ -2933,7 +2933,7 @@ window.MT = {
         "pq_encounters",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 299,
@@ -3060,7 +3060,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 140,
@@ -3192,7 +3192,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 72,
@@ -3453,7 +3453,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 154,
@@ -3515,7 +3515,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 81,
@@ -3587,7 +3587,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 141,
@@ -3713,7 +3713,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 13,
@@ -3775,7 +3775,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 410,
@@ -3841,7 +3841,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 98,
@@ -3903,7 +3903,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 107,
@@ -3966,7 +3966,7 @@ window.MT = {
       "pinFactTables": [
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 244,
@@ -4031,7 +4031,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 393,
@@ -4233,7 +4233,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 475,
@@ -4373,7 +4373,7 @@ window.MT = {
         "pq_family_histories",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 332,
@@ -4503,7 +4503,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_genetic_tests"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 250,
@@ -4565,7 +4565,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 288,
@@ -4832,7 +4832,7 @@ window.MT = {
         "pq_family_histories",
         "pq_genetic_tests"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 46,
@@ -4893,7 +4893,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 363,
@@ -4948,7 +4948,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 260,
@@ -5015,7 +5015,7 @@ window.MT = {
         "pq_symptoms",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 131,
@@ -5080,7 +5080,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 139,
@@ -5141,7 +5141,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 158,
@@ -5273,7 +5273,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 120,
@@ -5339,7 +5339,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 155,
@@ -5475,7 +5475,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 274,
@@ -5531,7 +5531,7 @@ window.MT = {
       "pinFactTables": [
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 180,
@@ -5713,7 +5713,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 419,
@@ -5780,7 +5780,7 @@ window.MT = {
         "pq_family_histories",
         "pq_genetic_tests"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 412,
@@ -5855,7 +5855,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 165,
@@ -5931,7 +5931,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 27,
@@ -6196,7 +6196,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 133,
@@ -6250,7 +6250,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 269,
@@ -6317,7 +6317,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 482,
@@ -6384,7 +6384,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 362,
@@ -6502,7 +6502,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 473,
@@ -6559,7 +6559,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 340,
@@ -6626,7 +6626,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 287,
@@ -6693,7 +6693,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 106,
@@ -6830,7 +6830,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 22,
@@ -6897,7 +6897,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 122,
@@ -6961,7 +6961,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 129,
@@ -7090,7 +7090,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 411,
@@ -7228,7 +7228,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_genetic_tests"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 135,
@@ -7288,7 +7288,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 65,
@@ -7358,7 +7358,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 492,
@@ -7420,7 +7420,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 4
+      "tier": 2
     },
     {
       "matterId": 9,
@@ -7483,7 +7483,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 2
+      "tier": 3
     },
     {
       "matterId": 437,
@@ -7606,7 +7606,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 235,
@@ -7668,7 +7668,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 86,
@@ -7724,7 +7724,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 375,
@@ -7926,7 +7926,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 169,
@@ -7997,7 +7997,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 225,
@@ -8058,7 +8058,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 66,
@@ -8128,7 +8128,7 @@ window.MT = {
         "pq_symptoms",
         "pq_family_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 366,
@@ -8198,7 +8198,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 249,
@@ -8273,7 +8273,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 361,
@@ -8335,7 +8335,7 @@ window.MT = {
         "pq_encounters",
         "pq_family_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 306,
@@ -8405,7 +8405,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 300,
@@ -8467,7 +8467,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 413,
@@ -8533,7 +8533,7 @@ window.MT = {
         "pq_encounters",
         "pq_genetic_tests"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 264,
@@ -8602,7 +8602,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 319,
@@ -8667,7 +8667,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 497,
@@ -8797,7 +8797,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 17,
@@ -8922,7 +8922,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 70,
@@ -8978,7 +8978,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 199,
@@ -9179,7 +9179,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 254,
@@ -9246,7 +9246,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 187,
@@ -9372,7 +9372,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 392,
@@ -9440,7 +9440,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 2
+      "tier": 3
     },
     {
       "matterId": 291,
@@ -9566,7 +9566,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 449,
@@ -9629,7 +9629,7 @@ window.MT = {
         "pq_symptoms",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 203,
@@ -9762,7 +9762,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 112,
@@ -9937,7 +9937,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 4,
@@ -10007,7 +10007,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 178,
@@ -10078,7 +10078,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 239,
@@ -10346,7 +10346,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 370,
@@ -10408,7 +10408,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 481,
@@ -10529,7 +10529,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 365,
@@ -10599,7 +10599,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_genetic_tests"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 444,
@@ -10662,7 +10662,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 47,
@@ -10727,7 +10727,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 134,
@@ -10794,7 +10794,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 48,
@@ -10850,7 +10850,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 394,
@@ -10910,7 +10910,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 97,
@@ -10974,7 +10974,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 320,
@@ -11107,7 +11107,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 495,
@@ -11304,7 +11304,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 491,
@@ -11361,7 +11361,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 457,
@@ -11425,7 +11425,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 404,
@@ -11560,7 +11560,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 382,
@@ -11623,7 +11623,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 440,
@@ -11688,7 +11688,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 182,
@@ -11746,7 +11746,7 @@ window.MT = {
       "pinFactTables": [
         "pq_symptoms"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 403,
@@ -11812,7 +11812,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 157,
@@ -11875,7 +11875,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 85,
@@ -12072,7 +12072,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 301,
@@ -12140,7 +12140,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 49,
@@ -12282,7 +12282,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 385,
@@ -12423,7 +12423,7 @@ window.MT = {
         "pq_symptoms",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 159,
@@ -12555,7 +12555,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 93,
@@ -12756,7 +12756,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 160,
@@ -12824,7 +12824,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 175,
@@ -12887,7 +12887,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 190,
@@ -13071,7 +13071,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 67,
@@ -13143,7 +13143,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 148,
@@ -13200,7 +13200,7 @@ window.MT = {
       "pinFactTables": [
         "pq_symptoms"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 408,
@@ -13259,7 +13259,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 402,
@@ -13391,7 +13391,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 277,
@@ -13451,7 +13451,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 64,
@@ -13525,7 +13525,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 494,
@@ -13595,7 +13595,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 268,
@@ -13731,7 +13731,7 @@ window.MT = {
         "pq_medications",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 480,
@@ -13794,7 +13794,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 228,
@@ -13857,7 +13857,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 170,
@@ -13914,7 +13914,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 335,
@@ -13978,7 +13978,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 483,
@@ -14037,7 +14037,7 @@ window.MT = {
         "pq_encounters",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 339,
@@ -14290,7 +14290,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 305,
@@ -14546,7 +14546,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 322,
@@ -14618,7 +14618,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 168,
@@ -14742,7 +14742,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 461,
@@ -14873,7 +14873,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 84,
@@ -14937,7 +14937,7 @@ window.MT = {
       "pinFactTables": [
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 373,
@@ -15064,7 +15064,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 3
     },
     {
       "matterId": 380,
@@ -15129,7 +15129,7 @@ window.MT = {
       "pinFactTables": [
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 407,
@@ -15261,7 +15261,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 109,
@@ -15460,7 +15460,7 @@ window.MT = {
         "pq_medications",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 126,
@@ -15535,7 +15535,7 @@ window.MT = {
         "pq_genetic_tests",
         "pq_genetic_tests"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 18,
@@ -15594,7 +15594,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 434,
@@ -15664,7 +15664,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 353,
@@ -15734,7 +15734,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 391,
@@ -15794,7 +15794,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 211,
@@ -15857,7 +15857,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 310,
@@ -15927,7 +15927,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 312,
@@ -16002,7 +16002,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 436,
@@ -16116,7 +16116,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 217,
@@ -16177,7 +16177,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 123,
@@ -16237,7 +16237,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 186,
@@ -16296,7 +16296,7 @@ window.MT = {
         "pq_encounters",
         "pq_symptoms"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 266,
@@ -16555,7 +16555,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 386,
@@ -16623,7 +16623,7 @@ window.MT = {
       "pinFactTables": [
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 252,
@@ -16691,7 +16691,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 500,
@@ -16758,7 +16758,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 418,
@@ -16826,7 +16826,7 @@ window.MT = {
         "pq_genetic_tests",
         "pq_genetic_tests"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 397,
@@ -16953,7 +16953,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 231,
@@ -17018,7 +17018,7 @@ window.MT = {
         "pq_family_histories",
         "pq_family_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 38,
@@ -17146,7 +17146,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 468,
@@ -17210,7 +17210,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 1
+      "tier": 2
     },
     {
       "matterId": 58,
@@ -17410,7 +17410,7 @@ window.MT = {
         "pq_symptoms",
         "pq_genetic_tests"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 41,
@@ -17471,7 +17471,7 @@ window.MT = {
       "pinFactTables": [
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 32,
@@ -17591,7 +17591,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 406,
@@ -17718,7 +17718,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 399,
@@ -17843,7 +17843,7 @@ window.MT = {
         "pq_encounters",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 453,
@@ -17903,7 +17903,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 396,
@@ -17967,7 +17967,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 150,
@@ -18026,7 +18026,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 1,
@@ -18091,7 +18091,7 @@ window.MT = {
         "pq_symptoms",
         "pq_family_histories"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 156,
@@ -18151,7 +18151,7 @@ window.MT = {
       "pinFactTables": [
         "pq_symptoms"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 349,
@@ -18221,7 +18221,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 1
+      "tier": 2
     },
     {
       "matterId": 333,
@@ -18542,7 +18542,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 115,
@@ -18601,7 +18601,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 429,
@@ -18798,7 +18798,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 263,
@@ -18977,7 +18977,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 117,
@@ -19101,7 +19101,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 273,
@@ -19300,7 +19300,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 293,
@@ -19433,7 +19433,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 357,
@@ -19503,7 +19503,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 270,
@@ -19562,7 +19562,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 374,
@@ -19620,7 +19620,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 345,
@@ -19743,7 +19743,7 @@ window.MT = {
         "pq_encounters",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 206,
@@ -19796,7 +19796,7 @@ window.MT = {
       "pinFactTables": [
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 50,
@@ -19937,7 +19937,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 136,
@@ -20008,7 +20008,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 145,
@@ -20072,7 +20072,7 @@ window.MT = {
       "pinFactTables": [
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 318,
@@ -20132,7 +20132,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 152,
@@ -20194,7 +20194,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 208,
@@ -20256,7 +20256,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 23,
@@ -20457,7 +20457,7 @@ window.MT = {
         "pq_encounters",
         "pq_genetic_tests"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 191,
@@ -20525,7 +20525,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 11,
@@ -20598,7 +20598,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 80,
@@ -20665,7 +20665,7 @@ window.MT = {
         "pq_family_histories",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 398,
@@ -20732,7 +20732,7 @@ window.MT = {
         "pq_symptoms",
         "pq_family_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 330,
@@ -20806,7 +20806,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 281,
@@ -20876,7 +20876,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 383,
@@ -20999,7 +20999,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 3
     },
     {
       "matterId": 210,
@@ -21065,7 +21065,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 446,
@@ -21132,7 +21132,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 4
+      "tier": 2
     },
     {
       "matterId": 479,
@@ -21197,7 +21197,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 230,
@@ -21314,7 +21314,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 379,
@@ -21378,7 +21378,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 42,
@@ -21507,7 +21507,7 @@ window.MT = {
       "pinFactTables": [
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 378,
@@ -21568,7 +21568,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 103,
@@ -21630,7 +21630,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 304,
@@ -21696,7 +21696,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 227,
@@ -21756,7 +21756,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 236,
@@ -21890,7 +21890,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 183,
@@ -21960,7 +21960,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 285,
@@ -22024,7 +22024,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 452,
@@ -22083,7 +22083,7 @@ window.MT = {
       "pinFactTables": [
         "pq_symptoms"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 196,
@@ -22145,7 +22145,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 95,
@@ -22206,7 +22206,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 104,
@@ -22338,7 +22338,7 @@ window.MT = {
       "pinFactTables": [
         "pq_symptoms"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 416,
@@ -22399,7 +22399,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 487,
@@ -22464,7 +22464,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 163,
@@ -22658,7 +22658,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 10,
@@ -22728,7 +22728,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 463,
@@ -22937,7 +22937,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 414,
@@ -23010,7 +23010,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 256,
@@ -23068,7 +23068,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 153,
@@ -23133,7 +23133,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 427,
@@ -23256,7 +23256,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 368,
@@ -23330,7 +23330,7 @@ window.MT = {
         "pq_encounters",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 188,
@@ -23399,7 +23399,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 185,
@@ -23528,7 +23528,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 255,
@@ -23655,7 +23655,7 @@ window.MT = {
         "pq_symptoms",
         "pq_genetic_tests"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 428,
@@ -23716,7 +23716,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 53,
@@ -23779,7 +23779,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 420,
@@ -23845,7 +23845,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 338,
@@ -23908,7 +23908,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 347,
@@ -23975,7 +23975,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 302,
@@ -24046,7 +24046,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 488,
@@ -24112,7 +24112,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 166,
@@ -24314,7 +24314,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 21,
@@ -24452,7 +24452,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 435,
@@ -24638,7 +24638,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 337,
@@ -24765,7 +24765,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 61,
@@ -24895,7 +24895,7 @@ window.MT = {
         "pq_encounters",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 147,
@@ -24954,7 +24954,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 90,
@@ -25023,7 +25023,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 209,
@@ -25096,7 +25096,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 30,
@@ -25158,7 +25158,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 477,
@@ -25359,7 +25359,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 69,
@@ -25487,7 +25487,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 143,
@@ -25556,7 +25556,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 195,
@@ -25624,7 +25624,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 44,
@@ -25754,7 +25754,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 43,
@@ -25813,7 +25813,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 20,
@@ -25871,7 +25871,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 33,
@@ -26000,7 +26000,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 184,
@@ -26067,7 +26067,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 355,
@@ -26139,7 +26139,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_genetic_tests"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 447,
@@ -26404,7 +26404,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 257,
@@ -26473,7 +26473,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 445,
@@ -26538,7 +26538,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_diagnoses"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 36,
@@ -26661,7 +26661,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 37,
@@ -26729,7 +26729,7 @@ window.MT = {
         "pq_symptoms",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 258,
@@ -26791,7 +26791,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 284,
@@ -26906,7 +26906,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 234,
@@ -27044,7 +27044,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 311,
@@ -27111,7 +27111,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 144,
@@ -27375,7 +27375,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 344,
@@ -27497,7 +27497,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 45,
@@ -27562,7 +27562,7 @@ window.MT = {
         "pq_medications",
         "pq_medications"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 342,
@@ -27619,7 +27619,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 128,
@@ -27685,7 +27685,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 400,
@@ -27875,7 +27875,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 193,
@@ -27946,7 +27946,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 181,
@@ -28198,7 +28198,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 205,
@@ -28503,7 +28503,7 @@ window.MT = {
         }
       ],
       "pinFactTables": [],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 278,
@@ -28636,7 +28636,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 215,
@@ -28699,7 +28699,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 121,
@@ -28762,7 +28762,7 @@ window.MT = {
       "pinFactTables": [
         "pq_symptoms"
       ],
-      "tier": 4
+      "tier": 3
     },
     {
       "matterId": 57,
@@ -28950,7 +28950,7 @@ window.MT = {
       "pinFactTables": [
         "pq_symptoms"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 308,
@@ -29082,7 +29082,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 294,
@@ -29153,7 +29153,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 202,
@@ -29211,7 +29211,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 162,
@@ -29341,7 +29341,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 462,
@@ -29477,7 +29477,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 229,
@@ -29602,7 +29602,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 493,
@@ -29666,7 +29666,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 73,
@@ -29734,7 +29734,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 207,
@@ -29792,7 +29792,7 @@ window.MT = {
         "pq_symptoms",
         "pq_genetic_tests"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 192,
@@ -30059,7 +30059,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 130,
@@ -30119,7 +30119,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 110,
@@ -30324,7 +30324,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 132,
@@ -30392,7 +30392,7 @@ window.MT = {
         "pq_encounters",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 424,
@@ -30520,7 +30520,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 149,
@@ -30587,7 +30587,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 176,
@@ -30650,7 +30650,7 @@ window.MT = {
         "pq_encounters",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 19,
@@ -30710,7 +30710,7 @@ window.MT = {
         "pq_medications",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 62,
@@ -30832,7 +30832,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 321,
@@ -30897,7 +30897,7 @@ window.MT = {
         "pq_smoking_histories",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 14,
@@ -31083,7 +31083,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 24,
@@ -31205,7 +31205,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 489,
@@ -31262,7 +31262,7 @@ window.MT = {
         "pq_medications",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 498,
@@ -31334,7 +31334,7 @@ window.MT = {
         "pq_encounters",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 456,
@@ -31396,7 +31396,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 359,
@@ -31464,7 +31464,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 469,
@@ -31527,7 +31527,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 167,
@@ -31583,7 +31583,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 60,
@@ -31830,7 +31830,7 @@ window.MT = {
         "pq_symptoms",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 384,
@@ -31891,7 +31891,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 296,
@@ -32020,7 +32020,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_diagnoses"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 240,
@@ -32202,7 +32202,7 @@ window.MT = {
         "pq_symptoms",
         "pq_genetic_tests"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 450,
@@ -32344,7 +32344,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 389,
@@ -32404,7 +32404,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 472,
@@ -32470,7 +32470,7 @@ window.MT = {
         "pq_symptoms",
         "pq_family_histories"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 458,
@@ -32598,7 +32598,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 307,
@@ -32721,7 +32721,7 @@ window.MT = {
         "pq_medications",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 348,
@@ -32786,7 +32786,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 430,
@@ -32851,7 +32851,7 @@ window.MT = {
         "pq_symptoms",
         "pq_smoking_histories"
       ],
-      "tier": 2
+      "tier": 1
     },
     {
       "matterId": 421,
@@ -32976,7 +32976,7 @@ window.MT = {
         "pq_symptoms",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 242,
@@ -33173,7 +33173,7 @@ window.MT = {
         "pq_medications",
         "pq_encounters"
       ],
-      "tier": 2
+      "tier": 4
     },
     {
       "matterId": 405,
@@ -33234,7 +33234,7 @@ window.MT = {
         "pq_diagnoses",
         "pq_medications"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 441,
@@ -33303,7 +33303,7 @@ window.MT = {
         "pq_symptoms",
         "pq_symptoms"
       ],
-      "tier": 3
+      "tier": 4
     },
     {
       "matterId": 7,
@@ -33369,7 +33369,7 @@ window.MT = {
         "pq_symptoms",
         "pq_encounters"
       ],
-      "tier": 3
+      "tier": 2
     },
     {
       "matterId": 212,
@@ -33447,23 +33447,23 @@ window.MT = {
   "avgSettlementByTier": [
     {
       "tier": 1,
-      "avg": null,
-      "count": 0
+      "avg": 320459.22,
+      "count": 3
     },
     {
       "tier": 2,
-      "avg": 280981.81,
-      "count": 19
+      "avg": 155976.21,
+      "count": 26
     },
     {
       "tier": 3,
-      "avg": 55675.3,
-      "count": 30
+      "avg": 57032.06,
+      "count": 6
     },
     {
       "tier": 4,
-      "avg": 8256.38,
-      "count": 2
+      "avg": 104154.67,
+      "count": 16
     }
   ]
 };
