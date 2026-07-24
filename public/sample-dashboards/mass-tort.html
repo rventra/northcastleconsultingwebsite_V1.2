@@ -98,6 +98,15 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tier-pill.t3{background:var(--amber)}
 .tier-pill.t4{background:var(--red)}
 .val-table-wrap{max-height:520px;overflow:auto;border:1px solid var(--border)}
+/* Cross-filter chips (PBI-style) */
+.cross-filter-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 28px;background:var(--mist);border-bottom:1px solid var(--border)}
+.xchip-label{font-size:10.5px;font-weight:700;color:var(--slate);letter-spacing:.12em;text-transform:uppercase}
+.xchip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--navy);background:var(--white);border:1px solid var(--gold);border-radius:12px;padding:3px 6px 3px 10px}
+.xchip-x{border:none;background:none;color:var(--amber);font-size:14px;font-weight:700;cursor:pointer;padding:0 2px;line-height:1;font-family:inherit}
+.xchip-x:hover{color:var(--red)}
+.xchip-clear{border:1px solid var(--border);background:var(--white);color:var(--slate);font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 10px;border-radius:12px;cursor:pointer;text-transform:uppercase}
+.xchip-clear:hover{color:var(--navy);border-color:var(--navy)}
+.chart-hint{font-size:10px;color:var(--slate-lite);font-style:italic;margin:-6px 0 8px}
 
 /* Executive Summary tab */
 .exec-stamp{font-size:11px;color:var(--slate-lite);font-style:italic}
@@ -206,6 +215,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <div class="tab" data-tab="t5">Valuation</div>
     <div class="tab" data-tab="t6">NL Query</div>
   </div>
+  <div id="crossFilterBar" class="cross-filter-bar" style="display:none"></div>
 
   <div class="content">
 
@@ -306,10 +316,10 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <div class="tab-content" id="t1">
       <div class="kpi-row" id="kpi-row-1"></div>
       <div class="chart-grid">
-        <div class="chart-card"><h3>Matters by Status</h3><canvas id="chartStatus"></canvas></div>
+        <div class="chart-card"><h3>Matters by Status</h3><div class="chart-hint">click chart to filter</div><canvas id="chartStatus"></canvas></div>
         <div class="chart-card"><h3>Matters by Acquisition Year</h3><canvas id="chartAcq"></canvas></div>
         <div class="chart-card"><h3>Filing Timeline</h3><canvas id="chartFiling"></canvas></div>
-        <div class="chart-card"><h3>Close Reasons</h3><canvas id="chartCloseReasons"></canvas></div>
+        <div class="chart-card"><h3>Close Reasons</h3><div class="chart-hint">click chart to filter</div><canvas id="chartCloseReasons"></canvas></div>
       </div>
     </div>
 
@@ -317,8 +327,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <div class="tab-content" id="t2">
       <div class="kpi-row" id="kpi-row-2"></div>
       <div class="chart-grid">
-        <div class="chart-card"><h3>Exposure Category — Direct vs Indirect</h3><canvas id="chartCategory"></canvas></div>
-        <div class="chart-card"><h3>Application Method</h3><canvas id="chartMethod"></canvas></div>
+        <div class="chart-card"><h3>Exposure Category — Direct vs Indirect</h3><div class="chart-hint">click chart to filter</div><canvas id="chartCategory"></canvas></div>
+        <div class="chart-card"><h3>Application Method</h3><div class="chart-hint">click chart to filter</div><canvas id="chartMethod"></canvas></div>
         <div class="chart-card"><h3>Exposure Duration</h3><canvas id="chartDuration"></canvas></div>
         <div class="chart-card"><h3>First Exposure Year</h3><canvas id="chartTimeline"></canvas></div>
         <div class="chart-card"><h3>Products Used</h3><canvas id="chartProducts"></canvas></div>
@@ -329,10 +339,10 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <div class="tab-content" id="t3">
       <div class="kpi-row" id="kpi-row-3"></div>
       <div class="chart-grid">
-        <div class="chart-card"><h3>Diagnosis Distribution</h3><canvas id="chartDx"></canvas></div>
+        <div class="chart-card"><h3>Diagnosis Distribution</h3><div class="chart-hint">click chart to filter</div><canvas id="chartDx"></canvas></div>
         <div class="chart-card"><h3>Most Recent Diagnosis by Year</h3><canvas id="chartDxYear"></canvas></div>
         <div class="chart-card"><h3>Top Symptoms</h3><canvas id="chartSymptoms"></canvas></div>
-        <div class="chart-card"><h3>Levodopa Response</h3><canvas id="chartLevodopa"></canvas></div>
+        <div class="chart-card"><h3>Levodopa Response</h3><div class="chart-hint">click chart to filter</div><canvas id="chartLevodopa"></canvas></div>
         <div class="chart-card"><h3>Avg Latency by Exposure Category</h3><canvas id="chartLatency"></canvas></div>
         <div class="chart-card"><h3>Latency Distribution</h3><canvas id="chartLatencyDist"></canvas></div>
       </div>
@@ -355,9 +365,9 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <div class="tab-content" id="t5">
       <div class="kpi-row" id="kpi-row-5"></div>
       <div class="chart-grid">
-        <div class="chart-card"><h3>Tier Distribution</h3><canvas id="chartTierDist"></canvas></div>
+        <div class="chart-card"><h3>Tier Distribution</h3><div class="chart-hint">click chart to filter</div><canvas id="chartTierDist"></canvas></div>
         <div class="chart-card"><h3>Score Histogram</h3><canvas id="chartScoreHist"></canvas></div>
-        <div class="chart-card"><h3>Tier Breakdown by Firm</h3><canvas id="chartTierByFirm"></canvas></div>
+        <div class="chart-card"><h3>Tier Breakdown by Firm</h3><div class="chart-hint">click chart to filter</div><canvas id="chartTierByFirm"></canvas></div>
         <div class="chart-card"><h3>Avg Score by Exposure Setting</h3><canvas id="chartScoreBySetting"></canvas></div>
         <div class="chart-card"><h3>Expected Recovery Range by Tier</h3><canvas id="chartRecoveryByTier"></canvas></div>
       </div>
@@ -422,7 +432,107 @@ const TIER_NAMES = {1: 'Tier 1', 2: 'Tier 2', 3: 'Tier 3', 4: 'Tier 4'};
 // (D.cases) filtered through this state, so sidebar filters apply everywhere.
 // Pre-aggregated D.* keys are retained in the data file for reference only.
 
-const state = { status: 'all', type: 'all', diagnosis: 'all', tier: 'all' };
+const state = { status: 'all', type: 'all', diagnosis: 'all', tier: 'all', cross: {} };
+
+// Cross-filter dimensions (PBI-style): chart clicks set these; they AND with
+// the sidebar dropdown filters above. Dims: statusBucket, dxBucket, tier,
+// exposureCategory, applicationMethod, closeReason, firm, levodopaResponse.
+const CROSS_LABELS = {
+  statusBucket: 'Status', dxBucket: 'Diagnosis', tier: 'Tier',
+  exposureCategory: 'Category', applicationMethod: 'Method',
+  closeReason: 'Close Reason', firm: 'Firm', levodopaResponse: 'Levodopa',
+};
+
+// Close-reason enum → display label (shared by chartCloseReasons and chips)
+const CLOSE_REASON_ORDER = [
+  ['exposure_criteria', 'Exposure Criteria'],
+  ['injury_criteria', 'Injury Criteria'],
+  ['client_no_contact', 'Client No Contact'],
+  ['claimant_withdrew', 'Claimant Withdrew'],
+  ['sol_expired', 'SOL Expired'],
+  ['deceased_no_estate', 'Deceased – No Estate'],
+  ['duplicate_or_merged', 'Duplicate or Merged'],
+  ['documentation_insufficient', 'Documentation Insufficient'],
+  ['other', 'Other'],
+];
+
+function crossDisplayValue(dim, v) {
+  if (dim === 'statusBucket') return ({ open: 'Open', pending_close: 'Pending to be Closed', closed: 'Closed' })[v] || v;
+  if (dim === 'dxBucket') return ({ parkinsons_disease: "Parkinson's Disease", parkinsonism_other: 'Parkinsonism (Other)', no_dx: 'Symptoms Only (No Dx)' })[v] || v;
+  if (dim === 'applicationMethod') return v.replace(/_/g, ' ');
+  if (dim === 'closeReason') { const f = CLOSE_REASON_ORDER.find(([k]) => k === v); return f ? f[1] : v; }
+  if (dim === 'firm') return v.length > 24 ? v.slice(0, 22) + '…' : v;
+  return String(v);
+}
+
+function toggleCrossFilter(dim, value) {
+  if (state.cross[dim] === value) delete state.cross[dim];
+  else state.cross[dim] = value;
+  renderCrossChips();
+  refreshActiveTab();
+}
+
+function clearCrossFilters() {
+  state.cross = {};
+  renderCrossChips();
+  refreshActiveTab();
+}
+
+// Render active cross-filters as removable chips below the tab strip
+function renderCrossChips() {
+  const bar = document.getElementById('crossFilterBar');
+  if (!bar) return;
+  const entries = Object.entries(state.cross);
+  bar.innerHTML = '';
+  if (!entries.length) { bar.style.display = 'none'; return; }
+  bar.style.display = 'flex';
+  const lbl = document.createElement('span');
+  lbl.className = 'xchip-label';
+  lbl.textContent = 'Cross-filters';
+  bar.appendChild(lbl);
+  entries.forEach(([dim, value]) => {
+    const chip = document.createElement('span');
+    chip.className = 'xchip';
+    chip.appendChild(document.createTextNode(`${CROSS_LABELS[dim] || dim}: ${crossDisplayValue(dim, value)}`));
+    const x = document.createElement('button');
+    x.className = 'xchip-x';
+    x.textContent = '×';
+    x.title = 'Remove filter';
+    x.addEventListener('click', () => toggleCrossFilter(dim, value));
+    chip.appendChild(x);
+    bar.appendChild(chip);
+  });
+  const clear = document.createElement('button');
+  clear.className = 'xchip-clear';
+  clear.textContent = 'Clear all';
+  clear.addEventListener('click', clearCrossFilters);
+  bar.appendChild(clear);
+}
+
+// Wire a chart instance so clicking an element toggles a cross-filter dim.
+// values[i] is the field value behind label index i (parallel to chart labels).
+function attachCrossFilter(chartId, dim, values) {
+  const ch = charts[chartId];
+  const cv = document.getElementById(chartId);
+  if (!ch || !cv) return;
+  cv.style.cursor = 'pointer';
+  ch.options.onClick = (evt) => {
+    const pts = ch.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+    if (!pts.length) return;
+    const v = values[pts[0].index];
+    if (v === undefined || v === null) return;
+    toggleCrossFilter(dim, v);
+  };
+}
+
+// Dim non-selected segments when a cross-filter is active on that chart's dim.
+// values: parallel to color slots; base: color string or array; active: current dim value.
+function xfade(values, base, active) {
+  return values.map((v, i) => {
+    const b = Array.isArray(base) ? base[i] : base;
+    return (active != null && v !== active) ? b + '66' : b;
+  });
+}
 
 function anyFilterActive() {
   return state.status !== 'all' || state.type !== 'all'
@@ -447,15 +557,26 @@ function statusBucketOf(c) {
 function getFilteredCases() {
   if (!D.cases) return [];
   // Ensure scores and live status buckets are set on each case
+  // (score is baked on first pass, so cross.tier can match the scored tier)
   D.cases.forEach(c => {
     if (c.score === undefined) Object.assign(c, scoreCase(c));
     c.statusBucket = statusBucketOf(c);
   });
+  const cross = state.cross;
   return D.cases.filter(c => {
     if (state.status !== 'all' && c.statusBucket !== state.status) return false;
     if (state.type !== 'all' && c.matter_type !== state.type) return false;
     if (state.diagnosis !== 'all' && c.dxBucket !== state.diagnosis) return false;
     if (state.tier !== 'all' && c.tier !== parseInt(state.tier)) return false;
+    // Cross-filters (chart clicks) — AND with sidebar dims
+    if (cross.statusBucket && c.statusBucket !== cross.statusBucket) return false;
+    if (cross.dxBucket && c.dxBucket !== cross.dxBucket) return false;
+    if (cross.tier != null && c.tier !== cross.tier) return false;
+    if (cross.exposureCategory && c.exposureCategory !== cross.exposureCategory) return false;
+    if (cross.applicationMethod && c.applicationMethod !== cross.applicationMethod) return false;
+    if (cross.closeReason && c.closeReason !== cross.closeReason) return false;
+    if (cross.firm && c.firm !== cross.firm) return false;
+    if (cross.levodopaResponse && c.levodopaResponse !== cross.levodopaResponse) return false;
     return true;
   });
 }
@@ -763,7 +884,8 @@ function renderTab1() {
   doughnut('chartStatus',
     BUCKET_ORDER.map(b => BUCKET_LABELS[b]),
     bucketCounts,
-    BUCKET_ORDER.map(b => BUCKET_COLORS[b]));
+    xfade(BUCKET_ORDER, BUCKET_ORDER.map(b => BUCKET_COLORS[b]), state.cross.statusBucket));
+  attachCrossFilter('chartStatus', 'statusBucket', BUCKET_ORDER);
 
   // Matters by Acquisition Year (intake date, falling back to open date)
   const acq = {};
@@ -787,24 +909,17 @@ function renderTab1() {
        borderColor: '#1E2761', backgroundColor: '#1E276120', fill: true, tension: 0.25 }]);
 
   // Close Reasons (filter-aware — closed + pending-close cases in selection)
-  const CLOSE_REASON_ORDER = [
-    ['exposure_criteria', 'Exposure Criteria'],
-    ['injury_criteria', 'Injury Criteria'],
-    ['client_no_contact', 'Client No Contact'],
-    ['claimant_withdrew', 'Claimant Withdrew'],
-    ['sol_expired', 'SOL Expired'],
-    ['deceased_no_estate', 'Deceased – No Estate'],
-    ['duplicate_or_merged', 'Duplicate or Merged'],
-    ['documentation_insufficient', 'Documentation Insufficient'],
-    ['other', 'Other'],
-  ];
+  // CLOSE_REASON_ORDER (enum → label) is hoisted at module level for the chips.
+  const reasonKeys = CLOSE_REASON_ORDER.map(([key]) => key);
   const closable = cases.filter(c => (c.statusBucket === 'closed' || c.statusBucket === 'pending_close') && c.closeReason);
   const reasonCounts = {};
   closable.forEach(c => { reasonCounts[c.closeReason] = (reasonCounts[c.closeReason] || 0) + 1; });
   bar('chartCloseReasons',
     CLOSE_REASON_ORDER.map(([, label]) => label),
-    [{ label: 'Matters', data: CLOSE_REASON_ORDER.map(([key]) => reasonCounts[key] || 0), backgroundColor: '#1E2761' }],
+    [{ label: 'Matters', data: CLOSE_REASON_ORDER.map(([key]) => reasonCounts[key] || 0),
+       backgroundColor: xfade(reasonKeys, '#1E2761', state.cross.closeReason) }],
     { horizontal: true });
+  attachCrossFilter('chartCloseReasons', 'closeReason', reasonKeys);
 }
 
 function renderTab2() {
@@ -828,16 +943,20 @@ function renderTab2() {
   const CAT_ORDER = ['Agricultural', 'Occupational / Commercial', 'Residential / Bystander'];
   stackedBar('chartCategory', CAT_ORDER,
     [
-      { label: 'Direct',   data: CAT_ORDER.map(cat => cases.filter(c => c.exposureCategory === cat && c.exposureType === 'direct').length),   backgroundColor: '#1E2761' },
-      { label: 'Indirect', data: CAT_ORDER.map(cat => cases.filter(c => c.exposureCategory === cat && c.exposureType === 'indirect').length), backgroundColor: '#C9A227' },
+      { label: 'Direct',   data: CAT_ORDER.map(cat => cases.filter(c => c.exposureCategory === cat && c.exposureType === 'direct').length),   backgroundColor: xfade(CAT_ORDER, '#1E2761', state.cross.exposureCategory) },
+      { label: 'Indirect', data: CAT_ORDER.map(cat => cases.filter(c => c.exposureCategory === cat && c.exposureType === 'indirect').length), backgroundColor: xfade(CAT_ORDER, '#C9A227', state.cross.exposureCategory) },
     ]);
+  attachCrossFilter('chartCategory', 'exposureCategory', CAT_ORDER);
 
   // Application Method (per-case)
   const byMethod = countBy(cases.filter(c => c.applicationMethod), 'applicationMethod');
+  const methodValues = byMethod.map(m => m.applicationMethod);
   bar('chartMethod',
-    byMethod.map(m => m.applicationMethod.replace(/_/g, ' ')),
-    [{ label: 'Matters', data: byMethod.map(m => m.count), backgroundColor: '#1E2761' }],
+    methodValues.map(v => v.replace(/_/g, ' ')),
+    [{ label: 'Matters', data: byMethod.map(m => m.count),
+       backgroundColor: xfade(methodValues, '#1E2761', state.cross.applicationMethod) }],
     { horizontal: true });
+  attachCrossFilter('chartMethod', 'applicationMethod', methodValues);
 
   // Exposure Duration (per-case exposure years)
   const durLabels = ['< 5 yrs', '5-10 yrs', '10-20 yrs', '20-30 yrs', '30+ yrs'];
@@ -884,10 +1003,12 @@ function renderTab3() {
 
   // Diagnosis Distribution (3 buckets, per-case)
   const DX_ORDER = [['parkinsons_disease', "Parkinson's Disease"], ['parkinsonism_other', 'Parkinsonism (Other)'], ['no_dx', 'Symptoms Only (No Dx)']];
+  const dxKeys = DX_ORDER.map(([key]) => key);
   doughnut('chartDx',
     DX_ORDER.map(([, label]) => label),
     DX_ORDER.map(([key]) => cases.filter(c => c.dxBucket === key).length),
-    ['#1E2761', '#4A5E8A', '#94A3B8']);
+    xfade(dxKeys, ['#1E2761', '#4A5E8A', '#94A3B8'], state.cross.dxBucket));
+  attachCrossFilter('chartDx', 'dxBucket', dxKeys);
 
   // Most Recent Diagnosis by Year (per-case lastDxDate)
   const dyMap = {};
@@ -910,7 +1031,8 @@ function renderTab3() {
   doughnut('chartLevodopa',
     LEV_KEYS,
     LEV_KEYS.map(k => cases.filter(c => c.levodopaResponse === k).length),
-    ['#2C5F2D', '#1E2761', '#B45309']);
+    xfade(LEV_KEYS, ['#2C5F2D', '#1E2761', '#B45309'], state.cross.levodopaResponse));
+  attachCrossFilter('chartLevodopa', 'levodopaResponse', LEV_KEYS);
 
   // Avg Latency by Exposure Category (per-case latencyYears)
   const CAT_ORDER = ['Agricultural', 'Occupational / Commercial', 'Residential / Bystander'];
@@ -1043,11 +1165,13 @@ function renderTab5() {
     <div class="tile"><div class="tile-label">Avg Score</div><div class="tile-value">${avgScore}</div><div class="tile-sub">across ${scored.length} matters</div></div>`;
 
   // Tier distribution
-  const tierCounts = [1,2,3,4].map(t => scored.filter(c => c.tier === t).length);
+  const TIER_VALUES = [1, 2, 3, 4];
+  const tierCounts = TIER_VALUES.map(t => scored.filter(c => c.tier === t).length);
   doughnut('chartTierDist',
     ['Tier 1', 'Tier 2', 'Tier 3', 'Tier 4'],
     tierCounts,
-    TIER_COLORS);
+    xfade(TIER_VALUES, TIER_COLORS, state.cross.tier));
+  attachCrossFilter('chartTierDist', 'tier', TIER_VALUES);
 
   // Score histogram
   const buckets = ['0-2','2-4','4-6','6-8','8-10'];
@@ -1073,11 +1197,12 @@ function renderTab5() {
   stackedBar('chartTierByFirm',
     tierByFirm.map(t => t.firm.length > 26 ? t.firm.slice(0,24)+'…' : t.firm),
     [
-      { label: 'Tier 1', data: tierByFirm.map(t => t.t1), backgroundColor: TIER_COLORS[0] },
-      { label: 'Tier 2', data: tierByFirm.map(t => t.t2), backgroundColor: TIER_COLORS[1] },
-      { label: 'Tier 3', data: tierByFirm.map(t => t.t3), backgroundColor: TIER_COLORS[2] },
-      { label: 'Tier 4', data: tierByFirm.map(t => t.t4), backgroundColor: TIER_COLORS[3] },
+      { label: 'Tier 1', data: tierByFirm.map(t => t.t1), backgroundColor: xfade(firms, TIER_COLORS[0], state.cross.firm) },
+      { label: 'Tier 2', data: tierByFirm.map(t => t.t2), backgroundColor: xfade(firms, TIER_COLORS[1], state.cross.firm) },
+      { label: 'Tier 3', data: tierByFirm.map(t => t.t3), backgroundColor: xfade(firms, TIER_COLORS[2], state.cross.firm) },
+      { label: 'Tier 4', data: tierByFirm.map(t => t.t4), backgroundColor: xfade(firms, TIER_COLORS[3], state.cross.firm) },
     ]);
+  attachCrossFilter('chartTierByFirm', 'firm', firms);
 
   // Avg score by setting
   const settings = [...new Set(scored.map(c => c.exposureSetting).filter(Boolean))];
@@ -1279,6 +1404,7 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 updateCounts();
 renderExecSummary();
+renderCrossChips();
 initFilters();
 
 // If NL query is opened first, allow backend to be specified via prompt
