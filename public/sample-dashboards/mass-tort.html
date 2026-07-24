@@ -149,6 +149,45 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tier-wins.empty{color:var(--slate-lite);font-style:italic;font-weight:400;background:transparent;border-left:3px solid var(--border)}
 .tier-foot{font-size:10.5px;color:var(--slate-lite);font-style:italic;margin-top:12px}
 
+/* Tier GSV input — single big editable field per tier */
+.tier-gsv{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-left:auto}
+.tier-gsv-dollar{font-size:18px;color:var(--navy);font-weight:700}
+.tier-gsv-input{width:140px;padding:8px 10px;border:2px solid var(--gold);border-radius:3px;font-family:inherit;font-size:18px;font-weight:700;color:var(--navy);text-align:right;background:var(--white);font-variant-numeric:tabular-nums}
+.tier-gsv-input:focus{outline:none;border-color:var(--navy);background:var(--mist)}
+/* Hide spinner arrows so investors type freely */
+.tier-gsv-input::-webkit-inner-spin-button,
+.tier-gsv-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.tier-gsv-input{appearance:textfield;-moz-appearance:textfield}
+.tier-gsv-suffix{font-size:10.5px;color:var(--slate-lite);font-weight:400;text-transform:none;letter-spacing:0}
+.tier-tier-value{margin-left:auto;color:var(--slate-lite);font-size:11.5px;font-weight:400;text-transform:none;letter-spacing:0}
+.tier-tier-value b{color:var(--navy);font-weight:700}
+
+/* Wins callout — make it clickable */
+.tier-wins{cursor:pointer;transition:filter .12s ease}
+.tier-wins:hover{filter:brightness(1.04)}
+.tier-wins:focus{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Wins Drill-in Modal */
+.wins-modal{position:fixed;inset:0;background:rgba(26,26,46,.55);display:flex;align-items:center;justify-content:center;z-index:1000;padding:24px}
+.wins-modal-card{background:var(--white);border:1px solid var(--border);border-radius:6px;width:min(960px,96vw);max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.wins-modal-head{display:flex;align-items:flex-start;justify-content:space-between;padding:18px 22px 14px;border-bottom:1px solid var(--border)}
+.wins-modal-head h3{margin:0;font-size:16px;font-weight:700;color:var(--navy);letter-spacing:.02em;text-transform:uppercase}
+.wins-modal-sub{margin:6px 0 0;font-size:12.5px;color:var(--slate)}
+.wins-modal-close{background:none;border:none;font-size:24px;line-height:1;color:var(--slate);cursor:pointer;padding:0 6px;font-family:inherit}
+.wins-modal-close:hover{color:var(--red)}
+.wins-modal-body{padding:14px 22px 22px;overflow:auto}
+.wins-modal-meta{font-size:11.5px;color:var(--slate-lite);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.wins-modal-table-wrap{max-height:60vh;overflow:auto;border:1px solid var(--border)}
+.wins-modal-table{width:100%;border-collapse:collapse;font-size:12px}
+.wins-modal-table th,.wins-modal-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+.wins-modal-table th{background:var(--mist);font-weight:700;color:var(--navy);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;position:sticky;top:0}
+.wins-modal-table tr:hover td{background:var(--mist)}
+.wins-badge{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.06em;padding:2px 6px;border-radius:2px;text-transform:uppercase}
+.wins-badge.wins-yes{background:#dcfce7;color:#166534}
+.wins-badge.wins-no{background:var(--mist);color:var(--slate)}
+.wins-pill{display:inline-block;background:var(--mist);border:1px solid var(--gold);color:var(--navy);font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:2px;margin:2px 2px 0 0}
+.wins-missing{white-space:normal}
+
 /* Pain Rulings (Executive Summary) */
 .pain-card{display:grid;grid-template-columns:90px 1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:baseline}
 .pain-card:last-child{border-bottom:none}
@@ -257,14 +296,14 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 
       <!-- Tier Panel — front and center for PE audience -->
       <div class="exec-card">
-        <h3>Docket Value by Tier — <span style="font-weight:400;color:var(--slate-lite);text-transform:none;letter-spacing:0">ranges are editable; numbers recompute live</span></h3>
+        <h3>Docket Value by Tier — <span style="font-weight:400;color:var(--slate-lite);text-transform:none;letter-spacing:0">GSV per case is editable; numbers recompute live</span></h3>
         <div class="tier-total-strip">
           <span><b id="totalOpenCount">0</b> open · <b id="totalClosedCount">0</b> closed</span>
-          <span>Total value at risk: <b id="totalValueAtRisk">$0</b></span>
+          <span>Total inventory value: <b id="totalInventoryValue">$0</b></span>
           <span class="tier-uplift-total">Incremental value on the table: <b id="totalUplift">$0</b></span>
         </div>
         <div id="tierPanel"></div>
-        <div class="tier-foot">Tier criteria are the researched framework (Verus LLC, NYU bellwether paper, DOJ Camp Lejeune grid). Defaults are illustrative — adjust the per-tier ranges to match your MSA framework.</div>
+        <div class="tier-foot">Tier criteria are the researched framework (Verus LLC, NYU bellwether paper, DOJ Camp Lejeune grid). Defaults are illustrative — type a GSV per case in the right-hand field to match your MSA framework. Click any "wins" row to drill into the cohort.</div>
       </div>
 
       <!-- Pain Rulings — what's hurting the docket -->
@@ -442,6 +481,37 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 
 </div>
 
+<!-- Wins Drill-in Modal (Executive Summary) -->
+<div id="winsModal" class="wins-modal" style="display:none" onclick="if (event.target === this) closeWinsModal()">
+  <div class="wins-modal-card">
+    <div class="wins-modal-head">
+      <div>
+        <h3 id="winsModalTitle">Wins cohort</h3>
+        <p id="winsModalSubtitle" class="wins-modal-sub"></p>
+      </div>
+      <button class="wins-modal-close" onclick="closeWinsModal()" title="Close">&times;</button>
+    </div>
+    <div class="wins-modal-body">
+      <div class="wins-modal-meta" id="winsModalCount">0 cases</div>
+      <div class="wins-modal-table-wrap">
+        <table class="wins-modal-table">
+          <thead>
+            <tr>
+              <th>Docket</th>
+              <th>Claimant</th>
+              <th>Firm</th>
+              <th>Score</th>
+              <th>Cert</th>
+              <th>Missing criterion (the one to fix)</th>
+            </tr>
+          </thead>
+          <tbody id="winsModalTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ====================================================================
 // DATA + DESIGN TOKENS
@@ -462,8 +532,8 @@ const TIER_DEFS = {
        checks: [
          { key: 'parkinsons_disease', test: c => c.primaryDiagnosis === 'parkinsons_disease',
            label: "Parkinson's Disease diagnosis" },
-         { key: 'verified_evidence', test: c => c.receiptsVerified || c.licenseVerified,
-           label: 'Verified license or receipts' },
+         { key: 'verified_evidence', test: c => c.licenseVerified || c.receiptsVerified,
+           label: 'Certified applicator license OR verified purchase receipts' },
          { key: '10yr_exposure', test: c => c.exposureYears != null && c.exposureYears >= 10,
            label: '≥10 years exposure' },
          { key: '2_records', test: c => c.recordCount >= 2,
@@ -475,7 +545,7 @@ const TIER_DEFS = {
        checks: [
          { key: 'any_pd_dx', test: c => c.dxBucket !== 'no_dx',
            label: 'Any PD-spectrum diagnosis (incl. parkinsonism)' },
-         { key: 'documented_exposure', test: c => c.receiptsClaimed || c.licenseClaimed || c.receiptsVerified || c.licenseVerified,
+         { key: 'documented_exposure', test: c => c.licenseClaimed || c.receiptsClaimed || c.licenseVerified || c.receiptsVerified,
            label: 'Documented exposure (claimed or verified)' },
          { key: '5yr_exposure', test: c => c.exposureYears != null && c.exposureYears >= 5,
            label: '≥5 years exposure' },
@@ -486,7 +556,7 @@ const TIER_DEFS = {
        checks: [
          { key: 'has_symptoms', test: c => (c.symptomNames || []).length > 0,
            label: 'Symptoms logged' },
-         { key: 'some_exposure', test: c => c.receiptsClaimed || c.licenseClaimed || c.receiptsVerified || c.licenseVerified,
+         { key: 'some_exposure', test: c => c.licenseClaimed || c.receiptsClaimed || c.licenseVerified || c.receiptsVerified,
            label: 'Some exposure evidence' },
          { key: 'non_trivial', test: c => c.exposureYears == null || c.exposureYears >= 1,
            label: 'At least 1 year exposure (or unknown)' },
@@ -857,23 +927,25 @@ function scoreAllCases() {
   return getFilteredCases().map(c => ({ ...c, ...scoreCase(c) }));
 }
 
-// Editable per-tier dollar ranges (in-memory only; defaults are illustrative).
-// tierMid(t) gives the headline per-case value used by Expected Value / Value
-// at Risk / Wins uplift. Investor edits one input → every derived figure live.
+// Per-tier GSV (Gross Settlement Value) — single number per case, editable
+// inline. Drives the per-tier value line, the wins uplift math, and the
+// total inventory value. Default values are illustrative; investor replaces
+// with their MSA framework.
 const tierDollars = {
-  1: { low: 50000,   high: 1000000 },
-  2: { low: 25000,   high: 500000  },
-  3: { low: 10000,   high: 150000  },
-  4: { low: 1000,    high: 50000   },
+  1: 750000,
+  2: 300000,
+  3: 100000,
+  4: 25000,
 };
-function tierMid(t)         { return (tierDollars[t].low + tierDollars[t].high) / 2; }
-function tierRangeLabel(t)  { return `$${fmtNumber(tierDollars[t].low)} – $${fmtNumber(tierDollars[t].high)}`; }
+function tierGsv(t)        { return tierDollars[t]; }
+function tierGsvLabel(t)   { return '$' + fmtNumber(tierDollars[t]); }
 
-// Kept for backwards compatibility with renderTab5 / renderExecSummary call sites
-// that previously read range.low / range.high. New code should use tierDollars +
-// tierMid() directly.
+// Backwards-compat shim for the old { low, high, label } shape. New code
+// uses tierGsv(t) directly. Used by renderTab5 (Expected Value) and the
+// tier pill subtitles on the Valuation tab.
 function tierRecoveryRange(tier) {
-  return { low: tierDollars[tier].low, high: tierDollars[tier].high, label: tierRangeLabel(tier) };
+  const v = tierDollars[tier];
+  return { low: v, high: v, label: '$' + fmtNumber(v) };
 }
 
 function fmtNumber(v) {
@@ -1428,32 +1500,35 @@ function renderTierPanel() {
     const def = TIER_DEFS[t];
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
+    const certified = cases.filter(c => c.tier === t && c.licenseVerified).length;
+    const tierValue = tierGsv(t) * open;
     // Wins: cases in tier (t+1) that are exactly one criterion short of tier t.
     const target = t + 1;
     const winsArr = target <= 4 ? cases.filter(c => c.tier === target && winCandidates(c, target).qualifies) : [];
     const winsCount = winsArr.length;
-    const perCaseLift = target <= 4 ? (tierMid(t) - tierMid(target)) : 0;
+    const perCaseLift = target <= 4 ? (tierGsv(t) - tierGsv(target)) : 0;
     const totalLift = winsCount * perCaseLift;
     const criteriaHtml = def.checks.length
       ? def.checks.map(chk => `<li>${chk.label}</li>`).join('')
       : '<li>All cases that fail to meet Tier 3 criteria.</li>';
     const winsHtml = winsCount > 0
-      ? `<div class="tier-wins">▸ <b>${winsCount}</b> cases one criterion from Tier ${t} &rarr; +${fmtMoney(totalLift)} incremental (per case +${fmtMoney(perCaseLift)})</div>`
+      ? `<div class="tier-wins" data-tier="${t}" data-count="${winsCount}" role="button" tabindex="0" title="Click to see the cohort">▸ <b>${winsCount}</b> cases one criterion from Tier ${t} &rarr; +${fmtMoney(totalLift)} incremental (per case +${fmtMoney(perCaseLift)})</div>`
       : `<div class="tier-wins empty">▸ No wins available to this tier</div>`;
     return `
       <div class="tier-row tier-${t}-row">
         <div class="tier-head">
           <span class="tier-pill t${t}">T${t}</span>
           <span class="tier-name">${def.name}</span>
-          <span class="tier-range-inputs">
-            $<input type="number" data-tier="${t}" data-bound="low" value="${tierDollars[t].low}" min="0" step="1000" /> –
-            $<input type="number" data-tier="${t}" data-bound="high" value="${tierDollars[t].high}" min="0" step="1000" />
+          <span class="tier-gsv">
+            <span class="tier-gsv-dollar">$</span><input type="number" class="tier-gsv-input" data-tier="${t}" value="${tierDollars[t]}" min="0" step="1000" />
+            <span class="tier-gsv-suffix">per case</span>
           </span>
         </div>
         <div class="tier-stats">
           <span><b class="tier-stat-num" id="tier-${t}-open">${open.toLocaleString()}</b> open</span>
           <span><b class="tier-stat-num" id="tier-${t}-closed">${closed.toLocaleString()}</b> closed</span>
-          <span>Value at risk: <b id="tier-${t}-vrisk">${fmtMoney(tierMid(t) * open)}</b></span>
+          <span><b class="tier-stat-num" id="tier-${t}-certified">${certified.toLocaleString()}</b> certified applicators</span>
+          <span class="tier-tier-value">Tier inventory value: <b id="tier-${t}-ivalue">${fmtMoney(tierValue)}</b></span>
         </div>
         <ul class="tier-criteria">${criteriaHtml}</ul>
         ${winsHtml}
@@ -1461,8 +1536,14 @@ function renderTierPanel() {
   }).join('');
 
   // Wire input listeners
-  panel.querySelectorAll('input[data-tier]').forEach(inp => {
+  panel.querySelectorAll('input.tier-gsv-input').forEach(inp => {
     inp.addEventListener('input', updateTierPanelDerived);
+  });
+
+  // Wire wins callouts to open the drill-in modal
+  panel.querySelectorAll('.tier-wins[data-tier]').forEach(el => {
+    el.addEventListener('click', () => openWinsModal(parseInt(el.dataset.tier, 10)));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openWinsModal(parseInt(el.dataset.tier, 10)); });
   });
 
   updateTierPanelDerived();
@@ -1471,52 +1552,109 @@ function renderTierPanel() {
 function updateTierPanelDerived() {
   if (!D.cases) return;
   // Read current values from inputs (don't re-render — preserves focus)
-  document.querySelectorAll('#tierPanel input[data-tier]').forEach(inp => {
+  document.querySelectorAll('#tierPanel input.tier-gsv-input').forEach(inp => {
     const t = parseInt(inp.dataset.tier, 10);
-    const bound = inp.dataset.bound;
     const v = parseInt(inp.value, 10);
-    if (!isNaN(v) && v >= 0) tierDollars[t][bound] = v;
+    if (!isNaN(v) && v >= 0) tierDollars[t] = v;
   });
   const cases = D.cases;
-  let totalOpen = 0, totalClosed = 0, totalValueAtRisk = 0, totalUplift = 0;
+  let totalOpen = 0, totalClosed = 0, totalInventoryValue = 0, totalUplift = 0;
   [1, 2, 3, 4].forEach(t => {
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
+    const certified = cases.filter(c => c.tier === t && c.licenseVerified).length;
     const target = t + 1;
-    const winsCount = target <= 4 ? cases.filter(c => c.tier === target && winCandidates(c, target).qualifies).length : 0;
-    const perCaseLift = target <= 4 ? (tierMid(t) - tierMid(target)) : 0;
+    const winsArr = target <= 4 ? cases.filter(c => c.tier === target && winCandidates(c, target).qualifies) : [];
+    const winsCount = winsArr.length;
+    const perCaseLift = target <= 4 ? (tierGsv(t) - tierGsv(target)) : 0;
     const totalLift = winsCount * perCaseLift;
-    const vrisk = tierMid(t) * open;
+    const ivalue = tierGsv(t) * open;
     totalOpen += open;
     totalClosed += closed;
-    totalValueAtRisk += vrisk;
+    totalInventoryValue += ivalue;
     totalUplift += totalLift;
     const openEl = document.getElementById(`tier-${t}-open`);
     const closedEl = document.getElementById(`tier-${t}-closed`);
-    const vriskEl = document.getElementById(`tier-${t}-vrisk`);
+    const certEl = document.getElementById(`tier-${t}-certified`);
+    const ivEl = document.getElementById(`tier-${t}-ivalue`);
     if (openEl) openEl.textContent = open.toLocaleString();
     if (closedEl) closedEl.textContent = closed.toLocaleString();
-    if (vriskEl) vriskEl.textContent = fmtMoney(vrisk);
+    if (certEl) certEl.textContent = certified.toLocaleString();
+    if (ivEl) ivEl.textContent = fmtMoney(ivalue);
     // Update the wins row in-place
     const row = document.querySelector(`.tier-${t}-row .tier-wins`);
     if (row) {
       if (winsCount > 0) {
         row.className = 'tier-wins';
+        row.dataset.tier = t;
+        row.dataset.count = winsCount;
         row.innerHTML = `▸ <b>${winsCount}</b> cases one criterion from Tier ${t} &rarr; +${fmtMoney(totalLift)} incremental (per case +${fmtMoney(perCaseLift)})`;
       } else {
         row.className = 'tier-wins empty';
+        row.removeAttribute('data-tier');
+        row.removeAttribute('data-count');
         row.innerHTML = '▸ No wins available to this tier';
       }
     }
   });
   const totalOpenEl = document.getElementById('totalOpenCount');
   const totalClosedEl = document.getElementById('totalClosedCount');
-  const totalVrEl = document.getElementById('totalValueAtRisk');
+  const totalIvEl = document.getElementById('totalInventoryValue');
   const totalUpliftEl = document.getElementById('totalUplift');
   if (totalOpenEl) totalOpenEl.textContent = totalOpen.toLocaleString();
   if (totalClosedEl) totalClosedEl.textContent = totalClosed.toLocaleString();
-  if (totalVrEl) totalVrEl.textContent = fmtMoney(totalValueAtRisk);
+  if (totalIvEl) totalIvEl.textContent = fmtMoney(totalInventoryValue);
   if (totalUpliftEl) totalUpliftEl.textContent = fmtMoney(totalUplift);
+}
+
+// ====================================================================
+// WINS DRILL-IN MODAL — click "X cases one criterion from Tier N" to see
+// the actual cohort. Lists docket/claimant/firm, score, and the single
+// missing criterion. Click outside or hit Esc to close.
+// ====================================================================
+
+function openWinsModal(fromTier) {
+  const target = fromTier - 1;
+  if (target < 1) return;
+  const cases = D.cases || [];
+  const wins = cases
+    .filter(c => c.tier === fromTier && winCandidates(c, fromTier).qualifies)
+    .map(c => {
+      const sc = scoreCase(c);
+      const missing = winCandidates(c, fromTier).missing;
+      return { ...c, score: sc.score, missing };
+    })
+    .sort((a, b) => b.score - a.score);
+  if (!wins.length) return;
+
+  const perCaseLift = tierGsv(target) - tierGsv(fromTier);
+  const totalLift = wins.length * perCaseLift;
+
+  const modal = document.getElementById('winsModal');
+  if (!modal) return;
+  document.getElementById('winsModalTitle').textContent = `Wins cohort: ${wins.length} cases one criterion from Tier ${target}`;
+  document.getElementById('winsModalSubtitle').textContent =
+    `Move to Tier ${target} by completing the missing criterion. Per-case uplift: ${fmtMoney(perCaseLift)}. Total incremental: ${fmtMoney(totalLift)}.`;
+  const tbody = document.getElementById('winsModalTbody');
+  tbody.innerHTML = wins.map(c => `
+    <tr>
+      <td>${(c.docket || '').slice(0, 16)}</td>
+      <td>${c.claimantName || '—'}</td>
+      <td>${c.firm || '—'}</td>
+      <td><b>${(c.score || 0).toFixed(1)}</b></td>
+      <td>${c.licenseVerified ? '<span class="wins-badge wins-yes">certified</span>' : '<span class="wins-badge wins-no">no cert</span>'}</td>
+      <td class="wins-missing">${c.missing.map(m => `<span class="wins-pill">${m}</span>`).join('')}</td>
+    </tr>`).join('');
+  document.getElementById('winsModalCount').textContent = `${wins.length} cases`;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeWinsModal() {
+  const modal = document.getElementById('winsModal');
+  if (!modal) return;
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
 }
 
 // Replaces the previous Portfolio Snapshot — now just dispatches the new panels.
@@ -1627,6 +1765,11 @@ document.addEventListener('click', e => {
   if (e.target.matches('.nl-examples li')) {
     document.getElementById('nlQuery').value = e.target.textContent;
   }
+});
+
+// Esc closes the wins drill-in modal
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeWinsModal();
 });
 
 document.getElementById('nlRunBtn').addEventListener('click', runNLQuery);
