@@ -1502,18 +1502,24 @@ function renderTierPanel() {
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
     const certified = cases.filter(c => c.tier === t && c.licenseVerified).length;
     const tierValue = tierGsv(t) * open;
-    // Wins: cases in tier (t+1) that are exactly one criterion short of tier t.
-    const target = t + 1;
-    const winsArr = target <= 4 ? cases.filter(c => c.tier === target && winCandidates(c, target).qualifies) : [];
+    // Wins live in the box of the SOURCE tier (where the cases are), pointing
+    // UP to the target tier they could become. T1 has nothing above it.
+    const target = t - 1;
+    const winsArr = target >= 1 ? cases.filter(c => c.tier === t && winCandidates(c, t).qualifies) : [];
     const winsCount = winsArr.length;
-    const perCaseLift = target <= 4 ? (tierGsv(t) - tierGsv(target)) : 0;
+    const perCaseLift = target >= 1 ? (tierGsv(target) - tierGsv(t)) : 0;
     const totalLift = winsCount * perCaseLift;
     const criteriaHtml = def.checks.length
       ? def.checks.map(chk => `<li>${chk.label}</li>`).join('')
       : '<li>All cases that fail to meet Tier 3 criteria.</li>';
-    const winsHtml = winsCount > 0
-      ? `<div class="tier-wins" data-tier="${t}" data-count="${winsCount}" role="button" tabindex="0" title="Click to see the cohort">▸ <b>${winsCount}</b> cases one criterion from Tier ${t} &rarr; +${fmtMoney(totalLift)} incremental (per case +${fmtMoney(perCaseLift)})</div>`
-      : `<div class="tier-wins empty">▸ No wins available to this tier</div>`;
+    let winsHtml;
+    if (target < 1) {
+      winsHtml = `<div class="tier-wins empty">▸ Already at the top tier — nothing to upgrade to</div>`;
+    } else if (winsCount > 0) {
+      winsHtml = `<div class="tier-wins" data-tier="${t}" data-count="${winsCount}" role="button" tabindex="0" title="Click to see the cohort">▸ <b>${winsCount}</b> cases here one criterion from Tier ${target} &rarr; +${fmtMoney(totalLift)} incremental (per case +${fmtMoney(perCaseLift)})</div>`;
+    } else {
+      winsHtml = `<div class="tier-wins empty">▸ No cases here one criterion from Tier ${target}</div>`;
+    }
     return `
       <div class="tier-row tier-${t}-row">
         <div class="tier-head">
@@ -1563,10 +1569,10 @@ function updateTierPanelDerived() {
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
     const certified = cases.filter(c => c.tier === t && c.licenseVerified).length;
-    const target = t + 1;
-    const winsArr = target <= 4 ? cases.filter(c => c.tier === target && winCandidates(c, target).qualifies) : [];
+    const target = t - 1;
+    const winsArr = target >= 1 ? cases.filter(c => c.tier === t && winCandidates(c, t).qualifies) : [];
     const winsCount = winsArr.length;
-    const perCaseLift = target <= 4 ? (tierGsv(t) - tierGsv(target)) : 0;
+    const perCaseLift = target >= 1 ? (tierGsv(target) - tierGsv(t)) : 0;
     const totalLift = winsCount * perCaseLift;
     const ivalue = tierGsv(t) * open;
     totalOpen += open;
@@ -1584,16 +1590,21 @@ function updateTierPanelDerived() {
     // Update the wins row in-place
     const row = document.querySelector(`.tier-${t}-row .tier-wins`);
     if (row) {
-      if (winsCount > 0) {
+      if (target < 1) {
+        row.className = 'tier-wins empty';
+        row.removeAttribute('data-tier');
+        row.removeAttribute('data-count');
+        row.innerHTML = '▸ Already at the top tier — nothing to upgrade to';
+      } else if (winsCount > 0) {
         row.className = 'tier-wins';
         row.dataset.tier = t;
         row.dataset.count = winsCount;
-        row.innerHTML = `▸ <b>${winsCount}</b> cases one criterion from Tier ${t} &rarr; +${fmtMoney(totalLift)} incremental (per case +${fmtMoney(perCaseLift)})`;
+        row.innerHTML = `▸ <b>${winsCount}</b> cases here one criterion from Tier ${target} &rarr; +${fmtMoney(totalLift)} incremental (per case +${fmtMoney(perCaseLift)})`;
       } else {
         row.className = 'tier-wins empty';
         row.removeAttribute('data-tier');
         row.removeAttribute('data-count');
-        row.innerHTML = '▸ No wins available to this tier';
+        row.innerHTML = `▸ No cases here one criterion from Tier ${target}`;
       }
     }
   });
