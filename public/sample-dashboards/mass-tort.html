@@ -148,7 +148,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .gsv-label{font-size:12px;font-weight:700;color:var(--slate);letter-spacing:.04em;text-transform:uppercase;flex:1;min-width:240px}
 .gsv-value{font-size:24px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.1}
 .gsv-line.gsv-potential .gsv-value{color:var(--gold);font-size:26px}
-.gsv-delta{font-size:11px;color:var(--slate-lite);font-weight:400;text-transform:none;letter-spacing:0}
+.gsv-value-wrap{display:inline-flex;flex-direction:column;align-items:flex-end;gap:2px}
+.gsv-delta{font-size:11px;color:var(--slate-lite);font-weight:400;text-transform:none;letter-spacing:0;line-height:1.2}
 .val-table-wrap{max-height:520px;overflow:auto;border:1px solid var(--border)}
 /* Cross-filter chips (PBI-style) */
 .cross-filter-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 28px;background:var(--mist);border-bottom:1px solid var(--border)}
@@ -386,9 +387,11 @@ details.exec-details[open]>summary{margin-bottom:12px}
             <span class="gsv-value" id="gsvCurrent">$0</span>
           </div>
           <div class="gsv-line gsv-potential">
-            <span class="gsv-label">Potential Gross Settlement Value at <span id="gsvRateLabel">25</span>% conversion rate</span>
-            <span class="gsv-value" id="gsvPotential">$0</span>
-            <span class="gsv-delta" id="gsvDelta"></span>
+            <span class="gsv-label">Potential Gross Settlement Value at an '<span id="gsvRateLabel">25</span>%' LIFT conversion rate</span>
+            <span class="gsv-value-wrap">
+              <span class="gsv-value" id="gsvPotential">$0</span>
+              <span class="gsv-delta" id="gsvDelta"></span>
+            </span>
           </div>
         </div>
         <div id="tierPanel"></div>
