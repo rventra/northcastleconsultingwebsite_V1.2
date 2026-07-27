@@ -134,10 +134,21 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .breakdown-legend-row .bd-val{font-weight:700;color:var(--navy);text-align:right;font-variant-numeric:tabular-nums}
 @media (max-width:760px){.breakdown-grid{grid-template-columns:1fr}.breakdown-donut-wrap{width:240px;height:240px;margin:0 auto}}
 
-/* Convert-rate dropdown — universal input, drives every "if X% convert" line. */
+/* Convert-rate input — universal input, drives every "if X% convert" line. */
 .tier-convert-control{display:inline-flex;align-items:center;gap:6px;margin-left:auto;font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-.tier-convert-select{font-family:inherit;font-size:12px;font-weight:700;color:var(--navy);padding:4px 8px;border:1px solid var(--gold);border-radius:3px;background:var(--white);cursor:pointer;letter-spacing:0;text-transform:none}
-.tier-convert-select:focus{outline:none;border-color:var(--navy)}
+.tier-convert-input{font-family:inherit;font-size:14px;font-weight:700;color:var(--navy);padding:4px 8px;border:1px solid var(--gold);border-radius:3px;background:var(--white);width:60px;text-align:right;letter-spacing:0}
+.tier-convert-input:focus{outline:none;border-color:var(--navy)}
+.tier-convert-input::-webkit-inner-spin-button,.tier-convert-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.tier-convert-input{appearance:textfield;-moz-appearance:textfield}
+
+/* Two-line GSV totals — current + potential. */
+.gsv-totals{margin:6px 0 16px;display:flex;flex-direction:column;gap:6px;padding:12px 16px;background:var(--white);border:1px solid var(--border);border-left:4px solid var(--navy)}
+.gsv-line{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.gsv-line.gsv-potential{border-top:1px dashed var(--border);padding-top:8px;margin-top:2px}
+.gsv-label{font-size:12px;font-weight:700;color:var(--slate);letter-spacing:.04em;text-transform:uppercase;flex:1;min-width:240px}
+.gsv-value{font-size:24px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.1}
+.gsv-line.gsv-potential .gsv-value{color:var(--gold);font-size:26px}
+.gsv-delta{font-size:11px;color:var(--slate-lite);font-weight:400;text-transform:none;letter-spacing:0}
 .val-table-wrap{max-height:520px;overflow:auto;border:1px solid var(--border)}
 /* Cross-filter chips (PBI-style) */
 .cross-filter-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 28px;background:var(--mist);border-bottom:1px solid var(--border)}
@@ -367,13 +378,18 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <h3>Value by tier <span style="font-weight:400;font-size:11.5px;color:var(--slate-lite)">· click a value to edit</span></h3>
         <div class="tier-total-strip">
           <span><b id="totalOpenCount">0</b> open · <b id="totalClosedCount">0</b> closed</span>
-          <span class="tier-convert-control">If <select id="convertRateSelect" class="tier-convert-select" title="Universal convert rate — applied to every dollar in the tier panel">
-            <option value="0.25" selected>a quarter (25%) convert</option>
-            <option value="0.5">half (50%) convert</option>
-            <option value="0.1667">a 1/6 (~17%) convert</option>
-          </select></span>
-          <span>Inventory value <span style="color:var(--slate-lite);font-weight:400">at convert rate</span>: <b id="totalInventoryValue">$0</b><span class="mx-sub" id="totalPotential" style="display:block;font-weight:400;color:var(--slate-lite);text-transform:none;letter-spacing:0;margin-top:2px"></span></span>
-          <span class="tier-uplift-total">Upside still on the table <span style="color:var(--slate-lite);font-weight:400">at convert rate</span>: <b id="totalUplift">$0</b></span>
+          <span class="tier-convert-control">Convert rate: <input type="number" id="convertRateInput" class="tier-convert-input" min="0" max="100" step="1" value="25" title="Universal convert rate (%) — drives both the potential GSV at the bottom and every 'if X% convert' lift line">%</span>
+        </div>
+        <div class="gsv-totals">
+          <div class="gsv-line gsv-current">
+            <span class="gsv-label">Current Gross Settlement Value</span>
+            <span class="gsv-value" id="gsvCurrent">$0</span>
+          </div>
+          <div class="gsv-line gsv-potential">
+            <span class="gsv-label">Potential Gross Settlement Value at <span id="gsvRateLabel">25</span>% conversion rate</span>
+            <span class="gsv-value" id="gsvPotential">$0</span>
+            <span class="gsv-delta" id="gsvDelta"></span>
+          </div>
         </div>
         <div id="tierPanel"></div>
         <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
@@ -944,26 +960,34 @@ function initFilters() {
     });
   });
 
-  // Convert-rate dropdown — single universal input driving every "if X%
-  // convert" lift line and the wins modal cohort note.
-  const crSel = document.getElementById('convertRateSelect');
-  if (crSel) {
-    crSel.addEventListener('change', (e) => {
-      const v = parseFloat(e.target.value);
-      if (!isNaN(v) && v > 0 && v <= 1) {
-        state.convertRate = v;
-        updateTierPanelDerived();
-        // If the wins modal is open, refresh it so the cohort note matches.
-        const modal = document.getElementById('winsModal');
-        if (modal && modal.style.display !== 'none') {
-          const openBtn = document.querySelector('.lift-line[data-tier]:focus, .lift-line[data-tier]:hover');
-          // Fall back to re-rendering for the most recently opened tier if we
-          // can't infer from focus. The modal will be re-opened by click; the
-          // safest path is to close it so the user picks again at the new rate.
-          modal.style.display = 'none';
-          document.body.style.overflow = '';
-        }
+  // Convert-rate input — single universal input driving every "if X% convert"
+  // lift line, the wins modal cohort note, and the Potential GSV line. The
+  // user enters a percent value (e.g. 25); we store it as a fraction.
+  const crIn = document.getElementById('convertRateInput');
+  if (crIn) {
+    crIn.addEventListener('input', (e) => {
+      // Allow either a percent (e.g. 25) or a fraction (e.g. 0.25) — anything
+      // > 1 is treated as percent and divided by 100.
+      let v = parseFloat(e.target.value);
+      if (isNaN(v)) return;
+      if (v > 1) v = v / 100;
+      v = Math.max(0, Math.min(1, v));
+      state.convertRate = v;
+      updateTierPanelDerived();
+      // Close the wins modal if open — the cohort note + lift values are now
+      // stale. Re-click the lift line to refresh at the new rate.
+      const modal = document.getElementById('winsModal');
+      if (modal && modal.style.display !== 'none') {
+        modal.style.display = 'none';
+        const bd = document.getElementById('breakdownModal');
+        if (bd && bd.style.display !== 'none') bd.style.display = 'none';
+        document.body.style.overflow = '';
       }
+    });
+    crIn.addEventListener('blur', (e) => {
+      // Normalize the displayed value to a clean percent on blur.
+      const v = parseFloat(e.target.value);
+      if (!isNaN(v)) e.target.value = Math.round(state.convertRate * 100);
     });
   }
   const clearBtn = document.getElementById('btnClearFilters');
@@ -1691,14 +1715,14 @@ function renderTierPanel() {
     const def = TIER_DEFS[t];
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
-    const payout = tierGsv(t) * open * state.convertRate;
+    const payout = tierGsv(t) * open;
     return `
       <tr class="tier-${t}-row">
         <td><span class="tier-pill t${t}">${TIER_NAMES[t]}</span></td>
         <td class="mx-criteria">${def.name}</td>
         <td class="num"><b id="mx-${t}-cases">${open.toLocaleString()}</b><span class="mx-sub">${closed.toLocaleString()} closed</span></td>
         <td class="num mx-gsv"><span class="tier-gsv-dollar">$</span><input type="number" class="tier-gsv-input" data-tier="${t}" value="${tierDollars[t]}" min="0" step="1000" /></td>
-        <td class="num"><b id="mx-${t}-payout">${fmtMoney(payout)}</b><span class="mx-sub" id="mx-${t}-potential">potential ${fmtMoney(tierGsv(t) * open)}</span></td>
+        <td class="num"><b id="mx-${t}-payout">${fmtMoney(payout)}</b></td>
         <td class="mx-lift" id="mx-${t}-lift">${liftCellHtml(t)}</td>
       </tr>`;
   }).join('');
@@ -1780,27 +1804,19 @@ function updateTierPanelDerived() {
     if (!isNaN(v) && v >= 0) tierDollars[t] = v;
   });
   const cases = D.cases;
-  // Universal convert rate (default 25% / quarter). Every dollar shown in the
-  // tier panel is scaled by this — Expected payout per tier, Total inventory
-  // value, and the Upside lift. The undiscounted ("potential") values appear
-  // as small sub-lines so the user sees both views at a glance.
   const p = state.convertRate;
-  let totalOpen = 0, totalClosed = 0, totalInventoryValue = 0, totalPotential = 0, totalUplift = 0;
+  let totalOpen = 0, totalClosed = 0, totalCurrentGsv = 0, totalWinsGap = 0;
   [1, 2, 3, 4].forEach(t => {
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
-    const potential = tierGsv(t) * open;
-    const expected = potential * p;
+    const tierFullGsv = tierGsv(t) * open;
     totalOpen += open;
     totalClosed += closed;
-    totalInventoryValue += expected;
-    totalPotential += potential;
+    totalCurrentGsv += tierFullGsv;
     const casesEl = document.getElementById(`mx-${t}-cases`);
     const payEl = document.getElementById(`mx-${t}-payout`);
-    const potEl = document.getElementById(`mx-${t}-potential`);
     if (casesEl) casesEl.textContent = open.toLocaleString();
-    if (payEl) payEl.textContent = fmtMoney(expected);
-    if (potEl) potEl.textContent = `potential ${fmtMoney(potential)}`;
+    if (payEl) payEl.textContent = fmtMoney(tierFullGsv);
     // Rebuild the lift cell in place and rewire its click handlers
     const liftEl = document.getElementById(`mx-${t}-lift`);
     if (liftEl) {
@@ -1808,22 +1824,29 @@ function updateTierPanelDerived() {
       wireWinsRows(liftEl);
     }
   });
-  // Total upside = probability-weighted expected lift across all source tiers,
-  // using the single universal convert rate (state.convertRate).
+  // Sum per-case gaps across every wins cohort (one + two + thin × all source tiers).
+  // This is the "cases that could convert × GSV" piece of the potential formula.
   [2, 3, 4].forEach(s => {
     const { one, two, thin, gap } = winsCohorts(s);
-    totalUplift += (one.length + two.length + thin.length) * gap * p;
+    totalWinsGap += (one.length + two.length + thin.length) * gap;
   });
+  const expectedLift = totalWinsGap * p;
+  const potentialGsv = totalCurrentGsv + expectedLift;
   const totalOpenEl = document.getElementById('totalOpenCount');
   const totalClosedEl = document.getElementById('totalClosedCount');
-  const totalIvEl = document.getElementById('totalInventoryValue');
-  const totalPotentialEl = document.getElementById('totalPotential');
-  const totalUpliftEl = document.getElementById('totalUplift');
   if (totalOpenEl) totalOpenEl.textContent = totalOpen.toLocaleString();
   if (totalClosedEl) totalClosedEl.textContent = totalClosed.toLocaleString();
-  if (totalIvEl) totalIvEl.textContent = fmtMoney(totalInventoryValue);
-  if (totalPotentialEl) totalPotentialEl.textContent = `potential ${fmtMoney(totalPotential)}`;
-  if (totalUpliftEl) totalUpliftEl.textContent = fmtMoney(totalUplift);
+  // Two-line GSV summary
+  const curEl = document.getElementById('gsvCurrent');
+  const potEl = document.getElementById('gsvPotential');
+  const rateEl = document.getElementById('gsvRateLabel');
+  const deltaEl = document.getElementById('gsvDelta');
+  if (curEl) curEl.textContent = fmtMoney(totalCurrentGsv);
+  if (potEl) potEl.textContent = fmtMoney(potentialGsv);
+  if (rateEl) rateEl.textContent = Math.round(p * 100);
+  if (deltaEl) deltaEl.textContent = expectedLift > 0
+    ? `+${fmtMoney(expectedLift)} incremental at ${Math.round(p * 100)}% convert`
+    : '';
 }
 
 // ====================================================================
