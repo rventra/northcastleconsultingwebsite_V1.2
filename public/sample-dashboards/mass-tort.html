@@ -123,15 +123,18 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .breakdown-center .bd-label{font-size:10.5px;font-weight:700;color:var(--slate);letter-spacing:.1em;text-transform:uppercase}
 .breakdown-center .bd-total{font-size:36px;font-weight:700;color:var(--navy);line-height:1;margin-top:4px;font-variant-numeric:tabular-nums}
 .breakdown-center .bd-sub{font-size:10.5px;color:var(--slate-lite);margin-top:4px}
-.breakdown-legend{display:flex;flex-direction:column;gap:8px}
-.breakdown-legend-row{display:grid;grid-template-columns:14px 90px 50px 1fr 50px;gap:10px;align-items:center;font-size:12px;padding:6px 8px;border-bottom:1px solid var(--border)}
+.breakdown-legend{display:flex;flex-direction:column;gap:6px}
+.breakdown-legend-row{display:flex;flex-direction:column;gap:4px;padding:8px 10px;border-bottom:1px solid var(--border)}
 .breakdown-legend-row:last-child{border-bottom:none}
-.breakdown-legend-row .bd-swatch{width:12px;height:12px;border-radius:2px}
-.breakdown-legend-row .bd-key{font-weight:700;color:var(--navy)}
-.breakdown-legend-row .bd-weight{font-size:10.5px;color:var(--slate-lite);font-weight:700;letter-spacing:.04em}
-.breakdown-legend-row .bd-bar-wrap{flex:1;height:6px;background:var(--bg);border-radius:1px;overflow:hidden;border:1px solid var(--border)}
-.breakdown-legend-row .bd-bar{height:100%}
-.breakdown-legend-row .bd-val{font-weight:700;color:var(--navy);text-align:right;font-variant-numeric:tabular-nums}
+.breakdown-legend-row .bd-top{display:grid;grid-template-columns:14px 110px 1fr 56px;gap:12px;align-items:center}
+.breakdown-legend-row .bd-swatch{width:14px;height:14px;border-radius:2px}
+.breakdown-legend-row .bd-key{font-weight:700;color:var(--navy);font-size:13px}
+.breakdown-legend-row .bd-key small{font-weight:400;color:var(--slate-lite);margin-left:6px;font-size:10.5px;letter-spacing:.04em}
+.breakdown-legend-row .bd-bar-wrap{flex:1;height:8px;background:var(--bg);border-radius:1px;overflow:hidden;border:1px solid var(--border)}
+.breakdown-legend-row .bd-bar{height:100%;display:block}
+.breakdown-legend-row .bd-val{font-weight:700;color:var(--navy);text-align:right;font-variant-numeric:tabular-nums;font-size:15px}
+.breakdown-legend-row .bd-reason{font-size:11.5px;color:var(--slate);padding-left:26px;line-height:1.4}
+.breakdown-legend-row .bd-formula{display:inline-block;background:var(--mist);border:1px solid var(--border);border-radius:2px;padding:1px 6px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;margin-right:4px}
 @media (max-width:760px){.breakdown-grid{grid-template-columns:1fr}.breakdown-donut-wrap{width:240px;height:240px;margin:0 auto}}
 
 /* Convert-rate input — universal input, drives every "if X% convert" line. */
@@ -1108,50 +1111,88 @@ const SCORE_FACTOR_LABELS = [
   ['Sym', 'Symptom severity',       10],
   ['Lev', 'Levodopa response',       5],
 ];
+// Per-factor scoring breakdown — returns the raw 0-10 sub-score for each
+// factor, the weight %, the weighted contribution (raw × weight / 100, which
+// is what shows in the donut), and a one-line REASON explaining why the raw
+// sub-score is what it is (e.g. "Parkinson's confirmed" vs "10-20 yrs").
+// Sums to the case's overall score.
+function scoreFactorBreakdown(c) {
+  const factors = [];
+
+  // 1. Diagnosis certainty
+  let dx = 0, dxReason = 'No diagnosis on file';
+  if (c.primaryDiagnosis === 'parkinsons_disease')      { dx = 8; dxReason = "Parkinson's disease confirmed"; }
+  else if (c.primaryDiagnosis === 'parkinsonism_unspecified') { dx = 6; dxReason = 'Parkinsonism (unspecified)'; }
+  else if (c.primaryDiagnosis) { dx = 4; dxReason = `Atypical / other (${c.primaryDiagnosis.replace(/_/g, ' ')})`; }
+  factors.push({ key: 'Dx', label: 'Diagnosis certainty', weight: 30, rawScore: dx, reason: dxReason });
+
+  // 2. Exposure duration
+  let exp = 0, expReason = 'Unknown exposure years';
+  const ey = c.exposureYears;
+  if (ey != null) {
+    if      (ey >= 30) { exp = 10; expReason = `${ey} yrs exposure (30+ band)`; }
+    else if (ey >= 20) { exp =  8; expReason = `${ey} yrs exposure (20-30 band)`; }
+    else if (ey >= 10) { exp =  6; expReason = `${ey} yrs exposure (10-20 band)`; }
+    else if (ey >=  5) { exp =  4; expReason = `${ey} yrs exposure (5-10 band)`; }
+    else               { exp =  2; expReason = `${ey} yrs exposure (under 5)`; }
+  }
+  factors.push({ key: 'Exp', label: 'Exposure duration', weight: 20, rawScore: exp, reason: expReason });
+
+  // 3. Evidence verification
+  let ev = 0, evReason = 'Neither license nor receipts verified';
+  if (c.receiptsVerified && c.licenseVerified) { ev = 10; evReason = 'License AND receipts verified'; }
+  else if (c.receiptsVerified)                  { ev =  5; evReason = 'Receipts verified only (no license)'; }
+  else if (c.licenseVerified)                   { ev =  5; evReason = 'License verified only (no receipts)'; }
+  factors.push({ key: 'Ev', label: 'Evidence verification', weight: 15, rawScore: ev, reason: evReason });
+
+  // 4. Medical records
+  let rec = 0, recReason = 'No medical records';
+  const rc = c.recordCount || 0;
+  if (rc >= 3)      { rec = 10; recReason = `${rc} records (3+ band)`; }
+  else if (rc === 2) { rec =  6; recReason = '2 medical records'; }
+  else if (rc === 1) { rec =  3; recReason = '1 medical record'; }
+  factors.push({ key: 'Rec', label: 'Medical records', weight: 10, rawScore: rec, reason: recReason });
+
+  // 5. Latency (10-25 = sweet spot)
+  let lat = 0, latReason = 'Unknown latency';
+  const ly = c.latencyYears;
+  if (ly != null) {
+    if      (ly >= 10 && ly <= 25) { lat = 10; latReason = `${ly} yrs latency (sweet spot 10-25)`; }
+    else if (ly >=  5 && ly <  10) { lat =  7; latReason = `${ly} yrs latency (short 5-10)`; }
+    else if (ly >  25)             { lat =  5; latReason = `${ly} yrs latency (long 25+)`; }
+    else                            { lat =  2; latReason = `${ly} yrs latency (under 5)`; }
+  }
+  factors.push({ key: 'Lat', label: 'Latency', weight: 10, rawScore: lat, reason: latReason });
+
+  // 6. Symptom severity
+  let sym = 0, symReason = 'No symptoms logged';
+  const sy = c.avgSymptomSeverity;
+  if (sy != null) {
+    if      (sy >= 4) { sym = 10; symReason = `Avg severity ${sy.toFixed(1)} (4-5 band)`; }
+    else if (sy >= 3) { sym =  6; symReason = `Avg severity ${sy.toFixed(1)} (3 band)`; }
+    else if (sy >= 1) { sym =  3; symReason = `Avg severity ${sy.toFixed(1)} (1-2 band)`; }
+  }
+  factors.push({ key: 'Sym', label: 'Symptom severity', weight: 10, rawScore: sym, reason: symReason });
+
+  // 7. Levodopa response
+  let lev = 0, levReason = 'No levodopa response on file';
+  const lv = c.levodopaResponse;
+  if      (lv === 'robust')    { lev = 10; levReason = 'Robust levodopa response'; }
+  else if (lv === 'moderate')  { lev =  7; levReason = 'Moderate levodopa response'; }
+  else if (lv === 'minimal')   { lev =  3; levReason = 'Minimal levodopa response'; }
+  factors.push({ key: 'Lev', label: 'Levodopa response', weight: 5, rawScore: lev, reason: levReason });
+
+  // Compute weighted contribution for each factor: raw × weight / 100.
+  factors.forEach(f => { f.contribution = Math.round(f.rawScore * f.weight / 100 * 10) / 10; });
+  return factors;
+}
+
+// Legacy shape retained for callers that still want a quick {Dx:..,Exp:..} map.
 function scoreBreakdown(c) {
-  // Mirrors scoreCase() but returns the weighted contribution of each factor.
-  let dx=0, exp=0, ev=0, rec=0, lat=0, sym=0, lev=0;
-  if (c.primaryDiagnosis) {
-    const cond = c.primaryDiagnosis;
-    if (cond === 'parkinsons_disease') dx = 8;
-    else if (cond === 'parkinsonism_unspecified') dx = 6;
-    else dx = 4;
-  }
-  if (c.exposureYears != null) {
-    if (c.exposureYears >= 30) exp = 10;
-    else if (c.exposureYears >= 20) exp = 8;
-    else if (c.exposureYears >= 10) exp = 6;
-    else if (c.exposureYears >= 5) exp = 4;
-    else exp = 2;
-  }
-  if (c.receiptsVerified && c.licenseVerified) ev = 10;
-  else if (c.receiptsVerified || c.licenseVerified) ev = 5;
-  if (c.recordCount >= 3) rec = 10;
-  else if (c.recordCount == 2) rec = 6;
-  else if (c.recordCount == 1) rec = 3;
-  if (c.latencyYears != null) {
-    if (c.latencyYears >= 10 && c.latencyYears <= 25) lat = 10;
-    else if (c.latencyYears >= 5 && c.latencyYears < 10) lat = 7;
-    else if (c.latencyYears > 25) lat = 5;
-    else lat = 2;
-  }
-  if (c.avgSymptomSeverity != null) {
-    if (c.avgSymptomSeverity >= 4) sym = 10;
-    else if (c.avgSymptomSeverity >= 3) sym = 6;
-    else if (c.avgSymptomSeverity >= 1) sym = 3;
-  }
-  if (c.levodopaResponse === 'robust') lev = 10;
-  else if (c.levodopaResponse === 'moderate') lev = 7;
-  else if (c.levodopaResponse === 'minimal') lev = 3;
-  return {
-    Dx:  Math.round(dx  * 30 / 100 * 10) / 10,
-    Exp: Math.round(exp * 20 / 100 * 10) / 10,
-    Ev:  Math.round(ev  * 15 / 100 * 10) / 10,
-    Rec: Math.round(rec * 10 / 100 * 10) / 10,
-    Lat: Math.round(lat * 10 / 100 * 10) / 10,
-    Sym: Math.round(sym * 10 / 100 * 10) / 10,
-    Lev: Math.round(lev *  5 / 100 * 10) / 10,
-  };
+  const arr = scoreFactorBreakdown(c);
+  const out = {};
+  arr.forEach(f => { out[f.key] = f.contribution; });
+  return out;
 }
 
 // Per-tier GSV (Gross Settlement Value) — single number per case, editable
@@ -1867,7 +1908,7 @@ function openWinsModal(fromTier, kind = 'one') {
     .filter(x => x.w.qualifies && x.w.kind === kind)
     .map(x => {
       const sc = scoreCase(x.c);
-      return { ...x.c, score: sc.score, gaps: x.w.gaps, breakdown: scoreBreakdown(x.c) };
+      return { ...x.c, score: sc.score, gaps: x.w.gaps, factors: scoreFactorBreakdown(x.c) };
     })
     .sort((a, b) => b.score - a.score);
   if (!wins.length) return;
@@ -1878,8 +1919,18 @@ function openWinsModal(fromTier, kind = 'one') {
   const totalExpected = wins.length * perCaseExpected;
 
   // Cohort-average score breakdown across the wins in this cohort.
-  const cohortAvg = SCORE_FACTOR_LABELS.map(([k]) => k)
-    .reduce((acc, k) => { acc[k] = wins.reduce((s, c) => s + (c.breakdown[k] || 0), 0) / wins.length; return acc; }, {});
+  // Cohort-average score breakdown across the wins in this cohort.
+  // Average each factor's raw 0-10 sub-score, then re-derive the weighted
+  // contribution. Reasons are generic ("Cohort avg") since the cases differ.
+  const cohortFactors = scoreFactorBreakdown({}).map(template => {
+    const avgRaw = wins.reduce((s, c) => {
+      const f = (c.factors || []).find(x => x.key === template.key);
+      return s + (f ? f.rawScore : 0);
+    }, 0) / wins.length;
+    const contribution = Math.round(avgRaw * template.weight / 100 * 10) / 10;
+    return { ...template, rawScore: avgRaw, contribution, reason: 'cohort average' };
+  });
+  cohortFactors._cohortN = wins.length;
 
   const modal = document.getElementById('winsModal');
   if (!modal) return;
@@ -1901,30 +1952,34 @@ function openWinsModal(fromTier, kind = 'one') {
     : '';
   const tbody = document.getElementById('winsModalTbody');
   tbody.innerHTML = wins.map((c, idx) => {
-    const b = c.breakdown;
-    const segs = SCORE_FACTOR_LABELS.map(([k, label, w], sidx) =>
-      `<div class="score-bar-seg s${sidx + 1}" style="flex:${b[k].toFixed(1)}"></div>`).join('');
+    const tooltip = (c.factors || []).map(f => `${f.key}: raw ${f.rawScore} × ${f.weight}% = ${f.contribution.toFixed(1)} (${f.reason})`).join('\n');
+    const segs = (c.factors || []).map((f, sidx) =>
+      `<div class="score-bar-seg s${sidx + 1}" style="flex:${f.contribution.toFixed(1)}"></div>`).join('');
     return `
       <tr>
         <td>${c.matterNumber || '—'}</td>
         <td>${c.claimantName || '—'}</td>
         <td>${c.firm || '—'}</td>
-        <td><div class="score-cell"><b>${(c.score || 0).toFixed(1)}</b><div class="score-bar" data-case-idx="${idx}" tabindex="0" role="button" aria-label="Open score breakdown donut">${segs}</div></div></td>
+        <td><div class="score-cell"><b>${(c.score || 0).toFixed(1)}</b><div class="score-bar" data-case-idx="${idx}" tabindex="0" role="button" aria-label="Open score breakdown donut" title="${tooltip.replace(/"/g, '&quot;')}">${segs}</div></div></td>
         <td>${c.licenseVerified ? '<span class="wins-badge wins-yes">certified</span>' : '<span class="wins-badge wins-no">no cert</span>'}</td>
         <td class="wins-missing">${gapCell(c.gaps[0])}</td>
         <td class="wins-missing">${gapCell(c.gaps[1])}</td>
       </tr>`;
   }).join('');
   document.getElementById('winsModalCount').textContent = `${wins.length} cases`;
-  // Wire score-bar clicks — open the per-case donut.
+  // Wire score-bar clicks — open the per-case donut with the rich breakdown.
   tbody.querySelectorAll('.score-bar[data-case-idx]').forEach(bar => {
-    const open = () => openScoreBreakdownModal({
-      title: `${wins[bar.dataset.caseIdx].matterNumber || 'Case'} — ${wins[bar.dataset.caseIdx].claimantName || '—'}`,
-      sub: `Score ${wins[bar.dataset.caseIdx].score.toFixed(1)} of 10 — weighted contribution by factor`,
-      breakdown: wins[bar.dataset.caseIdx].breakdown,
-      total: wins[bar.dataset.caseIdx].score,
-      totalLabel: 'Score / 10',
-    });
+    const open = () => {
+      const c = wins[bar.dataset.caseIdx];
+      openScoreBreakdownModal({
+        title: `${c.matterNumber || 'Case'} — ${c.claimantName || '—'}`,
+        sub: `Score ${c.score.toFixed(1)} of 10 — weighted contribution by factor`,
+        factors: c.factors,
+        total: c.score,
+        totalLabel: 'Score / 10',
+        isAverage: false,
+      });
+    };
     bar.addEventListener('click', open);
     bar.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
   });
@@ -1934,9 +1989,10 @@ function openWinsModal(fromTier, kind = 'one') {
     cohortBtn.addEventListener('click', () => openScoreBreakdownModal({
       title: 'Cohort average score breakdown',
       sub: `Across ${wins.length} cases in this wins cohort`,
-      breakdown: cohortAvg,
+      factors: cohortFactors,
       total: cohortAvgScore,
       totalLabel: 'Avg score / 10',
+      isAverage: true,
     }));
   }
   modal.style.display = 'flex';
@@ -1957,19 +2013,27 @@ function closeWinsModal() {
 // ====================================================================
 
 let breakdownChart = null;
-function openScoreBreakdownModal({ title, sub, breakdown, total, totalLabel }) {
+// Open the donut modal with a rich breakdown. `factors` is the array returned
+// by scoreFactorBreakdown(c) (or a cohort-averaged equivalent). Each row in
+// the legend shows: swatch · factor code + weight · relative bar · weighted
+// contribution (raw × weight / 100). Below it: the raw sub-score and the
+// reason that produced it.
+function openScoreBreakdownModal({ title, sub, factors, total, totalLabel, isAverage }) {
   const modal = document.getElementById('breakdownModal');
   if (!modal) return;
   document.getElementById('breakdownModalTitle').textContent = title;
   document.getElementById('breakdownModalSubtitle').textContent = sub;
+
+  // Center label — show the formula the user is looking at: sum of contributions.
+  const sumContrib = factors.reduce((s, f) => s + f.contribution, 0);
   document.getElementById('breakdownCenter').innerHTML =
     `<div class="bd-label">${escapeHtml(totalLabel || 'Score / 10')}</div>` +
     `<div class="bd-total">${(total || 0).toFixed(1)}</div>` +
-    `<div class="bd-sub">${breakdownTotal(breakdown).toFixed(1)} raw</div>`;
+    `<div class="bd-sub">sum of 7 contributions</div>`;
 
-  const labels = SCORE_FACTOR_LABELS.map(f => f[1]);
-  const values = SCORE_FACTOR_LABELS.map(([k]) => breakdown[k] || 0);
   const colors = ['#1E2761', '#4A5E8A', '#2C5F2D', '#C9A227', '#B45309', '#94A3B8', '#475569'];
+  const labels = factors.map(f => f.label);
+  const values = factors.map(f => f.contribution);
 
   if (breakdownChart) breakdownChart.destroy();
   breakdownChart = new Chart(document.getElementById('breakdownCanvas'), {
@@ -1982,24 +2046,33 @@ function openScoreBreakdownModal({ title, sub, breakdown, total, totalLabel }) {
         datalabels: { display: false },
         tooltip: {
           callbacks: {
-            label: (ctx) => `${ctx.label}: ${ctx.parsed.toFixed(1)} (weight ${SCORE_FACTOR_LABELS[ctx.dataIndex][2]}%)`,
+            label: (ctx) => {
+              const f = factors[ctx.dataIndex];
+              return `${f.label}: raw ${f.rawScore}/10 × ${f.weight}% = ${f.contribution.toFixed(1)}`;
+            },
           },
         },
       },
     },
   });
 
-  // Legend — per factor: swatch, name, weight, bar, value
+  // Legend — two-line rows: top = swatch · code+weight · bar · contribution;
+  // bottom = the reason + raw sub-score so the user can audit the formula.
   const max = Math.max(...values, 0.01);
-  document.getElementById('breakdownLegend').innerHTML = SCORE_FACTOR_LABELS.map(([k, label, w], idx) => {
-    const v = breakdown[k] || 0;
-    const pct = (v / max * 100).toFixed(0);
+  document.getElementById('breakdownLegend').innerHTML = factors.map((f, idx) => {
+    const pct = (f.contribution / max * 100).toFixed(0);
+    const reasonLine = isAverage
+      ? `Avg raw ${f.rawScore.toFixed(1)}/10 across ${factors._cohortN || 'this'} wins`
+      : `Raw ${f.rawScore}/10 — ${escapeHtml(f.reason)}`;
+    const formula = `${f.rawScore} × ${f.weight}% = ${f.contribution.toFixed(1)}`;
     return `<div class="breakdown-legend-row">
-      <span class="bd-swatch" style="background:${colors[idx]}"></span>
-      <span class="bd-key">${k}</span>
-      <span class="bd-weight">${w}% wt</span>
-      <span class="bd-bar-wrap"><span class="bd-bar" style="width:${pct}%;background:${colors[idx]}"></span></span>
-      <span class="bd-val">${v.toFixed(1)}</span>
+      <div class="bd-top">
+        <span class="bd-swatch" style="background:${colors[idx]}"></span>
+        <span class="bd-key">${f.key}<small>${f.weight}% wt</small></span>
+        <span class="bd-bar-wrap"><span class="bd-bar" style="width:${pct}%;background:${colors[idx]}"></span></span>
+        <span class="bd-val">${f.contribution.toFixed(1)}</span>
+      </div>
+      <div class="bd-reason"><span class="bd-formula">${formula}</span> &middot; ${reasonLine}</div>
     </div>`;
   }).join('');
 
