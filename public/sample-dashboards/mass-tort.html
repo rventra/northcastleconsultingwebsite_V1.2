@@ -106,8 +106,9 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .score-bar-seg.s4{background:#B91C1C}  /* Fam — red (genetic predisposition) */
 .score-bar-seg.s5{background:#C9A227}  /* Lat — gold */
 .score-bar-seg.s6{background:#0F766E}  /* Age — teal */
-.score-bar-seg.s7{background:#94A3B8}  /* Sym — slate */
-.score-bar-seg.s8{background:#475569}  /* Lev — dark slate */
+.score-bar-seg.s7{background:#7C3AED}  /* PPE — violet (professional pattern) */
+.score-bar-seg.s8{background:#94A3B8}  /* Sym — slate */
+.score-bar-seg.s9{background:#475569}  /* Lev — dark slate */
 .score-cell{line-height:1.2;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
 .score-cohort-breakdown{font-size:11.5px;color:var(--slate);margin:8px 0 0;line-height:1.7}
 .score-cohort-breakdown b{color:var(--navy)}
@@ -470,7 +471,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
             </ul>
           </div>
         </div>
-        <div class="criteria-foot">Age at first exposure is calculated as <code>(first exposure date) − (date of birth)</code>. Family history comes from <code>pq_family_histories</code> filtered to first-degree relatives (mother, father, sibling) with a Parkinsonism or Parkinson's condition. Medical record <em>count</em> is informational only — it does not gate tier membership.</div>
+        <div class="criteria-foot">Age at first exposure is calculated as <code>(first exposure date) − (date of birth)</code>. Family history comes from <code>pq_family_histories</code> filtered to first-degree relatives (mother, father, sibling) with a Parkinsonism or Parkinson's condition. Medical record <em>count</em> is informational only — it does not gate tier membership. <b>PPE use</b> (gloves, respirator, coveralls) is a scoring factor (5%): documented PPE use corroborates the professional-applicator pattern and strengthens the case; cases without PPE on file score lower.</div>
       </div>
 
       <div class="exec-card">
@@ -1141,13 +1142,15 @@ function scoreAllCases() {
 
 // Per-factor scoring weights — drives both the score and the donut modal.
 // (Rec removed: medical record COUNT is informational, not a tier criterion.)
+// (PPE: positive signal — verified professional applicator pattern.)
 const SCORE_FACTOR_LABELS = [
   ['Dx',  'Diagnosis certainty',    25],
   ['Exp', 'Exposure duration',      15],
   ['Ev',  'Evidence verification',  15],
-  ['Fam', 'Family history',         15],
+  ['Fam', 'Family history',         10],
   ['Lat', 'Latency',                10],
   ['Age', 'Age at first exposure',  10],
+  ['PPE', 'PPE used',                5],
   ['Sym', 'Symptom severity',        5],
   ['Lev', 'Levodopa response',       5],
 ];
@@ -1214,7 +1217,15 @@ function scoreFactorBreakdown(c) {
   }
   factors.push({ key: 'Age', label: 'Age at first exposure', weight: 10, rawScore: age, reason: ageReason });
 
-  // 7. Symptom severity (5%)
+  // 7. PPE used (5%) — corroborates the professional-applicator pattern
+  // (license + receipts + PPE = credible licensed user). No PPE / not on file
+  // is weaker because the defense can argue alternative cause or that the
+  // claimant wasn't really an applicator.
+  let ppe = 0, ppeReason = 'PPE not on file (or not used)';
+  if (c.ppeUsed === true) { ppe = 10; ppeReason = 'PPE used — corroborates licensed applicator pattern'; }
+  factors.push({ key: 'PPE', label: 'PPE used', weight: 5, rawScore: ppe, reason: ppeReason });
+
+  // 8. Symptom severity (5%)
   let sym = 0, symReason = 'No symptoms logged';
   const sy = c.avgSymptomSeverity;
   if (sy != null) {
@@ -1224,7 +1235,7 @@ function scoreFactorBreakdown(c) {
   }
   factors.push({ key: 'Sym', label: 'Symptom severity', weight: 5, rawScore: sym, reason: symReason });
 
-  // 8. Levodopa response (5%)
+  // 9. Levodopa response (5%)
   let lev = 0, levReason = 'No levodopa response on file';
   const lv = c.levodopaResponse;
   if      (lv === 'robust')    { lev = 10; levReason = 'Robust levodopa response'; }
@@ -2234,7 +2245,7 @@ function openScoreBreakdownModal({ title, sub, factors, total, totalLabel, isAve
     `<div class="bd-total">${(total || 0).toFixed(1)}</div>` +
     `<div class="bd-sub">sum of 7 contributions</div>`;
 
-  const colors = ['#1E2761', '#4A5E8A', '#2C5F2D', '#B91C1C', '#C9A227', '#0F766E', '#94A3B8', '#475569'];
+  const colors = ['#1E2761', '#4A5E8A', '#2C5F2D', '#B91C1C', '#C9A227', '#0F766E', '#7C3AED', '#94A3B8', '#475569'];
   const labels = factors.map(f => f.label);
   const values = factors.map(f => f.contribution);
 
