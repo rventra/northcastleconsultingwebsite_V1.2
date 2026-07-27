@@ -93,10 +93,31 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .val-table th,.val-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
 .val-table th{background:var(--mist);font-weight:700;color:var(--navy);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
 .tier-pill{display:inline-block;padding:2px 8px;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:2px;color:var(--white)}
-.tier-pill.t1{background:var(--gold);color:var(--navy-ink)}
-.tier-pill.t2{background:var(--purple)}
+.tier-pill.t1,.tier-pill.t2{background:transparent;color:var(--navy);padding:0;font-weight:700;letter-spacing:0;font-size:11.5px}
 .tier-pill.t3{background:var(--amber)}
 .tier-pill.t4{background:var(--red)}
+.tier-tile.tier-1,.tier-tile.tier-2{border-left-color:var(--border)}
+
+/* Score breakdown — horizontal stacked bar showing the 7 weighted factor
+   contributions to a case's 0-10 score. */
+.score-bar{display:flex;height:8px;width:140px;background:var(--bg);border:1px solid var(--border);border-radius:1px;overflow:hidden;margin:4px 0 0;cursor:help}
+.score-bar-seg{height:100%}
+.score-bar-seg.s1{background:#1E2761}  /* Dx  — navy */
+.score-bar-seg.s2{background:#4A5E8A}  /* Exp — purple */
+.score-bar-seg.s3{background:#2C5F2D}  /* Ev  — green */
+.score-bar-seg.s4{background:#C9A227}  /* Rec — gold */
+.score-bar-seg.s5{background:#B45309}  /* Lat — amber */
+.score-bar-seg.s6{background:#94A3B8}  /* Sym — slate */
+.score-bar-seg.s7{background:#475569}  /* Lev — dark slate */
+.score-cell{line-height:1.2;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.score-cohort-breakdown{font-size:11.5px;color:var(--slate);margin:8px 0 0;line-height:1.7}
+.score-cohort-breakdown b{color:var(--navy)}
+.score-cohort-breakdown .seg{display:inline-block;width:8px;height:8px;margin-right:4px;vertical-align:middle;border-radius:1px}
+
+/* Convert-rate dropdown — universal input, drives every "if X% convert" line. */
+.tier-convert-control{display:inline-flex;align-items:center;gap:6px;margin-left:auto;font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.tier-convert-select{font-family:inherit;font-size:12px;font-weight:700;color:var(--navy);padding:4px 8px;border:1px solid var(--gold);border-radius:3px;background:var(--white);cursor:pointer;letter-spacing:0;text-transform:none}
+.tier-convert-select:focus{outline:none;border-color:var(--navy)}
 .val-table-wrap{max-height:520px;overflow:auto;border:1px solid var(--border)}
 /* Cross-filter chips (PBI-style) */
 .cross-filter-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 28px;background:var(--mist);border-bottom:1px solid var(--border)}
@@ -326,11 +347,16 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <h3>Value by tier <span style="font-weight:400;font-size:11.5px;color:var(--slate-lite)">· click a value to edit</span></h3>
         <div class="tier-total-strip">
           <span><b id="totalOpenCount">0</b> open · <b id="totalClosedCount">0</b> closed</span>
+          <span class="tier-convert-control">If <select id="convertRateSelect" class="tier-convert-select" title="Universal convert rate — applied to every lift line and the wins cohort">
+            <option value="0.25" selected>a quarter (25%) convert</option>
+            <option value="0.5">half (50%) convert</option>
+            <option value="0.1667">a 1/6 (~17%) convert</option>
+          </select></span>
           <span>Total inventory value: <b id="totalInventoryValue">$0</b></span>
           <span class="tier-uplift-total">Upside still on the table: <b id="totalUplift">$0</b></span>
         </div>
         <div id="tierPanel"></div>
-        <div class="tier-foot">Upside counts only gaps that are missing information — not facts the record affirmatively rules out — weighted by the odds the gap can be cured. Thin files (≤2 records) with one adverse fact get partial credit. Click a lift line to see the cohort.</div>
+        <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
       </div>
 
       <div class="exec-card">
@@ -642,7 +668,7 @@ function winCandidates(c, fromTier) {
 // (D.cases) filtered through this state, so sidebar filters apply everywhere.
 // Pre-aggregated D.* keys are retained in the data file for reference only.
 
-const state = { status: 'all', type: 'all', diagnosis: 'all', tier: 'all', cross: {} };
+const state = { status: 'all', type: 'all', diagnosis: 'all', tier: 'all', cross: {}, convertRate: 0.25 };
 
 // Cross-filter dimensions (PBI-style): chart clicks set these; they AND with
 // the sidebar dropdown filters above. Dims: statusBucket, dxBucket, tier,
@@ -873,6 +899,29 @@ function initFilters() {
       refreshActiveTab();
     });
   });
+
+  // Convert-rate dropdown — single universal input driving every "if X%
+  // convert" lift line and the wins modal cohort note.
+  const crSel = document.getElementById('convertRateSelect');
+  if (crSel) {
+    crSel.addEventListener('change', (e) => {
+      const v = parseFloat(e.target.value);
+      if (!isNaN(v) && v > 0 && v <= 1) {
+        state.convertRate = v;
+        updateTierPanelDerived();
+        // If the wins modal is open, refresh it so the cohort note matches.
+        const modal = document.getElementById('winsModal');
+        if (modal && modal.style.display !== 'none') {
+          const openBtn = document.querySelector('.lift-line[data-tier]:focus, .lift-line[data-tier]:hover');
+          // Fall back to re-rendering for the most recently opened tier if we
+          // can't infer from focus. The modal will be re-opened by click; the
+          // safest path is to close it so the user picks again at the new rate.
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  }
   const clearBtn = document.getElementById('btnClearFilters');
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
@@ -973,6 +1022,65 @@ function scoreAllCases() {
   // Operates on the currently filtered cases so tier counts and scoring
   // respect the user's sidebar filters.
   return getFilteredCases().map(c => ({ ...c, ...scoreCase(c) }));
+}
+
+// Per-factor weighted contribution to the 0-10 score. Used to break out
+// where each case's score comes from (Diagnosis 30%, Exposure 20%, etc.).
+// Returns {Dx, Exp, Ev, Rec, Lat, Sym, Lev} — each value is the already-
+// weighted contribution on the same 0-10 scale (so they sum to `score`).
+const SCORE_FACTOR_LABELS = [
+  ['Dx',  'Diagnosis certainty',    30],
+  ['Exp', 'Exposure duration',      20],
+  ['Ev',  'Evidence verification',  15],
+  ['Rec', 'Medical records',        10],
+  ['Lat', 'Latency',                10],
+  ['Sym', 'Symptom severity',       10],
+  ['Lev', 'Levodopa response',       5],
+];
+function scoreBreakdown(c) {
+  // Mirrors scoreCase() but returns the weighted contribution of each factor.
+  let dx=0, exp=0, ev=0, rec=0, lat=0, sym=0, lev=0;
+  if (c.primaryDiagnosis) {
+    const cond = c.primaryDiagnosis;
+    if (cond === 'parkinsons_disease') dx = 8;
+    else if (cond === 'parkinsonism_unspecified') dx = 6;
+    else dx = 4;
+  }
+  if (c.exposureYears != null) {
+    if (c.exposureYears >= 30) exp = 10;
+    else if (c.exposureYears >= 20) exp = 8;
+    else if (c.exposureYears >= 10) exp = 6;
+    else if (c.exposureYears >= 5) exp = 4;
+    else exp = 2;
+  }
+  if (c.receiptsVerified && c.licenseVerified) ev = 10;
+  else if (c.receiptsVerified || c.licenseVerified) ev = 5;
+  if (c.recordCount >= 3) rec = 10;
+  else if (c.recordCount == 2) rec = 6;
+  else if (c.recordCount == 1) rec = 3;
+  if (c.latencyYears != null) {
+    if (c.latencyYears >= 10 && c.latencyYears <= 25) lat = 10;
+    else if (c.latencyYears >= 5 && c.latencyYears < 10) lat = 7;
+    else if (c.latencyYears > 25) lat = 5;
+    else lat = 2;
+  }
+  if (c.avgSymptomSeverity != null) {
+    if (c.avgSymptomSeverity >= 4) sym = 10;
+    else if (c.avgSymptomSeverity >= 3) sym = 6;
+    else if (c.avgSymptomSeverity >= 1) sym = 3;
+  }
+  if (c.levodopaResponse === 'robust') lev = 10;
+  else if (c.levodopaResponse === 'moderate') lev = 7;
+  else if (c.levodopaResponse === 'minimal') lev = 3;
+  return {
+    Dx:  Math.round(dx  * 30 / 100 * 10) / 10,
+    Exp: Math.round(exp * 20 / 100 * 10) / 10,
+    Ev:  Math.round(ev  * 15 / 100 * 10) / 10,
+    Rec: Math.round(rec * 10 / 100 * 10) / 10,
+    Lat: Math.round(lat * 10 / 100 * 10) / 10,
+    Sym: Math.round(sym * 10 / 100 * 10) / 10,
+    Lev: Math.round(lev *  5 / 100 * 10) / 10,
+  };
 }
 
 // Per-tier GSV (Gross Settlement Value) — single number per case, editable
@@ -1541,7 +1649,7 @@ function renderTierPanel() {
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
     return `
       <tr class="tier-${t}-row">
-        <td><span class="tier-pill t${t}">T${t}</span> <span class="mx-name">${def.name}</span></td>
+        <td><span class="tier-pill t${t}">${TIER_NAMES[t]}</span> <span class="mx-name">${def.name}</span></td>
         <td class="num"><b id="mx-${t}-cases">${open.toLocaleString()}</b><span class="mx-sub">${closed.toLocaleString()} closed</span></td>
         <td class="num mx-gsv"><span class="tier-gsv-dollar">$</span><input type="number" class="tier-gsv-input" data-tier="${t}" value="${tierDollars[t]}" min="0" step="1000" /></td>
         <td class="num"><b id="mx-${t}-payout">${fmtMoney(tierGsv(t) * open)}</b></td>
@@ -1603,7 +1711,7 @@ function liftCellHtml(t) {
 }
 
 function liftLine(source, kind, n, gap, label) {
-  const p = KIND_P[kind];
+  const p = state.convertRate;
   const exp = n * gap * p;
   return `<div class="lift-line lift-${kind}" data-tier="${source}" data-kind="${kind}" role="button" tabindex="0" title="Click to see the cohort">▸ <b>${n}</b> ${label} — if ${oddsWords(p)} convert, <b>+${fmtMoney(exp)}</b></div>`;
 }
@@ -1644,12 +1752,13 @@ function updateTierPanelDerived() {
       wireWinsRows(liftEl);
     }
   });
-  // Total upside = probability-weighted expected lift across all source tiers.
+  // Total upside = probability-weighted expected lift across all source tiers,
+  // using the single universal convert rate (state.convertRate) instead of
+  // per-cohort cure probabilities.
+  const p = state.convertRate;
   [2, 3, 4].forEach(s => {
     const { one, two, thin, gap } = winsCohorts(s);
-    totalUplift += one.length * gap * P_CURE_UNKNOWN
-                 + two.length * gap * P_CURE_TWO_FIX
-                 + thin.length * gap * P_CURE_THIN_FILE;
+    totalUplift += (one.length + two.length + thin.length) * gap * p;
   });
   const totalOpenEl = document.getElementById('totalOpenCount');
   const totalClosedEl = document.getElementById('totalClosedCount');
@@ -1676,15 +1785,19 @@ function openWinsModal(fromTier, kind = 'one') {
     .filter(x => x.w.qualifies && x.w.kind === kind)
     .map(x => {
       const sc = scoreCase(x.c);
-      return { ...x.c, score: sc.score, gaps: x.w.gaps };
+      return { ...x.c, score: sc.score, gaps: x.w.gaps, breakdown: scoreBreakdown(x.c) };
     })
     .sort((a, b) => b.score - a.score);
   if (!wins.length) return;
 
   const gap = tierGsv(target) - tierGsv(fromTier);
-  const p = KIND_P[kind];
+  const p = state.convertRate;
   const perCaseExpected = gap * p;
   const totalExpected = wins.length * perCaseExpected;
+
+  // Cohort-average score breakdown across the wins in this cohort.
+  const cohortAvg = SCORE_FACTOR_LABELS.map(([k]) => k)
+    .reduce((acc, k) => { acc[k] = wins.reduce((s, c) => s + (c.breakdown[k] || 0), 0) / wins.length; return acc; }, {});
 
   const modal = document.getElementById('winsModal');
   if (!modal) return;
@@ -1696,21 +1809,34 @@ function openWinsModal(fromTier, kind = 'one') {
   }[kind];
   document.getElementById('winsModalTitle').textContent =
     `Wins cohort: ${wins.length} cases ${fixWord} from Tier ${target}${kind === 'thin' ? ' (thin file)' : ''}`;
-  document.getElementById('winsModalSubtitle').textContent = cohortNote;
+  // Subtitle: cohort note + a one-line cohort-average breakdown of the score.
+  document.getElementById('winsModalSubtitle').innerHTML = cohortNote +
+    `<div class="score-cohort-breakdown">Cohort-avg score breakdown: `
+    + SCORE_FACTOR_LABELS.map(([k, label, w]) => {
+        const colorVar = k === 'Dx' ? 'navy' : k === 'Exp' ? 'purple' : k === 'Ev' ? 'green' : k === 'Rec' ? 'gold' : k === 'Lat' ? 'amber' : k === 'Sym' ? 'slate-lite' : 'slate';
+        return `<span title="${label} (weight ${w}%)"><span class="seg" style="background:var(--${colorVar})"></span>${k} <b>${cohortAvg[k].toFixed(1)}</b> <span style="color:var(--slate-lite)">(${w}%)</span></span>`;
+      }).join(' &middot; ')
+    + ` &middot; <b style="color:var(--gold)">cohort avg score ${(wins.reduce((s,c)=>s+c.score,0)/wins.length).toFixed(1)}</b></div>`;
   const gapCell = g => g
     ? `<span class="wins-pill">${g.label}</span>${g.status === 'disconfirmed' ? ' <span class="gap-badge gap-thin">disconfirmed</span>' : ''}`
     : '';
   const tbody = document.getElementById('winsModalTbody');
-  tbody.innerHTML = wins.map(c => `
-    <tr>
-      <td>${c.matterNumber || '—'}</td>
-      <td>${c.claimantName || '—'}</td>
-      <td>${c.firm || '—'}</td>
-      <td><b>${(c.score || 0).toFixed(1)}</b></td>
-      <td>${c.licenseVerified ? '<span class="wins-badge wins-yes">certified</span>' : '<span class="wins-badge wins-no">no cert</span>'}</td>
-      <td class="wins-missing">${gapCell(c.gaps[0])}</td>
-      <td class="wins-missing">${gapCell(c.gaps[1])}</td>
-    </tr>`).join('');
+  tbody.innerHTML = wins.map(c => {
+    const b = c.breakdown;
+    const segs = SCORE_FACTOR_LABELS.map(([k, label, w], idx) =>
+      `<div class="score-bar-seg s${idx + 1}" style="flex:${b[k].toFixed(1)}" title="${label} (${w}% weight): ${b[k].toFixed(1)}"></div>`).join('');
+    const tooltip = SCORE_FACTOR_LABELS.map(([k, label, w]) => `${label} (${w}%): ${b[k].toFixed(1)}`).join(' · ');
+    return `
+      <tr>
+        <td>${c.matterNumber || '—'}</td>
+        <td>${c.claimantName || '—'}</td>
+        <td>${c.firm || '—'}</td>
+        <td><div class="score-cell"><b>${(c.score || 0).toFixed(1)}</b><div class="score-bar" title="${tooltip}">${segs}</div></div></td>
+        <td>${c.licenseVerified ? '<span class="wins-badge wins-yes">certified</span>' : '<span class="wins-badge wins-no">no cert</span>'}</td>
+        <td class="wins-missing">${gapCell(c.gaps[0])}</td>
+        <td class="wins-missing">${gapCell(c.gaps[1])}</td>
+      </tr>`;
+  }).join('');
   document.getElementById('winsModalCount').textContent = `${wins.length} cases`;
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
