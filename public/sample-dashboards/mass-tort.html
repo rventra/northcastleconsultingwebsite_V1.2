@@ -19,7 +19,7 @@
   --purple:#4A5E8A; --purple-lite:#94A3B8;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg);font-variant-numeric:tabular-nums;font-size:14.5px;line-height:1.62}
+html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg);font-variant-numeric:tabular-nums;font-size:15.5px;line-height:1.62}
 .layout{display:grid;grid-template-columns:300px 1fr;align-items:start;max-width:1640px;margin:0 auto;background:var(--white);min-height:100vh;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .sidebar{position:sticky;top:0;align-self:start;height:100vh;background:var(--white);border-right:1px solid var(--border);padding:28px 24px;overflow-y:auto}
 .sidebar h1{font-size:18px;font-weight:700;color:var(--navy);margin:0 0 4px;letter-spacing:.04em}
@@ -47,9 +47,9 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .content{padding:34px 44px;max-width:1280px}
 .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px}
 .tile{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--gold);padding:16px 18px;position:relative}
-.tile-label{font-size:10.5px;font-weight:700;color:var(--slate);letter-spacing:.12em;text-transform:uppercase}
-.tile-value{font-size:26px;font-weight:700;color:var(--navy);margin:4px 0 2px;line-height:1.1}
-.tile-sub{font-size:11px;color:var(--slate-lite)}
+.tile-label{font-size:11px;font-weight:700;color:var(--slate);letter-spacing:.12em;text-transform:uppercase}
+.tile-value{font-size:28px;font-weight:700;color:var(--navy);margin:4px 0 2px;line-height:1.1}
+.tile-sub{font-size:11.5px;color:var(--slate-lite)}
 .chart-card{background:var(--white);border:1px solid var(--border);padding:22px 24px;margin-bottom:22px}
 .chart-card h3{font-size:14px;font-weight:700;color:var(--navy);margin:0 0 14px;letter-spacing:.01em}
 .chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px}
@@ -89,9 +89,9 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .nl-sql{background:var(--navy-ink);color:#94A3B8;padding:12px 14px;font-family:Consolas,monospace;font-size:12px;overflow:auto;margin-top:8px;line-height:1.5}
 
 /* Valuation table */
-.val-table{width:100%;border-collapse:collapse;font-size:12px}
+.val-table{width:100%;border-collapse:collapse;font-size:13px}
 .val-table th,.val-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
-.val-table th{background:var(--mist);font-weight:700;color:var(--navy);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.val-table th{background:var(--mist);font-weight:700;color:var(--navy);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
 .tier-pill{display:inline-block;padding:2px 8px;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:2px;color:var(--white)}
 .tier-pill.t1{background:var(--gold);color:var(--navy-ink)}
 .tier-pill.t2{background:var(--purple)}
@@ -114,7 +114,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 @media (max-width:1100px){.exec-grid{grid-template-columns:1fr}}
 .exec-card{background:var(--white);border:1px solid var(--border);padding:22px 24px;margin-bottom:22px}
 .exec-card h3{font-size:14px;font-weight:700;color:var(--navy);margin:0 0 12px;letter-spacing:.01em}
-.exec-card p,.exec-card li{font-size:13px;color:var(--navy-ink)}
+.exec-card p,.exec-card li{font-size:13.5px;color:var(--navy-ink)}
 .exec-flag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.06em;color:var(--amber);background:var(--amber-bg);border:1px solid var(--amber);padding:1px 6px;border-radius:2px;text-transform:uppercase;vertical-align:middle}
 .ruling-list{list-style:none;margin:0;padding:0}
 .ruling-list li{padding:6px 8px;border-bottom:1px solid var(--border);font-size:12px;line-height:1.5;display:flex;gap:12px;align-items:baseline}
@@ -130,16 +130,16 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 
 /* Tier Panel (Executive Summary) — front-and-center on t0 for PE audience */
 /* Tier matrix (Executive Summary) — clean valuation table */
-.tier-matrix{width:100%;border-collapse:collapse;font-size:13px}
-.tier-matrix th{font-size:10.5px;font-weight:700;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:6px 12px 8px;border-bottom:2px solid var(--border)}
+.tier-matrix{width:100%;border-collapse:collapse;font-size:14px}
+.tier-matrix th{font-size:11px;font-weight:700;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:6px 12px 8px;border-bottom:2px solid var(--border)}
 .tier-matrix th.num,.tier-matrix td.num{text-align:right}
-.tier-matrix td{padding:12px;border-bottom:1px solid var(--border);vertical-align:top}
+.tier-matrix td{padding:13px 12px;border-bottom:1px solid var(--border);vertical-align:top}
 .tier-matrix tbody tr:last-child td{border-bottom:none}
 .mx-name{font-weight:700;color:var(--navy)}
-.mx-sub{display:block;font-size:10.5px;color:var(--slate-lite);font-weight:400}
-.tier-matrix .tier-gsv-input{width:110px;padding:4px 8px;font-size:14px;border-width:1px}
+.mx-sub{display:block;font-size:11px;color:var(--slate-lite);font-weight:400}
+.tier-matrix .tier-gsv-input{width:115px;padding:4px 8px;font-size:15px;border-width:1px}
 .mx-lift{min-width:250px}
-.lift-line{cursor:pointer;font-size:12px;color:var(--navy-ink);padding:2px 0;line-height:1.5}
+.lift-line{cursor:pointer;font-size:12.5px;color:var(--navy-ink);padding:2px 0;line-height:1.5}
 .lift-line b{color:var(--navy)}
 .lift-line:hover{color:var(--gold)}
 .lift-line.lift-two,.lift-line.lift-thin{color:var(--slate)}
@@ -150,7 +150,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .gap-badge.gap-thin{background:var(--amber-bg);color:var(--amber)}
 
 /* Legacy tier-row styles kept for reference — superseded by .tier-matrix */
-.tier-total-strip{display:flex;gap:24px;flex-wrap:wrap;padding:10px 14px;background:var(--mist);border-radius:4px;margin-bottom:14px;font-size:12.5px;color:var(--slate)}
+.tier-total-strip{display:flex;gap:24px;flex-wrap:wrap;padding:10px 14px;background:var(--mist);border-radius:4px;margin-bottom:14px;font-size:13.5px;color:var(--slate)}
 .tier-total-strip b{color:var(--navy);font-variant-numeric:tabular-nums}
 .tier-uplift-total b{color:var(--gold);font-size:14px}
 .tier-row{display:grid;grid-template-columns:1fr;gap:8px;padding:14px 0;border-bottom:1px solid var(--border)}
@@ -210,9 +210,9 @@ details.exec-details[open]>summary{margin-bottom:12px}
 .wins-modal-body{padding:14px 22px 22px;overflow:auto}
 .wins-modal-meta{font-size:11.5px;color:var(--slate-lite);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
 .wins-modal-table-wrap{max-height:60vh;overflow:auto;border:1px solid var(--border)}
-.wins-modal-table{width:100%;border-collapse:collapse;font-size:12px}
+.wins-modal-table{width:100%;border-collapse:collapse;font-size:12.5px}
 .wins-modal-table th,.wins-modal-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
-.wins-modal-table th{background:var(--mist);font-weight:700;color:var(--navy);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;position:sticky;top:0}
+.wins-modal-table th{background:var(--mist);font-weight:700;color:var(--navy);font-size:11px;text-transform:uppercase;letter-spacing:.06em;position:sticky;top:0}
 .wins-modal-table tr:hover td{background:var(--mist)}
 .wins-badge{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.06em;padding:2px 6px;border-radius:2px;text-transform:uppercase}
 .wins-badge.wins-yes{background:#dcfce7;color:#166534}
@@ -321,11 +321,6 @@ details.exec-details[open]>summary{margin-bottom:12px}
 
     <!-- TAB 0: Executive Summary -->
     <div class="tab-content active" id="t0">
-      <div class="exec-card">
-        <h3>Executive Summary — Paraquat MDL 3004 &amp; Roundup Comparator</h3>
-        <p style="margin:0"><span class="exec-stamp">As of 2026-07-23 &middot; docket facts from public sources; portfolio figures are synthetic demo data</span></p>
-      </div>
-
       <!-- Tier Panel — front and center for PE audience -->
       <div class="exec-card">
         <h3>Value by tier <span style="font-weight:400;font-size:11.5px;color:var(--slate-lite)">· click a value to edit</span></h3>
@@ -338,51 +333,16 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <div class="tier-foot">Upside counts only gaps that are missing information — not facts the record affirmatively rules out — weighted by the odds the gap can be cured. Thin files (≤2 records) with one adverse fact get partial credit. Click a lift line to see the cohort.</div>
       </div>
 
-      <!-- Pain Rulings — what's hurting the docket -->
       <div class="exec-card">
-        <h3>Pain rulings — what's hurting the docket</h3>
-        <div id="painRulings"></div>
-      </div>
-
-      <div class="exec-card">
-        <details class="exec-details">
-          <summary>Key rulings timeline</summary>
-        <ul class="ruling-list">
-          <li><span class="ruling-date">2023-09/10</span><span><b>Durnell v. Monsanto</b> trial, Circuit Court of the City of St. Louis, MO — $1.25M strict-liability failure-to-warn verdict.</span></li>
-          <li><span class="ruling-date">2023-11 → 2025-09-30</span><span><b>Anderson/Draeger/Gunther</b>, Cole Cty. MO — $1.56B verdict reduced to $611M and affirmed; Missouri Supreme Court declined review 2025-09-30.</span></li>
-          <li><span class="ruling-date">2024-01/06</span><span><b>McKivison</b>, Philadelphia — $2.25B verdict reduced to ~$400M.</span></li>
-          <li class="ruling-hl"><span class="ruling-date">2024-04-17</span><span><b>MDL 3004 Doc. 5237 — Wells Daubert exclusion.</b> Judge Rosenstengel excluded Dr. Martin Wells, plaintiffs' sole general-causation expert, after a 4-day Daubert hearing; the first bellwether pool collapsed days later and a new pool had to be ordered (Jan 2025).</span></li>
-          <li><span class="ruling-date">2025-03-21</span><span><b>Barnes</b>, Cobb Cty. GA — $2.1B verdict ($65M compensatory + $2B punitive).</span></li>
-          <li><span class="ruling-date">2025-05</span><span><b>Caranci</b>, Pa. Super. Ct. — $177M verdict stands.</span></li>
-          <li><span class="ruling-date">2025-09-29</span><span><b>MDL 3004 Doc. 5719</b> — stay extended; October 2025 bellwether trial vacated.</span></li>
-          <li><span class="ruling-date">2025-11</span><span><b>Dennis</b>, Cal. Ct. App. — $28M verdict upheld.</span></li>
-          <li><span class="ruling-date">2026-01-27/29</span><span><b>Mertens</b>, Philadelphia CCP — first-ever paraquat jury trial ended in a confidential eve-of-trial settlement.</span></li>
-          <li class="ruling-hl"><span class="ruling-date">2026-06-25</span><span><b>Monsanto v. Durnell, SCOTUS No. 24-1068 — 7–2 for Bayer: FIFRA preempts state failure-to-warn claims requiring warnings beyond EPA-approved labels.</b> Industry-changing for both Roundup and paraquat — directly strengthens Syngenta's pending preemption motion in MDL 3004.</span></li>
+        <h3>Legal developments</h3>
+        <ul class="watch-list">
+          <li><b>SCOTUS, Monsanto v. Durnell (Jun 2026):</b> FIFRA preempts state failure-to-warn claims requiring warnings beyond EPA-approved labels. <b>Impact: high</b> — materially strengthens Syngenta's preemption motion in MDL 3004 and its leverage over non-settling inventory.</li>
+          <li><b>Wells Daubert exclusion, MDL 3004 Doc. 5237 (Apr 2024):</b> plaintiffs' sole general-causation expert was excluded and the first bellwether pool collapsed. <b>Impact: high</b> — general causation is still unproven across all 2,000+ member cases.</li>
+          <li><b>Roundup $7.25B class settlement (Feb 2026):</b> covers current and future claims; final-approval hearing held Jul 2026, outcome pending. <b>Impact: moderate</b> — the clearest comparator pricing signal for paraquat settlement value.</li>
+          <li><b>Philadelphia CCP bellwethers:</b> Mertens, the first paraquat jury trial, settled on the eve of trial; 1,952 cases remain pending. <b>Impact: moderate</b> — a plaintiff verdict there would re-price the opt-out tail.</li>
+          <li><b>Opt-out firm inventory:</b> the MSA excludes clients of specific opt-out firms. <b>Impact: moderate</b> — watch how that inventory is priced, tried, or folded back in.</li>
+          <li><b>Syngenta ends global paraquat production (Jun 2026):</b> exit proceeds while advocates press EPA for a ban. <b>Impact: low–moderate</b> — shapes future-claims exposure and the public narrative more than current valuation.</li>
         </ul>
-        </details>
-      </div>
-
-      <div class="exec-grid">
-        <div class="exec-card">
-          <h3>Comparator: Roundup (MDL 2741)</h3>
-          <ul class="watch-list">
-            <li><b>~3,920 pending</b> in MDL 2741 (N.D. Cal.) as of Jul 2026; ~61,000 active total; ~100,000 claims resolved for ~$11B. Judge Chhabria issued a Suggestion of Remand 2026-01-05.</li>
-            <li><b>$7.25B class settlement</b> (current + future claims) announced 2026-02-17; preliminary approval 2026-03-04 (Judge Timothy Boyer, St. Louis 22nd Cir.); objectors' federal removal remanded 2026-06-17. Final-approval hearing held <b>2026-07-09</b> — outcome pending <span class="exec-flag">not verified</span></li>
-            <li>Bayer has ~$16B provisioned in total reserves; <b>Durnell</b> (above) is a SCOTUS preemption win that narrows future failure-to-warn exposure.</li>
-            <li><b>Implication for paraquat:</b> Syngenta filed a preemption MSJ in Feb 2026 — the Durnell holding materially improves its odds and its leverage over non-settling inventory.</li>
-          </ul>
-        </div>
-
-        <div class="exec-card">
-          <h3>What to watch</h3>
-          <ul class="watch-list">
-            <li><b>Settlement-administration milestones</b> — QSF claims-submission rates, lien-administrator throughput, and timing of first disbursements under the MSA; these set the real pace of recovery.</li>
-            <li><b>Syngenta's preemption MSJ (filed Feb 2026)</b> — post-Durnell, a grant could gut failure-to-warn theories for opt-out and non-eligible inventory.</li>
-            <li><b>Opt-out firm inventory</b> — the MSA excludes clients of specific opt-out firms; watch how that inventory is priced, tried, or folded back in.</li>
-            <li><b>Philadelphia CCP bellwethers</b> — Mertens settled on the eve of trial; the next bellwether was set for 2026-04-13 (outcome unverified) and 1,952 cases remain pending. A plaintiff verdict there would re-price the opt-out tail.</li>
-            <li><b>EPA regulatory track</b> — Syngenta is ending global paraquat production by end of June 2026 while advocates press for a ban; regulatory action affects both future claims and public narrative.</li>
-          </ul>
-        </div>
       </div>
 
       <div class="exec-card">
@@ -533,7 +493,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <table class="wins-modal-table">
           <thead>
             <tr>
-              <th>Docket</th>
+              <th>Matter #</th>
               <th>Claimant</th>
               <th>Firm</th>
               <th>Score</th>
@@ -1082,8 +1042,8 @@ function doughnut(id, labels, data, colors) {
     data: { labels, datasets: [{ data, backgroundColor: colors || TIER_COLORS }] },
     options: {
       responsive: true, cutout: '60%',
-      plugins: { legend: { position: 'right', labels: { font: { size: 11 }, boxWidth: 12 } },
-                 datalabels: { color: '#fff', font: { weight: 700, size: 11 }, formatter: v => v } }
+      plugins: { legend: { position: 'right', labels: { font: { size: 12 }, boxWidth: 12 } },
+                 datalabels: { color: '#fff', font: { weight: 700, size: 12 }, formatter: v => v } }
     }
   });
 }
@@ -1098,11 +1058,11 @@ function bar(id, labels, datasets, opts = {}) {
     options: {
       indexAxis: opts.horizontal ? 'y' : 'x',
       responsive: true,
-      plugins: { legend: { display: (datasets.length > 1), labels: { font: { size: 11 }, boxWidth: 12 } },
+      plugins: { legend: { display: (datasets.length > 1), labels: { font: { size: 12 }, boxWidth: 12 } },
                  datalabels: opts.datalabels || { display: false } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
-        y: { grid: { color: '#F1F5F9' }, ticks: { font: { size: 10 } } }
+        x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+        y: { grid: { color: '#F1F5F9' }, ticks: { font: { size: 11 } } }
       }
     }
   });
@@ -1117,10 +1077,10 @@ function stackedBar(id, labels, datasets) {
     data: { labels, datasets },
     options: {
       indexAxis: 'y', responsive: true,
-      plugins: { legend: { labels: { font: { size: 11 }, boxWidth: 12 } } },
+      plugins: { legend: { labels: { font: { size: 12 }, boxWidth: 12 } } },
       scales: {
-        x: { stacked: true, grid: { color: '#F1F5F9' }, ticks: { font: { size: 10 } } },
-        y: { stacked: true, grid: { display: false }, ticks: { font: { size: 10 } } }
+        x: { stacked: true, grid: { color: '#F1F5F9' }, ticks: { font: { size: 11 } } },
+        y: { stacked: true, grid: { display: false }, ticks: { font: { size: 11 } } }
       }
     }
   });
@@ -1135,10 +1095,10 @@ function line(id, labels, datasets) {
     data: { labels, datasets },
     options: {
       responsive: true,
-      plugins: { legend: { display: (datasets.length > 1), labels: { font: { size: 11 } } } },
+      plugins: { legend: { display: (datasets.length > 1), labels: { font: { size: 12 } } } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
-        y: { grid: { color: '#F1F5F9' }, ticks: { font: { size: 10 } } }
+        x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+        y: { grid: { color: '#F1F5F9' }, ticks: { font: { size: 11 } } }
       }
     }
   });
@@ -1553,7 +1513,7 @@ function renderTab5() {
   tbody.innerHTML = top.map(c => `
     <tr>
       <td><span class="tier-pill t${c.tier}">T${c.tier}</span></td>
-      <td>${(c.docket || '').slice(0, 16)}</td>
+      <td>${c.matterNumber || '—'}</td>
       <td>${c.claimantName}</td>
       <td>${c.firm}</td>
       <td>${c.primaryDiagnosis ? c.primaryDiagnosis.replace(/_/g, ' ') : '—'}</td>
@@ -1562,37 +1522,8 @@ function renderTab5() {
 }
 
 // ====================================================================
-// EXECUTIVE SUMMARY TAB (t0) — tier panel + pain rulings + pitch
+// EXECUTIVE SUMMARY TAB (t0) — tier matrix + legal developments
 // ====================================================================
-
-// Adverse rulings — the ones actively hurting the docket. Pulled from the
-// full Key Rulings Timeline below; surfaced here so an investor sees the
-// pain points without scrolling.
-const PAIN_RULINGS = [
-  { date: '2026-06-25', name: 'Monsanto v. Durnell (SCOTUS, 7-2)',
-    body: 'FIFRA preempts state failure-to-warn claims requiring warnings beyond EPA-approved labels. Industry-changing — directly strengthens Syngenta\'s pending preemption MSJ in MDL 3004.',
-    impact: 'Critical' },
-  { date: '2024-04-17', name: 'Wells Daubert exclusion (MDL 3004 Doc. 5237)',
-    body: 'Judge Rosenstengel excluded Dr. Martin Wells, plaintiffs\' sole general-causation expert. First bellwether pool collapsed; new pool had to be ordered (Jan 2025). Applies to all 2,000+ member cases.',
-    impact: 'Critical' },
-  { date: '2026-02',   name: 'Syngenta preemption MSJ (filed)',
-    body: 'Post-Durnell materially improves odds of dismissal. A grant could gut failure-to-warn theories for opt-out and non-eligible inventory.',
-    impact: 'High' },
-  { date: '2025-09-29', name: 'MDL 3004 Doc. 5719 — bellwether trial vacated',
-    body: 'October 2025 MDL trial stayed; current activity is settlement administration, not trials. Bellwether track replaced by settlement framework.',
-    impact: 'Medium' },
-];
-
-function renderPainRulings() {
-  const el = document.getElementById('painRulings');
-  if (!el) return;
-  el.innerHTML = PAIN_RULINGS.map(r => `
-    <div class="pain-card">
-      <span class="pain-date">${r.date}</span>
-      <span class="pain-body"><b>${r.name}</b> — ${r.body}</span>
-      <span class="pain-impact">${r.impact}</span>
-    </div>`).join('');
-}
 
 // Tier panel — a clean valuation matrix: one row per tier with case count,
 // editable GSV per case, expected payout, and the lift the tier stands to
@@ -1772,7 +1703,7 @@ function openWinsModal(fromTier, kind = 'one') {
   const tbody = document.getElementById('winsModalTbody');
   tbody.innerHTML = wins.map(c => `
     <tr>
-      <td>${(c.docket || '').slice(0, 16)}</td>
+      <td>${c.matterNumber || '—'}</td>
       <td>${c.claimantName || '—'}</td>
       <td>${c.firm || '—'}</td>
       <td><b>${(c.score || 0).toFixed(1)}</b></td>
@@ -1792,12 +1723,11 @@ function closeWinsModal() {
   document.body.style.overflow = '';
 }
 
-// Replaces the previous Portfolio Snapshot — now just dispatches the new panels.
+// Exec tab — legal developments are static HTML now; just render the matrix.
 function renderExecSummary() {
   if (!D.cases) return;
   D.cases.forEach(c => { c.statusBucket = statusBucketOf(c); if (c.tier === undefined) c.tier = caseTier(c); });
   renderTierPanel();
-  renderPainRulings();
 }
 
 // ====================================================================
