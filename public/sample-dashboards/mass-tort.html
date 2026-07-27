@@ -103,10 +103,11 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .score-bar-seg.s1{background:#1E2761}  /* Dx  — navy */
 .score-bar-seg.s2{background:#4A5E8A}  /* Exp — purple */
 .score-bar-seg.s3{background:#2C5F2D}  /* Ev  — green */
-.score-bar-seg.s4{background:#C9A227}  /* Rec — gold */
-.score-bar-seg.s5{background:#B45309}  /* Lat — amber */
-.score-bar-seg.s6{background:#94A3B8}  /* Sym — slate */
-.score-bar-seg.s7{background:#475569}  /* Lev — dark slate */
+.score-bar-seg.s4{background:#B91C1C}  /* Fam — red (genetic predisposition) */
+.score-bar-seg.s5{background:#C9A227}  /* Lat — gold */
+.score-bar-seg.s6{background:#0F766E}  /* Age — teal */
+.score-bar-seg.s7{background:#94A3B8}  /* Sym — slate */
+.score-bar-seg.s8{background:#475569}  /* Lev — dark slate */
 .score-cell{line-height:1.2;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
 .score-cohort-breakdown{font-size:11.5px;color:var(--slate);margin:8px 0 0;line-height:1.7}
 .score-cohort-breakdown b{color:var(--navy)}
@@ -227,6 +228,22 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tier-wins.thin b{color:var(--navy)}
 .tier-wins.empty{color:var(--slate-lite);font-style:italic;font-weight:400;background:transparent;border-left:3px solid var(--border)}
 .tier-foot{font-size:11px;color:var(--slate-lite);margin-top:14px;line-height:1.6}
+
+/* Tier criteria reference card — layered bullet list */
+.criteria-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:6px}
+.criteria-tier-block{border:1px solid var(--border);border-left:4px solid var(--border);padding:12px 14px;background:var(--bg);border-radius:3px}
+.criteria-tier-block.tier-1-block{border-left-color:var(--gold)}
+.criteria-tier-block.tier-2-block{border-left-color:var(--purple)}
+.criteria-tier-block.tier-3-block{border-left-color:var(--amber)}
+.criteria-tier-block.tier-4-block{border-left-color:var(--red)}
+.criteria-tier-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.criteria-tier-head strong{font-size:13px;color:var(--navy)}
+.criteria-bullets{margin:0;padding-left:20px;font-size:12.5px;color:var(--navy-ink);line-height:1.6}
+.criteria-bullets li{margin-bottom:4px}
+.criteria-tag{display:inline-block;font-size:9.5px;font-weight:700;color:var(--gold);background:var(--navy-ink);padding:1px 6px;border-radius:2px;letter-spacing:.04em;margin-left:4px;vertical-align:middle;text-transform:uppercase}
+.criteria-bullets em{font-style:normal;font-weight:700;color:var(--navy);background:var(--mist);padding:0 4px;border-radius:2px}
+.criteria-foot{font-size:11px;color:var(--slate-lite);font-style:italic;margin-top:14px;border-top:1px solid var(--border);padding-top:10px;line-height:1.5}
+.criteria-foot code{font-style:normal;background:var(--mist);border:1px solid var(--border);padding:1px 5px;border-radius:2px;font-size:10.5px;color:var(--navy)}
 /* Collapsible reference sections */
 details.exec-details{margin:0}
 details.exec-details>summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--navy);letter-spacing:.01em;list-style-position:outside}
@@ -410,6 +427,50 @@ details.exec-details[open]>summary{margin-bottom:12px}
         </div>
         <div id="tierPanel"></div>
         <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
+      </div>
+
+      <!-- Tier criteria reference — layered bullet list of the EXACT criteria
+           used to assign tiers. Tier 1 at top (strongest), tier 4 below threshold.
+           Each tier block is color-keyed to match the matrix table. -->
+      <div class="exec-card">
+        <h3>Tier Criteria — what's required to land in each tier</h3>
+        <div class="criteria-grid">
+          <div class="criteria-tier-block tier-1-block">
+            <div class="criteria-tier-head"><span class="tier-pill">Tier 1</span> <strong>Confirmed PD + Verified Evidence</strong></div>
+            <ul class="criteria-bullets">
+              <li>Parkinson's Disease diagnosis (idiopathic PD)</li>
+              <li>Certified applicator license <em>OR</em> verified purchase receipts</li>
+              <li>≥10 years of exposure</li>
+              <li>First-degree relative with Parkinsonism <span class="criteria-tag">genetic predisposition</span></li>
+              <li>Latency 10–25 years <span class="criteria-tag">causation sweet spot</span></li>
+              <li>Age at first exposure &lt; 45 <span class="criteria-tag">longer life impact</span></li>
+              <li>Levodopa response (robust or moderate)</li>
+            </ul>
+          </div>
+          <div class="criteria-tier-block tier-2-block">
+            <div class="criteria-tier-head"><span class="tier-pill">Tier 2</span> <strong>Probable PD + Documented Exposure</strong></div>
+            <ul class="criteria-bullets">
+              <li>Any PD-spectrum diagnosis (incl. parkinsonism)</li>
+              <li>Documented exposure (claimed or verified)</li>
+              <li>≥5 years of exposure</li>
+            </ul>
+          </div>
+          <div class="criteria-tier-block tier-3-block">
+            <div class="criteria-tier-head"><span class="tier-pill">Tier 3</span> <strong>Symptoms Only / Partial Evidence</strong></div>
+            <ul class="criteria-bullets">
+              <li>Symptoms logged</li>
+              <li>Some exposure evidence (claimed)</li>
+              <li>At least 1 year exposure (or unknown)</li>
+            </ul>
+          </div>
+          <div class="criteria-tier-block tier-4-block">
+            <div class="criteria-tier-head"><span class="tier-pill">Tier 4</span> <strong>Marginal / Below Threshold</strong></div>
+            <ul class="criteria-bullets">
+              <li>Fails to meet Tier 3 criteria</li>
+            </ul>
+          </div>
+        </div>
+        <div class="criteria-foot">Age at first exposure is calculated as <code>(first exposure date) − (date of birth)</code>. Family history comes from <code>pq_family_histories</code> filtered to first-degree relatives (mother, father, sibling) with a Parkinsonism or Parkinson's condition. Medical record <em>count</em> is informational only — it does not gate tier membership.</div>
       </div>
 
       <div class="exec-card">
@@ -598,7 +659,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
               <th>Claimant</th>
               <th>Firm</th>
               <th>Score breakdown (click for donut)</th>
-              <th>Cert</th>
+              <th>Records</th>
               <th>Lift gaps</th>
             </tr>
           </thead>
@@ -661,18 +722,24 @@ const TIER_DEFS = {
              : (!c.primaryDiagnosis || c.dxBucket === 'no_dx') ? 'unknown' : 'disconfirmed' },
          { key: 'verified_evidence', test: c => c.licenseVerified || c.receiptsVerified,
            label: 'Certified applicator license OR verified purchase receipts',
-           // Nothing claimed or verified — or claimed but not yet verified — is
-           // missing information, never affirmative disconfirmation.
            status: c => (c.licenseVerified || c.receiptsVerified) ? 'pass' : 'unknown' },
          { key: '10yr_exposure', test: c => c.exposureYears != null && c.exposureYears >= 10,
            label: '≥10 years exposure',
            status: c => c.exposureYears == null ? 'unknown'
              : c.exposureYears >= 10 ? 'pass' : 'disconfirmed' },
-         { key: '2_records', test: c => c.recordCount >= 2,
-           label: '≥2 medical records',
-           // A thin file is curable by records procurement — absence of records
-           // is itself missing information, not disconfirmation.
-           status: c => c.recordCount >= 2 ? 'pass' : 'unknown' },
+         { key: 'family_pd', test: c => c.familyPd === true,
+           label: 'First-degree relative with Parkinsonism (genetic predisposition)',
+           // Absence of family-history info = unknown; an EMPTY family history
+           // record set is curable (genetic testing or relative interview).
+           status: c => c.familyPd === true ? 'pass' : 'unknown' },
+         { key: 'sweet_latency', test: c => c.latencyYears != null && c.latencyYears >= 10 && c.latencyYears <= 25,
+           label: 'Latency 10–25 yrs (causation sweet spot)',
+           status: c => c.latencyYears == null ? 'unknown'
+             : (c.latencyYears >= 10 && c.latencyYears <= 25) ? 'pass' : 'disconfirmed' },
+         { key: 'young_first_exposure', test: c => c.ageAtFirstExposure != null && c.ageAtFirstExposure < 45,
+           label: 'Age at first exposure < 45 (longer life impact)',
+           status: c => c.ageAtFirstExposure == null ? 'unknown'
+             : c.ageAtFirstExposure < 45 ? 'pass' : 'disconfirmed' },
          { key: 'levodopa', test: c => c.levodopaResponse === 'robust' || c.levodopaResponse === 'moderate',
            label: 'Levodopa response (robust/moderate)',
            status: c => (c.levodopaResponse === 'robust' || c.levodopaResponse === 'moderate') ? 'pass'
@@ -682,7 +749,6 @@ const TIER_DEFS = {
        checks: [
          { key: 'any_pd_dx', test: c => c.dxBucket !== 'no_dx',
            label: 'Any PD-spectrum diagnosis (incl. parkinsonism)',
-           // Absence of dx info = unknown; this one rarely disconfirms.
            status: c => c.dxBucket !== 'no_dx' ? 'pass' : 'unknown' },
          { key: 'documented_exposure', test: c => c.licenseClaimed || c.receiptsClaimed || c.licenseVerified || c.receiptsVerified,
            label: 'Documented exposure (claimed or verified)',
@@ -691,9 +757,6 @@ const TIER_DEFS = {
            label: '≥5 years exposure',
            status: c => c.exposureYears == null ? 'unknown'
              : c.exposureYears >= 5 ? 'pass' : 'disconfirmed' },
-         { key: '1_record', test: c => c.recordCount >= 1,
-           label: '≥1 medical record',
-           status: c => c.recordCount >= 1 ? 'pass' : 'unknown' },
        ]},
   3: { name: 'Symptoms Only / Partial Evidence',
        checks: [
@@ -1062,66 +1125,12 @@ function scoreCase(c) {
   // Continuous score (0–10) used by chartScoreHist / chartScoreBySetting /
   // chartRecoveryByTier. Tier assignment is delegated to caseTier() (criteria-
   // based, not score-band-based) so the tier definition lives in one place.
-  const W = {Dx:30, Exp:20, Ev:15, Rec:10, Lat:10, Sym:10, Lev:5};
-
-  // 1. Diagnosis certainty (0-10)
-  let dx = 0;
-  if (c.primaryDiagnosis) {
-    const cond = c.primaryDiagnosis;
-    if (cond === 'parkinsons_disease') dx = 8;
-    else if (cond === 'parkinsonism_unspecified') dx = 6;
-    else dx = 4; // atypical
-  }
-
-  // 2. Exposure duration (years)
-  let exp = 0;
-  if (c.exposureYears != null) {
-    if (c.exposureYears >= 30) exp = 10;
-    else if (c.exposureYears >= 20) exp = 8;
-    else if (c.exposureYears >= 10) exp = 6;
-    else if (c.exposureYears >= 5) exp = 4;
-    else exp = 2;
-  }
-
-  // 3. Evidence verification
-  let ev = 0;
-  if (c.receiptsVerified && c.licenseVerified) ev = 10;
-  else if (c.receiptsVerified || c.licenseVerified) ev = 5;
-
-  // 4. Medical records count
-  let rec = 0;
-  if (c.recordCount >= 3) rec = 10;
-  else if (c.recordCount == 2) rec = 6;
-  else if (c.recordCount == 1) rec = 3;
-
-  // 5. Latency (10-25 = sweet spot)
-  let lat = 0;
-  if (c.latencyYears != null) {
-    if (c.latencyYears >= 10 && c.latencyYears <= 25) lat = 10;
-    else if (c.latencyYears >= 5 && c.latencyYears < 10) lat = 7;
-    else if (c.latencyYears > 25) lat = 5;
-    else lat = 2;
-  }
-
-  // 6. Symptom severity (avg 1-5)
-  let sym = 0;
-  if (c.avgSymptomSeverity != null) {
-    if (c.avgSymptomSeverity >= 4) sym = 10;
-    else if (c.avgSymptomSeverity >= 3) sym = 6;
-    else if (c.avgSymptomSeverity >= 1) sym = 3;
-  }
-
-  // 7. Levodopa response
-  let lev = 0;
-  if (c.levodopaResponse === 'robust') lev = 10;
-  else if (c.levodopaResponse === 'moderate') lev = 7;
-  else if (c.levodopaResponse === 'minimal') lev = 3;
-
-  const raw = (dx*W.Dx + exp*W.Exp + ev*W.Ev + rec*W.Rec +
-               lat*W.Lat + sym*W.Sym + lev*W.Lev) / 100;
-  const score = Math.round(raw * 10) / 10; // 0-10 scale
-
-  return { score, tier: caseTier(c), rawScore: raw };
+  // Single source of truth: delegate to scoreFactorBreakdown() so the
+  // per-case score and the donut breakdown are guaranteed to match.
+  const factors = scoreFactorBreakdown(c);
+  const raw = factors.reduce((s, f) => s + f.contribution, 0);
+  const score = Math.round(raw * 10) / 10;
+  return { score, tier: caseTier(c), rawScore: raw, factors };
 }
 
 function scoreAllCases() {
@@ -1130,17 +1139,16 @@ function scoreAllCases() {
   return getFilteredCases().map(c => ({ ...c, ...scoreCase(c) }));
 }
 
-// Per-factor weighted contribution to the 0-10 score. Used to break out
-// where each case's score comes from (Diagnosis 30%, Exposure 20%, etc.).
-// Returns {Dx, Exp, Ev, Rec, Lat, Sym, Lev} — each value is the already-
-// weighted contribution on the same 0-10 scale (so they sum to `score`).
+// Per-factor scoring weights — drives both the score and the donut modal.
+// (Rec removed: medical record COUNT is informational, not a tier criterion.)
 const SCORE_FACTOR_LABELS = [
-  ['Dx',  'Diagnosis certainty',    30],
-  ['Exp', 'Exposure duration',      20],
+  ['Dx',  'Diagnosis certainty',    25],
+  ['Exp', 'Exposure duration',      15],
   ['Ev',  'Evidence verification',  15],
-  ['Rec', 'Medical records',        10],
+  ['Fam', 'Family history',         15],
   ['Lat', 'Latency',                10],
-  ['Sym', 'Symptom severity',       10],
+  ['Age', 'Age at first exposure',  10],
+  ['Sym', 'Symptom severity',        5],
   ['Lev', 'Levodopa response',       5],
 ];
 // Per-factor scoring breakdown — returns the raw 0-10 sub-score for each
@@ -1151,52 +1159,62 @@ const SCORE_FACTOR_LABELS = [
 function scoreFactorBreakdown(c) {
   const factors = [];
 
-  // 1. Diagnosis certainty
+  // 1. Diagnosis certainty (25%)
   let dx = 0, dxReason = 'No diagnosis on file';
   if (c.primaryDiagnosis === 'parkinsons_disease')      { dx = 8; dxReason = "Parkinson's disease confirmed"; }
   else if (c.primaryDiagnosis === 'parkinsonism_unspecified') { dx = 6; dxReason = 'Parkinsonism (unspecified)'; }
   else if (c.primaryDiagnosis) { dx = 4; dxReason = `Atypical / other (${c.primaryDiagnosis.replace(/_/g, ' ')})`; }
-  factors.push({ key: 'Dx', label: 'Diagnosis certainty', weight: 30, rawScore: dx, reason: dxReason });
+  factors.push({ key: 'Dx', label: 'Diagnosis certainty', weight: 25, rawScore: dx, reason: dxReason });
 
-  // 2. Exposure duration
+  // 2. Exposure duration (15%)
   let exp = 0, expReason = 'Unknown exposure years';
   const ey = c.exposureYears;
   if (ey != null) {
-    if      (ey >= 30) { exp = 10; expReason = `${ey} yrs exposure (30+ band)`; }
-    else if (ey >= 20) { exp =  8; expReason = `${ey} yrs exposure (20-30 band)`; }
-    else if (ey >= 10) { exp =  6; expReason = `${ey} yrs exposure (10-20 band)`; }
-    else if (ey >=  5) { exp =  4; expReason = `${ey} yrs exposure (5-10 band)`; }
-    else               { exp =  2; expReason = `${ey} yrs exposure (under 5)`; }
+    if      (ey >= 30) { exp = 10; expReason = `${ey.toFixed(1)} yrs exposure (30+ band)`; }
+    else if (ey >= 20) { exp =  8; expReason = `${ey.toFixed(1)} yrs exposure (20-30 band)`; }
+    else if (ey >= 10) { exp =  6; expReason = `${ey.toFixed(1)} yrs exposure (10-20 band)`; }
+    else if (ey >=  5) { exp =  4; expReason = `${ey.toFixed(1)} yrs exposure (5-10 band)`; }
+    else               { exp =  2; expReason = `${ey.toFixed(1)} yrs exposure (under 5)`; }
   }
-  factors.push({ key: 'Exp', label: 'Exposure duration', weight: 20, rawScore: exp, reason: expReason });
+  factors.push({ key: 'Exp', label: 'Exposure duration', weight: 15, rawScore: exp, reason: expReason });
 
-  // 3. Evidence verification
+  // 3. Evidence verification (15%)
   let ev = 0, evReason = 'Neither license nor receipts verified';
   if (c.receiptsVerified && c.licenseVerified) { ev = 10; evReason = 'License AND receipts verified'; }
   else if (c.receiptsVerified)                  { ev =  5; evReason = 'Receipts verified only (no license)'; }
   else if (c.licenseVerified)                   { ev =  5; evReason = 'License verified only (no receipts)'; }
   factors.push({ key: 'Ev', label: 'Evidence verification', weight: 15, rawScore: ev, reason: evReason });
 
-  // 4. Medical records
-  let rec = 0, recReason = 'No medical records';
-  const rc = c.recordCount || 0;
-  if (rc >= 3)      { rec = 10; recReason = `${rc} records (3+ band)`; }
-  else if (rc === 2) { rec =  6; recReason = '2 medical records'; }
-  else if (rc === 1) { rec =  3; recReason = '1 medical record'; }
-  factors.push({ key: 'Rec', label: 'Medical records', weight: 10, rawScore: rec, reason: recReason });
+  // 4. Family history (15%) — first-degree relative with Parkinsonism materially
+  // strengthens causation (genetic predisposition) and damages.
+  let fam = 0, famReason = 'No first-degree PD/parkinsonism relative on file';
+  if (c.familyPd === true) { fam = 10; famReason = 'First-degree relative with Parkinsonism'; }
+  factors.push({ key: 'Fam', label: 'Family history', weight: 15, rawScore: fam, reason: famReason });
 
-  // 5. Latency (10-25 = sweet spot)
+  // 5. Latency (10%) — 10-25 yrs is the causation sweet spot.
   let lat = 0, latReason = 'Unknown latency';
   const ly = c.latencyYears;
   if (ly != null) {
-    if      (ly >= 10 && ly <= 25) { lat = 10; latReason = `${ly} yrs latency (sweet spot 10-25)`; }
-    else if (ly >=  5 && ly <  10) { lat =  7; latReason = `${ly} yrs latency (short 5-10)`; }
-    else if (ly >  25)             { lat =  5; latReason = `${ly} yrs latency (long 25+)`; }
-    else                            { lat =  2; latReason = `${ly} yrs latency (under 5)`; }
+    if      (ly >= 10 && ly <= 25) { lat = 10; latReason = `${ly.toFixed(1)} yrs latency (sweet spot 10-25)`; }
+    else if (ly >=  5 && ly <  10) { lat =  7; latReason = `${ly.toFixed(1)} yrs latency (short 5-10)`; }
+    else if (ly >  25)             { lat =  5; latReason = `${ly.toFixed(1)} yrs latency (long 25+)`; }
+    else                            { lat =  2; latReason = `${ly.toFixed(1)} yrs latency (under 5)`; }
   }
   factors.push({ key: 'Lat', label: 'Latency', weight: 10, rawScore: lat, reason: latReason });
 
-  // 6. Symptom severity
+  // 6. Age at first exposure (10%) — younger first exposure = longer life impact.
+  let age = 0, ageReason = 'DOB or first-exposure date missing';
+  const a = c.ageAtFirstExposure;
+  if (a != null) {
+    if      (a < 25) { age = 10; ageReason = `${a.toFixed(0)} yrs old at first exposure (childhood — strongest impact)`; }
+    else if (a < 35) { age =  8; ageReason = `${a.toFixed(0)} yrs old at first exposure (young adult)`; }
+    else if (a < 50) { age =  6; ageReason = `${a.toFixed(0)} yrs old at first exposure (mid-career)`; }
+    else if (a < 65) { age =  4; ageReason = `${a.toFixed(0)} yrs old at first exposure (later career)`; }
+    else             { age =  2; ageReason = `${a.toFixed(0)} yrs old at first exposure (older — shorter impact window)`; }
+  }
+  factors.push({ key: 'Age', label: 'Age at first exposure', weight: 10, rawScore: age, reason: ageReason });
+
+  // 7. Symptom severity (5%)
   let sym = 0, symReason = 'No symptoms logged';
   const sy = c.avgSymptomSeverity;
   if (sy != null) {
@@ -1204,9 +1222,9 @@ function scoreFactorBreakdown(c) {
     else if (sy >= 3) { sym =  6; symReason = `Avg severity ${sy.toFixed(1)} (3 band)`; }
     else if (sy >= 1) { sym =  3; symReason = `Avg severity ${sy.toFixed(1)} (1-2 band)`; }
   }
-  factors.push({ key: 'Sym', label: 'Symptom severity', weight: 10, rawScore: sym, reason: symReason });
+  factors.push({ key: 'Sym', label: 'Symptom severity', weight: 5, rawScore: sym, reason: symReason });
 
-  // 7. Levodopa response
+  // 8. Levodopa response (5%)
   let lev = 0, levReason = 'No levodopa response on file';
   const lv = c.levodopaResponse;
   if      (lv === 'robust')    { lev = 10; levReason = 'Robust levodopa response'; }
@@ -2040,7 +2058,7 @@ function renderWinsTableHeader() {
       <th>Claimant</th>
       <th>Firm</th>
       <th>Score breakdown (click for donut)</th>
-      <th>Cert</th>
+      <th title="Total medical records on file (informational — not a tier criterion)">Records</th>
       ${criteriaHeaders}
       <th>Lift gaps</th>
     </tr>`;
@@ -2096,7 +2114,7 @@ function renderWinsTableBody() {
         <td>${c.claimantName || '—'}</td>
         <td>${c.firm || '—'}</td>
         <td><div class="score-cell"><b>${(c.score || 0).toFixed(1)}</b><div class="score-bar" data-case-idx="${idx}" tabindex="0" role="button" aria-label="Open score breakdown donut" title="${tooltip.replace(/"/g, '&quot;')}">${segs}</div></div></td>
-        <td>${c.licenseVerified ? '<span class="wins-badge wins-yes">certified</span>' : '<span class="wins-badge wins-no">no cert</span>'}</td>
+        <td style="text-align:right;font-variant-numeric:tabular-nums;color:var(--slate)" title="Medical records on file (informational only — not a tier criterion)">${c.recordCount || 0}</td>
         ${criteriaCells}
         <td class="wins-missing">${gapLabels || '<span style="color:var(--slate-lite)">—</span>'}</td>
       </tr>`;
@@ -2153,8 +2171,8 @@ function downloadWinsCsv() {
 
   const headers = [
     'Matter #', 'Claimant', 'Firm', 'Score', 'Score Dx', 'Score Exp', 'Score Ev',
-    'Score Rec', 'Score Lat', 'Score Sym', 'Score Lev',
-    'License verified', 'Tier (source)', 'Target tier',
+    'Score Fam', 'Score Lat', 'Score Age', 'Score Sym', 'Score Lev',
+    'Records', 'Tier (source)', 'Target tier',
     ...targetChecks.map(chk => `Criteria: ${chk.label}`),
     'Lift gaps',
   ];
@@ -2165,8 +2183,9 @@ function downloadWinsCsv() {
     return [
       c.matterNumber, c.claimantName, c.firm, (c.score || 0).toFixed(2),
       fMap.Dx?.rawScore ?? '', fMap.Exp?.rawScore ?? '', fMap.Ev?.rawScore ?? '',
-      fMap.Rec?.rawScore ?? '', fMap.Lat?.rawScore ?? '', fMap.Sym?.rawScore ?? '', fMap.Lev?.rawScore ?? '',
-      c.licenseVerified ? 'Yes' : 'No', fromTier, target,
+      fMap.Fam?.rawScore ?? '', fMap.Lat?.rawScore ?? '', fMap.Age?.rawScore ?? '',
+      fMap.Sym?.rawScore ?? '', fMap.Lev?.rawScore ?? '',
+      c.recordCount || 0, fromTier, target,
       ...targetChecks.map(chk => chk.test(c) ? 'Met' : 'Not met'),
       (c.gaps || []).filter(Boolean).map(g => g.label).join('; '),
     ];
@@ -2215,7 +2234,7 @@ function openScoreBreakdownModal({ title, sub, factors, total, totalLabel, isAve
     `<div class="bd-total">${(total || 0).toFixed(1)}</div>` +
     `<div class="bd-sub">sum of 7 contributions</div>`;
 
-  const colors = ['#1E2761', '#4A5E8A', '#2C5F2D', '#C9A227', '#B45309', '#94A3B8', '#475569'];
+  const colors = ['#1E2761', '#4A5E8A', '#2C5F2D', '#B91C1C', '#C9A227', '#0F766E', '#94A3B8', '#475569'];
   const labels = factors.map(f => f.label);
   const values = factors.map(f => f.contribution);
 
