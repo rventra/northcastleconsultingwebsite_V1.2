@@ -266,6 +266,17 @@ details.exec-details[open]>summary{margin-bottom:12px}
 .wins-modal-body{padding:14px 22px 22px;overflow:auto}
 .wins-modal-meta{font-size:11.5px;color:var(--slate-lite);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
 .wins-modal-table-wrap{max-height:60vh;overflow:auto;border:1px solid var(--border)}
+.wins-filters{display:flex;align-items:center;gap:14px;padding:8px 0 12px;flex-wrap:wrap;border-bottom:1px solid var(--border);margin-bottom:10px}
+.wins-filter{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.wins-filter input,.wins-filter select{font-family:inherit;font-size:12px;font-weight:700;color:var(--navy);padding:4px 8px;border:1px solid var(--border);border-radius:3px;background:var(--white);letter-spacing:0;text-transform:none;min-width:140px}
+.wins-filter input:focus,.wins-filter select:focus{outline:none;border-color:var(--gold)}
+.wins-filter input[type=number]{min-width:70px}
+.wins-filter-spacer{flex:1}
+.criteria-cell{text-align:center;font-weight:700;color:var(--green);font-size:14px;vertical-align:middle}
+.criteria-cell.unmet{color:var(--border)}
+.criteria-cell .crit-label{font-size:9.5px;font-weight:400;color:var(--slate-lite);text-transform:uppercase;letter-spacing:.04em;display:block;margin-top:1px}
+.wins-modal-table th.criteria-col{font-size:10.5px;line-height:1.25;max-width:120px;background:var(--mist)}
+.wins-modal-table th.criteria-col .lift-tag{display:inline-block;font-size:9px;font-weight:700;color:var(--gold);background:var(--navy-ink);padding:1px 5px;border-radius:2px;letter-spacing:.06em;margin-bottom:2px}
 .wins-modal-table{width:100%;border-collapse:collapse;font-size:12.5px}
 .wins-modal-table th,.wins-modal-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
 .wins-modal-table th{background:var(--mist);font-weight:700;color:var(--navy);font-size:11px;text-transform:uppercase;letter-spacing:.06em;position:sticky;top:0}
@@ -556,18 +567,39 @@ details.exec-details[open]>summary{margin-bottom:12px}
       <button class="wins-modal-close" onclick="closeWinsModal()" title="Close">&times;</button>
     </div>
     <div class="wins-modal-body">
-      <div class="wins-modal-meta" id="winsModalCount">0 cases</div>
+      <div class="wins-filters">
+        <label class="wins-filter">
+          <span>Min score</span>
+          <input type="number" id="winsFilterMinScore" min="0" max="10" step="0.5" value="0" />
+        </label>
+        <label class="wins-filter">
+          <span>Sort by</span>
+          <select id="winsFilterSort">
+            <option value="score-desc">Score (high → low)</option>
+            <option value="score-asc">Score (low → high)</option>
+            <option value="gaps-asc">Fewest gaps</option>
+            <option value="lift-desc">Lift potential</option>
+            <option value="matter-asc">Matter #</option>
+          </select>
+        </label>
+        <label class="wins-filter">
+          <span>Search</span>
+          <input type="text" id="winsFilterSearch" placeholder="matter #, claimant, firm…" />
+        </label>
+        <span class="wins-filter-spacer"></span>
+        <span class="wins-modal-meta" id="winsModalCount" style="margin:0"></span>
+        <button class="btn btn-ghost" id="winsExportCsvBtn" type="button">↓ Export CSV</button>
+      </div>
       <div class="wins-modal-table-wrap">
-        <table class="wins-modal-table">
-          <thead>
+        <table class="wins-modal-table" id="winsModalTable">
+          <thead id="winsModalThead">
             <tr>
               <th>Matter #</th>
               <th>Claimant</th>
               <th>Firm</th>
               <th>Score breakdown (click for donut)</th>
               <th>Cert</th>
-              <th>Missing criterion 1</th>
-              <th>Missing criterion 2</th>
+              <th>Lift gaps</th>
             </tr>
           </thead>
           <tbody id="winsModalTbody"></tbody>
@@ -1903,58 +1935,161 @@ function openWinsModal(fromTier, kind = 'one') {
   const target = fromTier - 1;
   if (target < 1) return;
   const cases = D.cases || [];
-  const wins = cases
+  const allWins = cases
     .map(c => ({ c, w: c.tier === fromTier ? winCandidates(c, fromTier) : { qualifies: false } }))
     .filter(x => x.w.qualifies && x.w.kind === kind)
     .map(x => {
       const sc = scoreCase(x.c);
       return { ...x.c, score: sc.score, gaps: x.w.gaps, factors: scoreFactorBreakdown(x.c) };
-    })
-    .sort((a, b) => b.score - a.score);
-  if (!wins.length) return;
-
-  const gap = tierGsv(target) - tierGsv(fromTier);
-  const p = state.convertRate;
-  const perCaseExpected = gap * p;
-  const totalExpected = wins.length * perCaseExpected;
-
-  // Cohort-average score breakdown across the wins in this cohort.
-  // Cohort-average score breakdown across the wins in this cohort.
-  // Average each factor's raw 0-10 sub-score, then re-derive the weighted
-  // contribution. Reasons are generic ("Cohort avg") since the cases differ.
-  const cohortFactors = scoreFactorBreakdown({}).map(template => {
-    const avgRaw = wins.reduce((s, c) => {
-      const f = (c.factors || []).find(x => x.key === template.key);
-      return s + (f ? f.rawScore : 0);
-    }, 0) / wins.length;
-    const contribution = Math.round(avgRaw * template.weight / 100 * 10) / 10;
-    return { ...template, rawScore: avgRaw, contribution, reason: 'cohort average' };
-  });
-  cohortFactors._cohortN = wins.length;
+    });
+  if (!allWins.length) return;
 
   const modal = document.getElementById('winsModal');
   if (!modal) return;
+
+  // Store cohort on the modal so filter/sort events can re-render without
+  // recomputing winCandidates() each time.
+  modal._cohort = {
+    wins: allWins, fromTier, target, kind, gap: tierGsv(target) - tierGsv(fromTier),
+  };
+
+  // Build the dynamic header: standard columns + one column per criteria in the
+  // TARGET tier (the criteria this cohort could satisfy to convert up).
+  renderWinsTableHeader();
+
+  // Initial render of body.
+  renderWinsTableBody();
+
+  // Cohort note + subtitle + buttons wired after the body exists.
+  const p = state.convertRate;
+  const gap = modal._cohort.gap;
+  const perCaseExpected = gap * p;
+  const totalExpected = allWins.length * perCaseExpected;
   const fixWord = kind === 'two' ? 'two fixes' : 'one fix';
   const cohortNote = {
     one: `Each case is missing one piece of information to reach Tier ${target}. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of them cure the gap, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
     two: `Each case is missing two pieces of information to reach Tier ${target}. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of them cure both, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
     thin: `Each case is blocked by a disconfirmed criterion, but the file is thin (≤2 records), so the disconfirmation may not hold. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of these cure, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
   }[kind];
+  const cohortAvgScore = allWins.reduce((s,c)=>s+c.score,0)/allWins.length;
   document.getElementById('winsModalTitle').textContent =
-    `Wins cohort: ${wins.length} cases ${fixWord} from Tier ${target}${kind === 'thin' ? ' (thin file)' : ''}`;
-  // Subtitle: cohort note + a clickable button that opens the cohort-average
-  // score breakdown as a donut chart. (Replaces the prior inline dot-list.)
-  const cohortAvgScore = wins.reduce((s,c)=>s+c.score,0)/wins.length;
+    `Wins cohort: ${allWins.length} cases ${fixWord} from Tier ${target}${kind === 'thin' ? ' (thin file)' : ''}`;
   document.getElementById('winsModalSubtitle').innerHTML = cohortNote +
-    `<button type="button" class="score-cohort-link" id="cohortBreakdownBtn" title="Show the cohort-average score as a donut">Cohort average breakdown → score ${cohortAvgScore.toFixed(1)}</button>`;
-  const gapCell = g => g
-    ? `<span class="wins-pill">${g.label}</span>${g.status === 'disconfirmed' ? ' <span class="gap-badge gap-thin">disconfirmed</span>' : ''}`
-    : '';
+    `<button type="button" class="score-cohort-link" id="cohortBreakdownBtn">Cohort average breakdown → score ${cohortAvgScore.toFixed(1)}</button>`;
+
+  // Build the cohort-average factors (averaged rawScore per factor × weight = contribution).
+  modal._cohort.factors = scoreFactorBreakdown({}).map(template => {
+    const avgRaw = allWins.reduce((s, c) => {
+      const f = (c.factors || []).find(x => x.key === template.key);
+      return s + (f ? f.rawScore : 0);
+    }, 0) / allWins.length;
+    const contribution = Math.round(avgRaw * template.weight / 100 * 10) / 10;
+    return { ...template, rawScore: avgRaw, contribution, reason: 'cohort average' };
+  });
+  modal._cohort.factors._cohortN = allWins.length;
+  modal._cohort.avgScore = cohortAvgScore;
+
+  // Wire the cohort-average button (re-assign to clobber any prior handler).
+  const cohortBtn = document.getElementById('cohortBreakdownBtn');
+  if (cohortBtn) {
+    cohortBtn.onclick = () => openScoreBreakdownModal({
+      title: 'Cohort average score breakdown',
+      sub: `Across ${allWins.length} cases in this wins cohort`,
+      factors: modal._cohort.factors,
+      total: cohortAvgScore,
+      totalLabel: 'Avg score / 10',
+      isAverage: true,
+    });
+  }
+
+  // Wire filters (debounce search for snappy typing).
+  const minScoreIn = document.getElementById('winsFilterMinScore');
+  const sortIn = document.getElementById('winsFilterSort');
+  const searchIn = document.getElementById('winsFilterSearch');
+  const csvBtn = document.getElementById('winsExportCsvBtn');
+  const rerender = () => renderWinsTableBody();
+  let searchT;
+  minScoreIn.oninput = rerender;
+  sortIn.onchange = rerender;
+  searchIn.oninput = () => { clearTimeout(searchT); searchT = setTimeout(rerender, 120); };
+  csvBtn.onclick = () => downloadWinsCsv();
+
+  // Reset filter values when opening a fresh modal.
+  minScoreIn.value = '0';
+  sortIn.value = 'score-desc';
+  searchIn.value = '';
+
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+// Render the wins-modal table header dynamically. Standard columns + one
+// column per criteria in the TARGET tier (the cohort's criteria checklist).
+function renderWinsTableHeader() {
+  const modal = document.getElementById('winsModal');
+  const thead = document.getElementById('winsModalThead');
+  const targetChecks = TIER_DEFS[modal._cohort.target]?.checks || [];
+  const criteriaHeaders = targetChecks.map(chk => `
+    <th class="criteria-col" title="${escapeHtml(chk.label)} — ✓ = case meets this criteria (lift already captured), blank = lift opportunity">
+      <span class="lift-tag">LIFT</span>
+      <span class="crit-label">${escapeHtml(chk.label)}</span>
+    </th>`).join('');
+  thead.innerHTML = `
+    <tr>
+      <th>Matter #</th>
+      <th>Claimant</th>
+      <th>Firm</th>
+      <th>Score breakdown (click for donut)</th>
+      <th>Cert</th>
+      ${criteriaHeaders}
+      <th>Lift gaps</th>
+    </tr>`;
+}
+
+// Render the wins-modal table body — applies active filters + sort, then
+// builds the rows with criteria cells + clickable score bar.
+function renderWinsTableBody() {
+  const modal = document.getElementById('winsModal');
+  const { wins, target, gap } = modal._cohort;
+  const targetChecks = TIER_DEFS[target]?.checks || [];
+
+  const minScore = parseFloat(document.getElementById('winsFilterMinScore').value) || 0;
+  const sortKey = document.getElementById('winsFilterSort').value;
+  const search = (document.getElementById('winsFilterSearch').value || '').trim().toLowerCase();
+
+  let filtered = wins.filter(c => {
+    if (c.score < minScore) return false;
+    if (search) {
+      const hay = `${c.matterNumber || ''} ${c.claimantName || ''} ${c.firm || ''}`.toLowerCase();
+      if (!hay.includes(search)) return false;
+    }
+    return true;
+  });
+  filtered.sort((a, b) => {
+    switch (sortKey) {
+      case 'score-asc':  return a.score - b.score;
+      case 'score-desc': return b.score - a.score;
+      case 'gaps-asc':   return (a.gaps?.filter(Boolean).length || 0) - (b.gaps?.filter(Boolean).length || 0);
+      case 'lift-desc':  return (gap * (1 + (a.score || 0) / 20)) - (gap * (1 + (b.score || 0) / 20));
+      case 'matter-asc': return String(a.matterNumber || '').localeCompare(String(b.matterNumber || ''));
+      default:           return b.score - a.score;
+    }
+  });
+
   const tbody = document.getElementById('winsModalTbody');
-  tbody.innerHTML = wins.map((c, idx) => {
-    const tooltip = (c.factors || []).map(f => `${f.key}: raw ${f.rawScore} × ${f.weight}% = ${f.contribution.toFixed(1)} (${f.reason})`).join('\n');
+  tbody.innerHTML = filtered.map((c, idx) => {
+    const tooltip = (c.factors || []).map(f => `${f.key}: raw ${f.rawScore}/10 × ${f.weight}% = ${f.contribution.toFixed(1)} (${f.reason})`).join('\n');
+    // Bar widths reflect the RAW 0-10 sub-score (10/10 = full segment),
+    // independent of weight. Weighted contribution is the number beside.
     const segs = (c.factors || []).map((f, sidx) =>
-      `<div class="score-bar-seg s${sidx + 1}" style="flex:${f.contribution.toFixed(1)}"></div>`).join('');
+      `<div class="score-bar-seg s${sidx + 1}" style="flex:${f.rawScore.toFixed(1)}"></div>`).join('');
+    // One criteria cell per check in the target tier: ✓ = met (no lift),
+    // blank = NOT met (this is the lift opportunity).
+    const criteriaCells = targetChecks.map(chk => {
+      const met = chk.test(c);
+      return `<td class="criteria-cell ${met ? '' : 'unmet'}" title="${escapeHtml(chk.label)} — ${met ? 'met (no lift here)' : 'NOT met — lift opportunity'}">${met ? '✓' : ''}</td>`;
+    }).join('');
+    const gapLabels = (c.gaps || []).filter(Boolean).map(g => escapeHtml(g.label)).join('; ');
     return `
       <tr>
         <td>${c.matterNumber || '—'}</td>
@@ -1962,15 +2097,17 @@ function openWinsModal(fromTier, kind = 'one') {
         <td>${c.firm || '—'}</td>
         <td><div class="score-cell"><b>${(c.score || 0).toFixed(1)}</b><div class="score-bar" data-case-idx="${idx}" tabindex="0" role="button" aria-label="Open score breakdown donut" title="${tooltip.replace(/"/g, '&quot;')}">${segs}</div></div></td>
         <td>${c.licenseVerified ? '<span class="wins-badge wins-yes">certified</span>' : '<span class="wins-badge wins-no">no cert</span>'}</td>
-        <td class="wins-missing">${gapCell(c.gaps[0])}</td>
-        <td class="wins-missing">${gapCell(c.gaps[1])}</td>
+        ${criteriaCells}
+        <td class="wins-missing">${gapLabels || '<span style="color:var(--slate-lite)">—</span>'}</td>
       </tr>`;
   }).join('');
-  document.getElementById('winsModalCount').textContent = `${wins.length} cases`;
-  // Wire score-bar clicks — open the per-case donut with the rich breakdown.
+
+  document.getElementById('winsModalCount').textContent = `${filtered.length} of ${wins.length} cases (after filters)`;
+
+  // Wire score-bar clicks (re-assign .onclick to clobber prior handlers).
   tbody.querySelectorAll('.score-bar[data-case-idx]').forEach(bar => {
     const open = () => {
-      const c = wins[bar.dataset.caseIdx];
+      const c = filtered[bar.dataset.caseIdx];
       openScoreBreakdownModal({
         title: `${c.matterNumber || 'Case'} — ${c.claimantName || '—'}`,
         sub: `Score ${c.score.toFixed(1)} of 10 — weighted contribution by factor`,
@@ -1980,23 +2117,70 @@ function openWinsModal(fromTier, kind = 'one') {
         isAverage: false,
       });
     };
-    bar.addEventListener('click', open);
-    bar.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    bar.onclick = open;
+    bar.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } };
   });
-  // Wire cohort-average button.
-  const cohortBtn = document.getElementById('cohortBreakdownBtn');
-  if (cohortBtn) {
-    cohortBtn.addEventListener('click', () => openScoreBreakdownModal({
-      title: 'Cohort average score breakdown',
-      sub: `Across ${wins.length} cases in this wins cohort`,
-      factors: cohortFactors,
-      total: cohortAvgScore,
-      totalLabel: 'Avg score / 10',
-      isAverage: true,
-    }));
-  }
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+}
+
+// Download the current filtered cohort as a CSV file. Columns include the
+// standard fields plus one column per target-tier criteria (Met/Not met) so
+// the user can re-analyze the lift opportunity in Excel.
+function downloadWinsCsv() {
+  const modal = document.getElementById('winsModal');
+  const { wins, target, fromTier } = modal._cohort;
+  const targetChecks = TIER_DEFS[target]?.checks || [];
+
+  // Re-apply the same filter/sort the user is currently looking at.
+  const minScore = parseFloat(document.getElementById('winsFilterMinScore').value) || 0;
+  const sortKey = document.getElementById('winsFilterSort').value;
+  const search = (document.getElementById('winsFilterSearch').value || '').trim().toLowerCase();
+  let filtered = wins.filter(c => {
+    if (c.score < minScore) return false;
+    if (search) {
+      const hay = `${c.matterNumber || ''} ${c.claimantName || ''} ${c.firm || ''}`.toLowerCase();
+      if (!hay.includes(search)) return false;
+    }
+    return true;
+  });
+  filtered.sort((a, b) => {
+    switch (sortKey) {
+      case 'score-asc':  return a.score - b.score;
+      case 'score-desc': return b.score - a.score;
+      case 'matter-asc': return String(a.matterNumber || '').localeCompare(String(b.matterNumber || ''));
+      default:           return b.score - a.score;
+    }
+  });
+
+  const headers = [
+    'Matter #', 'Claimant', 'Firm', 'Score', 'Score Dx', 'Score Exp', 'Score Ev',
+    'Score Rec', 'Score Lat', 'Score Sym', 'Score Lev',
+    'License verified', 'Tier (source)', 'Target tier',
+    ...targetChecks.map(chk => `Criteria: ${chk.label}`),
+    'Lift gaps',
+  ];
+  const cell = v => v == null ? '' : /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v);
+  const rows = filtered.map(c => {
+    const fMap = {};
+    (c.factors || []).forEach(f => { fMap[f.key] = f; });
+    return [
+      c.matterNumber, c.claimantName, c.firm, (c.score || 0).toFixed(2),
+      fMap.Dx?.rawScore ?? '', fMap.Exp?.rawScore ?? '', fMap.Ev?.rawScore ?? '',
+      fMap.Rec?.rawScore ?? '', fMap.Lat?.rawScore ?? '', fMap.Sym?.rawScore ?? '', fMap.Lev?.rawScore ?? '',
+      c.licenseVerified ? 'Yes' : 'No', fromTier, target,
+      ...targetChecks.map(chk => chk.test(c) ? 'Met' : 'Not met'),
+      (c.gaps || []).filter(Boolean).map(g => g.label).join('; '),
+    ];
+  });
+
+  const csv = [headers, ...rows].map(r => r.map(cell).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const tag = targetChecks.length ? `t${fromTier}to${target}-${targetChecks.length}crit` : 'wins';
+  a.download = `wins-cohort-${tag}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 function closeWinsModal() {
@@ -2058,9 +2242,11 @@ function openScoreBreakdownModal({ title, sub, factors, total, totalLabel, isAve
 
   // Legend — two-line rows: top = swatch · code+weight · bar · contribution;
   // bottom = the reason + raw sub-score so the user can audit the formula.
-  const max = Math.max(...values, 0.01);
+  // The bar width now reflects the RAW 0-10 sub-score (raw 10/10 = 100% bar),
+  // so the visual scale matches the raw score semantics, not the weighting.
+  // The weighted contribution is the number to the right of the bar.
   document.getElementById('breakdownLegend').innerHTML = factors.map((f, idx) => {
-    const pct = (f.contribution / max * 100).toFixed(0);
+    const pct = (f.rawScore / 10 * 100).toFixed(0);
     const reasonLine = isAverage
       ? `Avg raw ${f.rawScore.toFixed(1)}/10 across ${factors._cohortN || 'this'} wins`
       : `Raw ${f.rawScore}/10 — ${escapeHtml(f.reason)}`;
