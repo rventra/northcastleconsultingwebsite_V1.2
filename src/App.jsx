@@ -5,6 +5,7 @@ import DashboardingDataPortalPage from './DashboardingDataPortalPage.jsx';
 import DashboardingCaseStudiesPage from './DashboardingCaseStudiesPage.jsx';
 import DashboardingCaseStudyPage from './DashboardingCaseStudyPage.jsx';
 import SellSideReadinessPage from './SellSideReadinessPage.jsx';
+import SellSideDataAuditPage from './SellSideDataAuditPage.jsx';
 import QualityOfEarningsPage from './QualityOfEarningsPage.jsx';
 import CorporateDevPage from './CorporateDevPage.jsx';
 import BuildingCredibilityPage from './BuildingCredibilityPage.jsx';
@@ -648,6 +649,7 @@ const isRoundupLanding =
 
         {/* Service Pages */}
         <Route path="/services/sell-side-readiness" element={<SellSideReadinessPage />} />
+        <Route path="/services/sell-side-data-audit" element={<SellSideDataAuditPage />} />
         <Route path="/services/dashboarding-data-portal" element={<DashboardingDataPortalPage />} />
         <Route path="/services/corporate-development" element={<CorporateDevPage />} />
         <Route path="/services/mass-tort" element={<MassTortPage />} />

@@ -159,7 +159,11 @@ export const PAGE_META = {
   },
   sellSideReadiness: {
     title: 'Sell-Side Readiness | North Castle Consulting',
-    description: 'Preparing portfolio companies for optimal valuation and successful exits.',
+    description: "Maximize the multiple. Streamline the exit. North Castle runs the seller's internal workstreams — data, analysis, and diligence support — so management keeps running the business.",
+  },
+  sellSideDataAudit: {
+    title: 'Sell-Side Data Audit | North Castle Consulting',
+    description: "Buyers are using AI to find the holes in your story. A 2-week sell-side data audit finds the gaps in your data before the buyer's diligence team does.",
   },
   corporateDevelopment: {
     title: 'Corporate Development | North Castle Consulting',
