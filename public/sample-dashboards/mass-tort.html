@@ -93,10 +93,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .val-table th,.val-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
 .val-table th{background:var(--mist);font-weight:700;color:var(--navy);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
 .tier-pill{display:inline-block;padding:2px 8px;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:2px;color:var(--white)}
-.tier-pill.t1,.tier-pill.t2{background:transparent;color:var(--navy);padding:0;font-weight:700;letter-spacing:0;font-size:11.5px}
-.tier-pill.t3{background:var(--amber)}
-.tier-pill.t4{background:var(--red)}
-.tier-tile.tier-1,.tier-tile.tier-2{border-left-color:var(--border)}
+.tier-pill.t1,.tier-pill.t2,.tier-pill.t3,.tier-pill.t4{background:transparent;color:var(--navy);padding:0;font-weight:700;letter-spacing:0;font-size:13px}
+.tier-tile.tier-1,.tier-tile.tier-2,.tier-tile.tier-3,.tier-tile.tier-4{border-left-color:var(--border)}
 
 /* Score breakdown — horizontal stacked bar showing the 7 weighted factor
    contributions to a case's 0-10 score. */
@@ -113,6 +111,28 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .score-cohort-breakdown{font-size:11.5px;color:var(--slate);margin:8px 0 0;line-height:1.7}
 .score-cohort-breakdown b{color:var(--navy)}
 .score-cohort-breakdown .seg{display:inline-block;width:8px;height:8px;margin-right:4px;vertical-align:middle;border-radius:1px}
+.score-bar{cursor:pointer;transition:filter .12s ease}
+.score-bar:hover{filter:brightness(1.08);outline:1px solid var(--gold)}
+.score-cohort-link{display:inline-block;margin-top:8px;font-size:11.5px;font-weight:700;color:var(--navy);background:var(--mist);border:1px solid var(--gold);border-radius:3px;padding:3px 10px;cursor:pointer}
+.score-cohort-link:hover{background:var(--gold-lite)}
+/* Donut modal */
+.breakdown-grid{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:center;padding:8px 0}
+.breakdown-donut-wrap{position:relative;width:300px;height:300px}
+.breakdown-donut-wrap canvas{max-height:300px}
+.breakdown-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;text-align:center}
+.breakdown-center .bd-label{font-size:10.5px;font-weight:700;color:var(--slate);letter-spacing:.1em;text-transform:uppercase}
+.breakdown-center .bd-total{font-size:36px;font-weight:700;color:var(--navy);line-height:1;margin-top:4px;font-variant-numeric:tabular-nums}
+.breakdown-center .bd-sub{font-size:10.5px;color:var(--slate-lite);margin-top:4px}
+.breakdown-legend{display:flex;flex-direction:column;gap:8px}
+.breakdown-legend-row{display:grid;grid-template-columns:14px 90px 50px 1fr 50px;gap:10px;align-items:center;font-size:12px;padding:6px 8px;border-bottom:1px solid var(--border)}
+.breakdown-legend-row:last-child{border-bottom:none}
+.breakdown-legend-row .bd-swatch{width:12px;height:12px;border-radius:2px}
+.breakdown-legend-row .bd-key{font-weight:700;color:var(--navy)}
+.breakdown-legend-row .bd-weight{font-size:10.5px;color:var(--slate-lite);font-weight:700;letter-spacing:.04em}
+.breakdown-legend-row .bd-bar-wrap{flex:1;height:6px;background:var(--bg);border-radius:1px;overflow:hidden;border:1px solid var(--border)}
+.breakdown-legend-row .bd-bar{height:100%}
+.breakdown-legend-row .bd-val{font-weight:700;color:var(--navy);text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:760px){.breakdown-grid{grid-template-columns:1fr}.breakdown-donut-wrap{width:240px;height:240px;margin:0 auto}}
 
 /* Convert-rate dropdown — universal input, drives every "if X% convert" line. */
 .tier-convert-control{display:inline-flex;align-items:center;gap:6px;margin-left:auto;font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
@@ -347,13 +367,13 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <h3>Value by tier <span style="font-weight:400;font-size:11.5px;color:var(--slate-lite)">· click a value to edit</span></h3>
         <div class="tier-total-strip">
           <span><b id="totalOpenCount">0</b> open · <b id="totalClosedCount">0</b> closed</span>
-          <span class="tier-convert-control">If <select id="convertRateSelect" class="tier-convert-select" title="Universal convert rate — applied to every lift line and the wins cohort">
+          <span class="tier-convert-control">If <select id="convertRateSelect" class="tier-convert-select" title="Universal convert rate — applied to every dollar in the tier panel">
             <option value="0.25" selected>a quarter (25%) convert</option>
             <option value="0.5">half (50%) convert</option>
             <option value="0.1667">a 1/6 (~17%) convert</option>
           </select></span>
-          <span>Total inventory value: <b id="totalInventoryValue">$0</b></span>
-          <span class="tier-uplift-total">Upside still on the table: <b id="totalUplift">$0</b></span>
+          <span>Inventory value <span style="color:var(--slate-lite);font-weight:400">at convert rate</span>: <b id="totalInventoryValue">$0</b><span class="mx-sub" id="totalPotential" style="display:block;font-weight:400;color:var(--slate-lite);text-transform:none;letter-spacing:0;margin-top:2px"></span></span>
+          <span class="tier-uplift-total">Upside still on the table <span style="color:var(--slate-lite);font-weight:400">at convert rate</span>: <b id="totalUplift">$0</b></span>
         </div>
         <div id="tierPanel"></div>
         <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
@@ -522,7 +542,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
               <th>Matter #</th>
               <th>Claimant</th>
               <th>Firm</th>
-              <th>Score</th>
+              <th>Score breakdown (click for donut)</th>
               <th>Cert</th>
               <th>Missing criterion 1</th>
               <th>Missing criterion 2</th>
@@ -530,6 +550,30 @@ details.exec-details[open]>summary{margin-bottom:12px}
           </thead>
           <tbody id="winsModalTbody"></tbody>
         </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Score Breakdown Donut Modal — click a score bar in the wins modal to
+     see the 7-factor weighted contribution as a doughnut chart, or click the
+     "Cohort average breakdown" link in the wins modal subtitle. -->
+<div id="breakdownModal" class="wins-modal" style="display:none" onclick="if (event.target === this) closeBreakdownModal()">
+  <div class="wins-modal-card" style="width:min(720px,96vw)">
+    <div class="wins-modal-head">
+      <div>
+        <h3 id="breakdownModalTitle">Score breakdown</h3>
+        <p id="breakdownModalSubtitle" class="wins-modal-sub"></p>
+      </div>
+      <button class="wins-modal-close" onclick="closeBreakdownModal()" title="Close">&times;</button>
+    </div>
+    <div class="wins-modal-body">
+      <div class="breakdown-grid">
+        <div class="breakdown-donut-wrap">
+          <canvas id="breakdownCanvas" style="max-height:280px"></canvas>
+          <div id="breakdownCenter" class="breakdown-center"></div>
+        </div>
+        <div class="breakdown-legend" id="breakdownLegend"></div>
       </div>
     </div>
   </div>
@@ -1620,7 +1664,7 @@ function renderTab5() {
   const tbody = document.querySelector('#valTable tbody');
   tbody.innerHTML = top.map(c => `
     <tr>
-      <td><span class="tier-pill t${c.tier}">T${c.tier}</span></td>
+      <td><span class="tier-pill t${c.tier}">${TIER_NAMES[c.tier]}</span></td>
       <td>${c.matterNumber || '—'}</td>
       <td>${c.claimantName}</td>
       <td>${c.firm}</td>
@@ -1647,12 +1691,14 @@ function renderTierPanel() {
     const def = TIER_DEFS[t];
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
+    const payout = tierGsv(t) * open * state.convertRate;
     return `
       <tr class="tier-${t}-row">
-        <td><span class="tier-pill t${t}">${TIER_NAMES[t]}</span> <span class="mx-name">${def.name}</span></td>
+        <td><span class="tier-pill t${t}">${TIER_NAMES[t]}</span></td>
+        <td class="mx-criteria">${def.name}</td>
         <td class="num"><b id="mx-${t}-cases">${open.toLocaleString()}</b><span class="mx-sub">${closed.toLocaleString()} closed</span></td>
         <td class="num mx-gsv"><span class="tier-gsv-dollar">$</span><input type="number" class="tier-gsv-input" data-tier="${t}" value="${tierDollars[t]}" min="0" step="1000" /></td>
-        <td class="num"><b id="mx-${t}-payout">${fmtMoney(tierGsv(t) * open)}</b></td>
+        <td class="num"><b id="mx-${t}-payout">${fmtMoney(payout)}</b><span class="mx-sub" id="mx-${t}-potential">potential ${fmtMoney(tierGsv(t) * open)}</span></td>
         <td class="mx-lift" id="mx-${t}-lift">${liftCellHtml(t)}</td>
       </tr>`;
   }).join('');
@@ -1661,6 +1707,7 @@ function renderTierPanel() {
     <table class="tier-matrix">
       <thead><tr>
         <th>Tier</th>
+        <th>Criteria</th>
         <th class="num">Cases</th>
         <th class="num">GSV per case</th>
         <th class="num">Expected payout</th>
@@ -1733,18 +1780,27 @@ function updateTierPanelDerived() {
     if (!isNaN(v) && v >= 0) tierDollars[t] = v;
   });
   const cases = D.cases;
-  let totalOpen = 0, totalClosed = 0, totalInventoryValue = 0, totalUplift = 0;
+  // Universal convert rate (default 25% / quarter). Every dollar shown in the
+  // tier panel is scaled by this — Expected payout per tier, Total inventory
+  // value, and the Upside lift. The undiscounted ("potential") values appear
+  // as small sub-lines so the user sees both views at a glance.
+  const p = state.convertRate;
+  let totalOpen = 0, totalClosed = 0, totalInventoryValue = 0, totalPotential = 0, totalUplift = 0;
   [1, 2, 3, 4].forEach(t => {
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
-    const ivalue = tierGsv(t) * open;
+    const potential = tierGsv(t) * open;
+    const expected = potential * p;
     totalOpen += open;
     totalClosed += closed;
-    totalInventoryValue += ivalue;
+    totalInventoryValue += expected;
+    totalPotential += potential;
     const casesEl = document.getElementById(`mx-${t}-cases`);
     const payEl = document.getElementById(`mx-${t}-payout`);
+    const potEl = document.getElementById(`mx-${t}-potential`);
     if (casesEl) casesEl.textContent = open.toLocaleString();
-    if (payEl) payEl.textContent = fmtMoney(ivalue);
+    if (payEl) payEl.textContent = fmtMoney(expected);
+    if (potEl) potEl.textContent = `potential ${fmtMoney(potential)}`;
     // Rebuild the lift cell in place and rewire its click handlers
     const liftEl = document.getElementById(`mx-${t}-lift`);
     if (liftEl) {
@@ -1753,9 +1809,7 @@ function updateTierPanelDerived() {
     }
   });
   // Total upside = probability-weighted expected lift across all source tiers,
-  // using the single universal convert rate (state.convertRate) instead of
-  // per-cohort cure probabilities.
-  const p = state.convertRate;
+  // using the single universal convert rate (state.convertRate).
   [2, 3, 4].forEach(s => {
     const { one, two, thin, gap } = winsCohorts(s);
     totalUplift += (one.length + two.length + thin.length) * gap * p;
@@ -1763,10 +1817,12 @@ function updateTierPanelDerived() {
   const totalOpenEl = document.getElementById('totalOpenCount');
   const totalClosedEl = document.getElementById('totalClosedCount');
   const totalIvEl = document.getElementById('totalInventoryValue');
+  const totalPotentialEl = document.getElementById('totalPotential');
   const totalUpliftEl = document.getElementById('totalUplift');
   if (totalOpenEl) totalOpenEl.textContent = totalOpen.toLocaleString();
   if (totalClosedEl) totalClosedEl.textContent = totalClosed.toLocaleString();
   if (totalIvEl) totalIvEl.textContent = fmtMoney(totalInventoryValue);
+  if (totalPotentialEl) totalPotentialEl.textContent = `potential ${fmtMoney(totalPotential)}`;
   if (totalUpliftEl) totalUpliftEl.textContent = fmtMoney(totalUplift);
 }
 
@@ -1809,35 +1865,54 @@ function openWinsModal(fromTier, kind = 'one') {
   }[kind];
   document.getElementById('winsModalTitle').textContent =
     `Wins cohort: ${wins.length} cases ${fixWord} from Tier ${target}${kind === 'thin' ? ' (thin file)' : ''}`;
-  // Subtitle: cohort note + a one-line cohort-average breakdown of the score.
+  // Subtitle: cohort note + a clickable button that opens the cohort-average
+  // score breakdown as a donut chart. (Replaces the prior inline dot-list.)
+  const cohortAvgScore = wins.reduce((s,c)=>s+c.score,0)/wins.length;
   document.getElementById('winsModalSubtitle').innerHTML = cohortNote +
-    `<div class="score-cohort-breakdown">Cohort-avg score breakdown: `
-    + SCORE_FACTOR_LABELS.map(([k, label, w]) => {
-        const colorVar = k === 'Dx' ? 'navy' : k === 'Exp' ? 'purple' : k === 'Ev' ? 'green' : k === 'Rec' ? 'gold' : k === 'Lat' ? 'amber' : k === 'Sym' ? 'slate-lite' : 'slate';
-        return `<span title="${label} (weight ${w}%)"><span class="seg" style="background:var(--${colorVar})"></span>${k} <b>${cohortAvg[k].toFixed(1)}</b> <span style="color:var(--slate-lite)">(${w}%)</span></span>`;
-      }).join(' &middot; ')
-    + ` &middot; <b style="color:var(--gold)">cohort avg score ${(wins.reduce((s,c)=>s+c.score,0)/wins.length).toFixed(1)}</b></div>`;
+    `<button type="button" class="score-cohort-link" id="cohortBreakdownBtn" title="Show the cohort-average score as a donut">Cohort average breakdown → score ${cohortAvgScore.toFixed(1)}</button>`;
   const gapCell = g => g
     ? `<span class="wins-pill">${g.label}</span>${g.status === 'disconfirmed' ? ' <span class="gap-badge gap-thin">disconfirmed</span>' : ''}`
     : '';
   const tbody = document.getElementById('winsModalTbody');
-  tbody.innerHTML = wins.map(c => {
+  tbody.innerHTML = wins.map((c, idx) => {
     const b = c.breakdown;
-    const segs = SCORE_FACTOR_LABELS.map(([k, label, w], idx) =>
-      `<div class="score-bar-seg s${idx + 1}" style="flex:${b[k].toFixed(1)}" title="${label} (${w}% weight): ${b[k].toFixed(1)}"></div>`).join('');
-    const tooltip = SCORE_FACTOR_LABELS.map(([k, label, w]) => `${label} (${w}%): ${b[k].toFixed(1)}`).join(' · ');
+    const segs = SCORE_FACTOR_LABELS.map(([k, label, w], sidx) =>
+      `<div class="score-bar-seg s${sidx + 1}" style="flex:${b[k].toFixed(1)}"></div>`).join('');
     return `
       <tr>
         <td>${c.matterNumber || '—'}</td>
         <td>${c.claimantName || '—'}</td>
         <td>${c.firm || '—'}</td>
-        <td><div class="score-cell"><b>${(c.score || 0).toFixed(1)}</b><div class="score-bar" title="${tooltip}">${segs}</div></div></td>
+        <td><div class="score-cell"><b>${(c.score || 0).toFixed(1)}</b><div class="score-bar" data-case-idx="${idx}" tabindex="0" role="button" aria-label="Open score breakdown donut">${segs}</div></div></td>
         <td>${c.licenseVerified ? '<span class="wins-badge wins-yes">certified</span>' : '<span class="wins-badge wins-no">no cert</span>'}</td>
         <td class="wins-missing">${gapCell(c.gaps[0])}</td>
         <td class="wins-missing">${gapCell(c.gaps[1])}</td>
       </tr>`;
   }).join('');
   document.getElementById('winsModalCount').textContent = `${wins.length} cases`;
+  // Wire score-bar clicks — open the per-case donut.
+  tbody.querySelectorAll('.score-bar[data-case-idx]').forEach(bar => {
+    const open = () => openScoreBreakdownModal({
+      title: `${wins[bar.dataset.caseIdx].matterNumber || 'Case'} — ${wins[bar.dataset.caseIdx].claimantName || '—'}`,
+      sub: `Score ${wins[bar.dataset.caseIdx].score.toFixed(1)} of 10 — weighted contribution by factor`,
+      breakdown: wins[bar.dataset.caseIdx].breakdown,
+      total: wins[bar.dataset.caseIdx].score,
+      totalLabel: 'Score / 10',
+    });
+    bar.addEventListener('click', open);
+    bar.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  });
+  // Wire cohort-average button.
+  const cohortBtn = document.getElementById('cohortBreakdownBtn');
+  if (cohortBtn) {
+    cohortBtn.addEventListener('click', () => openScoreBreakdownModal({
+      title: 'Cohort average score breakdown',
+      sub: `Across ${wins.length} cases in this wins cohort`,
+      breakdown: cohortAvg,
+      total: cohortAvgScore,
+      totalLabel: 'Avg score / 10',
+    }));
+  }
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
@@ -1847,6 +1922,80 @@ function closeWinsModal() {
   if (!modal) return;
   modal.style.display = 'none';
   document.body.style.overflow = '';
+}
+
+// ====================================================================
+// SCORE BREAKDOWN DONUT MODAL — click a per-case score bar or the cohort
+// average button to see the 7-factor weighted contribution as a doughnut
+// chart with a detailed legend (factor, weight %, value, share of total).
+// ====================================================================
+
+let breakdownChart = null;
+function openScoreBreakdownModal({ title, sub, breakdown, total, totalLabel }) {
+  const modal = document.getElementById('breakdownModal');
+  if (!modal) return;
+  document.getElementById('breakdownModalTitle').textContent = title;
+  document.getElementById('breakdownModalSubtitle').textContent = sub;
+  document.getElementById('breakdownCenter').innerHTML =
+    `<div class="bd-label">${escapeHtml(totalLabel || 'Score / 10')}</div>` +
+    `<div class="bd-total">${(total || 0).toFixed(1)}</div>` +
+    `<div class="bd-sub">${breakdownTotal(breakdown).toFixed(1)} raw</div>`;
+
+  const labels = SCORE_FACTOR_LABELS.map(f => f[1]);
+  const values = SCORE_FACTOR_LABELS.map(([k]) => breakdown[k] || 0);
+  const colors = ['#1E2761', '#4A5E8A', '#2C5F2D', '#C9A227', '#B45309', '#94A3B8', '#475569'];
+
+  if (breakdownChart) breakdownChart.destroy();
+  breakdownChart = new Chart(document.getElementById('breakdownCanvas'), {
+    type: 'doughnut',
+    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderColor: '#fff', borderWidth: 2 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '68%',
+      plugins: {
+        legend: { display: false },
+        datalabels: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.label}: ${ctx.parsed.toFixed(1)} (weight ${SCORE_FACTOR_LABELS[ctx.dataIndex][2]}%)`,
+          },
+        },
+      },
+    },
+  });
+
+  // Legend — per factor: swatch, name, weight, bar, value
+  const max = Math.max(...values, 0.01);
+  document.getElementById('breakdownLegend').innerHTML = SCORE_FACTOR_LABELS.map(([k, label, w], idx) => {
+    const v = breakdown[k] || 0;
+    const pct = (v / max * 100).toFixed(0);
+    return `<div class="breakdown-legend-row">
+      <span class="bd-swatch" style="background:${colors[idx]}"></span>
+      <span class="bd-key">${k}</span>
+      <span class="bd-weight">${w}% wt</span>
+      <span class="bd-bar-wrap"><span class="bd-bar" style="width:${pct}%;background:${colors[idx]}"></span></span>
+      <span class="bd-val">${v.toFixed(1)}</span>
+    </div>`;
+  }).join('');
+
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBreakdownModal() {
+  const modal = document.getElementById('breakdownModal');
+  if (!modal) return;
+  modal.style.display = 'none';
+  // If the wins modal was open, restore its body lock so scroll stays disabled.
+  const winsModal = document.getElementById('winsModal');
+  if (winsModal && winsModal.style.display !== 'none') {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}
+
+function breakdownTotal(b) {
+  return SCORE_FACTOR_LABELS.reduce((s, [k]) => s + (b[k] || 0), 0);
 }
 
 // Exec tab — legal developments are static HTML now; just render the matrix.
@@ -1958,9 +2107,12 @@ document.addEventListener('click', e => {
   }
 });
 
-// Esc closes the wins drill-in modal
+// Esc closes whichever modal is open (breakdown modal takes precedence over wins modal).
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeWinsModal();
+  if (e.key !== 'Escape') return;
+  const bd = document.getElementById('breakdownModal');
+  if (bd && bd.style.display !== 'none') { closeBreakdownModal(); return; }
+  closeWinsModal();
 });
 
 document.getElementById('nlRunBtn').addEventListener('click', runNLQuery);
