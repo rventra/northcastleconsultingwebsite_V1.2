@@ -442,7 +442,6 @@ details.exec-details[open]>summary{margin-bottom:12px}
               <li>Parkinson's Disease diagnosis (idiopathic PD)</li>
               <li>Certified applicator license <em>OR</em> verified purchase receipts</li>
               <li>≥10 years of exposure</li>
-              <li>First-degree relative with Parkinsonism <span class="criteria-tag">genetic predisposition</span></li>
               <li>Latency 10–25 years <span class="criteria-tag">causation sweet spot</span></li>
               <li>Age at first exposure &lt; 45 <span class="criteria-tag">longer life impact</span></li>
               <li>Levodopa response (robust or moderate)</li>
@@ -471,7 +470,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
             </ul>
           </div>
         </div>
-        <div class="criteria-foot">Age at first exposure is calculated as <code>(first exposure date) − (date of birth)</code>. Family history comes from <code>pq_family_histories</code> filtered to first-degree relatives (mother, father, sibling) with a Parkinsonism or Parkinson's condition. Medical record <em>count</em> is informational only — it does not gate tier membership. <b>PPE use</b> (gloves, respirator, coveralls) is a scoring factor (5%): documented PPE use corroborates the professional-applicator pattern and strengthens the case; cases without PPE on file score lower.</div>
+        <div class="criteria-foot">Age at first exposure is calculated as <code>(first exposure date) − (date of birth)</code>. Medical record <em>count</em> is informational only — it does not gate tier membership. <b>Family history</b> is a scoring factor (10%) with reversed direction: a documented first-degree relative with Parkinsonism <em>dilutes</em> the claim (competing-cause argument — "PD was genetic, not paraquat-caused"); absence of family history is <em>stronger</em> (pure paraquat causation, no competing cause). <b>PPE use</b> (gloves, respirator, coveralls) is a scoring factor (5%): documented PPE use corroborates the professional-applicator pattern and strengthens the case; cases without PPE on file score lower.</div>
       </div>
 
       <div class="exec-card">
@@ -728,11 +727,6 @@ const TIER_DEFS = {
            label: '≥10 years exposure',
            status: c => c.exposureYears == null ? 'unknown'
              : c.exposureYears >= 10 ? 'pass' : 'disconfirmed' },
-         { key: 'family_pd', test: c => c.familyPd === true,
-           label: 'First-degree relative with Parkinsonism (genetic predisposition)',
-           // Absence of family-history info = unknown; an EMPTY family history
-           // record set is curable (genetic testing or relative interview).
-           status: c => c.familyPd === true ? 'pass' : 'unknown' },
          { key: 'sweet_latency', test: c => c.latencyYears != null && c.latencyYears >= 10 && c.latencyYears <= 25,
            label: 'Latency 10–25 yrs (causation sweet spot)',
            status: c => c.latencyYears == null ? 'unknown'
@@ -1188,11 +1182,15 @@ function scoreFactorBreakdown(c) {
   else if (c.licenseVerified)                   { ev =  5; evReason = 'License verified only (no receipts)'; }
   factors.push({ key: 'Ev', label: 'Evidence verification', weight: 15, rawScore: ev, reason: evReason });
 
-  // 4. Family history (15%) — first-degree relative with Parkinsonism materially
-  // strengthens causation (genetic predisposition) and damages.
-  let fam = 0, famReason = 'No first-degree PD/parkinsonism relative on file';
-  if (c.familyPd === true) { fam = 10; famReason = 'First-degree relative with Parkinsonism'; }
-  factors.push({ key: 'Fam', label: 'Family history', weight: 15, rawScore: fam, reason: famReason });
+  // 4. Family history (10%) — direction REVERSED from traditional mass-tort
+  // logic: a first-degree relative with Parkinsonism gives the defense a
+  // competing-cause argument ("PD was genetic, not paraquat-caused"), so it
+  // DILUTES the claim. Absence of documented genetic predisposition makes
+  // the case stronger — pure paraquat causation, no competing cause.
+  let fam = 5, famReason = 'Family history not on file — neutral';
+  if (c.familyPd === true) { fam = 0; famReason = 'First-degree relative with Parkinsonism — competing-cause risk'; }
+  else if (c.familyPd === false) { fam = 10; famReason = 'No first-degree PD relative on file — pure paraquat causation'; }
+  factors.push({ key: 'Fam', label: 'Family history (absent = stronger)', weight: 10, rawScore: fam, reason: famReason });
 
   // 5. Latency (10%) — 10-25 yrs is the causation sweet spot.
   let lat = 0, latReason = 'Unknown latency';
@@ -2060,7 +2058,6 @@ function renderWinsTableHeader() {
   const targetChecks = TIER_DEFS[modal._cohort.target]?.checks || [];
   const criteriaHeaders = targetChecks.map(chk => `
     <th class="criteria-col" title="${escapeHtml(chk.label)} — ✓ = case meets this criteria (lift already captured), blank = lift opportunity">
-      <span class="lift-tag">LIFT</span>
       <span class="crit-label">${escapeHtml(chk.label)}</span>
     </th>`).join('');
   thead.innerHTML = `
