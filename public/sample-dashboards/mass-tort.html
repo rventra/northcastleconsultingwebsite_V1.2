@@ -129,6 +129,27 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .exec-foot{font-size:11px;color:var(--slate-lite);font-style:italic;margin-top:6px;border-top:1px solid var(--border);padding-top:10px}
 
 /* Tier Panel (Executive Summary) — front-and-center on t0 for PE audience */
+/* Tier matrix (Executive Summary) — clean valuation table */
+.tier-matrix{width:100%;border-collapse:collapse;font-size:13px}
+.tier-matrix th{font-size:10.5px;font-weight:700;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:6px 12px 8px;border-bottom:2px solid var(--border)}
+.tier-matrix th.num,.tier-matrix td.num{text-align:right}
+.tier-matrix td{padding:12px;border-bottom:1px solid var(--border);vertical-align:top}
+.tier-matrix tbody tr:last-child td{border-bottom:none}
+.mx-name{font-weight:700;color:var(--navy)}
+.mx-sub{display:block;font-size:10.5px;color:var(--slate-lite);font-weight:400}
+.tier-matrix .tier-gsv-input{width:110px;padding:4px 8px;font-size:14px;border-width:1px}
+.mx-lift{min-width:250px}
+.lift-line{cursor:pointer;font-size:12px;color:var(--navy-ink);padding:2px 0;line-height:1.5}
+.lift-line b{color:var(--navy)}
+.lift-line:hover{color:var(--gold)}
+.lift-line.lift-two,.lift-line.lift-thin{color:var(--slate)}
+.lift-line.lift-two b,.lift-line.lift-thin b{color:var(--navy)}
+.lift-none{font-size:12px;color:var(--slate-lite);font-style:italic}
+/* Gap-status badge (wins modal) */
+.gap-badge{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.05em;padding:2px 6px;border-radius:2px;text-transform:uppercase}
+.gap-badge.gap-thin{background:var(--amber-bg);color:var(--amber)}
+
+/* Legacy tier-row styles kept for reference — superseded by .tier-matrix */
 .tier-total-strip{display:flex;gap:24px;flex-wrap:wrap;padding:10px 14px;background:var(--mist);border-radius:4px;margin-bottom:14px;font-size:12.5px;color:var(--slate)}
 .tier-total-strip b{color:var(--navy);font-variant-numeric:tabular-nums}
 .tier-uplift-total b{color:var(--gold);font-size:14px}
@@ -314,7 +335,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
           <span class="tier-uplift-total">Upside still on the table: <b id="totalUplift">$0</b></span>
         </div>
         <div id="tierPanel"></div>
-        <div class="tier-foot">Upside counts only gaps that are missing information — not facts the record affirmatively rules out — weighted by the odds the gap can be cured. Thin files (≤2 records) with one adverse fact get partial credit. Click a wins row to see the cohort.</div>
+        <div class="tier-foot">Upside counts only gaps that are missing information — not facts the record affirmatively rules out — weighted by the odds the gap can be cured. Thin files (≤2 records) with one adverse fact get partial credit. Click a lift line to see the cohort.</div>
       </div>
 
       <!-- Pain Rulings — what's hurting the docket -->
@@ -517,8 +538,8 @@ details.exec-details[open]>summary{margin-bottom:12px}
               <th>Firm</th>
               <th>Score</th>
               <th>Cert</th>
-              <th>Gap</th>
-              <th>Missing criterion (the one to fix)</th>
+              <th>Missing criterion 1</th>
+              <th>Missing criterion 2</th>
             </tr>
           </thead>
           <tbody id="winsModalTbody"></tbody>
@@ -619,24 +640,39 @@ function missingFromTier(c, tier) {
   return TIER_DEFS[tier].checks.filter(chk => !chk.test(c)).map(chk => chk.label);
 }
 
-// A "win" candidate is a case currently in tier N that is exactly one
-// criterion short of tier N-1 — and the gap must be curable:
-//   kind 'unknown' — the single failing criterion is missing information
-//                    (full-weight win, weighted by P_CURE_UNKNOWN)
-//   kind 'thin'    — the single failing criterion is affirmatively disconfirmed
-//                    but the file is thin (≤2 records), so the disconfirmation
-//                    is weak (small discounted lift, P_CURE_THIN_FILE)
-// A disconfirmed gap on a file with >2 records earns no lift.
+// A "win" candidate is a case currently in tier N that is one or two
+// criteria short of tier N-1 — and the gaps must be curable:
+//   kind 'one'  — exactly one failing criterion, status 'unknown'
+//                 (full-weight win, weighted by P_CURE_UNKNOWN)
+//   kind 'two'  — exactly two failing criteria, BOTH 'unknown'
+//                 (weighted by P_CURE_TWO_FIX)
+//   kind 'thin' — one disconfirmed + up to one unknown criterion on a thin
+//                 file (≤2 records): the disconfirmation is weak
+//                 (weighted by P_CURE_THIN_FILE)
+// Any disconfirmed gap on a file with >2 records, or two disconfirmed gaps,
+// or 3+ missing criteria: no lift.
 function winCandidates(c, fromTier) {
   const target = fromTier - 1;
-  if (target < 1) return { qualifies: false, kind: null, missing: [] };
+  const none = { qualifies: false, kind: null, missing: [], gaps: [] };
+  if (target < 1) return none;
   const failed = TIER_DEFS[target].checks.filter(chk => !chk.test(c));
-  if (failed.length !== 1) return { qualifies: false, kind: null, missing: failed.map(f => f.label) };
-  const chk = failed[0];
-  const st = chk.status ? chk.status(c) : 'unknown';
-  if (st === 'unknown') return { qualifies: true, kind: 'unknown', missing: [chk.label], gapKey: chk.key };
-  if (st === 'disconfirmed' && c.recordCount <= 2) return { qualifies: true, kind: 'thin', missing: [chk.label], gapKey: chk.key };
-  return { qualifies: false, kind: null, missing: [chk.label], gapKey: chk.key };
+  const gaps = failed.map(chk => ({
+    key: chk.key, label: chk.label,
+    status: chk.status ? chk.status(c) : 'unknown',
+  }));
+  const missing = gaps.map(g => g.label);
+  const nDisc = gaps.filter(g => g.status === 'disconfirmed').length;
+  if (failed.length === 1) {
+    if (nDisc === 0) return { qualifies: true, kind: 'one', missing, gaps };
+    if (c.recordCount <= 2) return { qualifies: true, kind: 'thin', missing, gaps };
+    return { ...none, missing, gaps };
+  }
+  if (failed.length === 2) {
+    if (nDisc === 0) return { qualifies: true, kind: 'two', missing, gaps };
+    if (nDisc === 1 && c.recordCount <= 2) return { qualifies: true, kind: 'thin', missing, gaps };
+    return { ...none, missing, gaps };
+  }
+  return { ...none, missing, gaps };
 }
 
 // ====================================================================
@@ -991,10 +1027,22 @@ const tierDollars = {
 };
 // Editable assumptions — cure probabilities for the wins uplift math.
 // P_CURE_UNKNOWN:   odds a missing-information gap (no data) gets cured.
+// P_CURE_TWO_FIX:   odds a case missing two pieces of information cures both.
 // P_CURE_THIN_FILE: odds a disconfirmed criterion on a thin file (≤2 records)
 //                   turns out to be curable (weak disconfirmation).
 const P_CURE_UNKNOWN = 0.5;
+const P_CURE_TWO_FIX = 0.25;
 const P_CURE_THIN_FILE = 0.15;
+const KIND_P = { one: P_CURE_UNKNOWN, two: P_CURE_TWO_FIX, thin: P_CURE_THIN_FILE };
+// Plain-English rendering of a cure probability — never show "p=" in the UI.
+function oddsWords(p) {
+  if (Math.abs(p - 0.5) < 1e-9) return 'half';
+  if (Math.abs(p - 0.25) < 1e-9) return 'a quarter';
+  if (Math.abs(p - 1 / 3) < 0.01) return 'a third';
+  if (Math.abs(p - 0.15) < 1e-9) return '~1 in 6';
+  if (Math.abs(p - 0.1) < 1e-9) return '~1 in 10';
+  return Math.round(p * 100) + '%';
+}
 function tierGsv(t)        { return tierDollars[t]; }
 function tierGsvLabel(t)   { return '$' + fmtNumber(tierDollars[t]); }
 
@@ -1546,43 +1594,41 @@ function renderPainRulings() {
     </div>`).join('');
 }
 
-// Tier panel — built once per render, then updateTierPanelDerived() only
-// patches the text spans when an input changes (preserves input focus).
+// Tier panel — a clean valuation matrix: one row per tier with case count,
+// editable GSV per case, expected payout, and the lift the tier stands to
+// gain from cases below it. updateTierPanelDerived() patches cells in place
+// when an input changes (preserves input focus).
 function renderTierPanel() {
   const panel = document.getElementById('tierPanel');
   if (!panel || !D.cases) return;
   const cases = D.cases;
   cases.forEach(c => { c.statusBucket = statusBucketOf(c); if (c.tier === undefined) c.tier = caseTier(c); });
 
-  panel.innerHTML = [1, 2, 3, 4].map(t => {
+  const rows = [1, 2, 3, 4].map(t => {
     const def = TIER_DEFS[t];
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
-    const certified = cases.filter(c => c.tier === t && c.licenseVerified).length;
-    const tierValue = tierGsv(t) * open;
-    const criteriaHtml = def.checks.length
-      ? def.checks.map(chk => `<li>${chk.label}</li>`).join('')
-      : '<li>All cases that fail to meet Tier 3 criteria.</li>';
     return `
-      <div class="tier-row tier-${t}-row">
-        <div class="tier-head">
-          <span class="tier-pill t${t}">T${t}</span>
-          <span class="tier-name">${def.name}</span>
-          <span class="tier-gsv">
-            <span class="tier-gsv-dollar">$</span><input type="number" class="tier-gsv-input" data-tier="${t}" value="${tierDollars[t]}" min="0" step="1000" />
-            <span class="tier-gsv-suffix">per case</span>
-          </span>
-        </div>
-        <div class="tier-stats">
-          <span><b class="tier-stat-num" id="tier-${t}-open">${open.toLocaleString()}</b> open</span>
-          <span><b class="tier-stat-num" id="tier-${t}-closed">${closed.toLocaleString()}</b> closed</span>
-          <span><b class="tier-stat-num" id="tier-${t}-certified">${certified.toLocaleString()}</b> certified applicators</span>
-          <span class="tier-tier-value">Tier inventory value: <b id="tier-${t}-ivalue">${fmtMoney(tierValue)}</b></span>
-        </div>
-        <ul class="tier-criteria">${criteriaHtml}</ul>
-        <div class="tier-wins-wrap">${winsRowsHtml(t)}</div>
-      </div>`;
+      <tr class="tier-${t}-row">
+        <td><span class="tier-pill t${t}">T${t}</span> <span class="mx-name">${def.name}</span></td>
+        <td class="num"><b id="mx-${t}-cases">${open.toLocaleString()}</b><span class="mx-sub">${closed.toLocaleString()} closed</span></td>
+        <td class="num mx-gsv"><span class="tier-gsv-dollar">$</span><input type="number" class="tier-gsv-input" data-tier="${t}" value="${tierDollars[t]}" min="0" step="1000" /></td>
+        <td class="num"><b id="mx-${t}-payout">${fmtMoney(tierGsv(t) * open)}</b></td>
+        <td class="mx-lift" id="mx-${t}-lift">${liftCellHtml(t)}</td>
+      </tr>`;
   }).join('');
+
+  panel.innerHTML = `
+    <table class="tier-matrix">
+      <thead><tr>
+        <th>Tier</th>
+        <th class="num">Cases</th>
+        <th class="num">GSV per case</th>
+        <th class="num">Expected payout</th>
+        <th>Lift — what the tier below could add</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
 
   // Wire input listeners
   panel.querySelectorAll('input.tier-gsv-input').forEach(inp => {
@@ -1594,44 +1640,45 @@ function renderTierPanel() {
   updateTierPanelDerived();
 }
 
-// Split a tier's win candidates into the two cohorts and compute the
-// probability-weighted expected lift for each.
+// Win candidates sitting in source tier t, grouped by cohort. The gap is the
+// GSV jump from t up to t-1.
 function winsCohorts(t) {
   const target = t - 1;
-  if (target < 1) return { target, unknown: [], thin: [], gap: 0 };
-  const wins = D.cases
-    .map(c => ({ c, w: c.tier === t ? winCandidates(c, t) : { qualifies: false } }))
-    .filter(x => x.w.qualifies);
-  return {
-    target,
-    unknown: wins.filter(x => x.w.kind === 'unknown').map(x => x.c),
-    thin: wins.filter(x => x.w.kind === 'thin').map(x => x.c),
-    gap: tierGsv(target) - tierGsv(t),
-  };
+  const out = { target, one: [], two: [], thin: [], gap: 0 };
+  if (target < 1) return out;
+  D.cases.forEach(c => {
+    if (c.tier !== t) return;
+    const w = winCandidates(c, t);
+    if (w.qualifies) out[w.kind].push(c);
+  });
+  out.gap = tierGsv(target) - tierGsv(t);
+  return out;
 }
 
-// Wins rows live in the box of the SOURCE tier, pointing UP to the target
-// tier. Unknown-gap cohort gets full weight (p = P_CURE_UNKNOWN); thin-file
-// disconfirmed cohort gets a quieter row (p = P_CURE_THIN_FILE). Disconfirmed
-// gaps on files with >2 records get no row — no lift.
-function winsRowsHtml(t) {
-  const { target, unknown, thin, gap } = winsCohorts(t);
-  if (target < 1) return `<div class="tier-wins empty">▸ Already at the top tier — nothing to upgrade to</div>`;
-  const rows = [];
-  if (unknown.length) {
-    const exp = unknown.length * gap * P_CURE_UNKNOWN;
-    rows.push(`<div class="tier-wins" data-tier="${t}" data-kind="unknown" role="button" tabindex="0" title="Click to see the cohort">▸ <b>${unknown.length}</b> cases one <i>unknown</i> criterion from Tier ${target} &rarr; +${fmtMoney(exp)} expected (p=${P_CURE_UNKNOWN})</div>`);
-  }
-  if (thin.length) {
-    const exp = thin.length * gap * P_CURE_THIN_FILE;
-    rows.push(`<div class="tier-wins thin" data-tier="${t}" data-kind="thin" role="button" tabindex="0" title="Click to see the cohort">▸ <b>${thin.length}</b> more blocked by a single disconfirmed criterion but thin-file (≤2 records) &rarr; +${fmtMoney(exp)} expected (p=${P_CURE_THIN_FILE})</div>`);
-  }
-  if (!rows.length) return `<div class="tier-wins empty">▸ No cases here one curable criterion from Tier ${target}</div>`;
-  return rows.join('');
+// Lift cell for tier T: the cohorts sitting in tier T+1 that could move UP
+// into T. One-fix unknown gaps at P_CURE_UNKNOWN, two-fix unknown gaps at
+// P_CURE_TWO_FIX, thin-file disconfirmed at P_CURE_THIN_FILE. Disconfirmed
+// gaps on files with >2 records earn no lift and get no line.
+function liftCellHtml(t) {
+  const source = t + 1;
+  if (source > 4) return '<span class="lift-none">&mdash;</span>';
+  const { one, two, thin, gap } = winsCohorts(source);
+  const lines = [];
+  if (one.length) lines.push(liftLine(source, 'one', one.length, gap, 'one fix away'));
+  if (two.length) lines.push(liftLine(source, 'two', two.length, gap, 'two fixes away'));
+  if (thin.length) lines.push(liftLine(source, 'thin', thin.length, gap, 'thin-file long shots'));
+  if (!lines.length) return '<span class="lift-none">no near-wins in the tier below</span>';
+  return lines.join('');
+}
+
+function liftLine(source, kind, n, gap, label) {
+  const p = KIND_P[kind];
+  const exp = n * gap * p;
+  return `<div class="lift-line lift-${kind}" data-tier="${source}" data-kind="${kind}" role="button" tabindex="0" title="Click to see the cohort">▸ <b>${n}</b> ${label} — if ${oddsWords(p)} convert, <b>+${fmtMoney(exp)}</b></div>`;
 }
 
 function wireWinsRows(panel) {
-  panel.querySelectorAll('.tier-wins[data-tier]').forEach(el => {
+  panel.querySelectorAll('.lift-line[data-tier]').forEach(el => {
     const open = () => openWinsModal(parseInt(el.dataset.tier, 10), el.dataset.kind);
     el.addEventListener('click', open);
     el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') open(); });
@@ -1651,30 +1698,27 @@ function updateTierPanelDerived() {
   [1, 2, 3, 4].forEach(t => {
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
-    const certified = cases.filter(c => c.tier === t && c.licenseVerified).length;
-    const { target, unknown, thin, gap } = winsCohorts(t);
-    // Probability-weighted expected lift only — never the raw GSV gap.
-    const totalLift = unknown.length * gap * P_CURE_UNKNOWN
-                    + thin.length * gap * P_CURE_THIN_FILE;
     const ivalue = tierGsv(t) * open;
     totalOpen += open;
     totalClosed += closed;
     totalInventoryValue += ivalue;
-    totalUplift += totalLift;
-    const openEl = document.getElementById(`tier-${t}-open`);
-    const closedEl = document.getElementById(`tier-${t}-closed`);
-    const certEl = document.getElementById(`tier-${t}-certified`);
-    const ivEl = document.getElementById(`tier-${t}-ivalue`);
-    if (openEl) openEl.textContent = open.toLocaleString();
-    if (closedEl) closedEl.textContent = closed.toLocaleString();
-    if (certEl) certEl.textContent = certified.toLocaleString();
-    if (ivEl) ivEl.textContent = fmtMoney(ivalue);
-    // Rebuild the wins rows in-place and rewire their click handlers
-    const wrap = document.querySelector(`.tier-${t}-row .tier-wins-wrap`);
-    if (wrap) {
-      wrap.innerHTML = winsRowsHtml(t);
-      wireWinsRows(wrap);
+    const casesEl = document.getElementById(`mx-${t}-cases`);
+    const payEl = document.getElementById(`mx-${t}-payout`);
+    if (casesEl) casesEl.textContent = open.toLocaleString();
+    if (payEl) payEl.textContent = fmtMoney(ivalue);
+    // Rebuild the lift cell in place and rewire its click handlers
+    const liftEl = document.getElementById(`mx-${t}-lift`);
+    if (liftEl) {
+      liftEl.innerHTML = liftCellHtml(t);
+      wireWinsRows(liftEl);
     }
+  });
+  // Total upside = probability-weighted expected lift across all source tiers.
+  [2, 3, 4].forEach(s => {
+    const { one, two, thin, gap } = winsCohorts(s);
+    totalUplift += one.length * gap * P_CURE_UNKNOWN
+                 + two.length * gap * P_CURE_TWO_FIX
+                 + thin.length * gap * P_CURE_THIN_FILE;
   });
   const totalOpenEl = document.getElementById('totalOpenCount');
   const totalClosedEl = document.getElementById('totalClosedCount');
@@ -1692,7 +1736,7 @@ function updateTierPanelDerived() {
 // missing criterion. Click outside or hit Esc to close.
 // ====================================================================
 
-function openWinsModal(fromTier, kind = 'unknown') {
+function openWinsModal(fromTier, kind = 'one') {
   const target = fromTier - 1;
   if (target < 1) return;
   const cases = D.cases || [];
@@ -1701,27 +1745,30 @@ function openWinsModal(fromTier, kind = 'unknown') {
     .filter(x => x.w.qualifies && x.w.kind === kind)
     .map(x => {
       const sc = scoreCase(x.c);
-      return { ...x.c, score: sc.score, missing: x.w.missing, kind };
+      return { ...x.c, score: sc.score, gaps: x.w.gaps };
     })
     .sort((a, b) => b.score - a.score);
   if (!wins.length) return;
 
   const gap = tierGsv(target) - tierGsv(fromTier);
-  const p = kind === 'thin' ? P_CURE_THIN_FILE : P_CURE_UNKNOWN;
+  const p = KIND_P[kind];
   const perCaseExpected = gap * p;
   const totalExpected = wins.length * perCaseExpected;
 
   const modal = document.getElementById('winsModal');
   if (!modal) return;
-  const cohortLabel = kind === 'thin' ? 'thin-file disconfirmed gap' : 'unknown gap';
-  document.getElementById('winsModalTitle').textContent = `Wins cohort: ${wins.length} cases one criterion from Tier ${target} (${cohortLabel})`;
-  document.getElementById('winsModalSubtitle').textContent =
-    kind === 'thin'
-      ? `Each case is blocked by a single disconfirmed criterion, but the file is thin (≤2 records), so the disconfirmation is weak. Expected uplift: ${fmtMoney(perCaseExpected)} per case at p=${p} (gap ${fmtMoney(gap)} × ${p}). Cohort total: ${fmtMoney(totalExpected)} expected.`
-      : `Each case is missing one piece of information to reach Tier ${target}. Expected uplift: ${fmtMoney(perCaseExpected)} per case at p=${p} (gap ${fmtMoney(gap)} × ${p}). Cohort total: ${fmtMoney(totalExpected)} expected.`;
-  const gapBadge = kind === 'thin'
-    ? '<span class="gap-badge gap-thin">disconfirmed · thin file</span>'
-    : '<span class="gap-badge gap-unknown">unknown</span>';
+  const fixWord = kind === 'two' ? 'two fixes' : 'one fix';
+  const cohortNote = {
+    one: `Each case is missing one piece of information to reach Tier ${target}. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of them cure the gap, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
+    two: `Each case is missing two pieces of information to reach Tier ${target}. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of them cure both, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
+    thin: `Each case is blocked by a disconfirmed criterion, but the file is thin (≤2 records), so the disconfirmation may not hold. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of these cure, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
+  }[kind];
+  document.getElementById('winsModalTitle').textContent =
+    `Wins cohort: ${wins.length} cases ${fixWord} from Tier ${target}${kind === 'thin' ? ' (thin file)' : ''}`;
+  document.getElementById('winsModalSubtitle').textContent = cohortNote;
+  const gapCell = g => g
+    ? `<span class="wins-pill">${g.label}</span>${g.status === 'disconfirmed' ? ' <span class="gap-badge gap-thin">disconfirmed</span>' : ''}`
+    : '';
   const tbody = document.getElementById('winsModalTbody');
   tbody.innerHTML = wins.map(c => `
     <tr>
@@ -1730,8 +1777,8 @@ function openWinsModal(fromTier, kind = 'unknown') {
       <td>${c.firm || '—'}</td>
       <td><b>${(c.score || 0).toFixed(1)}</b></td>
       <td>${c.licenseVerified ? '<span class="wins-badge wins-yes">certified</span>' : '<span class="wins-badge wins-no">no cert</span>'}</td>
-      <td>${gapBadge}</td>
-      <td class="wins-missing">${c.missing.map(m => `<span class="wins-pill">${m}</span>`).join('')}</td>
+      <td class="wins-missing">${gapCell(c.gaps[0])}</td>
+      <td class="wins-missing">${gapCell(c.gaps[1])}</td>
     </tr>`).join('');
   document.getElementById('winsModalCount').textContent = `${wins.length} cases`;
   modal.style.display = 'flex';
