@@ -19,7 +19,7 @@
   --purple:#4A5E8A; --purple-lite:#94A3B8;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg);font-variant-numeric:tabular-nums;line-height:1.5}
+html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;color:var(--navy-ink);background:var(--bg);font-variant-numeric:tabular-nums;font-size:14.5px;line-height:1.62}
 .layout{display:grid;grid-template-columns:300px 1fr;align-items:start;max-width:1640px;margin:0 auto;background:var(--white);min-height:100vh;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .sidebar{position:sticky;top:0;align-self:start;height:100vh;background:var(--white);border-right:1px solid var(--border);padding:28px 24px;overflow-y:auto}
 .sidebar h1{font-size:18px;font-weight:700;color:var(--navy);margin:0 0 4px;letter-spacing:.04em}
@@ -44,14 +44,14 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tab{padding:14px 22px;font-size:13px;font-weight:700;color:var(--slate);cursor:pointer;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;letter-spacing:.02em}
 .tab:hover{color:var(--navy)}
 .tab.active{color:var(--navy);border-bottom-color:var(--gold)}
-.content{padding:22px 28px}
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:18px}
-.tile{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--gold);padding:14px 16px;position:relative}
-.tile-label{font-size:10.5px;font-weight:700;color:var(--slate);letter-spacing:.14em;text-transform:uppercase}
+.content{padding:34px 44px;max-width:1280px}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px}
+.tile{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--gold);padding:16px 18px;position:relative}
+.tile-label{font-size:10.5px;font-weight:700;color:var(--slate);letter-spacing:.12em;text-transform:uppercase}
 .tile-value{font-size:26px;font-weight:700;color:var(--navy);margin:4px 0 2px;line-height:1.1}
 .tile-sub{font-size:11px;color:var(--slate-lite)}
-.chart-card{background:var(--white);border:1px solid var(--border);padding:16px 18px;margin-bottom:18px}
-.chart-card h3{font-size:13px;font-weight:700;color:var(--navy);margin:0 0 14px;letter-spacing:.04em;text-transform:uppercase}
+.chart-card{background:var(--white);border:1px solid var(--border);padding:22px 24px;margin-bottom:22px}
+.chart-card h3{font-size:14px;font-weight:700;color:var(--navy);margin:0 0 14px;letter-spacing:.01em}
 .chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px}
 .chart-grid canvas{max-height:280px}
 .tier-tile{border-left-color:var(--gold)}
@@ -112,12 +112,12 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .exec-stamp{font-size:11px;color:var(--slate-lite);font-style:italic}
 .exec-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media (max-width:1100px){.exec-grid{grid-template-columns:1fr}}
-.exec-card{background:var(--white);border:1px solid var(--border);padding:16px 18px;margin-bottom:16px}
-.exec-card h3{font-size:13px;font-weight:700;color:var(--navy);margin:0 0 12px;letter-spacing:.04em;text-transform:uppercase}
-.exec-card p,.exec-card li{font-size:12.5px;color:var(--navy-ink)}
+.exec-card{background:var(--white);border:1px solid var(--border);padding:22px 24px;margin-bottom:22px}
+.exec-card h3{font-size:14px;font-weight:700;color:var(--navy);margin:0 0 12px;letter-spacing:.01em}
+.exec-card p,.exec-card li{font-size:13px;color:var(--navy-ink)}
 .exec-flag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.06em;color:var(--amber);background:var(--amber-bg);border:1px solid var(--amber);padding:1px 6px;border-radius:2px;text-transform:uppercase;vertical-align:middle}
 .ruling-list{list-style:none;margin:0;padding:0}
-.ruling-list li{padding:8px 10px;border-bottom:1px solid var(--border);font-size:12.5px;display:flex;gap:12px;align-items:baseline}
+.ruling-list li{padding:6px 8px;border-bottom:1px solid var(--border);font-size:12px;line-height:1.5;display:flex;gap:12px;align-items:baseline}
 .ruling-list li:last-child{border-bottom:none}
 .ruling-date{font-weight:700;color:var(--navy);white-space:nowrap;min-width:118px;font-variant-numeric:tabular-nums}
 .ruling-hl{background:var(--amber-bg);border-left:3px solid var(--gold)}
@@ -145,9 +145,20 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tier-stat-num{font-size:14px;font-weight:700}
 .tier-criteria{margin:0 0 0 18px;padding:0;font-size:11.5px;color:var(--slate);line-height:1.6}
 .tier-criteria li{margin-bottom:2px}
-.tier-wins{background:linear-gradient(90deg,var(--gold) 0%,transparent 80%);padding:8px 12px;border-left:3px solid var(--gold);border-radius:2px;font-size:12.5px;font-weight:700;color:var(--navy-ink);margin-top:4px}
+.tier-wins{background:var(--mist);padding:8px 12px;border-left:3px solid var(--gold);border-radius:2px;font-size:12.5px;font-weight:700;color:var(--navy-ink);margin-top:6px}
+.tier-wins.thin{background:transparent;border-left:3px solid var(--slate-lite);font-weight:400;color:var(--slate)}
+.tier-wins.thin b{color:var(--navy)}
 .tier-wins.empty{color:var(--slate-lite);font-style:italic;font-weight:400;background:transparent;border-left:3px solid var(--border)}
-.tier-foot{font-size:10.5px;color:var(--slate-lite);font-style:italic;margin-top:12px}
+.tier-foot{font-size:11px;color:var(--slate-lite);margin-top:14px;line-height:1.6}
+/* Collapsible reference sections */
+details.exec-details{margin:0}
+details.exec-details>summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--navy);letter-spacing:.01em;list-style-position:outside}
+details.exec-details>summary:hover{color:var(--gold)}
+details.exec-details[open]>summary{margin-bottom:12px}
+/* Gap-status badge (wins modal) */
+.gap-badge{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.05em;padding:2px 6px;border-radius:2px;text-transform:uppercase}
+.gap-badge.gap-unknown{background:var(--green-bg);color:var(--green)}
+.gap-badge.gap-thin{background:var(--amber-bg);color:var(--amber)}
 
 /* Tier GSV input — single big editable field per tier */
 .tier-gsv{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-left:auto}
@@ -296,24 +307,25 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 
       <!-- Tier Panel — front and center for PE audience -->
       <div class="exec-card">
-        <h3>Docket Value by Tier — <span style="font-weight:400;color:var(--slate-lite);text-transform:none;letter-spacing:0">GSV per case is editable; numbers recompute live</span></h3>
+        <h3>Value by tier <span style="font-weight:400;font-size:11.5px;color:var(--slate-lite)">· click a value to edit</span></h3>
         <div class="tier-total-strip">
           <span><b id="totalOpenCount">0</b> open · <b id="totalClosedCount">0</b> closed</span>
           <span>Total inventory value: <b id="totalInventoryValue">$0</b></span>
-          <span class="tier-uplift-total">Incremental value on the table: <b id="totalUplift">$0</b></span>
+          <span class="tier-uplift-total">Upside still on the table: <b id="totalUplift">$0</b></span>
         </div>
         <div id="tierPanel"></div>
-        <div class="tier-foot">Tier criteria are the researched framework (Verus LLC, NYU bellwether paper, DOJ Camp Lejeune grid). Defaults are illustrative — type a GSV per case in the right-hand field to match your MSA framework. Click any "wins" row to drill into the cohort.</div>
+        <div class="tier-foot">Upside counts only gaps that are missing information — not facts the record affirmatively rules out — weighted by the odds the gap can be cured. Thin files (≤2 records) with one adverse fact get partial credit. Click a wins row to see the cohort.</div>
       </div>
 
       <!-- Pain Rulings — what's hurting the docket -->
       <div class="exec-card">
-        <h3>Recent Pain Rulings — What's Hurting the Docket</h3>
+        <h3>Pain rulings — what's hurting the docket</h3>
         <div id="painRulings"></div>
       </div>
 
       <div class="exec-card">
-        <h3>Key Rulings Timeline</h3>
+        <details class="exec-details">
+          <summary>Key rulings timeline</summary>
         <ul class="ruling-list">
           <li><span class="ruling-date">2023-09/10</span><span><b>Durnell v. Monsanto</b> trial, Circuit Court of the City of St. Louis, MO — $1.25M strict-liability failure-to-warn verdict.</span></li>
           <li><span class="ruling-date">2023-11 → 2025-09-30</span><span><b>Anderson/Draeger/Gunther</b>, Cole Cty. MO — $1.56B verdict reduced to $611M and affirmed; Missouri Supreme Court declined review 2025-09-30.</span></li>
@@ -326,6 +338,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
           <li><span class="ruling-date">2026-01-27/29</span><span><b>Mertens</b>, Philadelphia CCP — first-ever paraquat jury trial ended in a confidential eve-of-trial settlement.</span></li>
           <li class="ruling-hl"><span class="ruling-date">2026-06-25</span><span><b>Monsanto v. Durnell, SCOTUS No. 24-1068 — 7–2 for Bayer: FIFRA preempts state failure-to-warn claims requiring warnings beyond EPA-approved labels.</b> Industry-changing for both Roundup and paraquat — directly strengthens Syngenta's pending preemption motion in MDL 3004.</span></li>
         </ul>
+        </details>
       </div>
 
       <div class="exec-grid">
@@ -340,7 +353,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
         </div>
 
         <div class="exec-card">
-          <h3>What a PE Reviewer Should Watch</h3>
+          <h3>What to watch</h3>
           <ul class="watch-list">
             <li><b>Settlement-administration milestones</b> — QSF claims-submission rates, lien-administrator throughput, and timing of first disbursements under the MSA; these set the real pace of recovery.</li>
             <li><b>Syngenta's preemption MSJ (filed Feb 2026)</b> — post-Durnell, a grant could gut failure-to-warn theories for opt-out and non-eligible inventory.</li>
@@ -352,7 +365,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
       </div>
 
       <div class="exec-card">
-        <h3>Sources</h3>
+        <details class="exec-details">
+          <summary>Sources</summary>
         <ul class="src-list">
           <li>Wisner Baum paraquat lawsuit timeline (updated 2026-07-16) — <a href="https://www.wisnerbaum.com/toxic-tort-law/paraquat-parkinsons-lawsuit/">wisnerbaum.com</a></li>
           <li>Tavrn paraquat lawsuit update (JPML stats, second-hand) — <a href="https://www.tavrn.ai/blog/parkinsons-paraquat-lawsuit-update">tavrn.ai</a></li>
@@ -375,6 +389,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
           <li>Lawsuit Information Center: paraquat settlement amounts — <a href="https://www.lawsuit-information-center.com/paraquat-lawsuit-settlement-amount.html">lawsuit-information-center.com</a></li>
         </ul>
         <div class="exec-foot">Docket facts from public sources (CourtListener, court websites, company filings) as of 2026-07-23. Portfolio data is synthetic, for demo only.</div>
+        </details>
       </div>
     </div>
 
@@ -382,10 +397,10 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <div class="tab-content" id="t1">
       <div class="kpi-row" id="kpi-row-1"></div>
       <div class="chart-grid">
-        <div class="chart-card"><h3>Matters by Status</h3><div class="chart-hint">click chart to filter</div><canvas id="chartStatus"></canvas></div>
+        <div class="chart-card"><h3>Matters by Status</h3><div class="chart-hint">click to filter</div><canvas id="chartStatus"></canvas></div>
         <div class="chart-card"><h3>Matters by Acquisition Year</h3><canvas id="chartAcq"></canvas></div>
         <div class="chart-card"><h3>Filing Timeline</h3><canvas id="chartFiling"></canvas></div>
-        <div class="chart-card"><h3>Close Reasons</h3><div class="chart-hint">click chart to filter</div><canvas id="chartCloseReasons"></canvas></div>
+        <div class="chart-card"><h3>Close Reasons</h3><div class="chart-hint">click to filter</div><canvas id="chartCloseReasons"></canvas></div>
       </div>
     </div>
 
@@ -393,8 +408,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <div class="tab-content" id="t2">
       <div class="kpi-row" id="kpi-row-2"></div>
       <div class="chart-grid">
-        <div class="chart-card"><h3>Exposure Category — Direct vs Indirect</h3><div class="chart-hint">click chart to filter</div><canvas id="chartCategory"></canvas></div>
-        <div class="chart-card"><h3>Application Method</h3><div class="chart-hint">click chart to filter</div><canvas id="chartMethod"></canvas></div>
+        <div class="chart-card"><h3>Exposure Category — Direct vs Indirect</h3><div class="chart-hint">click to filter</div><canvas id="chartCategory"></canvas></div>
+        <div class="chart-card"><h3>Application Method</h3><div class="chart-hint">click to filter</div><canvas id="chartMethod"></canvas></div>
         <div class="chart-card"><h3>Exposure Duration</h3><canvas id="chartDuration"></canvas></div>
         <div class="chart-card"><h3>First Exposure Year</h3><canvas id="chartTimeline"></canvas></div>
         <div class="chart-card"><h3>Products Used</h3><canvas id="chartProducts"></canvas></div>
@@ -405,10 +420,10 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <div class="tab-content" id="t3">
       <div class="kpi-row" id="kpi-row-3"></div>
       <div class="chart-grid">
-        <div class="chart-card"><h3>Diagnosis Distribution</h3><div class="chart-hint">click chart to filter</div><canvas id="chartDx"></canvas></div>
+        <div class="chart-card"><h3>Diagnosis Distribution</h3><div class="chart-hint">click to filter</div><canvas id="chartDx"></canvas></div>
         <div class="chart-card"><h3>Most Recent Diagnosis by Year</h3><canvas id="chartDxYear"></canvas></div>
         <div class="chart-card"><h3>Top Symptoms</h3><canvas id="chartSymptoms"></canvas></div>
-        <div class="chart-card"><h3>Levodopa Response</h3><div class="chart-hint">click chart to filter</div><canvas id="chartLevodopa"></canvas></div>
+        <div class="chart-card"><h3>Levodopa Response</h3><div class="chart-hint">click to filter</div><canvas id="chartLevodopa"></canvas></div>
         <div class="chart-card"><h3>Avg Latency by Exposure Category</h3><canvas id="chartLatency"></canvas></div>
         <div class="chart-card"><h3>Latency Distribution</h3><canvas id="chartLatencyDist"></canvas></div>
       </div>
@@ -431,9 +446,9 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <div class="tab-content" id="t5">
       <div class="kpi-row" id="kpi-row-5"></div>
       <div class="chart-grid">
-        <div class="chart-card"><h3>Tier Distribution</h3><div class="chart-hint">click chart to filter</div><canvas id="chartTierDist"></canvas></div>
+        <div class="chart-card"><h3>Tier Distribution</h3><div class="chart-hint">click to filter</div><canvas id="chartTierDist"></canvas></div>
         <div class="chart-card"><h3>Score Histogram</h3><canvas id="chartScoreHist"></canvas></div>
-        <div class="chart-card"><h3>Tier Breakdown by Firm</h3><div class="chart-hint">click chart to filter</div><canvas id="chartTierByFirm"></canvas></div>
+        <div class="chart-card"><h3>Tier Breakdown by Firm</h3><div class="chart-hint">click to filter</div><canvas id="chartTierByFirm"></canvas></div>
         <div class="chart-card"><h3>Avg Score by Exposure Setting</h3><canvas id="chartScoreBySetting"></canvas></div>
         <div class="chart-card"><h3>Expected Recovery Range by Tier</h3><canvas id="chartRecoveryByTier"></canvas></div>
       </div>
@@ -452,7 +467,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
     <div class="tab-content nl-container" id="t6">
       <div class="chart-card">
         <h3>Ask the Database</h3>
-        <p style="margin:0 0 12px;font-size:12.5px;color:var(--slate)">Type a question in plain English. The system will convert it to SQL against the paraquat_tort database and run it.</p>
+        <p style="margin:0 0 12px;font-size:13px;color:var(--slate)">Ask in plain English — it runs SQL against the demo database.</p>
         <details class="nl-examples">
           <summary>Example queries</summary>
           <ul>
@@ -502,6 +517,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
               <th>Firm</th>
               <th>Score</th>
               <th>Cert</th>
+              <th>Gap</th>
               <th>Missing criterion (the one to fix)</th>
             </tr>
           </thead>
@@ -527,39 +543,65 @@ const TIER_NAMES = {1: 'Tier 1', 2: 'Tier 2', 3: 'Tier 3', 4: 'Tier 4'};
 // Tier 4 = "fails tier 3" (no checks; failure to meet T3 criteria).
 // Researched framework: Verus LLC valuation, NYU bellwether paper,
 // DOJ Camp Lejeune settlement grid (see briefs/pe-dashboard-iteration.md).
+// Each check carries a status(c) classifier used by the wins logic:
+//   'pass'         — criterion met
+//   'unknown'      — failing because information is missing (curable gap)
+//   'disconfirmed' — failing because the record affirmatively rules it out
 const TIER_DEFS = {
   1: { name: 'Confirmed PD + Verified Evidence',
        checks: [
          { key: 'parkinsons_disease', test: c => c.primaryDiagnosis === 'parkinsons_disease',
-           label: "Parkinson's Disease diagnosis" },
+           label: "Parkinson's Disease diagnosis",
+           status: c => c.primaryDiagnosis === 'parkinsons_disease' ? 'pass'
+             : (!c.primaryDiagnosis || c.dxBucket === 'no_dx') ? 'unknown' : 'disconfirmed' },
          { key: 'verified_evidence', test: c => c.licenseVerified || c.receiptsVerified,
-           label: 'Certified applicator license OR verified purchase receipts' },
+           label: 'Certified applicator license OR verified purchase receipts',
+           // Nothing claimed or verified — or claimed but not yet verified — is
+           // missing information, never affirmative disconfirmation.
+           status: c => (c.licenseVerified || c.receiptsVerified) ? 'pass' : 'unknown' },
          { key: '10yr_exposure', test: c => c.exposureYears != null && c.exposureYears >= 10,
-           label: '≥10 years exposure' },
+           label: '≥10 years exposure',
+           status: c => c.exposureYears == null ? 'unknown'
+             : c.exposureYears >= 10 ? 'pass' : 'disconfirmed' },
          { key: '2_records', test: c => c.recordCount >= 2,
-           label: '≥2 medical records' },
+           label: '≥2 medical records',
+           // A thin file is curable by records procurement — absence of records
+           // is itself missing information, not disconfirmation.
+           status: c => c.recordCount >= 2 ? 'pass' : 'unknown' },
          { key: 'levodopa', test: c => c.levodopaResponse === 'robust' || c.levodopaResponse === 'moderate',
-           label: 'Levodopa response (robust/moderate)' },
+           label: 'Levodopa response (robust/moderate)',
+           status: c => (c.levodopaResponse === 'robust' || c.levodopaResponse === 'moderate') ? 'pass'
+             : (c.levodopaResponse == null) ? 'unknown' : 'disconfirmed' },
        ]},
   2: { name: 'Probable PD + Documented Exposure',
        checks: [
          { key: 'any_pd_dx', test: c => c.dxBucket !== 'no_dx',
-           label: 'Any PD-spectrum diagnosis (incl. parkinsonism)' },
+           label: 'Any PD-spectrum diagnosis (incl. parkinsonism)',
+           // Absence of dx info = unknown; this one rarely disconfirms.
+           status: c => c.dxBucket !== 'no_dx' ? 'pass' : 'unknown' },
          { key: 'documented_exposure', test: c => c.licenseClaimed || c.receiptsClaimed || c.licenseVerified || c.receiptsVerified,
-           label: 'Documented exposure (claimed or verified)' },
+           label: 'Documented exposure (claimed or verified)',
+           status: c => (c.licenseClaimed || c.receiptsClaimed || c.licenseVerified || c.receiptsVerified) ? 'pass' : 'unknown' },
          { key: '5yr_exposure', test: c => c.exposureYears != null && c.exposureYears >= 5,
-           label: '≥5 years exposure' },
+           label: '≥5 years exposure',
+           status: c => c.exposureYears == null ? 'unknown'
+             : c.exposureYears >= 5 ? 'pass' : 'disconfirmed' },
          { key: '1_record', test: c => c.recordCount >= 1,
-           label: '≥1 medical record' },
+           label: '≥1 medical record',
+           status: c => c.recordCount >= 1 ? 'pass' : 'unknown' },
        ]},
   3: { name: 'Symptoms Only / Partial Evidence',
        checks: [
          { key: 'has_symptoms', test: c => (c.symptomNames || []).length > 0,
-           label: 'Symptoms logged' },
+           label: 'Symptoms logged',
+           status: c => (c.symptomNames || []).length > 0 ? 'pass' : 'unknown' },
          { key: 'some_exposure', test: c => c.licenseClaimed || c.receiptsClaimed || c.licenseVerified || c.receiptsVerified,
-           label: 'Some exposure evidence' },
+           label: 'Some exposure evidence',
+           status: c => (c.licenseClaimed || c.receiptsClaimed || c.licenseVerified || c.receiptsVerified) ? 'pass' : 'unknown' },
          { key: 'non_trivial', test: c => c.exposureYears == null || c.exposureYears >= 1,
-           label: 'At least 1 year exposure (or unknown)' },
+           label: 'At least 1 year exposure (or unknown)',
+           status: c => c.exposureYears == null ? 'unknown'
+             : c.exposureYears >= 1 ? 'pass' : 'disconfirmed' },
        ]},
   4: { name: 'Marginal / Below Threshold', checks: [] },
 };
@@ -578,13 +620,23 @@ function missingFromTier(c, tier) {
 }
 
 // A "win" candidate is a case currently in tier N that is exactly one
-// criterion short of tier N-1. Returns { qualifies, missing[] }.
-// (For tier 4 wins, the target is tier 3; for tier 1 there are no wins.)
+// criterion short of tier N-1 — and the gap must be curable:
+//   kind 'unknown' — the single failing criterion is missing information
+//                    (full-weight win, weighted by P_CURE_UNKNOWN)
+//   kind 'thin'    — the single failing criterion is affirmatively disconfirmed
+//                    but the file is thin (≤2 records), so the disconfirmation
+//                    is weak (small discounted lift, P_CURE_THIN_FILE)
+// A disconfirmed gap on a file with >2 records earns no lift.
 function winCandidates(c, fromTier) {
   const target = fromTier - 1;
-  if (target < 1) return { qualifies: false, missing: [] };
-  const missing = missingFromTier(c, target);
-  return { qualifies: missing.length === 1, missing };
+  if (target < 1) return { qualifies: false, kind: null, missing: [] };
+  const failed = TIER_DEFS[target].checks.filter(chk => !chk.test(c));
+  if (failed.length !== 1) return { qualifies: false, kind: null, missing: failed.map(f => f.label) };
+  const chk = failed[0];
+  const st = chk.status ? chk.status(c) : 'unknown';
+  if (st === 'unknown') return { qualifies: true, kind: 'unknown', missing: [chk.label], gapKey: chk.key };
+  if (st === 'disconfirmed' && c.recordCount <= 2) return { qualifies: true, kind: 'thin', missing: [chk.label], gapKey: chk.key };
+  return { qualifies: false, kind: null, missing: [chk.label], gapKey: chk.key };
 }
 
 // ====================================================================
@@ -937,6 +989,12 @@ const tierDollars = {
   3: 100000,
   4: 25000,
 };
+// Editable assumptions — cure probabilities for the wins uplift math.
+// P_CURE_UNKNOWN:   odds a missing-information gap (no data) gets cured.
+// P_CURE_THIN_FILE: odds a disconfirmed criterion on a thin file (≤2 records)
+//                   turns out to be curable (weak disconfirmation).
+const P_CURE_UNKNOWN = 0.5;
+const P_CURE_THIN_FILE = 0.15;
 function tierGsv(t)        { return tierDollars[t]; }
 function tierGsvLabel(t)   { return '$' + fmtNumber(tierDollars[t]); }
 
@@ -1502,24 +1560,9 @@ function renderTierPanel() {
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
     const certified = cases.filter(c => c.tier === t && c.licenseVerified).length;
     const tierValue = tierGsv(t) * open;
-    // Wins live in the box of the SOURCE tier (where the cases are), pointing
-    // UP to the target tier they could become. T1 has nothing above it.
-    const target = t - 1;
-    const winsArr = target >= 1 ? cases.filter(c => c.tier === t && winCandidates(c, t).qualifies) : [];
-    const winsCount = winsArr.length;
-    const perCaseLift = target >= 1 ? (tierGsv(target) - tierGsv(t)) : 0;
-    const totalLift = winsCount * perCaseLift;
     const criteriaHtml = def.checks.length
       ? def.checks.map(chk => `<li>${chk.label}</li>`).join('')
       : '<li>All cases that fail to meet Tier 3 criteria.</li>';
-    let winsHtml;
-    if (target < 1) {
-      winsHtml = `<div class="tier-wins empty">▸ Already at the top tier — nothing to upgrade to</div>`;
-    } else if (winsCount > 0) {
-      winsHtml = `<div class="tier-wins" data-tier="${t}" data-count="${winsCount}" role="button" tabindex="0" title="Click to see the cohort">▸ <b>${winsCount}</b> cases here one criterion from Tier ${target} &rarr; +${fmtMoney(totalLift)} incremental (per case +${fmtMoney(perCaseLift)})</div>`;
-    } else {
-      winsHtml = `<div class="tier-wins empty">▸ No cases here one criterion from Tier ${target}</div>`;
-    }
     return `
       <div class="tier-row tier-${t}-row">
         <div class="tier-head">
@@ -1537,7 +1580,7 @@ function renderTierPanel() {
           <span class="tier-tier-value">Tier inventory value: <b id="tier-${t}-ivalue">${fmtMoney(tierValue)}</b></span>
         </div>
         <ul class="tier-criteria">${criteriaHtml}</ul>
-        ${winsHtml}
+        <div class="tier-wins-wrap">${winsRowsHtml(t)}</div>
       </div>`;
   }).join('');
 
@@ -1546,13 +1589,53 @@ function renderTierPanel() {
     inp.addEventListener('input', updateTierPanelDerived);
   });
 
-  // Wire wins callouts to open the drill-in modal
-  panel.querySelectorAll('.tier-wins[data-tier]').forEach(el => {
-    el.addEventListener('click', () => openWinsModal(parseInt(el.dataset.tier, 10)));
-    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openWinsModal(parseInt(el.dataset.tier, 10)); });
-  });
+  wireWinsRows(panel);
 
   updateTierPanelDerived();
+}
+
+// Split a tier's win candidates into the two cohorts and compute the
+// probability-weighted expected lift for each.
+function winsCohorts(t) {
+  const target = t - 1;
+  if (target < 1) return { target, unknown: [], thin: [], gap: 0 };
+  const wins = D.cases
+    .map(c => ({ c, w: c.tier === t ? winCandidates(c, t) : { qualifies: false } }))
+    .filter(x => x.w.qualifies);
+  return {
+    target,
+    unknown: wins.filter(x => x.w.kind === 'unknown').map(x => x.c),
+    thin: wins.filter(x => x.w.kind === 'thin').map(x => x.c),
+    gap: tierGsv(target) - tierGsv(t),
+  };
+}
+
+// Wins rows live in the box of the SOURCE tier, pointing UP to the target
+// tier. Unknown-gap cohort gets full weight (p = P_CURE_UNKNOWN); thin-file
+// disconfirmed cohort gets a quieter row (p = P_CURE_THIN_FILE). Disconfirmed
+// gaps on files with >2 records get no row — no lift.
+function winsRowsHtml(t) {
+  const { target, unknown, thin, gap } = winsCohorts(t);
+  if (target < 1) return `<div class="tier-wins empty">▸ Already at the top tier — nothing to upgrade to</div>`;
+  const rows = [];
+  if (unknown.length) {
+    const exp = unknown.length * gap * P_CURE_UNKNOWN;
+    rows.push(`<div class="tier-wins" data-tier="${t}" data-kind="unknown" role="button" tabindex="0" title="Click to see the cohort">▸ <b>${unknown.length}</b> cases one <i>unknown</i> criterion from Tier ${target} &rarr; +${fmtMoney(exp)} expected (p=${P_CURE_UNKNOWN})</div>`);
+  }
+  if (thin.length) {
+    const exp = thin.length * gap * P_CURE_THIN_FILE;
+    rows.push(`<div class="tier-wins thin" data-tier="${t}" data-kind="thin" role="button" tabindex="0" title="Click to see the cohort">▸ <b>${thin.length}</b> more blocked by a single disconfirmed criterion but thin-file (≤2 records) &rarr; +${fmtMoney(exp)} expected (p=${P_CURE_THIN_FILE})</div>`);
+  }
+  if (!rows.length) return `<div class="tier-wins empty">▸ No cases here one curable criterion from Tier ${target}</div>`;
+  return rows.join('');
+}
+
+function wireWinsRows(panel) {
+  panel.querySelectorAll('.tier-wins[data-tier]').forEach(el => {
+    const open = () => openWinsModal(parseInt(el.dataset.tier, 10), el.dataset.kind);
+    el.addEventListener('click', open);
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') open(); });
+  });
 }
 
 function updateTierPanelDerived() {
@@ -1569,11 +1652,10 @@ function updateTierPanelDerived() {
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
     const certified = cases.filter(c => c.tier === t && c.licenseVerified).length;
-    const target = t - 1;
-    const winsArr = target >= 1 ? cases.filter(c => c.tier === t && winCandidates(c, t).qualifies) : [];
-    const winsCount = winsArr.length;
-    const perCaseLift = target >= 1 ? (tierGsv(target) - tierGsv(t)) : 0;
-    const totalLift = winsCount * perCaseLift;
+    const { target, unknown, thin, gap } = winsCohorts(t);
+    // Probability-weighted expected lift only — never the raw GSV gap.
+    const totalLift = unknown.length * gap * P_CURE_UNKNOWN
+                    + thin.length * gap * P_CURE_THIN_FILE;
     const ivalue = tierGsv(t) * open;
     totalOpen += open;
     totalClosed += closed;
@@ -1587,25 +1669,11 @@ function updateTierPanelDerived() {
     if (closedEl) closedEl.textContent = closed.toLocaleString();
     if (certEl) certEl.textContent = certified.toLocaleString();
     if (ivEl) ivEl.textContent = fmtMoney(ivalue);
-    // Update the wins row in-place
-    const row = document.querySelector(`.tier-${t}-row .tier-wins`);
-    if (row) {
-      if (target < 1) {
-        row.className = 'tier-wins empty';
-        row.removeAttribute('data-tier');
-        row.removeAttribute('data-count');
-        row.innerHTML = '▸ Already at the top tier — nothing to upgrade to';
-      } else if (winsCount > 0) {
-        row.className = 'tier-wins';
-        row.dataset.tier = t;
-        row.dataset.count = winsCount;
-        row.innerHTML = `▸ <b>${winsCount}</b> cases here one criterion from Tier ${target} &rarr; +${fmtMoney(totalLift)} incremental (per case +${fmtMoney(perCaseLift)})`;
-      } else {
-        row.className = 'tier-wins empty';
-        row.removeAttribute('data-tier');
-        row.removeAttribute('data-count');
-        row.innerHTML = `▸ No cases here one criterion from Tier ${target}`;
-      }
+    // Rebuild the wins rows in-place and rewire their click handlers
+    const wrap = document.querySelector(`.tier-${t}-row .tier-wins-wrap`);
+    if (wrap) {
+      wrap.innerHTML = winsRowsHtml(t);
+      wireWinsRows(wrap);
     }
   });
   const totalOpenEl = document.getElementById('totalOpenCount');
@@ -1624,28 +1692,36 @@ function updateTierPanelDerived() {
 // missing criterion. Click outside or hit Esc to close.
 // ====================================================================
 
-function openWinsModal(fromTier) {
+function openWinsModal(fromTier, kind = 'unknown') {
   const target = fromTier - 1;
   if (target < 1) return;
   const cases = D.cases || [];
   const wins = cases
-    .filter(c => c.tier === fromTier && winCandidates(c, fromTier).qualifies)
-    .map(c => {
-      const sc = scoreCase(c);
-      const missing = winCandidates(c, fromTier).missing;
-      return { ...c, score: sc.score, missing };
+    .map(c => ({ c, w: c.tier === fromTier ? winCandidates(c, fromTier) : { qualifies: false } }))
+    .filter(x => x.w.qualifies && x.w.kind === kind)
+    .map(x => {
+      const sc = scoreCase(x.c);
+      return { ...x.c, score: sc.score, missing: x.w.missing, kind };
     })
     .sort((a, b) => b.score - a.score);
   if (!wins.length) return;
 
-  const perCaseLift = tierGsv(target) - tierGsv(fromTier);
-  const totalLift = wins.length * perCaseLift;
+  const gap = tierGsv(target) - tierGsv(fromTier);
+  const p = kind === 'thin' ? P_CURE_THIN_FILE : P_CURE_UNKNOWN;
+  const perCaseExpected = gap * p;
+  const totalExpected = wins.length * perCaseExpected;
 
   const modal = document.getElementById('winsModal');
   if (!modal) return;
-  document.getElementById('winsModalTitle').textContent = `Wins cohort: ${wins.length} cases one criterion from Tier ${target}`;
+  const cohortLabel = kind === 'thin' ? 'thin-file disconfirmed gap' : 'unknown gap';
+  document.getElementById('winsModalTitle').textContent = `Wins cohort: ${wins.length} cases one criterion from Tier ${target} (${cohortLabel})`;
   document.getElementById('winsModalSubtitle').textContent =
-    `Move to Tier ${target} by completing the missing criterion. Per-case uplift: ${fmtMoney(perCaseLift)}. Total incremental: ${fmtMoney(totalLift)}.`;
+    kind === 'thin'
+      ? `Each case is blocked by a single disconfirmed criterion, but the file is thin (≤2 records), so the disconfirmation is weak. Expected uplift: ${fmtMoney(perCaseExpected)} per case at p=${p} (gap ${fmtMoney(gap)} × ${p}). Cohort total: ${fmtMoney(totalExpected)} expected.`
+      : `Each case is missing one piece of information to reach Tier ${target}. Expected uplift: ${fmtMoney(perCaseExpected)} per case at p=${p} (gap ${fmtMoney(gap)} × ${p}). Cohort total: ${fmtMoney(totalExpected)} expected.`;
+  const gapBadge = kind === 'thin'
+    ? '<span class="gap-badge gap-thin">disconfirmed · thin file</span>'
+    : '<span class="gap-badge gap-unknown">unknown</span>';
   const tbody = document.getElementById('winsModalTbody');
   tbody.innerHTML = wins.map(c => `
     <tr>
@@ -1654,6 +1730,7 @@ function openWinsModal(fromTier) {
       <td>${c.firm || '—'}</td>
       <td><b>${(c.score || 0).toFixed(1)}</b></td>
       <td>${c.licenseVerified ? '<span class="wins-badge wins-yes">certified</span>' : '<span class="wins-badge wins-no">no cert</span>'}</td>
+      <td>${gapBadge}</td>
       <td class="wins-missing">${c.missing.map(m => `<span class="wins-pill">${m}</span>`).join('')}</td>
     </tr>`).join('');
   document.getElementById('winsModalCount').textContent = `${wins.length} cases`;
