@@ -147,7 +147,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tier-convert-input{appearance:textfield;-moz-appearance:textfield}
 
 /* Two-line GSV totals — current + potential. */
-.gsv-totals{margin:6px 0 16px;display:flex;flex-direction:column;gap:6px;padding:12px 16px;background:var(--white);border:1px solid var(--border);border-left:4px solid var(--navy)}
+.gsv-totals{margin:6px 0 16px;display:flex;flex-direction:column;gap:6px;padding:12px 16px;background:var(--white);border:1px solid var(--border)}
 .gsv-line{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .gsv-line.gsv-potential{border-top:1px dashed var(--border);padding-top:8px;margin-top:2px}
 .gsv-label{font-size:12px;font-weight:700;color:var(--slate);letter-spacing:.04em;text-transform:uppercase;flex:1;min-width:240px}
@@ -231,7 +231,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tier-foot{font-size:11px;color:var(--slate-lite);margin-top:14px;line-height:1.6}
 
 /* Tier criteria reference card — layered bullet list */
-.criteria-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:6px}
+.criteria-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}
+@media(max-width:1400px){.criteria-grid{grid-template-columns:repeat(2,1fr)}}
 .criteria-tier-block{border:1px solid var(--border);border-left:4px solid var(--border);padding:12px 14px;background:var(--bg);border-radius:3px}
 .criteria-tier-block.tier-1-block{border-left-color:var(--gold)}
 .criteria-tier-block.tier-2-block{border-left-color:var(--purple)}
@@ -239,8 +240,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .criteria-tier-block.tier-4-block{border-left-color:var(--red)}
 .criteria-tier-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
 .criteria-tier-head strong{font-size:13px;color:var(--navy)}
-.criteria-bullets{margin:0;padding-left:20px;font-size:12.5px;color:var(--navy-ink);line-height:1.6}
-.criteria-bullets li{margin-bottom:4px}
+.criteria-bullets{margin:0;padding-left:16px;font-size:11.5px;color:var(--navy-ink);line-height:1.5}
+.criteria-bullets li{margin-bottom:3px}
 .criteria-tag{display:inline-block;font-size:9.5px;font-weight:700;color:var(--gold);background:var(--navy-ink);padding:1px 6px;border-radius:2px;letter-spacing:.04em;margin-left:4px;vertical-align:middle;text-transform:uppercase}
 .criteria-bullets em{font-style:normal;font-weight:700;color:var(--navy);background:var(--mist);padding:0 4px;border-radius:2px}
 .criteria-foot{font-size:11px;color:var(--slate-lite);font-style:italic;margin-top:14px;border-top:1px solid var(--border);padding-top:10px;line-height:1.5}
@@ -421,7 +422,6 @@ details.exec-details[open]>summary{margin-bottom:12px}
     <div class="tab-content active" id="t0">
       <!-- Tier Panel — front and center for PE audience -->
       <div class="exec-card">
-        <h3>Value by tier <span style="font-weight:400;font-size:11.5px;color:var(--slate-lite)">· click a value to edit</span></h3>
         <div class="bridge-wrap">
           <div class="bridge-head">Value bridge — current inventory to potential <span class="bridge-sub">right-hand bar is total potential (= 100%); middle bars are the specific fixes that unlock upgrades, sized by expected lift — y-axis truncated to make the lift visible</span></div>
           <div class="bridge-canvas-wrap"><canvas id="chartBridge"></canvas></div>
@@ -1907,7 +1907,7 @@ function renderTierPanel() {
         <th class="num">Cases</th>
         <th class="num">GSV per case ($K)</th>
         <th class="num">Expected payout</th>
-        <th>Lift — what the tier below could add</th>
+        <th>Lift — cases here that could move up</th>
       </tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
@@ -1937,19 +1937,18 @@ function winsCohorts(t) {
   return out;
 }
 
-// Lift cell for tier T: the cohorts sitting in tier T+1 that could move UP
-// into T. One-fix unknown gaps at P_CURE_UNKNOWN, two-fix unknown gaps at
-// P_CURE_TWO_FIX, thin-file disconfirmed at P_CURE_THIN_FILE. Disconfirmed
-// gaps on files with >2 records earn no lift and get no line.
+// Lift cell for tier T: the cohorts sitting IN tier T that could move UP
+// into T-1. Wins live in the SOURCE tier's box (the cases are here) — T1 has
+// no callout because it's already the top tier. Clicking a line opens the
+// wins modal for that cohort.
 function liftCellHtml(t) {
-  const source = t + 1;
-  if (source > 4) return '<span class="lift-none">&mdash;</span>';
-  const { one, two, thin, gap } = winsCohorts(source);
+  if (t === 1) return '<span class="lift-none">top tier</span>';
+  const { one, two, thin, gap } = winsCohorts(t);
   const lines = [];
-  if (one.length) lines.push(liftLine(source, 'one', one.length, gap, 'one fix away'));
-  if (two.length) lines.push(liftLine(source, 'two', two.length, gap, 'two fixes away'));
-  if (thin.length) lines.push(liftLine(source, 'thin', thin.length, gap, 'thin-file long shots'));
-  if (!lines.length) return '<span class="lift-none">no near-wins in the tier below</span>';
+  if (one.length)  lines.push(liftLine(t, 'one',  one.length,  gap, `one fix from Tier ${t - 1}`));
+  if (two.length)  lines.push(liftLine(t, 'two',  two.length,  gap, `two fixes from Tier ${t - 1}`));
+  if (thin.length) lines.push(liftLine(t, 'thin', thin.length, gap, `thin-file long shots → Tier ${t - 1}`));
+  if (!lines.length) return '<span class="lift-none">no near-wins here</span>';
   return lines.join('');
 }
 
@@ -2106,13 +2105,20 @@ function renderBridgeChart(current, segs, potential) {
           },
         },
         datalabels: {
-          anchor: 'end', align: 'top', color: '#1E2761', clip: false,
-          font: { weight: 700, size: 11 },
+          clip: false,
+          font: { weight: 700, size: 12 },
+          // Big end bars: bold white label INSIDE the bar. Thin lift slivers:
+          // two-line label above the bar (value + case count).
+          anchor: (t) => (t.dataIndex === 0 || t.dataIndex === labels.length - 1) ? 'center' : 'end',
+          align:  (t) => (t.dataIndex === 0 || t.dataIndex === labels.length - 1) ? 'center' : 'top',
+          color:  (t) => (t.dataIndex === 0 || t.dataIndex === labels.length - 1) ? '#fff' : '#1E2761',
           formatter: (v, t) => {
             const i = t.dataIndex;
-            if (i === 0 || i === labels.length - 1) return fmtMoneyShort(v[1]);
+            const hi = Array.isArray(v) ? v[1] : v;
+            const lo = Array.isArray(v) ? v[0] : 0;
+            if (i === 0 || i === labels.length - 1) return fmtMoneyShort(hi);
             const s = segs[i - 1];
-            return ['+' + fmtMoneyShort(v[1] - v[0]), `${s.n} case${s.n === 1 ? '' : 's'}`];
+            return ['+' + fmtMoneyShort(hi - lo), `${s.n} case${s.n === 1 ? '' : 's'}`];
           },
         },
       },
