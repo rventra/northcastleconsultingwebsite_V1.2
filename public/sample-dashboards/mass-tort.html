@@ -1366,6 +1366,14 @@ function fmtMoneyShort(v) {
   if (v >= 1e3) return '$' + Math.round(v / 1e3) + 'K';
   return '$' + Math.round(v);
 }
+// Axis-tick variant: no 2-decimal rounding — whole millions stay bare ($12M),
+// otherwise one decimal max ($1.5M).
+function fmtMoneyTick(v) {
+  if (v == null || isNaN(v)) return '—';
+  if (v >= 1e6) { const m = v / 1e6; return '$' + (Number.isInteger(m) ? m : m.toFixed(1)) + 'M'; }
+  if (v >= 1e3) return '$' + Math.round(v / 1e3) + 'K';
+  return '$' + Math.round(v);
+}
 
 // ====================================================================
 // CHART HELPERS
@@ -2110,7 +2118,7 @@ function renderBridgeChart(current, segs, potential) {
       },
       scales: {
         x: { grid: { display: false }, ticks: { font: { size: 11 }, autoSkip: false, maxRotation: 35 } },
-        y: { min: ymin, grace: '10%', grid: { color: '#F1F5F9' }, ticks: { font: { size: 11 }, callback: v => fmtMoneyShort(v) } },
+        y: { min: ymin, grace: '10%', grid: { color: '#F1F5F9' }, ticks: { font: { size: 11 }, callback: v => fmtMoneyTick(v) } },
       },
     },
   });
