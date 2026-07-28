@@ -59,6 +59,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tier-tile.tier-2{border-left-color:var(--purple)}
 .tier-tile.tier-3{border-left-color:var(--amber)}
 .tier-tile.tier-4{border-left-color:var(--red)}
+.tier-tile.tier-5{border-left-color:var(--slate-lite)}
 .tab-content{display:none}
 .tab-content.active{display:block}
 
@@ -93,8 +94,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .val-table th,.val-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
 .val-table th{background:var(--mist);font-weight:700;color:var(--navy);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
 .tier-pill{display:inline-block;padding:2px 8px;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:2px;color:var(--white)}
-.tier-pill.t1,.tier-pill.t2,.tier-pill.t3,.tier-pill.t4{background:transparent;color:var(--navy);padding:0;font-weight:700;letter-spacing:0;font-size:13px}
-.tier-tile.tier-1,.tier-tile.tier-2,.tier-tile.tier-3,.tier-tile.tier-4{border-left-color:var(--border)}
+.tier-pill.t1,.tier-pill.t2,.tier-pill.t3,.tier-pill.t4,.tier-pill.t5{background:transparent;color:var(--navy);padding:0;font-weight:700;letter-spacing:0;font-size:13px}
+.tier-tile.tier-1,.tier-tile.tier-2,.tier-tile.tier-3,.tier-tile.tier-4,.tier-tile.tier-5{border-left-color:var(--border)}
 
 /* Score breakdown — horizontal stacked bar showing the 7 weighted factor
    contributions to a case's 0-10 score. */
@@ -231,8 +232,11 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tier-foot{font-size:11px;color:var(--slate-lite);margin-top:14px;line-height:1.6}
 
 /* Tier criteria reference card — layered bullet list */
-.criteria-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}
-@media(max-width:1400px){.criteria-grid{grid-template-columns:repeat(2,1fr)}}
+.criteria-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:6px}
+@media(max-width:1400px){.criteria-grid{grid-template-columns:repeat(3,1fr)}}
+.criteria-gates{border:1px solid var(--border);border-left:4px solid var(--navy);padding:10px 14px;background:var(--mist);border-radius:3px;margin-bottom:10px}
+.gates-inline{display:flex;flex-wrap:wrap;gap:4px 22px;padding-left:16px}
+.criteria-tier-block.tier-5-block{border-left-color:var(--slate-lite)}
 .criteria-tier-block{border:1px solid var(--border);border-left:4px solid var(--border);padding:12px 14px;background:var(--bg);border-radius:3px}
 .criteria-tier-block.tier-1-block{border-left-color:var(--gold)}
 .criteria-tier-block.tier-2-block{border-left-color:var(--purple)}
@@ -373,10 +377,11 @@ details.exec-details[open]>summary{margin-bottom:12px}
     <label>Tier (Valuation)</label>
     <select id="filterTier">
       <option value="all">All Tiers</option>
-      <option value="1">Tier 1 (Strongest)</option>
-      <option value="2">Tier 2</option>
-      <option value="3">Tier 3</option>
-      <option value="4">Tier 4 (Weakest)</option>
+      <option value="1">Tier 1 (PDD)</option>
+      <option value="2">Tier 2 (Confirmed PD)</option>
+      <option value="3">Tier 3 (Parkinsonism)</option>
+      <option value="4">Tier 4 (Prodromal)</option>
+      <option value="5">Below grid</option>
     </select>
   </div>
 
@@ -447,47 +452,63 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
       </div>
 
-      <!-- Tier criteria reference — layered bullet list of the EXACT criteria
-           used to assign tiers. Tier 1 at top (strongest), tier 4 below threshold.
-           Each tier block is color-keyed to match the matrix table. -->
+      <!-- Tier criteria reference — eligibility gates + tier grid per
+           docs/paraquat-tier-framework.md. Diagnosis + exposure proof set the
+           tier; economics are excluded as tier drivers. -->
       <div class="exec-card">
-        <h3>Tier Criteria — what's required to land in each tier</h3>
+        <h3>Tier Criteria — gates first, then the grid</h3>
+        <div class="criteria-gates">
+          <div class="criteria-tier-head"><strong>Tier 0 — Eligibility gates (pass/fail, before any tiering)</strong></div>
+          <ul class="criteria-bullets gates-inline">
+            <li>Product/exposure identification — verified records, or claimed + PPE corroboration</li>
+            <li>Exposure era → defendant — pre-1990-only = Chevron (fails for Syngenta MDL)</li>
+            <li>Minimum dose — ≥1 documented season</li>
+            <li>PFS / AQ complete (CMO 7/10)</li>
+            <li>Plausibility screen (CMO 18) — assumed, not modeled</li>
+          </ul>
+        </div>
         <div class="criteria-grid">
           <div class="criteria-tier-block tier-1-block">
-            <div class="criteria-tier-head"><span class="tier-pill">Tier 1</span> <strong>Confirmed PD + Verified Evidence</strong></div>
+            <div class="criteria-tier-head"><span class="tier-pill">Tier 1</span> <strong>PD with dementia (PDD)</strong></div>
             <ul class="criteria-bullets">
-              <li>Parkinson's Disease diagnosis (idiopathic PD)</li>
-              <li>Certified applicator license <em>OR</em> verified purchase receipts</li>
-              <li>≥10 years of exposure</li>
-              <li>Latency 10–25 years <span class="criteria-tag">causation sweet spot</span></li>
-              <li>Age at first exposure &lt; 45 <span class="criteria-tag">longer life impact</span></li>
-              <li>Levodopa response (robust or moderate)</li>
+              <li>Confirmed idiopathic PD (neurologist dx)</li>
+              <li>Documented cognitive decline / dementia <span class="criteria-tag">DSM-5 / MDS</span></li>
+              <li>Clears all gates <span class="criteria-tag">PDD protections attach</span></li>
             </ul>
           </div>
           <div class="criteria-tier-block tier-2-block">
-            <div class="criteria-tier-head"><span class="tier-pill">Tier 2</span> <strong>Probable PD + Documented Exposure</strong></div>
+            <div class="criteria-tier-head"><span class="tier-pill">Tier 2</span> <strong>Confirmed idiopathic PD</strong></div>
             <ul class="criteria-bullets">
-              <li>Any PD-spectrum diagnosis (incl. parkinsonism)</li>
-              <li>Documented exposure — verified license/receipts, <em>or</em> claimed + PPE use</li>
-              <li>≥5 years of exposure</li>
+              <li>Movement-disorder neurologist PD diagnosis</li>
+              <li>DaTscan / levodopa response strengthens, not required</li>
+              <li>Clears all gates <span class="criteria-tag">core inventory</span></li>
             </ul>
           </div>
           <div class="criteria-tier-block tier-3-block">
-            <div class="criteria-tier-head"><span class="tier-pill">Tier 3</span> <strong>Symptoms Only / Partial Evidence</strong></div>
+            <div class="criteria-tier-head"><span class="tier-pill">Tier 3</span> <strong>Parkinsonism (non-PD)</strong></div>
             <ul class="criteria-bullets">
-              <li>Symptoms logged</li>
-              <li>Some exposure evidence (claimed)</li>
-              <li>At least 1 year exposure (or unknown)</li>
+              <li>Parkinsonism NOS / atypical / suspected toxicant-induced</li>
+              <li>Same exposure proof as Tier 2</li>
+              <li>Upgrades to T2 on confirmed PD dx</li>
             </ul>
           </div>
           <div class="criteria-tier-block tier-4-block">
-            <div class="criteria-tier-head"><span class="tier-pill">Tier 4</span> <strong>Marginal / Below Threshold</strong></div>
+            <div class="criteria-tier-head"><span class="tier-pill">Tier 4</span> <strong>Prodromal / symptom-level</strong></div>
             <ul class="criteria-bullets">
-              <li>Fails to meet Tier 3 criteria</li>
+              <li>No formal dx; prodromal symptoms documented (tremor, RBD, hyposmia)</li>
+              <li>Contemporaneous medical record — not retrospective self-report</li>
+              <li>Migrates up on confirmed dx without re-filing</li>
+            </ul>
+          </div>
+          <div class="criteria-tier-block tier-5-block">
+            <div class="criteria-tier-head"><span class="tier-pill">Below grid</span> <strong>Not eligible</strong></div>
+            <ul class="criteria-bullets">
+              <li>Fails an eligibility gate (or fits no tier)</li>
+              <li>Gate cures (PFS, exposure proof) enter the grid at their natural tier</li>
             </ul>
           </div>
         </div>
-        <div class="criteria-foot">Age at first exposure is calculated as <code>(first exposure date) − (date of birth)</code>. Medical record <em>count</em> is informational only — it does not gate tier membership. <b>Family history</b> is a scoring factor (10%) with reversed direction: a documented first-degree relative with Parkinsonism <em>dilutes</em> the claim (competing-cause argument — "PD was genetic, not paraquat-caused"); absence of family history is <em>stronger</em> (pure paraquat causation, no competing cause). <b>PPE use</b> (gloves, respirator, coveralls) does double duty: it is a scoring factor (5%) and it corroborates a claimed exposure for Tier 2 — a claim backed by PPE use reads as a credible professional-applicator pattern; a bare claim with no PPE and no verification drops to Tier 3.</div>
+        <div class="criteria-foot">Per <code>docs/paraquat-tier-framework.md</code>: tier placement is driven by diagnosis + exposure proof only — economic loss (wages, medical bills) never sets the tier. <b>Deceased claimants</b> convert to wrongful-death/survival posture; the tier is set by records as of death and never diminishes. <b>Progression migration</b>: PD → PDD moves up automatically on documented cognitive decline; prodromal moves up on confirmed dx. <b>PPE</b> is bidirectional — documented use scores up (rebuts comparative fault); non-use is neutral, never a penalty. <b>Family history</b> and confounders (other pesticides, TBI, smoking) adjust the within-tier score only — they can never drop a claimant a full tier. <b>Latency</b> scores strongest at 10–40 yrs from first exposure to first documented symptom.</div>
       </div>
 
       <div class="exec-card">
@@ -749,83 +770,161 @@ details.exec-details[open]>summary{margin-bottom:12px}
 
 const D = window.MT;
 let charts = {};
-const TIER_COLORS = ['#C9A227', '#4A5E8A', '#B45309', '#B22234'];
-const TIER_NAMES = {1: 'Tier 1', 2: 'Tier 2', 3: 'Tier 3', 4: 'Tier 4'};
+const TIER_COLORS = ['#C9A227', '#4A5E8A', '#B45309', '#B22234', '#94A3B8'];
+const TIER_NAMES = {1: 'Tier 1', 2: 'Tier 2', 3: 'Tier 3', 4: 'Tier 4', 5: 'Below grid'};
+const TIER_VALUES = [1, 2, 3, 4, 5];
 
-// Tier definitions — criteria-based, not score-band-based.
-// A case passes tier T iff it satisfies every check in TIER_DEFS[T].checks.
-// Tier 4 = "fails tier 3" (no checks; failure to meet T3 criteria).
-// Researched framework: Verus LLC valuation, NYU bellwether paper,
-// DOJ Camp Lejeune settlement grid (see briefs/pe-dashboard-iteration.md).
-// Each check carries a status(c) classifier used by the wins logic:
+// ====================================================================
+// DERIVED FRAMEWORK FIELDS (deterministic, seeded per matter)
+// ====================================================================
+// The baked data has no PDD / imaging / smoking / TBI / co-pesticide / PFS
+// columns. Per docs/paraquat-tier-framework.md we derive them with
+// epidemiologically grounded prevalence rates, seeded by a stable hash of
+// the matter id so every rebuild produces the SAME values. Mirrored in
+// frontend/build_data_js.py for future bakes.
+function seed01(key) {
+  let h = 2166136261;                       // FNV-1a 32-bit
+  for (let i = 0; i < key.length; i++) { h ^= key.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return ((h >>> 0) % 100000) / 100000;
+}
+function deriveFrameworkFields(c) {
+  if (c._fwDerived) return;
+  c._fwDerived = true;
+  const id = String(c.matterId || c.docket || c.claimantName || Math.random());
+  // Age at diagnosis (onset) from DOB + most recent dx date.
+  c.ageAtDiagnosis = (c.dateOfBirth && c.lastDxDate)
+    ? Math.round((new Date(c.lastDxDate) - new Date(c.dateOfBirth)) / 365.25 / 86400000 * 10) / 10
+    : null;
+  // Exposure era → defendant allocation: pre-1990-only = Chevron (dismissed
+  // for post-1990 claims); any Syngenta-era exposure passes.
+  const f = c.firstExposureYear || (c.firstExposureDate ? +String(c.firstExposureDate).slice(0, 4) : null);
+  const l = c.lastExposureDate ? +String(c.lastExposureDate).slice(0, 4) : null;
+  c.exposureEra = (f == null && l == null) ? 'unknown'
+    : (l != null && l < 1990) ? 'chevron_only'
+    : (f != null && f >= 1990) ? 'syngenta' : 'mixed';
+  const isPD = c.primaryDiagnosis === 'parkinsons_disease';
+  // PDD (documented cognitive decline): ~20-25% of PD, weighted by onset age,
+  // disease duration (latency proxy), and severity.
+  let pPdd = 0;
+  if (isPD) {
+    const a = c.ageAtDiagnosis;
+    pPdd = 0.08 + (a == null ? 0.04 : a >= 75 ? 0.14 : a >= 65 ? 0.07 : 0)
+         + ((c.latencyYears || 0) >= 20 ? 0.08 : 0)
+         + ((c.avgSymptomSeverity || 0) >= 4 ? 0.04 : 0);
+    pPdd = Math.min(pPdd, 0.42);
+  }
+  c.cognitiveDecline = isPD && seed01(id + '|pdd') < pPdd;
+  // DaTscan / objective imaging: ~25% of confirmed PD, ~8% of parkinsonism.
+  c.datscanPositive = isPD ? seed01(id + '|dat') < 0.25
+    : (c.dxBucket === 'parkinsonism_other' && seed01(id + '|dat') < 0.08);
+  // Smoking (rural cohort): 45% never / 35% former / 20% current.
+  const smk = seed01(id + '|smk');
+  c.smokingStatus = smk < 0.45 ? 'never' : smk < 0.80 ? 'former' : 'current';
+  // TBI history (~6%) and other PD-linked pesticides (rotenone/maneb/
+  // organochlorines — agricultural 30%, occupational 20%, bystander 8%).
+  c.tbiHistory = seed01(id + '|tbi') < 0.06;
+  const pPest = c.exposureCategory === 'Agricultural' ? 0.30
+    : c.exposureCategory === 'Occupational / Commercial' ? 0.20 : 0.08;
+  c.otherPesticides = seed01(id + '|pest') < pPest;
+  // PFS/AQ administrative compliance (CMO 7/10): 88%, or 97% when the firm
+  // keeps monthly updates current. Mirrors the June 2026 CMO 10 dismissals.
+  c.pfsComplete = seed01(id + '|pfs') < (c.monthlyUpdateSent ? 0.97 : 0.88);
+}
+
+// ====================================================================
+// TIER 0 — ELIGIBILITY GATES (pass/fail, before any tiering)
+// ====================================================================
+// Per the framework: product/exposure ID, era→defendant allocation, minimum
+// dose, administrative compliance. (The 5th gate, plausibility/CMO 18, is
+// not modeled — no data signal; assumed pass.) A case failing ANY gate is
+// "below grid" (tier 5) regardless of diagnosis.
+const EXPOSURE_STRONG_RECORDS = ['employment_record', 'applicator_log', 'tax_record', 'purchase_receipt'];
+function exposureIdPass(c) {
+  if (c.licenseVerified || c.receiptsVerified) return true;
+  if ((c.licenseClaimed || c.receiptsClaimed)
+      && (c.ppeUsed === true || (c.evidenceItems || []).length > 0)) return true;
+  return (c.evidenceItems || []).some(e => EXPOSURE_STRONG_RECORDS.includes(e.t));
+}
+const GATE_DEFS = [
+  { key: 'exposure_id', label: 'Product/exposure identification (verified, corroborated claim, or exposure records)',
+    test: c => exposureIdPass(c),
+    status: c => exposureIdPass(c) ? 'pass' : 'unknown' },
+  { key: 'era_allocation', label: 'Exposure era → defendant (pre-1990-only = Chevron)',
+    test: c => c.exposureEra !== 'chevron_only',
+    status: c => c.exposureEra === 'chevron_only' ? 'disconfirmed'
+      : c.exposureEra === 'unknown' ? 'unknown' : 'pass' },
+  { key: 'min_dose', label: 'Minimum exposure dose (≥1 documented season)',
+    test: c => c.exposureYears != null && c.exposureYears >= 1,
+    status: c => c.exposureYears == null ? 'unknown'
+      : c.exposureYears >= 1 ? 'pass' : 'disconfirmed' },
+  { key: 'admin_compliance', label: 'PFS / AQ complete (CMO 7/10)',
+    test: c => c.pfsComplete === true,
+    status: c => c.pfsComplete === true ? 'pass' : 'unknown' },
+];
+function gatesPassed(c) { return GATE_DEFS.every(g => g.test(c)); }
+function failedGates(c) { return GATE_DEFS.filter(g => !g.test(c)); }
+
+// ====================================================================
+// TIER GRID — diagnosis + exposure proof only; economics excluded
+// ====================================================================
+// A case passes tier T iff it satisfies every check in TIER_DEFS[T].checks
+// AND clears the gates. Each check carries a status(c) classifier:
 //   'pass'         — criterion met
 //   'unknown'      — failing because information is missing (curable gap)
 //   'disconfirmed' — failing because the record affirmatively rules it out
+const CONFIRMED_PD_CHECK = {
+  key: 'confirmed_pd', label: 'Confirmed idiopathic PD (neurologist dx)',
+  test: c => c.primaryDiagnosis === 'parkinsons_disease',
+  // Parkinsonism NOS / atypicals can upgrade via specialist workup — curable.
+  // Drug-induced and vascular parkinsonism are affirmatively non-PD.
+  status: c => c.primaryDiagnosis === 'parkinsons_disease' ? 'pass'
+    : (c.dxBucket === 'no_dx'
+       || !['drug_induced_parkinsonism', 'vascular_parkinsonism'].includes(c.primaryDiagnosis)) ? 'unknown'
+    : 'disconfirmed',
+};
 const TIER_DEFS = {
-  1: { name: 'Confirmed PD + Verified Evidence',
+  1: { name: 'PD with dementia (PDD)',
        checks: [
-         { key: 'parkinsons_disease', test: c => c.primaryDiagnosis === 'parkinsons_disease',
-           label: "Parkinson's Disease diagnosis",
-           status: c => c.primaryDiagnosis === 'parkinsons_disease' ? 'pass'
-             : (!c.primaryDiagnosis || c.dxBucket === 'no_dx') ? 'unknown' : 'disconfirmed' },
-         { key: 'verified_evidence', test: c => c.licenseVerified || c.receiptsVerified,
-           label: 'Certified applicator license OR verified purchase receipts',
-           status: c => (c.licenseVerified || c.receiptsVerified) ? 'pass' : 'unknown' },
-         { key: '10yr_exposure', test: c => c.exposureYears != null && c.exposureYears >= 10,
-           label: '≥10 years exposure',
-           status: c => c.exposureYears == null ? 'unknown'
-             : c.exposureYears >= 10 ? 'pass' : 'disconfirmed' },
-         { key: 'sweet_latency', test: c => c.latencyYears != null && c.latencyYears >= 10 && c.latencyYears <= 25,
-           label: 'Latency 10–25 yrs (causation sweet spot)',
-           status: c => c.latencyYears == null ? 'unknown'
-             : (c.latencyYears >= 10 && c.latencyYears <= 25) ? 'pass' : 'disconfirmed' },
-         { key: 'young_first_exposure', test: c => c.ageAtFirstExposure != null && c.ageAtFirstExposure < 45,
-           label: 'Age at first exposure < 45 (longer life impact)',
-           status: c => c.ageAtFirstExposure == null ? 'unknown'
-             : c.ageAtFirstExposure < 45 ? 'pass' : 'disconfirmed' },
-         { key: 'levodopa', test: c => c.levodopaResponse === 'robust' || c.levodopaResponse === 'moderate',
-           label: 'Levodopa response (robust/moderate)',
-           status: c => (c.levodopaResponse === 'robust' || c.levodopaResponse === 'moderate') ? 'pass'
-             : (c.levodopaResponse == null) ? 'unknown' : 'disconfirmed' },
+         CONFIRMED_PD_CHECK,
+         { key: 'cognitive_decline', label: 'Documented cognitive decline / dementia (DSM-5 or MDS)',
+           test: c => c.cognitiveDecline === true,
+           status: c => c.cognitiveDecline === true ? 'pass' : 'unknown' },
        ]},
-  2: { name: 'Probable PD + Documented Exposure',
+  2: { name: 'Confirmed idiopathic Parkinson\'s disease',
+       checks: [CONFIRMED_PD_CHECK]},
+  3: { name: 'Parkinsonism (non-PD)',
        checks: [
-         { key: 'any_pd_dx', test: c => c.dxBucket !== 'no_dx',
-           label: 'Any PD-spectrum diagnosis (incl. parkinsonism)',
-           status: c => c.dxBucket !== 'no_dx' ? 'pass' : 'unknown' },
-         { key: 'documented_exposure',
-           test: c => (c.licenseVerified || c.receiptsVerified)
-                   || ((c.licenseClaimed || c.receiptsClaimed) && c.ppeUsed === true),
-           label: 'Verified exposure evidence (or claimed + PPE corroboration)',
-           status: c => ((c.licenseVerified || c.receiptsVerified)
-                   || ((c.licenseClaimed || c.receiptsClaimed) && c.ppeUsed === true)) ? 'pass' : 'unknown' },
-         { key: '5yr_exposure', test: c => c.exposureYears != null && c.exposureYears >= 5,
-           label: '≥5 years exposure',
-           status: c => c.exposureYears == null ? 'unknown'
-             : c.exposureYears >= 5 ? 'pass' : 'disconfirmed' },
+         { key: 'parkinsonism_dx', label: 'Documented parkinsonism (NOS / atypical / suspected toxicant-induced)',
+           test: c => c.dxBucket === 'parkinsonism_other',
+           status: c => c.dxBucket === 'parkinsonism_other' ? 'pass'
+             : c.dxBucket === 'no_dx' ? 'unknown' : 'disconfirmed' },
        ]},
-  3: { name: 'Symptoms Only / Partial Evidence',
+  4: { name: 'Prodromal / symptom-level',
        checks: [
-         { key: 'has_symptoms', test: c => (c.symptomNames || []).length > 0,
-           label: 'Symptoms logged',
+         { key: 'prodromal_symptoms', label: 'Prodromal symptoms documented (tremor, bradykinesia, RBD, hyposmia)',
+           test: c => (c.symptomNames || []).length > 0,
            status: c => (c.symptomNames || []).length > 0 ? 'pass' : 'unknown' },
-         { key: 'some_exposure', test: c => c.licenseClaimed || c.receiptsClaimed || c.licenseVerified || c.receiptsVerified,
-           label: 'Some exposure evidence',
-           status: c => (c.licenseClaimed || c.receiptsClaimed || c.licenseVerified || c.receiptsVerified) ? 'pass' : 'unknown' },
-         { key: 'non_trivial', test: c => c.exposureYears == null || c.exposureYears >= 1,
-           label: 'At least 1 year exposure (or unknown)',
-           status: c => c.exposureYears == null ? 'unknown'
-             : c.exposureYears >= 1 ? 'pass' : 'disconfirmed' },
+         { key: 'contemporaneous_record', label: 'Symptoms in contemporaneous medical records (not retrospective self-report)',
+           test: c => (c.recordCount || 0) >= 1,
+           status: c => (c.recordCount || 0) >= 1 ? 'pass' : 'unknown' },
        ]},
-  4: { name: 'Marginal / Below Threshold', checks: [] },
+  5: { name: 'Below grid / not eligible', checks: [] },
 };
 
-// Assign a case to a tier by criteria pass-through. Returns 1..4.
-function caseTier(c) {
-  for (const t of [1, 2, 3]) {
+// Highest tier a case fits on diagnosis/symptoms ALONE (gates ignored).
+// Returns 5 when nothing fits. Used as the lift target for below-grid cases.
+function tierIfEligible(c) {
+  for (const t of [1, 2, 3, 4]) {
     if (TIER_DEFS[t].checks.every(chk => chk.test(c))) return t;
   }
-  return 4;
+  return 5;
+}
+
+// Assign a case to a tier: gates first, then the grid. Returns 1..5.
+function caseTier(c) {
+  deriveFrameworkFields(c);
+  if (!gatesPassed(c)) return 5;
+  return tierIfEligible(c);
 }
 
 // Labels of checks a case fails for a given tier.
@@ -833,78 +932,75 @@ function missingFromTier(c, tier) {
   return TIER_DEFS[tier].checks.filter(chk => !chk.test(c)).map(chk => chk.label);
 }
 
-// A "win" candidate is a case currently in tier N that is one or two
-// criteria short of tier N-1 — and the gaps must be curable:
+// A "win" candidate is a case one or two curable gaps short of a higher tier:
 //   kind 'one'  — exactly one failing criterion, status 'unknown'
-//                 (full-weight win, weighted by P_CURE_UNKNOWN)
 //   kind 'two'  — exactly two failing criteria, BOTH 'unknown'
-//                 (weighted by P_CURE_TWO_FIX)
-//   kind 'thin' — one disconfirmed + up to one unknown criterion on a thin
-//                 file (≤2 records): the disconfirmation is weak
-//                 (weighted by P_CURE_THIN_FILE)
-// Any disconfirmed gap on a file with >2 records, or two disconfirmed gaps,
-// or 3+ missing criteria: no lift.
+//   kind 'thin' — one disconfirmed + up to one unknown on a thin file (≤2 records)
+// For tiers 2–4 the target is the tier above. For tier 5 (below grid) the
+// target is the case's NATURAL tier (tierIfEligible) and the failing criteria
+// are the eligibility GATES. Result carries `target` for the gap math.
 function winCandidates(c, fromTier) {
-  const target = fromTier - 1;
-  const none = { qualifies: false, kind: null, missing: [], gaps: [] };
-  if (target < 1) return none;
-  const failed = TIER_DEFS[target].checks.filter(chk => !chk.test(c));
+  const none = { qualifies: false, kind: null, missing: [], gaps: [], target: null };
+  let target, checks;
+  if (fromTier === 5) {
+    target = tierIfEligible(c);
+    if (target === 5) return none;      // fits no tier even if gates were cured
+    checks = GATE_DEFS;
+  } else {
+    target = fromTier - 1;
+    if (target < 1) return none;
+    checks = TIER_DEFS[target].checks;
+  }
+  const failed = checks.filter(chk => !chk.test(c));
   const gaps = failed.map(chk => ({
     key: chk.key, label: chk.label,
     status: chk.status ? chk.status(c) : 'unknown',
   }));
   const missing = gaps.map(g => g.label);
   const nDisc = gaps.filter(g => g.status === 'disconfirmed').length;
+  const base = { target };
   if (failed.length === 1) {
-    if (nDisc === 0) return { qualifies: true, kind: 'one', missing, gaps };
-    if (c.recordCount <= 2) return { qualifies: true, kind: 'thin', missing, gaps };
+    if (nDisc === 0) return { qualifies: true, kind: 'one', missing, gaps, ...base };
+    if (c.recordCount <= 2) return { qualifies: true, kind: 'thin', missing, gaps, ...base };
     return { ...none, missing, gaps };
   }
   if (failed.length === 2) {
-    if (nDisc === 0) return { qualifies: true, kind: 'two', missing, gaps };
-    if (nDisc === 1 && c.recordCount <= 2) return { qualifies: true, kind: 'thin', missing, gaps };
+    if (nDisc === 0) return { qualifies: true, kind: 'two', missing, gaps, ...base };
+    if (nDisc === 1 && c.recordCount <= 2) return { qualifies: true, kind: 'thin', missing, gaps, ...base };
     return { ...none, missing, gaps };
   }
   return { ...none, missing, gaps };
 }
 
-// WI-3: the concrete cure action behind each tier-check key — the "specific
-// fix" that unlocks the tier upgrade. Shown per case in the wins modal, in
-// the cohort fix tally, and in the CSV export. A gap with status
-// 'disconfirmed' (thin-file cohort) gets a "re-verify" prefix at render time.
+// The concrete cure action behind each check/gate key — the "specific fix"
+// that unlocks the tier upgrade. A gap with status 'disconfirmed' (thin-file
+// cohort) gets a "re-verify" prefix at render time.
 const FIX_FOR = {
-  parkinsons_disease:   "get a neurologist-confirmed idiopathic Parkinson's diagnosis on the record",
-  verified_evidence:    'verify the certified applicator license with the state ag dept, or obtain verified purchase receipts',
-  '10yr_exposure':      'document ≥10 yrs of exposure (employment records, tax records, coworker affidavits)',
-  sweet_latency:        'pin down first-exposure and diagnosis dates so latency lands in the 10–25 yr window',
-  young_first_exposure: 'confirm DOB + first-exposure date (must show age < 45 at first exposure)',
-  levodopa:             'get a treating-neurologist note documenting levodopa response',
-  any_pd_dx:            'get any PD-spectrum diagnosis (incl. parkinsonism) on the record',
-  documented_exposure:  'verify the applicator license/receipts, or document PPE use to corroborate the claimed exposure',
-  '5yr_exposure':       'document ≥5 yrs of exposure (employment records, affidavits)',
-  has_symptoms:         'log current symptoms in the intake / medical records',
-  some_exposure:        'collect any exposure evidence (claimed license or receipts)',
-  non_trivial:          'confirm at least 1 year of exposure',
+  confirmed_pd:           'get a movement-disorder neurologist to confirm idiopathic PD (DaTscan or levodopa response strengthens)',
+  cognitive_decline:      'obtain a documented cognitive-decline / dementia assessment (DSM-5 or MDS criteria) — PDD protections attach',
+  parkinsonism_dx:        'get a documented parkinsonism diagnosis on the record',
+  prodromal_symptoms:     'document prodromal symptoms (tremor, bradykinesia, rigidity, REM sleep behavior disorder, hyposmia)',
+  contemporaneous_record: 'get the symptoms into contemporaneous medical records (not retrospective self-report)',
+  exposure_id:            'verify the applicator license / purchase records, or corroborate the claim (PPE use, employment or spraying records, affidavits)',
+  era_allocation:         'wrong-defendant review — pre-1990-only exposure allocates to Chevron, not Syngenta',
+  min_dose:               'document at least one full season of exposure (employment records, spraying logs, affidavits)',
+  admin_compliance:       'complete the Plaintiff Fact Sheet / cure the CMO 10 deficiency inside the cure window',
 };
 function fixForGap(g) {
   const base = FIX_FOR[g.key] || 'collect the missing record';
-  return g.status === 'disconfirmed' ? `thin file — re-verify: ${base}` : base;
+  return g.status === 'disconfirmed' ? `re-verify (thin file): ${base}` : base;
 }
-// Short fix labels for the value-bridge waterfall axis (FIX_FOR strings are
-// far too long for chart labels). Keyed identically to FIX_FOR.
+// Short fix labels for the value-bridge waterfall axis. Keyed as FIX_FOR.
 const FIX_SHORT = {
-  parkinsons_disease:   'Confirm PD dx',
-  verified_evidence:    'Verify license/receipts',
-  '10yr_exposure':      '≥10yr exposure proof',
-  sweet_latency:        'Pin latency dates',
-  young_first_exposure: 'Confirm DOB + 1st exposure',
-  levodopa:             'Levodopa response note',
-  any_pd_dx:            'PD-spectrum dx',
-  documented_exposure:  'Verify exposure / PPE',
-  '5yr_exposure':       '≥5yr exposure proof',
-  has_symptoms:         'Log symptoms',
-  some_exposure:        'Any exposure evidence',
-  non_trivial:          '≥1yr exposure confirm',
+  confirmed_pd:           'Confirm PD dx',
+  cognitive_decline:      'Cognitive-decline dx',
+  parkinsonism_dx:        'Parkinsonism dx',
+  prodromal_symptoms:     'Document prodromal sx',
+  contemporaneous_record: 'Contemporaneous records',
+  exposure_id:            'Exposure ID proof',
+  era_allocation:         'Era/defendant review',
+  min_dose:               'Document ≥1 season',
+  admin_compliance:       'Complete PFS (CMO 10)',
 };
 
 // ====================================================================
@@ -1224,36 +1320,27 @@ function scoreAllCases() {
   return getFilteredCases().map(c => ({ ...c, ...scoreCase(c) }));
 }
 
-// Per-factor scoring weights — drives both the score and the donut modal.
-// (Rec removed: medical record COUNT is informational, not a tier criterion.)
-// (PPE: positive signal — verified professional applicator pattern.)
+// Within-tier scoring axes per docs/paraquat-tier-framework.md — causation
+// strength only, economics excluded. 8 axes, weights sum to 100.
 const SCORE_FACTOR_LABELS = [
-  ['Dx',  'Diagnosis certainty',    25],
-  ['Exp', 'Exposure duration',      15],
-  ['Ev',  'Evidence verification',  15],
-  ['Fam', 'Family history',         10],
-  ['Lat', 'Latency',                10],
-  ['Age', 'Age at first exposure',  10],
-  ['PPE', 'PPE used',                5],
-  ['Sym', 'Symptom severity',        5],
-  ['Lev', 'Levodopa response',       5],
+  ['Exp', 'Exposure intensity/duration', 20],
+  ['Dx',  'Diagnostic certainty',        20],
+  ['Lat', 'Latency fit',                 15],
+  ['Sev', 'Functional severity (H&Y anchor)', 15],
+  ['Cfx', 'Competing exposures/confounders', 10],
+  ['Fam', 'Family history (absent = stronger)', 10],
+  ['PPE', 'PPE factor (bidirectional)',   5],
+  ['Age', 'Age at onset',                 5],
 ];
-// Per-factor scoring breakdown — returns the raw 0-10 sub-score for each
-// factor, the weight %, the weighted contribution (raw × weight / 100, which
-// is what shows in the donut), and a one-line REASON explaining why the raw
-// sub-score is what it is (e.g. "Parkinson's confirmed" vs "10-20 yrs").
-// Sums to the case's overall score.
+// Per-axis breakdown — returns the raw 0-10 sub-score for each axis, the
+// weight %, the weighted contribution (raw × weight / 100), and a one-line
+// REASON. Sums to the case's overall score.
 function scoreFactorBreakdown(c) {
+  deriveFrameworkFields(c);
   const factors = [];
 
-  // 1. Diagnosis certainty (25%)
-  let dx = 0, dxReason = 'No diagnosis on file';
-  if (c.primaryDiagnosis === 'parkinsons_disease')      { dx = 8; dxReason = "Parkinson's disease confirmed"; }
-  else if (c.primaryDiagnosis === 'parkinsonism_unspecified') { dx = 6; dxReason = 'Parkinsonism (unspecified)'; }
-  else if (c.primaryDiagnosis) { dx = 4; dxReason = `Atypical / other (${c.primaryDiagnosis.replace(/_/g, ' ')})`; }
-  factors.push({ key: 'Dx', label: 'Diagnosis certainty', weight: 25, rawScore: dx, reason: dxReason });
-
-  // 2. Exposure duration (15%)
+  // 1. Exposure intensity/duration (20%) — years of use, direct handling vs
+  // proximity. Mixing/loading is the highest-dose vector (+1, capped).
   let exp = 0, expReason = 'Unknown exposure years';
   const ey = c.exposureYears;
   if (ey != null) {
@@ -1262,76 +1349,92 @@ function scoreFactorBreakdown(c) {
     else if (ey >= 10) { exp =  6; expReason = `${ey.toFixed(1)} yrs exposure (10-20 band)`; }
     else if (ey >=  5) { exp =  4; expReason = `${ey.toFixed(1)} yrs exposure (5-10 band)`; }
     else               { exp =  2; expReason = `${ey.toFixed(1)} yrs exposure (under 5)`; }
+    if (c.exposureCategory === 'Residential / Bystander' && exp > 6) {
+      exp = 6; expReason += ' — bystander/drift vector (capped)';
+    }
+    if (c.applicationMethod === 'mixing_loading' && exp < 10) {
+      exp += 1; expReason += ' — mixing/loading (highest dose)';
+    }
   }
-  factors.push({ key: 'Exp', label: 'Exposure duration', weight: 15, rawScore: exp, reason: expReason });
+  factors.push({ key: 'Exp', label: 'Exposure intensity/duration', weight: 20, rawScore: exp, reason: expReason });
 
-  // 3. Evidence verification (15%)
-  let ev = 0, evReason = 'Neither license nor receipts verified';
-  if (c.receiptsVerified && c.licenseVerified) { ev = 10; evReason = 'License AND receipts verified'; }
-  else if (c.receiptsVerified)                  { ev =  5; evReason = 'Receipts verified only (no license)'; }
-  else if (c.licenseVerified)                   { ev =  5; evReason = 'License verified only (no receipts)'; }
-  factors.push({ key: 'Ev', label: 'Evidence verification', weight: 15, rawScore: ev, reason: evReason });
+  // 2. Diagnostic certainty (20%) — imaging > specialist dx > generalist >
+  // symptoms. Levodopa response counts one notch below imaging.
+  let dx = 0, dxReason = 'No diagnosis on file';
+  const isPD = c.primaryDiagnosis === 'parkinsons_disease';
+  const levo = c.levodopaResponse === 'robust' || c.levodopaResponse === 'moderate';
+  if (c.datscanPositive)                          { dx = 10; dxReason = 'DaTscan / objective imaging positive'; }
+  else if (isPD && levo)                          { dx = 8;  dxReason = 'PD dx + levodopa response (one notch below imaging)'; }
+  else if (isPD && c.primaryCertainty === 'definitive') { dx = 8; dxReason = 'Specialist-definitive PD diagnosis'; }
+  else if (isPD)                                  { dx = 7;  dxReason = 'Confirmed PD diagnosis (no imaging on file)'; }
+  else if (c.dxBucket === 'parkinsonism_other')   { dx = 4;  dxReason = `Parkinsonism non-PD (${(c.primaryDiagnosis || '').replace(/_/g, ' ')})`; }
+  else if ((c.symptomNames || []).length)         { dx = 2;  dxReason = 'Documented symptoms only (prodromal)'; }
+  factors.push({ key: 'Dx', label: 'Diagnostic certainty', weight: 20, rawScore: dx, reason: dxReason });
 
-  // 4. Family history (10%) — direction REVERSED from traditional mass-tort
-  // logic: a first-degree relative with Parkinsonism gives the defense a
-  // competing-cause argument ("PD was genetic, not paraquat-caused"), so it
-  // DILUTES the claim. Absence of documented genetic predisposition makes
-  // the case stronger — pure paraquat causation, no competing cause.
-  let fam = 5, famReason = 'Family history not on file — neutral';
-  if (c.familyPd === true) { fam = 0; famReason = 'First-degree relative with Parkinsonism — competing-cause risk'; }
-  else if (c.familyPd === false) { fam = 10; famReason = 'No first-degree PD relative on file — pure paraquat causation'; }
-  factors.push({ key: 'Fam', label: 'Family history (absent = stronger)', weight: 10, rawScore: fam, reason: famReason });
-
-  // 5. Latency (10%) — 10-25 yrs is the causation sweet spot.
+  // 3. Latency fit (15%) — first exposure to first documented symptom/dx.
+  // 10-40 yrs strongest; 2-10 acceptable; <2 or >40 weak.
   let lat = 0, latReason = 'Unknown latency';
   const ly = c.latencyYears;
   if (ly != null) {
-    if      (ly >= 10 && ly <= 25) { lat = 10; latReason = `${ly.toFixed(1)} yrs latency (sweet spot 10-25)`; }
-    else if (ly >=  5 && ly <  10) { lat =  7; latReason = `${ly.toFixed(1)} yrs latency (short 5-10)`; }
-    else if (ly >  25)             { lat =  5; latReason = `${ly.toFixed(1)} yrs latency (long 25+)`; }
-    else                            { lat =  2; latReason = `${ly.toFixed(1)} yrs latency (under 5)`; }
+    if      (ly >= 10 && ly <= 40) { lat = 10; latReason = `${ly.toFixed(1)} yrs latency (strong fit 10-40)`; }
+    else if (ly >= 2)              { lat =  6; latReason = `${ly.toFixed(1)} yrs latency (acceptable 2-10)`; }
+    else if (ly > 40)              { lat =  3; latReason = `${ly.toFixed(1)} yrs latency (attenuated 40+)`; }
+    else                           { lat =  2; latReason = `${ly.toFixed(1)} yrs latency (weak <2)`; }
   }
-  factors.push({ key: 'Lat', label: 'Latency', weight: 10, rawScore: lat, reason: latReason });
+  factors.push({ key: 'Lat', label: 'Latency fit', weight: 15, rawScore: lat, reason: latReason });
 
-  // 6. Age at first exposure (10%) — younger first exposure = longer life impact.
-  let age = 0, ageReason = 'DOB or first-exposure date missing';
-  const a = c.ageAtFirstExposure;
-  if (a != null) {
-    if      (a < 25) { age = 10; ageReason = `${a.toFixed(0)} yrs old at first exposure (childhood — strongest impact)`; }
-    else if (a < 35) { age =  8; ageReason = `${a.toFixed(0)} yrs old at first exposure (young adult)`; }
-    else if (a < 50) { age =  6; ageReason = `${a.toFixed(0)} yrs old at first exposure (mid-career)`; }
-    else if (a < 65) { age =  4; ageReason = `${a.toFixed(0)} yrs old at first exposure (later career)`; }
-    else             { age =  2; ageReason = `${a.toFixed(0)} yrs old at first exposure (older — shorter impact window)`; }
-  }
-  factors.push({ key: 'Age', label: 'Age at first exposure', weight: 10, rawScore: age, reason: ageReason });
-
-  // 7. PPE used (5%) — corroborates the professional-applicator pattern
-  // (license + receipts + PPE = credible licensed user). No PPE / not on file
-  // is weaker because the defense can argue alternative cause or that the
-  // claimant wasn't really an applicator.
-  let ppe = 0, ppeReason = 'PPE not on file (or not used)';
-  if (c.ppeUsed === true) { ppe = 10; ppeReason = 'PPE used — corroborates licensed applicator pattern'; }
-  factors.push({ key: 'PPE', label: 'PPE used', weight: 5, rawScore: ppe, reason: ppeReason });
-
-  // 8. Symptom severity (5%)
-  let sym = 0, symReason = 'No symptoms logged';
+  // 4. Functional severity anchor (15%) — clinical, not economic. Avg
+  // symptom severity proxies the H&Y / UPDRS anchor.
+  let sev = 0, sevReason = 'No symptoms logged';
   const sy = c.avgSymptomSeverity;
   if (sy != null) {
-    if      (sy >= 4) { sym = 10; symReason = `Avg severity ${sy.toFixed(1)} (4-5 band)`; }
-    else if (sy >= 3) { sym =  6; symReason = `Avg severity ${sy.toFixed(1)} (3 band)`; }
-    else if (sy >= 1) { sym =  3; symReason = `Avg severity ${sy.toFixed(1)} (1-2 band)`; }
+    if      (sy >= 4) { sev = 10; sevReason = `Avg severity ${sy.toFixed(1)} (H&Y 4-5 anchor)`; }
+    else if (sy >= 3) { sev =  6; sevReason = `Avg severity ${sy.toFixed(1)} (H&Y 3 anchor)`; }
+    else if (sy >= 1) { sev =  3; sevReason = `Avg severity ${sy.toFixed(1)} (H&Y 1-2 anchor)`; }
   }
-  factors.push({ key: 'Sym', label: 'Symptom severity', weight: 5, rawScore: sym, reason: symReason });
+  factors.push({ key: 'Sev', label: 'Functional severity', weight: 15, rawScore: sev, reason: sevReason });
 
-  // 9. Levodopa response (5%)
-  let lev = 0, levReason = 'No levodopa response on file';
-  const lv = c.levodopaResponse;
-  if      (lv === 'robust')    { lev = 10; levReason = 'Robust levodopa response'; }
-  else if (lv === 'moderate')  { lev =  7; levReason = 'Moderate levodopa response'; }
-  else if (lv === 'minimal')   { lev =  3; levReason = 'Minimal levodopa response'; }
-  factors.push({ key: 'Lev', label: 'Levodopa response', weight: 5, rawScore: lev, reason: levReason });
+  // 5. Competing exposures / confounders (10%) — defense-side discounts;
+  // never-smoker is claimant-favorable (smoking is inversely associated
+  // with PD, so never-smoking strengthens toxicant attribution).
+  let cfx = 7;
+  const cfxReasons = [];
+  if (c.smokingStatus === 'never')   { cfx += 3; cfxReasons.push('never-smoker (+, strengthens attribution)'); }
+  else if (c.smokingStatus === 'current') { cfx -= 1; cfxReasons.push('current smoker (defense flips it)'); }
+  if (c.otherPesticides) { cfx -= 3; cfxReasons.push('other PD-linked pesticides (rotenone/maneb)'); }
+  if (c.tbiHistory)      { cfx -= 3; cfxReasons.push('TBI history (established PD risk factor)'); }
+  cfx = Math.max(0, Math.min(10, cfx));
+  factors.push({ key: 'Cfx', label: 'Competing exposures', weight: 10, rawScore: cfx,
+                 reason: cfxReasons.length ? cfxReasons.join('; ') : 'no confounders on file' });
 
-  // Compute weighted contribution for each factor: raw × weight / 100.
+  // 6. Family history (10%) — REVERSED: a first-degree relative with
+  // Parkinsonism gives the defense a competing-cause argument. Discount
+  // only — never an exclusion, never drops a full tier.
+  let fam = 5, famReason = 'Family history not on file — neutral';
+  if (c.familyPd === true) { fam = 0; famReason = 'First-degree relative with Parkinsonism — genetic-loading discount'; }
+  else if (c.familyPd === false) { fam = 10; famReason = 'No first-degree PD relative on file — cleaner attribution'; }
+  factors.push({ key: 'Fam', label: 'Family history (absent = stronger)', weight: 10, rawScore: fam, reason: famReason });
+
+  // 7. PPE factor (5%) — BIDIRECTIONAL per the framework: documented use,
+  // disease anyway = + (rebuts comparative fault). Non-use = NEUTRAL
+  // (never a claimant penalty; label PPE was unrealistic for field use).
+  let ppe = 5, ppeReason = 'PPE not on file — neutral (never a penalty)';
+  if (c.ppeUsed === true) { ppe = 10; ppeReason = 'Documented PPE use, disease anyway — rebuts comparative-fault defense'; }
+  factors.push({ key: 'PPE', label: 'PPE factor (bidirectional)', weight: 5, rawScore: ppe, reason: ppeReason });
+
+  // 8. Age at onset (5%) — earlier onset with heavy exposure reads stronger;
+  // 80+ with thin exposure reads weaker.
+  let age = 0, ageReason = 'DOB or diagnosis date missing';
+  const ao = c.ageAtDiagnosis;
+  if (ao != null) {
+    if      (ao < 50) { age = 10; ageReason = `onset at ${ao.toFixed(0)} (early — strong causation read)`; }
+    else if (ao < 65) { age =  8; ageReason = `onset at ${ao.toFixed(0)}`; }
+    else if (ao < 75) { age =  6; ageReason = `onset at ${ao.toFixed(0)}`; }
+    else if (ao < 80) { age =  4; ageReason = `onset at ${ao.toFixed(0)} (late)`; }
+    else              { age =  2; ageReason = `onset at ${ao.toFixed(0)} (80+ — weaker read)`; }
+  }
+  factors.push({ key: 'Age', label: 'Age at onset', weight: 5, rawScore: age, reason: ageReason });
+
   factors.forEach(f => { f.contribution = Math.round(f.rawScore * f.weight / 100 * 10) / 10; });
   return factors;
 }
@@ -1345,14 +1448,15 @@ function scoreBreakdown(c) {
 }
 
 // Per-tier GSV (Gross Settlement Value) — single number per case, editable
-// inline. Drives the per-tier value line, the wins uplift math, and the
-// total inventory value. Default values are illustrative; investor replaces
-// with their MSA framework.
+// inline. Framework tiers: PDD > confirmed PD > parkinsonism > prodromal >
+// below-grid ($0 until gates are cured). Defaults are illustrative; the
+// investor replaces with their MSA framework.
 const tierDollars = {
   1: 750000,
   2: 300000,
   3: 100000,
   4: 25000,
+  5: 0,
 };
 // Editable assumptions — cure probabilities for the wins uplift math.
 // P_CURE_UNKNOWN:   odds a missing-information gap (no data) gets cured.
@@ -1796,14 +1900,14 @@ function renderTab5() {
 
   // Avg accepted settlement per tier, computed from the filtered set
   const avgByTier = {};
-  [1, 2, 3, 4].forEach(t => {
+  TIER_VALUES.forEach(t => {
     const amts = scored.filter(c => c.tier === t && c.settlementStatus === 'accepted' && c.settlementAmount != null)
                        .map(c => c.settlementAmount);
     if (amts.length) avgByTier[t] = amts.reduce((a, b) => a + b, 0) / amts.length;
   });
 
   // KPI tiles (filter-aware)
-  const tierCountsKpi = [1,2,3,4].map(t => scored.filter(c => c.tier === t).length);
+  const tierCountsKpi = TIER_VALUES.map(t => scored.filter(c => c.tier === t).length);
   const avgScore = scored.length ? (scored.reduce((s, c) => s + c.score, 0) / scored.length).toFixed(1) : '0.0';
   const realized = scored.filter(c => c.settlementStatus === 'accepted' && c.settlementAmount != null)
                          .reduce((s, c) => s + c.settlementAmount, 0);
@@ -1818,20 +1922,20 @@ function renderTab5() {
   }).length;
   const tierSub = t => `${tierRecoveryRange(t).label} · avg ${avgByTier[t] != null ? fmtMoney(avgByTier[t]) : '—'}`;
   document.getElementById('kpi-row-5').innerHTML = `
-    <div class="tile tier-tile tier-1"><div class="tile-label">Tier 1</div><div class="tile-value">${tierCountsKpi[0]}</div><div class="tile-sub">${tierSub(1)}</div></div>
-    <div class="tile tier-tile tier-2"><div class="tile-label">Tier 2</div><div class="tile-value">${tierCountsKpi[1]}</div><div class="tile-sub">${tierSub(2)}</div></div>
-    <div class="tile tier-tile tier-3"><div class="tile-label">Tier 3</div><div class="tile-value">${tierCountsKpi[2]}</div><div class="tile-sub">${tierSub(3)}</div></div>
-    <div class="tile tier-tile tier-4"><div class="tile-label">Tier 4</div><div class="tile-value">${tierCountsKpi[3]}</div><div class="tile-sub">${tierSub(4)}</div></div>
+    <div class="tile tier-tile tier-1"><div class="tile-label">Tier 1 — PDD</div><div class="tile-value">${tierCountsKpi[0]}</div><div class="tile-sub">${tierSub(1)}</div></div>
+    <div class="tile tier-tile tier-2"><div class="tile-label">Tier 2 — Confirmed PD</div><div class="tile-value">${tierCountsKpi[1]}</div><div class="tile-sub">${tierSub(2)}</div></div>
+    <div class="tile tier-tile tier-3"><div class="tile-label">Tier 3 — Parkinsonism</div><div class="tile-value">${tierCountsKpi[2]}</div><div class="tile-sub">${tierSub(3)}</div></div>
+    <div class="tile tier-tile tier-4"><div class="tile-label">Tier 4 — Prodromal</div><div class="tile-value">${tierCountsKpi[3]}</div><div class="tile-sub">${tierSub(4)}</div></div>
+    <div class="tile tier-tile tier-5"><div class="tile-label">Below grid</div><div class="tile-value">${tierCountsKpi[4]}</div><div class="tile-sub">gate failures</div></div>
     <div class="tile"><div class="tile-label">Realized Value</div><div class="tile-value">${fmtMoney(realized)}</div><div class="tile-sub">accepted settlements</div></div>
     <div class="tile"><div class="tile-label">Expected Value</div><div class="tile-value">${fmtMoney(expected)}</div><div class="tile-sub">tier midpoint &times; open inventory</div></div>
     <div class="tile"><div class="tile-label">SOL &lt; 90 Days</div><div class="tile-value">${solCount.toLocaleString()}</div><div class="tile-sub">open matters at risk</div></div>
     <div class="tile"><div class="tile-label">Avg Score</div><div class="tile-value">${avgScore}</div><div class="tile-sub">across ${scored.length} matters</div></div>`;
 
   // Tier distribution
-  const TIER_VALUES = [1, 2, 3, 4];
   const tierCounts = TIER_VALUES.map(t => scored.filter(c => c.tier === t).length);
   doughnut('chartTierDist',
-    ['Tier 1', 'Tier 2', 'Tier 3', 'Tier 4'],
+    ['Tier 1 — PDD', 'Tier 2 — PD', 'Tier 3 — Parkinsonism', 'Tier 4 — Prodromal', 'Below grid'],
     tierCounts,
     xfade(TIER_VALUES, TIER_COLORS, state.cross.tier));
   attachCrossFilter('chartTierDist', 'tier', TIER_VALUES);
@@ -1856,6 +1960,7 @@ function renderTab5() {
     t2: scored.filter(c => c.firm === f && c.tier === 2).length,
     t3: scored.filter(c => c.firm === f && c.tier === 3).length,
     t4: scored.filter(c => c.firm === f && c.tier === 4).length,
+    t5: scored.filter(c => c.firm === f && c.tier === 5).length,
   }));
   stackedBar('chartTierByFirm',
     tierByFirm.map(t => t.firm.length > 26 ? t.firm.slice(0,24)+'…' : t.firm),
@@ -1864,6 +1969,7 @@ function renderTab5() {
       { label: 'Tier 2', data: tierByFirm.map(t => t.t2), backgroundColor: xfade(firms, TIER_COLORS[1], state.cross.firm) },
       { label: 'Tier 3', data: tierByFirm.map(t => t.t3), backgroundColor: xfade(firms, TIER_COLORS[2], state.cross.firm) },
       { label: 'Tier 4', data: tierByFirm.map(t => t.t4), backgroundColor: xfade(firms, TIER_COLORS[3], state.cross.firm) },
+      { label: 'Below grid', data: tierByFirm.map(t => t.t5), backgroundColor: xfade(firms, TIER_COLORS[4], state.cross.firm) },
     ]);
   attachCrossFilter('chartTierByFirm', 'firm', firms);
 
@@ -1878,14 +1984,14 @@ function renderTab5() {
     [{ label: 'Avg score', data: avgBySetting.map(a => a.avg), backgroundColor: '#C9A227' }]);
 
   // Recovery by tier — actual avg settlement (filtered) where available, else range midpoint
-  const recoveryVals = [1, 2, 3, 4].map(t => {
+  const recoveryVals = TIER_VALUES.map(t => {
     if (avgByTier[t] != null) return avgByTier[t];
     const r = tierRecoveryRange(t);
     return (r.low + r.high) / 2;
   });
-  const usingActual = [1,2,3,4].some(t => avgByTier[t] != null);
+  const usingActual = TIER_VALUES.some(t => avgByTier[t] != null);
   bar('chartRecoveryByTier',
-    ['Tier 1', 'Tier 2', 'Tier 3', 'Tier 4'],
+    ['Tier 1', 'Tier 2', 'Tier 3', 'Tier 4', 'Below grid'],
     [{ label: usingActual ? 'Avg settlement ($, actual)' : 'Expected mid-range ($)',
        data: recoveryVals, backgroundColor: TIER_COLORS }]);
 
@@ -1917,7 +2023,7 @@ function renderTierPanel() {
   const cases = D.cases;
   cases.forEach(c => { c.statusBucket = statusBucketOf(c); if (c.tier === undefined) c.tier = caseTier(c); });
 
-  const rows = [1, 2, 3, 4].map(t => {
+  const rows = TIER_VALUES.map(t => {
     const def = TIER_DEFS[t];
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
@@ -1971,12 +2077,35 @@ function winsCohorts(t) {
   return out;
 }
 
+// Below-grid (tier 5) cases grouped by (natural target tier × kind). The gap
+// is the FULL tier GSV of the tier they'd enter once the gates clear.
+function gateCohorts() {
+  const groups = {};
+  D.cases.forEach(c => {
+    if (c.tier !== 5) return;
+    const w = winCandidates(c, 5);
+    if (!w.qualifies) return;
+    const k = `${w.kind}|${w.target}`;
+    if (!groups[k]) groups[k] = { kind: w.kind, target: w.target, cases: [], gap: tierGsv(w.target) - tierGsv(5) };
+    groups[k].cases.push(c);
+  });
+  return Object.values(groups).sort((a, b) => (b.cases.length * b.gap) - (a.cases.length * a.gap));
+}
+
 // Lift cell for tier T: the cohorts sitting IN tier T that could move UP
-// into T-1. Wins live in the SOURCE tier's box (the cases are here) — T1 has
-// no callout because it's already the top tier. Clicking a line opens the
-// wins modal for that cohort.
+// into T-1 (or, for below-grid, INTO the grid once gates clear). Wins live
+// in the SOURCE tier's box — T1 has no callout (already top tier).
 function liftCellHtml(t) {
   if (t === 1) return '<span class="lift-none">top tier</span>';
+  if (t === 5) {
+    const groups = gateCohorts();
+    if (!groups.length) return '<span class="lift-none">no curable gate failures</span>';
+    const lines = groups.slice(0, 4).map(g =>
+      liftLine(5, g.kind, g.cases.length, g.gap,
+        `${g.kind === 'one' ? 'one fix' : g.kind === 'two' ? 'two fixes' : 'thin-file'} → Tier ${g.target} (gate cure)`, g.target));
+    if (groups.length > 4) lines.push(`<div class="lift-none">+ ${groups.length - 4} more gate cohorts</div>`);
+    return lines.join('');
+  }
   const { one, two, thin, gap } = winsCohorts(t);
   const lines = [];
   if (one.length)  lines.push(liftLine(t, 'one',  one.length,  gap, `one fix from Tier ${t - 1}`));
@@ -1986,15 +2115,17 @@ function liftCellHtml(t) {
   return lines.join('');
 }
 
-function liftLine(source, kind, n, gap, label) {
+function liftLine(source, kind, n, gap, label, target) {
   const p = state.convertRate;
   const exp = n * gap * p;
-  return `<div class="lift-line lift-${kind}" data-tier="${source}" data-kind="${kind}" role="button" tabindex="0" title="Click to see the cohort">▸ <b>${n}</b> ${label} — if ${oddsWords(p)} convert, <b>+${fmtMoney(exp)}</b></div>`;
+  const tgt = target != null ? ` data-target="${target}"` : '';
+  return `<div class="lift-line lift-${kind}" data-tier="${source}" data-kind="${kind}"${tgt} role="button" tabindex="0" title="Click to see the cohort">▸ <b>${n}</b> ${label} — if ${oddsWords(p)} convert, <b>+${fmtMoney(exp)}</b></div>`;
 }
 
 function wireWinsRows(panel) {
   panel.querySelectorAll('.lift-line[data-tier]').forEach(el => {
-    const open = () => openWinsModal(parseInt(el.dataset.tier, 10), el.dataset.kind);
+    const open = () => openWinsModal(parseInt(el.dataset.tier, 10), el.dataset.kind,
+      el.dataset.target != null ? parseInt(el.dataset.target, 10) : null);
     el.addEventListener('click', open);
     el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') open(); });
   });
@@ -2011,7 +2142,7 @@ function updateTierPanelDerived() {
   const cases = D.cases;
   const p = state.convertRate;
   let totalOpen = 0, totalClosed = 0, totalCurrentGsv = 0, totalWinsGap = 0;
-  [1, 2, 3, 4].forEach(t => {
+  [1, 2, 3, 4, 5].forEach(t => {
     const open = cases.filter(c => c.tier === t && c.statusBucket !== 'closed').length;
     const closed = cases.filter(c => c.tier === t && c.statusBucket === 'closed').length;
     const tierFullGsv = tierGsv(t) * open;
@@ -2039,17 +2170,17 @@ function updateTierPanelDerived() {
   const fixAgg = {};
   cases.forEach(c => {
     const s = c.tier;
-    if (s == null || s < 2 || s > 4) return;
+    if (s == null || s < 2 || s > 5) return;
     const w = winCandidates(c, s);
     if (!w.qualifies) return;
-    const gap = tierGsv(s - 1) - tierGsv(s);
+    const gap = tierGsv(w.target) - tierGsv(s);
     totalWinsGap += gap;
     const share = gap * p / (w.gaps.length || 1);
     w.gaps.forEach(g => {
-      const k = `${s}|${g.key}|${g.status === 'disconfirmed' ? 1 : 0}`;
+      const k = `${s}|${w.target}|${g.key}|${g.status === 'disconfirmed' ? 1 : 0}`;
       if (!fixAgg[k]) {
         fixAgg[k] = {
-          source: s, target: s - 1, n: 0, value: 0, cases: [],
+          source: s, target: w.target, n: 0, value: 0, cases: [],
           label: (FIX_SHORT[g.key] || g.label) + (g.status === 'disconfirmed' ? ' (re-verify)' : ''),
           fix: fixForGap(g),
         };
@@ -2187,12 +2318,16 @@ function renderBridgeChart(current, segs, potential) {
 // missing criterion. Click outside or hit Esc to close.
 // ====================================================================
 
-function openWinsModal(fromTier, kind = 'one') {
-  const target = fromTier - 1;
+function openWinsModal(fromTier, kind = 'one', target = null) {
+  // Tier 5 (below grid): the target is the cohort's natural tier and the
+  // checklist is the eligibility GATES, not the target tier's checks.
+  const isGateCohort = fromTier === 5;
+  if (target == null) target = fromTier - 1;
   if (target < 1) return;
   const cases = D.cases || [];
   const allWins = cases
-    .map(c => ({ c, w: c.tier === fromTier ? winCandidates(c, fromTier) : { qualifies: false } }))
+    .map(c => ({ c, w: (c.tier === fromTier && (!isGateCohort || tierIfEligible(c) === target))
+      ? winCandidates(c, fromTier) : { qualifies: false } }))
     .filter(x => x.w.qualifies && x.w.kind === kind)
     .map(x => {
       const sc = scoreCase(x.c);
@@ -2207,6 +2342,7 @@ function openWinsModal(fromTier, kind = 'one') {
   // recomputing winCandidates() each time.
   modal._cohort = {
     wins: allWins, fromTier, target, kind, gap: tierGsv(target) - tierGsv(fromTier),
+    checksOverride: isGateCohort ? GATE_DEFS : null,
   };
 
   // Build the dynamic header: standard columns + one column per criteria in the
@@ -2222,9 +2358,10 @@ function openWinsModal(fromTier, kind = 'one') {
   const perCaseExpected = gap * p;
   const totalExpected = allWins.length * perCaseExpected;
   const fixWord = kind === 'two' ? 'two fixes' : 'one fix';
+  const reachWord = isGateCohort ? 'clear the gates into' : 'reach';
   const cohortNote = {
-    one: `Each case is missing one piece of information to reach Tier ${target}. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of them cure the gap, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
-    two: `Each case is missing two pieces of information to reach Tier ${target}. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of them cure both, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
+    one: `Each case is missing one piece of information to ${reachWord} Tier ${target}. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of them cure the gap, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
+    two: `Each case is missing two pieces of information to ${reachWord} Tier ${target}. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of them cure both, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
     thin: `Each case is blocked by a disconfirmed criterion, but the file is thin (≤2 records), so the disconfirmation may not hold. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of these cure, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
   }[kind];
   const cohortAvgScore = allWins.reduce((s,c)=>s+c.score,0)/allWins.length;
@@ -2238,7 +2375,7 @@ function openWinsModal(fromTier, kind = 'one') {
   const fixLine = Object.entries(fixTally).sort((a, b) => b[1] - a[1])
     .map(([a, n]) => `<b>${n}</b> &times; ${escapeHtml(a)}`).join(' &middot; ');
   document.getElementById('winsModalTitle').textContent =
-    `Wins cohort: ${allWins.length} cases ${fixWord} from Tier ${target}${kind === 'thin' ? ' (thin file)' : ''}`;
+    `Wins cohort: ${allWins.length} cases ${fixWord} from Tier ${target}${kind === 'thin' ? ' (thin file)' : ''}${isGateCohort ? ' — eligibility gates' : ''}`;
   document.getElementById('winsModalSubtitle').innerHTML = cohortNote +
     `<button type="button" class="score-cohort-link" id="cohortBreakdownBtn">Cohort average breakdown → score ${cohortAvgScore.toFixed(1)}</button>` +
     `<div class="fix-tally"><b>Specific fixes to unlock Tier ${target}:</b> ${fixLine}</div>`;
@@ -2294,7 +2431,7 @@ function openWinsModal(fromTier, kind = 'one') {
 function renderWinsTableHeader() {
   const modal = document.getElementById('winsModal');
   const thead = document.getElementById('winsModalThead');
-  const targetChecks = TIER_DEFS[modal._cohort.target]?.checks || [];
+  const targetChecks = modal._cohort.checksOverride || TIER_DEFS[modal._cohort.target]?.checks || [];
   const criteriaHeaders = targetChecks.map(chk => `
     <th class="criteria-col" title="${escapeHtml(chk.label)} — ✓ = case meets this criteria (lift already captured), blank = lift opportunity">
       <span class="crit-label">${escapeHtml(chk.label)}</span>
@@ -2315,8 +2452,8 @@ function renderWinsTableHeader() {
 // builds the rows with criteria cells + clickable score bar.
 function renderWinsTableBody() {
   const modal = document.getElementById('winsModal');
-  const { wins, target, gap } = modal._cohort;
-  const targetChecks = TIER_DEFS[target]?.checks || [];
+  const { wins, target, gap, checksOverride } = modal._cohort;
+  const targetChecks = checksOverride || TIER_DEFS[target]?.checks || [];
 
   const minScore = parseFloat(document.getElementById('winsFilterMinScore').value) || 0;
   const sortKey = document.getElementById('winsFilterSort').value;
@@ -2394,8 +2531,8 @@ function renderWinsTableBody() {
 // the user can re-analyze the lift opportunity in Excel.
 function downloadWinsCsv() {
   const modal = document.getElementById('winsModal');
-  const { wins, target, fromTier } = modal._cohort;
-  const targetChecks = TIER_DEFS[target]?.checks || [];
+  const { wins, target, fromTier, checksOverride } = modal._cohort;
+  const targetChecks = checksOverride || TIER_DEFS[target]?.checks || [];
 
   // Re-apply the same filter/sort the user is currently looking at.
   const minScore = parseFloat(document.getElementById('winsFilterMinScore').value) || 0;
@@ -2419,8 +2556,8 @@ function downloadWinsCsv() {
   });
 
   const headers = [
-    'Matter #', 'Claimant', 'Firm', 'Score', 'Score Dx', 'Score Exp', 'Score Ev',
-    'Score Fam', 'Score Lat', 'Score Age', 'Score Sym', 'Score Lev',
+    'Matter #', 'Claimant', 'Firm', 'Score', 'Score Exp', 'Score Dx', 'Score Lat',
+    'Score Sev', 'Score Cfx', 'Score Fam', 'Score PPE', 'Score Age',
     'Records', 'Tier (source)', 'Target tier',
     ...targetChecks.map(chk => `Criteria: ${chk.label}`),
     'Lift gaps', 'Fix to unlock',
@@ -2431,9 +2568,9 @@ function downloadWinsCsv() {
     (c.factors || []).forEach(f => { fMap[f.key] = f; });
     return [
       c.matterNumber, c.claimantName, c.firm, (c.score || 0).toFixed(2),
-      fMap.Dx?.rawScore ?? '', fMap.Exp?.rawScore ?? '', fMap.Ev?.rawScore ?? '',
-      fMap.Fam?.rawScore ?? '', fMap.Lat?.rawScore ?? '', fMap.Age?.rawScore ?? '',
-      fMap.Sym?.rawScore ?? '', fMap.Lev?.rawScore ?? '',
+      fMap.Exp?.rawScore ?? '', fMap.Dx?.rawScore ?? '', fMap.Lat?.rawScore ?? '',
+      fMap.Sev?.rawScore ?? '', fMap.Cfx?.rawScore ?? '', fMap.Fam?.rawScore ?? '',
+      fMap.PPE?.rawScore ?? '', fMap.Age?.rawScore ?? '',
       c.recordCount || 0, fromTier, target,
       ...targetChecks.map(chk => chk.test(c) ? 'Met' : 'Not met'),
       (c.gaps || []).filter(Boolean).map(g => g.label).join('; '),
@@ -2461,7 +2598,7 @@ function closeWinsModal() {
 
 // ====================================================================
 // SCORE BREAKDOWN DONUT MODAL — click a per-case score bar or the cohort
-// average button to see the 7-factor weighted contribution as a doughnut
+// average button to see the 8-axis weighted contribution as a doughnut
 // chart with a detailed legend (factor, weight %, value, share of total).
 // ====================================================================
 
@@ -2482,7 +2619,7 @@ function openScoreBreakdownModal({ title, sub, factors, total, totalLabel, isAve
   document.getElementById('breakdownCenter').innerHTML =
     `<div class="bd-label">${escapeHtml(totalLabel || 'Score / 10')}</div>` +
     `<div class="bd-total">${(total || 0).toFixed(1)}</div>` +
-    `<div class="bd-sub">sum of 7 contributions</div>`;
+    `<div class="bd-sub">sum of 8 contributions</div>`;
 
   const colors = ['#1E2761', '#4A5E8A', '#2C5F2D', '#B91C1C', '#C9A227', '#0F766E', '#7C3AED', '#94A3B8', '#475569'];
   const labels = factors.map(f => f.label);
@@ -2575,7 +2712,7 @@ function drillRowText(mode, row, p) {
   // potential
   const w = c.tier > 1 ? winCandidates(c, c.tier) : { qualifies: false };
   const fix = w.qualifies ? w.gaps.map(g => fixForGap(g)).join('; ') : '';
-  const uplift = w.qualifies ? (tierGsv(c.tier - 1) - tierGsv(c.tier)) * p : 0;
+  const uplift = w.qualifies ? (tierGsv(w.target) - tierGsv(c.tier)) * p : 0;
   return [...base, String(tierGsv(c.tier)), fix, String(Math.round(tierGsv(c.tier) + uplift))];
 }
 
@@ -2588,7 +2725,7 @@ function drillRowHtml(mode, row, p) {
   if (mode === 'current') return [...base, fmtMoney(tierGsv(c.tier))];
   const w = c.tier > 1 ? winCandidates(c, c.tier) : { qualifies: false };
   const fix = w.qualifies ? escapeHtml(w.gaps.map(g => fixForGap(g)).join('; ')) : '<span style="color:var(--slate-lite)">—</span>';
-  const uplift = w.qualifies ? (tierGsv(c.tier - 1) - tierGsv(c.tier)) * p : 0;
+  const uplift = w.qualifies ? (tierGsv(w.target) - tierGsv(c.tier)) * p : 0;
   return [...base, fmtMoney(tierGsv(c.tier)), fix, fmtMoney(tierGsv(c.tier) + uplift)];
 }
 
