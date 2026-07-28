@@ -276,11 +276,19 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .layer-col ul li{margin-bottom:4px}
 .layer-col ul li b{color:var(--navy)}
 .layer-read{font-size:11.5px;color:var(--slate);font-style:italic;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.5}
-.layer-outcome{margin-top:14px;padding:10px 14px;font-size:12.5px;line-height:1.6;border:1px solid var(--border);border-radius:3px}
+.layer-outcome{margin-top:14px;padding:12px 16px;font-size:12.5px;line-height:1.6;border:1px solid var(--border);border-radius:3px}
 .layer-outcome b{color:var(--navy)}
 .layer-outcome.fail{color:var(--red);border-color:var(--red);background:var(--red-bg)}
 .layer-outcome.fail b{color:var(--red)}
 .layer-outcome.win{color:var(--navy);border-color:var(--gold);background:var(--white)}
+.layer-outcome-head{display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:10px;font-weight:400}
+.layer-outcome-mark{font-size:13px;font-weight:700;color:var(--red);width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;background:var(--white);border:1.5px solid var(--red);border-radius:50%;flex:none;line-height:1}
+.layer-fail-list{margin:0;padding:0;list-style:none;font-size:12.5px;line-height:1.55}
+.layer-fail-list li{padding:6px 0 6px 18px;position:relative;border-top:1px solid rgba(178,34,52,.18)}
+.layer-fail-list li:first-child{border-top:none;padding-top:4px}
+.layer-fail-list li:last-child{padding-bottom:0}
+.layer-fail-list li:before{content:"";position:absolute;left:4px;top:14px;width:6px;height:6px;background:var(--red);border-radius:50%}
+.layer-fail-list li b{color:var(--red)}
 .dx-grid-head{font-size:12px;font-weight:700;color:var(--navy);margin:22px 0 10px;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid var(--border);padding-top:16px}
 .dx-grid-head .note{font-weight:400;color:var(--slate);text-transform:none;letter-spacing:0;margin-left:6px}
 
@@ -344,15 +352,36 @@ details.exec-details[open]>summary{margin-bottom:12px}
 .wins-pill{display:inline-block;background:var(--mist);border:1px solid var(--gold);color:var(--navy);font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:2px;margin:2px 2px 0 0}
 .wins-missing{white-space:normal}
 
-/* Market value grid strip (tier panel) */
-.mkt-strip{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:2px 0 12px;padding:10px 14px;background:var(--mist);border:1px solid var(--border);border-radius:3px;font-size:13px;color:var(--navy-ink)}
-.mkt-cell{display:inline-flex;align-items:center;gap:5px}
-.mkt-cell b{color:var(--navy)}
-.mkt-below{color:var(--slate)}
-.mkt-gsv-input{width:70px;padding:5px 8px;border:2px solid var(--gold);border-radius:3px;font-family:inherit;font-size:13px;font-weight:700;color:var(--navy);text-align:right;background:var(--white);font-variant-numeric:tabular-nums}
-.mkt-gsv-input:focus{outline:none;border-color:var(--navy)}
+/* Market value tier card — clear inventory view of dollar tiers
+   (replaces the older inline .mkt-strip; PE audience needs to see the
+   case count + total value per market tier at a glance). */
+.mkt-card{border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin:0 0 18px;background:var(--white)}
+.mkt-card-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.mkt-card-head h4{font-size:14px;font-weight:700;color:var(--navy);margin:0;letter-spacing:.02em}
+.mkt-card-head .mkt-card-sub{font-size:11.5px;color:var(--slate);font-weight:400;letter-spacing:.04em}
+.mkt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:1000px){.mkt-grid{grid-template-columns:repeat(2,1fr)}}
+.mkt-col{padding:14px 16px;border:1px solid var(--border);border-top:4px solid var(--border);border-radius:3px;background:var(--bg);text-align:left;display:flex;flex-direction:column}
+.mkt-col.mkt-I{border-top-color:var(--gold)}
+.mkt-col.mkt-II{border-top-color:var(--purple)}
+.mkt-col.mkt-III{border-top-color:var(--amber)}
+.mkt-col.mkt-BG{border-top-color:var(--slate-lite)}
+.mkt-tier-label{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase}
+.mkt-tier-range{font-size:10.5px;color:var(--slate-lite);font-style:italic;margin:2px 0 10px}
+.mkt-n{font-size:34px;font-weight:700;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.mkt-n-sub{font-size:10px;color:var(--slate-lite);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.mkt-divider{border-top:1px solid var(--border);margin:12px 0 10px}
+.mkt-gsv-edit{display:flex;align-items:center;gap:3px;font-size:11px;color:var(--slate);letter-spacing:.04em;text-transform:uppercase;flex-wrap:wrap}
+.mkt-gsv-edit .tier-gsv-dollar{font-size:13px;color:var(--navy);font-weight:700}
+.mkt-gsv-input{width:60px;padding:4px 6px;border:1px solid var(--gold);border-radius:2px;font-family:inherit;font-size:13px;font-weight:700;color:var(--navy);text-align:right;background:var(--white);font-variant-numeric:tabular-nums}
+.mkt-gsv-input:focus{outline:none;border-color:var(--navy);background:var(--mist)}
 .mkt-gsv-input::-webkit-inner-spin-button,.mkt-gsv-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .mkt-gsv-input{appearance:textfield;-moz-appearance:textfield}
+.mkt-gsv-suffix{font-size:10.5px;color:var(--slate-lite);font-weight:400;text-transform:none;letter-spacing:0}
+.mkt-total{font-size:18px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.1;margin-top:2px}
+.mkt-total-sub{font-size:9.5px;color:var(--slate-lite);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+.mkt-avg{font-size:11.5px;color:var(--slate);margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);line-height:1.4}
+.mkt-avg b{color:var(--navy);font-variant-numeric:tabular-nums}
 .mkt-gates{border-left-color:var(--gold);background:var(--white)}
 
 /* Value bridge waterfall (Executive Summary, WI-2) */
@@ -541,7 +570,15 @@ details.exec-details[open]>summary{margin-bottom:12px}
             </div>
           </div>
           <div class="layer-outcome fail">
-            <b>Layer 1 fails</b> — and you get DQ'd or capped at Tier III ($20K–$100K) — if any of these hit: <b>doc_score &lt; 4</b> · <b>drift-only or residential proximity</b> exposure · <b>latency &lt; 5 yrs or &gt; 40 yrs</b> · no documented season · wrong-defendant era (pre-1990 Chevron-only) · PFS / AQ incomplete.
+            <div class="layer-outcome-head"><span class="layer-outcome-mark">✕</span><b>Layer 1 fails</b> &mdash; DQ'd or capped at Tier III ($20K&ndash;$100K):</div>
+            <ul class="layer-fail-list">
+              <li><b>doc_score &lt; 4</b> &mdash; exposure proof too thin, even with great latency and severe disease</li>
+              <li><b>drift-only or residential proximity</b> exposure &mdash; no direct handling proof; reads as bystander only</li>
+              <li><b>latency &lt; 5 yrs or &gt; 40 yrs</b> &mdash; outside the science window; reads as alternate cause</li>
+              <li><b>no documented season</b> &mdash; fails the minimum dose gate</li>
+              <li><b>wrong-defendant era</b> &mdash; pre-1990-only exposure allocates to Chevron, not Syngenta</li>
+              <li><b>PFS / AQ incomplete</b> &mdash; CMO 7/10 administrative compliance failure (the June 2026 dismissals show this is enforced)</li>
+            </ul>
           </div>
         </div>
 
@@ -1783,9 +1820,14 @@ function curedCase(c, gapKeys) {
   return cl;
 }
 
-// Value unlocked by curing all of a case's win gaps.
+// Value unlocked by curing all of a case's win gaps. The cure is supposed to
+// make a case worth more, never less — clamp to >= 0 as a safety net so the
+// tier panel and value bridge never display a negative "lift" (which would
+// contradict the framework's promise: a Tier I file with PDD is worth more
+// than the same file without PDD).
 function gapValue(c, w) {
-  return caseValue(curedCase(c, (w.gaps || []).map(g => g.key))) - caseValue(c);
+  const v = caseValue(curedCase(c, (w.gaps || []).map(g => g.key))) - caseValue(c);
+  return Math.max(0, v);
 }
 
 // Backwards-compat shim: average market value of cases currently in a
@@ -2364,10 +2406,35 @@ function renderTierPanel() {
   }).join('');
 
   panel.innerHTML = `
-    <div class="mkt-strip" id="mktStrip">
-      ${['I', 'II', 'III'].map(m => `
-        <span class="mkt-cell"><b>${MARKET_NAMES[m]}</b> <span class="tier-gsv-dollar">$</span><input type="number" class="mkt-gsv-input" data-mkt="${m}" value="${marketGsv[m] / 1000}" min="0" step="5" /><span class="tier-gsv-suffix">K</span> &times; <b id="mkt-${m}-n">0</b> = <b id="mkt-${m}-v">$0</b></span>`).join('')}
-      <span class="mkt-cell mkt-below"><b>Below grid</b> $0 &times; <b id="mkt-BG-n">0</b></span>
+    <div class="mkt-card">
+      <div class="mkt-card-head">
+        <h4>Market value inventory — by tier</h4>
+        <span class="mkt-card-sub">how many cases in each dollar tier, total inventory value, average per case</span>
+      </div>
+      <div class="mkt-grid">
+        ${[
+          { m: 'I',  label: 'Tier I',       range: '$400K – $1M+',  color: 'I'  },
+          { m: 'II', label: 'Tier II',      range: '$150K – $300K', color: 'II' },
+          { m: 'III',label: 'Tier III',     range: '$20K – $150K',  color: 'III'},
+          { m: 'BG', label: 'Below grid',   range: '$0 (gate failure)', color: 'BG' },
+        ].map(o => `
+          <div class="mkt-col mkt-${o.color}">
+            <div class="mkt-tier-label">${o.label}</div>
+            <div class="mkt-tier-range">${o.range}</div>
+            <div class="mkt-n"><b id="mkt-${o.m}-n">0</b></div>
+            <div class="mkt-n-sub">cases</div>
+            ${o.m === 'BG' ? '' : `
+              <div class="mkt-divider"></div>
+              <div class="mkt-gsv-edit">
+                <span class="tier-gsv-dollar">$</span><input type="number" class="mkt-gsv-input" data-mkt="${o.m}" value="${marketGsv[o.m] / 1000}" min="0" step="5" /><span class="mkt-gsv-suffix">K</span> &times; <b id="mkt-${o.m}-count">0</b>
+              </div>
+            `}
+            <div class="mkt-total"><b id="mkt-${o.m}-v">$0</b></div>
+            <div class="mkt-total-sub">inventory value</div>
+            <div class="mkt-avg" id="mkt-${o.m}-avg">avg —</div>
+          </div>
+        `).join('')}
+      </div>
     </div>
     <table class="tier-matrix">
       <thead><tr>
@@ -2504,11 +2571,16 @@ function updateTierPanelDerived() {
   ['I', 'II', 'III'].forEach(m => {
     const nEl = document.getElementById(`mkt-${m}-n`);
     const vEl = document.getElementById(`mkt-${m}-v`);
+    const countEl = document.getElementById(`mkt-${m}-count`);
+    const avgEl = document.getElementById(`mkt-${m}-avg`);
     if (nEl) nEl.textContent = mktN[m].toLocaleString();
+    if (countEl) countEl.textContent = mktN[m].toLocaleString();
     if (vEl) vEl.textContent = fmtMoney(mktV[m]);
+    if (avgEl) avgEl.innerHTML = mktN[m] ? `avg <b>${fmtMoney(mktV[m] / mktN[m])}</b> per case` : 'avg —';
   });
   const bgEl = document.getElementById('mkt-BG-n');
-  if (bgEl) bgEl.textContent = cases.filter(c => c.tier === 5 && c.statusBucket !== 'closed').length.toLocaleString();
+  const bgOpen = cases.filter(c => c.tier === 5 && c.statusBucket !== 'closed').length;
+  if (bgEl) bgEl.textContent = bgOpen.toLocaleString();
   // Sum per-case value deltas across every wins cohort — the "cases that
   // could convert × Δ value" piece of the potential formula. Bridge segments
   // are the SPECIFIC FIXES behind the lift; a case with two gaps splits its
@@ -2537,6 +2609,14 @@ function updateTierPanelDerived() {
       fixAgg[k].cases.push({ c, gap: g, gapValue: gv, share });
     });
   });
+  // Below-grid avg: gate-cure unlock value across the cohort (sized off the
+  // wins-cohort totals computed above). Set here so totalWinsGap is final.
+  const bgAvgEl = document.getElementById('mkt-BG-avg');
+  const bgCohortTotal = cases.filter(c => c.tier === 5 && c.statusBucket !== 'closed')
+    .reduce((s, c) => s + Math.max(0, gapValue(c, winCandidates(c, 5)) || 0), 0);
+  if (bgAvgEl) bgAvgEl.innerHTML = bgOpen
+    ? `gate cures unlock <b>${fmtMoney(bgCohortTotal)}</b> across <b>${bgOpen}</b> cases`
+    : 'avg —';
   // Biggest lift gaps first; cap at 6 named segments + one "other" bucket so
   // the axis stays legible.
   let bridgeSegs = Object.values(fixAgg).sort((a, b) => b.value - a.value);
