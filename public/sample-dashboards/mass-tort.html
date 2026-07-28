@@ -441,7 +441,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
         </div>
         <div id="tierPanel"></div>
         <div class="bridge-wrap">
-          <div class="bridge-head">Value bridge — current inventory to potential <span class="bridge-sub">right-hand bar is total potential (= 100%); middle bars are the biggest lift gaps at the convert rate above</span></div>
+          <div class="bridge-head">Value bridge — current inventory to potential <span class="bridge-sub">right-hand bar is total potential (= 100%); middle bars are the specific fixes that unlock upgrades, sized by expected lift — y-axis truncated to make the lift visible</span></div>
           <div class="bridge-canvas-wrap"><canvas id="chartBridge"></canvas></div>
         </div>
         <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
@@ -856,6 +856,22 @@ function fixForGap(g) {
   const base = FIX_FOR[g.key] || 'collect the missing record';
   return g.status === 'disconfirmed' ? `thin file — re-verify: ${base}` : base;
 }
+// Short fix labels for the value-bridge waterfall axis (FIX_FOR strings are
+// far too long for chart labels). Keyed identically to FIX_FOR.
+const FIX_SHORT = {
+  parkinsons_disease:   'Confirm PD dx',
+  verified_evidence:    'Verify license/receipts',
+  '10yr_exposure':      '≥10yr exposure proof',
+  sweet_latency:        'Pin latency dates',
+  young_first_exposure: 'Confirm DOB + 1st exposure',
+  levodopa:             'Levodopa response note',
+  any_pd_dx:            'PD-spectrum dx',
+  documented_exposure:  'Exposure documentation',
+  '5yr_exposure':       '≥5yr exposure proof',
+  has_symptoms:         'Log symptoms',
+  some_exposure:        'Any exposure evidence',
+  non_trivial:          '≥1yr exposure confirm',
+};
 
 // ====================================================================
 // FILTER STATE
@@ -1972,22 +1988,47 @@ function updateTierPanelDerived() {
       wireWinsRows(liftEl);
     }
   });
-  // Sum per-case gaps across every wins cohort (one + two + thin × all source tiers).
-  // This is the "cases that could convert × GSV" piece of the potential formula.
-  // WI-2: also collect one bridge segment per non-empty cohort (expected value
-  // at the current convert rate) so the waterfall can show the biggest gaps.
-  const bridgeSegs = [];
-  [2, 3, 4].forEach(s => {
-    const { one, two, thin, gap, target } = winsCohorts(s);
-    totalWinsGap += (one.length + two.length + thin.length) * gap;
-    const push = (n, label) => {
-      if (n) bridgeSegs.push({ n, gap, target, label, value: n * gap * p, color: TIER_COLORS[target - 1] });
-    };
-    push(one.length,  `T${s}→T${target} · ${one.length} one fix away`);
-    push(two.length,  `T${s}→T${target} · ${two.length} two fixes away`);
-    push(thin.length, `T${s}→T${target} · ${thin.length} thin-file`);
+  // Sum per-case gaps across every wins cohort (one + two + thin × all source
+  // tiers) — the "cases that could convert × GSV" piece of the potential
+  // formula. WI-2 (revised): bridge segments are the SPECIFIC FIXES behind the
+  // lift, broken out per tier pair — a "27 cases one fix away" cohort spans
+  // several different fixes and the chart must say which ones. A case with two
+  // gaps splits its expected value evenly across both fixes, so segment values
+  // still sum exactly to expectedLift.
+  const fixAgg = {};
+  cases.forEach(c => {
+    const s = c.tier;
+    if (s == null || s < 2 || s > 4) return;
+    const w = winCandidates(c, s);
+    if (!w.qualifies) return;
+    const gap = tierGsv(s - 1) - tierGsv(s);
+    totalWinsGap += gap;
+    const share = gap * p / (w.gaps.length || 1);
+    w.gaps.forEach(g => {
+      const k = `${s}|${g.key}|${g.status === 'disconfirmed' ? 1 : 0}`;
+      if (!fixAgg[k]) {
+        fixAgg[k] = {
+          source: s, target: s - 1, n: 0, value: 0,
+          label: (FIX_SHORT[g.key] || g.label) + (g.status === 'disconfirmed' ? ' (re-verify)' : ''),
+          fix: fixForGap(g),
+        };
+      }
+      fixAgg[k].n += 1;
+      fixAgg[k].value += share;
+    });
   });
-  bridgeSegs.sort((a, b) => b.value - a.value);
+  // Biggest lift gaps first; cap at 6 named segments + one "other" bucket so
+  // the axis stays legible.
+  let bridgeSegs = Object.values(fixAgg).sort((a, b) => b.value - a.value);
+  if (bridgeSegs.length > 7) {
+    const rest = bridgeSegs.slice(6);
+    bridgeSegs = bridgeSegs.slice(0, 6);
+    bridgeSegs.push({
+      source: 0, target: 0, label: 'All other fixes', fix: 'the smaller fixes not shown individually',
+      n: rest.reduce((sum, x) => sum + x.n, 0),
+      value: rest.reduce((sum, x) => sum + x.value, 0),
+    });
+  }
   const expectedLift = totalWinsGap * p;
   const potentialGsv = totalCurrentGsv + expectedLift;
   const totalOpenEl = document.getElementById('totalOpenCount');
@@ -2008,26 +2049,35 @@ function updateTierPanelDerived() {
   renderBridgeChart(totalCurrentGsv, bridgeSegs, potentialGsv);
 }
 
-// WI-2: waterfall / bridge chart on the Executive Summary. Starts at the
-// current inventory value, stacks the biggest lift gaps (largest first,
-// colored by the tier they'd upgrade INTO), and ends at total potential
-// (= 100%). Re-rendered by updateTierPanelDerived(), so it stays in sync
-// with the GSV inputs and the convert-rate assumption.
+// WI-2 (revised): waterfall / bridge chart on the Executive Summary. Starts
+// at the current inventory value, stacks the specific FIXES that unlock tier
+// upgrades (biggest expected lift first, colored by the tier they'd upgrade
+// INTO), and ends at total potential (= 100%). The y-axis is truncated near
+// the current value — starting at $0 flattens the lift segments into
+// invisible slivers, which defeats the point. Re-rendered by
+// updateTierPanelDerived(), so it tracks the GSV inputs and convert rate.
 function renderBridgeChart(current, segs, potential) {
   destroy('chartBridge');
   const ctx = document.getElementById('chartBridge');
   if (!ctx) return;
-  const labels = ['Current inventory', ...segs.map(s => s.label), 'Potential (100%)'];
+  const segLabel = s => s.target ? `${s.label} · T${s.source}→T${s.target} (${s.n})` : `${s.label} (${s.n})`;
+  const labels = ['Current inventory', ...segs.map(segLabel), 'Potential (100%)'];
   const data = [[0, current]];
   const colors = ['#1E2761'];
   let cum = current;
   segs.forEach(s => {
     data.push([cum, cum + s.value]);
-    colors.push(s.color);
+    colors.push(s.target ? TIER_COLORS[s.target - 1] : '#94A3B8');
     cum += s.value;
   });
   data.push([0, potential]);
   colors.push('#2C5F2D');
+  // Truncated axis: start a bit below the current value so the lift segments
+  // get real pixels. Current/potential bars clip at the bottom — their
+  // datalabels still carry the full figures, so nothing is hidden.
+  const lift = potential - current;
+  const ymin = lift > 0 ? Math.max(0, current - lift * 2) : 0;
+  const pct = Math.round(state.convertRate * 100);
   charts.chartBridge = new Chart(ctx, {
     type: 'bar',
     data: { labels, datasets: [{ data, backgroundColor: colors, borderSkipped: false, maxBarThickness: 64 }] },
@@ -2042,7 +2092,8 @@ function renderBridgeChart(current, segs, potential) {
               if (i === 0) return ` Current inventory: ${fmtMoney(current)}`;
               if (i === labels.length - 1) return ` Total potential: ${fmtMoney(potential)}`;
               const s = segs[i - 1];
-              return ` +${fmtMoney(s.value)} expected — ${s.n} cases × ${fmtMoney(s.gap)} gap × ${Math.round(state.convertRate * 100)}% convert`;
+              const head = s.target ? `T${s.source}→T${s.target} · ${s.fix}` : `${s.fix}`;
+              return ` +${fmtMoney(s.value)} expected — ${head} — ${s.n} case${s.n === 1 ? '' : 's'} at ${pct}% convert`;
             },
           },
         },
@@ -2058,10 +2109,12 @@ function renderBridgeChart(current, segs, potential) {
       },
       scales: {
         x: { grid: { display: false }, ticks: { font: { size: 11 }, autoSkip: false, maxRotation: 35 } },
-        y: { grid: { color: '#F1F5F9' }, ticks: { font: { size: 11 }, callback: v => fmtMoneyShort(v) } },
+        y: { min: ymin, grace: '10%', grid: { color: '#F1F5F9' }, ticks: { font: { size: 11 }, callback: v => fmtMoneyShort(v) } },
       },
     },
   });
+  // Stash for headless tests / console debugging.
+  charts.chartBridge._debug = { current, potential, ymin, segs };
 }
 
 // ====================================================================
