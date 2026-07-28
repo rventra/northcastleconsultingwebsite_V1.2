@@ -423,7 +423,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
       <!-- Tier Panel — front and center for PE audience -->
       <div class="exec-card">
         <div class="bridge-wrap">
-          <div class="bridge-head">Value bridge — current inventory to potential <span class="bridge-sub">right-hand bar is total potential (= 100%); middle bars are the specific fixes that unlock upgrades, sized by expected lift — y-axis truncated to make the lift visible</span></div>
+          <div class="bridge-head">Value bridge — current inventory to potential <span class="bridge-sub">right-hand bar is total potential (= 100%); middle bars are the specific fixes that unlock upgrades, sized by expected lift — y-axis truncated to make the lift visible · <b>double-click a bar</b> for the case list (exportable)</span></div>
           <div class="bridge-canvas-wrap"><canvas id="chartBridge"></canvas></div>
         </div>
         <div class="tier-total-strip">
@@ -681,6 +681,37 @@ details.exec-details[open]>summary{margin-bottom:12px}
             </tr>
           </thead>
           <tbody id="winsModalTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bridge Drill-through Modal — double-click a value-bridge bar for the
+     flat, exportable case list behind that number. -->
+<div id="drillModal" class="wins-modal" style="display:none" onclick="if (event.target === this) closeDrillModal()">
+  <div class="wins-modal-card">
+    <div class="wins-modal-head">
+      <div>
+        <h3 id="drillModalTitle">Drill-through</h3>
+        <p id="drillModalSubtitle" class="wins-modal-sub"></p>
+      </div>
+      <button class="wins-modal-close" onclick="closeDrillModal()" title="Close">&times;</button>
+    </div>
+    <div class="wins-modal-body">
+      <div class="wins-filters">
+        <label class="wins-filter">
+          <span>Search</span>
+          <input type="text" id="drillSearch" placeholder="matter #, claimant, firm…" />
+        </label>
+        <span class="wins-filter-spacer"></span>
+        <span class="wins-modal-meta" id="drillModalCount" style="margin:0"></span>
+        <button class="btn btn-ghost" id="drillExportCsvBtn" type="button">↓ Export CSV</button>
+      </div>
+      <div class="wins-modal-table-wrap">
+        <table class="wins-modal-table" id="drillModalTable">
+          <thead id="drillModalThead"></thead>
+          <tbody id="drillModalTbody"></tbody>
         </table>
       </div>
     </div>
@@ -2015,13 +2046,14 @@ function updateTierPanelDerived() {
       const k = `${s}|${g.key}|${g.status === 'disconfirmed' ? 1 : 0}`;
       if (!fixAgg[k]) {
         fixAgg[k] = {
-          source: s, target: s - 1, n: 0, value: 0,
+          source: s, target: s - 1, n: 0, value: 0, cases: [],
           label: (FIX_SHORT[g.key] || g.label) + (g.status === 'disconfirmed' ? ' (re-verify)' : ''),
           fix: fixForGap(g),
         };
       }
       fixAgg[k].n += 1;
       fixAgg[k].value += share;
+      fixAgg[k].cases.push({ c, gap: g, gapValue: gap, share });
     });
   });
   // Biggest lift gaps first; cap at 6 named segments + one "other" bucket so
@@ -2034,6 +2066,7 @@ function updateTierPanelDerived() {
       source: 0, target: 0, label: 'All other fixes', fix: 'the smaller fixes not shown individually',
       n: rest.reduce((sum, x) => sum + x.n, 0),
       value: rest.reduce((sum, x) => sum + x.value, 0),
+      cases: rest.flatMap(x => x.cases),
     });
   }
   const expectedLift = totalWinsGap * p;
@@ -2090,6 +2123,9 @@ function renderBridgeChart(current, segs, potential) {
     data: { labels, datasets: [{ data, backgroundColor: colors, borderSkipped: false, maxBarThickness: 64 }] },
     options: {
       responsive: true, maintainAspectRatio: false,
+      onHover: (evt, elts) => {
+        if (evt.native && evt.native.target) evt.native.target.style.cursor = elts.length ? 'pointer' : 'default';
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -2133,6 +2169,11 @@ function renderBridgeChart(current, segs, potential) {
   });
   // Stash for headless tests / console debugging.
   charts.chartBridge._debug = { current, potential, ymin, segs };
+  // Double-click a bar to drill through to the flat case list behind it.
+  ctx.ondblclick = (evt) => {
+    const pts = charts.chartBridge.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+    if (pts.length) openBridgeDrillModal(pts[0].index);
+  };
 }
 
 // ====================================================================
@@ -2502,6 +2543,137 @@ function closeBreakdownModal() {
   }
 }
 
+// ====================================================================
+// BRIDGE DRILL-THROUGH — double-click any value-bridge bar for the flat,
+// exportable case list behind that number.
+//   Current bar   → every open matter with its tier GSV
+//   Lift segment  → the exact cases behind that fix (per-case gap + expected)
+//   Potential bar → every open matter + its win fix and lifted value
+// ====================================================================
+
+const DRILL_COLS = {
+  current:   ['Matter #', 'Claimant', 'Firm', 'Tier', 'Status', 'GSV per case'],
+  segment:   ['Matter #', 'Claimant', 'Firm', 'Tier', 'Status', 'Fix', 'Gap', 'Expected @ convert'],
+  potential: ['Matter #', 'Claimant', 'Firm', 'Tier', 'Status', 'GSV per case', 'Win fix', 'Expected w/ lift'],
+};
+
+function drillStatusLabel(c) {
+  return c.statusBucket === 'pending_close' ? 'Pending close' : 'Open';
+}
+
+// Plain-text row values (CSV-safe; money as raw numbers).
+function drillRowText(mode, row, p) {
+  const c = row.c;
+  const base = [c.matterNumber || '', c.claimantName || '', c.firm || '', TIER_NAMES[c.tier] || '', drillStatusLabel(c)];
+  if (mode === 'segment') return [...base, fixForGap(row.gap), String(row.gapValue), String(Math.round(row.share))];
+  if (mode === 'current') return [...base, String(tierGsv(c.tier))];
+  // potential
+  const w = c.tier > 1 ? winCandidates(c, c.tier) : { qualifies: false };
+  const fix = w.qualifies ? w.gaps.map(g => fixForGap(g)).join('; ') : '';
+  const uplift = w.qualifies ? (tierGsv(c.tier - 1) - tierGsv(c.tier)) * p : 0;
+  return [...base, String(tierGsv(c.tier)), fix, String(Math.round(tierGsv(c.tier) + uplift))];
+}
+
+// HTML cell values (escaped, tier pill, comma-formatted money).
+function drillRowHtml(mode, row, p) {
+  const c = row.c;
+  const pill = `<span class="tier-pill t${c.tier}">${TIER_NAMES[c.tier]}</span>`;
+  const base = [escapeHtml(c.matterNumber || '—'), escapeHtml(c.claimantName || '—'), escapeHtml(c.firm || '—'), pill, drillStatusLabel(c)];
+  if (mode === 'segment') return [...base, escapeHtml(fixForGap(row.gap)), fmtMoney(row.gapValue), fmtMoney(row.share)];
+  if (mode === 'current') return [...base, fmtMoney(tierGsv(c.tier))];
+  const w = c.tier > 1 ? winCandidates(c, c.tier) : { qualifies: false };
+  const fix = w.qualifies ? escapeHtml(w.gaps.map(g => fixForGap(g)).join('; ')) : '<span style="color:var(--slate-lite)">—</span>';
+  const uplift = w.qualifies ? (tierGsv(c.tier - 1) - tierGsv(c.tier)) * p : 0;
+  return [...base, fmtMoney(tierGsv(c.tier)), fix, fmtMoney(tierGsv(c.tier) + uplift)];
+}
+
+function openBridgeDrillModal(barIndex) {
+  const dbg = charts.chartBridge && charts.chartBridge._debug;
+  const modal = document.getElementById('drillModal');
+  if (!dbg || !modal || !D.cases) return;
+  const p = state.convertRate;
+  const pct = Math.round(p * 100);
+  const last = dbg.segs.length + 1;
+  let mode, title, sub, rows, seg = null;
+
+  if (barIndex === 0) {
+    mode = 'current';
+    rows = D.cases.filter(c => c.statusBucket !== 'closed').map(c => ({ c }));
+    title = `Current inventory — ${rows.length.toLocaleString()} open matters · ${fmtMoney(dbg.current)}`;
+    sub = 'Tier GSV × open matters. Double-click a lift bar to see the cases behind it.';
+  } else if (barIndex === last) {
+    mode = 'potential';
+    rows = D.cases.filter(c => c.statusBucket !== 'closed').map(c => ({ c }));
+    title = `Potential inventory — ${fmtMoney(dbg.potential)} at ${pct}% convert`;
+    sub = `Current ${fmtMoney(dbg.current)} + expected lift ${fmtMoney(dbg.potential - dbg.current)}. "Win fix" shows what unlocks each case's upgrade.`;
+  } else {
+    mode = 'segment';
+    seg = dbg.segs[barIndex - 1];
+    rows = seg.cases;
+    title = seg.target
+      ? `${seg.label} — ${seg.n} case${seg.n === 1 ? '' : 's'} (T${seg.source}→T${seg.target})`
+      : `${seg.label} — ${seg.n} cases`;
+    sub = seg.target
+      ? `${seg.fix} — +${fmtMoney(seg.value)} expected at ${pct}% convert across ${seg.n} case${seg.n === 1 ? '' : 's'}.`
+      : `${seg.n} case-fix pairs across the smaller fixes — +${fmtMoney(seg.value)} expected at ${pct}% convert.`;
+  }
+
+  modal._drill = { mode, rows, p };
+  document.getElementById('drillModalTitle').textContent = title;
+  document.getElementById('drillModalSubtitle').textContent = sub;
+  document.getElementById('drillModalThead').innerHTML =
+    '<tr>' + DRILL_COLS[mode].map(h => `<th>${h}</th>`).join('') + '</tr>';
+
+  const searchIn = document.getElementById('drillSearch');
+  searchIn.value = '';
+  searchIn.oninput = () => renderDrillBody();
+  document.getElementById('drillExportCsvBtn').onclick = () => downloadDrillCsv();
+
+  renderDrillBody();
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function drillFilteredRows() {
+  const modal = document.getElementById('drillModal');
+  const { rows } = modal._drill;
+  const q = (document.getElementById('drillSearch').value || '').trim().toLowerCase();
+  if (!q) return rows;
+  return rows.filter(r => `${r.c.matterNumber || ''} ${r.c.claimantName || ''} ${r.c.firm || ''}`.toLowerCase().includes(q));
+}
+
+function renderDrillBody() {
+  const modal = document.getElementById('drillModal');
+  const { mode, rows, p } = modal._drill;
+  const filtered = drillFilteredRows();
+  document.getElementById('drillModalTbody').innerHTML = filtered.map(r =>
+    '<tr>' + drillRowHtml(mode, r, p).map(cell => `<td>${cell}</td>`).join('') + '</tr>').join('');
+  document.getElementById('drillModalCount').textContent = `${filtered.length.toLocaleString()} of ${rows.length.toLocaleString()} cases`;
+}
+
+function downloadDrillCsv() {
+  const modal = document.getElementById('drillModal');
+  const { mode, p } = modal._drill;
+  const filtered = drillFilteredRows();
+  const cell = v => /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v);
+  const csv = [DRILL_COLS[mode], ...filtered.map(r => drillRowText(mode, r, p))]
+    .map(r => r.map(cell).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `bridge-drill-${mode}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function closeDrillModal() {
+  const modal = document.getElementById('drillModal');
+  if (!modal) return;
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
 function breakdownTotal(b) {
   return SCORE_FACTOR_LABELS.reduce((s, [k]) => s + (b[k] || 0), 0);
 }
@@ -2620,6 +2792,8 @@ document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
   const bd = document.getElementById('breakdownModal');
   if (bd && bd.style.display !== 'none') { closeBreakdownModal(); return; }
+  const dm = document.getElementById('drillModal');
+  if (dm && dm.style.display !== 'none') { closeDrillModal(); return; }
   closeWinsModal();
 });
 
