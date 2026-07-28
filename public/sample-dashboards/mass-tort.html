@@ -258,7 +258,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
 /* Tier GSV input — single big editable field per tier */
 .tier-gsv{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--slate);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-left:auto}
 .tier-gsv-dollar{font-size:18px;color:var(--navy);font-weight:700}
-.tier-gsv-input{width:140px;padding:8px 10px;border:2px solid var(--gold);border-radius:3px;font-family:inherit;font-size:18px;font-weight:700;color:var(--navy);text-align:right;background:var(--white);font-variant-numeric:tabular-nums}
+.tier-gsv-input{width:84px;padding:8px 10px;border:2px solid var(--gold);border-radius:3px;font-family:inherit;font-size:18px;font-weight:700;color:var(--navy);text-align:right;background:var(--white);font-variant-numeric:tabular-nums}
 .tier-gsv-input:focus{outline:none;border-color:var(--navy);background:var(--mist)}
 /* Hide spinner arrows so investors type freely */
 .tier-gsv-input::-webkit-inner-spin-button,
@@ -306,7 +306,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
 .wins-missing{white-space:normal}
 
 /* Value bridge waterfall (Executive Summary, WI-2) */
-.bridge-wrap{margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
+.bridge-wrap{margin:2px 0 14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
 .bridge-head{font-weight:700;color:var(--navy);font-size:13px}
 .bridge-sub{font-weight:400;font-size:11.5px;color:var(--slate-lite);margin-left:6px}
 .bridge-canvas-wrap{position:relative;height:300px;margin-top:8px}
@@ -422,6 +422,10 @@ details.exec-details[open]>summary{margin-bottom:12px}
       <!-- Tier Panel — front and center for PE audience -->
       <div class="exec-card">
         <h3>Value by tier <span style="font-weight:400;font-size:11.5px;color:var(--slate-lite)">· click a value to edit</span></h3>
+        <div class="bridge-wrap">
+          <div class="bridge-head">Value bridge — current inventory to potential <span class="bridge-sub">right-hand bar is total potential (= 100%); middle bars are the specific fixes that unlock upgrades, sized by expected lift — y-axis truncated to make the lift visible</span></div>
+          <div class="bridge-canvas-wrap"><canvas id="chartBridge"></canvas></div>
+        </div>
         <div class="tier-total-strip">
           <span><b id="totalOpenCount">0</b> open · <b id="totalClosedCount">0</b> closed</span>
           <span class="tier-convert-control">Convert rate: <input type="number" id="convertRateInput" class="tier-convert-input" min="0" max="100" step="1" value="25" title="Universal convert rate (%) — drives both the potential GSV at the bottom and every 'if X% convert' lift line">%</span>
@@ -440,10 +444,6 @@ details.exec-details[open]>summary{margin-bottom:12px}
           </div>
         </div>
         <div id="tierPanel"></div>
-        <div class="bridge-wrap">
-          <div class="bridge-head">Value bridge — current inventory to potential <span class="bridge-sub">right-hand bar is total potential (= 100%); middle bars are the specific fixes that unlock upgrades, sized by expected lift — y-axis truncated to make the lift visible</span></div>
-          <div class="bridge-canvas-wrap"><canvas id="chartBridge"></canvas></div>
-        </div>
         <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
       </div>
 
@@ -1885,7 +1885,7 @@ function renderTierPanel() {
         <td><span class="tier-pill t${t}">${TIER_NAMES[t]}</span></td>
         <td class="mx-criteria">${def.name}</td>
         <td class="num"><b id="mx-${t}-cases">${open.toLocaleString()}</b><span class="mx-sub">${closed.toLocaleString()} closed</span></td>
-        <td class="num mx-gsv"><span class="tier-gsv-dollar">$</span><input type="number" class="tier-gsv-input" data-tier="${t}" value="${tierDollars[t]}" min="0" step="1000" /></td>
+        <td class="num mx-gsv"><span class="tier-gsv-dollar">$</span><input type="number" class="tier-gsv-input" data-tier="${t}" value="${tierDollars[t] / 1000}" min="0" step="5" /><span class="tier-gsv-suffix">K</span></td>
         <td class="num"><b id="mx-${t}-payout">${fmtMoney(payout)}</b></td>
         <td class="mx-lift" id="mx-${t}-lift">${liftCellHtml(t)}</td>
       </tr>`;
@@ -1897,7 +1897,7 @@ function renderTierPanel() {
         <th>Tier</th>
         <th>Criteria</th>
         <th class="num">Cases</th>
-        <th class="num">GSV per case</th>
+        <th class="num">GSV per case ($K)</th>
         <th class="num">Expected payout</th>
         <th>Lift — what the tier below could add</th>
       </tr></thead>
@@ -1964,8 +1964,8 @@ function updateTierPanelDerived() {
   // Read current values from inputs (don't re-render — preserves focus)
   document.querySelectorAll('#tierPanel input.tier-gsv-input').forEach(inp => {
     const t = parseInt(inp.dataset.tier, 10);
-    const v = parseInt(inp.value, 10);
-    if (!isNaN(v) && v >= 0) tierDollars[t] = v;
+    const v = parseFloat(inp.value);
+    if (!isNaN(v) && v >= 0) tierDollars[t] = Math.round(v * 1000); // input is in $K
   });
   const cases = D.cases;
   const p = state.convertRate;
@@ -2060,7 +2060,7 @@ function renderBridgeChart(current, segs, potential) {
   destroy('chartBridge');
   const ctx = document.getElementById('chartBridge');
   if (!ctx) return;
-  const segLabel = s => s.target ? `${s.label} · T${s.source}→T${s.target} (${s.n})` : `${s.label} (${s.n})`;
+  const segLabel = s => `${s.label} (${s.n})`;
   const labels = ['Current inventory', ...segs.map(segLabel), 'Potential (100%)'];
   const data = [[0, current]];
   const colors = ['#1E2761'];
@@ -2103,7 +2103,8 @@ function renderBridgeChart(current, segs, potential) {
           formatter: (v, t) => {
             const i = t.dataIndex;
             if (i === 0 || i === labels.length - 1) return fmtMoneyShort(v[1]);
-            return '+' + fmtMoneyShort(v[1] - v[0]);
+            const s = segs[i - 1];
+            return ['+' + fmtMoneyShort(v[1] - v[0]), `${s.n} case${s.n === 1 ? '' : 's'}`];
           },
         },
       },
