@@ -96,12 +96,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tier-pill{display:inline-block;padding:2px 8px;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:2px;color:var(--white)}
 .tier-pill.t1,.tier-pill.t2,.tier-pill.t3,.tier-pill.t4,.tier-pill.t5{background:transparent;color:var(--navy);padding:0;font-weight:700;letter-spacing:0;font-size:13px}
 
-/* Top-25 table — Level 1 / Level 3 indicators (background colors stripped per
-   user request — use text + border only so the eye reads them as labels, not
-   branded badges). */
-.l1-pass,.l1-fail{display:inline-block;padding:1px 7px;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:2px;text-transform:uppercase;background:transparent}
-.l1-pass{color:var(--green);border:1px solid var(--green)}
-.l1-fail{color:var(--red);border:1px solid var(--red)}
+/* Top-25 table — Level 3 indicator (L1 PASS/FAIL column removed per user
+   request; case-level L1 status is implied by clinical tier + market tier). */
 .mt-pill{display:inline-block;padding:1px 7px;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--navy);border:1px solid var(--border);border-radius:2px;text-transform:uppercase;background:transparent}
 .mt-pill.mt-I{color:var(--gold);border-color:var(--gold)}
 .mt-pill.mt-II{color:var(--purple);border-color:var(--purple)}
@@ -263,42 +259,53 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .criteria-foot{font-size:11px;color:var(--slate-lite);font-style:italic;margin-top:14px;border-top:1px solid var(--border);padding-top:10px;line-height:1.5}
 .criteria-foot code{font-style:normal;background:var(--mist);border:1px solid var(--border);padding:1px 5px;border-radius:2px;font-size:10.5px;color:var(--navy)}
 
-/* Three-level criteria card — laid out as 3 side-by-side columns.
-   Leftmost column has 2 vertical sections (Layer 1 pillars + DX tier →
-   Market Value Tier truth table). Middle + right columns are the severity
-   escalators and confounders that decide between Tier I/II/III. */
-.criteria-cols{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:14px;align-items:start}
-@media(max-width:1100px){.criteria-cols{grid-template-columns:1fr}}
+/* Three-level criteria card — laid out top→bottom:
+     1. Layer 1 (2 Pillars) | Clinical Tier (Layer 2)  — two side-by-side cols
+     2. Severity Escalators + Confounders (push up / pull down) — 2 sub-blocks
+     3. Market Value Tier — the combined L1 + L2 + Severity + Confounder result
+   No red. Neutral text-only tags. */
+.crit-top{display:grid;grid-template-columns:1.45fr 1fr;gap:14px;align-items:start}
+@media(max-width:900px){.crit-top{grid-template-columns:1fr}}
 .crit-col{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:14px 16px;min-width:0}
-.crit-col-1{padding-top:0;border-top:none}
-.crit-head{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;padding:10px 0 8px;border-bottom:1px solid var(--border);margin-bottom:8px}
-.crit-col-1 .crit-head:first-child{margin-top:0}
-.crit-sub{font-size:10.5px;font-weight:700;color:var(--red);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;padding:4px 8px;border:1px solid var(--red);border-radius:2px;display:inline-block}
+.crit-head{font-size:10.5px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;padding:8px 0 8px;border-bottom:1px solid var(--border);margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.crit-head .head-tag{font-size:9.5px;font-weight:700;color:var(--slate);background:transparent;border:1px solid var(--border);padding:1px 6px;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;margin-left:auto}
 .crit-pillar{margin-bottom:10px;padding:10px 12px;border:1px solid var(--border);border-radius:3px}
 .crit-pillar:last-child{margin-bottom:0}
 .crit-pillar-head{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .crit-pillar-head .pill-num{font-size:9.5px;font-weight:700;color:var(--navy);background:transparent;border:1px solid var(--navy);padding:1px 6px;border-radius:2px;letter-spacing:.1em;text-transform:uppercase}
-.crit-pillar-head .pill-pass{font-size:9.5px;font-weight:700;color:var(--green);background:transparent;border:1px solid var(--green);padding:1px 6px;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;margin-left:auto}
-.crit-list{margin:0;padding:0;list-style:none;font-size:12px;color:var(--navy-ink);line-height:1.55}
-.crit-list li{margin-bottom:5px;padding-left:14px;position:relative}
-.crit-list li:before{content:"·";position:absolute;left:0;top:-1px;color:var(--gold);font-weight:700;font-size:14px}
+.crit-pillar-head .pill-tag{font-size:9.5px;font-weight:700;color:var(--slate);background:transparent;border:1px solid var(--border);padding:1px 6px;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;margin-left:auto}
+.crit-list{margin:0;padding:0;list-style:none;font-size:11.5px;color:var(--navy-ink);line-height:1.5}
+.crit-list li{margin-bottom:4px;padding-left:14px;position:relative}
+.crit-list li:before{content:"·";position:absolute;left:0;top:-2px;color:var(--gold);font-weight:700;font-size:14px}
 .crit-list li b{color:var(--navy)}
-.crit-list li .dq{color:var(--red);font-weight:700;text-transform:uppercase;font-size:10.5px;letter-spacing:.04em;border:1px solid var(--red);padding:1px 5px;border-radius:2px;margin-left:4px;background:transparent}
-.crit-list li .fail-inline{color:var(--red);font-weight:700;text-transform:uppercase;font-size:10.5px;letter-spacing:.04em}
-.crit-list li .ideal{color:var(--green);font-weight:700;text-transform:uppercase;font-size:10.5px;letter-spacing:.04em;border:1px solid var(--green);padding:1px 5px;border-radius:2px;margin-left:4px;background:transparent}
-.crit-list li .doc-detail{font-size:11px;color:var(--slate);font-style:italic;display:block;margin-top:2px;padding-left:0}
+.crit-list li .tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--slate);border:1px solid var(--border);padding:1px 5px;border-radius:2px;margin-left:4px;background:transparent;white-space:nowrap}
+.crit-list li .doc-detail{font-size:10.5px;color:var(--slate);font-style:italic;display:block;margin-top:1px;padding-left:0}
 .crit-list li .doc-detail:before{content:""}
 
-/* Truth table — DX tier → Market Value Tier (leftmost column, section 2) */
-.truth-table{width:100%;border-collapse:collapse;font-size:11.5px;color:var(--navy-ink);margin-top:6px}
-.truth-table th{font-size:9.5px;font-weight:700;color:var(--slate);letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:5px 6px;border-bottom:1px solid var(--border);background:transparent}
-.truth-table td{padding:5px 6px;border-top:1px solid var(--border);vertical-align:top;line-height:1.4}
-.truth-table tr:first-child td{border-top:none}
-.truth-table .tt-tx{font-weight:700;color:var(--navy);width:24%}
-.truth-table .tt-mt{width:32%;font-weight:700}
-.truth-table .tt-mt.mt-I{color:var(--gold)}
-.truth-table .tt-mt.mt-II{color:var(--purple)}
-.truth-table .tt-mt.mt-III{color:var(--amber)}
+/* Modifiers row: severity escalators + confounders */
+.crit-mods{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:900px){.crit-mods{grid-template-columns:1fr}}
+.crit-mod{border:1px solid var(--border);border-radius:4px;padding:10px 14px;background:var(--white)}
+.crit-mod-head{font-size:11.5px;font-weight:700;color:var(--navy);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.crit-mod-head .arrow{font-size:14px;font-weight:700;display:inline-block;width:14px}
+.crit-mod.mod-up .arrow{color:var(--gold)}
+.crit-mod.mod-down .arrow{color:var(--slate)}
+.crit-mod ul{margin:0;padding-left:18px;font-size:11.5px;color:var(--navy-ink);line-height:1.5;columns:2;column-gap:18px}
+.crit-mod ul li{margin-bottom:2px;break-inside:avoid}
+.crit-mod ul li b{color:var(--navy)}
+.crit-mod-note{font-size:10.5px;color:var(--slate);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);line-height:1.4}
+
+/* Market Value Tier table — combined output of L1 + L2 + Severity + Confounders */
+.market-tier-table{margin-top:14px;width:100%;border-collapse:collapse;font-size:11.5px;color:var(--navy-ink)}
+.market-tier-table th{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:8px 10px;background:var(--bg);border-bottom:1px solid var(--border)}
+.market-tier-table td{padding:8px 10px;border-top:1px solid var(--border);vertical-align:top;line-height:1.45}
+.market-tier-table tr:first-child td{border-top:none}
+.market-tier-table .mt-tier-cell{width:80px;font-weight:700;text-align:center;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.market-tier-table .mt-tier-cell.mt-I{color:var(--gold)}
+.market-tier-table .mt-tier-cell.mt-II{color:var(--purple)}
+.market-tier-table .mt-tier-cell.mt-III{color:var(--amber)}
+.market-tier-table .mt-range-cell{width:130px;font-weight:700;color:var(--navy);white-space:nowrap}
+.market-tier-table .mt-formula b{color:var(--navy);font-weight:700}
 
 /* Hide sidebar on Executive Summary (t0) — fewer distractions for PE audiences. */
 body.t0-active .sidebar{display:none}
@@ -539,100 +546,113 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
       </div>
 
-      <!-- Tier criteria reference — three-level hierarchy laid out as 3 columns:
-         leftmost = Layer 1 (2 pillars) + DX tier → Market Value Tier truth table;
-         middle = severity escalators; right = confounders. -->
+      <!-- Tier criteria reference — laid out top→bottom:
+         1. Layer 1 (2 Pillars) | Clinical Tier (Layer 2) — two side-by-side cols
+         2. Severity Escalators + Confounders (push up / pull down)
+         3. Market Value Tier — the combined L1 + L2 + Severity + Confounder result -->
       <div class="exec-card">
-        <h3>Tier Criteria — Three Levels</h3>
-        <p style="font-size:13px;color:var(--slate);margin:-4px 0 18px;line-height:1.55;max-width:920px">
-          Each docket flows through <b>Layer 1 → Clinical Tier → Market Value Tier</b>. Layer 1 asks whether you can prove paraquat exposure and whether the timing fits the science window. The Clinical Tier slots you by diagnosis. The Market Value Tier is computed from your Clinical Tier + severity escalators − confounders. Cleanest Tier I ($500K–$1M+): <b>Clinical Tier 1 or 2 + 3+ severity escalators + 0 confounders</b>.
+        <h3>Tier Criteria — Layer 1 → Layer 2 → Market Value Tier</h3>
+        <p style="font-size:12.5px;color:var(--slate);margin:-4px 0 14px;line-height:1.5;max-width:920px">
+          Each docket flows through three sequential steps. <b>Layer 1</b> asks whether you can prove paraquat exposure and whether the timing fits the science window. The <b>Clinical Tier</b> slots you by diagnosis. The <b>Market Value Tier</b> is computed from your Clinical Tier + severity escalators − confounders. Cleanest Tier I ($500K&ndash;$1M+): <b>Clinical Tier 1 or 2 + 3+ severity escalators + 0 confounders</b>.
         </p>
 
-        <div class="criteria-cols">
+        <!-- TOP ROW: Layer 1 (2 Pillars) | Clinical Tier (Layer 2) -->
+        <div class="crit-top">
 
-          <!-- COLUMN 1: Layer 1 (2 Pillars) + DX → Market truth table -->
-          <div class="crit-col crit-col-1">
-
-            <!-- Section A: Layer 1 — 2 Pillars -->
-            <div class="crit-head">Layer 1 &mdash; 2 Pillars <span class="crit-sub" style="margin:0 0 0 10px">Fail → Cap at Tier III ($20K&ndash;$100K)</span></div>
+          <div class="crit-col">
+            <div class="crit-head">Layer 1 &mdash; 2 Pillars <span class="head-tag">fail → cap at Tier III ($20K&ndash;$100K)</span></div>
 
             <div class="crit-pillar">
-              <div class="crit-pillar-head"><span class="pill-num">Pillar 1</span> Exposure Proof <span class="pill-pass">All 4 required</span></div>
+              <div class="crit-pillar-head"><span class="pill-num">Pillar 1</span> Exposure Proof <span class="pill-tag">all 4 required</span></div>
               <ul class="crit-list">
-                <li><b>doc_score 0&ndash;10</b> <span class="doc-detail">+2 license · +2 W-2 · +2 receipts · +2 co-worker dec · +1 spray-log · +1 brand recall — ≥7 trial-grade, 4&ndash;6 solid, &lt;4 <span class="fail-inline">CAP TIER III</span></span></li>
-                <li><b>Nature of exposure</b> <span class="doc-detail">mixer/loader &gt; sprayer &gt; applicator &gt; flagger &gt; farmhand &gt; drift <span class="fail-inline">CAP TIER III</span></span></li>
-                <li><b>Exposure era</b> <span class="doc-detail">Syngenta (&ge;1990) = pass · Mixed = pass · Pre-1990 Chevron-only <span class="dq">FAIL</span> (wrong defendant)</span></li>
-                <li><b>PFS / AQ documentation</b> <span class="doc-detail">Complete (CMO 7/10) = pass · Incomplete <span class="dq">FAIL</span></span></li>
+                <li><b>doc_score 0&ndash;10</b> <span class="doc-detail">+2 license · +2 W-2 · +2 receipts · +2 co-worker dec · +1 spray-log · +1 brand recall — ≥7 trial-grade, 4&ndash;6 solid, &lt;4 <span class="tag">cap TIER III</span></span></li>
+                <li><b>Nature of exposure</b> <span class="doc-detail">mixer/loader &gt; sprayer &gt; applicator &gt; flagger &gt; farmhand &gt; drift — drift <span class="tag">cap TIER III</span></span></li>
+                <li><b>Exposure era</b> <span class="doc-detail">Syngenta (&ge;1990) = pass · Mixed = pass · Pre-1990 Chevron-only = <span class="tag">fail (wrong defendant)</span></span></li>
+                <li><b>PFS / AQ documentation</b> <span class="doc-detail">Complete (CMO 7/10) = pass · Incomplete = <span class="tag">fail</span></span></li>
               </ul>
             </div>
 
             <div class="crit-pillar">
               <div class="crit-pillar-head"><span class="pill-num">Pillar 2</span> Latency (first exposure &rarr; diagnosis)</div>
               <ul class="crit-list">
-                <li><b>10&ndash;30 yrs</b> <span class="ideal">IDEAL</span> — "two to three decades" is the relevant window; 20&ndash;10 yrs before dx is where studies found the signal</li>
+                <li><b>10&ndash;30 yrs</b> <span class="tag">ideal</span> — "two to three decades" is the relevant window; 20&ndash;10 yrs before dx is where studies found the signal</li>
                 <li><b>5&ndash;10 yrs</b> acceptable but weak</li>
-                <li><b>&lt; 5 yrs</b> <span class="dq">DQ</span> — alternate-cause flag</li>
-                <li><b>&gt; 40 yrs</b> defense argues alternate cause — <span class="fail-inline">CAP TIER III</span></li>
+                <li><b>&lt; 5 yrs</b> <span class="tag">dq (alternate cause)</span></li>
+                <li><b>&gt; 40 yrs</b> defense argues alternate cause — <span class="tag">cap TIER III</span></li>
               </ul>
             </div>
-
-            <!-- Section B: DX tier → Market Value Tier truth table -->
-            <div class="crit-head">Clinical Tier &rarr; Market Value Tier</div>
-            <table class="truth-table">
-              <thead>
-                <tr><th>Clinical Tier</th><th>+ Severity</th><th>&minus; Confounders</th><th>= Market Value</th></tr>
-              </thead>
-              <tbody>
-                <tr><td class="tt-tx">T1: PDD / T2: PD</td><td>3+ escalators</td><td>0</td><td class="tt-mt mt-I">Tier I · $400K&ndash;$1M+</td></tr>
-                <tr><td class="tt-tx">T1 / T2</td><td>3+</td><td>1</td><td class="tt-mt mt-II">Tier II · $150K&ndash;$300K</td></tr>
-                <tr><td class="tt-tx">T1 / T2</td><td>1&ndash;2</td><td>0&ndash;1</td><td class="tt-mt mt-II">Tier II</td></tr>
-                <tr><td class="tt-tx">T1 / T2</td><td>0</td><td>0&ndash;1</td><td class="tt-mt mt-III">Tier III · $20K&ndash;$150K</td></tr>
-                <tr><td class="tt-tx">T1 / T2</td><td>any</td><td>2+</td><td class="tt-mt mt-III">Tier III</td></tr>
-                <tr><td class="tt-tx">T3: Parkinsonism</td><td>any</td><td>any</td><td class="tt-mt mt-II">Tier II (capped)</td></tr>
-                <tr><td class="tt-tx">T4: Prodromal</td><td>any</td><td>any</td><td class="tt-mt mt-III">Tier III</td></tr>
-                <tr><td class="tt-tx">Below grid</td><td>—</td><td>—</td><td class="tt-mt">$0</td></tr>
-              </tbody>
-            </table>
-            <div style="font-size:11px;color:var(--slate);margin-top:8px;line-height:1.5">
-              <b>Clinical Tier definitions:</b> T1 PDD = PD + documented dementia · T2 = confirmed idiopathic PD · T3 = parkinsonism (non-PD, caps at market Tier II) · T4 = prodromal / symptom-level (forces market Tier III) · Below grid = no diagnosis that fits. <b>Layer 1 fails</b> (any pillar 1 weak signal or pillar 2 latency miss) → <span style="color:var(--red);font-weight:700">cap at Tier III</span> regardless of clinical tier.
-            </div>
           </div>
 
-          <!-- COLUMN 2: Severity Escalators (push UP) -->
-          <div class="crit-col crit-col-2">
-            <div class="crit-head">Severity Escalators <span style="color:var(--gold);font-weight:700;letter-spacing:0;text-transform:none;font-size:11px">▲ push UP</span></div>
+          <div class="crit-col">
+            <div class="crit-head">Layer 2 &mdash; Clinical Tier (diagnosis) <span class="head-tag">economics excluded</span></div>
             <ul class="crit-list">
-              <li><b>Hoehn &amp; Yahr 3+</b> — functional severity anchor</li>
-              <li><b>PDD</b> — Parkinson's + dementia / severe debilitation</li>
-              <li><b>DBS surgery</b> — deep brain stimulation (advanced PD)</li>
-              <li><b>Falls &gt;3 in 6 mo</b> / freezing episodes</li>
-              <li><b>Psychosis / hallucinations</b></li>
-              <li><b>Nursing home admission</b></li>
-              <li><b>Young age at diagnosis</b> — more compensation years</li>
+              <li><b>T1: PDD</b> — Confirmed PD + documented dementia (MoCA / DSM-5 / MDS). PDD protections attach.</li>
+              <li><b>T2: Confirmed PD</b> — Movement-disorder neurologist dx. DaTscan / levodopa strengthens. <b>Core inventory.</b></li>
+              <li><b>T3: Parkinsonism</b> — Parkinsonism NOS / atypical / suspected toxicant-induced. Upgrades to T2 on confirmed PD dx.</li>
+              <li><b>T4: Prodromal</b> — Documented symptoms in contemporaneous records. Migrates up on confirmed dx.</li>
+              <li><b>Below grid</b> — No clinical diagnosis that fits any of the above.</li>
             </ul>
-            <div style="font-size:11px;color:var(--slate);margin-top:14px;padding-top:10px;border-top:1px solid var(--border);line-height:1.5">
-              <b>To reach Tier I</b> you need <b>3 or more</b> of these on a Clinical Tier 1 (PDD) or 2 (PD) docket with <b>0 confounders</b>.
-            </div>
-          </div>
-
-          <!-- COLUMN 3: Confounders (pull DOWN) -->
-          <div class="crit-col crit-col-3">
-            <div class="crit-head">Confounders <span style="color:var(--red);font-weight:700;letter-spacing:0;text-transform:none;font-size:11px">▼ pull DOWN</span></div>
-            <ul class="crit-list">
-              <li><b>First-degree PD family hx</b> — MDL fact sheet asks for this for a reason</li>
-              <li><b>LRRK2-G2019S / GBA+</b> pathogenic variant — alternative causation</li>
-              <li><b>TBI with LOC</b> — neurons made more vulnerable to pesticides</li>
-              <li><b>Age 79+ at diagnosis</b></li>
-              <li><b>Heavy maneb / rotenone co-exposure</b></li>
-            </ul>
-            <div style="font-size:11px;color:var(--slate);margin-top:14px;padding-top:10px;border-top:1px solid var(--border);line-height:1.5">
-              <b>2 or more confounders = Tier III</b> even with good exposure and severe disease. Confounders adjust within-tier score only; they can never <i>raise</i> a tier on their own.
-            </div>
           </div>
 
         </div>
 
-        <div class="criteria-foot">Per <code>docs/paraquat-tier-framework.md</code>: tier placement is driven by diagnosis + exposure proof only — economic loss (wages, medical bills) never sets the tier. <b>Deceased claimants</b> convert to wrongful-death/survival posture; the tier is set by records as of death and never diminishes. <b>Progression migration</b>: PD → PDD moves up automatically on documented cognitive decline; prodromal moves up on confirmed dx. <b>PPE</b> is bidirectional — documented use scores up (rebuts comparative fault); non-use is neutral, never a penalty.</div>
+        <!-- MIDDLE ROW: Severity Escalators + Confounders -->
+        <div class="crit-mods">
+
+          <div class="crit-mod mod-up">
+            <div class="crit-mod-head"><span class="arrow">▲</span> Severity escalators <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--slate);font-size:10.5px">push UP into Tier I</span></div>
+            <ul>
+              <li>Hoehn &amp; Yahr 3+</li>
+              <li>PDD (Parkinson's + dementia)</li>
+              <li>DBS surgery</li>
+              <li>Falls &gt;3 in 6 mo / freezing</li>
+              <li>Psychosis / hallucinations</li>
+              <li>Nursing home admission</li>
+              <li>Young age at diagnosis</li>
+            </ul>
+            <div class="crit-mod-note"><b>To reach Tier I</b> you need <b>3 or more</b> of these on a T1 (PDD) or T2 (PD) docket with <b>0 confounders</b>.</div>
+          </div>
+
+          <div class="crit-mod mod-down">
+            <div class="crit-mod-head"><span class="arrow">▼</span> Confounders <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--slate);font-size:10.5px">pull DOWN</span></div>
+            <ul>
+              <li>First-degree PD family hx</li>
+              <li>LRRK2-G2019S / GBA+</li>
+              <li>TBI with LOC</li>
+              <li>Age 79+ at diagnosis</li>
+              <li>Heavy maneb / rotenone</li>
+            </ul>
+            <div class="crit-mod-note"><b>2 or more confounders = Tier III</b> even with good exposure and severe disease.</div>
+          </div>
+
+        </div>
+
+        <!-- BOTTOM: Market Value Tier — the combined result -->
+        <div class="crit-head" style="margin-top:18px">Market Value Tier <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--slate);font-size:11px">L1 + L2 + Severity Escalators + Confounders</span></div>
+        <table class="market-tier-table">
+          <thead>
+            <tr><th>Tier</th><th>Range</th><th>Result</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mt-tier-cell mt-I">Tier I</td>
+              <td class="mt-range-cell">$400K &ndash; $1M+</td>
+              <td class="mt-formula"><b>Layer 1 passes</b> · <b>Clinical Tier = T1 or T2</b> · <b>3+ severity escalators</b> · <b>0 confounders</b> · dx age &lt;70 · Hoehn &amp; Yahr &ge;3</td>
+            </tr>
+            <tr>
+              <td class="mt-tier-cell mt-II">Tier II</td>
+              <td class="mt-range-cell">$150K &ndash; $300K</td>
+              <td class="mt-formula"><b>Layer 1 passes</b> · <b>Clinical Tier = T1 or T2</b> with 1&ndash;2 severity escalators and 0&ndash;1 confounders, OR <b>Clinical Tier = T3</b> with any severity (capped)</td>
+            </tr>
+            <tr>
+              <td class="mt-tier-cell mt-III">Tier III</td>
+              <td class="mt-range-cell">$20K &ndash; $150K</td>
+              <td class="mt-formula"><b>Layer 1 fails</b> (any pillar 1 weak signal or pillar 2 latency miss) — OR <b>Clinical Tier = T4</b> (prodromal forces Tier III) — OR <b>2+ confounders</b> — OR zero severity escalators</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="criteria-foot">Per <code>docs/paraquat-tier-framework.md</code>: tier placement is driven by diagnosis + exposure proof only — economic loss (wages, medical bills) never sets the tier. <b>Deceased claimants</b> convert to wrongful-death/survival posture; the tier is set by records as of death and never diminishes. <b>Progression migration</b>: PD → PDD moves up automatically on documented cognitive decline; prodromal moves up on confirmed dx. <b>PPE</b> is bidirectional — documented use scores up (rebuts comparative fault); non-use is neutral, never a penalty. <b>Confounders</b> adjust within-tier score only — they can never drop a claimant a full tier alone.</div>
       </div>
 
       <div class="exec-card">
@@ -739,7 +759,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <h3>Top 25 Highest-Valued Matters</h3>
         <div class="val-table-wrap">
           <table class="val-table" id="valTable">
-            <thead><tr><th>L1</th><th>Clinical tier</th><th>$ tier</th><th>Matter</th><th>Claimant</th><th>Firm</th><th>Diagnosis</th><th>Score</th></tr></thead>
+            <thead><tr><th>Clinical tier</th><th>$ tier</th><th>Matter</th><th>Claimant</th><th>Firm</th><th>Diagnosis</th><th>Score</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -2334,16 +2354,15 @@ function renderTab5() {
     [{ label: usingActual ? 'Avg settlement ($, actual)' : 'Expected mid-range ($)',
        data: recoveryVals, backgroundColor: TIER_COLORS }]);
 
-  // Top 25 table — each row shows the three-level hierarchy: Level 1 (gate
-  // pass/fail) → Level 2 (clinical tier) → Level 3 (market value tier).
+  // Top 25 table — each row shows the clinical tier (L2) and the market value
+  // tier (L3). L1 status is implied (Case can't have a clinical tier if it
+  // didn't pass Layer 1, and Market Tier I requires Layer 1 to pass).
   const top = scored.sort((a,b) => b.score - a.score).slice(0, 25);
   const tbody = document.querySelector('#valTable tbody');
   tbody.innerHTML = top.map(c => {
-    const l1 = gatesPassed(c);
     const mt = marketTierOf(c);
     return `
     <tr>
-      <td>${l1 ? '<span class="l1-pass">PASS</span>' : '<span class="l1-fail">FAIL</span>'}</td>
       <td><span class="tier-pill t${c.tier}">${TIER_NAMES[c.tier]}</span></td>
       <td>${mt ? `<span class="mt-pill mt-${mt}">${mt}</span>` : '<span class="mt-none">—</span>'}</td>
       <td>${c.matterNumber || '—'}</td>
