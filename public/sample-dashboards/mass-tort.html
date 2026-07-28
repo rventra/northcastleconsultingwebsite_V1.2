@@ -305,6 +305,19 @@ details.exec-details[open]>summary{margin-bottom:12px}
 .wins-pill{display:inline-block;background:var(--mist);border:1px solid var(--gold);color:var(--navy);font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:2px;margin:2px 2px 0 0}
 .wins-missing{white-space:normal}
 
+/* Value bridge waterfall (Executive Summary, WI-2) */
+.bridge-wrap{margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
+.bridge-head{font-weight:700;color:var(--navy);font-size:13px}
+.bridge-sub{font-weight:400;font-size:11.5px;color:var(--slate-lite);margin-left:6px}
+.bridge-canvas-wrap{position:relative;height:300px;margin-top:8px}
+
+/* WI-3: per-case fix callouts (wins modal) */
+.fix-item{margin:0 0 6px}
+.fix-item:last-child{margin-bottom:0}
+.fix-gap{display:block;font-weight:700;color:var(--navy);font-size:11.5px}
+.fix-action{display:block;color:var(--slate);font-size:11px}
+.fix-tally{margin-top:8px;font-size:12px;color:var(--navy-ink)}
+
 /* Pain Rulings (Executive Summary) */
 .pain-card{display:grid;grid-template-columns:90px 1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:baseline}
 .pain-card:last-child{border-bottom:none}
@@ -427,6 +440,10 @@ details.exec-details[open]>summary{margin-bottom:12px}
           </div>
         </div>
         <div id="tierPanel"></div>
+        <div class="bridge-wrap">
+          <div class="bridge-head">Value bridge — current inventory to potential <span class="bridge-sub">right-hand bar is total potential (= 100%); middle bars are the biggest lift gaps at the convert rate above</span></div>
+          <div class="bridge-canvas-wrap"><canvas id="chartBridge"></canvas></div>
+        </div>
         <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
       </div>
 
@@ -815,6 +832,29 @@ function winCandidates(c, fromTier) {
     return { ...none, missing, gaps };
   }
   return { ...none, missing, gaps };
+}
+
+// WI-3: the concrete cure action behind each tier-check key — the "specific
+// fix" that unlocks the tier upgrade. Shown per case in the wins modal, in
+// the cohort fix tally, and in the CSV export. A gap with status
+// 'disconfirmed' (thin-file cohort) gets a "re-verify" prefix at render time.
+const FIX_FOR = {
+  parkinsons_disease:   "get a neurologist-confirmed idiopathic Parkinson's diagnosis on the record",
+  verified_evidence:    'verify the certified applicator license with the state ag dept, or obtain verified purchase receipts',
+  '10yr_exposure':      'document ≥10 yrs of exposure (employment records, tax records, coworker affidavits)',
+  sweet_latency:        'pin down first-exposure and diagnosis dates so latency lands in the 10–25 yr window',
+  young_first_exposure: 'confirm DOB + first-exposure date (must show age < 45 at first exposure)',
+  levodopa:             'get a treating-neurologist note documenting levodopa response',
+  any_pd_dx:            'get any PD-spectrum diagnosis (incl. parkinsonism) on the record',
+  documented_exposure:  'collect exposure documentation (applicator license claim or purchase receipts)',
+  '5yr_exposure':       'document ≥5 yrs of exposure (employment records, affidavits)',
+  has_symptoms:         'log current symptoms in the intake / medical records',
+  some_exposure:        'collect any exposure evidence (claimed license or receipts)',
+  non_trivial:          'confirm at least 1 year of exposure',
+};
+function fixForGap(g) {
+  const base = FIX_FOR[g.key] || 'collect the missing record';
+  return g.status === 'disconfirmed' ? `thin file — re-verify: ${base}` : base;
 }
 
 // ====================================================================
@@ -1293,13 +1333,18 @@ function tierRecoveryRange(tier) {
   return { low: v, high: v, label: '$' + fmtNumber(v) };
 }
 
+// WI-1: PE-facing dollar values render in full with comma thousands
+// separators ($12,345,678 — no K/M abbreviation). fmtMoneyShort keeps the
+// old compact form for crowded chart canvas labels/axis ticks only.
 function fmtNumber(v) {
   if (v == null || isNaN(v)) return '—';
-  if (v >= 1e6) return (v / 1e6).toFixed(2) + 'M';
-  if (v >= 1e3) return Math.round(v / 1e3) + 'K';
-  return Math.round(v).toLocaleString();
+  return Math.round(v).toLocaleString('en-US');
 }
 function fmtMoney(v) {
+  if (v == null || isNaN(v)) return '—';
+  return '$' + Math.round(v).toLocaleString('en-US');
+}
+function fmtMoneyShort(v) {
   if (v == null || isNaN(v)) return '—';
   if (v >= 1e6) return '$' + (v / 1e6).toFixed(2) + 'M';
   if (v >= 1e3) return '$' + Math.round(v / 1e3) + 'K';
@@ -1929,10 +1974,20 @@ function updateTierPanelDerived() {
   });
   // Sum per-case gaps across every wins cohort (one + two + thin × all source tiers).
   // This is the "cases that could convert × GSV" piece of the potential formula.
+  // WI-2: also collect one bridge segment per non-empty cohort (expected value
+  // at the current convert rate) so the waterfall can show the biggest gaps.
+  const bridgeSegs = [];
   [2, 3, 4].forEach(s => {
-    const { one, two, thin, gap } = winsCohorts(s);
+    const { one, two, thin, gap, target } = winsCohorts(s);
     totalWinsGap += (one.length + two.length + thin.length) * gap;
+    const push = (n, label) => {
+      if (n) bridgeSegs.push({ n, gap, target, label, value: n * gap * p, color: TIER_COLORS[target - 1] });
+    };
+    push(one.length,  `T${s}→T${target} · ${one.length} one fix away`);
+    push(two.length,  `T${s}→T${target} · ${two.length} two fixes away`);
+    push(thin.length, `T${s}→T${target} · ${thin.length} thin-file`);
   });
+  bridgeSegs.sort((a, b) => b.value - a.value);
   const expectedLift = totalWinsGap * p;
   const potentialGsv = totalCurrentGsv + expectedLift;
   const totalOpenEl = document.getElementById('totalOpenCount');
@@ -1950,6 +2005,63 @@ function updateTierPanelDerived() {
   if (deltaEl) deltaEl.textContent = expectedLift > 0
     ? `+${fmtMoney(expectedLift)} incremental at ${Math.round(p * 100)}% convert`
     : '';
+  renderBridgeChart(totalCurrentGsv, bridgeSegs, potentialGsv);
+}
+
+// WI-2: waterfall / bridge chart on the Executive Summary. Starts at the
+// current inventory value, stacks the biggest lift gaps (largest first,
+// colored by the tier they'd upgrade INTO), and ends at total potential
+// (= 100%). Re-rendered by updateTierPanelDerived(), so it stays in sync
+// with the GSV inputs and the convert-rate assumption.
+function renderBridgeChart(current, segs, potential) {
+  destroy('chartBridge');
+  const ctx = document.getElementById('chartBridge');
+  if (!ctx) return;
+  const labels = ['Current inventory', ...segs.map(s => s.label), 'Potential (100%)'];
+  const data = [[0, current]];
+  const colors = ['#1E2761'];
+  let cum = current;
+  segs.forEach(s => {
+    data.push([cum, cum + s.value]);
+    colors.push(s.color);
+    cum += s.value;
+  });
+  data.push([0, potential]);
+  colors.push('#2C5F2D');
+  charts.chartBridge = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{ data, backgroundColor: colors, borderSkipped: false, maxBarThickness: 64 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (t) => {
+              const i = t.dataIndex;
+              if (i === 0) return ` Current inventory: ${fmtMoney(current)}`;
+              if (i === labels.length - 1) return ` Total potential: ${fmtMoney(potential)}`;
+              const s = segs[i - 1];
+              return ` +${fmtMoney(s.value)} expected — ${s.n} cases × ${fmtMoney(s.gap)} gap × ${Math.round(state.convertRate * 100)}% convert`;
+            },
+          },
+        },
+        datalabels: {
+          anchor: 'end', align: 'top', color: '#1E2761', clip: false,
+          font: { weight: 700, size: 11 },
+          formatter: (v, t) => {
+            const i = t.dataIndex;
+            if (i === 0 || i === labels.length - 1) return fmtMoneyShort(v[1]);
+            return '+' + fmtMoneyShort(v[1] - v[0]);
+          },
+        },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 11 }, autoSkip: false, maxRotation: 35 } },
+        y: { grid: { color: '#F1F5F9' }, ticks: { font: { size: 11 }, callback: v => fmtMoneyShort(v) } },
+      },
+    },
+  });
 }
 
 // ====================================================================
@@ -1999,10 +2111,20 @@ function openWinsModal(fromTier, kind = 'one') {
     thin: `Each case is blocked by a disconfirmed criterion, but the file is thin (≤2 records), so the disconfirmation may not hold. The gap is worth ${fmtMoney(gap)} a case; assuming ${oddsWords(p)} of these cure, that's ${fmtMoney(perCaseExpected)} expected per case — ${fmtMoney(totalExpected)} for the cohort.`,
   }[kind];
   const cohortAvgScore = allWins.reduce((s,c)=>s+c.score,0)/allWins.length;
+  // WI-3: cohort-level tally of the specific fixes that unlock the upgrade,
+  // most common first.
+  const fixTally = {};
+  allWins.forEach(c => (c.gaps || []).filter(Boolean).forEach(g => {
+    const a = fixForGap(g);
+    fixTally[a] = (fixTally[a] || 0) + 1;
+  }));
+  const fixLine = Object.entries(fixTally).sort((a, b) => b[1] - a[1])
+    .map(([a, n]) => `<b>${n}</b> &times; ${escapeHtml(a)}`).join(' &middot; ');
   document.getElementById('winsModalTitle').textContent =
     `Wins cohort: ${allWins.length} cases ${fixWord} from Tier ${target}${kind === 'thin' ? ' (thin file)' : ''}`;
   document.getElementById('winsModalSubtitle').innerHTML = cohortNote +
-    `<button type="button" class="score-cohort-link" id="cohortBreakdownBtn">Cohort average breakdown → score ${cohortAvgScore.toFixed(1)}</button>`;
+    `<button type="button" class="score-cohort-link" id="cohortBreakdownBtn">Cohort average breakdown → score ${cohortAvgScore.toFixed(1)}</button>` +
+    `<div class="fix-tally"><b>Specific fixes to unlock Tier ${target}:</b> ${fixLine}</div>`;
 
   // Build the cohort-average factors (averaged rawScore per factor × weight = contribution).
   modal._cohort.factors = scoreFactorBreakdown({}).map(template => {
@@ -2068,7 +2190,7 @@ function renderWinsTableHeader() {
       <th>Score breakdown (click for donut)</th>
       <th title="Total medical records on file (informational — not a tier criterion)">Records</th>
       ${criteriaHeaders}
-      <th>Lift gaps</th>
+      <th>Lift gaps — specific fix to unlock</th>
     </tr>`;
 }
 
@@ -2115,7 +2237,9 @@ function renderWinsTableBody() {
       const met = chk.test(c);
       return `<td class="criteria-cell ${met ? '' : 'unmet'}" title="${escapeHtml(chk.label)} — ${met ? 'met (no lift here)' : 'NOT met — lift opportunity'}">${met ? '✓' : ''}</td>`;
     }).join('');
-    const gapLabels = (c.gaps || []).filter(Boolean).map(g => escapeHtml(g.label)).join('; ');
+    // WI-3: each gap shows the criterion label plus the specific fix action.
+    const gapHtml = (c.gaps || []).filter(Boolean).map(g =>
+      `<div class="fix-item"><span class="fix-gap">${escapeHtml(g.label)}</span><span class="fix-action">Fix: ${escapeHtml(fixForGap(g))}</span></div>`).join('');
     return `
       <tr>
         <td>${c.matterNumber || '—'}</td>
@@ -2124,7 +2248,7 @@ function renderWinsTableBody() {
         <td><div class="score-cell"><b>${(c.score || 0).toFixed(1)}</b><div class="score-bar" data-case-idx="${idx}" tabindex="0" role="button" aria-label="Open score breakdown donut" title="${tooltip.replace(/"/g, '&quot;')}">${segs}</div></div></td>
         <td style="text-align:right;font-variant-numeric:tabular-nums;color:var(--slate)" title="Medical records on file (informational only — not a tier criterion)">${c.recordCount || 0}</td>
         ${criteriaCells}
-        <td class="wins-missing">${gapLabels || '<span style="color:var(--slate-lite)">—</span>'}</td>
+        <td class="wins-missing">${gapHtml || '<span style="color:var(--slate-lite)">—</span>'}</td>
       </tr>`;
   }).join('');
 
@@ -2182,7 +2306,7 @@ function downloadWinsCsv() {
     'Score Fam', 'Score Lat', 'Score Age', 'Score Sym', 'Score Lev',
     'Records', 'Tier (source)', 'Target tier',
     ...targetChecks.map(chk => `Criteria: ${chk.label}`),
-    'Lift gaps',
+    'Lift gaps', 'Fix to unlock',
   ];
   const cell = v => v == null ? '' : /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v);
   const rows = filtered.map(c => {
@@ -2196,6 +2320,7 @@ function downloadWinsCsv() {
       c.recordCount || 0, fromTier, target,
       ...targetChecks.map(chk => chk.test(c) ? 'Met' : 'Not met'),
       (c.gaps || []).filter(Boolean).map(g => g.label).join('; '),
+      (c.gaps || []).filter(Boolean).map(g => fixForGap(g)).join('; '),
     ];
   });
 
