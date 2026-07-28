@@ -880,6 +880,84 @@ function deriveFrameworkFields(c) {
   // Computed scores (stored for convenience; pure functions of record fields).
   c.docScore = docScoreOf(c);
   c.confounderScore = confounderScoreOf(c);
+
+  // ================================================================
+  // DATA-DICTIONARY SPEC FIELDS (sections A–F, docs/DATA_DICTIONARY.md)
+  // Deterministic derivations filling fields the baked data lacks.
+  // ================================================================
+  const REF = new Date('2026-07-28T00:00:00');
+  const s2 = (tag) => seed01(id + '|' + tag);
+  // A. Case identity
+  c.stateFiled = ['IL','IL','IL','CA','PA','TX','FL','IA','MO','OH'][Math.floor(s2('st') * 10)];
+  c.mdlMember = true;
+  // B. Exposure (window vs total: our synthetic cases have one exposure
+  // period, so years_total == window — noted in the dictionary)
+  const HANDLING = {
+    mixing_loading: 'mixer_loader', handheld_sprayer: 'sprayer', backpack_sprayer: 'sprayer',
+    boom_sprayer: 'applicator', aerial_adjacent: 'flagger', cleanup_disposal: 'loader', other: 'farmhand',
+  };
+  c.handlingType = HANDLING[c.applicationMethod]
+    || (c.exposureCategory === 'Residential / Bystander' ? 'drift' : 'farmhand');
+  c.exposureWindowYears = c.exposureYears;
+  c.exposureYearsTotal = c.exposureYears;
+  const DPY = { mixer_loader: [40, 90], mixer: [40, 90], loader: [30, 80], sprayer: [30, 80],
+    applicator: [30, 80], flagger: [20, 60], farmhand: [40, 120], drift: [5, 20], residential: [5, 20] };
+  const [dLo, dHi] = DPY[c.handlingType] || [30, 90];
+  c.exposureDaysPerYear = dLo + Math.floor(s2('dpy') * (dHi - dLo));
+  c.exposureTotalDays = c.exposureYearsTotal != null ? Math.round(c.exposureYearsTotal * c.exposureDaysPerYear) : null;
+  c.brandUsed = (c.productNames || [])[0] || null;
+  const FARMS = ['Walsh Family Farms', 'Heritage Grain Co-op', 'Delta Row Crops LLC', 'Prairie View Ag', 'Sutter Valley Produce', 'Ozark Highlands Farm', 'Lonestar Citrus Growers', 'Willamette Orchard Works'];
+  c.employerName = (c.exposureCategory === 'Agricultural' || (c.evidenceItems || []).some(e => e.t === 'employment_record'))
+    ? FARMS[Math.floor(s2('emp') * FARMS.length)] : null;
+  c.docApplicatorLicense = !!(c.licenseClaimed || c.licenseVerified);
+  c.docW2Paystub = (c.evidenceItems || []).some(e => e.t === 'employment_record' || e.t === 'tax_record');
+  c.docPurchaseReceipt = !!(c.receiptsClaimed || c.receiptsVerified || (c.evidenceItems || []).some(e => e.t === 'purchase_receipt'));
+  c.docCoworkerDec = (c.evidenceItems || []).some(e => e.t === 'affidavit');
+  // C. Latency
+  const ly2 = c.latencyYears;
+  c.latencyBucket = ly2 == null ? null : ly2 < 5 ? '<5' : ly2 < 10 ? '5-10' : ly2 < 20 ? '10-20' : ly2 < 30 ? '20-30' : ly2 < 40 ? '30-40' : '40+';
+  c.diagnosisType = c.primaryDiagnosis === 'parkinsons_disease' ? 'PD'
+    : ['multiple_system_atrophy', 'progressive_supranuclear_palsy', 'corticobasal_degeneration'].includes(c.primaryDiagnosis) ? 'atypical_PSP_MSA'
+    : c.primaryDiagnosis ? 'parkinsonism' : null;
+  // D. Medical severity
+  const hyB = c.hoehnYahr;
+  const UPDRS = { 1: [8, 15], 2: [15, 30], 3: [30, 45], 4: [45, 60], 5: [60, 80] };
+  const [uLo, uHi] = UPDRS[hyB] || [0, 0];
+  c.updrsIii = hyB ? uLo + Math.floor(s2('updrs') * (uHi - uLo)) : null;
+  const addYears = (dateStr, lo, hi) => {
+    if (!dateStr) return null;
+    const d = new Date(new Date(dateStr).getTime() + (lo + s2('dyrs') * (hi - lo)) * 365.25 * 86400000);
+    return (d > REF ? REF : d).toISOString().slice(0, 10);
+  };
+  c.pddDate = c.cognitiveDecline ? addYears(c.lastDxDate, 2, 6) : null;
+  c.mocaScore = c.cognitiveDecline ? 10 + Math.floor(s2('moca') * 11)
+    : isPD ? 24 + Math.floor(s2('moca') * 6) : null;
+  c.dbsDate = c.dbsSurgery ? addYears(c.lastDxDate, 3, 8) : null;
+  c.nursingHomeDate = c.nursingHome ? addYears(c.lastDxDate, 2, 6) : null;
+  c.caregiverHoursWeek = (c.hoehnYahr || 0) >= 4 ? 20 + Math.floor(s2('cg') * 41)
+    : c.hoehnYahr === 3 ? 5 + Math.floor(s2('cg') * 16) : 0;
+  c.deathDate = c.matter_type === 'wrongful_death' && c.intakeDate
+    ? new Date(new Date(c.intakeDate).getTime() - (30 + s2('dth') * 370) * 86400000).toISOString().slice(0, 10)
+    : null;
+  // E. Family history & genetics
+  c.familyHistoryWho = c.familyPd === true ? ['father', 'mother', 'brother', 'sister'][Math.floor(s2('fhw') * 4)] : null;
+  c.familyHistoryAlzAls1st = s2('falz') < 0.06;
+  c.lrrk2G2019s = c.geneticVariant === 'LRRK2-G2019S';
+  c.gbaMutation = c.geneticVariant === 'GBA';
+  c.parkinMutation = c.geneticVariant === 'parkin';
+  c.sncaMutation = c.geneticVariant === 'SNCA';
+  // F. Confounders
+  c.tbiCount = c.tbiHistory ? 1 + Math.floor(s2('tbc') * 3) : 0;
+  c.tbiWithLoc = c.tbiHistory && s2('tloc') < 0.7;
+  c.smokingPackYears = c.smokingStatus === 'never' ? 0
+    : c.smokingStatus === 'former' ? Math.round((5 + s2('pky') * 25) * 10) / 10
+    : Math.round((10 + s2('pky') * 35) * 10) / 10;
+  c.manebExposure = c.otherPesticides && s2('maneb') < 0.6;
+  c.rotenoneExposure = c.otherPesticides && s2('roten') < 0.55;
+  c.otherPesticidesHeavy = c.otherPesticides;
+  c.wellWaterYears = c.exposureCategory === 'Residential / Bystander' ? Math.floor(s2('well') * 30) : 0;
+  c.essentialTremorPrior = s2('et') < 0.04;
+  c.militaryAgentOrange = (c.ageAtDiagnosis || 0) >= 65 && s2('ao') < 0.05;
 }
 
 // Document score (0–10) — exposure proof quantified per the framework:
