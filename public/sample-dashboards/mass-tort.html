@@ -388,7 +388,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
     <label>Tier (Valuation)</label>
     <select id="filterTier">
       <option value="all">All Tiers</option>
-      <option value="1">Tier 1 (PDD)</option>
+      <option value="1">Tier 1 (Parkinson's + dementia)</option>
       <option value="2">Tier 2 (Confirmed PD)</option>
       <option value="3">Tier 3 (Parkinsonism)</option>
       <option value="4">Tier 4 (Prodromal)</option>
@@ -491,10 +491,10 @@ details.exec-details[open]>summary{margin-bottom:12px}
         </div>
         <div class="criteria-grid">
           <div class="criteria-tier-block tier-1-block">
-            <div class="criteria-tier-head"><span class="tier-pill">Tier 1</span> <strong>PD with dementia (PDD)</strong></div>
+            <div class="criteria-tier-head"><span class="tier-pill">Tier 1</span> <strong>Parkinson's + dementia (PDD)</strong></div>
             <ul class="criteria-bullets">
-              <li>Confirmed idiopathic PD (neurologist dx)</li>
-              <li>Documented cognitive decline / dementia <span class="criteria-tag">DSM-5 / MDS</span></li>
+              <li>Confirmed idiopathic PD (neurologist dx) that has <em>progressed to dementia</em></li>
+              <li>Documented cognitive decline <span class="criteria-tag">MoCA / DSM-5 / MDS</span></li>
               <li>Clears all gates <span class="criteria-tag">PDD protections attach</span></li>
             </ul>
           </div>
@@ -530,7 +530,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
             </ul>
           </div>
         </div>
-        <div class="criteria-foot">Per <code>docs/paraquat-tier-framework.md</code>: tier placement is driven by diagnosis + exposure proof only — economic loss (wages, medical bills) never sets the tier. <b>Deceased claimants</b> convert to wrongful-death/survival posture; the tier is set by records as of death and never diminishes. <b>Progression migration</b>: PD → PDD moves up automatically on documented cognitive decline; prodromal moves up on confirmed dx. <b>PPE</b> is bidirectional — documented use scores up (rebuts comparative fault); non-use is neutral, never a penalty. <b>Family history</b> and confounders (other pesticides, TBI, smoking) adjust the within-tier score only — they can never drop a claimant a full tier. <b>Latency</b> scores strongest at 10–40 yrs from first exposure to first documented symptom.</div>
+        <div class="criteria-foot">Per <code>docs/paraquat-tier-framework.md</code>: tier placement is driven by diagnosis + exposure proof only — economic loss (wages, medical bills) never sets the tier. <b>Deceased claimants</b> convert to wrongful-death/survival posture; the tier is set by records as of death and never diminishes. <b>Progression migration</b>: PD → PD-with-dementia (PDD) moves up automatically on documented cognitive decline; prodromal moves up on confirmed dx. <b>PPE</b> is bidirectional — documented use scores up (rebuts comparative fault); non-use is neutral, never a penalty. <b>Family history</b> and confounders (other pesticides, TBI, smoking) adjust the within-tier score only — they can never drop a claimant a full tier. <b>Latency</b> scores strongest at 10–40 yrs from first exposure to first documented symptom.</div>
       </div>
 
       <div class="exec-card">
@@ -1050,7 +1050,7 @@ const CONFIRMED_PD_CHECK = {
     : 'disconfirmed',
 };
 const TIER_DEFS = {
-  1: { name: 'PD with dementia (PDD)',
+  1: { name: "Confirmed Parkinson's + documented dementia (PDD)",
        checks: [
          CONFIRMED_PD_CHECK,
          { key: 'cognitive_decline', label: 'Documented cognitive decline / dementia (DSM-5 or MDS)',
@@ -2154,7 +2154,7 @@ function renderTab5() {
   }).length;
   const tierSub = t => `${tierRecoveryRange(t).label} · avg ${avgByTier[t] != null ? fmtMoney(avgByTier[t]) : '—'}`;
   document.getElementById('kpi-row-5').innerHTML = `
-    <div class="tile tier-tile tier-1"><div class="tile-label">Tier 1 — PDD</div><div class="tile-value">${tierCountsKpi[0]}</div><div class="tile-sub">${tierSub(1)}</div></div>
+    <div class="tile tier-tile tier-1"><div class="tile-label">Tier 1 — Parkinson's + dementia</div><div class="tile-value">${tierCountsKpi[0]}</div><div class="tile-sub">${tierSub(1)}</div></div>
     <div class="tile tier-tile tier-2"><div class="tile-label">Tier 2 — Confirmed PD</div><div class="tile-value">${tierCountsKpi[1]}</div><div class="tile-sub">${tierSub(2)}</div></div>
     <div class="tile tier-tile tier-3"><div class="tile-label">Tier 3 — Parkinsonism</div><div class="tile-value">${tierCountsKpi[2]}</div><div class="tile-sub">${tierSub(3)}</div></div>
     <div class="tile tier-tile tier-4"><div class="tile-label">Tier 4 — Prodromal</div><div class="tile-value">${tierCountsKpi[3]}</div><div class="tile-sub">${tierSub(4)}</div></div>
@@ -2167,7 +2167,7 @@ function renderTab5() {
   // Tier distribution
   const tierCounts = TIER_VALUES.map(t => scored.filter(c => c.tier === t).length);
   doughnut('chartTierDist',
-    ['Tier 1 — PDD', 'Tier 2 — PD', 'Tier 3 — Parkinsonism', 'Tier 4 — Prodromal', 'Below grid'],
+    ['Tier 1 — PD + dementia', 'Tier 2 — PD', 'Tier 3 — Parkinsonism', 'Tier 4 — Prodromal', 'Below grid'],
     tierCounts,
     xfade(TIER_VALUES, TIER_COLORS, state.cross.tier));
   attachCrossFilter('chartTierDist', 'tier', TIER_VALUES);
