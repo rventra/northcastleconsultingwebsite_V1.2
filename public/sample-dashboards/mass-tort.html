@@ -468,7 +468,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
             <div class="criteria-tier-head"><span class="tier-pill">Tier 2</span> <strong>Probable PD + Documented Exposure</strong></div>
             <ul class="criteria-bullets">
               <li>Any PD-spectrum diagnosis (incl. parkinsonism)</li>
-              <li>Documented exposure (claimed or verified)</li>
+              <li>Documented exposure — verified license/receipts, <em>or</em> claimed + PPE use</li>
               <li>≥5 years of exposure</li>
             </ul>
           </div>
@@ -487,7 +487,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
             </ul>
           </div>
         </div>
-        <div class="criteria-foot">Age at first exposure is calculated as <code>(first exposure date) − (date of birth)</code>. Medical record <em>count</em> is informational only — it does not gate tier membership. <b>Family history</b> is a scoring factor (10%) with reversed direction: a documented first-degree relative with Parkinsonism <em>dilutes</em> the claim (competing-cause argument — "PD was genetic, not paraquat-caused"); absence of family history is <em>stronger</em> (pure paraquat causation, no competing cause). <b>PPE use</b> (gloves, respirator, coveralls) is a scoring factor (5%): documented PPE use corroborates the professional-applicator pattern and strengthens the case; cases without PPE on file score lower.</div>
+        <div class="criteria-foot">Age at first exposure is calculated as <code>(first exposure date) − (date of birth)</code>. Medical record <em>count</em> is informational only — it does not gate tier membership. <b>Family history</b> is a scoring factor (10%) with reversed direction: a documented first-degree relative with Parkinsonism <em>dilutes</em> the claim (competing-cause argument — "PD was genetic, not paraquat-caused"); absence of family history is <em>stronger</em> (pure paraquat causation, no competing cause). <b>PPE use</b> (gloves, respirator, coveralls) does double duty: it is a scoring factor (5%) and it corroborates a claimed exposure for Tier 2 — a claim backed by PPE use reads as a credible professional-applicator pattern; a bare claim with no PPE and no verification drops to Tier 3.</div>
       </div>
 
       <div class="exec-card">
@@ -793,9 +793,12 @@ const TIER_DEFS = {
          { key: 'any_pd_dx', test: c => c.dxBucket !== 'no_dx',
            label: 'Any PD-spectrum diagnosis (incl. parkinsonism)',
            status: c => c.dxBucket !== 'no_dx' ? 'pass' : 'unknown' },
-         { key: 'documented_exposure', test: c => c.licenseClaimed || c.receiptsClaimed || c.licenseVerified || c.receiptsVerified,
-           label: 'Documented exposure (claimed or verified)',
-           status: c => (c.licenseClaimed || c.receiptsClaimed || c.licenseVerified || c.receiptsVerified) ? 'pass' : 'unknown' },
+         { key: 'documented_exposure',
+           test: c => (c.licenseVerified || c.receiptsVerified)
+                   || ((c.licenseClaimed || c.receiptsClaimed) && c.ppeUsed === true),
+           label: 'Verified exposure evidence (or claimed + PPE corroboration)',
+           status: c => ((c.licenseVerified || c.receiptsVerified)
+                   || ((c.licenseClaimed || c.receiptsClaimed) && c.ppeUsed === true)) ? 'pass' : 'unknown' },
          { key: '5yr_exposure', test: c => c.exposureYears != null && c.exposureYears >= 5,
            label: '≥5 years exposure',
            status: c => c.exposureYears == null ? 'unknown'
@@ -877,7 +880,7 @@ const FIX_FOR = {
   young_first_exposure: 'confirm DOB + first-exposure date (must show age < 45 at first exposure)',
   levodopa:             'get a treating-neurologist note documenting levodopa response',
   any_pd_dx:            'get any PD-spectrum diagnosis (incl. parkinsonism) on the record',
-  documented_exposure:  'collect exposure documentation (applicator license claim or purchase receipts)',
+  documented_exposure:  'verify the applicator license/receipts, or document PPE use to corroborate the claimed exposure',
   '5yr_exposure':       'document ≥5 yrs of exposure (employment records, affidavits)',
   has_symptoms:         'log current symptoms in the intake / medical records',
   some_exposure:        'collect any exposure evidence (claimed license or receipts)',
@@ -897,7 +900,7 @@ const FIX_SHORT = {
   young_first_exposure: 'Confirm DOB + 1st exposure',
   levodopa:             'Levodopa response note',
   any_pd_dx:            'PD-spectrum dx',
-  documented_exposure:  'Exposure documentation',
+  documented_exposure:  'Verify exposure / PPE',
   '5yr_exposure':       '≥5yr exposure proof',
   has_symptoms:         'Log symptoms',
   some_exposure:        'Any exposure evidence',
