@@ -250,6 +250,40 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .criteria-bullets em{font-style:normal;font-weight:700;color:var(--navy);background:var(--mist);padding:0 4px;border-radius:2px}
 .criteria-foot{font-size:11px;color:var(--slate-lite);font-style:italic;margin-top:14px;border-top:1px solid var(--border);padding-top:10px;line-height:1.5}
 .criteria-foot code{font-style:normal;background:var(--mist);border:1px solid var(--border);padding:1px 5px;border-radius:2px;font-size:10.5px;color:var(--navy)}
+
+/* Two-layer tier model — Layer 1 (door) / Layer 2 (value). PE-facing
+   clarification: the original flat "gates first, then the grid" didn't make
+   the mental model obvious. Layer 1 is pure proof (doc_score + latency);
+   Layer 2 is valuation (severity minus confounders). */
+.layer-card{border:1px solid var(--border);border-radius:4px;padding:18px 22px;margin:0 0 18px;background:var(--white)}
+.layer-1{border-top:4px solid var(--navy)}
+.layer-2{border-top:4px solid var(--gold)}
+.layer-head{display:flex;align-items:center;gap:10px;margin:0 0 6px;flex-wrap:wrap}
+.layer-num{font-size:10px;font-weight:700;color:var(--white);background:var(--navy);padding:3px 10px;border-radius:2px;letter-spacing:.12em;text-transform:uppercase;line-height:1.2}
+.layer-2 .layer-num{background:var(--gold);color:var(--navy-ink)}
+.layer-title{font-size:17px;font-weight:700;color:var(--navy);letter-spacing:.01em}
+.layer-sub{font-size:13px;color:var(--slate);margin:0 0 16px;line-height:1.55;max-width:820px}
+.layer-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:900px){.layer-grid{grid-template-columns:1fr}}
+.layer-col{padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:3px}
+.layer-col-severity{border-left:3px solid var(--gold)}
+.layer-col-confounder{border-left:3px solid var(--red)}
+.layer-col-title{font-size:11.5px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.layer-col-title .arrow{font-size:14px;font-weight:700;display:inline-block;width:14px}
+.layer-col-severity .layer-col-title .arrow{color:var(--gold)}
+.layer-col-confounder .layer-col-title .arrow{color:var(--red)}
+.layer-col ul{margin:0;padding-left:18px;font-size:12.5px;color:var(--navy-ink);line-height:1.65}
+.layer-col ul li{margin-bottom:4px}
+.layer-col ul li b{color:var(--navy)}
+.layer-read{font-size:11.5px;color:var(--slate);font-style:italic;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.5}
+.layer-outcome{margin-top:14px;padding:10px 14px;font-size:12.5px;line-height:1.6;border:1px solid var(--border);border-radius:3px}
+.layer-outcome b{color:var(--navy)}
+.layer-outcome.fail{color:var(--red);border-color:var(--red);background:var(--red-bg)}
+.layer-outcome.fail b{color:var(--red)}
+.layer-outcome.win{color:var(--navy);border-color:var(--gold);background:var(--white)}
+.dx-grid-head{font-size:12px;font-weight:700;color:var(--navy);margin:22px 0 10px;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid var(--border);padding-top:16px}
+.dx-grid-head .note{font-weight:400;color:var(--slate);text-transform:none;letter-spacing:0;margin-left:6px}
+
 /* Collapsible reference sections */
 details.exec-details{margin:0}
 details.exec-details>summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--navy);letter-spacing:.01em;list-style-position:outside}
@@ -463,37 +497,99 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
       </div>
 
-      <!-- Tier criteria reference — eligibility gates + tier grid per
-           docs/paraquat-tier-framework.md. Diagnosis + exposure proof set the
-           tier; economics are excluded as tier drivers. -->
+      <!-- Tier criteria reference — two-layer gate (docs/paraquat-tier-framework.md).
+           Mental model: Layer 1 asks whether you can prove paraquat exposure AND
+           whether the timing fits the science window. Layer 2 runs once you're
+           inside — severity pushes up, confounders pull down. Economics are
+           excluded as a tier driver throughout. -->
       <div class="exec-card">
-        <h3>Tier Criteria — gates first, then the grid</h3>
-        <div class="criteria-gates">
-          <div class="criteria-tier-head"><strong>Tier 0 — Eligibility gates (pass/fail, before any tiering)</strong></div>
-          <ul class="criteria-bullets gates-inline">
-            <li>Product/exposure identification — verified records, corroborated claim, or exposure records</li>
-            <li>Exposure era → defendant — pre-1990-only = Chevron (fails for Syngenta MDL)</li>
-            <li>Minimum dose — ≥1 documented season</li>
-            <li>Latency sanity — &lt;5 yrs exposure → dx = likely DQ (prodromal clock excepted)</li>
-            <li>PFS / AQ complete (CMO 7/10)</li>
-            <li>Plausibility screen (CMO 18) — assumed, not modeled</li>
-          </ul>
+        <h3>Tier Criteria — Two layers: Door → Value</h3>
+        <p style="font-size:13px;color:var(--slate);margin:-4px 0 18px;line-height:1.55;max-width:820px">
+          Eligibility is a <b>two-layer gate</b>. <b>Layer 1</b> asks whether you can prove paraquat exposure and whether the timing fits the science window — fail it and you never price the case (DQ) or you're capped at Tier III. <b>Layer 2</b> runs only once you're inside: severity pushes you up, confounders pull you down. The cleanest Tier I files — the $500K–$1M+ range — are the ones with strong proof, perfect latency, severe disease, and zero confounders.
+        </p>
+
+        <!-- LAYER 1: DOOR — pure proof (doc_score + latency) -->
+        <div class="layer-card layer-1">
+          <div class="layer-head">
+            <span class="layer-num">Layer 1</span>
+            <span class="layer-title">Do you get in the door?</span>
+          </div>
+          <p class="layer-sub">Pure proof. Two pillars — how well you can document exposure, and whether the timing fits the science window. Fail this layer and you never price the case.</p>
+          <div class="layer-grid">
+            <div class="layer-col">
+              <div class="layer-col-title">Exposure proof — doc_score 0–10</div>
+              <ul>
+                <li><b>+2</b> applicator license</li>
+                <li><b>+2</b> W-2 / ag employer</li>
+                <li><b>+2</b> purchase receipts</li>
+                <li><b>+2</b> co-worker declaration</li>
+                <li><b>+1</b> spray-log / aerial proximity</li>
+                <li><b>+1</b> brand recall (any specifically named product)</li>
+              </ul>
+              <div class="layer-read">≥7 trial-grade · 4–6 solid · <b>&lt;4 caps at Tier III</b> even with great latency and severe disease</div>
+            </div>
+            <div class="layer-col">
+              <div class="layer-col-title">Latency — first exposure → diagnosis</div>
+              <ul>
+                <li><b>10–30 yrs</b> ideal window — described as "latency of two to three decades"</li>
+                <li><b>20–10 yrs before dx</b> is where the studies found the signal</li>
+                <li><b>5–10 yrs</b> acceptable but weak</li>
+                <li><b>&lt;5 yrs</b> likely DQ — alternate-cause flag</li>
+                <li><b>&gt;40 yrs</b> defense argues alternate cause</li>
+              </ul>
+              <div class="layer-read">Prodromal claimants (no formal dx) get the clock started at first documented prodromal symptom — this rescues cases whose exposure was decades ago.</div>
+            </div>
+          </div>
+          <div class="layer-outcome fail">
+            <b>Layer 1 fails</b> — and you get DQ'd or capped at Tier III ($20K–$100K) — if any of these hit: <b>doc_score &lt; 4</b> · <b>drift-only or residential proximity</b> exposure · <b>latency &lt; 5 yrs or &gt; 40 yrs</b> · no documented season · wrong-defendant era (pre-1990 Chevron-only) · PFS / AQ incomplete.
+          </div>
         </div>
-        <div class="criteria-gates mkt-gates">
-          <div class="criteria-tier-head"><strong>Market value grid — computed from doc score, confounder score, latency, severity, age</strong></div>
-          <ul class="criteria-bullets gates-inline">
-            <li><b>Tier I</b> $400K–$1M+ — doc ≥7 · latency 10–30 · H&amp;Y ≥3 · confounder 0 · severity escalator (PDD/DBS/nursing home/falls) · dx age &lt;70</li>
-            <li><b>Tier II</b> $150K–$300K — doc 4–6 · latency 5–35 · confounder ≤1</li>
-            <li><b>Tier III</b> $20K–$150K — doc &lt;4 · latency &lt;10 · confounder ≥2 · dx age &gt;78 · or drift-only</li>
-            <li><b>Doc score</b> +2 license / W-2 ag employer / purchase records / co-worker dec · +1 spray-log proximity / brand recall</li>
-            <li><b>Confounders</b> +1 family hx · LRRK2/GBA+ · TBI w/ LOC · age &gt;78 · maneb/rotenone</li>
-          </ul>
+
+        <!-- LAYER 2: VALUE — severity minus confounders -->
+        <div class="layer-card layer-2">
+          <div class="layer-head">
+            <span class="layer-num">Layer 2</span>
+            <span class="layer-title">How much are you worth once inside?</span>
+          </div>
+          <p class="layer-sub">Severity minus confounders. Once Layer 1 is clean, the market value tier comes from how sick the claimant is (pushes up) minus what the defense can lean on (pulls down).</p>
+          <div class="layer-grid">
+            <div class="layer-col layer-col-severity">
+              <div class="layer-col-title"><span class="arrow">▲</span> Severity pushes you UP</div>
+              <ul>
+                <li><b>Hoehn &amp; Yahr 3+</b> — functional severity anchor</li>
+                <li><b>PDD</b> — Parkinson's progressed to dementia / severe debilitation</li>
+                <li><b>DBS surgery</b> — deep brain stimulation (advanced PD)</li>
+                <li><b>Falls &gt;3 in 6 mo</b> / freezing episodes</li>
+                <li><b>Nursing home admission</b></li>
+                <li><b>Psychosis / hallucinations</b></li>
+                <li><b>Young age at diagnosis</b> — more compensation years</li>
+              </ul>
+              <div class="layer-read">Clinical events, not economics — they belong in tiering.</div>
+            </div>
+            <div class="layer-col layer-col-confounder">
+              <div class="layer-col-title"><span class="arrow">▼</span> Confounders pull you DOWN</div>
+              <ul>
+                <li><b>First-degree PD family history</b> — the MDL fact sheet asks for this for a reason</li>
+                <li><b>LRRK2-G2019S / GBA+</b> pathogenic variant — alternative causation</li>
+                <li><b>TBI with LOC</b> — neurons made more vulnerable to pesticides</li>
+                <li><b>Age 79+ at diagnosis</b></li>
+                <li><b>Heavy maneb / rotenone co-exposure</b></li>
+              </ul>
+              <div class="layer-read">Confounders can never drop a full tier alone — they adjust the within-tier score only. The same TBI / genetics can also be argued as potentiation (susceptibility), so it cuts both ways.</div>
+            </div>
+          </div>
+          <div class="layer-outcome win">
+            <b>The cleanest Tier I file</b> — the $500K–$1M+ range — is <b>doc_score 7+</b> · <b>latency 10–30</b> · <b>severe PD with PDD or DBS</b> · <b>diagnosed young</b> · <b>confounder_score = 0</b> — basically no family history, no genetics, no TBI, no heavy maneb/rotenone. <b>Add one confounder</b> — dad with Parkinson's, or a dx at 79 — and you slide to Tier II ($100K–$500K). <b>Add two</b> and you're Tier III even with good exposure.
+          </div>
         </div>
+
+        <!-- Diagnosis grid: once Layer 1 is clean, which clinical tier you sit in -->
+        <div class="dx-grid-head">Diagnosis grid <span class="note">— once Layer 1 is clean, which clinical tier you sit in (PDD → confirmed PD → parkinsonism → prodromal → below grid)</span></div>
         <div class="criteria-grid">
           <div class="criteria-tier-block tier-1-block">
             <div class="criteria-tier-head"><span class="tier-pill">Tier 1</span> <strong>Parkinson's + dementia (PDD)</strong></div>
             <ul class="criteria-bullets">
-              <li>Confirmed idiopathic PD (neurologist dx) that has <em>progressed to dementia</em></li>
+              <li>Confirmed idiopathic PD (neurologist dx)</li>
               <li>Documented cognitive decline <span class="criteria-tag">MoCA / DSM-5 / MDS</span></li>
               <li>Clears all gates <span class="criteria-tag">PDD protections attach</span></li>
             </ul>
