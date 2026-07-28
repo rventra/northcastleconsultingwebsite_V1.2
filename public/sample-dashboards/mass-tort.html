@@ -2107,10 +2107,13 @@ function renderBridgeChart(current, segs, potential) {
         datalabels: {
           clip: false,
           font: { weight: 700, size: 12 },
-          // Big end bars: bold white label INSIDE the bar. Thin lift slivers:
-          // two-line label above the bar (value + case count).
-          anchor: (t) => (t.dataIndex === 0 || t.dataIndex === labels.length - 1) ? 'center' : 'end',
-          align:  (t) => (t.dataIndex === 0 || t.dataIndex === labels.length - 1) ? 'center' : 'top',
+          // Truncated axis means the big end bars extend below the plot — a
+          // 'center'-anchored label renders OFF-SCREEN. Anchor at the bar's
+          // top end and align 'start' (just inside the bar) so the white label
+          // stays visible. Thin lift slivers keep the two-line label above.
+          anchor: 'end',
+          align:  (t) => (t.dataIndex === 0 || t.dataIndex === labels.length - 1) ? 'start' : 'top',
+          offset: (t) => (t.dataIndex === 0 || t.dataIndex === labels.length - 1) ? 4 : 0,
           color:  (t) => (t.dataIndex === 0 || t.dataIndex === labels.length - 1) ? '#fff' : '#1E2761',
           formatter: (v, t) => {
             const i = t.dataIndex;
