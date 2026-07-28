@@ -262,25 +262,23 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 /* Three-level criteria card — laid out top→bottom:
      1. Layer 1 (2 Pillars) | Clinical Tier (Layer 2)  — two side-by-side cols
      2. Severity Escalators + Confounders (push up / pull down) — 2 sub-blocks
-     3. Market Value Tier — the combined L1 + L2 + Severity + Confounder result
-   No red. Neutral text-only tags. */
+     3. Market Value Tier rules (L1 + L2 + Severity + Confounders → Tier I/II/III)
+     4. Tier Configurator — interactive widget to define a case and see the
+        resulting Market Value Tier.
+   No commentary on the lists themselves — just the criteria. Commentary and
+   thresholds live in the Market Value Tier rules + the Configurator output. */
 .crit-top{display:grid;grid-template-columns:1.45fr 1fr;gap:14px;align-items:start}
 @media(max-width:900px){.crit-top{grid-template-columns:1fr}}
 .crit-col{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:14px 16px;min-width:0}
-.crit-head{font-size:10.5px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;padding:8px 0 8px;border-bottom:1px solid var(--border);margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.crit-head .head-tag{font-size:9.5px;font-weight:700;color:var(--slate);background:transparent;border:1px solid var(--border);padding:1px 6px;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;margin-left:auto}
+.crit-head{font-size:10.5px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;padding:8px 0 8px;border-bottom:1px solid var(--border);margin-bottom:8px}
 .crit-pillar{margin-bottom:10px;padding:10px 12px;border:1px solid var(--border);border-radius:3px}
 .crit-pillar:last-child{margin-bottom:0}
 .crit-pillar-head{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .crit-pillar-head .pill-num{font-size:9.5px;font-weight:700;color:var(--navy);background:transparent;border:1px solid var(--navy);padding:1px 6px;border-radius:2px;letter-spacing:.1em;text-transform:uppercase}
-.crit-pillar-head .pill-tag{font-size:9.5px;font-weight:700;color:var(--slate);background:transparent;border:1px solid var(--border);padding:1px 6px;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;margin-left:auto}
 .crit-list{margin:0;padding:0;list-style:none;font-size:11.5px;color:var(--navy-ink);line-height:1.5}
 .crit-list li{margin-bottom:4px;padding-left:14px;position:relative}
 .crit-list li:before{content:"·";position:absolute;left:0;top:-2px;color:var(--gold);font-weight:700;font-size:14px}
 .crit-list li b{color:var(--navy)}
-.crit-list li .tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--slate);border:1px solid var(--border);padding:1px 5px;border-radius:2px;margin-left:4px;background:transparent;white-space:nowrap}
-.crit-list li .doc-detail{font-size:10.5px;color:var(--slate);font-style:italic;display:block;margin-top:1px;padding-left:0}
-.crit-list li .doc-detail:before{content:""}
 
 /* Modifiers row: severity escalators + confounders */
 .crit-mods{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
@@ -293,9 +291,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .crit-mod ul{margin:0;padding-left:18px;font-size:11.5px;color:var(--navy-ink);line-height:1.5;columns:2;column-gap:18px}
 .crit-mod ul li{margin-bottom:2px;break-inside:avoid}
 .crit-mod ul li b{color:var(--navy)}
-.crit-mod-note{font-size:10.5px;color:var(--slate);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);line-height:1.4}
 
-/* Market Value Tier table — combined output of L1 + L2 + Severity + Confounders */
+/* Market Value Tier rules table */
 .market-tier-table{margin-top:14px;width:100%;border-collapse:collapse;font-size:11.5px;color:var(--navy-ink)}
 .market-tier-table th{font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:8px 10px;background:var(--bg);border-bottom:1px solid var(--border)}
 .market-tier-table td{padding:8px 10px;border-top:1px solid var(--border);vertical-align:top;line-height:1.45}
@@ -306,6 +303,37 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .market-tier-table .mt-tier-cell.mt-III{color:var(--amber)}
 .market-tier-table .mt-range-cell{width:130px;font-weight:700;color:var(--navy);white-space:nowrap}
 .market-tier-table .mt-formula b{color:var(--navy);font-weight:700}
+
+/* Tier Configurator — interactive widget for building combinations */
+.tier-config{margin-top:18px;border:1px solid var(--gold);border-radius:4px;padding:14px 16px;background:var(--white)}
+.tier-config-head{font-size:13px;font-weight:700;color:var(--navy);margin:0 0 4px;letter-spacing:.02em}
+.tier-config-sub{font-size:11.5px;color:var(--slate);margin:0 0 12px;line-height:1.5}
+.config-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:1100px){.config-grid{grid-template-columns:repeat(2,1fr)}}
+.config-section{background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:10px 12px;min-width:0}
+.config-section-head{font-size:10.5px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.config-field{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--navy-ink);margin-bottom:5px;flex-wrap:wrap}
+.config-field > label:first-child{font-weight:700;color:var(--navy);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;min-width:60px}
+.config-field input[type="number"],.config-field select{font-family:inherit;font-size:12px;padding:4px 6px;border:1px solid var(--border);border-radius:2px;background:var(--white);color:var(--navy);font-weight:700}
+.config-field input[type="number"]{width:54px;text-align:right}
+.config-field select{padding-right:22px;cursor:pointer;flex:1;min-width:0}
+.config-field input[type="checkbox"]{width:13px;height:13px;margin:0;cursor:pointer;accent-color:var(--navy)}
+.config-radio-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;font-size:11.5px;cursor:pointer}
+.config-radio-row input[type="radio"]{margin:0;cursor:pointer;accent-color:var(--navy)}
+.config-radio-row span{color:var(--navy-ink)}
+.config-counter{font-size:10.5px;color:var(--slate);font-style:italic;margin-top:6px;padding-top:6px;border-top:1px solid var(--border)}
+.config-result{margin-top:14px;padding:12px 14px;background:var(--bg);border:1px solid var(--gold);border-radius:3px}
+.config-result-head{font-size:10.5px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;gap:10px}
+.result-row.result-tier{padding:8px 0;margin-top:4px;border-top:1px solid var(--border)}
+.result-label{color:var(--slate);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:10px}
+.result-val{font-weight:700;color:var(--navy);font-size:12px;text-align:right}
+.result-row.result-tier .result-val{font-size:18px}
+.result-row.result-tier.tier-I .result-val{color:var(--gold)}
+.result-row.result-tier.tier-II .result-val{color:var(--purple)}
+.result-row.result-tier.tier-III .result-val{color:var(--amber)}
+.result-row.result-tier.tier-cap .result-val{color:var(--slate);font-size:14px}
+.result-explain{font-size:11px;color:var(--slate);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);font-style:italic;line-height:1.45}
 
 /* Hide sidebar on Executive Summary (t0) — fewer distractions for PE audiences. */
 body.t0-active .sidebar{display:none}
@@ -546,113 +574,215 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
       </div>
 
-      <!-- Tier criteria reference — laid out top→bottom:
-         1. Layer 1 (2 Pillars) | Clinical Tier (Layer 2) — two side-by-side cols
-         2. Severity Escalators + Confounders (push up / pull down)
-         3. Market Value Tier — the combined L1 + L2 + Severity + Confounder result -->
+      <!-- Tier criteria reference — three sequential levels plus an interactive
+         Tier Configurator widget. Lists contain the criteria themselves only;
+         thresholds and outcomes live in the Market Value Tier rules table
+         and the Configurator result panel. -->
       <div class="exec-card">
         <h3>Tier Criteria — Layer 1 → Layer 2 → Market Value Tier</h3>
         <p style="font-size:12.5px;color:var(--slate);margin:-4px 0 14px;line-height:1.5;max-width:920px">
-          Each docket flows through three sequential steps. <b>Layer 1</b> asks whether you can prove paraquat exposure and whether the timing fits the science window. The <b>Clinical Tier</b> slots you by diagnosis. The <b>Market Value Tier</b> is computed from your Clinical Tier + severity escalators − confounders. Cleanest Tier I ($500K&ndash;$1M+): <b>Clinical Tier 1 or 2 + 3+ severity escalators + 0 confounders</b>.
+          Each docket flows through three sequential levels. <b>Layer 1</b> is the proof gate. <b>Layer 2</b> is the clinical diagnosis tier. <b>Market Value Tier</b> is computed from Layer 1 + Layer 2 + Severity Escalators + Confounders.
         </p>
 
-        <!-- TOP ROW: Layer 1 (2 Pillars) | Clinical Tier (Layer 2) -->
+        <!-- TOP ROW: Layer 1 (2 Pillars) | Layer 2 (Clinical Tier) -->
         <div class="crit-top">
 
           <div class="crit-col">
-            <div class="crit-head">Layer 1 &mdash; 2 Pillars <span class="head-tag">fail → cap at Tier III ($20K&ndash;$100K)</span></div>
-
+            <div class="crit-head">Layer 1 &mdash; 2 Pillars</div>
             <div class="crit-pillar">
-              <div class="crit-pillar-head"><span class="pill-num">Pillar 1</span> Exposure Proof <span class="pill-tag">all 4 required</span></div>
+              <div class="crit-pillar-head"><span class="pill-num">Pillar 1</span> Exposure Proof</div>
               <ul class="crit-list">
-                <li><b>doc_score 0&ndash;10</b> <span class="doc-detail">+2 license · +2 W-2 · +2 receipts · +2 co-worker dec · +1 spray-log · +1 brand recall — ≥7 trial-grade, 4&ndash;6 solid, &lt;4 <span class="tag">cap TIER III</span></span></li>
-                <li><b>Nature of exposure</b> <span class="doc-detail">mixer/loader &gt; sprayer &gt; applicator &gt; flagger &gt; farmhand &gt; drift — drift <span class="tag">cap TIER III</span></span></li>
-                <li><b>Exposure era</b> <span class="doc-detail">Syngenta (&ge;1990) = pass · Mixed = pass · Pre-1990 Chevron-only = <span class="tag">fail (wrong defendant)</span></span></li>
-                <li><b>PFS / AQ documentation</b> <span class="doc-detail">Complete (CMO 7/10) = pass · Incomplete = <span class="tag">fail</span></span></li>
+                <li><b>doc_score 0&ndash;10</b> — +2 license · +2 W-2 · +2 receipts · +2 co-worker dec · +1 spray-log · +1 brand recall</li>
+                <li><b>Nature of exposure</b> — mixer/loader · sprayer · applicator · flagger · loader · farmhand · drift</li>
+                <li><b>Exposure era</b> — Syngenta (≥1990) · Mixed · Pre-1990 Chevron-only</li>
+                <li><b>PFS / AQ documentation</b> — Complete · Incomplete</li>
               </ul>
             </div>
-
             <div class="crit-pillar">
-              <div class="crit-pillar-head"><span class="pill-num">Pillar 2</span> Latency (first exposure &rarr; diagnosis)</div>
+              <div class="crit-pillar-head"><span class="pill-num">Pillar 2</span> Latency</div>
               <ul class="crit-list">
-                <li><b>10&ndash;30 yrs</b> <span class="tag">ideal</span> — "two to three decades" is the relevant window; 20&ndash;10 yrs before dx is where studies found the signal</li>
-                <li><b>5&ndash;10 yrs</b> acceptable but weak</li>
-                <li><b>&lt; 5 yrs</b> <span class="tag">dq (alternate cause)</span></li>
-                <li><b>&gt; 40 yrs</b> defense argues alternate cause — <span class="tag">cap TIER III</span></li>
+                <li>10&ndash;30 yrs</li>
+                <li>5&ndash;10 yrs</li>
+                <li>&lt; 5 yrs</li>
+                <li>&gt; 40 yrs</li>
               </ul>
             </div>
           </div>
 
           <div class="crit-col">
-            <div class="crit-head">Layer 2 &mdash; Clinical Tier (diagnosis) <span class="head-tag">economics excluded</span></div>
+            <div class="crit-head">Layer 2 &mdash; Clinical Tier (diagnosis)</div>
             <ul class="crit-list">
-              <li><b>T1: PDD</b> — Confirmed PD + documented dementia (MoCA / DSM-5 / MDS). PDD protections attach.</li>
-              <li><b>T2: Confirmed PD</b> — Movement-disorder neurologist dx. DaTscan / levodopa strengthens. <b>Core inventory.</b></li>
-              <li><b>T3: Parkinsonism</b> — Parkinsonism NOS / atypical / suspected toxicant-induced. Upgrades to T2 on confirmed PD dx.</li>
-              <li><b>T4: Prodromal</b> — Documented symptoms in contemporaneous records. Migrates up on confirmed dx.</li>
-              <li><b>Below grid</b> — No clinical diagnosis that fits any of the above.</li>
+              <li><b>T1</b> — Parkinson's + dementia (PDD)</li>
+              <li><b>T2</b> — Confirmed idiopathic PD</li>
+              <li><b>T3</b> — Parkinsonism (non-PD)</li>
+              <li><b>T4</b> — Prodromal / symptom-level</li>
+              <li><b>Below grid</b> — No clinical diagnosis that fits</li>
             </ul>
           </div>
 
         </div>
 
-        <!-- MIDDLE ROW: Severity Escalators + Confounders -->
+        <!-- MODIFIERS ROW: Severity Escalators + Confounders -->
         <div class="crit-mods">
-
           <div class="crit-mod mod-up">
-            <div class="crit-mod-head"><span class="arrow">▲</span> Severity escalators <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--slate);font-size:10.5px">push UP into Tier I</span></div>
+            <div class="crit-mod-head"><span class="arrow">▲</span> Severity escalators</div>
             <ul>
               <li>Hoehn &amp; Yahr 3+</li>
               <li>PDD (Parkinson's + dementia)</li>
               <li>DBS surgery</li>
-              <li>Falls &gt;3 in 6 mo / freezing</li>
+              <li>Falls &gt;3 in 6 mo</li>
+              <li>Freezing episodes</li>
               <li>Psychosis / hallucinations</li>
               <li>Nursing home admission</li>
               <li>Young age at diagnosis</li>
             </ul>
-            <div class="crit-mod-note"><b>To reach Tier I</b> you need <b>3 or more</b> of these on a T1 (PDD) or T2 (PD) docket with <b>0 confounders</b>.</div>
           </div>
-
           <div class="crit-mod mod-down">
-            <div class="crit-mod-head"><span class="arrow">▼</span> Confounders <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--slate);font-size:10.5px">pull DOWN</span></div>
+            <div class="crit-mod-head"><span class="arrow">▼</span> Confounders</div>
             <ul>
-              <li>First-degree PD family hx</li>
+              <li>First-degree PD family history</li>
               <li>LRRK2-G2019S / GBA+</li>
               <li>TBI with LOC</li>
               <li>Age 79+ at diagnosis</li>
-              <li>Heavy maneb / rotenone</li>
+              <li>Heavy maneb / rotenone co-exposure</li>
             </ul>
-            <div class="crit-mod-note"><b>2 or more confounders = Tier III</b> even with good exposure and severe disease.</div>
           </div>
-
         </div>
 
-        <!-- BOTTOM: Market Value Tier — the combined result -->
-        <div class="crit-head" style="margin-top:18px">Market Value Tier <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--slate);font-size:11px">L1 + L2 + Severity Escalators + Confounders</span></div>
+        <!-- MARKET VALUE TIER RULES TABLE -->
+        <div class="crit-head" style="margin-top:18px">Market Value Tier rules</div>
         <table class="market-tier-table">
           <thead>
-            <tr><th>Tier</th><th>Range</th><th>Result</th></tr>
+            <tr><th>Tier</th><th>Range</th><th>Conditions</th></tr>
           </thead>
           <tbody>
             <tr>
               <td class="mt-tier-cell mt-I">Tier I</td>
               <td class="mt-range-cell">$400K &ndash; $1M+</td>
-              <td class="mt-formula"><b>Layer 1 passes</b> · <b>Clinical Tier = T1 or T2</b> · <b>3+ severity escalators</b> · <b>0 confounders</b> · dx age &lt;70 · Hoehn &amp; Yahr &ge;3</td>
+              <td class="mt-formula">Layer 1 pass · Clinical Tier = T1 or T2 · <b>doc_score &ge;7</b> · <b>latency 10&ndash;30</b> · <b>H&amp;Y &ge;3</b> · <b>cf = 0</b> · &ge;1 severity escalator · <b>age &lt;70</b></td>
             </tr>
             <tr>
               <td class="mt-tier-cell mt-II">Tier II</td>
               <td class="mt-range-cell">$150K &ndash; $300K</td>
-              <td class="mt-formula"><b>Layer 1 passes</b> · <b>Clinical Tier = T1 or T2</b> with 1&ndash;2 severity escalators and 0&ndash;1 confounders, OR <b>Clinical Tier = T3</b> with any severity (capped)</td>
+              <td class="mt-formula">Layer 1 pass · Clinical Tier = T1/T2 with <b>doc_score 4&ndash;6</b>, <b>latency 5&ndash;35</b>, <b>cf &le;1</b> — OR Clinical Tier = T3 with any severity (capped at II)</td>
             </tr>
             <tr>
               <td class="mt-tier-cell mt-III">Tier III</td>
               <td class="mt-range-cell">$20K &ndash; $150K</td>
-              <td class="mt-formula"><b>Layer 1 fails</b> (any pillar 1 weak signal or pillar 2 latency miss) — OR <b>Clinical Tier = T4</b> (prodromal forces Tier III) — OR <b>2+ confounders</b> — OR zero severity escalators</td>
+              <td class="mt-formula">Layer 1 <b>fail</b> — OR Clinical Tier = T4 — OR <b>doc_score &lt;4</b> — OR <b>latency &lt;10</b> — OR <b>cf &ge;2</b> — OR <b>age &gt;78</b> — OR drift-only — OR no severity escalators</td>
             </tr>
           </tbody>
         </table>
 
-        <div class="criteria-foot">Per <code>docs/paraquat-tier-framework.md</code>: tier placement is driven by diagnosis + exposure proof only — economic loss (wages, medical bills) never sets the tier. <b>Deceased claimants</b> convert to wrongful-death/survival posture; the tier is set by records as of death and never diminishes. <b>Progression migration</b>: PD → PDD moves up automatically on documented cognitive decline; prodromal moves up on confirmed dx. <b>PPE</b> is bidirectional — documented use scores up (rebuts comparative fault); non-use is neutral, never a penalty. <b>Confounders</b> adjust within-tier score only — they can never drop a claimant a full tier alone.</div>
+        <!-- INTERACTIVE TIER CONFIGURATOR -->
+        <div class="tier-config">
+          <h3 class="tier-config-head">Tier Configurator — build a case, see its Market Value Tier</h3>
+          <p class="tier-config-sub">Pick the Layer 1, Layer 2, Severity, and Confounder combination below. The widget computes the resulting Market Value Tier against the rules above.</p>
+
+          <div class="config-grid">
+
+            <!-- Layer 1 inputs -->
+            <div class="config-section">
+              <div class="config-section-head">Layer 1 — 2 Pillars</div>
+
+              <div class="config-field">
+                <label>doc_score</label>
+                <input type="number" id="cfg-doc-score" min="0" max="10" step="1" value="8">
+              </div>
+              <div class="config-field">
+                <label>Nature</label>
+                <select id="cfg-nature">
+                  <option value="applicator">applicator+ (mixer/loader, sprayer, applicator, flagger)</option>
+                  <option value="farmhand">farmhand / loader (occupational)</option>
+                  <option value="drift" selected>drift (residential / bystander)</option>
+                </select>
+              </div>
+              <div class="config-field">
+                <label>Era</label>
+                <select id="cfg-era">
+                  <option value="syngenta" selected>Syngenta (≥1990) / Mixed</option>
+                  <option value="chevron">Pre-1990 Chevron-only</option>
+                </select>
+              </div>
+              <div class="config-field">
+                <label>PFS/AQ</label>
+                <select id="cfg-pfs">
+                  <option value="complete" selected>Complete (CMO 7/10)</option>
+                  <option value="incomplete">Incomplete</option>
+                </select>
+              </div>
+              <div class="config-field">
+                <label>Latency</label>
+                <select id="cfg-latency">
+                  <option value="ideal" selected>10&ndash;30 yrs</option>
+                  <option value="acceptable">5&ndash;10 yrs</option>
+                  <option value="dq">&lt; 5 yrs</option>
+                  <option value="alt">&gt; 40 yrs</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Layer 2 inputs -->
+            <div class="config-section">
+              <div class="config-section-head">Layer 2 — Clinical Tier</div>
+              <label class="config-radio-row"><input type="radio" name="cfg-dx" value="1"> T1: PDD</label>
+              <label class="config-radio-row"><input type="radio" name="cfg-dx" value="2" checked> T2: Confirmed PD</label>
+              <label class="config-radio-row"><input type="radio" name="cfg-dx" value="3"> T3: Parkinsonism</label>
+              <label class="config-radio-row"><input type="radio" name="cfg-dx" value="4"> T4: Prodromal</label>
+              <label class="config-radio-row"><input type="radio" name="cfg-dx" value="5"> Below grid</label>
+              <div class="config-field" style="margin-top:6px">
+                <label>H&amp;Y</label>
+                <select id="cfg-hy">
+                  <option value="1">1 (mild)</option>
+                  <option value="2">2 (moderate)</option>
+                  <option value="3" selected>3 (advanced)</option>
+                  <option value="4">4 (severe)</option>
+                </select>
+              </div>
+              <div class="config-field">
+                <label>Age dx</label>
+                <input type="number" id="cfg-age" min="40" max="100" step="1" value="62">
+              </div>
+            </div>
+
+            <!-- Severity inputs -->
+            <div class="config-section">
+              <div class="config-section-head">Severity escalators</div>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-sev-pdd" checked> PDD (Parkinson's + dementia)</label>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-sev-dbs"> DBS surgery</label>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-sev-falls"> Falls &gt;3 in 6 mo</label>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-sev-freezing"> Freezing episodes</label>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-sev-psych"> Psychosis / hallucinations</label>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-sev-nh"> Nursing home admission</label>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-sev-young"> Young age at diagnosis</label>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-sev-hy"> Hoehn &amp; Yahr 3+</label>
+              <div class="config-counter" id="cfg-sev-count">2 escalators checked</div>
+            </div>
+
+            <!-- Confounders inputs -->
+            <div class="config-section">
+              <div class="config-section-head">Confounders</div>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-cf-fam"> First-degree PD family hx</label>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-cf-gen"> LRRK2-G2019S / GBA+</label>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-cf-tbi"> TBI with LOC</label>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-cf-age79"> Age 79+ at diagnosis</label>
+              <label class="config-radio-row"><input type="checkbox" id="cfg-cf-pest"> Heavy maneb / rotenone</label>
+              <div class="config-counter" id="cfg-cf-count">0 confounders checked</div>
+            </div>
+
+          </div>
+
+          <!-- RESULT -->
+          <div class="config-result">
+            <div class="config-result-head">Computed Result</div>
+            <div class="result-row"><span class="result-label">Layer 1</span><span class="result-val" id="cfg-r-l1">PASS</span></div>
+            <div class="result-row"><span class="result-label">Layer 2</span><span class="result-val" id="cfg-r-l2">T2 — Confirmed PD</span></div>
+            <div class="result-row result-tier tier-III" id="cfg-r-tier-row"><span class="result-label">Market Value Tier</span><span class="result-val" id="cfg-r-mt">Tier III · $20K&ndash;$150K</span></div>
+            <div class="result-explain" id="cfg-r-explain">drift-only exposure (residential / bystander) — caps at Tier III.</div>
+          </div>
+        </div>
+
+        <div class="criteria-foot">Per <code>docs/paraquat-tier-framework.md</code>: tier placement is driven by diagnosis + exposure proof only. <b>Deceased claimants</b> convert to wrongful-death/survival posture. <b>Progression migration</b>: PD → PDD moves up automatically on documented cognitive decline; prodromal moves up on confirmed dx.</div>
       </div>
 
       <div class="exec-card">
@@ -3396,6 +3526,146 @@ document.querySelectorAll('.tab').forEach(tab => {
 document.body.classList.add('t0-active');
 
 // ====================================================================
+// TIER CONFIGURATOR — interactive widget that builds a case from the
+// Layer 1 / Layer 2 / Severity / Confounder criteria and computes the
+// resulting Market Value Tier against the rules in the criteria card.
+// Mirrors marketTierOf() so the on-screen result matches what the JS
+// assigns to real cases. Recomputes live on any input change.
+// ====================================================================
+function readCfg() {
+  const get = id => document.getElementById(id);
+  const checked = id => !!(get(id) && get(id).checked);
+  const sevIds = ['cfg-sev-pdd','cfg-sev-dbs','cfg-sev-falls','cfg-sev-freezing',
+                   'cfg-sev-psych','cfg-sev-nh','cfg-sev-young','cfg-sev-hy'];
+  const cfIds = ['cfg-cf-fam','cfg-cf-gen','cfg-cf-tbi','cfg-cf-age79','cfg-cf-pest'];
+  return {
+    docScore: parseInt(get('cfg-doc-score').value || '0', 10),
+    nature: get('cfg-nature').value,
+    era: get('cfg-era').value,
+    pfs: get('cfg-pfs').value,
+    latency: get('cfg-latency').value,
+    dx: parseInt(document.querySelector('input[name="cfg-dx"]:checked').value, 10),
+    hy: parseInt(get('cfg-hy').value, 10),
+    age: parseInt(get('cfg-age').value || '0', 10),
+    sevCount: sevIds.filter(checked).length,
+    sevAny: sevIds.some(checked),
+    cfCount: cfIds.filter(checked).length,
+  };
+}
+function computeTierCfg() {
+  const c = readCfg();
+  // ----- Layer 1 pass/fail -----
+  const eraOk = c.era !== 'chevron';
+  const pfsOk = c.pfs === 'complete';
+  const latOk = c.latency !== 'dq' && c.latency !== 'alt';
+  const l1Pass = eraOk && pfsOk && latOk;
+  // Latency in years (representative point inside the bucket)
+  const latYears = c.latency === 'ideal' ? 20 : c.latency === 'acceptable' ? 7 : c.latency === 'dq' ? 3 : 45;
+  const driftOnly = c.nature === 'drift';
+  // ----- Layer 2 (Clinical Tier) — already a direct selection -----
+  const dxLabel = { 1: 'T1 — PDD', 2: 'T2 — Confirmed PD', 3: 'T3 — Parkinsonism', 4: 'T4 — Prodromal', 5: 'Below grid' }[c.dx] || '?';
+  // ----- Market Value Tier — mirror marketTierOf() rules -----
+  let mt = null, mtLabel = '', tierRowClass = 'result-row result-tier';
+  if (!l1Pass) {
+    mt = 'cap';
+    mtLabel = 'Cap at Tier III ($20K–$100K) — Layer 1 fails';
+    tierRowClass += ' tier-cap';
+  } else if (c.dx === 5) {
+    mt = 'none';
+    mtLabel = 'No clinical tier — no market value';
+    tierRowClass += ' tier-cap';
+  } else if (c.dx === 4) {
+    mt = 'III';
+    mtLabel = 'Tier III · $20K–$150K (T4 prodromal forces Tier III)';
+    tierRowClass += ' tier-III';
+  } else {
+    // Drift-only caps at Tier III regardless of other conditions (framework rule)
+    if (driftOnly) {
+      mt = 'III';
+      mtLabel = 'Tier III · $20K–$150K (drift-only caps at Tier III)';
+      tierRowClass += ' tier-III';
+    } else {
+      const tierI = c.docScore >= 7 && latYears >= 10 && latYears <= 30 && c.hy >= 3
+        && c.cfCount === 0 && c.sevAny && c.age < 70;
+      const tierIII = c.docScore < 4 || latYears < 10 || c.cfCount >= 2 || c.age > 78;
+      if (tierI) {
+        mt = 'I';
+        mtLabel = 'Tier I · $400K–$1M+';
+        tierRowClass += ' tier-I';
+      } else if (tierIII) {
+        mt = 'III';
+        mtLabel = 'Tier III · $20K–$150K';
+        tierRowClass += ' tier-III';
+      } else if (c.docScore >= 4 && latYears >= 5 && latYears <= 35 && c.cfCount <= 1) {
+        mt = 'II';
+        mtLabel = 'Tier II · $150K–$300K';
+        tierRowClass += ' tier-II';
+        if (c.dx === 3) mtLabel += ' (T3 capped at II)';
+      } else {
+        mt = 'III';
+        mtLabel = 'Tier III · $20K–$150K';
+        tierRowClass += ' tier-III';
+      }
+    }
+  }
+  // ----- Layer 1 pass/fail message -----
+  let l1Msg = 'PASS';
+  if (!l1Pass) {
+    const fails = [];
+    if (!eraOk) fails.push('era = Pre-1990 Chevron-only');
+    if (!pfsOk) fails.push('PFS/AQ incomplete');
+    if (!latOk) fails.push(`latency ${c.latency === 'dq' ? '<5 yrs' : '>40 yrs'}`);
+    l1Msg = `FAIL — ${fails.join(' · ')}`;
+  }
+  // ----- Explanation -----
+  let explain = '';
+  if (mt === 'cap') explain = `Layer 1 fail → cap at Tier III regardless of clinical tier.`;
+  else if (mt === 'none') explain = `Below grid — no clinical diagnosis fits.`;
+  else if (mt === 'I') explain = `Tier I: doc ≥7, latency 10–30, H&Y ≥3, cf = 0, ≥1 severity, age <70.`;
+  else if (mt === 'II') explain = c.dx === 3
+    ? `Tier II (capped): Clinical Tier T3 caps at market Tier II.`
+    : `Tier II: doc 4–6, latency 5–35, cf ≤1.`;
+  else if (mt === 'III') {
+    const reasons = [];
+    if (driftOnly) reasons.push('drift-only exposure (caps at III)');
+    if (c.docScore < 4) reasons.push('doc_score <4');
+    if (latYears < 10) reasons.push('latency <10');
+    if (c.cfCount >= 2) reasons.push(`${c.cfCount} confounders`);
+    if (c.age > 78) reasons.push('age >78');
+    if (c.dx === 4) reasons.push('T4 prodromal forces III');
+    if (!c.sevAny) reasons.push('no severity escalators');
+    explain = `Tier III: ${reasons.length ? reasons.join(' · ') : 'no Tier II condition matched'}.`;
+  }
+  // ----- Render -----
+  document.getElementById('cfg-r-l1').textContent = l1Msg;
+  document.getElementById('cfg-r-l2').textContent = dxLabel;
+  const tierRow = document.getElementById('cfg-r-tier-row');
+  tierRow.className = tierRowClass;
+  document.getElementById('cfg-r-mt').innerHTML = mtLabel;
+  document.getElementById('cfg-r-explain').textContent = explain;
+  document.getElementById('cfg-sev-count').textContent = `${c.sevCount} severity escalator${c.sevCount === 1 ? '' : 's'} checked`;
+  document.getElementById('cfg-cf-count').textContent = `${c.cfCount} confounder${c.cfCount === 1 ? '' : 's'} checked`;
+}
+function initTierConfigurator() {
+  const ids = ['cfg-doc-score','cfg-nature','cfg-era','cfg-pfs','cfg-latency','cfg-hy','cfg-age'];
+  const sevIds = ['cfg-sev-pdd','cfg-sev-dbs','cfg-sev-falls','cfg-sev-freezing',
+                   'cfg-sev-psych','cfg-sev-nh','cfg-sev-young','cfg-sev-hy'];
+  const cfIds = ['cfg-cf-fam','cfg-cf-gen','cfg-cf-tbi','cfg-cf-age79','cfg-cf-pest'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.addEventListener('input', computeTierCfg); el.addEventListener('change', computeTierCfg); }
+  });
+  sevIds.concat(cfIds).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.addEventListener('change', computeTierCfg); }
+  });
+  document.querySelectorAll('input[name="cfg-dx"]').forEach(el => {
+    el.addEventListener('change', computeTierCfg);
+  });
+  computeTierCfg();
+}
+
+// ====================================================================
 // INIT
 // ====================================================================
 
@@ -3403,6 +3673,7 @@ updateCounts();
 renderExecSummary();
 renderCrossChips();
 initFilters();
+initTierConfigurator();
 
 // If NL query is opened first, allow backend to be specified via prompt
 if (!API_URL) {
