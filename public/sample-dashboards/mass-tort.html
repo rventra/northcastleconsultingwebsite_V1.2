@@ -2106,15 +2106,17 @@ function renderBridgeChart(current, segs, potential) {
   const segLabel = s => `${s.label} (${s.n})`;
   const labels = ['Current inventory', ...segs.map(segLabel), 'Potential (100%)'];
   const data = [[0, current]];
+  // Two colors only: navy for the before/after (current + potential) bars,
+  // gold for every lift segment in between.
   const colors = ['#1E2761'];
   let cum = current;
   segs.forEach(s => {
     data.push([cum, cum + s.value]);
-    colors.push(s.target ? TIER_COLORS[s.target - 1] : '#94A3B8');
+    colors.push('#C9A227');
     cum += s.value;
   });
   data.push([0, potential]);
-  colors.push('#2C5F2D');
+  colors.push('#1E2761');
   // Truncated axis: start a bit below the current value so the lift segments
   // get real pixels. Current/potential bars clip at the bottom — their
   // datalabels still carry the full figures, so nothing is hidden.
