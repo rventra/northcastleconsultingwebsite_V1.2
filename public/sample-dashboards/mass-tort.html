@@ -44,6 +44,11 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tab{padding:14px 22px;font-size:13px;font-weight:700;color:var(--slate);cursor:pointer;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;letter-spacing:.02em}
 .tab:hover{color:var(--navy)}
 .tab.active{color:var(--navy);border-bottom-color:var(--gold)}
+/* Live GSV readout pinned to the right end of the (sticky) tab strip — always
+   top-right, updates via updateTierPanelDerived() on any tier $/case edit. */
+.gsv-header{margin-left:auto;display:flex;align-items:baseline;gap:8px;padding:0 4px;cursor:help}
+.gsv-header-label{font-size:10px;font-weight:700;color:var(--slate);letter-spacing:.12em;text-transform:uppercase}
+.gsv-header-value{font-size:17px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
 .content{padding:34px 44px;max-width:1280px}
 .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px}
 .tile{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--gold);padding:16px 18px;position:relative}
@@ -645,6 +650,10 @@ details.exec-details[open]>summary{margin-bottom:12px}
     <div class="tab" data-tab="t4">Evidence</div>
     <div class="tab" data-tab="t5">Valuation</div>
     <div class="tab" data-tab="t6">NL Query</div>
+    <div class="gsv-header" title="Current gross settlement value of the open inventory — updates live as you edit tier $/case inputs">
+      <span class="gsv-header-label">Current GSV</span>
+      <span class="gsv-header-value" id="gsvHeader">&mdash;</span>
+    </div>
   </div>
   <div id="crossFilterBar" class="cross-filter-bar" style="display:none"></div>
 
@@ -2416,6 +2425,9 @@ function updateTierPanelDerived() {
     totalClosed += closed;
     totalCurrentGsv += payout;
   });
+  // Header readout (tab strip, top-right) — tracks every tier $/case edit.
+  const hdrGsvEl = document.getElementById('gsvHeader');
+  if (hdrGsvEl) hdrGsvEl.textContent = fmtMoney(totalCurrentGsv);
   // Market-grid strip: open-case counts + values per market tier.
   const mktN = { I: 0, II: 0, III: 0 }, mktV = { I: 0, II: 0, III: 0 };
   cases.forEach(c => {
