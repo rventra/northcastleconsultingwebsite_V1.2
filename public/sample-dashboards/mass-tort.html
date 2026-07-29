@@ -205,13 +205,6 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .mx-name{font-weight:700;color:var(--navy)}
 .mx-sub{display:block;font-size:11px;color:var(--slate-lite);font-weight:400}
 .tier-matrix .tier-gsv-input{width:115px;padding:4px 8px;font-size:15px;border-width:1px}
-.mx-lift{min-width:250px}
-.lift-line{cursor:pointer;font-size:12.5px;color:var(--navy-ink);padding:2px 0;line-height:1.5}
-.lift-line b{color:var(--navy)}
-.lift-line:hover{color:var(--gold)}
-.lift-line.lift-two,.lift-line.lift-thin{color:var(--slate)}
-.lift-line.lift-two b,.lift-line.lift-thin b{color:var(--navy)}
-.lift-none{font-size:12px;color:var(--slate-lite);font-style:italic}
 /* Gap-status badge (wins modal) */
 .gap-badge{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.05em;padding:2px 6px;border-radius:2px;text-transform:uppercase}
 .gap-badge.gap-thin{background:var(--amber-bg);color:var(--amber)}
@@ -307,8 +300,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 /* Tier Builder — visual rule editor + distribution table.
    Users define the conditional statements that place a case into Tier I/II/III/BG.
    Each tier is an AND or OR of conditions on case fields. */
-.tier-builder-card .builder-tiers{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
-@media(max-width:1100px){.tier-builder-card .builder-tiers{grid-template-columns:1fr}}
+/* Tier builder grid — see .builder-tiers rule below for responsive columns */
 .builder-tier{border:1px solid var(--border);border-radius:4px;padding:12px 14px;background:var(--bg)}
 .builder-tier-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--border)}
 .builder-tier-name{font-size:13px;font-weight:700;color:var(--navy)}
@@ -320,8 +312,15 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .builder-tier-controls{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:11px;color:var(--slate)}
 .builder-tier-controls select{font-family:inherit;font-size:11px;padding:2px 5px;border:1px solid var(--border);border-radius:2px;background:var(--white);color:var(--navy);font-weight:700;cursor:pointer}
 .builder-conditions{display:flex;flex-direction:column;gap:5px;margin-bottom:8px}
-.builder-condition{display:grid;grid-template-columns:1fr 80px 70px 24px;gap:5px;align-items:center;font-size:11.5px}
-.builder-condition select,.builder-condition input{font-family:inherit;font-size:11.5px;padding:4px 6px;border:1px solid var(--border);border-radius:2px;background:var(--white);color:var(--navy);font-weight:600}
+.builder-condition{display:grid;grid-template-columns:1fr 80px minmax(54px,1fr) 24px;gap:5px;align-items:start;font-size:11.5px}
+/* Narrower tier boxes — 180px min instead of stretching full width */
+.tier-builder-card .builder-tiers{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:14px}
+.builder-tier{max-width:340px}
+/* Symptom multi-select */
+.cond-multi-select{display:flex;flex-wrap:wrap;gap:2px 6px;max-width:200px;font-size:10px}
+.symptom-cb{display:inline-flex;align-items:center;gap:2px;white-space:nowrap;cursor:pointer}
+.symptom-cb input[type=checkbox]{width:12px;height:12px;cursor:pointer}
+.builder-condition select,.builder-condition input:not([type=checkbox]){font-family:inherit;font-size:11.5px;padding:4px 6px;border:1px solid var(--border);border-radius:2px;background:var(--white);color:var(--navy);font-weight:600}
 .builder-condition .cond-field{font-weight:700}
 .builder-condition .cond-value{text-align:right}
 .builder-condition .cond-remove{width:24px;height:24px;border:1px solid var(--border);background:var(--white);color:var(--slate);font-size:14px;line-height:1;cursor:pointer;border-radius:2px;padding:0;font-weight:700}
@@ -2405,7 +2404,6 @@ function renderTierPanel() {
         <td class="num"><b id="mx-${t}-cases">0</b><span class="mx-sub" id="mx-${t}-closed"></span></td>
         <td class="num" id="mx-${t}-avg">$0</td>
         <td class="num"><b id="mx-${t}-payout">$0</b></td>
-        <td class="mx-lift" id="mx-${t}-lift">${liftCellHtml(t)}</td>
       </tr>`;
   }).join('');
 
@@ -2447,7 +2445,6 @@ function renderTierPanel() {
         <th class="num">Cases</th>
         <th class="num">Avg value</th>
         <th class="num">Inventory value</th>
-        <th>Lift — cases here that could move up</th>
       </tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
@@ -2457,80 +2454,14 @@ function renderTierPanel() {
     inp.addEventListener('input', updateTierPanelDerived);
   });
 
-  wireWinsRows(panel);
-
   updateTierPanelDerived();
 }
 
 // Win candidates sitting in source tier t, grouped by cohort kind. Entries
 // carry the per-case value delta (gv) — with the two-layer model the same
 // upgrade is worth different amounts to different cases.
-function winsCohorts(t) {
-  const target = t - 1;
-  const out = { target, one: [], two: [], thin: [] };
-  if (target < 1) return out;
-  D.cases.forEach(c => {
-    if (c.tier !== t) return;
-    const w = winCandidates(c, t);
-    if (w.qualifies) out[w.kind].push({ c, w, gv: gapValue(c, w) });
-  });
-  return out;
-}
-
-// Below-grid (tier 5) cases grouped by (natural target tier × kind).
-function gateCohorts() {
-  const groups = {};
-  D.cases.forEach(c => {
-    if (c.tier !== 5) return;
-    const w = winCandidates(c, 5);
-    if (!w.qualifies) return;
-    const gv = gapValue(c, w);
-    const k = `${w.kind}|${w.target}`;
-    if (!groups[k]) groups[k] = { kind: w.kind, target: w.target, entries: [], exp: 0 };
-    groups[k].entries.push({ c, w, gv });
-    groups[k].exp += gv * state.convertRate;
-  });
-  return Object.values(groups).sort((a, b) => b.exp - a.exp);
-}
-
-// Lift cell for tier T: cohorts sitting IN tier T that could move UP (or, for
-// below-grid, INTO the grid once gates clear). Source tier's box — T1 top.
-function liftCellHtml(t) {
-  if (t === 1) return '<span class="lift-none">top tier</span>';
-  const p = state.convertRate;
-  const sumExp = arr => arr.reduce((s, e) => s + e.gv, 0) * p;
-  if (t === 5) {
-    const groups = gateCohorts();
-    if (!groups.length) return '<span class="lift-none">no curable gate failures</span>';
-    const lines = groups.slice(0, 4).map(g =>
-      liftLine(5, g.kind, g.entries.length, sumExp(g.entries),
-        `${g.kind === 'one' ? 'one fix' : g.kind === 'two' ? 'two fixes' : 'thin-file'} → Tier ${g.target} (gate cure)`, g.target));
-    if (groups.length > 4) lines.push(`<div class="lift-none">+ ${groups.length - 4} more gate cohorts</div>`);
-    return lines.join('');
-  }
-  const { one, two, thin } = winsCohorts(t);
-  const lines = [];
-  if (one.length)  lines.push(liftLine(t, 'one',  one.length,  sumExp(one),  `one fix from Tier ${t - 1}`));
-  if (two.length)  lines.push(liftLine(t, 'two',  two.length,  sumExp(two),  `two fixes from Tier ${t - 1}`));
-  if (thin.length) lines.push(liftLine(t, 'thin', thin.length, sumExp(thin), `thin-file long shots → Tier ${t - 1}`));
-  if (!lines.length) return '<span class="lift-none">no near-wins here</span>';
-  return lines.join('');
-}
-
-function liftLine(source, kind, n, exp, label, target) {
-  const p = state.convertRate;
-  const tgt = target != null ? ` data-target="${target}"` : '';
-  return `<div class="lift-line lift-${kind}" data-tier="${source}" data-kind="${kind}"${tgt} role="button" tabindex="0" title="Click to see the cohort">▸ <b>${n}</b> ${label} — if ${oddsWords(p)} convert, <b>+${fmtMoney(exp)}</b></div>`;
-}
-
-function wireWinsRows(panel) {
-  panel.querySelectorAll('.lift-line[data-tier]').forEach(el => {
-    const open = () => openWinsModal(parseInt(el.dataset.tier, 10), el.dataset.kind,
-      el.dataset.target != null ? parseInt(el.dataset.target, 10) : null);
-    el.addEventListener('click', open);
-    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') open(); });
-  });
-}
+// (winsCohorts / gateCohorts / liftCellHtml / liftLine / wireWinsRows removed
+//  2026-07-29 when the lift matrix was taken off the panel — see PR notes.)
 
 function updateTierPanelDerived() {
   if (!D.cases) return;
@@ -2562,12 +2493,6 @@ function updateTierPanelDerived() {
     if (closedEl) closedEl.textContent = `${closed.toLocaleString()} closed`;
     if (payEl) payEl.textContent = fmtMoney(payout);
     if (avgEl) avgEl.textContent = fmtMoney(openCases.length ? payout / openCases.length : 0);
-    // Rebuild the lift cell in place and rewire its click handlers
-    const liftEl = document.getElementById(`mx-${t}-lift`);
-    if (liftEl) {
-      liftEl.innerHTML = liftCellHtml(t);
-      wireWinsRows(liftEl);
-    }
   });
   // Market-grid strip: open-case counts + values per market tier.
   const mktN = { I: 0, II: 0, III: 0 }, mktV = { I: 0, II: 0, III: 0 };
@@ -3415,15 +3340,27 @@ document.body.classList.add('t0-active');
 // recompute the distribution. Defaults mirror the framework doc.
 // ====================================================================
 const TIER_BUILDER_FIELD_DEFS = [
-  { key: 'docScore',          label: 'doc_score',              type: 'number', min: 0, max: 10 },
-  { key: 'clinicalTier',      label: 'clinical tier (1-5)',    type: 'number', min: 1, max: 5 },
-  { key: 'latencyYears',      label: 'latency (years)',        type: 'number', min: 0, max: 60 },
-  { key: 'hoehnYahr',         label: 'H&Y stage',              type: 'number', min: 1, max: 5 },
-  { key: 'ageAtDiagnosis',    label: 'age at dx',              type: 'number', min: 40, max: 100 },
-  { key: 'confounderCount',   label: 'confounder count',       type: 'number', min: 0, max: 5 },
-  { key: 'severityCount',     label: 'severity count',         type: 'number', min: 0, max: 6 },
-  { key: 'driftOnly',         label: 'drift-only exposure',    type: 'number' },  // 0/1
-  { key: 'gatesPassed',       label: 'Layer 1 (gates passed)', type: 'number' },  // 0/1
+  { key: 'docScore',           label: 'doc_score',              type: 'number',  min: 0, max: 10 },
+  { key: 'parkinsonsDx',      label: "Parkinson's DX",         type: 'boolean' },
+  { key: 'latencyYears',      label: 'latency (years)',        type: 'number',  min: 0, max: 60 },
+  { key: 'hoehnYahr',         label: 'H&Y stage',              type: 'number',  min: 1, max: 5 },
+  { key: 'ageAtDiagnosis',    label: 'age at dx',              type: 'number',  min: 40, max: 100 },
+  { key: 'symptoms',          label: 'symptoms',               type: 'string',
+    values: ['rem_sleep_behavior_disorder','akathisia','alien_limb_phenomenon','asymmetric_rigidity',
+             'ataxia','autonomic_dysfunction','axial_rigidity','balance_problems','bradykinesia',
+             'constipation','cortical_sensory_loss','dysarthria','dysphagia','early_falls',
+             'fatigue','fluctuating_cognition','gait_disturbance','hypomimia','hyposmia',
+             'limb_apraxia','micrographia','myoclonus','orthostatic_hypotension','parkinsonism',
+             'postural_instability','resting_tremor','rigidity','shuffling_gait','slowness_of_movement',
+             'stiffness','tremor','urinary_incontinence','vertical_gaze_palsy','visual_hallucinations'] },
+  { key: 'levodopaResponse',  label: 'levodopa response',      type: 'boolean' },
+  { key: 'exposureType',      label: 'exposure type',          type: 'string',  values: ['direct','indirect'] },
+  { key: 'totalExposure',     label: 'total exposure (days)',  type: 'number',  min: 0 },
+  { key: 'protectiveEquipment', label: 'protective equipment', type: 'boolean' },
+  { key: 'familyPd1st',       label: "family hx PD (1°)",      type: 'boolean',
+    help: '1st-degree relative (father, mother, sibling) with PD' },
+  { key: 'geneticMarker',     label: 'genetic marker (+)',     type: 'boolean',
+    help: 'LRRK2 / GBA / Parkin / SNCA positive' },
 ];
 const TIER_BUILDER_OP_DEFS = {
   number: [
@@ -3434,65 +3371,65 @@ const TIER_BUILDER_OP_DEFS = {
     { op: '>',  label: '>' },
     { op: '>=', label: '≥' },
   ],
+  boolean: [
+    { op: '=',  label: '=' },
+    { op: '!=', label: '≠' },
+  ],
+  string: [
+    { op: 'containsAny', label: 'any of' },
+    { op: '!containsAny', label: 'none of' },
+  ],
 };
 function tierBuilderDefaultRules() {
-  // Defaults mirror marketTierOf() exactly (verified 0 mismatches on the
-  // 500-case dataset). Tier ORDER = evaluation order: I → II → BG → III.
-  // BG runs before III so III's catch-all OR can't claim gate failures.
+  // Defaults mirror marketTierOf() logic translated to the new field set.
+  // Tier ORDER = evaluation order: I → II → BG → III.
   // Rule model: tier.op combines tier.items; an item is a single condition
   // or a nested group with its own op — Excel-style AND(x, OR(y, z)).
   const cond = (field, op, value) => ({ type: 'cond', field, op, value });
   return { tiers: [
     { id: 'I', name: 'Tier I', gsv: 0, op: 'AND', items: [
-      cond('gatesPassed', '=', 1), cond('clinicalTier', '<=', 2),
-      cond('docScore', '>=', 7), cond('latencyYears', '>=', 10), cond('latencyYears', '<=', 30),
-      cond('hoehnYahr', '>=', 3), cond('confounderCount', '=', 0),
-      cond('severityCount', '>=', 1), cond('ageAtDiagnosis', '<', 70), cond('driftOnly', '=', 0),
+      cond('parkinsonsDx', '=', 1), cond('docScore', '>=', 7),
+      cond('latencyYears', '>=', 10), cond('latencyYears', '<=', 30),
+      cond('hoehnYahr', '>=', 3), cond('ageAtDiagnosis', '<', 70),
     ]},
     { id: 'II', name: 'Tier II', gsv: 0, op: 'AND', items: [
-      cond('gatesPassed', '=', 1), cond('clinicalTier', '<=', 3),
-      cond('docScore', '>=', 4), cond('latencyYears', '>=', 10), cond('latencyYears', '<=', 35),
-      cond('confounderCount', '<=', 1), cond('ageAtDiagnosis', '<=', 78), cond('driftOnly', '=', 0),
+      cond('parkinsonsDx', '=', 1), cond('docScore', '>=', 4),
+      cond('latencyYears', '>=', 5), cond('latencyYears', '<=', 35),
+      cond('ageAtDiagnosis', '<=', 78),
     ]},
     { id: 'BG', name: 'Below grid / Cap', gsv: 0, op: 'AND', items: [
-      cond('gatesPassed', '=', 0),
+      cond('parkinsonsDx', '=', 0),
     ]},
     { id: 'III', name: 'Tier III', gsv: 0, op: 'OR', items: [
-      cond('clinicalTier', '=', 4), cond('docScore', '<', 4),
-      cond('latencyYears', '<', 10), cond('latencyYears', '>', 35),
-      cond('confounderCount', '>=', 2), cond('ageAtDiagnosis', '>', 78), cond('driftOnly', '=', 1),
+      cond('docScore', '<', 4), cond('latencyYears', '<', 10),
+      cond('latencyYears', '>', 35), cond('ageAtDiagnosis', '>', 78),
     ]},
   ]};
 }
 function getCaseFieldDefs() {
   // Compute the case's effective values for the field-keys used by the Builder.
   return {
-    docScore:        (c) => c.docScore ?? docScoreOf(c),
+    docScore:           (c) => c.docScore ?? docScoreOf(c),
     // Null latency (unDx'd / missing records) coerces to -1 so it fails the
     // Tier I/II latency floors and is caught by Tier III's `latency < 10`
     // trigger — mirroring marketTierOf's explicit `lat == null → III`.
-    latencyYears:    (c) => c.latencyYears ?? -1,
-    hoehnYahr:       (c) => c.hoehnYahr,
-    ageAtDiagnosis:  (c) => c.ageAtDiagnosis,
-    confounderCount: (c) => c.confounderScore ?? confounderScoreOf(c),
-    // Severity count mirrors marketTierOf's sevEsc EXACTLY: the six clinical
-    // escalators only. H&Y ≥3 and age are SEPARATE rule conditions in the
-    // framework, not escalators — counting them here double-counts H&Y and
-    // inflates Tier I (this was the 13-vs-5 bug).
-    severityCount:   (c) => {
-      let n = 0;
-      if (c.cognitiveDecline) n++;
-      if (c.dbsSurgery) n++;
-      if (c.nursingHome) n++;
-      if ((c.falls6mo || 0) > 3) n++;
-      if (c.freezing) n++;
-      if (c.psychosis) n++;
-      return n;
+    latencyYears:       (c) => c.latencyYears ?? -1,
+    hoehnYahr:          (c) => c.hoehnYahr,
+    ageAtDiagnosis:     (c) => c.ageAtDiagnosis,
+    parkinsonsDx:       (c) => (c.dxBucket === 'parkinsons_disease' || c.dxBucket === 'parkinsonism_other') ? 1 : 0,
+    symptoms:           (c) => (c.symptomNames || []).map(s => s.toLowerCase().replace(/\s+/g, '_')),
+    levodopaResponse:   (c) => {
+      const r = (c.levodopaResponse || '').toLowerCase();
+      return (r === 'robust' || r === 'moderate' || r === 'minimal') ? 1 : 0;
     },
-    // Clinical tier the case sits on (1=PDD … 4=prodromal, 5=below grid).
-    clinicalTier:    (c) => c.tier != null ? c.tier : caseTier(c),
-    driftOnly:       (c) => (c.exposureCategory === 'Residential / Bystander' && !c.licenseVerified && !c.licenseClaimed) ? 1 : 0,
-    gatesPassed:     (c) => gatesPassed(c) ? 1 : 0,
+    exposureType:       (c) => c.exposureType || 'unknown',
+    totalExposure:      (c) => c.exposureTotalDays ?? c.exposureYears ?? 0,
+    protectiveEquipment:(c) => c.ppeUsed ? 1 : 0,
+    // familyPd is already filtered to 1st-degree (father/mother/sibling) in
+    // build_data_js.py SQL — no further gating needed here.
+    familyPd1st:        (c) => c.familyPd ? 1 : 0,
+    // Any of the 4 tracked PD genetic markers (LRRK2-G2019S, GBA, Parkin, SNCA).
+    geneticMarker:      (c) => (c.lrrk2G2019s || c.gbaMutation || c.parkinMutation || c.sncaMutation) ? 1 : 0,
   };
 }
 function evalBuilderCondition(cond, values) {
@@ -3505,6 +3442,14 @@ function evalBuilderCondition(cond, values) {
     case '<=': return v <= cond.value;
     case '>':  return v >  cond.value;
     case '>=': return v >= cond.value;
+    case 'containsAny': {
+      const sel = String(cond.value).split(',').map(s => s.trim()).filter(Boolean);
+      return Array.isArray(v) ? v.some(x => sel.includes(x)) : sel.includes(String(v));
+    }
+    case '!containsAny': {
+      const sel = String(cond.value).split(',').map(s => s.trim()).filter(Boolean);
+      return Array.isArray(v) ? !v.some(x => sel.includes(x)) : !sel.includes(String(v));
+    }
     default:   return false;
   }
 }
@@ -3547,7 +3492,7 @@ function builderTierValue(tierId) {
 // Tier Builder editable state — persisted to localStorage so user changes
 // survive a page reload. The framework defaults are used until the user
 // explicitly overrides anything.
-const TIER_BUILDER_LS_KEY = 'mt.tierBuilderRules.v3';
+const TIER_BUILDER_LS_KEY = 'mt.tierBuilderRules.v4';
 function loadTierBuilderRules() {
   try {
     const raw = localStorage.getItem(TIER_BUILDER_LS_KEY);
@@ -3558,10 +3503,12 @@ function loadTierBuilderRules() {
     // Shape-validate + drop conditions referencing fields/ops that no longer
     // exist so they fail loudly here instead of silently evaluating to false.
     const knownFields = new Set(TIER_BUILDER_FIELD_DEFS.map(f => f.key));
-    const knownOps = new Set(TIER_BUILDER_OP_DEFS.number.map(o => o.op));
+    const allOps = [].concat(...Object.values(TIER_BUILDER_OP_DEFS).map(arr => arr.map(o => o.op)));
+    const knownOps = new Set(allOps);
     const cleanCond = (cond) => {
-      const ok = cond && knownFields.has(cond.field) && knownOps.has(cond.op)
-        && typeof cond.value === 'number' && !isNaN(cond.value);
+      const valOk = (typeof cond.value === 'number' && !isNaN(cond.value))
+                  || typeof cond.value === 'string';
+      const ok = cond && knownFields.has(cond.field) && knownOps.has(cond.op) && valOk;
       if (!ok) console.warn('[TierBuilder] dropped invalid saved condition:', cond);
       return ok ? { type: 'cond', field: cond.field, op: cond.op, value: cond.value } : null;
     };
@@ -3592,15 +3539,27 @@ function saveTierBuilderRules() {
 let TIER_BUILDER_RULES = loadTierBuilderRules() || tierBuilderDefaultRules();
 
 function condRowHtml(c, dataAttrs) {
+  const fdef = TIER_BUILDER_FIELD_DEFS.find(f => f.key === c.field);
+  const fType = fdef ? fdef.type : 'number';
+  const ops = TIER_BUILDER_OP_DEFS[fType] || TIER_BUILDER_OP_DEFS.number;
+  let valueHtml;
+  if (fType === 'boolean') {
+    valueHtml = `<select class="cond-value"><option value="1"${c.value === 1 ? ' selected' : ''}>true</option><option value="0"${c.value === 0 ? ' selected' : ''}>false</option></select>`;
+  } else if (fType === 'string' && fdef && fdef.values) {
+    const selected = String(c.value || '').split(',').map(s => s.trim());
+    valueHtml = `<div class="cond-multi-select" data-symptoms="${fdef.values.join(',')}" data-selected="${selected.join(',')}">${fdef.values.map(v => `<label class="symptom-cb"><input type="checkbox" class="symptom-cb" data-symptom="${v}"${selected.includes(v) ? ' checked' : ''}> ${v.replace(/_/g, ' ')}</label>`).join('')}</div>`;
+  } else {
+    valueHtml = `<input type="number" class="cond-value" value="${c.value}" step="1">`;
+  }
   return `
     <div class="builder-condition" ${dataAttrs}>
       <select class="cond-field">
         ${TIER_BUILDER_FIELD_DEFS.map(f => `<option value="${f.key}"${f.key === c.field ? ' selected' : ''}>${f.label}</option>`).join('')}
       </select>
       <select class="cond-op">
-        ${TIER_BUILDER_OP_DEFS.number.map(o => `<option value="${o.op}"${o.op === c.op ? ' selected' : ''}>${o.label}</option>`).join('')}
+        ${ops.map(o => `<option value="${o.op}"${o.op === c.op ? ' selected' : ''}>${o.label}</option>`).join('')}
       </select>
-      <input type="number" class="cond-value" value="${c.value}" step="1">
+      ${valueHtml}
       <button class="cond-remove" title="Remove condition">×</button>
     </div>`;
 }
@@ -3899,6 +3858,55 @@ function initTierBuilder() {
   // number fields AND selects in all modern browsers, so a separate
   // 'change' listener would just double-apply.
   document.getElementById('builder-tiers').addEventListener('input', autoSyncAndApply);
+  // 'change' for field-select swaps (re-render op+value) and symptom checkboxes.
+  document.getElementById('builder-tiers').addEventListener('change', e => {
+    if (e.target.classList.contains('symptom-cb')) {
+      const row = e.target.closest('.builder-condition');
+      if (!row) return;
+      const ms = row.querySelector('.cond-multi-select');
+      if (!ms) return;
+      const checked = [...ms.querySelectorAll('input.symptom-cb:checked')].map(cb => cb.dataset.symptom);
+      const tierSec = row.closest('.builder-tier');
+      if (!tierSec) return;
+      syncTierBuilderFromDOM();
+      const gi = row.dataset.gi;
+      const ci = parseInt(row.dataset.ci, 10);
+      const t = TIER_BUILDER_RULES.tiers.find(t => t.id === tierSec.dataset.tier);
+      if (!t) return;
+      const cond = (gi !== undefined && gi !== '')
+        ? (t.items[parseInt(gi, 10)]?.conditions?.[ci])
+        : t.items[ci];
+      if (cond) { cond.value = checked.join(','); renderTierBuilder(); applyTierBuilder(); saveTierBuilderRules(); }
+      return;
+    }
+    if (e.target.classList.contains('cond-field')) {
+      const row = e.target.closest('.builder-condition');
+      if (!row) return;
+      const newField = e.target.value;
+      const tierSec = row.closest('.builder-tier');
+      if (!tierSec) return;
+      syncTierBuilderFromDOM();
+      const gi = row.dataset.gi;
+      const ci = parseInt(row.dataset.ci, 10);
+      const t = TIER_BUILDER_RULES.tiers.find(t => t.id === tierSec.dataset.tier);
+      if (!t) return;
+      const cond = (gi !== undefined && gi !== '')
+        ? (t.items[parseInt(gi, 10)]?.conditions?.[ci])
+        : t.items[ci];
+      if (cond) {
+        const fdef = TIER_BUILDER_FIELD_DEFS.find(f => f.key === newField);
+        const fType = fdef ? fdef.type : 'number';
+        const ops = TIER_BUILDER_OP_DEFS[fType] || TIER_BUILDER_OP_DEFS.number;
+        if (!ops.some(o => o.op === cond.op)) cond.op = ops[0].op;
+        if (fType === 'boolean') { cond.value = 1; }
+        else if (fType === 'string' && fdef && fdef.values) { cond.value = fdef.values[0]; }
+        else { cond.value = typeof cond.value === 'number' ? cond.value : 0; }
+      }
+      renderTierBuilder();
+      applyTierBuilder();
+      saveTierBuilderRules();
+    }
+  });
 }
 function autoSyncAndApply() {
   syncTierBuilderFromDOM();
@@ -3907,10 +3915,29 @@ function autoSyncAndApply() {
 }
 function syncTierBuilderFromDOM() {
   const readCond = row => {
-    const value = parseFloat(row.querySelector('.cond-value').value);
-    // Skip rows with an empty/invalid value — a NaN comparison always
-    // fails, which would silently kill an AND tier.
-    if (isNaN(value)) return null;
+    const field = row.querySelector('.cond-field').value;
+    const fdef = TIER_BUILDER_FIELD_DEFS.find(f => f.key === field);
+    const fType = fdef ? fdef.type : 'number';
+    let value;
+    if (fType === 'string') {
+      const ms = row.querySelector('.cond-multi-select');
+      if (ms) {
+        const checked = [...ms.querySelectorAll('input.symptom-cb:checked')].map(cb => cb.dataset.symptom);
+        value = checked.join(',');
+      } else {
+        const inp = row.querySelector('.cond-value');
+        value = inp ? inp.value || '' : '';
+      }
+    } else if (fType === 'boolean') {
+      const sel = row.querySelector('.cond-value');
+      value = sel ? parseInt(sel.value, 10) || 0 : 0;
+    } else {
+      const raw = row.querySelector('.cond-value');
+      value = raw ? parseFloat(raw.value) : NaN;
+      // Skip rows with an empty/invalid value — a NaN comparison always
+      // fails, which would silently kill an AND tier.
+      if (isNaN(value)) return null;
+    }
     return { type: 'cond', field: row.querySelector('.cond-field').value,
              op: row.querySelector('.cond-op').value, value };
   };
