@@ -179,8 +179,8 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .exec-stamp{font-size:11px;color:var(--slate-lite);font-style:italic}
 .exec-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media (max-width:1100px){.exec-grid{grid-template-columns:1fr}}
-.exec-card{background:var(--white);border:1px solid var(--border);padding:22px 24px;margin-bottom:22px}
-.exec-card h3{font-size:14px;font-weight:700;color:var(--navy);margin:0 0 12px;letter-spacing:.01em}
+.exec-card{background:var(--white);border:1px solid var(--border);padding:14px 16px;margin-bottom:12px}
+.exec-card h3{font-size:14px;font-weight:700;color:var(--navy);margin:0 0 8px;letter-spacing:.01em}
 .exec-card p,.exec-card li{font-size:13.5px;color:var(--navy-ink)}
 .exec-flag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.06em;color:var(--amber);background:var(--amber-bg);border:1px solid var(--amber);padding:1px 6px;border-radius:2px;text-transform:uppercase;vertical-align:middle}
 .ruling-list{list-style:none;margin:0;padding:0}
@@ -314,7 +314,7 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .builder-conditions{display:flex;flex-direction:column;gap:5px;margin-bottom:8px}
 .builder-condition{display:grid;grid-template-columns:1fr 80px minmax(54px,1fr) 24px;gap:5px;align-items:start;font-size:11.5px}
 /* Narrower tier boxes — 180px min instead of stretching full width */
-.tier-builder-card .builder-tiers{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:14px}
+.tier-builder-card .builder-tiers{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:10px}
 .builder-tier{max-width:340px}
 /* Sankey flow links — clickable, with hover halo so users know they're interactive. */
 .tf-link{cursor:pointer;transition:opacity .15s ease, stroke-width .15s ease}
@@ -324,6 +324,30 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .builder-help{display:inline-block;font-size:10.5px;color:var(--slate-lite);cursor:help;border-bottom:1px dotted var(--slate-lite);padding:0 2px;margin-left:4px}
 .builder-sub{font-size:11.5px;font-weight:400;color:var(--slate);margin-left:8px;letter-spacing:0}
 .tier-gsv-linked{color:var(--slate);font-style:italic;font-size:11px;cursor:help;border-bottom:1px dotted var(--slate-lite)}
+
+/* Popout multi-picklist (Salesforce-style) — used for symptoms in the Builder.
+   Trigger looks like a select; panel pops out with search + checkboxes. */
+.popout-picklist{position:relative;display:inline-block;min-width:0}
+.popout-trigger{display:flex;align-items:center;gap:4px;width:100%;font-family:inherit;font-size:11.5px;padding:4px 6px;border:1px solid var(--border);border-radius:2px;background:var(--white);color:var(--navy);font-weight:600;cursor:pointer;text-align:left;min-width:0}
+.popout-trigger:hover{border-color:var(--navy)}
+.popout-trigger:focus{outline:2px solid var(--mist);border-color:var(--navy)}
+.popout-label{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.popout-arrow{font-size:9px;color:var(--slate-lite);flex:none}
+.popout-panel{position:absolute;top:calc(100% + 2px);left:0;z-index:50;min-width:220px;max-width:280px;background:var(--white);border:1px solid var(--navy);border-radius:3px;box-shadow:0 6px 18px rgba(0,0,0,0.18);padding:6px;display:flex;flex-direction:column;gap:5px}
+.popout-panel[hidden]{display:none}
+.popout-options{display:flex;flex-wrap:wrap;gap:1px 4px;max-height:160px;overflow-y:auto;padding:2px 0}
+.popout-opt{display:flex;align-items:center;gap:4px;font-size:11px;padding:2px 5px;border-radius:2px;cursor:pointer;color:var(--navy-ink);white-space:nowrap}
+.popout-opt:hover{background:var(--mist)}
+.popout-opt input[type=checkbox]{width:11px;height:11px;cursor:pointer;accent-color:var(--navy);margin:0}
+.popout-foot{display:flex;justify-content:space-between;padding-top:5px;border-top:1px solid var(--border)}
+.popout-foot button{font-family:inherit;font-size:10.5px;font-weight:700;padding:3px 8px;border:1px solid var(--border);border-radius:2px;background:var(--white);color:var(--navy);cursor:pointer;letter-spacing:.04em;text-transform:uppercase}
+.popout-foot button:hover{background:var(--mist)}
+.popout-foot .popout-done{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.popout-foot .popout-done:hover{background:var(--navy-ink)}
+
+/* Builder-tier pill — used in click-through to show the builder-assigned tier
+   (which can differ from the clinical tier when the Builder is customized). */
+.builder-tier-pill{display:inline-block;font-size:10.5px;font-weight:700;color:var(--navy);background:var(--mist);border:1px solid var(--border);border-radius:2px;padding:1px 6px;letter-spacing:.04em}
 .builder-condition select,.builder-condition input:not([type=checkbox]){font-family:inherit;font-size:11.5px;padding:4px 6px;border:1px solid var(--border);border-radius:2px;background:var(--white);color:var(--navy);font-weight:600}
 .builder-condition .cond-field{font-weight:700}
 .builder-condition .cond-value{text-align:right}
@@ -358,19 +382,6 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .tier-remove:hover{background:var(--red-bg);color:var(--red);border-color:var(--red)}
 .tier-remove:disabled{opacity:.35;cursor:not-allowed}
 
-/* Tier Distribution — results of the Builder */
-.tier-dist-card .dist-table{width:100%;border-collapse:collapse;font-size:12px;color:var(--navy-ink)}
-.tier-dist-card .dist-table th{font-size:10px;font-weight:700;color:var(--slate);letter-spacing:.06em;text-transform:uppercase;text-align:right;padding:8px 10px;background:var(--bg);border-bottom:1px solid var(--border)}
-.tier-dist-card .dist-table th:first-child{text-align:left}
-.tier-dist-card .dist-table td{padding:9px 10px;border-top:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums}
-.tier-dist-card .dist-table tr:first-child td{border-top:none}
-.tier-dist-card .dist-table td:first-child{text-align:left;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:11px}
-.tier-dist-card .dist-table .dt-I{color:var(--gold)}
-.tier-dist-card .dist-table .dt-II{color:var(--purple)}
-.tier-dist-card .dist-table .dt-III{color:var(--amber)}
-.tier-dist-card .dist-table .dt-BG{color:var(--slate)}
-.tier-dist-card .dist-table .dt-total{font-weight:700;color:var(--navy)}
-.tier-dist-card .dist-sub{font-size:11px;color:var(--slate);margin:8px 0 0;line-height:1.5}
 .tier-config{margin-top:18px;border:1px solid var(--gold);border-radius:4px;padding:14px 16px;background:var(--white)}
 .tier-config-head{font-size:13px;font-weight:700;color:var(--navy);margin:0 0 4px;letter-spacing:.02em}
 .tier-config-sub{font-size:11.5px;color:var(--slate);margin:0 0 12px;line-height:1.5}
@@ -662,23 +673,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <div class="builder-actions">
           <button id="builder-add-tier" class="builder-btn">+ Add tier</button>
           <button id="builder-reset" class="builder-btn">Reset to framework defaults</button>
-          <button id="builder-apply" class="builder-btn primary">Apply rules →</button>
         </div>
-      </div>
-
-      <!-- Tier Distribution — applied-rules readout. Open + Closed breakdown
-           by Market Value Tier under whatever rules the Builder is currently
-           set to (defaults match the framework). -->
-      <div class="exec-card tier-dist-card" id="tier-dist-card">
-        <h3>Tier Distribution</h3>
-        <p style="font-size:12.5px;color:var(--slate);margin:-4px 0 12px;line-height:1.5;max-width:920px">
-          Inventory count by tier under the rules currently set in the <b>Tier Builder</b>. Open = status not closed/dismissed/settled and not in pending-close grace. Inventory value uses the per-tier case values (Tier I/II/III follow the editable GSVs in the tier panel below; custom tiers use their own $/case input).
-        </p>
-        <table class="dist-table">
-          <thead><tr><th>Tier</th><th>Open</th><th>Closed</th><th>Total</th><th>Avg value</th><th>Inventory value</th></tr></thead>
-          <tbody id="dist-tbody"></tbody>
-        </table>
-        <div class="dist-sub" id="dist-sub"></div>
       </div>
 
       <!-- Tier Panel — front and center for PE audience -->
@@ -2400,18 +2395,6 @@ function renderTierPanel() {
   const cases = D.cases;
   cases.forEach(c => { c.statusBucket = statusBucketOf(c); if (c.tier === undefined) c.tier = caseTier(c); });
 
-  const rows = TIER_VALUES.map(t => {
-    const def = TIER_DEFS[t];
-    return `
-      <tr class="tier-${t}-row">
-        <td><span class="tier-pill t${t}">${TIER_NAMES[t]}</span></td>
-        <td class="mx-criteria">${def.name}</td>
-        <td class="num"><b id="mx-${t}-cases">0</b><span class="mx-sub" id="mx-${t}-closed"></span></td>
-        <td class="num" id="mx-${t}-avg">$0</td>
-        <td class="num"><b id="mx-${t}-payout">$0</b></td>
-      </tr>`;
-  }).join('');
-
   panel.innerHTML = `
     <div class="mkt-card">
       <div class="mkt-card-head">
@@ -2442,17 +2425,7 @@ function renderTierPanel() {
           </div>
         `).join('')}
       </div>
-    </div>
-    <table class="tier-matrix">
-      <thead><tr>
-        <th>Diagnosis tier</th>
-        <th>Criteria</th>
-        <th class="num">Cases</th>
-        <th class="num">Avg value</th>
-        <th class="num">Inventory value</th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table>`;
+    </div>`;
 
   // Wire input listeners
   panel.querySelectorAll('input.mkt-gsv-input').forEach(inp => {
@@ -2475,12 +2448,12 @@ function updateTierPanelDerived() {
     const v = parseFloat(inp.value);
     if (!isNaN(v) && v >= 0) marketGsv[inp.dataset.mkt] = Math.round(v * 1000);
   });
-  // Keep the Builder-driven Tier Distribution dollars in sync with the
-  // edited GSVs (its counts don't change, its inventory values do).
-  renderTierDistribution();
+  // Keep the Sankey dollars in sync with the edited GSVs.
   renderTierFlow();
   const cases = D.cases;
   const p = state.convertRate;
+  // Aggregate open/closed/current-GSV across the clinical 1..5 grid — this is
+  // the inventory card's headline strip and its current-GSV dollar figure.
   let totalOpen = 0, totalClosed = 0, totalCurrentGsv = 0, totalWinsGap = 0;
   [1, 2, 3, 4, 5].forEach(t => {
     const inTier = cases.filter(c => c.tier === t);
@@ -2490,14 +2463,6 @@ function updateTierPanelDerived() {
     totalOpen += openCases.length;
     totalClosed += closed;
     totalCurrentGsv += payout;
-    const casesEl = document.getElementById(`mx-${t}-cases`);
-    const closedEl = document.getElementById(`mx-${t}-closed`);
-    const payEl = document.getElementById(`mx-${t}-payout`);
-    const avgEl = document.getElementById(`mx-${t}-avg`);
-    if (casesEl) casesEl.textContent = openCases.length.toLocaleString();
-    if (closedEl) closedEl.textContent = `${closed.toLocaleString()} closed`;
-    if (payEl) payEl.textContent = fmtMoney(payout);
-    if (avgEl) avgEl.textContent = fmtMoney(openCases.length ? payout / openCases.length : 0);
   });
   // Market-grid strip: open-case counts + values per market tier.
   const mktN = { I: 0, II: 0, III: 0 }, mktV = { I: 0, II: 0, III: 0 };
@@ -3063,23 +3028,47 @@ function closeBreakdownModal() {
 // ====================================================================
 
 const DRILL_COLS = {
-  current:   ['Matter #', 'Claimant', 'Firm', 'Tier', 'Status', 'Market tier', 'Value'],
-  segment:   ['Matter #', 'Claimant', 'Firm', 'Tier', 'Status', 'Fix', 'Value delta', 'Expected @ convert'],
-  potential: ['Matter #', 'Claimant', 'Firm', 'Tier', 'Status', 'Value', 'Win fix', 'Expected w/ lift'],
-  sankey:    ['Matter #', 'Claimant', 'Firm', 'Tier', 'Status', 'doc', 'dx_age', 'latency', 'app method', 'levodopa'],
+  current:   ['Matter #', 'Claimant', 'Tier', 'Status', 'Market tier', 'Value'],
+  segment:   ['Matter #', 'Claimant', 'Tier', 'Status', 'Fix', 'Value delta', 'Expected @ convert'],
+  potential: ['Matter #', 'Claimant', 'Tier', 'Status', 'Value', 'Win fix', 'Expected w/ lift'],
+  sankey:    ['Matter #', 'Claimant', 'Tier', 'Status', 'doc', 'dx_age', 'latency', 'app method', 'levodopa', 'close reason'],
 };
 
 function drillStatusLabel(c) {
-  return c.statusBucket === 'pending_close' ? 'Pending close' : 'Open';
+  if (c.statusBucket === 'pending_close') return 'Pending close';
+  if (c.statusBucket === 'closed') return 'Closed';
+  return 'Open';
+}
+
+// Builder-assigned tier for the click-through (uses CASE_BUILDER_TIER), not
+// the clinical tier — these two can differ when the Builder rules are
+// customized, and the Sankey flow was driven by the builder tier.
+function drillBuilderTier(c) {
+  const id = CASE_BUILDER_TIER && CASE_BUILDER_TIER[c.matterId];
+  if (!id) return 'No tier matched';
+  const t = (TIER_BUILDER_RULES?.tiers || []).find(x => x.id === id);
+  return t ? t.name : id;
+}
+
+// Pretty short labels so the modal stays readable
+function _pretty(v, fallback) {
+  if (v == null || v === '') return fallback ?? '—';
+  return String(v).replace(/_/g, ' ');
 }
 
 // Plain-text row values (CSV-safe; money as raw numbers).
 function drillRowText(mode, row, p) {
   const c = row.c;
-  const base = [c.matterNumber || '', c.claimantName || '', c.firm || '', TIER_NAMES[c.tier] || '', drillStatusLabel(c)];
+  const base = [c.matterNumber || '', c.claimantName || '', drillBuilderTier(c), drillStatusLabel(c)];
   if (mode === 'segment') return [...base, fixForGap(row.gap), String(Math.round(row.gapValue)), String(Math.round(row.share))];
   if (mode === 'current') return [...base, marketTierOf(c) || 'Below grid', String(caseValue(c))];
-  if (mode === 'sankey') return [...base, String(c.docScore ?? ''), String(c.ageAtDiagnosis ?? ''), String(c.latencyYears ?? ''), c.applicationMethod || '', c.levodopaResponse || ''];
+  if (mode === 'sankey') return [...base,
+    String(c.docScore ?? ''),
+    String(c.ageAtDiagnosis != null ? c.ageAtDiagnosis.toFixed(1) : ''),
+    String(c.latencyYears != null ? Math.round(c.latencyYears) : ''),
+    _pretty(c.applicationMethod),
+    _pretty(c.levodopaResponse),
+    _pretty(c.closeReason)];
   // potential
   const w = c.tier > 1 ? winCandidates(c, c.tier) : { qualifies: false };
   const fix = w.qualifies ? w.gaps.map(g => fixForGap(g)).join('; ') : '';
@@ -3090,17 +3079,19 @@ function drillRowText(mode, row, p) {
 // HTML cell values (escaped, tier pill, comma-formatted money).
 function drillRowHtml(mode, row, p) {
   const c = row.c;
-  const pill = `<span class="tier-pill t${c.tier}">${TIER_NAMES[c.tier]}</span>`;
-  const base = [escapeHtml(c.matterNumber || '—'), escapeHtml(c.claimantName || '—'), escapeHtml(c.firm || '—'), pill, drillStatusLabel(c)];
+  const tierName = drillBuilderTier(c);
+  const pill = `<span class="builder-tier-pill">${escapeHtml(tierName)}</span>`;
+  const base = [escapeHtml(c.matterNumber || '—'), escapeHtml(c.claimantName || '—'), pill, drillStatusLabel(c)];
   if (mode === 'segment') return [...base, escapeHtml(fixForGap(row.gap)), fmtMoney(row.gapValue), fmtMoney(row.share)];
   if (mode === 'current') return [...base, marketTierOf(c) || 'Below grid', fmtMoney(caseValue(c))];
   if (mode === 'sankey') {
     return [...base,
       c.docScore ?? '—',
-      c.ageAtDiagnosis ?? '—',
-      c.latencyYears ?? '—',
-      escapeHtml((c.applicationMethod || '—').replace(/_/g, ' ')),
-      escapeHtml((c.levodopaResponse || '—').replace(/_/g, ' '))];
+      c.ageAtDiagnosis != null ? c.ageAtDiagnosis.toFixed(1) : '—',
+      c.latencyYears != null ? Math.round(c.latencyYears) : '—',
+      escapeHtml(_pretty(c.applicationMethod)),
+      escapeHtml(_pretty(c.levodopaResponse)),
+      escapeHtml(_pretty(c.closeReason))];
   }
   const w = c.tier > 1 ? winCandidates(c, c.tier) : { qualifies: false };
   const fix = w.qualifies ? escapeHtml(w.gaps.map(g => fixForGap(g)).join('; ')) : '<span style="color:var(--slate-lite)">—</span>';
@@ -3162,7 +3153,7 @@ function drillFilteredRows() {
   if (!q) return rows;
   return rows.filter(r => {
     const c = r.c;
-    const hay = `${c.matterNumber || ''} ${c.claimantName || ''} ${c.firm || ''} ${c.applicationMethod || ''} ${c.levodopaResponse || ''}`;
+    const hay = `${c.matterNumber || ''} ${c.claimantName || ''} ${c.applicationMethod || ''} ${c.levodopaResponse || ''} ${c.closeReason || ''} ${drillBuilderTier(c)}`;
     return hay.toLowerCase().includes(q);
   });
 }
@@ -3315,12 +3306,69 @@ document.addEventListener('click', e => {
 // Esc closes whichever modal is open (breakdown modal takes precedence over wins modal).
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
+  // Popouts close first
+  document.querySelectorAll('.popout-panel:not([hidden])').forEach(p => p.hidden = true);
   const bd = document.getElementById('breakdownModal');
   if (bd && bd.style.display !== 'none') { closeBreakdownModal(); return; }
   const dm = document.getElementById('drillModal');
   if (dm && dm.style.display !== 'none') { closeDrillModal(); return; }
   closeWinsModal();
 });
+
+// Popout multi-picklist behavior (Salesforce-style). Click trigger to open,
+// click outside or Done to close. Selecting writes back to the cond value via
+// the existing 'change' sync in the Builder.
+document.addEventListener('click', e => {
+  // Click outside any popout → close all
+  if (!e.target.closest('.popout-picklist')) {
+    document.querySelectorAll('.popout-panel:not([hidden])').forEach(p => p.hidden = true);
+    return;
+  }
+  // Click on trigger → toggle its panel
+  const trig = e.target.closest('.popout-trigger');
+  if (trig) {
+    const pl = trig.closest('.popout-picklist');
+    const panel = pl.querySelector('.popout-panel');
+    const wasOpen = !panel.hidden;
+    // Close all, then open this one (single-open pattern)
+    document.querySelectorAll('.popout-panel:not([hidden])').forEach(p => p.hidden = true);
+    panel.hidden = wasOpen;
+    e.stopPropagation();
+    return;
+  }
+  // Clear / Done inside a popout
+  if (e.target.matches('.popout-clear')) {
+    const pl = e.target.closest('.popout-picklist');
+    pl.querySelectorAll('input.symptom-cb').forEach(cb => cb.checked = false);
+    updatePopoutLabel(pl);
+    e.target.dispatchEvent(new Event('change', { bubbles: true }));
+    e.stopPropagation();
+    return;
+  }
+  if (e.target.matches('.popout-done')) {
+    const pl = e.target.closest('.popout-picklist');
+    pl.querySelector('.popout-panel').hidden = true;
+    e.stopPropagation();
+    return;
+  }
+});
+// Live-update trigger label as checkboxes toggle
+document.addEventListener('change', e => {
+  if (e.target.classList.contains('symptom-cb')) {
+    const pl = e.target.closest('.popout-picklist');
+    if (pl) updatePopoutLabel(pl);
+  }
+});
+
+function updatePopoutLabel(pl) {
+  const checked = [...pl.querySelectorAll('input.symptom-cb:checked')].map(cb => cb.dataset.symptom);
+  const label = pl.querySelector('.popout-label');
+  label.textContent = checked.length === 0
+    ? 'pick symptoms…'
+    : checked.length <= 2
+      ? checked.map(s => s.replace(/_/g, ' ')).join(', ')
+      : `${checked.length} symptoms`;
+}
 
 document.getElementById('nlRunBtn').addEventListener('click', runNLQuery);
 document.getElementById('nlClearBtn').addEventListener('click', () => {
@@ -3567,7 +3615,27 @@ function condRowHtml(c, dataAttrs) {
     valueHtml = `<select class="cond-value"><option value="1"${c.value === 1 ? ' selected' : ''}>true</option><option value="0"${c.value === 0 ? ' selected' : ''}>false</option></select>`;
   } else if (fType === 'string' && fdef && fdef.key === 'symptoms') {
     const selected = String(c.value || '').split(',').map(s => s.trim());
-    valueHtml = `<div class="cond-multi-select" data-symptoms="${fdef.values.join(',')}" data-selected="${selected.join(',')}">${fdef.values.map(v => `<label class="symptom-cb"><input type="checkbox" class="symptom-cb" data-symptom="${v}"${selected.includes(v) ? ' checked' : ''}> ${v.replace(/_/g, ' ')}</label>`).join('')}</div>`;
+    const labelTxt = selected.length === 0
+      ? 'pick symptoms…'
+      : selected.length <= 2
+        ? selected.map(s => s.replace(/_/g, ' ')).join(', ')
+        : `${selected.length} symptoms`;
+    valueHtml = `
+      <div class="popout-picklist" data-picklist="symptoms">
+        <button type="button" class="popout-trigger">
+          <span class="popout-label">${escapeHtml(labelTxt)}</span>
+          <span class="popout-arrow">▾</span>
+        </button>
+        <div class="popout-panel" hidden>
+          <div class="popout-options">
+            ${fdef.values.map(v => `<label class="popout-opt" data-text="${v.replace(/_/g, ' ')}"><input type="checkbox" class="symptom-cb" data-symptom="${v}"${selected.includes(v) ? ' checked' : ''}> ${v.replace(/_/g, ' ')}</label>`).join('')}
+          </div>
+          <div class="popout-foot">
+            <button type="button" class="popout-clear">Clear</button>
+            <button type="button" class="popout-done">Done</button>
+          </div>
+        </div>
+      </div>`;
   } else if (fType === 'string' && fdef && fdef.values) {
     valueHtml = `<select class="cond-value">${fdef.values.map(v => `<option value="${v}"${String(c.value) === v ? ' selected' : ''}>${v.replace(/_/g, ' ')}</option>`).join('')}</select>`;
   } else {
@@ -3651,47 +3719,9 @@ function applyTierBuilder(redistribute = true) {
     if (!c.tier) c.tier = caseTier(c);
     CASE_BUILDER_TIER[c.matterId] = evaluateCaseBuilderTier(c, TIER_BUILDER_RULES);
   });
-  if (redistribute) { renderTierDistribution(); renderTierFlow(); }
+  if (redistribute) { renderTierFlow(); }
 }
 const UNMATCHED_KEY = '__UNMATCHED__';
-function renderTierDistribution() {
-  const tbody = document.getElementById('dist-tbody');
-  if (!tbody) return;
-  const counts = {};
-  TIER_BUILDER_RULES.tiers.forEach(t => counts[t.id] = { open: 0, closed: 0, totalValue: 0 });
-  counts[UNMATCHED_KEY] = { open: 0, closed: 0, totalValue: 0 };
-  D.cases.forEach(c => {
-    const k = CASE_BUILDER_TIER[c.matterId] || UNMATCHED_KEY;
-    const bucket = counts[k] || counts[UNMATCHED_KEY];
-    const isClosed = c.statusBucket === 'closed';
-    bucket[isClosed ? 'closed' : 'open']++;
-    // Dollar value follows the BUILDER-assigned tier (not marketTierOf) so
-    // counts and dollars always agree.
-    bucket.totalValue += k === UNMATCHED_KEY ? 0 : builderTierValue(k);
-  });
-  const rowHtml = (label, cls, c) => {
-    const total = c.open + c.closed;
-    const avg = total > 0 ? c.totalValue / total : 0;
-    return `<tr>
-      <td class="${cls}">${label}</td>
-      <td>${c.open.toLocaleString()}</td>
-      <td>${c.closed.toLocaleString()}</td>
-      <td class="dt-total">${total.toLocaleString()}</td>
-      <td>${fmtMoney(avg)}</td>
-      <td class="dt-total">${fmtMoney(c.totalValue)}</td>
-    </tr>`;
-  };
-  const rows = TIER_BUILDER_RULES.tiers.map(t => rowHtml(escapeHtml(t.name), `dt-${t.id}`, counts[t.id]));
-  const un = counts[UNMATCHED_KEY];
-  if (un.open + un.closed > 0) rows.push(rowHtml('No tier matched', 'dt-BG', un));
-  tbody.innerHTML = rows.join('');
-  const sub = document.getElementById('dist-sub');
-  if (sub) {
-    let totalOpen = 0, totalClosed = 0, totalVal = 0;
-    Object.values(counts).forEach(c => { totalOpen += c.open; totalClosed += c.closed; totalVal += c.totalValue; });
-    sub.innerHTML = `<b>${(totalOpen + totalClosed).toLocaleString()}</b> cases total · <b>${totalOpen.toLocaleString()}</b> open · <b>${totalClosed.toLocaleString()}</b> closed · <b>${fmtMoney(totalVal)}</b> inventory under the applied rules.`;
-  }
-}
 
 // ====================================================================
 // TIER FLOW — hand-rolled SVG Sankey at the top of t0. ONE decision
@@ -3705,9 +3735,13 @@ function renderTierFlow() {
   if (!wrap || !D || !D.cases) return;
 
   const NAVY = '#1E2761', GOLD = '#C9A227', PURPLE = '#6B4E9B', AMBER = '#D98324',
-        RED = '#B23A48', SLATE = '#5B6478', SLATE_LITE = '#9AA1B5';
+        RED = '#B23A48', SLATE = '#5B6478', SLATE_LITE = '#9AA1B5',
+        BLUE = '#2E6FB7', GREEN = '#3A8554', TEAL = '#0E8B8B', PINK = '#B5476B', ORANGE = '#D2691E';
   const TIER_COLORS = { I: GOLD, II: PURPLE, III: AMBER, BG: RED };
-  const tierColor = id => TIER_COLORS[id] || SLATE;
+  // Custom tier IDs cycle through a 5-color palette so they don't all go SLATE.
+  const CUSTOM_TIER_COLORS = [BLUE, GREEN, TEAL, PINK, ORANGE];
+  const customIdx = {};
+  const tierColor = id => TIER_COLORS[id] || customIdx[id] || (customIdx[id] = CUSTOM_TIER_COLORS[Object.keys(customIdx).length % CUSTOM_TIER_COLORS.length]);
 
   // ---- nodes: inflow (col 0) → builder tiers (col 1) → status (col 2) ----
   const nodes = {
@@ -3739,8 +3773,8 @@ function renderTierFlow() {
   for (const id in nodes) nodes[id].value = Math.max(nodes[id].in, nodes[id].out);
 
   // ---- layout ----
-  const W = 1160, H = 360, HEAD = 32, PAD = 16, NODE_W = 12;
-  const colX = [8, 520, 1010];
+  const W = 1480, H = 280, HEAD = 24, PAD = 10, NODE_W = 10;
+  const colX = [8, 720, 1320];
   const COL_HEADS = ['Inflow', 'Tier — Builder rules', 'Status'];
   const cols = [[], [], []];
   Object.values(nodes).filter(n => n.value > 0).forEach(n => cols[n.col].push(n));
@@ -3827,7 +3861,7 @@ function openSankeyFlowDrill(sourceId, targetId) {
   document.getElementById('drillModalTitle').textContent =
     `${sourceName} → ${targetName}: ${rows.length.toLocaleString()} case${rows.length === 1 ? '' : 's'}`;
   document.getElementById('drillModalSubtitle').textContent =
-    `Click any column header to sort. Search by matter #, claimant, or firm.`;
+    `Click any column header to sort. Search by matter #, claimant, tier, app method, levodopa, or close reason.`;
   document.getElementById('drillModalThead').innerHTML =
     '<tr>' + DRILL_COLS.sankey.map(h => `<th>${h}</th>`).join('') + '</tr>';
   const searchIn = document.getElementById('drillSearch');
@@ -3928,9 +3962,8 @@ function initTierBuilder() {
     if (e.target.classList.contains('symptom-cb')) {
       const row = e.target.closest('.builder-condition');
       if (!row) return;
-      const ms = row.querySelector('.cond-multi-select');
-      if (!ms) return;
-      const checked = [...ms.querySelectorAll('input.symptom-cb:checked')].map(cb => cb.dataset.symptom);
+      // Popout picker: the row has .popout-picklist, not .cond-multi-select
+      const checked = [...row.querySelectorAll('input.symptom-cb:checked')].map(cb => cb.dataset.symptom);
       const tierSec = row.closest('.builder-tier');
       if (!tierSec) return;
       syncTierBuilderFromDOM();
@@ -3985,9 +4018,9 @@ function syncTierBuilderFromDOM() {
     const fType = fdef ? fdef.type : 'number';
     let value;
     if (fType === 'string') {
-      const ms = row.querySelector('.cond-multi-select');
-      if (ms) {
-        const checked = [...ms.querySelectorAll('input.symptom-cb:checked')].map(cb => cb.dataset.symptom);
+      // Popout picker: read all checked symptom-cb checkboxes
+      const checked = [...row.querySelectorAll('input.symptom-cb:checked')].map(cb => cb.dataset.symptom);
+      if (checked.length) {
         value = checked.join(',');
       } else {
         const inp = row.querySelector('.cond-value');
