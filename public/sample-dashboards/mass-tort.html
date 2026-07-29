@@ -675,25 +675,8 @@ details.exec-details[open]>summary{margin-bottom:12px}
 
       <!-- Tier Panel — front and center for PE audience -->
       <div class="exec-card">
-        <div class="tier-total-strip">
-          <span><b id="totalOpenCount">0</b> open · <b id="totalClosedCount">0</b> closed</span>
-          <span class="tier-convert-control">Convert rate: <input type="number" id="convertRateInput" class="tier-convert-input" min="0" max="100" step="1" value="25" title="Universal convert rate (%) — drives both the potential GSV at the bottom and every 'if X% convert' lift line">%</span>
-        </div>
-        <div class="gsv-totals">
-          <div class="gsv-line gsv-current">
-            <span class="gsv-label">Current Gross Settlement Value</span>
-            <span class="gsv-value" id="gsvCurrent">$0</span>
-          </div>
-          <div class="gsv-line gsv-potential">
-            <span class="gsv-label">Potential Gross Settlement Value at an '<span id="gsvRateLabel">25</span>%' LIFT conversion rate</span>
-            <span class="gsv-value-wrap">
-              <span class="gsv-value" id="gsvPotential">$0</span>
-              <span class="gsv-delta" id="gsvDelta"></span>
-            </span>
-          </div>
-        </div>
         <div id="tierPanel"></div>
-        <div class="tier-foot">Each lift line and the cohort note use the universal convert rate from the dropdown above — toggle between "a quarter / half / 1/6" to see how sensitive the upside is to that assumption. Click a lift line to see the cohort.</div>
+        <div class="tier-foot">Each lift line and the cohort note assume a 25% convert rate. Click a lift line to see the cohort.</div>
       </div>
 
     </div>
@@ -1535,36 +1518,8 @@ function initFilters() {
     });
   });
 
-  // Convert-rate input — single universal input driving every "if X% convert"
-  // lift line, the wins modal cohort note, and the Potential GSV line. The
-  // user enters a percent value (e.g. 25); we store it as a fraction.
-  const crIn = document.getElementById('convertRateInput');
-  if (crIn) {
-    crIn.addEventListener('input', (e) => {
-      // Allow either a percent (e.g. 25) or a fraction (e.g. 0.25) — anything
-      // > 1 is treated as percent and divided by 100.
-      let v = parseFloat(e.target.value);
-      if (isNaN(v)) return;
-      if (v > 1) v = v / 100;
-      v = Math.max(0, Math.min(1, v));
-      state.convertRate = v;
-      updateTierPanelDerived();
-      // Close the wins modal if open — the cohort note + lift values are now
-      // stale. Re-click the lift line to refresh at the new rate.
-      const modal = document.getElementById('winsModal');
-      if (modal && modal.style.display !== 'none') {
-        modal.style.display = 'none';
-        const bd = document.getElementById('breakdownModal');
-        if (bd && bd.style.display !== 'none') bd.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    });
-    crIn.addEventListener('blur', (e) => {
-      // Normalize the displayed value to a clean percent on blur.
-      const v = parseFloat(e.target.value);
-      if (!isNaN(v)) e.target.value = Math.round(state.convertRate * 100);
-    });
-  }
+  // Convert rate is fixed at 25% (state.convertRate = 0.25) — the universal
+  // input was removed from the Executive Summary along with the GSV totals strip.
   const clearBtn = document.getElementById('btnClearFilters');
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
@@ -2532,21 +2487,6 @@ function updateTierPanelDerived() {
   }
   const expectedLift = totalWinsGap * p;
   const potentialGsv = totalCurrentGsv + expectedLift;
-  const totalOpenEl = document.getElementById('totalOpenCount');
-  const totalClosedEl = document.getElementById('totalClosedCount');
-  if (totalOpenEl) totalOpenEl.textContent = totalOpen.toLocaleString();
-  if (totalClosedEl) totalClosedEl.textContent = totalClosed.toLocaleString();
-  // Two-line GSV summary
-  const curEl = document.getElementById('gsvCurrent');
-  const potEl = document.getElementById('gsvPotential');
-  const rateEl = document.getElementById('gsvRateLabel');
-  const deltaEl = document.getElementById('gsvDelta');
-  if (curEl) curEl.textContent = fmtMoney(totalCurrentGsv);
-  if (potEl) potEl.textContent = fmtMoney(potentialGsv);
-  if (rateEl) rateEl.textContent = Math.round(p * 100);
-  if (deltaEl) deltaEl.textContent = expectedLift > 0
-    ? `+${fmtMoney(expectedLift)} incremental at ${Math.round(p * 100)}% convert`
-    : '';
   renderBridgeChart(totalCurrentGsv, bridgeSegs, potentialGsv);
 }
 
