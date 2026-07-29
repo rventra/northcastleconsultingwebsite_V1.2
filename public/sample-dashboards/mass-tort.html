@@ -335,6 +335,24 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .result-row.result-tier.tier-cap .result-val{color:var(--slate);font-size:14px}
 .result-explain{font-size:11px;color:var(--slate);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);font-style:italic;line-height:1.45}
 
+/* Inventory-by-tier distribution inside the Configurator result panel.
+   Shows how the actual dataset distributes across the four market-value buckets,
+   broken out by OPEN (statusBucket !== 'closed') vs CLOSED. */
+.config-inventory{margin-top:14px;padding:12px 14px;background:var(--white);border:1px solid var(--border);border-radius:3px}
+.config-inventory-head{font-size:10.5px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.inv-dist-table{width:100%;border-collapse:collapse;font-size:11.5px}
+.inv-dist-table th{font-size:9.5px;font-weight:700;color:var(--slate);letter-spacing:.06em;text-transform:uppercase;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:transparent}
+.inv-dist-table th:first-child{text-align:left}
+.inv-dist-table td{padding:6px 8px;border-top:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums}
+.inv-dist-table td:first-child{text-align:left;font-weight:700}
+.inv-dist-table tr:first-child td{border-top:none}
+.inv-dist-table .inv-tier{width:140px}
+.inv-dist-table .inv-tier.inv-I{color:var(--gold)}
+.inv-dist-table .inv-tier.inv-II{color:var(--purple)}
+.inv-dist-table .inv-tier.inv-III{color:var(--amber)}
+.inv-dist-table .inv-tier.inv-BG{color:var(--slate)}
+.inv-dist-table .inv-total{font-weight:700;color:var(--navy)}
+
 /* Hide sidebar on Executive Summary (t0) — fewer distractions for PE audiences. */
 body.t0-active .sidebar{display:none}
 body.t0-active .layout{grid-template-columns:1fr;max-width:1640px}
@@ -779,6 +797,23 @@ details.exec-details[open]>summary{margin-bottom:12px}
             <div class="result-row"><span class="result-label">Layer 2</span><span class="result-val" id="cfg-r-l2">T2 — Confirmed PD</span></div>
             <div class="result-row result-tier tier-III" id="cfg-r-tier-row"><span class="result-label">Market Value Tier</span><span class="result-val" id="cfg-r-mt">Tier III · $20K&ndash;$150K</span></div>
             <div class="result-explain" id="cfg-r-explain">drift-only exposure (residential / bystander) — caps at Tier III.</div>
+
+            <!-- Inventory distribution — how the actual cases split across the four
+                 market-value buckets under the configured rules. OPEN + CLOSED
+                 split is per the dashboard's statusBucket (closed = status in
+                 closed/dismissed/settled OR close_notification >30 days old). -->
+            <div class="config-inventory">
+              <div class="config-inventory-head">Inventory by Market Value Tier</div>
+              <table class="inv-dist-table">
+                <thead><tr><th>Tier</th><th>Open</th><th>Closed</th><th class="inv-total">Total</th></tr></thead>
+                <tbody id="cfg-inv-tbody">
+                  <tr><td class="inv-tier inv-I">Tier I</td><td id="cfg-inv-I-open">0</td><td id="cfg-inv-I-closed">0</td><td class="inv-total" id="cfg-inv-I-total">0</td></tr>
+                  <tr><td class="inv-tier inv-II">Tier II</td><td id="cfg-inv-II-open">0</td><td id="cfg-inv-II-closed">0</td><td class="inv-total" id="cfg-inv-II-total">0</td></tr>
+                  <tr><td class="inv-tier inv-III">Tier III</td><td id="cfg-inv-III-open">0</td><td id="cfg-inv-III-closed">0</td><td class="inv-total" id="cfg-inv-III-total">0</td></tr>
+                  <tr><td class="inv-tier inv-BG">Cap at T3 / Below grid</td><td id="cfg-inv-BG-open">0</td><td id="cfg-inv-BG-closed">0</td><td class="inv-total" id="cfg-inv-BG-total">0</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
@@ -3646,6 +3681,38 @@ function computeTierCfg() {
   document.getElementById('cfg-sev-count').textContent = `${c.sevCount} severity escalator${c.sevCount === 1 ? '' : 's'} checked`;
   document.getElementById('cfg-cf-count').textContent = `${c.cfCount} confounder${c.cfCount === 1 ? '' : 's'} checked`;
 }
+
+// Inventory distribution — runs the same tier logic on every case in the
+// dataset and tallies counts per Market Value Tier (OPEN vs CLOSED). This is
+// the "configured rules → actual cases" readout. It doesn't depend on the
+// Configurator inputs (those define a sample case); it depends on the
+// existing caseTier() / marketTierOf() rules baked into the framework.
+function computeInventoryDist() {
+  if (!D || !D.cases) return;
+  // Make sure every case has a tier assigned
+  D.cases.forEach(c => { if (c.tier === undefined) c.tier = caseTier(c); });
+  // Buckets: Tier I, Tier II, Tier III, BelowGrid-or-L1Fail
+  const buckets = { 'I': { open:0, closed:0 }, 'II': { open:0, closed:0 }, 'III': { open:0, closed:0 }, 'BG': { open:0, closed:0 } };
+  D.cases.forEach(c => {
+    let key;
+    if (c.tier === 5 || !gatesPassed(c)) key = 'BG';
+    else key = marketTierOf(c) || 'III';
+    // cap at Tier III if drift-only (mirror Configurator rule)
+    if (key === 'I' && c.exposureCategory === 'Residential / Bystander' && !c.licenseVerified && !c.licenseClaimed) key = 'III';
+    const isClosed = c.statusBucket === 'closed';
+    buckets[key][isClosed ? 'closed' : 'open']++;
+  });
+  console.log('[CID] buckets:', JSON.stringify(buckets));
+  ['I','II','III','BG'].forEach(k => {
+    const o = buckets[k].open, c = buckets[k].closed;
+    const oEl = document.getElementById(`cfg-inv-${k}-open`);
+    const cEl = document.getElementById(`cfg-inv-${k}-closed`);
+    const tEl = document.getElementById(`cfg-inv-${k}-total`);
+    if (oEl) oEl.textContent = o.toLocaleString();
+    if (cEl) cEl.textContent = c.toLocaleString();
+    if (tEl) tEl.textContent = (o + c).toLocaleString();
+  });
+}
 function initTierConfigurator() {
   const ids = ['cfg-doc-score','cfg-nature','cfg-era','cfg-pfs','cfg-latency','cfg-hy','cfg-age'];
   const sevIds = ['cfg-sev-pdd','cfg-sev-dbs','cfg-sev-falls','cfg-sev-freezing',
@@ -3663,6 +3730,7 @@ function initTierConfigurator() {
     el.addEventListener('change', computeTierCfg);
   });
   computeTierCfg();
+  computeInventoryDist();
 }
 
 // ====================================================================
