@@ -316,14 +316,22 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 /* Narrower tier boxes — 180px min instead of stretching full width */
 .tier-builder-card .builder-tiers{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:14px}
 .builder-tier{max-width:340px}
-/* Symptom multi-select */
-.cond-multi-select{display:flex;flex-wrap:wrap;gap:2px 6px;max-width:200px;font-size:10px}
-.symptom-cb{display:inline-flex;align-items:center;gap:2px;white-space:nowrap;cursor:pointer}
-.symptom-cb input[type=checkbox]{width:12px;height:12px;cursor:pointer}
+/* Sankey flow links — clickable, with hover halo so users know they're interactive. */
+.tf-link{cursor:pointer;transition:opacity .15s ease, stroke-width .15s ease}
+.tf-link:hover{opacity:.75}
+.tf-link:focus{outline:none;opacity:.75}
+/* Tier builder help icons — discreet hover dots/text */
+.builder-help{display:inline-block;font-size:10.5px;color:var(--slate-lite);cursor:help;border-bottom:1px dotted var(--slate-lite);padding:0 2px;margin-left:4px}
+.builder-sub{font-size:11.5px;font-weight:400;color:var(--slate);margin-left:8px;letter-spacing:0}
+.tier-gsv-linked{color:var(--slate);font-style:italic;font-size:11px;cursor:help;border-bottom:1px dotted var(--slate-lite)}
 .builder-condition select,.builder-condition input:not([type=checkbox]){font-family:inherit;font-size:11.5px;padding:4px 6px;border:1px solid var(--border);border-radius:2px;background:var(--white);color:var(--navy);font-weight:600}
 .builder-condition .cond-field{font-weight:700}
 .builder-condition .cond-value{text-align:right}
 .builder-condition .cond-remove{width:24px;height:24px;border:1px solid var(--border);background:var(--white);color:var(--slate);font-size:14px;line-height:1;cursor:pointer;border-radius:2px;padding:0;font-weight:700}
+/* Symptom multi-select (string field with checkboxes) */
+.cond-multi-select{display:flex;flex-wrap:wrap;gap:2px 6px;max-width:200px;font-size:10px}
+.symptom-cb{display:inline-flex;align-items:center;gap:2px;white-space:nowrap;cursor:pointer}
+.symptom-cb input[type=checkbox]{width:12px;height:12px;cursor:pointer}
 .builder-condition .cond-remove:hover{background:var(--red-bg);color:var(--red);border-color:var(--red)}
 .builder-add{display:inline-block;font-size:11px;font-weight:700;color:var(--navy);background:transparent;border:1px dashed var(--navy);padding:3px 8px;border-radius:2px;cursor:pointer;letter-spacing:.04em}
 .builder-add:hover{background:var(--mist)}
@@ -649,10 +657,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
            (with its own AND/OR) — Excel-style AND(x, OR(y, z)). Up to 4 tiers;
            evaluated top-down in the order shown. -->
       <div class="exec-card tier-builder-card">
-        <h3>Tier Builder — define the tier rules</h3>
-        <p style="font-size:12.5px;color:var(--slate);margin:-4px 0 12px;line-height:1.5;max-width:920px">
-          Cases are evaluated <b>top-down</b> in the order the tiers appear below, and the first tier whose logic matches is the case's tier. Each tier matches <b>ALL</b> (AND) or <b>ANY</b> (OR) of its items; an item is a single condition or a nested <b>group</b> of conditions with its own ALL/ANY — e.g. <code>AND(doc_score ≥ 7, OR(latency &lt; 10, drift-only = 1))</code>. Up to <b>4 tiers</b>.
-        </p>
+        <h3>Tier Builder <span class="builder-sub">hover any field for its definition</span></h3>
         <div class="builder-tiers" id="builder-tiers"></div>
         <div class="builder-actions">
           <button id="builder-add-tier" class="builder-btn">+ Add tier</button>
@@ -3061,6 +3066,7 @@ const DRILL_COLS = {
   current:   ['Matter #', 'Claimant', 'Firm', 'Tier', 'Status', 'Market tier', 'Value'],
   segment:   ['Matter #', 'Claimant', 'Firm', 'Tier', 'Status', 'Fix', 'Value delta', 'Expected @ convert'],
   potential: ['Matter #', 'Claimant', 'Firm', 'Tier', 'Status', 'Value', 'Win fix', 'Expected w/ lift'],
+  sankey:    ['Matter #', 'Claimant', 'Firm', 'Tier', 'Status', 'doc', 'dx_age', 'latency', 'app method', 'levodopa'],
 };
 
 function drillStatusLabel(c) {
@@ -3073,6 +3079,7 @@ function drillRowText(mode, row, p) {
   const base = [c.matterNumber || '', c.claimantName || '', c.firm || '', TIER_NAMES[c.tier] || '', drillStatusLabel(c)];
   if (mode === 'segment') return [...base, fixForGap(row.gap), String(Math.round(row.gapValue)), String(Math.round(row.share))];
   if (mode === 'current') return [...base, marketTierOf(c) || 'Below grid', String(caseValue(c))];
+  if (mode === 'sankey') return [...base, String(c.docScore ?? ''), String(c.ageAtDiagnosis ?? ''), String(c.latencyYears ?? ''), c.applicationMethod || '', c.levodopaResponse || ''];
   // potential
   const w = c.tier > 1 ? winCandidates(c, c.tier) : { qualifies: false };
   const fix = w.qualifies ? w.gaps.map(g => fixForGap(g)).join('; ') : '';
@@ -3087,6 +3094,14 @@ function drillRowHtml(mode, row, p) {
   const base = [escapeHtml(c.matterNumber || '—'), escapeHtml(c.claimantName || '—'), escapeHtml(c.firm || '—'), pill, drillStatusLabel(c)];
   if (mode === 'segment') return [...base, escapeHtml(fixForGap(row.gap)), fmtMoney(row.gapValue), fmtMoney(row.share)];
   if (mode === 'current') return [...base, marketTierOf(c) || 'Below grid', fmtMoney(caseValue(c))];
+  if (mode === 'sankey') {
+    return [...base,
+      c.docScore ?? '—',
+      c.ageAtDiagnosis ?? '—',
+      c.latencyYears ?? '—',
+      escapeHtml((c.applicationMethod || '—').replace(/_/g, ' ')),
+      escapeHtml((c.levodopaResponse || '—').replace(/_/g, ' '))];
+  }
   const w = c.tier > 1 ? winCandidates(c, c.tier) : { qualifies: false };
   const fix = w.qualifies ? escapeHtml(w.gaps.map(g => fixForGap(g)).join('; ')) : '<span style="color:var(--slate-lite)">—</span>';
   const uplift = w.qualifies ? gapValue(c, w) * p : 0;
@@ -3145,7 +3160,11 @@ function drillFilteredRows() {
   const { rows } = modal._drill;
   const q = (document.getElementById('drillSearch').value || '').trim().toLowerCase();
   if (!q) return rows;
-  return rows.filter(r => `${r.c.matterNumber || ''} ${r.c.claimantName || ''} ${r.c.firm || ''}`.toLowerCase().includes(q));
+  return rows.filter(r => {
+    const c = r.c;
+    const hay = `${c.matterNumber || ''} ${c.claimantName || ''} ${c.firm || ''} ${c.applicationMethod || ''} ${c.levodopaResponse || ''}`;
+    return hay.toLowerCase().includes(q);
+  });
 }
 
 function renderDrillBody() {
@@ -3340,7 +3359,8 @@ document.body.classList.add('t0-active');
 // recompute the distribution. Defaults mirror the framework doc.
 // ====================================================================
 const TIER_BUILDER_FIELD_DEFS = [
-  { key: 'docScore',           label: 'doc_score',              type: 'number',  min: 0, max: 10 },
+  { key: 'docScore',           label: 'doc_score',              type: 'number',  min: 0, max: 10,
+    help: 'Composite of exposure documentation strength — receipts, applicator license, employment records, affidavits. 0 = none on file, 10 = independently verified.' },
   { key: 'parkinsonsDx',      label: "Parkinson's DX",         type: 'boolean' },
   { key: 'latencyYears',      label: 'latency (years)',        type: 'number',  min: 0, max: 60 },
   { key: 'hoehnYahr',         label: 'H&Y stage',              type: 'number',  min: 1, max: 5 },
@@ -3353,8 +3373,10 @@ const TIER_BUILDER_FIELD_DEFS = [
              'limb_apraxia','micrographia','myoclonus','orthostatic_hypotension','parkinsonism',
              'postural_instability','resting_tremor','rigidity','shuffling_gait','slowness_of_movement',
              'stiffness','tremor','urinary_incontinence','vertical_gaze_palsy','visual_hallucinations'] },
-  { key: 'levodopaResponse',  label: 'levodopa response',      type: 'boolean' },
-  { key: 'exposureType',      label: 'exposure type',          type: 'string',  values: ['direct','indirect'] },
+  { key: 'levodopaResponse',  label: 'levodopa response',      type: 'string',
+    values: ['robust','moderate','minimal','none','not_tried','unknown'] },
+  { key: 'applicationMethod', label: 'application method',    type: 'string',
+    values: ['backpack_sprayer','boom_sprayer','handheld_sprayer','mixing_loading','aerial_adjacent','cleanup_disposal','other'] },
   { key: 'totalExposure',     label: 'total exposure (days)',  type: 'number',  min: 0 },
   { key: 'protectiveEquipment', label: 'protective equipment', type: 'boolean' },
   { key: 'familyPd1st',       label: "family hx PD (1°)",      type: 'boolean',
@@ -3418,11 +3440,8 @@ function getCaseFieldDefs() {
     ageAtDiagnosis:     (c) => c.ageAtDiagnosis,
     parkinsonsDx:       (c) => (c.dxBucket === 'parkinsons_disease' || c.dxBucket === 'parkinsonism_other') ? 1 : 0,
     symptoms:           (c) => (c.symptomNames || []).map(s => s.toLowerCase().replace(/\s+/g, '_')),
-    levodopaResponse:   (c) => {
-      const r = (c.levodopaResponse || '').toLowerCase();
-      return (r === 'robust' || r === 'moderate' || r === 'minimal') ? 1 : 0;
-    },
-    exposureType:       (c) => c.exposureType || 'unknown',
+    levodopaResponse:   (c) => (c.levodopaResponse || 'unknown').toLowerCase().replace(/\s+/g, '_'),
+    applicationMethod:  (c) => c.applicationMethod || 'other',
     totalExposure:      (c) => c.exposureTotalDays ?? c.exposureYears ?? 0,
     protectiveEquipment:(c) => c.ppeUsed ? 1 : 0,
     // familyPd is already filtered to 1st-degree (father/mother/sibling) in
@@ -3492,7 +3511,7 @@ function builderTierValue(tierId) {
 // Tier Builder editable state — persisted to localStorage so user changes
 // survive a page reload. The framework defaults are used until the user
 // explicitly overrides anything.
-const TIER_BUILDER_LS_KEY = 'mt.tierBuilderRules.v4';
+const TIER_BUILDER_LS_KEY = 'mt.tierBuilderRules.v5';
 function loadTierBuilderRules() {
   try {
     const raw = localStorage.getItem(TIER_BUILDER_LS_KEY);
@@ -3542,18 +3561,21 @@ function condRowHtml(c, dataAttrs) {
   const fdef = TIER_BUILDER_FIELD_DEFS.find(f => f.key === c.field);
   const fType = fdef ? fdef.type : 'number';
   const ops = TIER_BUILDER_OP_DEFS[fType] || TIER_BUILDER_OP_DEFS.number;
+  const fieldTitle = fdef && fdef.help ? fdef.label + ' — ' + fdef.help : fdef ? fdef.label : '';
   let valueHtml;
   if (fType === 'boolean') {
     valueHtml = `<select class="cond-value"><option value="1"${c.value === 1 ? ' selected' : ''}>true</option><option value="0"${c.value === 0 ? ' selected' : ''}>false</option></select>`;
-  } else if (fType === 'string' && fdef && fdef.values) {
+  } else if (fType === 'string' && fdef && fdef.key === 'symptoms') {
     const selected = String(c.value || '').split(',').map(s => s.trim());
     valueHtml = `<div class="cond-multi-select" data-symptoms="${fdef.values.join(',')}" data-selected="${selected.join(',')}">${fdef.values.map(v => `<label class="symptom-cb"><input type="checkbox" class="symptom-cb" data-symptom="${v}"${selected.includes(v) ? ' checked' : ''}> ${v.replace(/_/g, ' ')}</label>`).join('')}</div>`;
+  } else if (fType === 'string' && fdef && fdef.values) {
+    valueHtml = `<select class="cond-value">${fdef.values.map(v => `<option value="${v}"${String(c.value) === v ? ' selected' : ''}>${v.replace(/_/g, ' ')}</option>`).join('')}</select>`;
   } else {
     valueHtml = `<input type="number" class="cond-value" value="${c.value}" step="1">`;
   }
   return `
     <div class="builder-condition" ${dataAttrs}>
-      <select class="cond-field">
+      <select class="cond-field" title="${escapeHtml(fieldTitle)}">
         ${TIER_BUILDER_FIELD_DEFS.map(f => `<option value="${f.key}"${f.key === c.field ? ' selected' : ''}>${f.label}</option>`).join('')}
       </select>
       <select class="cond-op">
@@ -3588,7 +3610,7 @@ function renderTierBuilder() {
           </div>` : condRowHtml(it, `data-ci="${ii}"`)).join('');
     const isMkt = Object.prototype.hasOwnProperty.call(marketGsv, t.id);
     const valueCtl = isMkt
-      ? `<span class="tier-gsv-label">$/case follows the Market value inventory card below</span>`
+      ? `<span class="tier-gsv-label tier-gsv-linked" title="Follows the Market value inventory card below">$ / case</span>`
       : `<span class="tier-gsv-label">$<input type="number" class="tier-gsv-in" value="${Math.round((t.gsv || 0) / 1000)}" min="0" step="5">K / case</span>`;
     return `
       <div class="builder-tier" data-tier="${t.id}">
@@ -3603,7 +3625,7 @@ function renderTierBuilder() {
             <option value="AND"${t.op === 'AND' ? ' selected' : ''}>ALL (AND)</option>
             <option value="OR"${t.op === 'OR' ? ' selected' : ''}>ANY (OR)</option>
           </select>
-          <span>of the items below — an item is a condition or a nested group</span>
+          <span class="builder-help" title="Items below: a single condition, or a nested group with its own ALL/ANY.">items</span>
         </div>
         <div class="builder-items">${itemsHtml}</div>
         <div class="builder-tier-controls">
@@ -3698,11 +3720,12 @@ function renderTierFlow() {
   });
   nodes[UNMATCHED_KEY] = { id: UNMATCHED_KEY, col: 1, name: 'No tier matched', color: SLATE_LITE, value: 0, in: 0, out: 0 };
 
-  const links = {}; // 'a>b' -> {source, target, value}
-  const bump = (a, b) => {
+  const links = {}; // 'a>b' -> {source, target, value, matterIds: []}
+  const bump = (a, b, matterId) => {
     const k = a + '>' + b;
-    if (!links[k]) links[k] = { source: a, target: b, value: 0 };
+    if (!links[k]) links[k] = { source: a, target: b, value: 0, matterIds: [] };
     links[k].value++;
+    links[k].matterIds.push(matterId);
     nodes[a].out++; nodes[b].in++;
   };
   const tierMoney = {};
@@ -3710,7 +3733,7 @@ function renderTierFlow() {
     const k = CASE_BUILDER_TIER[c.matterId] || UNMATCHED_KEY;
     const m = nodes[k] ? k : UNMATCHED_KEY;
     const end = c.statusBucket === 'closed' ? 'closed' : 'open';
-    bump('all', m); bump(m, end);
+    bump('all', m, c.matterId); bump(m, end, c.matterId);
     tierMoney[m] = (tierMoney[m] || 0) + (m === UNMATCHED_KEY ? 0 : builderTierValue(m));
   });
   for (const id in nodes) nodes[id].value = Math.max(nodes[id].in, nodes[id].out);
@@ -3744,7 +3767,8 @@ function renderTierFlow() {
     // Color flows by TIER: inflow links take the target tier's color, tier →
     // status links keep it — each tier reads as one continuous colored band.
     const linkColor = l.source === 'all' ? t.color : s.color;
-    return `<path class="tf-link" fill="none" d="M${x0},${y0.toFixed(1)} C${xi},${y0.toFixed(1)} ${xi},${y1.toFixed(1)} ${x1},${y1.toFixed(1)}" stroke="${linkColor}" stroke-width="${w.toFixed(1)}"><title>${s.name} → ${t.name}: ${l.value.toLocaleString()} cases</title></path>`;
+    const ids = l.matterIds.join(',');
+    return `<path class="tf-link" data-source="${s.id}" data-target="${t.id}" data-ids="${ids}" fill="none" d="M${x0},${y0.toFixed(1)} C${xi},${y0.toFixed(1)} ${xi},${y1.toFixed(1)} ${x1},${y1.toFixed(1)}" stroke="${linkColor}" stroke-width="${w.toFixed(1)}" tabindex="0"><title>${s.name} → ${t.name}: ${l.value.toLocaleString()} cases — click to see matter list</title></path>`;
   }).join('');
 
   // ---- nodes + labels ----
@@ -3772,6 +3796,47 @@ function renderTierFlow() {
     </defs>
     ${headSvg}${linkSvg}${nodeSvg}
   </svg>`;
+  // Click a flow link → drill into the cases that flowed through it
+  wrap.querySelectorAll('.tf-link').forEach(el => {
+    el.addEventListener('click', () => openSankeyFlowDrill(el.dataset.source, el.dataset.target));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openSankeyFlowDrill(el.dataset.source, el.dataset.target); } });
+  });
+}
+
+// Drill into the cases that flow through one Sankey link
+function openSankeyFlowDrill(sourceId, targetId) {
+  const modal = document.getElementById('drillModal');
+  if (!modal || !D || !D.cases) return;
+  const sourceName = sourceId === 'all' ? 'Inventory'
+    : (TIER_BUILDER_RULES.tiers.find(t => t.id === sourceId)?.name || sourceId);
+  const targetName = targetId === 'open' ? 'Open' : targetId === 'closed' ? 'Closed'
+    : (TIER_BUILDER_RULES.tiers.find(t => t.id === targetId)?.name || targetId);
+  // Recompute the matter set for this flow (cheap — 500 cases max)
+  const rows = D.cases.filter(c => {
+    const tier = CASE_BUILDER_TIER[c.matterId] || UNMATCHED_KEY;
+    if (sourceId === 'all') {
+      if (targetId === 'open' || targetId === 'closed') return tier !== UNMATCHED_KEY && c.statusBucket === targetId;
+      return tier === targetId;
+    }
+    const end = c.statusBucket === 'closed' ? 'closed' : 'open';
+    return tier === sourceId && end === targetId;
+  }).map(c => ({ c }));
+  if (!rows.length) return;
+  const p = state.convertRate;
+  modal._drill = { mode: 'sankey', rows, p };
+  document.getElementById('drillModalTitle').textContent =
+    `${sourceName} → ${targetName}: ${rows.length.toLocaleString()} case${rows.length === 1 ? '' : 's'}`;
+  document.getElementById('drillModalSubtitle').textContent =
+    `Click any column header to sort. Search by matter #, claimant, or firm.`;
+  document.getElementById('drillModalThead').innerHTML =
+    '<tr>' + DRILL_COLS.sankey.map(h => `<th>${h}</th>`).join('') + '</tr>';
+  const searchIn = document.getElementById('drillSearch');
+  searchIn.value = '';
+  searchIn.oninput = () => renderDrillBody();
+  document.getElementById('drillExportCsvBtn').onclick = () => downloadDrillCsv();
+  renderDrillBody();
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
 function initTierBuilder() {
   renderTierBuilder();
