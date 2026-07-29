@@ -657,9 +657,6 @@ details.exec-details[open]>summary{margin-bottom:12px}
            Open/Closed. Recomputes whenever the Builder rules change. -->
       <div class="exec-card">
         <h3>Tier flow — where the inventory peels off</h3>
-        <p style="font-size:12.5px;color:var(--slate);margin:-4px 0 8px;line-height:1.5;max-width:920px">
-          Every case flows left → right: <b>inflow</b> → <b>Tier</b> (under the rules currently set in the <b>Tier Builder</b> below) → <b>Open / Closed</b>. Link widths are proportional to case count; dollar labels use the per-tier case values.
-        </p>
         <div class="tier-flow-wrap" id="tierFlowWrap"></div>
       </div>
 
@@ -3773,8 +3770,11 @@ function renderTierFlow() {
   for (const id in nodes) nodes[id].value = Math.max(nodes[id].in, nodes[id].out);
 
   // ---- layout ----
-  const W = 1480, H = 280, HEAD = 24, PAD = 10, NODE_W = 10;
-  const colX = [8, 720, 1320];
+  // W fits the content: col 0 node at x=4, col 2 node at x=W-14 (right edge
+  // hugs the col-2 status bar with no wasted margin). Tighter than a fixed
+  // 1480 — the SVG viewBox used to leave ~10% empty on the right.
+  const W = 1320, H = 280, HEAD = 24, PAD = 10, NODE_W = 10;
+  const colX = [4, 640, W - 14];
   const COL_HEADS = ['Inflow', 'Tier — Builder rules', 'Status'];
   const cols = [[], [], []];
   Object.values(nodes).filter(n => n.value > 0).forEach(n => cols[n.col].push(n));
@@ -3818,8 +3818,12 @@ function renderTierFlow() {
       <text class="tf-label" x="${lx}" y="${(ly - 1).toFixed(1)}" text-anchor="${anchor}">${n.name}</text>
       <text class="tf-label-sub" x="${lx}" y="${(ly + 11).toFixed(1)}" text-anchor="${anchor}">${n.value.toLocaleString()} cases${money}</text>`;
   }).join('');
-  const headSvg = COL_HEADS.map((h, i) =>
-    `<text class="tf-head" x="${colX[i]}" y="12">${h}</text>`).join('');
+  const headSvg = COL_HEADS.map((h, i) => {
+    // Right-anchor the Status header so it never clips off the right edge.
+    const anchor = i === COL_HEADS.length - 1 ? 'end' : 'start';
+    const hx = anchor === 'end' ? W - 6 : colX[i];
+    return `<text class="tf-head" x="${hx}" y="12" text-anchor="${anchor}">${h}</text>`;
+  }).join('');
 
   wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Tier flow Sankey">
     <defs>
