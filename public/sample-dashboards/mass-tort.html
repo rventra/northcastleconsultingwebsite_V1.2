@@ -499,6 +499,16 @@ details.exec-details[open]>summary{margin-bottom:12px}
 .bridge-sub{font-weight:400;font-size:11.5px;color:var(--slate-lite);margin-left:6px}
 .bridge-canvas-wrap{position:relative;height:300px;margin-top:8px}
 
+/* Tier flow Sankey (Executive Summary, under Tier Distribution) */
+.tier-flow-wrap{width:100%;overflow-x:auto}
+.tier-flow-wrap svg{display:block;width:100%;height:auto}
+.tf-link{fill:none;stroke-opacity:.32}
+.tf-link:hover{stroke-opacity:.55}
+.tf-node{stroke:none}
+.tf-label{font-size:11px;fill:var(--navy);font-weight:600}
+.tf-label-sub{font-size:10px;fill:var(--slate-lite);font-weight:400}
+.tf-head{font-size:10px;fill:var(--slate);font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+
 /* WI-3: per-case fix callouts (wins modal) */
 .fix-item{margin:0 0 6px}
 .fix-item:last-child{margin-bottom:0}
@@ -616,7 +626,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
       <div class="exec-card tier-builder-card">
         <h3>Tier Builder — define the tier rules</h3>
         <p style="font-size:12.5px;color:var(--slate);margin:-4px 0 12px;line-height:1.5;max-width:920px">
-          Each tier is a list of conditional statements over case fields. Cases are evaluated top-down — <b>Tier I → Tier II → Tier III → Below grid</b> — and the first tier whose conditions match is the case's Market Value Tier. Combine a tier's conditions with <b>ALL</b> (AND) for strict matching or <b>ANY</b> (OR) for catch-all buckets.
+          Each tier is a list of conditional statements over case fields. Cases are evaluated top-down — <b>Tier I → Tier II → Below-grid gate check → Tier III</b> — and the first tier whose conditions match is the case's Market Value Tier. (The gate check runs before Tier III so Tier III's catch-all ANY rules can't claim gate failures; Tier III is the residual bucket for gate-passing cases.) Combine a tier's conditions with <b>ALL</b> (AND) for strict matching or <b>ANY</b> (OR) for catch-all buckets.
         </p>
         <div class="builder-tiers" id="builder-tiers"></div>
         <div class="builder-actions">
@@ -638,6 +648,18 @@ details.exec-details[open]>summary{margin-bottom:12px}
           <tbody id="dist-tbody"></tbody>
         </table>
         <div class="dist-sub" id="dist-sub"></div>
+      </div>
+
+      <!-- Tier Flow — Sankey of cases peeling off through the framework:
+           Layer 1 gates → Clinical Tier → Market Value Tier → Open/Closed.
+           Driven by the Tier Builder rules (via CASE_BUILDER_TIER), so it
+           recomputes whenever the Builder rules change. -->
+      <div class="exec-card">
+        <h3>Tier flow — where the inventory peels off</h3>
+        <p style="font-size:12.5px;color:var(--slate);margin:-4px 0 8px;line-height:1.5;max-width:920px">
+          Every case flows left → right through the framework: <b>Layer 1 gates</b> → <b>Clinical Tier</b> → <b>Market Value Tier</b> (under the rules currently set in the <b>Tier Builder</b>) → <b>Open / Closed</b>. Link widths are proportional to case count; dollar labels on the market tiers use the editable GSVs below.
+        </p>
+        <div class="tier-flow-wrap" id="tierFlowWrap"></div>
       </div>
 
       <!-- Tier Panel — front and center for PE audience -->
@@ -847,9 +869,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
               <label class="config-radio-row"><input type="checkbox" id="cfg-sev-freezing"> Freezing episodes</label>
               <label class="config-radio-row"><input type="checkbox" id="cfg-sev-psych"> Psychosis / hallucinations</label>
               <label class="config-radio-row"><input type="checkbox" id="cfg-sev-nh"> Nursing home admission</label>
-              <label class="config-radio-row"><input type="checkbox" id="cfg-sev-young"> Young age at diagnosis</label>
-              <label class="config-radio-row"><input type="checkbox" id="cfg-sev-hy"> Hoehn &amp; Yahr 3+</label>
-              <div class="config-counter" id="cfg-sev-count">2 escalators checked</div>
+              <div class="config-counter" id="cfg-sev-count">1 escalator checked</div>
             </div>
 
             <!-- Confounders inputs -->
@@ -2004,8 +2024,11 @@ function marketTierOf(c) {
   const driftOnly = c.exposureCategory === 'Residential / Bystander' && !c.licenseVerified && !c.licenseClaimed;
   const sevEsc = c.cognitiveDecline || c.dbsSurgery || c.nursingHome || (c.falls6mo || 0) > 3 || c.freezing || c.psychosis;
   let m;
+  // Drift-only (residential/bystander with no license proof) caps at Tier III
+  // per the framework — excluded from Tier I explicitly here so ALL consumers
+  // (tier panel, configurator, inventory dist, builder defaults) agree.
   if (ds >= 7 && lat != null && lat >= 10 && lat <= 30 && (c.hoehnYahr || 0) >= 3
-      && cf === 0 && sevEsc && age != null && age < 70) {
+      && cf === 0 && sevEsc && age != null && age < 70 && !driftOnly) {
     m = 'I';
   } else if (ds < 4 || lat == null || lat < 10 || cf >= 2 || (age != null && age > 78) || driftOnly) {
     m = 'III';
@@ -2770,6 +2793,10 @@ function updateTierPanelDerived() {
     const v = parseFloat(inp.value);
     if (!isNaN(v) && v >= 0) marketGsv[inp.dataset.mkt] = Math.round(v * 1000);
   });
+  // Keep the Builder-driven Tier Distribution dollars in sync with the
+  // edited GSVs (its counts don't change, its inventory values do).
+  renderTierDistribution();
+  renderTierFlow();
   const cases = D.cases;
   const p = state.convertRate;
   let totalOpen = 0, totalClosed = 0, totalCurrentGsv = 0, totalWinsGap = 0;
@@ -3643,11 +3670,12 @@ document.body.classList.add('t0-active');
 // ====================================================================
 const TIER_BUILDER_FIELD_DEFS = [
   { key: 'docScore',          label: 'doc_score',              type: 'number', min: 0, max: 10 },
+  { key: 'clinicalTier',      label: 'clinical tier (1-5)',    type: 'number', min: 1, max: 5 },
   { key: 'latencyYears',      label: 'latency (years)',        type: 'number', min: 0, max: 60 },
   { key: 'hoehnYahr',         label: 'H&Y stage',              type: 'number', min: 1, max: 5 },
   { key: 'ageAtDiagnosis',    label: 'age at dx',              type: 'number', min: 40, max: 100 },
   { key: 'confounderCount',   label: 'confounder count',       type: 'number', min: 0, max: 5 },
-  { key: 'severityCount',     label: 'severity count',         type: 'number', min: 0, max: 8 },
+  { key: 'severityCount',     label: 'severity count',         type: 'number', min: 0, max: 6 },
   { key: 'driftOnly',         label: 'drift-only exposure',    type: 'number' },  // 0/1
   { key: 'gatesPassed',       label: 'Layer 1 (gates passed)', type: 'number' },  // 0/1
 ];
@@ -3662,9 +3690,14 @@ const TIER_BUILDER_OP_DEFS = {
   ],
 };
 function tierBuilderDefaultRules() {
+  // Defaults mirror marketTierOf() exactly (verified against the 500-case
+  // dataset). Evaluation order is I → II → BG → III: the Below-grid gate
+  // check runs BEFORE Tier III so III's catch-all OR can't swallow gate
+  // failures; Tier III is the residual bucket for gate-passing cases.
   return {
     I: { name: 'Tier I', range: '$400K–$1M+', op: 'AND', conditions: [
       { field: 'gatesPassed',     op: '=',  value: 1 },
+      { field: 'clinicalTier',    op: '<=', value: 2 },
       { field: 'docScore',       op: '>=', value: 7 },
       { field: 'latencyYears',   op: '>=', value: 10 },
       { field: 'latencyYears',   op: '<=', value: 30 },
@@ -3672,25 +3705,29 @@ function tierBuilderDefaultRules() {
       { field: 'confounderCount',op: '=',  value: 0 },
       { field: 'severityCount',  op: '>=', value: 1 },
       { field: 'ageAtDiagnosis', op: '<',  value: 70 },
+      { field: 'driftOnly',      op: '=',  value: 0 },
     ]},
     II: { name: 'Tier II', range: '$150K–$300K', op: 'AND', conditions: [
       { field: 'gatesPassed',     op: '=',  value: 1 },
+      { field: 'clinicalTier',    op: '<=', value: 3 },
       { field: 'docScore',       op: '>=', value: 4 },
-      { field: 'docScore',       op: '<=', value: 6 },
-      { field: 'latencyYears',   op: '>=', value: 5 },
+      { field: 'latencyYears',   op: '>=', value: 10 },
       { field: 'latencyYears',   op: '<=', value: 35 },
       { field: 'confounderCount',op: '<=', value: 1 },
+      { field: 'ageAtDiagnosis', op: '<=', value: 78 },
       { field: 'driftOnly',      op: '=',  value: 0 },
-    ]},
-    III: { name: 'Tier III', range: '$20K–$150K', op: 'OR', conditions: [
-      { field: 'docScore',       op: '<',  value: 4 },
-      { field: 'latencyYears',   op: '<',  value: 10 },
-      { field: 'confounderCount',op: '>=', value: 2 },
-      { field: 'ageAtDiagnosis', op: '>',  value: 78 },
-      { field: 'driftOnly',      op: '=',  value: 1 },
     ]},
     BG: { name: 'Below grid / Cap', range: '$0', op: 'AND', conditions: [
       { field: 'gatesPassed',     op: '=',  value: 0 },
+    ]},
+    III: { name: 'Tier III', range: '$20K–$150K', op: 'OR', conditions: [
+      { field: 'clinicalTier',    op: '=',  value: 4 },
+      { field: 'docScore',       op: '<',  value: 4 },
+      { field: 'latencyYears',   op: '<',  value: 10 },
+      { field: 'latencyYears',   op: '>',  value: 35 },
+      { field: 'confounderCount',op: '>=', value: 2 },
+      { field: 'ageAtDiagnosis', op: '>',  value: 78 },
+      { field: 'driftOnly',      op: '=',  value: 1 },
     ]},
   };
 }
@@ -3698,10 +3735,17 @@ function getCaseFieldDefs() {
   // Compute the case's effective values for the field-keys used by the Builder.
   return {
     docScore:        (c) => c.docScore ?? docScoreOf(c),
-    latencyYears:    (c) => c.latencyYears,
+    // Null latency (unDx'd / missing records) coerces to -1 so it fails the
+    // Tier I/II latency floors and is caught by Tier III's `latency < 10`
+    // trigger — mirroring marketTierOf's explicit `lat == null → III`.
+    latencyYears:    (c) => c.latencyYears ?? -1,
     hoehnYahr:       (c) => c.hoehnYahr,
     ageAtDiagnosis:  (c) => c.ageAtDiagnosis,
     confounderCount: (c) => c.confounderScore ?? confounderScoreOf(c),
+    // Severity count mirrors marketTierOf's sevEsc EXACTLY: the six clinical
+    // escalators only. H&Y ≥3 and age are SEPARATE rule conditions in the
+    // framework, not escalators — counting them here double-counts H&Y and
+    // inflates Tier I (this was the 13-vs-5 bug).
     severityCount:   (c) => {
       let n = 0;
       if (c.cognitiveDecline) n++;
@@ -3710,10 +3754,10 @@ function getCaseFieldDefs() {
       if ((c.falls6mo || 0) > 3) n++;
       if (c.freezing) n++;
       if (c.psychosis) n++;
-      if (c.hoehnYahr && c.hoehnYahr >= 3) n++;
-      if (c.ageAtDiagnosis && c.ageAtDiagnosis < 60) n++;
       return n;
     },
+    // Clinical tier the case sits on (1=PDD … 4=prodromal, 5=below grid).
+    clinicalTier:    (c) => c.tier != null ? c.tier : caseTier(c),
     driftOnly:       (c) => (c.exposureCategory === 'Residential / Bystander' && !c.licenseVerified && !c.licenseClaimed) ? 1 : 0,
     gatesPassed:     (c) => gatesPassed(c) ? 1 : 0,
   };
@@ -3741,18 +3785,21 @@ function evaluateCaseBuilderTier(c, rules) {
   const getters = getCaseFieldDefs();
   const values = {};
   for (const k in getters) values[k] = getters[k](c);
-  // Top-down evaluation: Tier I → Tier II → Tier III → BG
-  const order = ['I', 'II', 'III', 'BG'];
-  for (const k of order) {
+  // Top-down evaluation: Tier I → Tier II → BG (gate check) → Tier III.
+  // BG runs before III so III's catch-all OR can't claim gate failures;
+  // III is the residual bucket for gate-passing cases.
+  for (const k of TIER_BUILDER_ORDER) {
     if (evalBuilderTier(rules[k], values)) return k;
   }
   return null;
 }
+// Evaluation AND display order for the Builder.
+const TIER_BUILDER_ORDER = ['I', 'II', 'BG', 'III'];
 
 // Tier Builder editable state — persisted to localStorage so user changes
 // survive a page reload. The framework defaults are used until the user
 // explicitly overrides any condition.
-const TIER_BUILDER_LS_KEY = 'mt.tierBuilderRules.v1';
+const TIER_BUILDER_LS_KEY = 'mt.tierBuilderRules.v2';
 function loadTierBuilderRules() {
   try {
     const raw = localStorage.getItem(TIER_BUILDER_LS_KEY);
@@ -3760,6 +3807,22 @@ function loadTierBuilderRules() {
     const parsed = JSON.parse(raw);
     if (!parsed || typeof parsed !== 'object') return null;
     if (!parsed.I || !parsed.II || !parsed.III || !parsed.BG) return null;
+    // Shape-validate + drop conditions referencing fields that no longer
+    // exist (e.g. saved before a field rename) so they fail loudly here
+    // instead of silently evaluating to false forever.
+    const knownFields = new Set(TIER_BUILDER_FIELD_DEFS.map(f => f.key));
+    const knownOps = new Set(TIER_BUILDER_OP_DEFS.number.map(o => o.op));
+    for (const k of TIER_BUILDER_ORDER) {
+      const t = parsed[k];
+      if (!t || !Array.isArray(t.conditions)) return null;
+      if (t.op !== 'AND' && t.op !== 'OR') t.op = 'AND';
+      t.conditions = t.conditions.filter(cond => {
+        const ok = cond && knownFields.has(cond.field) && knownOps.has(cond.op)
+          && typeof cond.value === 'number' && !isNaN(cond.value);
+        if (!ok) console.warn('[TierBuilder] dropped invalid saved condition:', cond);
+        return ok;
+      });
+    }
     return parsed;
   } catch (e) { return null; }
 }
@@ -3771,7 +3834,7 @@ let TIER_BUILDER_RULES = loadTierBuilderRules() || tierBuilderDefaultRules();
 function renderTierBuilder() {
   const container = document.getElementById('builder-tiers');
   if (!container) return;
-  container.innerHTML = ['I', 'II', 'III', 'BG'].map(tierKey => {
+  container.innerHTML = TIER_BUILDER_ORDER.map(tierKey => {
     const t = TIER_BUILDER_RULES[tierKey];
     const condRows = t.conditions.length === 0
       ? `<div class="builder-tier-empty">No conditions — tier matches every case that reaches it. <button class="builder-add" data-tier="${tierKey}">+ Add condition</button></div>`
@@ -3818,7 +3881,7 @@ function applyTierBuilder(redistribute = true) {
     const k = evaluateCaseBuilderTier(c, TIER_BUILDER_RULES) || 'BG';
     CASE_BUILDER_TIER[c.matterId] = k;
   });
-  if (redistribute) renderTierDistribution();
+  if (redistribute) { renderTierDistribution(); renderTierFlow(); }
 }
 function renderTierDistribution() {
   const tbody = document.getElementById('dist-tbody');
@@ -3828,7 +3891,9 @@ function renderTierDistribution() {
     const k = CASE_BUILDER_TIER[c.matterId] || 'BG';
     const isClosed = c.statusBucket === 'closed';
     counts[k][isClosed ? 'closed' : 'open']++;
-    counts[k].totalValue += caseValue(c);
+    // Dollar value follows the BUILDER-assigned tier (not marketTierOf) so
+    // counts and dollars always agree; BG is $0 by definition.
+    counts[k].totalValue += k === 'BG' ? 0 : (marketGsv[k] || 0);
   });
   const tierMeta = { I: 'Tier I · $400K–$1M+', II: 'Tier II · $150K–$300K', III: 'Tier III · $20K–$150K', BG: 'Below grid / Cap' };
   tbody.innerHTML = ['I', 'II', 'III', 'BG'].map(k => {
@@ -3851,6 +3916,118 @@ function renderTierDistribution() {
     const totalVal = counts.I.totalValue + counts.II.totalValue + counts.III.totalValue + counts.BG.totalValue;
     sub.innerHTML = `<b>${(totalOpen + totalClosed).toLocaleString()}</b> cases total · <b>${totalOpen.toLocaleString()}</b> open · <b>${totalClosed.toLocaleString()}</b> closed · <b>${fmtMoney(totalVal)}</b> inventory under the applied rules.`;
   }
+}
+
+// ====================================================================
+// TIER FLOW — hand-rolled SVG Sankey on t0. Cases flow Layer 1 gates →
+// Clinical Tier → Market Value Tier (per the Tier BUILDER rules, via
+// CASE_BUILDER_TIER) → Open/Closed. Link widths are proportional to case
+// count; market-tier nodes carry inventory dollars at the editable GSVs.
+// Recomputed by applyTierBuilder() and on GSV edits.
+// ====================================================================
+function renderTierFlow() {
+  const wrap = document.getElementById('tierFlowWrap');
+  if (!wrap || !D || !D.cases) return;
+
+  const NAVY = '#1E2761', GOLD = '#C9A227', PURPLE = '#6B4E9B', AMBER = '#D98324',
+        RED = '#B23A48', SLATE = '#5B6478', SLATE_LITE = '#9AA1B5';
+  const NODE_DEF = {
+    all:    { col: 0, name: 'Inventory',         color: NAVY },
+    pass:   { col: 1, name: 'Gates pass',        color: NAVY },
+    fail:   { col: 1, name: 'Gates fail',        color: RED },
+    T1:     { col: 2, name: 'T1 · PDD',          color: GOLD },
+    T2:     { col: 2, name: 'T2 · Confirmed PD', color: PURPLE },
+    T3:     { col: 2, name: 'T3 · Parkinsonism', color: AMBER },
+    T4:     { col: 2, name: 'T4 · Prodromal',    color: SLATE },
+    T5:     { col: 2, name: 'No clinical fit',   color: SLATE_LITE },
+    I:      { col: 3, name: 'Tier I',            color: GOLD },
+    II:     { col: 3, name: 'Tier II',           color: PURPLE },
+    III:    { col: 3, name: 'Tier III',          color: AMBER },
+    BG:     { col: 3, name: 'Below grid / cap',  color: RED },
+    open:   { col: 4, name: 'Open',              color: NAVY },
+    closed: { col: 4, name: 'Closed',            color: SLATE, hatch: true },
+  };
+  const COL_HEADS = ['Inventory', 'Layer 1 — gates', 'Clinical tier', 'Market value tier', 'Status'];
+
+  // ---- tally per-case paths ----
+  const nodes = {};
+  for (const id in NODE_DEF) nodes[id] = { id, ...NODE_DEF[id], value: 0, in: 0, out: 0 };
+  const links = {}; // 'a>b' -> {source, target, value}
+  const bump = (a, b) => {
+    const k = a + '>' + b;
+    if (!links[k]) links[k] = { source: a, target: b, value: 0 };
+    links[k].value++;
+    nodes[a].out++; nodes[b].in++;
+  };
+  const mktMoney = { I: 0, II: 0, III: 0, BG: 0 };
+  D.cases.forEach(c => {
+    const end = c.statusBucket === 'closed' ? 'closed' : 'open';
+    if (!gatesPassed(c)) {
+      // Gate failures exit at Layer 1 straight to Below grid / cap.
+      bump('all', 'fail'); bump('fail', 'BG'); bump('BG', end);
+      return;
+    }
+    const t = (c.tier != null ? c.tier : caseTier(c));
+    const tKey = 'T' + t; // T1..T4; T5 = no clinical fit
+    const m = t === 5 ? 'BG' : (CASE_BUILDER_TIER[c.matterId] || 'BG');
+    bump('all', 'pass'); bump('pass', tKey); bump(tKey, m); bump(m, end);
+    mktMoney[m] += m === 'BG' ? 0 : (marketGsv[m] || 0);
+  });
+  for (const id in nodes) nodes[id].value = Math.max(nodes[id].in, nodes[id].out);
+
+  // ---- layout ----
+  const W = 1160, H = 440, HEAD = 32, PAD = 14, NODE_W = 12;
+  const colX = [8, 262, 516, 770, 1024];
+  const cols = [[], [], [], [], []];
+  Object.values(nodes).filter(n => n.value > 0).forEach(n => cols[n.col].push(n));
+  const maxColTotal = Math.max(...cols.map(col => col.reduce((s, n) => s + n.value, 0)));
+  const maxNodes = Math.max(...cols.map(col => col.length));
+  const scale = (H - HEAD - (maxNodes - 1) * PAD) / (maxColTotal || 1);
+  cols.forEach(col => {
+    let y = HEAD;
+    col.forEach(n => { n.y = y; n.h = Math.max(1.5, n.value * scale); y += n.h + PAD; n.outY = n.y; n.inY = n.y; });
+  });
+
+  // ---- links (sorted to limit crossings), drawn under the nodes ----
+  const sorted = Object.values(links).sort((a, b) =>
+    nodes[a.source].col - nodes[b.source].col
+    || nodes[a.source].y - nodes[b.source].y
+    || nodes[a.target].y - nodes[b.target].y);
+  const linkSvg = sorted.map(l => {
+    const s = nodes[l.source], t = nodes[l.target];
+    const w = Math.max(1, l.value * scale);
+    const x0 = colX[s.col] + NODE_W, x1 = colX[t.col];
+    const y0 = s.outY + w / 2, y1 = t.inY + w / 2;
+    s.outY += w; t.inY += w;
+    const xi = (x0 + x1) / 2;
+    return `<path class="tf-link" fill="none" d="M${x0},${y0.toFixed(1)} C${xi},${y0.toFixed(1)} ${xi},${y1.toFixed(1)} ${x1},${y1.toFixed(1)}" stroke="${s.color}" stroke-width="${w.toFixed(1)}"><title>${s.name} → ${t.name}: ${l.value.toLocaleString()} cases</title></path>`;
+  }).join('');
+
+  // ---- nodes + labels ----
+  const nodeSvg = cols.flat().map(n => {
+    const x = colX[n.col];
+    const fill = n.hatch ? 'url(#tfHatch)' : n.color;
+    const labelRight = n.col < 4;
+    const lx = labelRight ? x + NODE_W + 6 : x - 6;
+    const anchor = labelRight ? 'start' : 'end';
+    const ly = n.y + n.h / 2;
+    const money = (n.col === 3 && mktMoney[n.id] > 0) ? ` · ${fmtMoney(mktMoney[n.id])}` : '';
+    return `<rect class="tf-node" x="${x}" y="${n.y.toFixed(1)}" width="${NODE_W}" height="${n.h.toFixed(1)}" rx="2" fill="${fill}"><title>${n.name}: ${n.value.toLocaleString()} cases${money}</title></rect>
+      <text class="tf-label" x="${lx}" y="${(ly - 1).toFixed(1)}" text-anchor="${anchor}">${n.name}</text>
+      <text class="tf-label-sub" x="${lx}" y="${(ly + 11).toFixed(1)}" text-anchor="${anchor}">${n.value.toLocaleString()} cases${money}</text>`;
+  }).join('');
+  const headSvg = COL_HEADS.map((h, i) =>
+    `<text class="tf-head" x="${colX[i]}" y="12">${h}</text>`).join('');
+
+  wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Tier flow Sankey">
+    <defs>
+      <pattern id="tfHatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+        <rect width="6" height="6" fill="${SLATE}"/>
+        <line x1="0" y1="0" x2="0" y2="6" stroke="#ffffff" stroke-width="2" stroke-opacity="0.55"/>
+      </pattern>
+    </defs>
+    ${headSvg}${linkSvg}${nodeSvg}
+  </svg>`;
 }
 function initTierBuilder() {
   renderTierBuilder();
@@ -3891,17 +4068,10 @@ function initTierBuilder() {
       return;
     }
   });
-  // Live update on condition field/op/value change
-  document.getElementById('builder-tiers').addEventListener('input', e => {
-    // Don't fully re-render on input (it would steal focus); instead mark dirty
-    // and require Apply. Alternatively auto-apply — auto-apply keeps results
-    // in sync, which the user expects.
-    autoSyncAndApply();
-  });
-  document.getElementById('builder-tiers').addEventListener('change', e => {
-    if (e.target.matches('.builder-op')) autoSyncAndApply();
-    else autoSyncAndApply();
-  });
+  // Live update on any condition field/op/value change. 'input' covers
+  // number fields AND selects in all modern browsers, so a separate
+  // 'change' listener would just double-apply.
+  document.getElementById('builder-tiers').addEventListener('input', autoSyncAndApply);
 }
 function autoSyncAndApply() {
   syncTierBuilderFromDOM();
@@ -3918,6 +4088,9 @@ function syncTierBuilderFromDOM() {
       const field = row.querySelector('.cond-field').value;
       const op = row.querySelector('.cond-op').value;
       const value = parseFloat(row.querySelector('.cond-value').value);
+      // Skip rows with an empty/invalid value — a NaN comparison always
+      // fails, which would silently kill an AND tier.
+      if (isNaN(value)) return;
       conds.push({ field, op, value });
     });
     TIER_BUILDER_RULES[tierKey].conditions = conds;
@@ -3933,8 +4106,11 @@ function syncTierBuilderFromDOM() {
 function readCfg() {
   const get = id => document.getElementById(id);
   const checked = id => !!(get(id) && get(id).checked);
+  // The six clinical severity escalators — mirrors marketTierOf's sevEsc.
+  // (H&Y stage and age at dx are NOT escalators; they are separate rule
+  // conditions with their own inputs above.)
   const sevIds = ['cfg-sev-pdd','cfg-sev-dbs','cfg-sev-falls','cfg-sev-freezing',
-                   'cfg-sev-psych','cfg-sev-nh','cfg-sev-young','cfg-sev-hy'];
+                   'cfg-sev-psych','cfg-sev-nh'];
   const cfIds = ['cfg-cf-fam','cfg-cf-gen','cfg-cf-tbi','cfg-cf-age79','cfg-cf-pest'];
   return {
     docScore: parseInt(get('cfg-doc-score').value || '0', 10),
@@ -3945,8 +4121,15 @@ function readCfg() {
     dx: parseInt(document.querySelector('input[name="cfg-dx"]:checked').value, 10),
     hy: parseInt(get('cfg-hy').value, 10),
     age: parseInt(get('cfg-age').value || '0', 10),
+    sev: {
+      cognitiveDecline: checked('cfg-sev-pdd'),
+      dbsSurgery:       checked('cfg-sev-dbs'),
+      falls6mo:         checked('cfg-sev-falls') ? 4 : 0,
+      freezing:         checked('cfg-sev-freezing'),
+      psychosis:        checked('cfg-sev-psych'),
+      nursingHome:      checked('cfg-sev-nh'),
+    },
     sevCount: sevIds.filter(checked).length,
-    sevAny: sevIds.some(checked),
     cfCount: cfIds.filter(checked).length,
   };
 }
@@ -3962,7 +4145,10 @@ function computeTierCfg() {
   const driftOnly = c.nature === 'drift';
   // ----- Layer 2 (Clinical Tier) — already a direct selection -----
   const dxLabel = { 1: 'T1 — PDD', 2: 'T2 — Confirmed PD', 3: 'T3 — Parkinsonism', 4: 'T4 — Prodromal', 5: 'Below grid' }[c.dx] || '?';
-  // ----- Market Value Tier — mirror marketTierOf() rules -----
+  // ----- Market Value Tier — delegate to marketTierOf() on a synthetic
+  // case so this widget can NEVER drift from the engine. Layer-1 failure is
+  // represented as clinical tier 5 (below grid), exactly how caseTier()
+  // encodes it for real cases.
   let mt = null, mtLabel = '', tierRowClass = 'result-row result-tier';
   if (!l1Pass) {
     mt = 'cap';
@@ -3972,39 +4158,24 @@ function computeTierCfg() {
     mt = 'none';
     mtLabel = 'No clinical tier — no market value';
     tierRowClass += ' tier-cap';
-  } else if (c.dx === 4) {
-    mt = 'III';
-    mtLabel = 'Tier III · $20K–$150K (T4 prodromal forces Tier III)';
-    tierRowClass += ' tier-III';
   } else {
-    // Drift-only caps at Tier III regardless of other conditions (framework rule)
-    if (driftOnly) {
-      mt = 'III';
-      mtLabel = 'Tier III · $20K–$150K (drift-only caps at Tier III)';
-      tierRowClass += ' tier-III';
-    } else {
-      const tierI = c.docScore >= 7 && latYears >= 10 && latYears <= 30 && c.hy >= 3
-        && c.cfCount === 0 && c.sevAny && c.age < 70;
-      const tierIII = c.docScore < 4 || latYears < 10 || c.cfCount >= 2 || c.age > 78;
-      if (tierI) {
-        mt = 'I';
-        mtLabel = 'Tier I · $400K–$1M+';
-        tierRowClass += ' tier-I';
-      } else if (tierIII) {
-        mt = 'III';
-        mtLabel = 'Tier III · $20K–$150K';
-        tierRowClass += ' tier-III';
-      } else if (c.docScore >= 4 && latYears >= 5 && latYears <= 35 && c.cfCount <= 1) {
-        mt = 'II';
-        mtLabel = 'Tier II · $150K–$300K';
-        tierRowClass += ' tier-II';
-        if (c.dx === 3) mtLabel += ' (T3 capped at II)';
-      } else {
-        mt = 'III';
-        mtLabel = 'Tier III · $20K–$150K';
-        tierRowClass += ' tier-III';
-      }
-    }
+    const syn = {
+      tier: c.dx,
+      docScore: c.docScore,
+      confounderScore: c.cfCount,
+      latencyYears: latYears,
+      hoehnYahr: c.hy,
+      ageAtDiagnosis: c.age,
+      exposureCategory: driftOnly ? 'Residential / Bystander' : 'Occupational',
+      licenseVerified: false, licenseClaimed: false,
+      ...c.sev,
+    };
+    mt = marketTierOf(syn) || 'III';
+    mtLabel = { I: 'Tier I · $400K–$1M+', II: 'Tier II · $150K–$300K', III: 'Tier III · $20K–$150K' }[mt];
+    tierRowClass += ' tier-' + mt;
+    if (mt === 'II' && c.dx === 3) mtLabel += ' (T3 capped at II)';
+    if (mt === 'III' && driftOnly) mtLabel += ' (drift-only caps at Tier III)';
+    if (mt === 'III' && c.dx === 4) mtLabel += ' (T4 prodromal forces Tier III)';
   }
   // ----- Layer 1 pass/fail message -----
   let l1Msg = 'PASS';
@@ -4022,17 +4193,18 @@ function computeTierCfg() {
   else if (mt === 'I') explain = `Tier I: doc ≥7, latency 10–30, H&Y ≥3, cf = 0, ≥1 severity, age <70.`;
   else if (mt === 'II') explain = c.dx === 3
     ? `Tier II (capped): Clinical Tier T3 caps at market Tier II.`
-    : `Tier II: doc 4–6, latency 5–35, cf ≤1.`;
+    : `Tier II: doc ≥4, latency 10–35, cf ≤1, age ≤78.`;
   else if (mt === 'III') {
     const reasons = [];
     if (driftOnly) reasons.push('drift-only exposure (caps at III)');
     if (c.docScore < 4) reasons.push('doc_score <4');
     if (latYears < 10) reasons.push('latency <10');
+    if (latYears > 35) reasons.push('latency >35');
     if (c.cfCount >= 2) reasons.push(`${c.cfCount} confounders`);
     if (c.age > 78) reasons.push('age >78');
     if (c.dx === 4) reasons.push('T4 prodromal forces III');
-    if (!c.sevAny) reasons.push('no severity escalators');
-    explain = `Tier III: ${reasons.length ? reasons.join(' · ') : 'no Tier II condition matched'}.`;
+    if (c.sevCount === 0) reasons.push('no severity escalators');
+    explain = `Tier III: ${reasons.length ? reasons.join(' · ') : 'Tier I/II conditions not met'}.`;
   }
   // ----- Render -----
   document.getElementById('cfg-r-l1').textContent = l1Msg;
@@ -4057,15 +4229,12 @@ function computeInventoryDist() {
   // Buckets: Tier I, Tier II, Tier III, BelowGrid-or-L1Fail
   const buckets = { 'I': { open:0, closed:0 }, 'II': { open:0, closed:0 }, 'III': { open:0, closed:0 }, 'BG': { open:0, closed:0 } };
   D.cases.forEach(c => {
-    let key;
-    if (c.tier === 5 || !gatesPassed(c)) key = 'BG';
-    else key = marketTierOf(c) || 'III';
-    // cap at Tier III if drift-only (mirror Configurator rule)
-    if (key === 'I' && c.exposureCategory === 'Residential / Bystander' && !c.licenseVerified && !c.licenseClaimed) key = 'III';
+    // marketTierOf already encodes the drift-only cap and the gate/T4 rules —
+    // no post-hoc patches needed here.
+    const key = (c.tier === 5 || !gatesPassed(c)) ? 'BG' : (marketTierOf(c) || 'III');
     const isClosed = c.statusBucket === 'closed';
     buckets[key][isClosed ? 'closed' : 'open']++;
   });
-  console.log('[CID] buckets:', JSON.stringify(buckets));
   ['I','II','III','BG'].forEach(k => {
     const o = buckets[k].open, c = buckets[k].closed;
     const oEl = document.getElementById(`cfg-inv-${k}-open`);
@@ -4079,7 +4248,7 @@ function computeInventoryDist() {
 function initTierConfigurator() {
   const ids = ['cfg-doc-score','cfg-nature','cfg-era','cfg-pfs','cfg-latency','cfg-hy','cfg-age'];
   const sevIds = ['cfg-sev-pdd','cfg-sev-dbs','cfg-sev-falls','cfg-sev-freezing',
-                   'cfg-sev-psych','cfg-sev-nh','cfg-sev-young','cfg-sev-hy'];
+                   'cfg-sev-psych','cfg-sev-nh'];
   const cfIds = ['cfg-cf-fam','cfg-cf-gen','cfg-cf-tbi','cfg-cf-age79','cfg-cf-pest'];
   ids.forEach(id => {
     const el = document.getElementById(id);
