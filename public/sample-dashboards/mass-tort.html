@@ -3441,6 +3441,7 @@ function getCaseFieldDefs() {
     symptoms:           (c) => (c.symptomNames || []).map(s => s.toLowerCase().replace(/\s+/g, '_')),
     levodopaResponse:   (c) => (c.levodopaResponse || 'unknown').toLowerCase().replace(/\s+/g, '_'),
     applicationMethod:  (c) => c.applicationMethod || 'other',  // legacy alias — case data still uses the old key
+    natureOfExposure:   (c) => c.applicationMethod || 'other',  // same underlying data as applicationMethod (single method per case)
     totalExposure:      (c) => c.exposureTotalDays ?? c.exposureYears ?? 0,
     protectiveEquipment:(c) => c.ppeUsed ? 1 : 0,
     // familyPd is already filtered to 1st-degree (father/mother/sibling) in
