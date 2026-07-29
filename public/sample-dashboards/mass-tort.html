@@ -2347,48 +2347,54 @@ function renderTab5() {
 // EXECUTIVE SUMMARY TAB (t0) — tier matrix + legal developments
 // ====================================================================
 
-// Tier panel — market value grid strip (editable point values) on top of the
-// diagnosis-tier matrix: case count, avg value, inventory value, and the lift
-// the tier stands to gain. updateTierPanelDerived() patches cells in place.
+// Tier panel — inventory card driven by the TIER BUILDER (same assignments as
+// the Sankey: CASE_BUILDER_TIER). One column per builder tier with an editable
+// $/case (= the tier's gsv), open-case count, total, and average; plus a $0
+// "No tier matched" column for cases no rule caught. With no tiers defined the
+// card is an empty state. updateTierPanelDerived() patches cells in place.
 function renderTierPanel() {
   const panel = document.getElementById('tierPanel');
   if (!panel || !D.cases) return;
   const cases = D.cases;
   cases.forEach(c => { c.statusBucket = statusBucketOf(c); if (c.tier === undefined) c.tier = caseTier(c); });
 
+  const tiers = TIER_BUILDER_RULES.tiers;
+  const cols = tiers.map(t => `
+    <div class="mkt-col">
+      <div class="mkt-tier-label">${escapeHtml(t.name)}</div>
+      <div class="mkt-tier-range">builder tier</div>
+      <div class="mkt-n"><b id="mkt-${t.id}-n">0</b></div>
+      <div class="mkt-n-sub">open cases</div>
+      <div class="mkt-divider"></div>
+      <div class="mkt-gsv-edit">
+        <span class="tier-gsv-dollar">$</span><input type="number" class="mkt-gsv-input" data-tier="${t.id}" value="${Math.round((t.gsv || 0) / 1000)}" min="0" step="5" /><span class="mkt-gsv-suffix">K</span> &times; <b id="mkt-${t.id}-count">0</b>
+      </div>
+      <div class="mkt-total"><b id="mkt-${t.id}-v">$0</b></div>
+      <div class="mkt-total-sub">inventory value</div>
+      <div class="mkt-avg" id="mkt-${t.id}-avg">avg —</div>
+    </div>`);
+  cols.push(`
+    <div class="mkt-col mkt-BG">
+      <div class="mkt-tier-label">No tier matched</div>
+      <div class="mkt-tier-range">$0 (no builder rule)</div>
+      <div class="mkt-n"><b id="mkt-${UNMATCHED_KEY}-n">0</b></div>
+      <div class="mkt-n-sub">open cases</div>
+      <div class="mkt-divider"></div>
+      <div class="mkt-total"><b>$0</b></div>
+      <div class="mkt-total-sub">inventory value</div>
+      <div class="mkt-avg">route these by adding conditions above</div>
+    </div>`);
   panel.innerHTML = `
     <div class="mkt-card">
       <div class="mkt-card-head">
         <h4>Market value inventory — by tier</h4>
-        <span class="mkt-card-sub">how many cases in each dollar tier, total inventory value, average per case</span>
+        <span class="mkt-card-sub">flows from the Tier Builder above (same assignments as the tier flow) — open cases</span>
       </div>
-      <div class="mkt-grid">
-        ${[
-          { m: 'I',  label: 'Tier I',       range: '$400K – $1M+',  color: 'I'  },
-          { m: 'II', label: 'Tier II',      range: '$150K – $300K', color: 'II' },
-          { m: 'III',label: 'Tier III',     range: '$20K – $150K',  color: 'III'},
-          { m: 'BG', label: 'Below grid',   range: '$0 (gate failure)', color: 'BG' },
-        ].map(o => `
-          <div class="mkt-col mkt-${o.color}">
-            <div class="mkt-tier-label">${o.label}</div>
-            <div class="mkt-tier-range">${o.range}</div>
-            <div class="mkt-n"><b id="mkt-${o.m}-n">0</b></div>
-            <div class="mkt-n-sub">cases</div>
-            ${o.m === 'BG' ? '' : `
-              <div class="mkt-divider"></div>
-              <div class="mkt-gsv-edit">
-                <span class="tier-gsv-dollar">$</span><input type="number" class="mkt-gsv-input" data-mkt="${o.m}" value="${marketGsv[o.m] / 1000}" min="0" step="5" /><span class="mkt-gsv-suffix">K</span> &times; <b id="mkt-${o.m}-count">0</b>
-              </div>
-            `}
-            <div class="mkt-total"><b id="mkt-${o.m}-v">$0</b></div>
-            <div class="mkt-total-sub">inventory value</div>
-            <div class="mkt-avg" id="mkt-${o.m}-avg">avg —</div>
-          </div>
-        `).join('')}
-      </div>
+      ${tiers.length === 0 ? '<div class="builder-tier-empty" style="padding:8px 2px">No tiers defined — add a tier in the Tier Builder above and its case count, value, and average will appear here.</div>' : ''}
+      <div class="mkt-grid">${cols.join('')}</div>
     </div>`;
 
-  // Wire input listeners
+  // Wire input listeners (edit $/case without re-render — preserves focus)
   panel.querySelectorAll('input.mkt-gsv-input').forEach(inp => {
     inp.addEventListener('input', updateTierPanelDerived);
   });
@@ -2404,102 +2410,45 @@ function renderTierPanel() {
 
 function updateTierPanelDerived() {
   if (!D.cases) return;
-  // Read market-grid inputs ($K, don't re-render — preserves focus)
+  // Read card $/case inputs into the builder tiers ($K units; no re-render —
+  // preserves focus). This is THE value per case for the tier everywhere:
+  // this card, the Sankey dollars, and the Current GSV header.
   document.querySelectorAll('#tierPanel input.mkt-gsv-input').forEach(inp => {
+    const t = TIER_BUILDER_RULES.tiers.find(t => t.id === inp.dataset.tier);
     const v = parseFloat(inp.value);
-    if (!isNaN(v) && v >= 0) marketGsv[inp.dataset.mkt] = Math.round(v * 1000);
+    if (t && !isNaN(v) && v >= 0) t.gsv = Math.round(v * 1000);
   });
-  // Keep the Sankey dollars in sync with the edited GSVs.
-  renderTierFlow();
+  saveTierBuilderRules();
+  // Mirror the value into the builder-head $/case inputs (no re-render; skip
+  // the focused one so we never clobber an in-progress edit).
+  document.querySelectorAll('#builder-tiers .builder-tier').forEach(sec => {
+    const t = TIER_BUILDER_RULES.tiers.find(t => t.id === sec.dataset.tier);
+    const inp = sec.querySelector('.tier-gsv-in');
+    if (t && inp && document.activeElement !== inp) inp.value = Math.round((t.gsv || 0) / 1000);
+  });
+  renderTierFlow(); // Sankey dollars follow tier $/case
   const cases = D.cases;
-  const p = state.convertRate;
-  // Aggregate open/closed/current-GSV across the clinical 1..5 grid — this is
-  // the inventory card's headline strip and its current-GSV dollar figure.
-  let totalOpen = 0, totalClosed = 0, totalCurrentGsv = 0, totalWinsGap = 0;
-  [1, 2, 3, 4, 5].forEach(t => {
-    const inTier = cases.filter(c => c.tier === t);
-    const openCases = inTier.filter(c => c.statusBucket !== 'closed');
-    const closed = inTier.length - openCases.length;
-    const payout = openCases.reduce((s, c) => s + caseValue(c), 0);
-    totalOpen += openCases.length;
-    totalClosed += closed;
-    totalCurrentGsv += payout;
+  // Counts + values come straight from the builder assignments (the Sankey
+  // results) — open cases only, matching the Current GSV definition.
+  let totalCurrentGsv = 0;
+  TIER_BUILDER_RULES.tiers.forEach(t => {
+    const openN = cases.filter(c => c.statusBucket !== 'closed' && CASE_BUILDER_TIER[c.matterId] === t.id).length;
+    const val = openN * (t.gsv || 0);
+    totalCurrentGsv += val;
+    const nEl = document.getElementById(`mkt-${t.id}-n`);
+    const countEl = document.getElementById(`mkt-${t.id}-count`);
+    const vEl = document.getElementById(`mkt-${t.id}-v`);
+    const avgEl = document.getElementById(`mkt-${t.id}-avg`);
+    if (nEl) nEl.textContent = openN.toLocaleString();
+    if (countEl) countEl.textContent = openN.toLocaleString();
+    if (vEl) vEl.textContent = fmtMoney(val);
+    if (avgEl) avgEl.innerHTML = openN ? `avg <b>${fmtMoney(val / openN)}</b> per case` : 'avg —';
   });
-  // Header readout (tab strip, top-right) — tracks every tier $/case edit.
+  const unEl = document.getElementById(`mkt-${UNMATCHED_KEY}-n`);
+  if (unEl) unEl.textContent = cases.filter(c => c.statusBucket !== 'closed' && !CASE_BUILDER_TIER[c.matterId]).length.toLocaleString();
+  // Header readout (tab strip, top-right) — sum of tier counts × $/case.
   const hdrGsvEl = document.getElementById('gsvHeader');
   if (hdrGsvEl) hdrGsvEl.textContent = fmtMoney(totalCurrentGsv);
-  // Market-grid strip: open-case counts + values per market tier.
-  const mktN = { I: 0, II: 0, III: 0 }, mktV = { I: 0, II: 0, III: 0 };
-  cases.forEach(c => {
-    if (c.statusBucket === 'closed' || c.tier === 5) return;
-    const m = marketTierOf(c);
-    if (m) { mktN[m]++; mktV[m] += caseValue(c); }
-  });
-  ['I', 'II', 'III'].forEach(m => {
-    const nEl = document.getElementById(`mkt-${m}-n`);
-    const vEl = document.getElementById(`mkt-${m}-v`);
-    const countEl = document.getElementById(`mkt-${m}-count`);
-    const avgEl = document.getElementById(`mkt-${m}-avg`);
-    if (nEl) nEl.textContent = mktN[m].toLocaleString();
-    if (countEl) countEl.textContent = mktN[m].toLocaleString();
-    if (vEl) vEl.textContent = fmtMoney(mktV[m]);
-    if (avgEl) avgEl.innerHTML = mktN[m] ? `avg <b>${fmtMoney(mktV[m] / mktN[m])}</b> per case` : 'avg —';
-  });
-  const bgEl = document.getElementById('mkt-BG-n');
-  const bgOpen = cases.filter(c => c.tier === 5 && c.statusBucket !== 'closed').length;
-  if (bgEl) bgEl.textContent = bgOpen.toLocaleString();
-  // Sum per-case value deltas across every wins cohort — the "cases that
-  // could convert × Δ value" piece of the potential formula. Bridge segments
-  // are the SPECIFIC FIXES behind the lift; a case with two gaps splits its
-  // expected value evenly across both fixes so segments sum to expectedLift.
-  const fixAgg = {};
-  cases.forEach(c => {
-    const s = c.tier;
-    if (s == null || s < 2 || s > 5) return;
-    const w = winCandidates(c, s);
-    if (!w.qualifies) return;
-    const gv = gapValue(c, w);
-    if (gv <= 0) return;
-    totalWinsGap += gv;
-    const share = gv * p / (w.gaps.length || 1);
-    w.gaps.forEach(g => {
-      const k = `${s}|${w.target}|${g.key}|${g.status === 'disconfirmed' ? 1 : 0}`;
-      if (!fixAgg[k]) {
-        fixAgg[k] = {
-          source: s, target: w.target, n: 0, value: 0, cases: [],
-          label: (FIX_SHORT[g.key] || g.label) + (g.status === 'disconfirmed' ? ' (re-verify)' : ''),
-          fix: fixForGap(g),
-        };
-      }
-      fixAgg[k].n += 1;
-      fixAgg[k].value += share;
-      fixAgg[k].cases.push({ c, gap: g, gapValue: gv, share });
-    });
-  });
-  // Below-grid avg: gate-cure unlock value across the cohort (sized off the
-  // wins-cohort totals computed above). Set here so totalWinsGap is final.
-  const bgAvgEl = document.getElementById('mkt-BG-avg');
-  const bgCohortTotal = cases.filter(c => c.tier === 5 && c.statusBucket !== 'closed')
-    .reduce((s, c) => s + Math.max(0, gapValue(c, winCandidates(c, 5)) || 0), 0);
-  if (bgAvgEl) bgAvgEl.innerHTML = bgOpen
-    ? `gate cures unlock <b>${fmtMoney(bgCohortTotal)}</b> across <b>${bgOpen}</b> cases`
-    : 'avg —';
-  // Biggest lift gaps first; cap at 6 named segments + one "other" bucket so
-  // the axis stays legible.
-  let bridgeSegs = Object.values(fixAgg).sort((a, b) => b.value - a.value);
-  if (bridgeSegs.length > 7) {
-    const rest = bridgeSegs.slice(6);
-    bridgeSegs = bridgeSegs.slice(0, 6);
-    bridgeSegs.push({
-      source: 0, target: 0, label: 'All other fixes', fix: 'the smaller fixes not shown individually',
-      n: rest.reduce((sum, x) => sum + x.n, 0),
-      value: rest.reduce((sum, x) => sum + x.value, 0),
-      cases: rest.flatMap(x => x.cases),
-    });
-  }
-  const expectedLift = totalWinsGap * p;
-  const potentialGsv = totalCurrentGsv + expectedLift;
-  renderBridgeChart(totalCurrentGsv, bridgeSegs, potentialGsv);
 }
 
 // WI-2 (revised): waterfall / bridge chart on the Executive Summary. Starts
@@ -3481,10 +3430,10 @@ function evaluateCaseBuilderTier(c, rules) {
   }
   return null;
 }
-// Per-case dollar value of a builder tier. Tier I/II/III track the editable
-// marketGsv inputs live; BG and custom tiers use their own gsv ($/case).
+// Per-case dollar value of a builder tier — the tier's own editable $/case.
+// Used by the Sankey dollars and the inventory card; there is no separate
+// framework value anymore.
 function builderTierValue(tierId) {
-  if (Object.prototype.hasOwnProperty.call(marketGsv, tierId)) return marketGsv[tierId];
   const t = TIER_BUILDER_RULES.tiers.find(t => t.id === tierId);
   return t ? (t.gsv || 0) : 0;
 }
@@ -3592,7 +3541,7 @@ function condRowHtml(c, dataAttrs) {
 function renderTierBuilder() {
   const container = document.getElementById('builder-tiers');
   if (!container) return;
-  const canRemove = TIER_BUILDER_RULES.tiers.length > 1;
+  const canRemove = TIER_BUILDER_RULES.tiers.length > 0; // may remove down to the blank slate
   container.innerHTML = TIER_BUILDER_RULES.tiers.length === 0
     ? `<div class="builder-tier-empty">No tiers defined — click "+ Add tier" to start routing cases. Until then every case falls to "No tier matched" above.</div>`
     : TIER_BUILDER_RULES.tiers.map(t => {
@@ -3614,10 +3563,7 @@ function renderTierBuilder() {
               : it.conditions.map((c, ci) => condRowHtml(c, `data-gi="${ii}" data-ci="${ci}"`)).join('')}
             <button class="builder-add group-add-cond" data-ii="${ii}">+ Condition</button>
           </div>` : condRowHtml(it, `data-ci="${ii}"`)).join('');
-    const isMkt = Object.prototype.hasOwnProperty.call(marketGsv, t.id);
-    const valueCtl = isMkt
-      ? `<span class="tier-gsv-label tier-gsv-linked" title="Follows the Market value inventory card below">$ / case</span>`
-      : `<span class="tier-gsv-label">$<input type="number" class="tier-gsv-in" value="${Math.round((t.gsv || 0) / 1000)}" min="0" step="5">K / case</span>`;
+    const valueCtl = `<span class="tier-gsv-label">$<input type="number" class="tier-gsv-in" value="${Math.round((t.gsv || 0) / 1000)}" min="0" step="5">K / case</span>`;
     return `
       <div class="builder-tier" data-tier="${t.id}">
         <div class="builder-tier-head">
@@ -3657,7 +3603,7 @@ function applyTierBuilder(redistribute = true) {
     if (!c.tier) c.tier = caseTier(c);
     CASE_BUILDER_TIER[c.matterId] = evaluateCaseBuilderTier(c, TIER_BUILDER_RULES);
   });
-  if (redistribute) { renderTierFlow(); }
+  if (redistribute) { renderTierPanel(); } // card rebuild + Sankey (via updateTierPanelDerived)
 }
 const UNMATCHED_KEY = '__UNMATCHED__';
 
@@ -3909,7 +3855,7 @@ function initTierBuilder() {
         }
       });
     } else if (e.target.closest('.tier-remove')) {
-      if (TIER_BUILDER_RULES.tiers.length <= 1) return;
+      if (TIER_BUILDER_RULES.tiers.length < 1) return;
       syncTierBuilderFromDOM();
       const idx = TIER_BUILDER_RULES.tiers.findIndex(t => t.id === tierId);
       if (idx >= 0) TIER_BUILDER_RULES.tiers.splice(idx, 1);
