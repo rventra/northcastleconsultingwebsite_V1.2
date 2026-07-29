@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docket Value Diagnostic — Executive Summary · North Castle Consulting</title>
+<meta name="description" content="A matter-level mass tort diagnostic: every case graded against the settlement tier grid, every curable gap priced. Illustrative Paraquat docket — $25.9M of traceable lift.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23051c2c'/%3E%3Cpath d='M8 24V12l3-4v3h3v-3l2-3 2 3v3h3v-3l3 4v12z' fill='%23f4f6f9'/%3E%3C/svg%3E">
+<style>
+  :root {
+    color-scheme: light;
+    --page:      #f9f9f7;
+    --surface:   #fcfcfb;
+    --ink:       #0b0b0b;
+    --ink-2:     #52514e;
+    --muted:     #898781;
+    --grid:      #e1e0d9;
+    --baseline:  #c3c2b7;
+    --border:    rgba(11,11,11,0.10);
+    --series-1:  #2a78d6;   /* GSV levels */
+    --series-2:  #1baf7a;   /* value lifts */
+    --tier-1:    #104281;   /* ordinal ramp: Tier I (dark) */
+    --tier-2:    #2a78d6;   /* Tier II */
+    --tier-3:    #86b6ef;   /* Tier III (light) */
+    --good:      #0ca30c;
+    --warning:   #fab219;
+    --serious:   #ec835a;
+    --critical:  #d03b3b;
+    --navy:      #051c2c;   /* brand chrome only, never a data color */
+    --navy-ink:  #f4f6f9;
+    --accent:    #2563EB;   /* brand link/interact accent — chrome only */
+    --cta:       #C2410C;   /* conversion color — used ONLY on conversion actions */
+    --wash:      rgba(42,120,214,0.06);
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page:      #0d0d0d;
+    --surface:   #1a1a19;
+    --ink:       #ffffff;
+    --ink-2:     #c3c2b7;
+    --muted:     #898781;
+    --grid:      #2c2c2a;
+    --baseline:  #383835;
+    --border:    rgba(255,255,255,0.10);
+    --series-1:  #3987e5;
+    --series-2:  #199e70;
+    --tier-1:    #184f95;
+    --tier-2:    #3987e5;
+    --tier-3:    #86b6ef;
+    --navy:      #051c2c;
+    --navy-ink:  #f4f6f9;
+    --accent:    #3b82f6;
+    --cta:       #C2410C;
+    --wash:      rgba(57,135,229,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--page); color: var(--ink);
+    font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px 56px; }
+
+  /* ---------- header ---------- */
+  header.brand {
+    background: var(--navy); color: var(--navy-ink);
+    padding: 26px 0 24px; margin-bottom: 28px;
+  }
+  header.brand .wrap { padding-bottom: 0; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: baseline; justify-content: space-between; }
+  .wordmark { font-size: 13px; letter-spacing: 0.22em; font-weight: 600; text-transform: uppercase; opacity: 0.92; }
+  .wordmark .castle { opacity: 0.55; font-weight: 400; margin-left: 8px; letter-spacing: 0.08em; text-transform: none; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.6; width: 100%; margin-top: 16px; }
+  h1 { font-size: 29px; font-weight: 650; letter-spacing: -0.01em; width: 100%; max-width: 880px; margin-top: 8px; line-height: 1.28; }
+  h1 .hl-num { white-space: nowrap; }
+  .subhead { font-size: 15px; opacity: 0.85; max-width: 800px; width: 100%; margin-top: 12px; line-height: 1.55; }
+  .cred { font-size: 12.5px; opacity: 0.62; width: 100%; margin-top: 12px; }
+  .subline { font-size: 13.5px; opacity: 0.75; width: 100%; margin-top: 12px; }
+  .hdr-right { display: flex; gap: 10px; align-items: center; margin-left: auto; }
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 999px;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+  }
+  .theme-btn {
+    background: transparent; color: var(--navy-ink); border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px; font: inherit; font-size: 12px; padding: 3px 12px; cursor: pointer;
+  }
+  .lede { font-size: 15.5px; color: var(--ink-2); max-width: 820px; margin-bottom: 24px; }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- cards & sections ---------- */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px;
+  }
+  .section-title { font-size: 12px; font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 30px 0 10px; }
+  .card h3 { font-size: 15px; font-weight: 650; margin-bottom: 2px; }
+  .card .sub { font-size: 12.5px; color: var(--ink-2); margin-bottom: 12px; }
+
+  /* ---------- KPI row ---------- */
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .kpi .label { font-size: 12px; color: var(--ink-2); }
+  .kpi .value { font-size: 30px; font-weight: 650; letter-spacing: -0.01em; margin: 2px 0 1px; }
+  .kpi.hero .value { font-size: 44px; }
+  .kpi .note { font-size: 11.5px; color: var(--muted); }
+  .kpi .delta { font-size: 12.5px; font-weight: 600; }
+  .kpi .delta.up { color: var(--good); }
+  :root[data-theme="dark"] .kpi .delta.up { color: #0ca30c; }
+  :root:not([data-theme="dark"]) .kpi .delta.up { color: #006300; }
+
+  /* ---------- two-col layout ---------- */
+  .cols { display: grid; grid-template-columns: 7fr 5fr; gap: 12px; align-items: stretch; }
+  @media (max-width: 900px) { .cols, .kpis { grid-template-columns: 1fr; } }
+
+  /* ---------- lever cards ---------- */
+  .lever { padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; background: var(--page); }
+  .lever:last-child { margin-bottom: 0; }
+  .lever .top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+  .lever .name { font-size: 13.5px; font-weight: 600; }
+  .lever .amt { font-size: 15px; font-weight: 650; white-space: nowrap; }
+  .lever .desc { font-size: 12px; color: var(--ink-2); margin: 2px 0 8px; }
+  .lever .rrow { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--ink-2); }
+  .lever input[type="range"] { flex: 1; accent-color: var(--series-1); height: 18px; }
+  .lever .pct { width: 76px; text-align: right; font-variant-numeric: tabular-nums; }
+  .presets { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; align-items: center; }
+  .presets .plabel { font-size: 12px; color: var(--ink-2); margin-right: 2px; }
+  .chip {
+    font: inherit; font-size: 12px; padding: 3px 11px; cursor: pointer;
+    border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--ink-2);
+  }
+  .chip:hover { background: var(--wash); }
+  .chip.active { background: var(--series-1); color: #fff; border-color: var(--series-1); }
+
+  /* ---------- charts ---------- */
+  svg text { font: 11.5px system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--ink-2); }
+  svg .val { font-weight: 600; fill: var(--ink); }
+  svg .tick { fill: var(--muted); font-variant-numeric: tabular-nums; }
+  svg .gline { stroke: var(--grid); stroke-width: 1; }
+  svg .bline { stroke: var(--baseline); stroke-width: 1; }
+  svg .conn { stroke: var(--baseline); stroke-width: 1; }
+  .legend { display: flex; gap: 16px; font-size: 12px; color: var(--ink-2); margin-top: 8px; flex-wrap: wrap; }
+  .legend .key { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .sw { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+  details.tblview { margin-top: 10px; font-size: 12.5px; }
+  details.tblview summary { color: var(--muted); cursor: pointer; }
+  details.tblview table { margin-top: 8px; }
+
+  /* ---------- chips / near-tier ---------- */
+  .neartier { display: flex; flex-wrap: wrap; gap: 8px; }
+  .nt {
+    border: 1px solid var(--border); border-radius: 8px; background: var(--page);
+    padding: 8px 12px; font-size: 12.5px; color: var(--ink-2);
+  }
+  .nt b { font-size: 16px; color: var(--ink); font-weight: 650; margin-right: 4px; }
+
+  /* ---------- tables ---------- */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; font-size: 11px; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 7px 10px; border-bottom: 1px solid var(--grid); }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--grid); }
+  tr:last-child td { border-bottom: none; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.total td { font-weight: 650; border-top: 1px solid var(--baseline); }
+  .tiersw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 8px; vertical-align: baseline; }
+  input.tv {
+    width: 84px; font: inherit; font-variant-numeric: tabular-nums; text-align: right;
+    padding: 3px 6px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--surface); color: var(--ink);
+  }
+  .move { white-space: nowrap; }
+  td.matter { white-space: nowrap; font-variant-numeric: tabular-nums; font-size: 12.5px; }
+  #topTbl td { font-size: 12.5px; }
+
+  /* ---------- risk flags ---------- */
+  .risks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .risks { grid-template-columns: 1fr 1fr; } }
+  .risk { display: flex; gap: 10px; align-items: flex-start; }
+  .risk .icon { width: 26px; height: 26px; border-radius: 6px; flex: none; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: #fff; }
+  .risk .icon.critical { background: var(--critical); }
+  .risk .icon.serious { background: var(--serious); }
+  .risk .icon.warning { background: var(--warning); color: #3a2c00; }
+  .risk b { font-size: 15px; }
+  .risk .t { font-size: 12px; color: var(--ink-2); }
+
+  /* ---------- CTAs (conversion color used nowhere else) ---------- */
+  a.btn-primary {
+    background: var(--cta); color: #fff; text-decoration: none; font-weight: 650;
+    font-size: 14px; padding: 12px 22px; border-radius: 8px; white-space: nowrap; display: inline-block;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25); transition: transform 0.1s, filter 0.1s;
+  }
+  a.btn-primary:hover { filter: brightness(1.12); transform: translateY(-1px); }
+  .micro { font-size: 11.5px; color: var(--muted); margin-top: 7px; }
+  .hero-cta { width: 100%; margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+  .hero-cta .micro { width: 100%; margin-top: 2px; color: var(--navy-ink); opacity: 0.55; }
+  a.ghost-hero {
+    color: var(--navy-ink); opacity: 0.85; font-size: 13.5px; font-weight: 600; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 11px 18px; white-space: nowrap;
+  }
+  a.ghost-hero:hover { background: rgba(255,255,255,0.08); }
+  .hl-num { border-bottom: 3px solid var(--series-2); padding-bottom: 1px; }
+  .cta-mid {
+    margin-top: 12px; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--cta);
+    border-radius: 10px; padding: 16px 20px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between;
+  }
+  .cta-mid .line { font-size: 14.5px; color: var(--ink); max-width: 700px; }
+  .cta-mid .line b { font-weight: 650; }
+  .cta-mid .action { text-align: right; }
+  /* sticky conversion bar — appears after the hero scrolls away */
+  #stickyBar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+    background: var(--navy); color: var(--navy-ink);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 9px 24px; transform: translateY(-110%); transition: transform 0.25s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  }
+  #stickyBar.on { transform: translateY(0); }
+  #stickyBar .sb-word { font-size: 11.5px; letter-spacing: 0.18em; font-weight: 600; text-transform: uppercase; opacity: 0.9; }
+  #stickyBar .sb-gap { font-size: 12.5px; opacity: 0.75; }
+  #stickyBar a.btn-primary { padding: 8px 16px; font-size: 13px; box-shadow: none; }
+  @media (max-width: 720px) {
+    #stickyBar .sb-gap { display: none; }
+    a.btn-primary, a.ghost-hero { width: 100%; text-align: center; }
+    .cta-mid .action { width: 100%; text-align: left; }
+  }
+
+  /* ---------- diagnose → execute ---------- */
+  .exec3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 4px; }
+  @media (max-width: 900px) { .exec3 { grid-template-columns: 1fr; } }
+  .exec { border: 1px solid var(--border); border-radius: 8px; background: var(--page); padding: 14px 16px; }
+  .exec .icon { width: 34px; height: 34px; border-radius: 8px; background: var(--wash); display: grid; place-items: center; margin-bottom: 10px; }
+  .exec .icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .exec .lever-tag { font-size: 11px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .exec .lever-name { font-size: 14px; font-weight: 650; margin: 4px 0 6px; }
+  .exec .how { font-size: 12.5px; color: var(--ink-2); margin-bottom: 10px; }
+  .exec ul { list-style: none; }
+  .exec li { font-size: 12.5px; color: var(--ink-2); padding: 3px 0 3px 18px; position: relative; }
+  .exec li::before { content: "✓"; position: absolute; left: 0; color: var(--good); font-weight: 700; }
+  .exec li b { color: var(--ink); font-weight: 650; }
+  a.alink { color: var(--accent); text-decoration: none; font-weight: 600; }
+  a.alink:hover { text-decoration: underline; }
+
+  /* ---------- footer ---------- */
+  .cta { margin-top: 30px; background: var(--navy); color: var(--navy-ink); border-radius: 10px; padding: 22px 24px; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between; }
+  .cta .big { font-size: 16.5px; font-weight: 650; }
+  .cta .small { font-size: 13px; opacity: 0.78; max-width: 620px; margin-top: 3px; }
+  .cta .trust { font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.6; margin-top: 10px; }
+  .cta .btns { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+  .cta a.ghost { color: var(--navy-ink); opacity: 0.75; font-size: 12.5px; text-decoration: underline; text-underline-offset: 3px; }
+  svg path.dimmed { opacity: 0.25; transition: opacity 0.15s; }
+  svg text.dimmed { opacity: 0.25; transition: opacity 0.15s; }
+  svg .grp { font-weight: 650; fill: var(--ink); font-size: 12px; }
+  svg .grpsum { font-weight: 650; fill: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .foot { font-size: 11.5px; color: var(--muted); margin-top: 16px; line-height: 1.6; }
+
+  /* ---------- tooltip ---------- */
+  #tip {
+    position: fixed; pointer-events: none; z-index: 50; display: none;
+    background: var(--ink); color: var(--surface); font-size: 12px;
+    padding: 6px 9px; border-radius: 6px; max-width: 260px;
+  }
+  #tip b { display: block; }
+</style>
+</head>
+<body>
+
+<header class="brand">
+  <div class="wrap">
+    <div class="wordmark">North Castle<span class="castle">Consulting</span></div>
+    <div class="hdr-right">
+      <span class="badge">Illustrative · Synthetic Data</span>
+      <button class="theme-btn" id="themeBtn" type="button">Dark</button>
+    </div>
+    <div class="eyebrow">Docket Value Diagnostic · Executive Summary</div>
+    <h1>This docket is leaving <span class="hl-num" id="hlGap">$25.9M</span> on the table — and every dollar traces to a gap someone could cure this quarter.</h1>
+    <p class="subhead">An illustrative matter-level diagnostic: every case graded against the settlement tier grid, every curable gap priced. Built on synthetic data — in an engagement, we run it on your docket.</p>
+    <div class="cred">Built by the team that ran docket tiering and lift analysis inside a national Parkinson's-litigation practice — the same framework, productized.</div>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://www.northcastleconsulting.com/contact-us" target="_blank" rel="noopener">Run this on my docket →</a>
+      <a class="ghost-hero" href="#bridgeCard">See it work — 60-second tour ↓</a>
+      <div class="micro">NDA first · No commitment — starts with a case-file export · All data housed in AWS</div>
+    </div>
+    <div class="subline">Paraquat Products Liability · MDL 3004 (S.D. Ill.) · 500-matter sample docket · 354 open matters</div>
+  </div>
+</header>
+
+<div id="stickyBar" aria-hidden="true">
+  <span class="sb-word">North Castle</span>
+  <span class="sb-gap">This docket is leaving <b id="sbGap">$25.9M</b> on the table — yours may be too.</span>
+  <a class="btn-primary" href="https://www.northcastleconsulting.com/contact-us" target="_blank" rel="noopener">Run this on my docket →</a>
+</div>
+
+<div class="wrap">
+
+  <p class="lede">Attorneys manage cases. Nobody's job is the gap between what a docket is <em>worth</em> and what it <em>could be worth</em> — and that gap doesn't sit still: statutes run, claimants disengage, thin files settle thin. On this 500-matter sample the gap is <strong id="ledeGap">$25.9M</strong> against <strong id="ledeCur">$37.8M</strong> of current gross settlement value. Below: the three levers, the eight gaps behind them, and what each is worth at your assumptions.</p>
+
+  <div class="kpis">
+    <div class="card kpi hero">
+      <div class="label">Current gross settlement value</div>
+      <div class="value" id="kpiCur">$37.8M</div>
+      <div class="note">354 open matters on the valuation grid</div>
+    </div>
+    <div class="card kpi">
+      <div class="label">Value trapped behind curable gaps</div>
+      <div class="value" id="kpiFull">$25.9M</div>
+      <div class="note">3 levers · full cure, before realization</div>
+    </div>
+    <div class="card kpi">
+      <div class="label">Realized lift at current assumptions</div>
+      <div class="value" id="kpiReal">$6.5M</div>
+      <div class="delta up" id="kpiRealPct">+17.2% vs current GSV</div>
+      <div class="note">set realization per lever below</div>
+    </div>
+    <div class="card kpi">
+      <div class="label">Matters a team could be working today</div>
+      <div class="value">335</div>
+      <div class="note">264 open with curable gaps + 71 recoverable off-inventory</div>
+    </div>
+  </div>
+
+  <div class="section-title">Three levers · <span id="stGap">$25.9M</span> of lift · all curable</div>
+  <div class="cols">
+    <div class="card" id="bridgeCard">
+      <h3>Gross settlement value bridge</h3>
+      <div class="sub">Current GSV → potential GSV at the realization rates set on the right. Drag the sliders and the bridge moves.</div>
+      <div id="bridge"></div>
+      <div class="legend">
+        <span class="key"><span class="sw" style="background:var(--series-1)"></span>GSV level</span>
+        <span class="key"><span class="sw" style="background:var(--series-2)"></span>Value lift</span>
+      </div>
+      <details class="tblview"><summary>Table view</summary>
+        <table id="bridgeTbl"></table>
+      </details>
+    </div>
+    <div class="card">
+      <h3>Value-creation levers</h3>
+      <div class="sub">Full potential per lever, scaled by how much of it you expect to convert.</div>
+      <div class="presets">
+        <span class="plabel">Realization presets:</span>
+        <button class="chip" data-preset="5" type="button">5%</button>
+        <button class="chip" data-preset="10" type="button">10%</button>
+        <button class="chip active" data-preset="25" type="button">25%</button>
+        <button class="chip" data-preset="50" type="button">50%</button>
+        <button class="chip" data-preset="100" type="button">Full cure</button>
+      </div>
+      <div id="levers"></div>
+    </div>
+  </div>
+
+  <div class="cta-mid">
+    <div class="line">That jump you just made with a slider? In an engagement it's a <b>ranked work list</b> — file numbers, the gap on each, and what curing it is worth.</div>
+    <div class="action">
+      <a class="btn-primary" href="https://www.northcastleconsulting.com/contact-us" target="_blank" rel="noopener">Run this on my docket →</a>
+      <div class="micro">NDA first · no commitment</div>
+    </div>
+  </div>
+
+  <div class="section-title">The eight gaps, priced — biggest first</div>
+  <div class="cols">
+    <div class="card">
+      <h3>Full lift potential by gap</h3>
+      <div class="sub">Grouped under the bridge lever each gap rolls up to, priced at the grid values below. Hover a lever bar in the bridge to spotlight its gaps here.</div>
+      <div id="liftmap"></div>
+      <details class="tblview"><summary>Table view</summary>
+        <table id="liftTbl"></table>
+      </details>
+    </div>
+    <div class="card">
+      <h3>Near-tier inventory</h3>
+      <div class="sub">Open matters sitting one to two <em>curable</em> gaps from a higher grid position — the cheapest value in the docket.</div>
+      <div class="neartier">
+        <div class="nt"><b>117</b> one PDD / cognitive-decline documentation from the top clinical tier</div>
+        <div class="nt"><b>71</b> one neurologist confirmation from Confirmed&nbsp;PD</div>
+        <div class="nt"><b>27</b> one eligibility gate from Confirmed&nbsp;PD — currently below grid</div>
+        <div class="nt"><b>22</b> one gate from Parkinsonism — currently below grid</div>
+        <div class="nt"><b>14</b> one gate from the top clinical tier — currently below grid</div>
+        <div class="nt"><b>13</b> one contemporaneous record from Parkinsonism</div>
+      </div>
+      <div class="sub" style="margin-top:12px; margin-bottom:0;">These counts come from grading every matter against the tier grid and flagging failures caused by <em>missing</em> information (curable) rather than disconfirming records (not curable).</div>
+    </div>
+  </div>
+
+  <div class="section-title">Diagnosis is half the job — here's how the value gets unlocked</div>
+  <div class="card">
+    <h3>The dashboard finds the value. The platform recovers it.</h3>
+    <div class="sub">Each lever maps to execution machinery North Castle runs inside mass tort practices — the same 8-stage platform this diagnostic comes from. You don't get a finding; you get the fix.</div>
+    <div class="exec3">
+      <div class="exec">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg></div>
+        <div class="lever-tag">Lever 1 · unlock</div>
+        <div class="lever-name">Cure documentation gaps</div>
+        <div class="how">Structured intake QA and automated claimant communication chase down the missing licenses, receipts and records — without burning paralegal hours.</div>
+        <ul>
+          <li><b>40–60% higher</b> document completeness rates</li>
+          <li><b>60–80%</b> claimant response rate (industry: 30–40%)</li>
+          <li><b>75% shorter</b> document cycle times</li>
+        </ul>
+      </div>
+      <div class="exec">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6M11 8v6"/></svg></div>
+        <div class="lever-tag">Lever 2 · unlock</div>
+        <div class="lever-name">Raise document scores</div>
+        <div class="how">AI medical record review and medical-grade OCR turn unstructured files into scored, defensible evidence that holds up in negotiation.</div>
+        <ul>
+          <li><b>200+ data points</b> extracted per case file</li>
+          <li><b>50% less</b> medical review time per case</li>
+          <li>Defense data requests answered in <b>hours, not weeks</b></li>
+        </ul>
+      </div>
+      <div class="exec">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 3v6h-6"/></svg></div>
+        <div class="lever-tag">Lever 3 · unlock</div>
+        <div class="lever-name">Re-screen recoverable matters</div>
+        <div class="how">Automated rescreening triggers re-grade closed and shelved files the moment new evidence, criteria or settlement terms land.</div>
+        <ul>
+          <li>Standardized tier schemas — <b>no tier disputes</b> with defense</li>
+          <li><b>90%</b> portfolio forecast accuracy</li>
+          <li>Automated escalation the moment a file becomes viable</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub" style="margin:14px 0 0;">The full lifecycle: intake QA → claimant communication → AI medical review → docket tiering → workflow control → OCR pipelines → dashboards &amp; portals. <a class="alink" href="https://www.northcastleconsulting.com/services/mass-tort" target="_blank" rel="noopener">Explore the 8-stage platform →</a></div>
+  </div>
+
+  <div class="section-title">Your assumptions, live — edit the grid and every number recomputes</div>
+  <div class="cols">
+    <div class="card">
+      <h3>Market tiers on the open inventory</h3>
+      <div class="sub">Point values are editable (in $000s) within the published negotiation ranges — every number on this page recomputes.</div>
+      <table>
+        <thead><tr><th>Tier</th><th>Published range</th><th class="num">$/case ($000s)</th><th class="num">Open matters</th><th class="num">GSV</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tiersw" style="background:var(--tier-1)"></span>Tier I</td><td>$400K – $1M+</td><td class="num"><input class="tv" id="tvI" type="number" min="0" step="25" value="700"></td><td class="num">3</td><td class="num" id="gsvI">$2.1M</td></tr>
+          <tr><td><span class="tiersw" style="background:var(--tier-2)"></span>Tier II</td><td>$150K – $300K</td><td class="num"><input class="tv" id="tvII" type="number" min="0" step="25" value="225"></td><td class="num">97</td><td class="num" id="gsvII">$21.8M</td></tr>
+          <tr><td><span class="tiersw" style="background:var(--tier-3)"></span>Tier III</td><td>$20K – $150K</td><td class="num"><input class="tv" id="tvIII" type="number" min="0" step="25" value="85"></td><td class="num">163</td><td class="num" id="gsvIII">$13.9M</td></tr>
+          <tr><td>Below grid</td><td>—</td><td class="num">$0</td><td class="num">91</td><td class="num">$0</td></tr>
+          <tr class="total"><td>Total</td><td></td><td></td><td class="num">354</td><td class="num" id="gsvTot">$37.8M</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Top single-file opportunities</h3>
+      <div class="sub">The ten open matters with the largest one-move lift.</div>
+      <table id="topTbl">
+        <thead><tr><th>Matter</th><th>Firm</th><th>Action</th><th>Move</th><th class="num">Lift</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-title">Six matters go to $0 within 90 days — the diagnostic sees it coming</div>
+  <div class="card">
+    <div class="risks">
+      <div class="risk"><span class="icon critical">!</span><div><b>6</b> matters hit statute-of-limitations deadlines within 90 days<div class="t">critical — value goes to zero if unfiled</div></div></div>
+      <div class="risk"><span class="icon serious">!</span><div><b>11</b> matters already closed on SOL expiry<div class="t">serious — the avoidable version of the above</div></div></div>
+      <div class="risk"><span class="icon warning">▲</span><div><b>51</b> open matters missing monthly update letters<div class="t">warning — compliance drag on settlement posture</div></div></div>
+      <div class="risk"><span class="icon warning">▲</span><div><b>125</b> claimed purchase receipts still unverified<div class="t">warning — 251 claimed, 126 verified to date</div></div></div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div>
+      <div class="big">This is the deliverable. Your docket is the input.</div>
+      <div class="small">North Castle runs your actual inventory through this framework — tier grading, gap detection, lift quantification per matter — and hands your team a ranked work list plus the execution machinery to clear it. It starts with a case-file export, not a commitment.</div>
+      <div class="trust">NDA first · All data housed in AWS · 100% U.S.-based team</div>
+    </div>
+    <div class="btns">
+      <a class="btn-primary" href="https://www.northcastleconsulting.com/contact-us" target="_blank" rel="noopener">Run this on my docket →</a>
+      <a class="ghost" href="https://www.northcastleconsulting.com/sample-dashboards/mass-tort.html" target="_blank" rel="noopener">Skeptical? Open the full analytics engine</a>
+    </div>
+  </div>
+
+  <p class="foot">Illustrative diagnostic built on a synthetic 500-matter Paraquat docket — no client data. Tier point values default to the midpoints North Castle uses for negotiation modeling and are editable within published ranges. Levers are modeled independently and not additive at the individual-matter level; realization rates are user assumptions, not projections. Nothing here is legal or investment advice.</p>
+
+</div>
+
+<div id="tip"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---------- data (computed from the same engine as the full dashboard) ----------
+  // Tier transition counts: 'from>to' where 'none' carries $0.
+  var LEVERS = [
+    { id: 'docs',
+      name: 'Cure documentation gaps on near-tier files',
+      desc: '264 open matters graded one–two curable gaps below a higher grid position; 50 of them cross a dollar threshold when cured.',
+      trans: { 'none>III': 39, 'none>II': 8, 'II>I': 3 }, real: 25 },
+    { id: 'proof',
+      name: 'Raise document scores (+2 on the 10-point scale)',
+      desc: 'Licenses, receipts, W-2s and co-worker declarations push 44 open matters over a dollar-tier threshold.',
+      trans: { 'III>II': 34, 'II>I': 10 }, real: 25 },
+    { id: 'reopen',
+      name: 'Re-screen closed, on-hold & dismissed matters',
+      desc: '71 grid-eligible matters currently booked at $0 — 31 closed, 25 on hold, 15 dismissed.',
+      trans: { 'none>I': 1, 'none>II': 23, 'none>III': 47 }, real: 25 }
+  ];
+
+  var GAPS = [
+    { label: 'Exposure ID verification (eligibility gate)', lever: 'docs', cases: 48, trans: { 'none>III': 38, 'none>II': 8 } },
+    { label: 'Idiopathic PD confirmation (neurologist dx)', lever: 'docs', cases: 71, trans: { 'II>I': 3 } },
+    { label: 'Latency documentation', lever: 'docs', cases: 1, trans: { 'none>III': 1 } },
+    { label: 'Doc score past the Tier II threshold', lever: 'proof', cases: 34, trans: { 'III>II': 34 } },
+    { label: 'Doc score past the Tier I threshold', lever: 'proof', cases: 10, trans: { 'II>I': 10 } },
+    { label: 'Re-screen closed matters', lever: 'reopen', cases: 31, trans: { 'none>I': 1, 'none>II': 10, 'none>III': 20 } },
+    { label: 'Re-screen on-hold matters', lever: 'reopen', cases: 25, trans: { 'none>II': 8, 'none>III': 17 } },
+    { label: 'Re-screen dismissed matters', lever: 'reopen', cases: 15, trans: { 'none>II': 5, 'none>III': 10 } }
+  ];
+  var LEVER_LABELS = { docs: 'Cure documentation gaps', proof: 'Raise document scores', reopen: 'Re-screen recoverable matters' };
+
+  var OPEN = { I: 3, II: 97, III: 163 };
+
+  var TOP = [
+    { m: '3:21-md-03004-00468', f: 'Southern Trial Counsel', a: 'Confirm idiopathic PD dx', from: 'II', to: 'I' },
+    { m: '3:21-md-03004-00217', f: 'Gulf Coast Plaintiffs', a: 'Confirm idiopathic PD dx', from: 'II', to: 'I' },
+    { m: '3:21-md-03004-00337', f: 'Heartland Injury Law', a: 'Confirm idiopathic PD dx', from: 'II', to: 'I' },
+    { m: '2022-CV-006373',      f: 'Gulf Coast Plaintiffs', a: 'Verify exposure ID', from: 'none', to: 'II' },
+    { m: '3:21-md-03004-00451', f: 'Southern Trial Counsel', a: 'Verify exposure ID', from: 'none', to: 'II' },
+    { m: '3:21-md-03004-00400', f: 'Pinnacle Litigation', a: 'Verify exposure ID', from: 'none', to: 'II' },
+    { m: '3:21-md-03004-00214', f: 'Southern Trial Counsel', a: 'Verify exposure ID', from: 'none', to: 'II' },
+    { m: '3:21-md-03004-00081', f: 'Meridian Mass Tort', a: 'Verify exposure ID', from: 'none', to: 'II' },
+    { m: '3:21-md-03004-00422', f: 'Meridian Mass Tort', a: 'Verify exposure ID', from: 'none', to: 'II' },
+    { m: '3:21-md-03004-00349', f: 'Pinnacle Litigation', a: 'Verify exposure ID', from: 'none', to: 'II' }
+  ];
+
+  // ---------- helpers ----------
+  var $ = function (id) { return document.getElementById(id); };
+  function tierValues() {
+    return {
+      I:   Math.max(0, +($('tvI').value)   || 0),
+      II:  Math.max(0, +($('tvII').value)  || 0),
+      III: Math.max(0, +($('tvIII').value) || 0),
+      none: 0
+    };
+  }
+  // value of a transition set, in $000s; each transition clamped >= 0
+  function transValue(trans, V) {
+    var sum = 0;
+    Object.keys(trans).forEach(function (k) {
+      var p = k.split('>');
+      sum += trans[k] * Math.max(0, (V[p[1]] || 0) - (V[p[0]] || 0));
+    });
+    return sum;
+  }
+  function fmtM(k) { // k = $000s -> compact string
+    if (k >= 100000) return '$' + Math.round(k / 1000) + 'M';
+    if (k >= 10000)  return '$' + (k / 1000).toFixed(1) + 'M';
+    if (k >= 1000)   return '$' + (k / 1000).toFixed(2).replace(/0$/, '') + 'M';
+    return '$' + Math.round(k).toLocaleString('en-US') + 'K';
+  }
+  function fmtK(k) { return '$' + Math.round(k).toLocaleString('en-US') + 'K'; }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  // ---------- tooltip ----------
+  var tip = $('tip');
+  function tipOn(html, ev) { tip.innerHTML = html; tip.style.display = 'block'; tipMove(ev); }
+  function tipMove(ev) {
+    var x = ev.clientX + 14, y = ev.clientY + 10;
+    if (x + 270 > window.innerWidth) x = ev.clientX - 270;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  }
+  function tipOff() { tip.style.display = 'none'; }
+  function hoverable(el, html) {
+    el.style.cursor = 'default';
+    el.addEventListener('mouseenter', function (e) { tipOn(html, e); });
+    el.addEventListener('mousemove', tipMove);
+    el.addEventListener('mouseleave', tipOff);
+  }
+
+  // ---------- state ----------
+  function currentGsv(V) { return OPEN.I * V.I + OPEN.II * V.II + OPEN.III * V.III; }
+  function leverFull(l, V) { return transValue(l.trans, V); }
+  function leverRealized(l, V) { return leverFull(l, V) * l.real / 100; }
+
+  // ---------- lever cards ----------
+  function buildLevers() {
+    var host = $('levers');
+    host.innerHTML = '';
+    LEVERS.forEach(function (l) {
+      var div = document.createElement('div');
+      div.className = 'lever';
+      div.innerHTML =
+        '<div class="top"><span class="name">' + esc(l.name) + '</span>' +
+        '<span class="amt" id="amt-' + l.id + '"></span></div>' +
+        '<div class="desc">' + esc(l.desc) + '</div>' +
+        '<div class="rrow"><input type="range" min="0" max="100" step="5" value="' + l.real + '" id="rg-' + l.id + '" aria-label="Realization rate for ' + esc(l.name) + '">' +
+        '<span class="pct" id="pct-' + l.id + '"></span></div>';
+      host.appendChild(div);
+      $('rg-' + l.id).addEventListener('input', function () {
+        l.real = +this.value;
+        document.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('active'); });
+        render();
+      });
+    });
+  }
+
+  // ---------- bridge (waterfall) ----------
+  function renderBridge(V) {
+    var cur = currentGsv(V);
+    var lifts = LEVERS.map(function (l) { return leverRealized(l, V); });
+    var pot = cur + lifts.reduce(function (a, b) { return a + b; }, 0);
+    var cols = [
+      { label: 'Current GSV', from: 0, to: cur, kind: 'level' },
+      { label: 'Docs cure', from: cur, to: cur + lifts[0], kind: 'lift', lever: 'docs' },
+      { label: 'Raise doc scores', from: cur + lifts[0], to: cur + lifts[0] + lifts[1], kind: 'lift', lever: 'proof' },
+      { label: 'Re-screen', from: cur + lifts[0] + lifts[1], to: pot, kind: 'lift', lever: 'reopen' },
+      { label: 'Potential GSV', from: 0, to: pot, kind: 'level' }
+    ];
+    // stable-ish scale: full-cure potential so slider motion reads against a fixed frame
+    var fullPot = cur + LEVERS.reduce(function (a, l) { return a + leverFull(l, V); }, 0);
+    var maxV = Math.max(fullPot, pot, 1);
+    var W = 620, H = 300, padL = 52, padR = 12, padT = 26, padB = 34;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var y = function (v) { return padT + plotH - (v / maxV) * plotH; };
+    var slot = plotW / cols.length, barW = Math.min(64, slot * 0.55);
+
+    // clean ticks
+    var step = Math.pow(10, Math.floor(Math.log10(maxV)));
+    if (maxV / step < 3) step = step / 2;
+    if (maxV / step > 7) step = step * 2;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Waterfall bridge from current to potential gross settlement value">';
+    for (var t = 0; t <= maxV; t += step) {
+      s += '<line class="gline" x1="' + padL + '" x2="' + (W - padR) + '" y1="' + y(t) + '" y2="' + y(t) + '"/>';
+      s += '<text class="tick" x="' + (padL - 6) + '" y="' + (y(t) + 3.5) + '" text-anchor="end">' + (t >= 1000 ? '$' + (t / 1000) + 'M' : '$' + t + 'K') + '</text>';
+    }
+    var marks = [];
+    cols.forEach(function (c, i) {
+      var x = padL + slot * i + (slot - barW) / 2;
+      var yTop = y(Math.max(c.from, c.to)), yBot = y(Math.min(c.from, c.to));
+      var h = Math.max(2, yBot - yTop);
+      var fill = c.kind === 'level' ? 'var(--series-1)' : 'var(--series-2)';
+      var r = 4;
+      var d;
+      if (c.kind === 'level') { // grows from baseline: round top only
+        d = 'M' + x + ',' + (yTop + r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',-' + r + ' h' + (barW - 2 * r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r + ' v' + (h - r) + ' h-' + barW + ' Z';
+      } else { // floating increment: round top only (data end)
+        d = 'M' + x + ',' + (yTop + r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',-' + r + ' h' + (barW - 2 * r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r + ' v' + Math.max(0, h - r) + ' h-' + barW + ' Z';
+      }
+      marks.push({ d: d, fill: fill, label: c.label, v: c.to - c.from, kind: c.kind, x: x, yTop: yTop });
+      // connector to next column
+      if (i < cols.length - 1) {
+        var nx = padL + slot * (i + 1) + (slot - barW) / 2;
+        s += '<line class="conn" x1="' + (x + barW) + '" x2="' + (nx + barW) + '" y1="' + y(c.to) + '" y2="' + y(c.to) + '"/>';
+      }
+    });
+    s += '<line class="bline" x1="' + padL + '" x2="' + (W - padR) + '" y1="' + y(0) + '" y2="' + y(0) + '"/>';
+    marks.forEach(function (m, i) {
+      s += '<path d="' + m.d + '" fill="' + m.fill + '" data-bi="' + i + '"/>';
+      var txt = m.kind === 'lift' ? '+' + fmtM(m.v) : fmtM(m.v);
+      s += '<text class="val" x="' + (m.x + barW / 2) + '" y="' + (m.yTop - 6) + '" text-anchor="middle">' + txt + '</text>';
+      s += '<text x="' + (m.x + barW / 2) + '" y="' + (H - 12) + '" text-anchor="middle">' + m.label + '</text>';
+    });
+    s += '</svg>';
+    $('bridge').innerHTML = s;
+    // hover layer + lift-map spotlight
+    var paths = $('bridge').querySelectorAll('path');
+    paths.forEach(function (p, i) {
+      var m = marks[i], c = cols[i];
+      var html = '<b>' + esc(c.label) + '</b>' + (c.kind === 'lift' ? '+' : '') + fmtK(m.v) +
+        (c.kind === 'lift' ? ' at ' + LEVERS[i - 1].real + '% realization (full: ' + fmtK(leverFull(LEVERS[i - 1], V)) + ') — its gaps are spotlighted in the lift map below' : '');
+      hoverable(p, html);
+      if (c.lever) {
+        p.addEventListener('mouseenter', function () { spotlightLever(c.lever); });
+        p.addEventListener('mouseleave', function () { spotlightLever(null); });
+      }
+    });
+    // table view
+    var tb = '<thead><tr><th>Step</th><th class="num">$000s</th></tr></thead><tbody>';
+    cols.forEach(function (c) { tb += '<tr><td>' + esc(c.label) + '</td><td class="num">' + Math.round(c.to - c.from).toLocaleString('en-US') + '</td></tr>'; });
+    $('bridgeTbl').innerHTML = tb + '</tbody>';
+    return { cur: cur, pot: pot, realized: pot - cur };
+  }
+
+  // ---------- lift map (grouped by bridge lever) ----------
+  function spotlightLever(lever) {
+    $('liftmap').querySelectorAll('[data-lever]').forEach(function (el) {
+      el.classList.toggle('dimmed', !!lever && el.getAttribute('data-lever') !== lever);
+    });
+  }
+  function renderLiftmap(V) {
+    var order = ['docs', 'proof', 'reopen'];
+    var groups = order.map(function (id) {
+      var rows = GAPS.filter(function (g) { return g.lever === id; })
+                     .map(function (g) { return { g: g, v: transValue(g.trans, V) }; })
+                     .sort(function (a, b) { return b.v - a.v; });
+      return { id: id, rows: rows, sum: rows.reduce(function (a, r) { return a + r.v; }, 0) };
+    });
+    var allRows = groups.reduce(function (a, gr) { return a.concat(gr.rows); }, []);
+    var maxV = Math.max.apply(null, allRows.map(function (r) { return r.v; }).concat([1]));
+    var W = 620, rowH = 30, barH = 18, grpH = 26, padL = 8, padR = 64, labelW = 268;
+    var axisH = 24, H = allRows.length * rowH + groups.length * grpH + axisH + 4;
+    var plotW = W - padL - labelW - padR;
+    var x = function (v) { return (v / maxV) * plotW; };
+    var step = Math.pow(10, Math.floor(Math.log10(maxV)));
+    if (maxV / step < 3) step = step / 2;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Lift potential by gap, grouped by bridge lever">';
+    for (var t = 0; t <= maxV; t += step) {
+      var gx = padL + labelW + x(t);
+      s += '<line class="gline" x1="' + gx + '" x2="' + gx + '" y1="0" y2="' + (H - axisH) + '"/>';
+      s += '<text class="tick" x="' + gx + '" y="' + (H - 8) + '" text-anchor="middle">' + (t >= 1000 ? '$' + (t / 1000) + 'M' : '$' + t + 'K') + '</text>';
+    }
+    var y = 0, barMeta = [];
+    groups.forEach(function (gr) {
+      s += '<text class="grp" data-lever="' + gr.id + '" x="' + padL + '" y="' + (y + grpH - 8) + '">' + esc(LEVER_LABELS[gr.id]) + '</text>';
+      s += '<text class="grpsum" data-lever="' + gr.id + '" x="' + (W - padR + 56) + '" y="' + (y + grpH - 8) + '" text-anchor="end">' + fmtM(gr.sum) + ' full</text>';
+      y += grpH;
+      gr.rows.forEach(function (r) {
+        var yTop = y + (rowH - barH) / 2;
+        var w = Math.max(2, x(r.v)), rr = 4;
+        var bx = padL + labelW;
+        s += '<text data-lever="' + gr.id + '" x="' + (padL + labelW - 10) + '" y="' + (yTop + barH / 2 + 4) + '" text-anchor="end">' + esc(r.g.label) + '</text>';
+        s += '<path data-lever="' + gr.id + '" data-bi="' + barMeta.length + '" fill="var(--series-2)" d="M' + bx + ',' + yTop + ' h' + Math.max(0, w - rr) + ' a' + rr + ',' + rr + ' 0 0 1 ' + rr + ',' + rr + ' v' + (barH - 2 * rr) + ' a' + rr + ',' + rr + ' 0 0 1 -' + rr + ',' + rr + ' h-' + Math.max(0, w - rr) + ' Z"/>';
+        s += '<text class="val" data-lever="' + gr.id + '" x="' + (bx + w + 6) + '" y="' + (yTop + barH / 2 + 4) + '">' + fmtM(r.v) + '</text>';
+        barMeta.push(r);
+        y += rowH;
+      });
+    });
+    s += '</svg>';
+    $('liftmap').innerHTML = s;
+    $('liftmap').querySelectorAll('path').forEach(function (p) {
+      var r = barMeta[+p.getAttribute('data-bi')];
+      var moves = Object.keys(r.g.trans).map(function (k) {
+        var pr = k.split('>');
+        return r.g.trans[k] + ' matters ' + (pr[0] === 'none' ? 'onto the grid' : 'Tier ' + pr[0]) + ' → Tier ' + pr[1];
+      }).join(' · ');
+      hoverable(p, '<b>' + esc(r.g.label) + ' — ' + fmtK(r.v) + '</b>' + esc(LEVER_LABELS[r.g.lever]) + ' · ' + r.g.cases + ' matters · ' + esc(moves));
+    });
+    var tb = '<thead><tr><th>Gap</th><th>Bridge lever</th><th class="num">Matters</th><th class="num">Full lift ($000s)</th></tr></thead><tbody>';
+    allRows.forEach(function (r) { tb += '<tr><td>' + esc(r.g.label) + '</td><td>' + esc(LEVER_LABELS[r.g.lever]) + '</td><td class="num">' + r.g.cases + '</td><td class="num">' + Math.round(r.v).toLocaleString('en-US') + '</td></tr>'; });
+    $('liftTbl').innerHTML = tb + '</tbody>';
+  }
+
+  // ---------- top table ----------
+  function renderTop(V) {
+    var tb = '';
+    TOP.forEach(function (r) {
+      var lift = Math.max(0, (V[r.to] || 0) - (V[r.from] || 0));
+      var move = (r.from === 'none' ? 'Below grid' : 'Tier ' + r.from) + ' → Tier ' + r.to;
+      var shortM = r.m.indexOf('3:21-md-03004-') === 0 ? 'MDL …' + r.m.slice(-5) : r.m;
+      tb += '<tr><td class="matter" title="' + esc(r.m) + '">' + esc(shortM) + '</td><td>' + esc(r.f) + '</td><td>' + esc(r.a) + '</td><td class="move">' + move + '</td><td class="num">' + fmtK(lift) + '</td></tr>';
+    });
+    $('topTbl').querySelector('tbody').innerHTML = tb;
+  }
+
+  // ---------- master render ----------
+  function render() {
+    var V = tierValues();
+    var b = renderBridge(V);
+    renderLiftmap(V);
+    renderTop(V);
+    var full = LEVERS.reduce(function (a, l) { return a + leverFull(l, V); }, 0);
+    $('kpiCur').textContent = fmtM(b.cur);
+    $('kpiFull').textContent = fmtM(full);
+    $('kpiReal').textContent = fmtM(b.realized);
+    $('kpiRealPct').textContent = '+' + (b.cur > 0 ? (100 * b.realized / b.cur).toFixed(1) : '0') + '% vs current GSV';
+    $('ledeCur').textContent = fmtM(b.cur);
+    $('ledeGap').textContent = fmtM(full);
+    $('hlGap').textContent = fmtM(full);
+    $('stGap').textContent = fmtM(full);
+    $('sbGap').textContent = fmtM(full);
+    $('gsvI').textContent = fmtM(OPEN.I * V.I);
+    $('gsvII').textContent = fmtM(OPEN.II * V.II);
+    $('gsvIII').textContent = fmtM(OPEN.III * V.III);
+    $('gsvTot').textContent = fmtM(b.cur);
+    LEVERS.forEach(function (l) {
+      $('amt-' + l.id).textContent = '+' + fmtM(leverRealized(l, V));
+      $('pct-' + l.id).textContent = l.real + '% · of ' + fmtM(leverFull(l, V));
+    });
+  }
+
+  // ---------- wiring ----------
+  buildLevers();
+  ['tvI', 'tvII', 'tvIII'].forEach(function (id) { $(id).addEventListener('input', render); });
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      var p = +this.dataset.preset;
+      LEVERS.forEach(function (l) { l.real = p; $('rg-' + l.id).value = p; });
+      document.querySelectorAll('.chip').forEach(function (x) { x.classList.remove('active'); });
+      this.classList.add('active');
+      render();
+    });
+  });
+  // sticky conversion bar: show once the hero CTA has scrolled away, hide near the footer CTA
+  var heroCta = document.querySelector('.hero-cta');
+  var footCta = document.querySelector('.cta');
+  window.addEventListener('scroll', function () {
+    var pastHero = heroCta.getBoundingClientRect().bottom < 0;
+    var atFooter = footCta.getBoundingClientRect().top < window.innerHeight;
+    var bar = $('stickyBar');
+    bar.classList.toggle('on', pastHero && !atFooter);
+    bar.setAttribute('aria-hidden', String(!(pastHero && !atFooter)));
+  }, { passive: true });
+  $('themeBtn').addEventListener('click', function () {
+    var r = document.documentElement;
+    var dark = r.getAttribute('data-theme') === 'dark';
+    r.setAttribute('data-theme', dark ? 'light' : 'dark');
+    this.textContent = dark ? 'Dark' : 'Light';
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
