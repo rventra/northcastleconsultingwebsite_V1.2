@@ -3739,10 +3739,36 @@ function renderTierFlow() {
   Object.values(nodes).filter(n => n.value > 0).forEach(n => cols[n.col].push(n));
   const maxColTotal = Math.max(...cols.map(col => col.reduce((s, n) => s + n.value, 0)));
   const maxNodes = Math.max(...cols.map(col => col.length));
-  const scale = (H - HEAD - (maxNodes - 1) * PAD) / (maxColTotal || 1);
+  // Nodes get a MIN height so the two-line labels stay legible when a tier
+  // shrinks to a handful of cases (e.g. after adding a restrictive condition).
+  // Shrink the global scale until every column fits, since min-height nodes
+  // take more room than their proportional share. Link widths use this scale.
+  const MIN_NODE_H = 24;
+  const avail = H - HEAD;
+  let scale = (avail - (maxNodes - 1) * PAD) / (maxColTotal || 1);
+  for (let i = 0; i < 5; i++) {
+    let need = scale;
+    cols.forEach(col => {
+      if (!col.length) return;
+      const fixedN = col.filter(n => n.value * scale < MIN_NODE_H).length;
+      const flexTotal = col.reduce((s, n) => s + (n.value * scale < MIN_NODE_H ? 0 : n.value), 0);
+      if (flexTotal > 0) need = Math.min(need, (avail - fixedN * MIN_NODE_H - (col.length - 1) * PAD) / flexTotal);
+    });
+    if (need >= scale - 1e-9) break;
+    scale = need;
+  }
   cols.forEach(col => {
     let y = HEAD;
-    col.forEach(n => { n.y = y; n.h = Math.max(1.5, n.value * scale); y += n.h + PAD; n.outY = n.y; n.inY = n.y; });
+    col.forEach(n => { n.y = y; n.h = Math.max(MIN_NODE_H, n.value * scale); y += n.h + PAD; });
+  });
+  // Center each node's link stack within its (possibly min-height) rect.
+  Object.values(nodes).forEach(n => {
+    if (!n.value) return;
+    const linkW = (l, key) => Math.max(1, l.value * scale);
+    const outW = Object.values(links).filter(l => l.source === n.id).reduce((s, l) => s + linkW(l), 0);
+    const inW  = Object.values(links).filter(l => l.target === n.id).reduce((s, l) => s + linkW(l), 0);
+    n.outY = n.y + Math.max(0, (n.h - outW) / 2);
+    n.inY  = n.y + Math.max(0, (n.h - inW) / 2);
   });
 
   // ---- links (sorted to limit crossings), drawn under the nodes ----
