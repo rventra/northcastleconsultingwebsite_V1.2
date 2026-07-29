@@ -678,7 +678,7 @@ details.exec-details[open]>summary{margin-bottom:12px}
         <div class="builder-tiers" id="builder-tiers"></div>
         <div class="builder-actions">
           <button id="builder-add-tier" class="builder-btn">+ Add tier</button>
-          <button id="builder-reset" class="builder-btn">Reset to framework defaults</button>
+          <button id="builder-reset" class="builder-btn">Clear all tiers</button>
         </div>
       </div>
 
@@ -3402,30 +3402,11 @@ const TIER_BUILDER_OP_DEFS = {
   ],
 };
 function tierBuilderDefaultRules() {
-  // Defaults mirror marketTierOf() logic translated to the new field set.
-  // Tier ORDER = evaluation order: I → II → BG → III.
-  // Rule model: tier.op combines tier.items; an item is a single condition
-  // or a nested group with its own op — Excel-style AND(x, OR(y, z)).
-  const cond = (field, op, value) => ({ type: 'cond', field, op, value });
-  return { tiers: [
-    { id: 'I', name: 'Tier I', gsv: 0, op: 'AND', items: [
-      cond('parkinsonsDx', '=', 1), cond('docScore', '>=', 7),
-      cond('latencyYears', '>=', 10), cond('latencyYears', '<=', 30),
-      cond('hoehnYahr', '>=', 3), cond('ageAtDiagnosis', '<', 70),
-    ]},
-    { id: 'II', name: 'Tier II', gsv: 0, op: 'AND', items: [
-      cond('parkinsonsDx', '=', 1), cond('docScore', '>=', 4),
-      cond('latencyYears', '>=', 5), cond('latencyYears', '<=', 35),
-      cond('ageAtDiagnosis', '<=', 78),
-    ]},
-    { id: 'BG', name: 'Below grid / Cap', gsv: 0, op: 'AND', items: [
-      cond('parkinsonsDx', '=', 0),
-    ]},
-    { id: 'III', name: 'Tier III', gsv: 0, op: 'OR', items: [
-      cond('docScore', '<', 4), cond('latencyYears', '<', 10),
-      cond('latencyYears', '>', 35), cond('ageAtDiagnosis', '>', 78),
-    ]},
-  ]};
+  // Blank slate — NO default tiers. The user builds the decision layer from
+  // scratch (+ Add tier). Until they do, every case falls to "No tier matched"
+  // in the Sankey. (Empty tier shells would be a trap: an empty tier is
+  // match-all, so the whole inventory would pile into Tier I.)
+  return { tiers: [] };
 }
 function getCaseFieldDefs() {
   // Compute the case's effective values for the field-keys used by the Builder.
@@ -3509,16 +3490,15 @@ function builderTierValue(tierId) {
 }
 
 // Tier Builder editable state — persisted to localStorage so user changes
-// survive a page reload. The framework defaults are used until the user
-// explicitly overrides anything.
-const TIER_BUILDER_LS_KEY = 'mt.tierBuilderRules.v6';
+// survive a page reload. Starts blank (no tiers) — the user builds the rules.
+const TIER_BUILDER_LS_KEY = 'mt.tierBuilderRules.v7'; // v7: no default tiers — blank slate
 function loadTierBuilderRules() {
   try {
     const raw = localStorage.getItem(TIER_BUILDER_LS_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
     if (!parsed || !Array.isArray(parsed.tiers)
-        || parsed.tiers.length < 1 || parsed.tiers.length > 4) return null;
+        || parsed.tiers.length > 4) return null; // 0 tiers is a valid (blank) saved state
     // Shape-validate + drop conditions referencing fields/ops that no longer
     // exist so they fail loudly here instead of silently evaluating to false.
     const knownFields = new Set(TIER_BUILDER_FIELD_DEFS.map(f => f.key));
@@ -3613,7 +3593,9 @@ function renderTierBuilder() {
   const container = document.getElementById('builder-tiers');
   if (!container) return;
   const canRemove = TIER_BUILDER_RULES.tiers.length > 1;
-  container.innerHTML = TIER_BUILDER_RULES.tiers.map(t => {
+  container.innerHTML = TIER_BUILDER_RULES.tiers.length === 0
+    ? `<div class="builder-tier-empty">No tiers defined — click "+ Add tier" to start routing cases. Until then every case falls to "No tier matched" above.</div>`
+    : TIER_BUILDER_RULES.tiers.map(t => {
     const itemsHtml = t.items.length === 0
       ? `<div class="builder-tier-empty">No items — this tier matches every case that reaches it.</div>`
       : t.items.map((it, ii) => it.type === 'group' ? `
@@ -3866,8 +3848,8 @@ function initTierBuilder() {
   applyTierBuilder();
   saveTierBuilderRules();
   // (Apply-rules button removed — rules apply live as you edit)
-  // Reset-rules button — restore framework defaults AND clear localStorage so
-  // a subsequent reload starts from defaults again.
+  // Clear-all button — back to the blank slate AND clear localStorage so a
+  // subsequent reload starts blank again.
   document.getElementById('builder-reset').addEventListener('click', () => {
     TIER_BUILDER_RULES = tierBuilderDefaultRules();
     try { localStorage.removeItem(TIER_BUILDER_LS_KEY); } catch (e) {}
