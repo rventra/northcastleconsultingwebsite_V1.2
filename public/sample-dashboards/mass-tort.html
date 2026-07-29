@@ -3931,7 +3931,10 @@ function initTierBuilder() {
       const cond = (gi !== undefined && gi !== '')
         ? (t.items[parseInt(gi, 10)]?.conditions?.[ci])
         : t.items[ci];
-      if (cond) { cond.value = checked.join(','); renderTierBuilder(); applyTierBuilder(); saveTierBuilderRules(); }
+      // NO renderTierBuilder() here — re-rendering would destroy the open
+      // popout mid-selection. updatePopoutLabel (document-level listener)
+      // refreshes the trigger label; Apply / click-outside closes the panel.
+      if (cond) { cond.value = checked.join(','); applyTierBuilder(); saveTierBuilderRules(); }
       return;
     }
     if (e.target.classList.contains('cond-field')) {
