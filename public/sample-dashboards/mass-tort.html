@@ -304,7 +304,50 @@ html,body{margin:0;padding:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;col
 .market-tier-table .mt-range-cell{width:130px;font-weight:700;color:var(--navy);white-space:nowrap}
 .market-tier-table .mt-formula b{color:var(--navy);font-weight:700}
 
-/* Tier Configurator — interactive widget for building combinations */
+/* Tier Builder — visual rule editor + distribution table.
+   Users define the conditional statements that place a case into Tier I/II/III/BG.
+   Each tier is an AND or OR of conditions on case fields. */
+.tier-builder-card .builder-tiers{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
+@media(max-width:1100px){.tier-builder-card .builder-tiers{grid-template-columns:1fr}}
+.builder-tier{border:1px solid var(--border);border-radius:4px;padding:12px 14px;background:var(--bg)}
+.builder-tier-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.builder-tier-name{font-size:13px;font-weight:700;color:var(--navy)}
+.builder-tier-name.t-I{color:var(--gold)}
+.builder-tier-name.t-II{color:var(--purple)}
+.builder-tier-name.t-III{color:var(--amber)}
+.builder-tier-name.t-BG{color:var(--slate)}
+.builder-tier-range{font-size:11px;color:var(--slate);font-style:italic}
+.builder-tier-controls{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:11px;color:var(--slate)}
+.builder-tier-controls select{font-family:inherit;font-size:11px;padding:2px 5px;border:1px solid var(--border);border-radius:2px;background:var(--white);color:var(--navy);font-weight:700;cursor:pointer}
+.builder-conditions{display:flex;flex-direction:column;gap:5px;margin-bottom:8px}
+.builder-condition{display:grid;grid-template-columns:1fr 80px 70px 24px;gap:5px;align-items:center;font-size:11.5px}
+.builder-condition select,.builder-condition input{font-family:inherit;font-size:11.5px;padding:4px 6px;border:1px solid var(--border);border-radius:2px;background:var(--white);color:var(--navy);font-weight:600}
+.builder-condition .cond-field{font-weight:700}
+.builder-condition .cond-value{text-align:right}
+.builder-condition .cond-remove{width:24px;height:24px;border:1px solid var(--border);background:var(--white);color:var(--slate);font-size:14px;line-height:1;cursor:pointer;border-radius:2px;padding:0;font-weight:700}
+.builder-condition .cond-remove:hover{background:var(--red-bg);color:var(--red);border-color:var(--red)}
+.builder-add{display:inline-block;font-size:11px;font-weight:700;color:var(--navy);background:transparent;border:1px dashed var(--navy);padding:3px 8px;border-radius:2px;cursor:pointer;letter-spacing:.04em}
+.builder-add:hover{background:var(--mist)}
+.builder-tier-empty{font-size:10.5px;color:var(--slate);font-style:italic;padding:6px 0}
+.builder-actions{display:flex;gap:10px;padding-top:12px;border-top:1px solid var(--border)}
+.builder-btn{font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:6px 14px;border:1px solid var(--border);border-radius:2px;background:var(--white);color:var(--navy);cursor:pointer;text-transform:uppercase}
+.builder-btn:hover{background:var(--mist)}
+.builder-btn.primary{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.builder-btn.primary:hover{background:var(--navy-ink)}
+
+/* Tier Distribution — results of the Builder */
+.tier-dist-card .dist-table{width:100%;border-collapse:collapse;font-size:12px;color:var(--navy-ink)}
+.tier-dist-card .dist-table th{font-size:10px;font-weight:700;color:var(--slate);letter-spacing:.06em;text-transform:uppercase;text-align:right;padding:8px 10px;background:var(--bg);border-bottom:1px solid var(--border)}
+.tier-dist-card .dist-table th:first-child{text-align:left}
+.tier-dist-card .dist-table td{padding:9px 10px;border-top:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums}
+.tier-dist-card .dist-table tr:first-child td{border-top:none}
+.tier-dist-card .dist-table td:first-child{text-align:left;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:11px}
+.tier-dist-card .dist-table .dt-I{color:var(--gold)}
+.tier-dist-card .dist-table .dt-II{color:var(--purple)}
+.tier-dist-card .dist-table .dt-III{color:var(--amber)}
+.tier-dist-card .dist-table .dt-BG{color:var(--slate)}
+.tier-dist-card .dist-table .dt-total{font-weight:700;color:var(--navy)}
+.tier-dist-card .dist-sub{font-size:11px;color:var(--slate);margin:8px 0 0;line-height:1.5}
 .tier-config{margin-top:18px;border:1px solid var(--gold);border-radius:4px;padding:14px 16px;background:var(--white)}
 .tier-config-head{font-size:13px;font-weight:700;color:var(--navy);margin:0 0 4px;letter-spacing:.02em}
 .tier-config-sub{font-size:11.5px;color:var(--slate);margin:0 0 12px;line-height:1.5}
@@ -565,6 +608,38 @@ details.exec-details[open]>summary{margin-bottom:12px}
 
     <!-- TAB 0: Executive Summary -->
     <div class="tab-content active" id="t0">
+      <!-- Tier Builder — top of t0 so the rules are defined before any
+           dependent UI is read. Visual rule editor for the 4 Market Value Tier
+           buckets (I / II / III / Below grid). Each bucket has an AND or OR of
+           conditions over the dashboard's case fields. Apply rules → recompute
+           the distribution. -->
+      <div class="exec-card tier-builder-card">
+        <h3>Tier Builder — define the tier rules</h3>
+        <p style="font-size:12.5px;color:var(--slate);margin:-4px 0 12px;line-height:1.5;max-width:920px">
+          Each tier is a list of conditional statements over case fields. Cases are evaluated top-down — <b>Tier I → Tier II → Tier III → Below grid</b> — and the first tier whose conditions match is the case's Market Value Tier. Combine a tier's conditions with <b>ALL</b> (AND) for strict matching or <b>ANY</b> (OR) for catch-all buckets.
+        </p>
+        <div class="builder-tiers" id="builder-tiers"></div>
+        <div class="builder-actions">
+          <button id="builder-reset" class="builder-btn">Reset to framework defaults</button>
+          <button id="builder-apply" class="builder-btn primary">Apply rules →</button>
+        </div>
+      </div>
+
+      <!-- Tier Distribution — applied-rules readout. Open + Closed breakdown
+           by Market Value Tier under whatever rules the Builder is currently
+           set to (defaults match the framework). -->
+      <div class="exec-card tier-dist-card" id="tier-dist-card">
+        <h3>Tier Distribution</h3>
+        <p style="font-size:12.5px;color:var(--slate);margin:-4px 0 12px;line-height:1.5;max-width:920px">
+          Inventory count by Market Value Tier under the rules currently set in the <b>Tier Builder</b>. Open = status not closed/dismissed/settled and not in pending-close grace. Inventory value uses the editable GSV inputs at the top of the tier panel.
+        </p>
+        <table class="dist-table">
+          <thead><tr><th>Tier</th><th>Open</th><th>Closed</th><th>Total</th><th>Avg value</th><th>Inventory value</th></tr></thead>
+          <tbody id="dist-tbody"></tbody>
+        </table>
+        <div class="dist-sub" id="dist-sub"></div>
+      </div>
+
       <!-- Tier Panel — front and center for PE audience -->
       <div class="exec-card">
         <div class="bridge-wrap">
@@ -3561,6 +3636,274 @@ document.querySelectorAll('.tab').forEach(tab => {
 document.body.classList.add('t0-active');
 
 // ====================================================================
+// ====================================================================
+// TIER BUILDER — interactive rule editor for the 4 Market Value Tier buckets.
+// Each tier is an AND or OR of conditions over case fields. Apply rules to
+// recompute the distribution. Defaults mirror the framework doc.
+// ====================================================================
+const TIER_BUILDER_FIELD_DEFS = [
+  { key: 'docScore',          label: 'doc_score',              type: 'number', min: 0, max: 10 },
+  { key: 'latencyYears',      label: 'latency (years)',        type: 'number', min: 0, max: 60 },
+  { key: 'hoehnYahr',         label: 'H&Y stage',              type: 'number', min: 1, max: 5 },
+  { key: 'ageAtDiagnosis',    label: 'age at dx',              type: 'number', min: 40, max: 100 },
+  { key: 'confounderCount',   label: 'confounder count',       type: 'number', min: 0, max: 5 },
+  { key: 'severityCount',     label: 'severity count',         type: 'number', min: 0, max: 8 },
+  { key: 'driftOnly',         label: 'drift-only exposure',    type: 'number' },  // 0/1
+  { key: 'gatesPassed',       label: 'Layer 1 (gates passed)', type: 'number' },  // 0/1
+];
+const TIER_BUILDER_OP_DEFS = {
+  number: [
+    { op: '=',  label: '=' },
+    { op: '!=', label: '≠' },
+    { op: '<',  label: '<' },
+    { op: '<=', label: '≤' },
+    { op: '>',  label: '>' },
+    { op: '>=', label: '≥' },
+  ],
+};
+function tierBuilderDefaultRules() {
+  return {
+    I: { name: 'Tier I', range: '$400K–$1M+', op: 'AND', conditions: [
+      { field: 'gatesPassed',     op: '=',  value: 1 },
+      { field: 'docScore',       op: '>=', value: 7 },
+      { field: 'latencyYears',   op: '>=', value: 10 },
+      { field: 'latencyYears',   op: '<=', value: 30 },
+      { field: 'hoehnYahr',      op: '>=', value: 3 },
+      { field: 'confounderCount',op: '=',  value: 0 },
+      { field: 'severityCount',  op: '>=', value: 1 },
+      { field: 'ageAtDiagnosis', op: '<',  value: 70 },
+    ]},
+    II: { name: 'Tier II', range: '$150K–$300K', op: 'AND', conditions: [
+      { field: 'gatesPassed',     op: '=',  value: 1 },
+      { field: 'docScore',       op: '>=', value: 4 },
+      { field: 'docScore',       op: '<=', value: 6 },
+      { field: 'latencyYears',   op: '>=', value: 5 },
+      { field: 'latencyYears',   op: '<=', value: 35 },
+      { field: 'confounderCount',op: '<=', value: 1 },
+      { field: 'driftOnly',      op: '=',  value: 0 },
+    ]},
+    III: { name: 'Tier III', range: '$20K–$150K', op: 'OR', conditions: [
+      { field: 'docScore',       op: '<',  value: 4 },
+      { field: 'latencyYears',   op: '<',  value: 10 },
+      { field: 'confounderCount',op: '>=', value: 2 },
+      { field: 'ageAtDiagnosis', op: '>',  value: 78 },
+      { field: 'driftOnly',      op: '=',  value: 1 },
+    ]},
+    BG: { name: 'Below grid / Cap', range: '$0', op: 'AND', conditions: [
+      { field: 'gatesPassed',     op: '=',  value: 0 },
+    ]},
+  };
+}
+function getCaseFieldDefs() {
+  // Compute the case's effective values for the field-keys used by the Builder.
+  return {
+    docScore:        (c) => c.docScore ?? docScoreOf(c),
+    latencyYears:    (c) => c.latencyYears,
+    hoehnYahr:       (c) => c.hoehnYahr,
+    ageAtDiagnosis:  (c) => c.ageAtDiagnosis,
+    confounderCount: (c) => c.confounderScore ?? confounderScoreOf(c),
+    severityCount:   (c) => {
+      let n = 0;
+      if (c.cognitiveDecline) n++;
+      if (c.dbsSurgery) n++;
+      if (c.nursingHome) n++;
+      if ((c.falls6mo || 0) > 3) n++;
+      if (c.freezing) n++;
+      if (c.psychosis) n++;
+      if (c.hoehnYahr && c.hoehnYahr >= 3) n++;
+      if (c.ageAtDiagnosis && c.ageAtDiagnosis < 60) n++;
+      return n;
+    },
+    driftOnly:       (c) => (c.exposureCategory === 'Residential / Bystander' && !c.licenseVerified && !c.licenseClaimed) ? 1 : 0,
+    gatesPassed:     (c) => gatesPassed(c) ? 1 : 0,
+  };
+}
+function evalBuilderCondition(cond, values) {
+  const v = values[cond.field];
+  if (v == null) return false;
+  switch (cond.op) {
+    case '=':  return v === cond.value;
+    case '!=': return v !== cond.value;
+    case '<':  return v <  cond.value;
+    case '<=': return v <= cond.value;
+    case '>':  return v >  cond.value;
+    case '>=': return v >= cond.value;
+    default:   return false;
+  }
+}
+function evalBuilderTier(tier, values) {
+  if (!tier.conditions || tier.conditions.length === 0) return true; // empty = match-all
+  return tier.op === 'AND'
+    ? tier.conditions.every(c => evalBuilderCondition(c, values))
+    : tier.conditions.some(c => evalBuilderCondition(c, values));
+}
+function evaluateCaseBuilderTier(c, rules) {
+  const getters = getCaseFieldDefs();
+  const values = {};
+  for (const k in getters) values[k] = getters[k](c);
+  // Top-down evaluation: Tier I → Tier II → Tier III → BG
+  const order = ['I', 'II', 'III', 'BG'];
+  for (const k of order) {
+    if (evalBuilderTier(rules[k], values)) return k;
+  }
+  return null;
+}
+
+// Tier Builder editable state (in-memory; persist to localStorage if you want
+// changes to survive a refresh — kept off for now so the defaults stay stable).
+let TIER_BUILDER_RULES = tierBuilderDefaultRules();
+
+function renderTierBuilder() {
+  const container = document.getElementById('builder-tiers');
+  if (!container) return;
+  container.innerHTML = ['I', 'II', 'III', 'BG'].map(tierKey => {
+    const t = TIER_BUILDER_RULES[tierKey];
+    const condRows = t.conditions.length === 0
+      ? `<div class="builder-tier-empty">No conditions — tier matches every case that reaches it. <button class="builder-add" data-tier="${tierKey}">+ Add condition</button></div>`
+      : t.conditions.map((c, ci) => `
+          <div class="builder-condition" data-tier="${tierKey}" data-ci="${ci}">
+            <select class="cond-field">
+              ${TIER_BUILDER_FIELD_DEFS.map(f => `<option value="${f.key}"${f.key === c.field ? ' selected' : ''}>${f.label}</option>`).join('')}
+            </select>
+            <select class="cond-op">
+              ${TIER_BUILDER_OP_DEFS.number.map(o => `<option value="${o.op}"${o.op === c.op ? ' selected' : ''}>${o.label}</option>`).join('')}
+            </select>
+            <input type="number" class="cond-value" value="${c.value}" step="1">
+            <button class="cond-remove" data-tier="${tierKey}" data-ci="${ci}" title="Remove condition">×</button>
+          </div>`).join('');
+    return `
+      <div class="builder-tier" data-tier="${tierKey}">
+        <div class="builder-tier-head">
+          <span class="builder-tier-name t-${tierKey}">${t.name}</span>
+          <span class="builder-tier-range">${t.range}</span>
+        </div>
+        <div class="builder-tier-controls">
+          <span>Combine conditions with</span>
+          <select class="builder-op" data-tier="${tierKey}">
+            <option value="AND"${t.op === 'AND' ? ' selected' : ''}>ALL (AND) — every condition must match</option>
+            <option value="OR"${t.op === 'OR' ? ' selected' : ''}>ANY (OR) — at least one condition must match</option>
+          </select>
+          <button class="builder-add" data-tier="${tierKey}">+ Add condition</button>
+        </div>
+        <div class="builder-conditions" data-tier="${tierKey}">
+          ${condRows}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// Apply rules to every case in the inventory and render the distribution table.
+// Stores the assignment in CASE_BUILDER_TIER so the dashboard reflects the
+// user-configured rules.
+const CASE_BUILDER_TIER = {}; // matterId -> 'I' | 'II' | 'III' | 'BG'
+function applyTierBuilder(redistribute = true) {
+  if (!D || !D.cases) return;
+  D.cases.forEach(c => {
+    if (!c.tier) c.tier = caseTier(c);
+    const k = evaluateCaseBuilderTier(c, TIER_BUILDER_RULES) || 'BG';
+    CASE_BUILDER_TIER[c.matterId] = k;
+  });
+  if (redistribute) renderTierDistribution();
+}
+function renderTierDistribution() {
+  const tbody = document.getElementById('dist-tbody');
+  if (!tbody) return;
+  const counts = { I: { open: 0, closed: 0, totalValue: 0 }, II: { open: 0, closed: 0, totalValue: 0 }, III: { open: 0, closed: 0, totalValue: 0 }, BG: { open: 0, closed: 0, totalValue: 0 } };
+  D.cases.forEach(c => {
+    const k = CASE_BUILDER_TIER[c.matterId] || 'BG';
+    const isClosed = c.statusBucket === 'closed';
+    counts[k][isClosed ? 'closed' : 'open']++;
+    counts[k].totalValue += caseValue(c);
+  });
+  const tierMeta = { I: 'Tier I · $400K–$1M+', II: 'Tier II · $150K–$300K', III: 'Tier III · $20K–$150K', BG: 'Below grid / Cap' };
+  tbody.innerHTML = ['I', 'II', 'III', 'BG'].map(k => {
+    const c = counts[k];
+    const total = c.open + c.closed;
+    const avg = total > 0 ? c.totalValue / total : 0;
+    return `<tr>
+      <td class="dt-${k}">${tierMeta[k]}</td>
+      <td>${c.open.toLocaleString()}</td>
+      <td>${c.closed.toLocaleString()}</td>
+      <td class="dt-total">${total.toLocaleString()}</td>
+      <td>${fmtMoney(avg)}</td>
+      <td class="dt-total">${fmtMoney(c.totalValue)}</td>
+    </tr>`;
+  }).join('');
+  const sub = document.getElementById('dist-sub');
+  if (sub) {
+    const totalOpen = counts.I.open + counts.II.open + counts.III.open + counts.BG.open;
+    const totalClosed = counts.I.closed + counts.II.closed + counts.III.closed + counts.BG.closed;
+    const totalVal = counts.I.totalValue + counts.II.totalValue + counts.III.totalValue + counts.BG.totalValue;
+    sub.innerHTML = `<b>${(totalOpen + totalClosed).toLocaleString()}</b> cases total · <b>${totalOpen.toLocaleString()}</b> open · <b>${totalClosed.toLocaleString()}</b> closed · <b>${fmtMoney(totalVal)}</b> inventory under the applied rules.`;
+  }
+}
+function initTierBuilder() {
+  renderTierBuilder();
+  applyTierBuilder();
+  // Apply-rules button
+  document.getElementById('builder-apply').addEventListener('click', () => {
+    // Pull the current DOM state into TIER_BUILDER_RULES first
+    syncTierBuilderFromDOM();
+    applyTierBuilder();
+  });
+  // Reset-rules button
+  document.getElementById('builder-reset').addEventListener('click', () => {
+    TIER_BUILDER_RULES = tierBuilderDefaultRules();
+    renderTierBuilder();
+    applyTierBuilder();
+  });
+  // Delegated event handlers for condition add/remove/edit
+  document.getElementById('builder-tiers').addEventListener('click', e => {
+    const addBtn = e.target.closest('.builder-add');
+    if (addBtn) {
+      const tierKey = addBtn.dataset.tier;
+      TIER_BUILDER_RULES[tierKey].conditions.push({ field: 'docScore', op: '>=', value: 0 });
+      renderTierBuilder();
+      applyTierBuilder();
+      return;
+    }
+    const rmBtn = e.target.closest('.cond-remove');
+    if (rmBtn) {
+      const tierKey = rmBtn.dataset.tier;
+      const ci = parseInt(rmBtn.dataset.ci, 10);
+      TIER_BUILDER_RULES[tierKey].conditions.splice(ci, 1);
+      renderTierBuilder();
+      applyTierBuilder();
+      return;
+    }
+  });
+  // Live update on condition field/op/value change
+  document.getElementById('builder-tiers').addEventListener('input', e => {
+    // Don't fully re-render on input (it would steal focus); instead mark dirty
+    // and require Apply. Alternatively auto-apply — auto-apply keeps results
+    // in sync, which the user expects.
+    autoSyncAndApply();
+  });
+  document.getElementById('builder-tiers').addEventListener('change', e => {
+    if (e.target.matches('.builder-op')) autoSyncAndApply();
+    else autoSyncAndApply();
+  });
+}
+function autoSyncAndApply() {
+  syncTierBuilderFromDOM();
+  applyTierBuilder();
+}
+function syncTierBuilderFromDOM() {
+  document.querySelectorAll('#builder-tiers .builder-tier').forEach(sec => {
+    const tierKey = sec.dataset.tier;
+    const opSel = sec.querySelector('.builder-op');
+    if (opSel) TIER_BUILDER_RULES[tierKey].op = opSel.value;
+    const conds = [];
+    sec.querySelectorAll('.builder-condition').forEach(row => {
+      const field = row.querySelector('.cond-field').value;
+      const op = row.querySelector('.cond-op').value;
+      const value = parseFloat(row.querySelector('.cond-value').value);
+      conds.push({ field, op, value });
+    });
+    TIER_BUILDER_RULES[tierKey].conditions = conds;
+  });
+}
+
 // TIER CONFIGURATOR — interactive widget that builds a case from the
 // Layer 1 / Layer 2 / Severity / Confounder criteria and computes the
 // resulting Market Value Tier against the rules in the criteria card.
@@ -3741,6 +4084,7 @@ updateCounts();
 renderExecSummary();
 renderCrossChips();
 initFilters();
+initTierBuilder();
 initTierConfigurator();
 
 // If NL query is opened first, allow backend to be specified via prompt
