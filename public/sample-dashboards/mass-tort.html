@@ -3358,13 +3358,15 @@ document.addEventListener('change', e => {
 });
 
 function updatePopoutLabel(pl) {
+  const fdef = TIER_BUILDER_FIELD_DEFS.find(f => f.key === pl.dataset.picklist);
+  const placeholder = (fdef?.label || 'items').toLowerCase();
   const checked = [...pl.querySelectorAll('input.symptom-cb:checked')].map(cb => cb.dataset.symptom);
   const label = pl.querySelector('.popout-label');
   label.textContent = checked.length === 0
-    ? 'pick symptoms…'
+    ? `pick ${placeholder}…`
     : checked.length <= 2
       ? checked.map(s => s.replace(/_/g, ' ')).join(', ')
-      : `${checked.length} symptoms`;
+      : `${checked.length} ${placeholder}`;
 }
 
 document.getElementById('nlRunBtn').addEventListener('click', runNLQuery);
@@ -3420,8 +3422,8 @@ const TIER_BUILDER_FIELD_DEFS = [
              'stiffness','tremor','urinary_incontinence','vertical_gaze_palsy','visual_hallucinations'] },
   { key: 'levodopaResponse',  label: 'levodopa response',      type: 'string',
     values: ['robust','moderate','minimal','none','not_tried','unknown'] },
-  { key: 'applicationMethod', label: 'application method',    type: 'string',
-    values: ['backpack_sprayer','boom_sprayer','handheld_sprayer','mixing_loading','aerial_adjacent','cleanup_disposal','other'] },
+  { key: 'natureOfExposure',  label: 'Nature of Exposure',    type: 'string', multi: true,
+    values: ['backpack_sprayer','boom_sprayer','handheld_sprayer','mixing_loading','aerial_adjacent','cleanup_disposal','drift','other'] },
   { key: 'totalExposure',     label: 'total exposure (days)',  type: 'number',  min: 0 },
   { key: 'protectiveEquipment', label: 'protective equipment', type: 'boolean' },
   { key: 'familyPd1st',       label: "family hx PD (1°)",      type: 'boolean',
@@ -3486,7 +3488,7 @@ function getCaseFieldDefs() {
     parkinsonsDx:       (c) => (c.dxBucket === 'parkinsons_disease' || c.dxBucket === 'parkinsonism_other') ? 1 : 0,
     symptoms:           (c) => (c.symptomNames || []).map(s => s.toLowerCase().replace(/\s+/g, '_')),
     levodopaResponse:   (c) => (c.levodopaResponse || 'unknown').toLowerCase().replace(/\s+/g, '_'),
-    applicationMethod:  (c) => c.applicationMethod || 'other',
+    applicationMethod:  (c) => c.applicationMethod || 'other',  // legacy alias — case data still uses the old key
     totalExposure:      (c) => c.exposureTotalDays ?? c.exposureYears ?? 0,
     protectiveEquipment:(c) => c.ppeUsed ? 1 : 0,
     // familyPd is already filtered to 1st-degree (father/mother/sibling) in
@@ -3556,7 +3558,7 @@ function builderTierValue(tierId) {
 // Tier Builder editable state — persisted to localStorage so user changes
 // survive a page reload. The framework defaults are used until the user
 // explicitly overrides anything.
-const TIER_BUILDER_LS_KEY = 'mt.tierBuilderRules.v5';
+const TIER_BUILDER_LS_KEY = 'mt.tierBuilderRules.v6';
 function loadTierBuilderRules() {
   try {
     const raw = localStorage.getItem(TIER_BUILDER_LS_KEY);
@@ -3610,15 +3612,19 @@ function condRowHtml(c, dataAttrs) {
   let valueHtml;
   if (fType === 'boolean') {
     valueHtml = `<select class="cond-value"><option value="1"${c.value === 1 ? ' selected' : ''}>true</option><option value="0"${c.value === 0 ? ' selected' : ''}>false</option></select>`;
-  } else if (fType === 'string' && fdef && fdef.key === 'symptoms') {
+  } else if (fType === 'string' && fdef && fdef.multi) {
+    // Multi-select popout (Salesforce-style) — used for symptoms, nature of
+    // exposure, or any future field with `multi: true`. Stays open until the
+    // user clicks Apply or clicks outside the popout.
     const selected = String(c.value || '').split(',').map(s => s.trim());
+    const placeholder = (fdef.label || 'items').toLowerCase();
     const labelTxt = selected.length === 0
-      ? 'pick symptoms…'
+      ? `pick ${placeholder}…`
       : selected.length <= 2
         ? selected.map(s => s.replace(/_/g, ' ')).join(', ')
-        : `${selected.length} symptoms`;
+        : `${selected.length} ${placeholder}`;
     valueHtml = `
-      <div class="popout-picklist" data-picklist="symptoms">
+      <div class="popout-picklist" data-picklist="${fdef.key}">
         <button type="button" class="popout-trigger">
           <span class="popout-label">${escapeHtml(labelTxt)}</span>
           <span class="popout-arrow">▾</span>
@@ -3629,7 +3635,7 @@ function condRowHtml(c, dataAttrs) {
           </div>
           <div class="popout-foot">
             <button type="button" class="popout-clear">Clear</button>
-            <button type="button" class="popout-done">Done</button>
+            <button type="button" class="popout-done">Apply</button>
           </div>
         </div>
       </div>`;
