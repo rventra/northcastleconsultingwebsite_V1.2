@@ -3749,9 +3749,24 @@ function evaluateCaseBuilderTier(c, rules) {
   return null;
 }
 
-// Tier Builder editable state (in-memory; persist to localStorage if you want
-// changes to survive a refresh — kept off for now so the defaults stay stable).
-let TIER_BUILDER_RULES = tierBuilderDefaultRules();
+// Tier Builder editable state — persisted to localStorage so user changes
+// survive a page reload. The framework defaults are used until the user
+// explicitly overrides any condition.
+const TIER_BUILDER_LS_KEY = 'mt.tierBuilderRules.v1';
+function loadTierBuilderRules() {
+  try {
+    const raw = localStorage.getItem(TIER_BUILDER_LS_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return null;
+    if (!parsed.I || !parsed.II || !parsed.III || !parsed.BG) return null;
+    return parsed;
+  } catch (e) { return null; }
+}
+function saveTierBuilderRules() {
+  try { localStorage.setItem(TIER_BUILDER_LS_KEY, JSON.stringify(TIER_BUILDER_RULES)); } catch (e) {}
+}
+let TIER_BUILDER_RULES = loadTierBuilderRules() || tierBuilderDefaultRules();
 
 function renderTierBuilder() {
   const container = document.getElementById('builder-tiers');
@@ -3840,15 +3855,19 @@ function renderTierDistribution() {
 function initTierBuilder() {
   renderTierBuilder();
   applyTierBuilder();
+  saveTierBuilderRules();
   // Apply-rules button
   document.getElementById('builder-apply').addEventListener('click', () => {
     // Pull the current DOM state into TIER_BUILDER_RULES first
     syncTierBuilderFromDOM();
     applyTierBuilder();
+    saveTierBuilderRules();
   });
-  // Reset-rules button
+  // Reset-rules button — restore framework defaults AND clear localStorage so
+  // a subsequent reload starts from defaults again.
   document.getElementById('builder-reset').addEventListener('click', () => {
     TIER_BUILDER_RULES = tierBuilderDefaultRules();
+    try { localStorage.removeItem(TIER_BUILDER_LS_KEY); } catch (e) {}
     renderTierBuilder();
     applyTierBuilder();
   });
@@ -3887,6 +3906,7 @@ function initTierBuilder() {
 function autoSyncAndApply() {
   syncTierBuilderFromDOM();
   applyTierBuilder();
+  saveTierBuilderRules();
 }
 function syncTierBuilderFromDOM() {
   document.querySelectorAll('#builder-tiers .builder-tier').forEach(sec => {
