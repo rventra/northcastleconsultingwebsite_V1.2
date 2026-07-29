@@ -3876,13 +3876,7 @@ function initTierBuilder() {
   renderTierBuilder();
   applyTierBuilder();
   saveTierBuilderRules();
-  // Apply-rules button
-  document.getElementById('builder-apply').addEventListener('click', () => {
-    // Pull the current DOM state into TIER_BUILDER_RULES first
-    syncTierBuilderFromDOM();
-    applyTierBuilder();
-    saveTierBuilderRules();
-  });
+  // (Apply-rules button removed — rules apply live as you edit)
   // Reset-rules button — restore framework defaults AND clear localStorage so
   // a subsequent reload starts from defaults again.
   document.getElementById('builder-reset').addEventListener('click', () => {
