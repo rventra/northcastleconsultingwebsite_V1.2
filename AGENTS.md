@@ -7,11 +7,27 @@
 
 ## ⚠️ CURRENT STATUS - NEXT SESSION READ THIS
 
-**Last Worked On:** 2026-05-18  
-**Current Focus:** Dashboarding & Reporting Service Page Live + Working Directory Cleanup  
-**Status:** ✅ Dashboarding service page deployed. Working directory cleaned.
+**Last Worked On:** 2026-07-31  
+**Current Focus:** Dental & DSO Disentanglement Service Page  
+**Status:** ✅ DSO Disentanglement service page built and deployed.
 
-### What Was Just Completed (May 18, 2026):
+### What Was Just Completed (July 31, 2026):
+
+#### Dental & DSO Disentanglement Service Page — COMPLETE ✅
+1. ✅ **Created `src/DSODisentanglementPage.jsx`** — new service page at `/services/dso-disentanglement`, modeled on the `DashboardingDataPortalPage.jsx` template (split hero, navy `#051c2c` / blue `#2563EB` styling)
+   - Split hero with dental imagery + "Why Exits Get Stuck" panel (4 challenges: cross-owned entities, shared services/captive labs, intercompany entanglement, lender constraints)
+   - What We Do: 6 capability cards (hybrid valuation, exit scenario modeling, intercompany/deferred-comp forensics, debt disentanglement, CFADS/DSCR analysis, seller-note engineering)
+   - Engagement Snapshot: anonymized case strip (8 entities, 7 practices + captive lab, 30+ debt instruments, 3 exit scenarios) — NO client names, individuals, lenders, or dollar figures (source engagement is confidential)
+   - Who We Help: 3 audience cards (departing partner / remaining partners / DSO-sponsors)
+   - Engagement Model: Discover → Model → Structure → Support (4 phases)
+2. ✅ **Updated `src/App.jsx`** — added import + route (`/services/dso-disentanglement`), added nav link to desktop Services dropdown and mobile menu (**replaced the pre-existing duplicate "Dashboarding & Reporting" entry** which pointed to the same URL as "Dashboarding & Data Portal"), added 6th card to homepage "What we do" grid
+3. ✅ **Updated `src/ContactUsPage.jsx`** — added "Dental & DSO Disentanglement" to service dropdown
+4. ✅ **Updated `public/sitemap.xml`** — added `/services/dso-disentanglement` entry
+5. ✅ **Merged to `claude/main`** via `feature/dso-disentanglement-page` branch and deployed via Amplify (auto-build on merge)
+
+---
+
+### Previous Session (May 18, 2026):
 
 #### Dashboarding & Reporting Service Page — COMPLETE ✅
 1. ✅ **Rewrote `src/DashboardingDataPortalPage.jsx`** — replaced "Coming Soon" with full service page based on NCC V4.1 deck slides 22-26
@@ -515,6 +531,7 @@ gh repo view rventra/northcastleconsultingwebsite_V1.2
 
 | Date | Change | Description |
 |------|--------|-------------|
+| 2026-07-31 | DSO Disentanglement Service | Added Dental & DSO Disentanglement service page (`/services/dso-disentanglement`) + nav/homepage/contact/sitemap links; fixed duplicate nav entry |
 | 2026-05-18 | Dashboarding Service | Added full Dashboarding & Reporting service page + case study from NCC deck slides 22-26 |
 | 2026-05-18 | Cleanup | Removed extraneous files from working directory (credentials, old scripts, stale copies) |
 | 2026-02-25 | 3 New Landing Pages | Created Claimant Enrichment, SMS Bridge, and Swipe File landing pages + thank you pages |

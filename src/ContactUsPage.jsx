@@ -93,6 +93,7 @@ export default function ContactUsPage() {
                   <option value="Corporate Development">Corporate Development</option>
                   <option value="Dashboarding &amp; Reporting">Dashboarding &amp; Reporting</option>
                   <option value="Mass Tort Services">Mass Tort Services</option>
+                  <option value="Dental & DSO Disentanglement">Dental &amp; DSO Disentanglement</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
