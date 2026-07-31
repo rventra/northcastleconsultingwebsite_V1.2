@@ -555,6 +555,7 @@ gh repo view rventra/northcastleconsultingwebsite_V1.2
 
 | Date | Change | Description |
 |------|--------|-------------|
+| 2026-07-31 | DSO Page Title/SEO/Density | H1 now "Dental Service Organization Partner Carve-Out"; added PAGE_META entry + PageMeta on page; re-added Who We Help rows; case study cross-links back to service page; global density pass (sections/rows tightened ~10-15%) |
 | 2026-07-31 | DSO Page Polish | Workstreams density tightened (all 6 in one viewport); image band reworked (blurred opaque bg, centered statement, de-salesy copy); engagement timelines shortened to ~5–8 weeks |
 | 2026-07-31 | DSO Page Restyle | Rewrote DSO Disentanglement page in McKinsey editorial style (light headlines, serif subheads, hairline rows, blue section divider, quiet CTA) |
 | 2026-07-31 | Carve-Out Case Study | Added Corporate Development case study "Carve-Out: Unwinding a Multi-Entity Dental Partnership" + category/hub/homepage/sitemap updates |

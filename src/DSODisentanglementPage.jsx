@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PageMeta } from './components/MetaTags.jsx';
 
 export default function DSODisentanglementPage() {
   const challenges = [
@@ -63,6 +64,7 @@ export default function DSODisentanglementPage() {
 
   return (
     <div>
+      <PageMeta pageKey="dsoDisentanglement" />
       {/* ═══════════════════════════════════════════════════════════════
           HERO 1 — Full-viewport navy title screen (McKinsey style)
       ═══════════════════════════════════════════════════════════════ */}
@@ -73,7 +75,7 @@ export default function DSODisentanglementPage() {
               Specialized Advisory
             </p>
             <h1 className="text-4xl md:text-6xl font-light text-white leading-[1.15] mb-8">
-              Dental Partnership &amp; DSO Disentanglement
+              Dental Service Organization Partner Carve-Out
             </h1>
             <p className="text-white/70 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
               Unwinding a partner&rsquo;s economics across cross-owned practices, captive labs, intercompany loans, and lender covenants — cleanly, credibly, and without breaking the practice.
@@ -90,7 +92,7 @@ export default function DSODisentanglementPage() {
       {/* ═══════════════════════════════════════════════════════════════
           STATEMENT — Large blue pull-quote style engagement snapshot
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-white py-20 md:py-28 px-6">
+      <div className="bg-white py-14 md:py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-[#2563EB] text-2xl md:text-3xl leading-snug font-normal mb-8">
             &ldquo;A multi-location dental partnership group — eight legal entities spanning seven practices and a captive central lab — needed to buy out a departing partner who held a different ownership stake in every entity. The bank wouldn&rsquo;t fund it.&rdquo;
@@ -107,22 +109,22 @@ export default function DSODisentanglementPage() {
       {/* ═══════════════════════════════════════════════════════════════
           THE CHALLENGE — Narrow editorial column
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-white pb-20 md:pb-28 px-6">
+      <div className="bg-white pb-14 md:pb-20 px-6">
         <div className="max-w-3xl mx-auto">
           <p className="text-[#051c2c]/50 text-xs font-semibold tracking-[0.25em] uppercase mb-6">
             The Challenge
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-[#051c2c] mb-8">
+          <h2 className="font-serif text-3xl md:text-4xl text-[#051c2c] mb-6">
             Why partner exits get stuck
           </h2>
-          <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-12">
+          <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-8">
             In a multi-entity dental group, a partner is never just a partner. They are a shareholder in every practice, a lender to some entities and a borrower from others, owed deferred compensation by the group, and jointly liable on debt held against equipment, build-outs, and real estate. Untangling one person&rsquo;s economics without destabilizing the whole organization is the real work of a carve-out.
           </p>
 
           <div>
             {challenges.map((c, i) => (
-              <div key={i} className="border-t border-gray-200 py-8">
-                <h3 className="text-lg font-semibold text-[#051c2c] mb-2">{c.title}</h3>
+              <div key={i} className="border-t border-gray-200 py-6">
+                <h3 className="text-lg font-semibold text-[#051c2c] mb-1.5">{c.title}</h3>
                 <p className="text-gray-600 text-base leading-relaxed">{c.desc}</p>
               </div>
             ))}
@@ -133,7 +135,7 @@ export default function DSODisentanglementPage() {
       {/* ═══════════════════════════════════════════════════════════════
           HERO 2 — Full-viewport blue section divider (McKinsey style)
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-[#2563EB] min-h-[70vh] flex items-center justify-center px-6">
+      <div className="bg-[#2563EB] min-h-[55vh] flex items-center justify-center px-6">
         <div className="text-center max-w-4xl mx-auto py-24">
           <p className="text-white/60 text-xs font-semibold tracking-[0.25em] uppercase mb-8">
             The Approach
@@ -162,6 +164,32 @@ export default function DSODisentanglementPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
+          WHO WE HELP — 3 audience rows
+      ═══════════════════════════════════════════════════════════════ */}
+      <div className="bg-white py-14 md:py-20 px-6">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-[#051c2c]/50 text-xs font-semibold tracking-[0.25em] uppercase mb-6">
+            Who We Help
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-[#051c2c] mb-8">
+            Built for both sides of the table.
+          </h2>
+          <div>
+            {[
+              { role: 'Departing Partner', desc: 'A defensible valuation of every stake, credit for intercompany loans and deferred comp, and seller-note terms that actually pay out.' },
+              { role: 'Remaining Partners', desc: 'A buyout structured within debt capacity — DSCR headroom preserved, senior-lender consent secured, no insolvency trap after close.' },
+              { role: 'DSOs & Sponsors', desc: 'Practice-level separations and carve-outs, shared-service disentanglement, and lender-ready credit packages.' },
+            ].map((a, i) => (
+              <div key={i} className="border-t border-gray-200 py-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-8">
+                <h3 className="text-lg font-semibold text-[#051c2c] md:w-56 flex-shrink-0">{a.role}</h3>
+                <p className="text-gray-600 text-base leading-relaxed flex-1">{a.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════
           FULL-BLEED IMAGE — with navy caption card (McKinsey style)
       ═══════════════════════════════════════════════════════════════ */}
       <div className="relative overflow-hidden">
@@ -175,7 +203,7 @@ export default function DSODisentanglementPage() {
         <div className="absolute inset-0 bg-[#051c2c]/70"></div>
 
         {/* Centered statement across the image */}
-        <div className="relative z-10 max-w-4xl mx-auto px-6 py-24 md:py-36 text-center">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 py-20 md:py-28 text-center">
           <p className="text-white text-2xl md:text-4xl font-light leading-snug md:leading-snug">
             The unglamorous work comes first — every entity, every intercompany balance, every loan, reconciled to the source records.
           </p>
@@ -185,17 +213,17 @@ export default function DSODisentanglementPage() {
       {/* ═══════════════════════════════════════════════════════════════
           ENGAGEMENT MODEL — 4 quiet phases
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-white py-20 md:py-28 px-6">
+      <div className="bg-white py-14 md:py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <p className="text-[#051c2c]/50 text-xs font-semibold tracking-[0.25em] uppercase mb-6">
             Engagement Model
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-[#051c2c] mb-12">
+          <h2 className="font-serif text-3xl md:text-4xl text-[#051c2c] mb-8">
             Discover. Model. Structure. Support.
           </h2>
           <div>
             {phases.map((p) => (
-              <div key={p.num} className="border-t border-gray-200 py-8 flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8">
+              <div key={p.num} className="border-t border-gray-200 py-6 flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8">
                 <div className="flex items-baseline gap-4 md:w-56 flex-shrink-0">
                   <span className="text-sm font-semibold text-[#2563EB]">{p.num}</span>
                   <h3 className="text-lg font-semibold text-[#051c2c]">{p.title}</h3>
@@ -211,15 +239,15 @@ export default function DSODisentanglementPage() {
       {/* ═══════════════════════════════════════════════════════════════
           THE IMPACT — Stats + outcomes on navy
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-[#051c2c] py-20 md:py-28 px-6">
+      <div className="bg-[#051c2c] py-16 md:py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-white/50 text-xs font-semibold tracking-[0.25em] uppercase mb-6">
             The Impact
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-white mb-8 max-w-2xl">
+          <h2 className="font-serif text-3xl md:text-4xl text-white mb-6 max-w-2xl">
             A buyout the bank wouldn&rsquo;t fund — made financeable.
           </h2>
-          <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-3xl mb-16">
+          <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-3xl mb-12">
             Three exit scenarios modeled, every intercompany balance reconciled, and a subordinated seller note — structured with cash-flow payment gates and DSCR covenants — that senior lenders could accept. The remaining partners got a defensible settlement; the departing partner got terms that actually pay out.
           </p>
 
@@ -237,7 +265,7 @@ export default function DSODisentanglementPage() {
             ))}
           </div>
 
-          <div className="mt-16">
+          <div className="mt-12">
             <Link
               to="/case-studies/corporate-dental-carve-out"
               className="inline-flex items-center text-white text-sm font-semibold border-b border-white/40 pb-1 hover:border-white transition-colors"
@@ -251,7 +279,7 @@ export default function DSODisentanglementPage() {
       {/* ═══════════════════════════════════════════════════════════════
           GET IN TOUCH — Quiet CTA
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-white py-20 md:py-24 px-6 border-t border-gray-200">
+      <div className="bg-white py-14 md:py-16 px-6 border-t border-gray-200">
         <div className="max-w-3xl mx-auto">
           <p className="text-[#051c2c]/50 text-xs font-semibold tracking-[0.25em] uppercase mb-6">
             Get in Touch
