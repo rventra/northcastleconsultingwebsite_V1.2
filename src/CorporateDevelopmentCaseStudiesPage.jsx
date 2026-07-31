@@ -85,6 +85,38 @@ export default function CorporateDevelopmentCaseStudiesPage() {
         </div>
       </section>
 
+      {/* Featured Case Study - Carve-Out: Dental Partnership Disentanglement */}
+      <section className="py-12 md:py-16 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Image - Left */}
+            <div className="rounded-xl overflow-hidden shadow-lg">
+              <img
+                src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600&h=900&fit=crop"
+                alt="Carve-Out: Unwinding a Multi-Entity Dental Partnership"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+
+            {/* Content - Right */}
+            <div className="flex flex-col justify-center">
+              <h1 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-4">
+                Carve-Out: Unwinding a Multi-Entity Dental Partnership
+              </h1>
+              <p className="text-[#1A2234]/70 text-base leading-relaxed mb-6">
+                A multi-location dental partnership group needed to buy out a departing partner whose economics were entangled across eight legal entities — seven practices, a captive lab, intercompany loans, and 30+ debt instruments. A buyout the bank wouldn't fund — made financeable.
+              </p>
+              <Link
+                to="/case-studies/corporate-dental-carve-out"
+                className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-amber-300 transition-all duration-300 self-start"
+              >
+                View More
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16 px-6 bg-[#0D3BC3]">
         <div className="max-w-3xl mx-auto text-center">
