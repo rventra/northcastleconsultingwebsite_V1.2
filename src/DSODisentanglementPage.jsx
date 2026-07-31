@@ -55,9 +55,9 @@ export default function DSODisentanglementPage() {
   ];
 
   const phases = [
-    { num: '01', title: 'Discover', duration: '2–4 weeks', desc: 'Entity map, ownership ledger, debt inventory, and intercompany data collection.' },
-    { num: '02', title: 'Model', duration: '4–8 weeks', desc: 'Entity-level valuations, shared-service reallocation, and exit scenarios with equity waterfalls.' },
-    { num: '03', title: 'Structure', duration: '2–4 weeks', desc: 'DSCR-tested financing, seller-note terms, subordination packages, lender presentations.' },
+    { num: '01', title: 'Discover', duration: '1–2 weeks', desc: 'Entity map, ownership ledger, debt inventory, and intercompany data collection.' },
+    { num: '02', title: 'Model', duration: '3–4 weeks', desc: 'Entity-level valuations, shared-service reallocation, and exit scenarios with equity waterfalls.' },
+    { num: '03', title: 'Structure', duration: '1–2 weeks', desc: 'DSCR-tested financing, seller-note terms, subordination packages, lender presentations.' },
     { num: '04', title: 'Support', duration: 'Through close', desc: 'Negotiation support, lender Q&A, documentation tie-outs, settlement mechanics.' },
   ];
 
@@ -177,10 +177,7 @@ export default function DSODisentanglementPage() {
         {/* Centered statement across the image */}
         <div className="relative z-10 max-w-4xl mx-auto px-6 py-24 md:py-36 text-center">
           <p className="text-white text-2xl md:text-4xl font-light leading-snug md:leading-snug">
-            Every thread mapped before any is pulled — entities, ownership, intercompany balances, deferred compensation, and debt.
-          </p>
-          <p className="text-white/60 text-xs font-semibold tracking-[0.25em] uppercase mt-8">
-            Verified against source records
+            The unglamorous work comes first — every entity, every intercompany balance, every loan, reconciled to the source records.
           </p>
         </div>
       </div>
