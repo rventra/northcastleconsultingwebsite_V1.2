@@ -175,12 +175,20 @@ export default function CarveOutCaseStudyPage() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-xl font-bold text-white mb-2">Facing a Carve-Out or Partner Exit?</h2>
           <p className="text-gray-400 text-sm mb-6">Let's discuss how to unwind the entities, satisfy the lenders, and get to a clean close.</p>
-          <a
-            href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Carve-Out%20Inquiry"
-            className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded font-semibold text-sm hover:bg-amber-300 transition-all"
-          >
-            Start the Conversation
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Carve-Out%20Inquiry"
+              className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded font-semibold text-sm hover:bg-amber-300 transition-all"
+            >
+              Start the Conversation
+            </a>
+            <Link
+              to="/services/dso-disentanglement"
+              className="inline-block text-gray-300 px-6 py-3 text-sm font-semibold border-b border-gray-500 hover:border-white hover:text-white transition-colors"
+            >
+              Related Service: Dental &amp; DSO Disentanglement &rarr;
+            </Link>
+          </div>
         </div>
       </div>
     </div>

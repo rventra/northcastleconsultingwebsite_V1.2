@@ -181,6 +181,10 @@ export const PAGE_META = {
     title: 'Dashboarding & Data Portal | North Castle Consulting',
     description: 'Custom dashboards for real-time portfolio visibility.',
   },
+  dsoDisentanglement: {
+    title: 'Dental Service Organization Partner Carve-Out | North Castle Consulting',
+    description: 'Partner buyouts and entity unwinding for multi-location dental groups and DSO-affiliated practices. Entity-level valuations, intercompany reconciliation, debt disentanglement, and lender-ready seller-note structuring.',
+  },
   caseStudies: {
     title: 'Case Studies | North Castle Consulting',
     description: 'Proven results across sell-side readiness, corporate development, and data infrastructure.',
