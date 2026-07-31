@@ -69,8 +69,17 @@ export default function DSODisentanglementPage() {
           HERO 1 — Full-viewport navy title screen (McKinsey style)
       ═══════════════════════════════════════════════════════════════ */}
       <div className="pt-16">
-        <div className="relative bg-[#051c2c] min-h-[85vh] flex items-center justify-center px-6">
-          <div className="text-center max-w-4xl mx-auto py-24">
+        <div className="relative bg-[#051c2c] min-h-[85vh] flex items-center justify-center px-6 overflow-hidden">
+          {/* Blurred dental background image + navy overlay */}
+          <img
+            src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1600&h=900&fit=crop"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover blur-md scale-110"
+          />
+          <div className="absolute inset-0 bg-[#051c2c]/80"></div>
+
+          <div className="relative z-10 text-center max-w-4xl mx-auto py-24">
             <p className="text-white/50 text-xs font-semibold tracking-[0.25em] uppercase mb-8">
               Specialized Advisory
             </p>
@@ -81,7 +90,7 @@ export default function DSODisentanglementPage() {
               Unwinding a partner&rsquo;s economics across cross-owned practices, captive labs, intercompany loans, and lender covenants — cleanly, credibly, and without breaking the practice.
             </p>
           </div>
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
             <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
             </svg>
