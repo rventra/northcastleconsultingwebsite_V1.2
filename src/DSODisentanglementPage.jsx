@@ -4,276 +4,126 @@ import { Link } from 'react-router-dom';
 export default function DSODisentanglementPage() {
   const challenges = [
     {
-      num: '01',
       title: 'Cross-Owned Entities',
-      desc: 'One partner holds a different ownership percentage in every practice, lab, and real-estate entity.',
-      solution: 'We build entity-level equity waterfalls — from gross practice value to net settlement for each partner.',
+      desc: 'One partner holds a different ownership percentage in every practice, lab, and real-estate entity. We build entity-level equity waterfalls — from gross practice value to net settlement.',
     },
     {
-      num: '02',
       title: 'Shared Services & Captive Labs',
-      desc: 'A central lab or management entity serves every office, so its economics belong to no one — and everyone.',
-      solution: 'We reallocate shared-service EBITDA to producing entities, with logic that adapts to each exit scenario.',
+      desc: 'A central lab or management entity serves every office, so its economics belong to no one — and everyone. We reallocate shared-service EBITDA to producing entities, with logic that adapts to each exit scenario.',
     },
     {
-      num: '03',
       title: 'Intercompany Entanglement',
-      desc: 'Years of due-to / due-from loans, partner draws, and accrued deferred compensation obscure who owes what.',
-      solution: 'We forensically reconcile every balance — transaction by transaction, by entity and by partner.',
+      desc: 'Years of due-to / due-from loans, partner draws, and accrued deferred compensation obscure who owes what. We forensically reconcile every balance — transaction by transaction, by entity and by partner.',
     },
     {
-      num: '04',
       title: 'Lender Constraints',
-      desc: 'Dozens of loan instruments and thin coverage mean a bank simply won\u2019t fund the buyout.',
-      solution: 'We deliver CFADS / DSCR analysis and lender-ready seller-note structures that close the gap.',
+      desc: 'Dozens of loan instruments and thin coverage mean a bank simply won\u2019t fund the buyout. We deliver CFADS / DSCR analysis and lender-ready seller-note structures that close the gap.',
     },
   ];
 
-  const capabilities = [
+  const workstreams = [
     {
-      tag: 'Valuation',
+      num: '01',
       title: 'Hybrid Multi-Entity Valuation',
-      items: ['Going-concern entities on EBITDA multiples', 'Underperforming entities on NAV ex-goodwill floors', 'Formal multiple-justification memos', 'Goodwill embedded — no double counting'],
+      desc: 'Going-concern entities on EBITDA multiples; underperforming entities on net-asset-value floors excluding goodwill — supported by formal multiple-justification memos, with goodwill embedded rather than double counted.',
     },
     {
-      tag: 'Scenario Modeling',
+      num: '02',
       title: 'Partner-Exit Scenario Analysis',
-      items: ['Full exit vs. partial exit vs. asset retention', 'Equity waterfalls by scenario', 'Replacement-clinician compensation modeling', 'Downside and insolvency-trap stress tests'],
+      desc: 'Full exit vs. partial exit vs. asset retention — complete equity waterfalls by scenario, replacement-clinician compensation modeling, and downside insolvency-trap stress tests.',
     },
     {
-      tag: 'Forensics',
+      num: '03',
       title: 'Intercompany & Deferred-Comp Reconciliation',
-      items: ['Transaction-level due-to / due-from mapping', 'Partner draw true-ups', 'Deferred compensation rollforwards', 'Balance-sheet adjustments by entity'],
+      desc: 'Transaction-level due-to / due-from mapping by entity and partner, partner draw true-ups, deferred compensation rollforwards, and the balance-sheet adjustments that follow.',
     },
     {
-      tag: 'Debt',
+      num: '04',
       title: 'Debt Disentanglement',
-      items: ['Every instrument mapped to an entity', 'Allocated to partners by ownership %', 'Reconciled to lender schedules', 'Payoff and refinance sequencing'],
+      desc: 'Every loan instrument mapped to an entity, allocated to partners by ownership percentage, reconciled to lender schedules, and sequenced for payoff or refinance.',
     },
     {
-      tag: 'Credit',
+      num: '05',
       title: 'CFADS & DSCR Analysis',
-      items: ['EBITDA-to-cash-flow bridges', 'Multi-year debt-service step-downs', 'DSCR under competing financing structures', 'Lender-grade covenant framing'],
+      desc: 'EBITDA-to-cash-flow bridges, multi-year debt-service step-downs, and DSCR under competing financing structures — framed the way lenders underwrite.',
     },
     {
-      tag: 'Structuring',
+      num: '06',
       title: 'Seller-Note Engineering',
-      items: ['PIK \u2192 interest-only \u2192 amortizing structures', 'Cash-flow payment gates and covenants', 'Subordination & standstill for senior lenders', 'Missed-payment mechanics and remedies'],
+      desc: 'PIK \u2192 interest-only \u2192 amortizing structures with cash-flow payment gates, covenants, subordination and standstill provisions senior lenders can accept — and missed-payment mechanics that protect everyone.',
     },
   ];
 
   const phases = [
-    {
-      num: '01',
-      title: 'Discover',
-      duration: '2–4 weeks',
-      desc: 'Entity map, ownership ledger, debt inventory, and intercompany data collection. We find every thread before we pull any of them.',
-    },
-    {
-      num: '02',
-      title: 'Model',
-      duration: '4–8 weeks',
-      desc: 'Entity-level valuations, shared-service reallocation, and full / partial / retention exit scenarios with equity waterfalls.',
-    },
-    {
-      num: '03',
-      title: 'Structure',
-      duration: '2–4 weeks',
-      desc: 'Buyout financing: DSCR-tested structures, seller-note terms, subordination packages, and lender presentations.',
-    },
-    {
-      num: '04',
-      title: 'Support',
-      duration: 'Through close',
-      desc: 'Negotiation support, lender Q&A, documentation tie-outs, and post-close settlement mechanics.',
-    },
+    { num: '01', title: 'Discover', duration: '2–4 weeks', desc: 'Entity map, ownership ledger, debt inventory, and intercompany data collection.' },
+    { num: '02', title: 'Model', duration: '4–8 weeks', desc: 'Entity-level valuations, shared-service reallocation, and exit scenarios with equity waterfalls.' },
+    { num: '03', title: 'Structure', duration: '2–4 weeks', desc: 'DSCR-tested financing, seller-note terms, subordination packages, lender presentations.' },
+    { num: '04', title: 'Support', duration: 'Through close', desc: 'Negotiation support, lender Q&A, documentation tie-outs, settlement mechanics.' },
   ];
 
   return (
     <div>
       {/* ═══════════════════════════════════════════════════════════════
-          HERO — Split: Image Left | Gray Panel Right
+          HERO 1 — Full-viewport navy title screen (McKinsey style)
       ═══════════════════════════════════════════════════════════════ */}
       <div className="pt-16">
-        <div className="grid lg:grid-cols-12 min-h-[600px] lg:min-h-[700px]">
-
-          {/* Left — Image with Text Overlay */}
-          <div className="lg:col-span-8 relative flex items-end">
-            <div className="absolute inset-0">
-              <img
-                src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600&h=900&fit=crop"
-                alt="Modern dental practice operatory"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#051c2c] via-[#051c2c]/70 to-transparent"></div>
-            </div>
-
-            <div className="relative z-10 p-8 md:p-12 lg:p-16 w-full">
-              <p className="text-white/60 text-sm font-semibold tracking-widest uppercase mb-4">
-                Specialized Advisory
-              </p>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.05] max-w-3xl">
-                Dental Partnership &amp; DSO Disentanglement
-              </h1>
-              <p className="text-xl md:text-2xl text-white/80 font-light mb-6 max-w-2xl leading-relaxed">
-                Unwinding a partner's economics across a web of cross-owned practices, captive labs, intercompany loans, and lender covenants — cleanly, credibly, and without breaking the practice.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href="mailto:admin@northcastleconsulting.com?subject=DSO%20Disentanglement%20Inquiry"
-                  className="inline-block bg-white text-[#051c2c] px-8 py-4 font-semibold hover:shadow-xl hover:bg-gray-50 transition-all duration-300"
-                >
-                  Start a Conversation
-                </a>
-                <Link
-                  to="/contact-us"
-                  className="inline-block bg-transparent text-white px-8 py-4 font-semibold border border-white/40 hover:border-white hover:bg-white/10 transition-all duration-300"
-                >
-                  Contact Us
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Right — Gray Panel with Challenges */}
-          <div className="lg:col-span-4 bg-[#F5F5F5] p-8 md:p-10 lg:p-12 flex flex-col justify-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#051c2c] mb-2">
-              Why Exits Get Stuck
-            </h2>
-            <p className="text-[#051c2c]/60 text-lg mb-8">
-              &amp; How We Unstick Them
+        <div className="relative bg-[#051c2c] min-h-[85vh] flex items-center justify-center px-6">
+          <div className="text-center max-w-4xl mx-auto py-24">
+            <p className="text-white/50 text-xs font-semibold tracking-[0.25em] uppercase mb-8">
+              Specialized Advisory
             </p>
-
-            <div className="space-y-6">
-              {challenges.map((item) => (
-                <div key={item.num} className="border-l-2 border-[#2563EB] pl-5">
-                  <div className="flex items-baseline gap-3 mb-2">
-                    <span className="text-3xl font-bold text-[#2563EB]">{item.num}</span>
-                    <h3 className="text-lg font-semibold text-[#051c2c]">{item.title}</h3>
-                  </div>
-                  <p className="text-base text-[#051c2c]/60 mb-2 leading-relaxed">{item.desc}</p>
-                  <p className="text-base text-[#051c2c] font-medium leading-relaxed">{item.solution}</p>
-                </div>
-              ))}
-            </div>
+            <h1 className="text-4xl md:text-6xl font-light text-white leading-[1.15] mb-8">
+              Dental Partnership &amp; DSO Disentanglement
+            </h1>
+            <p className="text-white/70 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+              Unwinding a partner&rsquo;s economics across cross-owned practices, captive labs, intercompany loans, and lender covenants — cleanly, credibly, and without breaking the practice.
+            </p>
+          </div>
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+            <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
         </div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          WHAT WE DO — 6 Capability Cards
+          STATEMENT — Large blue pull-quote style engagement snapshot
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="py-20 md:py-28 px-6 bg-[#F9F9F7]">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">What We Do</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#051c2c]">
-              One Engagement. Six Workstreams.
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {capabilities.map((cap, i) => (
-              <div key={i} className="bg-white border-l-4 border-[#2563EB] shadow-sm p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="inline-block bg-[#2563EB] text-white text-xs font-bold px-3 py-1 uppercase tracking-wider">
-                    {cap.tag}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-[#051c2c] mb-4">{cap.title}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {cap.items.map((item) => (
-                    <span key={item} className="inline-block bg-[#F9F9F7] border border-gray-200 px-3 py-1.5 text-sm font-medium text-[#051c2c]">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+      <div className="bg-white py-20 md:py-28 px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-[#2563EB] text-2xl md:text-3xl leading-snug font-normal mb-8">
+            &ldquo;A multi-location dental partnership group — eight legal entities spanning seven practices and a captive central lab — needed to buy out a departing partner who held a different ownership stake in every entity. The bank wouldn&rsquo;t fund it.&rdquo;
+          </p>
+          <p className="text-[#2563EB] text-sm font-medium">
+            — Engagement Snapshot
+          </p>
+          <p className="text-[#2563EB]/70 text-sm">
+            Multi-location dental partnership group, Mountain West
+          </p>
         </div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          ENGAGEMENT SNAPSHOT — Anonymized Case Strip
+          THE CHALLENGE — Narrow editorial column
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="py-20 md:py-28 px-6 bg-[#051c2c]">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-white/50 text-sm font-semibold tracking-widest uppercase mb-3">Engagement Snapshot</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 max-w-4xl">
-            A Partner Buyout the Bank Wouldn&rsquo;t Fund
+      <div className="bg-white pb-20 md:pb-28 px-6">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-[#051c2c]/50 text-xs font-semibold tracking-[0.25em] uppercase mb-6">
+            The Challenge
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-[#051c2c] mb-8">
+            Why partner exits get stuck
           </h2>
-          <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-4xl mb-12">
-            A multi-location dental partnership group in the Mountain West — eight legal entities spanning seven practices and a captive central lab — needed to buy out a departing partner who held a different ownership stake in every entity. We valued each entity on a hybrid framework, modeled three exit scenarios, mapped more than 30 debt instruments, reconciled years of intercompany balances and deferred compensation, and structured a subordinated seller note with cash-flow payment gates that senior lenders could accept — enabling a buyout the bank wouldn&rsquo;t fund.
+          <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-12">
+            In a multi-entity dental group, a partner is never just a partner. They are a shareholder in every practice, a lender to some entities and a borrower from others, owed deferred compensation by the group, and jointly liable on debt held against equipment, build-outs, and real estate. Untangling one person&rsquo;s economics without destabilizing the whole organization is the real work of a carve-out.
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-            {[
-              { value: '8', label: 'Legal Entities Unwound' },
-              { value: '7', label: 'Practices + Captive Lab' },
-              { value: '30+', label: 'Debt Instruments Mapped' },
-              { value: '3', label: 'Exit Scenarios Modeled' },
-            ].map((stat, i) => (
-              <div key={i} className="text-center border-t-2 border-[#2563EB] pt-6">
-                <p className="text-4xl md:text-5xl font-bold text-white">{stat.value}</p>
-                <p className="text-xs text-white/50 mt-2 uppercase tracking-wider">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-
-          <Link
-            to="/case-studies/corporate-dental-carve-out"
-            className="inline-flex items-center text-white text-sm font-semibold border-b border-white/50 pb-1 hover:border-white transition-colors"
-          >
-            Read the Full Case Study <span className="ml-2">&rarr;</span>
-          </Link>
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          WHO WE HELP — 3 Audience Cards
-      ═══════════════════════════════════════════════════════════════ */}
-      <div className="py-20 md:py-28 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">Who We Help</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#051c2c] mb-4">
-              Built for Both Sides of the Table
-            </h2>
-            <p className="text-lg text-[#051c2c]/60 max-w-3xl">
-              Whether you are the partner leaving, the partners staying, or the platform separating from a practice — the math has to work for everyone, including the lenders.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                role: 'Departing Partner',
-                persona: 'Selling Dentist / Owner',
-                kpis: ['Defensible valuation of every entity stake', 'Credit for intercompany loans & deferred comp', 'Seller-note terms that actually pay out', 'Tax-aware settlement sequencing'],
-              },
-              {
-                role: 'Remaining Partners',
-                persona: 'Practice Group / Partnership',
-                kpis: ['Buyout structured within debt capacity', 'DSCR headroom preserved for operations', 'Senior-lender consent secured', 'No insolvency trap post-close'],
-              },
-              {
-                role: 'Platforms & Sponsors',
-                persona: 'DSO / Investor',
-                kpis: ['Practice-level separations & carve-outs', 'Shared-service & lab disentanglement', 'Lender-ready credit packages', 'Audit-grade diligence support'],
-              },
-            ].map((a, i) => (
-              <div key={i} className="bg-[#051c2c] text-white p-8">
-                <p className="text-white/50 text-sm mb-1">{a.role}</p>
-                <h3 className="text-xl font-bold mb-4">{a.persona}</h3>
-                <ul className="space-y-2">
-                  {a.kpis.map((kpi) => (
-                    <li key={kpi} className="flex items-start gap-2 text-sm text-white/80">
-                      <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 bg-white/60" />
-                      {kpi}
-                    </li>
-                  ))}
-                </ul>
+          <div>
+            {challenges.map((c, i) => (
+              <div key={i} className="border-t border-gray-200 py-8">
+                <h3 className="text-lg font-semibold text-[#051c2c] mb-2">{c.title}</h3>
+                <p className="text-gray-600 text-base leading-relaxed">{c.desc}</p>
               </div>
             ))}
           </div>
@@ -281,29 +131,72 @@ export default function DSODisentanglementPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          ENGAGEMENT MODEL — 4 Phases
+          HERO 2 — Full-viewport blue section divider (McKinsey style)
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="py-20 md:py-28 px-6 bg-[#F9F9F7]">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <p className="text-[#051c2c]/50 text-sm font-semibold tracking-widest uppercase mb-3">Engagement Model</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#051c2c] mb-4">
-              Discover. Model. Structure. Support.
-            </h2>
-            <p className="text-lg text-[#051c2c]/60 max-w-3xl">
-              A defined path from entangled to closed — with lender-grade analysis at every step.
-            </p>
-          </div>
+      <div className="bg-[#2563EB] min-h-[70vh] flex items-center justify-center px-6">
+        <div className="text-center max-w-4xl mx-auto py-24">
+          <p className="text-white/60 text-xs font-semibold tracking-[0.25em] uppercase mb-8">
+            The Approach
+          </p>
+          <h2 className="text-4xl md:text-6xl font-light text-white leading-[1.15]">
+            One engagement. Six workstreams.
+          </h2>
+        </div>
+      </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {phases.map((phase) => (
-              <div key={phase.num} className="bg-white p-8 border-t-4 border-[#2563EB] shadow-sm">
-                <div className="flex items-baseline gap-3 mb-4">
-                  <span className="text-4xl font-bold text-[#2563EB]">{phase.num}</span>
-                  <span className="text-sm font-semibold text-[#051c2c]/50 uppercase tracking-wider">{phase.duration}</span>
+      {/* ═══════════════════════════════════════════════════════════════
+          WORKSTREAMS — Hairline numbered rows, editorial column
+      ═══════════════════════════════════════════════════════════════ */}
+      <div className="bg-white py-20 md:py-28 px-6">
+        <div className="max-w-3xl mx-auto">
+          {workstreams.map((w) => (
+            <div key={w.num} className="border-t border-gray-200 py-10 flex gap-8">
+              <span className="text-sm font-semibold text-[#2563EB] mt-1 flex-shrink-0">{w.num}</span>
+              <div>
+                <h3 className="text-xl font-semibold text-[#051c2c] mb-3">{w.title}</h3>
+                <p className="text-gray-600 text-base leading-relaxed">{w.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          FULL-BLEED IMAGE — with navy caption card (McKinsey style)
+      ═══════════════════════════════════════════════════════════════ */}
+      <div className="relative">
+        <img
+          src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600&h=900&fit=crop"
+          alt="Modern dental practice operatory"
+          className="w-full h-[60vh] object-cover"
+        />
+        <div className="absolute bottom-0 left-0 md:left-12 bg-[#051c2c] text-white p-8 max-w-md">
+          <p className="text-base leading-relaxed">
+            Every thread mapped before any is pulled: entities, ownership, intercompany balances, deferred compensation, and debt — verified against source records.
+          </p>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          ENGAGEMENT MODEL — 4 quiet phases
+      ═══════════════════════════════════════════════════════════════ */}
+      <div className="bg-white py-20 md:py-28 px-6">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-[#051c2c]/50 text-xs font-semibold tracking-[0.25em] uppercase mb-6">
+            Engagement Model
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-[#051c2c] mb-12">
+            Discover. Model. Structure. Support.
+          </h2>
+          <div>
+            {phases.map((p) => (
+              <div key={p.num} className="border-t border-gray-200 py-8 flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8">
+                <div className="flex items-baseline gap-4 md:w-56 flex-shrink-0">
+                  <span className="text-sm font-semibold text-[#2563EB]">{p.num}</span>
+                  <h3 className="text-lg font-semibold text-[#051c2c]">{p.title}</h3>
                 </div>
-                <h3 className="text-xl font-bold text-[#051c2c] mb-3">{phase.title}</h3>
-                <p className="text-[#051c2c]/60 leading-relaxed">{phase.desc}</p>
+                <p className="text-gray-600 text-base leading-relaxed flex-1">{p.desc}</p>
+                <span className="text-sm text-[#051c2c]/50 md:w-32 md:text-right flex-shrink-0">{p.duration}</span>
               </div>
             ))}
           </div>
@@ -311,29 +204,72 @@ export default function DSODisentanglementPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          CTA
+          THE IMPACT — Stats + outcomes on navy
       ═══════════════════════════════════════════════════════════════ */}
       <div className="bg-[#051c2c] py-20 md:py-28 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-white/50 text-xs font-semibold tracking-[0.25em] uppercase mb-6">
+            The Impact
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-white mb-8 max-w-2xl">
+            A buyout the bank wouldn&rsquo;t fund — made financeable.
+          </h2>
+          <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-3xl mb-16">
+            Three exit scenarios modeled, every intercompany balance reconciled, and a subordinated seller note — structured with cash-flow payment gates and DSCR covenants — that senior lenders could accept. The remaining partners got a defensible settlement; the departing partner got terms that actually pay out.
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+            {[
+              { value: '8', label: 'Legal entities unwound' },
+              { value: '30+', label: 'Debt instruments mapped' },
+              { value: '3', label: 'Exit scenarios modeled' },
+              { value: '100%', label: 'Models independently re-verified' },
+            ].map((stat, i) => (
+              <div key={i} className="border-t border-white/20 pt-6">
+                <p className="text-3xl md:text-4xl font-light text-white mb-2">{stat.value}</p>
+                <p className="text-sm text-white/50">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16">
+            <Link
+              to="/case-studies/corporate-dental-carve-out"
+              className="inline-flex items-center text-white text-sm font-semibold border-b border-white/40 pb-1 hover:border-white transition-colors"
+            >
+              Read the full case study <span className="ml-2">&rarr;</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          GET IN TOUCH — Quiet CTA
+      ═══════════════════════════════════════════════════════════════ */}
+      <div className="bg-white py-20 md:py-24 px-6 border-t border-gray-200">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-[#051c2c]/50 text-xs font-semibold tracking-[0.25em] uppercase mb-6">
+            Get in Touch
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-[#051c2c] mb-6">
             Facing a partner exit or practice separation?
           </h2>
-          <p className="text-white/60 text-xl mb-10 max-w-2xl mx-auto">
+          <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
             Let&rsquo;s discuss how to unwind the entities, satisfy the lenders, and get to a clean close.
           </p>
           <a
             href="mailto:admin@northcastleconsulting.com?subject=DSO%20Disentanglement%20Inquiry"
-            className="inline-block bg-white text-[#051c2c] px-10 py-5 font-semibold text-lg hover:shadow-xl hover:bg-gray-50 transition-all duration-300"
+            className="inline-block bg-[#051c2c] text-white px-8 py-3 text-sm font-semibold hover:bg-[#2563EB] transition-colors"
           >
-            Start a Conversation
+            Contact Us
           </a>
         </div>
       </div>
 
       {/* Back */}
       <div className="bg-white py-6 px-6 border-t border-gray-200">
-        <div className="max-w-6xl mx-auto">
-          <Link to="/" className="text-[#051c2c]/50 hover:text-[#051c2c] transition-colors text-base">
+        <div className="max-w-3xl mx-auto">
+          <Link to="/" className="text-[#051c2c]/50 hover:text-[#051c2c] transition-colors text-sm">
             &larr; Back to Home
           </Link>
         </div>

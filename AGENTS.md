@@ -9,7 +9,7 @@
 
 **Last Worked On:** 2026-07-31  
 **Current Focus:** Dental & DSO Disentanglement Service Page + Carve-Out Case Study  
-**Status:** ✅ DSO Disentanglement service page and Carve-Out case study deployed.
+**Status:** ✅ DSO page restyled to McKinsey editorial template and deployed.
 
 ### What Was Just Completed (July 31, 2026):
 
@@ -32,7 +32,22 @@
 4. ✅ **Updated `src/CaseStudiesPage.jsx`** — Corporate Development card count 2 → 3 + "Carve-Out: Dental Partnership Disentanglement" featured story
 5. ✅ **Updated `src/DSODisentanglementPage.jsx`** — Engagement Snapshot now links to the full case study
 6. ✅ **Updated `public/sitemap.xml`** — added case study URL
-7. ✅ **Merged to `claude/main`** via `feature/carve-out-case-study` branch and deployed via Amplify (auto-build on merge)
+7. ✅ **Merged to `claude/main`** via `feature/carve-out-case-study` branch and deployed via Amplify Build #365 (SUCCEED)
+
+#### DSO Page McKinsey-Style Restyle — COMPLETE ✅
+1. ✅ **Rewrote `src/DSODisentanglementPage.jsx`** from the card-based dashboard template to a McKinsey client-story editorial layout (reference: mckinsey.com "how we help clients" case studies):
+   - Hero 1: full-viewport navy `#051c2c` title screen — small caps eyebrow, `font-light` headline, standfirst, scroll chevron
+   - Blue pull-quote engagement snapshot (`#2563EB`) with attribution line
+   - "The Challenge": narrow `max-w-3xl` editorial column, serif (`font-serif`) subheads, hairline-separated rows (no cards/chips)
+   - Hero 2: full-viewport blue `#2563EB` section divider — "THE APPROACH / One engagement. Six workstreams."
+   - 6 workstreams as numbered hairline rows; 4 phases as quiet hairline rows with duration column
+   - Full-bleed dental image with navy caption card (bottom-left overlay)
+   - "The Impact" navy section: serif headline, smaller `font-light` stats, case-study link
+   - Quiet "Get in Touch" CTA (small navy button) replacing the big CTA band
+2. ✅ Verified locally via `vite preview` + Playwright screenshots at 1440×900
+3. ✅ **Merged to `claude/main`** via `feature/dso-page-mckinsey-restyle` branch and deployed via Amplify (auto-build on merge)
+
+**Design note:** The McKinsey template = light-weight (not bold) headlines, serif section subheads, hairline dividers instead of cards/chips, full-viewport color-block section dividers, narrow text columns, quiet CTAs. Use this pattern for future B2B service/case-study pages.
 
 ---
 
@@ -540,6 +555,7 @@ gh repo view rventra/northcastleconsultingwebsite_V1.2
 
 | Date | Change | Description |
 |------|--------|-------------|
+| 2026-07-31 | DSO Page Restyle | Rewrote DSO Disentanglement page in McKinsey editorial style (light headlines, serif subheads, hairline rows, blue section divider, quiet CTA) |
 | 2026-07-31 | Carve-Out Case Study | Added Corporate Development case study "Carve-Out: Unwinding a Multi-Entity Dental Partnership" + category/hub/homepage/sitemap updates |
 | 2026-07-31 | DSO Disentanglement Service | Added Dental & DSO Disentanglement service page (`/services/dso-disentanglement`) + nav/homepage/contact/sitemap links; fixed duplicate nav entry |
 | 2026-05-18 | Dashboarding Service | Added full Dashboarding & Reporting service page + case study from NCC deck slides 22-26 |
