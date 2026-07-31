@@ -207,7 +207,7 @@ export default function DSODisentanglementPage() {
             A multi-location dental partnership group in the Mountain West — eight legal entities spanning seven practices and a captive central lab — needed to buy out a departing partner who held a different ownership stake in every entity. We valued each entity on a hybrid framework, modeled three exit scenarios, mapped more than 30 debt instruments, reconciled years of intercompany balances and deferred compensation, and structured a subordinated seller note with cash-flow payment gates that senior lenders could accept — enabling a buyout the bank wouldn&rsquo;t fund.
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
             {[
               { value: '8', label: 'Legal Entities Unwound' },
               { value: '7', label: 'Practices + Captive Lab' },
@@ -220,6 +220,13 @@ export default function DSODisentanglementPage() {
               </div>
             ))}
           </div>
+
+          <Link
+            to="/case-studies/corporate-dental-carve-out"
+            className="inline-flex items-center text-white text-sm font-semibold border-b border-white/50 pb-1 hover:border-white transition-colors"
+          >
+            Read the Full Case Study <span className="ml-2">&rarr;</span>
+          </Link>
         </div>
       </div>
 

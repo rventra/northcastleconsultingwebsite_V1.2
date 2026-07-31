@@ -8,8 +8,8 @@
 ## ⚠️ CURRENT STATUS - NEXT SESSION READ THIS
 
 **Last Worked On:** 2026-07-31  
-**Current Focus:** Dental & DSO Disentanglement Service Page  
-**Status:** ✅ DSO Disentanglement service page built and deployed.
+**Current Focus:** Dental & DSO Disentanglement Service Page + Carve-Out Case Study  
+**Status:** ✅ DSO Disentanglement service page and Carve-Out case study deployed.
 
 ### What Was Just Completed (July 31, 2026):
 
@@ -23,7 +23,16 @@
 2. ✅ **Updated `src/App.jsx`** — added import + route (`/services/dso-disentanglement`), added nav link to desktop Services dropdown and mobile menu (**replaced the pre-existing duplicate "Dashboarding & Reporting" entry** which pointed to the same URL as "Dashboarding & Data Portal"), added 6th card to homepage "What we do" grid
 3. ✅ **Updated `src/ContactUsPage.jsx`** — added "Dental & DSO Disentanglement" to service dropdown
 4. ✅ **Updated `public/sitemap.xml`** — added `/services/dso-disentanglement` entry
-5. ✅ **Merged to `claude/main`** via `feature/dso-disentanglement-page` branch and deployed via Amplify (auto-build on merge)
+5. ✅ **Merged to `claude/main`** via `feature/dso-disentanglement-page` branch and deployed via Amplify Build #364 (SUCCEED)
+
+#### Carve-Out Case Study (Corporate Development) — COMPLETE ✅
+1. ✅ **Created `src/CarveOutCaseStudyPage.jsx`** — new case study at `/case-studies/corporate-dental-carve-out` under Corporate Development, following the TargetIdentification template (blue `#0D3BC3` / gold `#EDB624`): hero, project info bar, Challenge/Solution two-column, 7 execution steps, results with stats row (8 entities, 30+ debt instruments, 3 scenarios), CTA. Fully anonymized — no client/individual/lender names or $ figures.
+2. ✅ **Updated `src/App.jsx`** — import + route; homepage Corporate Development card count 2 → 3
+3. ✅ **Updated `src/CorporateDevelopmentCaseStudiesPage.jsx`** — added third featured case study section (alternating white background)
+4. ✅ **Updated `src/CaseStudiesPage.jsx`** — Corporate Development card count 2 → 3 + "Carve-Out: Dental Partnership Disentanglement" featured story
+5. ✅ **Updated `src/DSODisentanglementPage.jsx`** — Engagement Snapshot now links to the full case study
+6. ✅ **Updated `public/sitemap.xml`** — added case study URL
+7. ✅ **Merged to `claude/main`** via `feature/carve-out-case-study` branch and deployed via Amplify (auto-build on merge)
 
 ---
 
@@ -531,6 +540,7 @@ gh repo view rventra/northcastleconsultingwebsite_V1.2
 
 | Date | Change | Description |
 |------|--------|-------------|
+| 2026-07-31 | Carve-Out Case Study | Added Corporate Development case study "Carve-Out: Unwinding a Multi-Entity Dental Partnership" + category/hub/homepage/sitemap updates |
 | 2026-07-31 | DSO Disentanglement Service | Added Dental & DSO Disentanglement service page (`/services/dso-disentanglement`) + nav/homepage/contact/sitemap links; fixed duplicate nav entry |
 | 2026-05-18 | Dashboarding Service | Added full Dashboarding & Reporting service page + case study from NCC deck slides 22-26 |
 | 2026-05-18 | Cleanup | Removed extraneous files from working directory (credentials, old scripts, stale copies) |

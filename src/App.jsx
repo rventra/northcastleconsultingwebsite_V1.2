@@ -13,6 +13,7 @@ import BuildingCredibilityPage from './BuildingCredibilityPage.jsx';
 import EnhancingInvestmentCredibilityPage from './EnhancingInvestmentCredibilityPage.jsx';
 import StreamliningOperationsCaseStudyPage from './StreamliningOperationsCaseStudyPage.jsx';
 import CarRentalCaseStudyPage from './CarRentalCaseStudyPage.jsx';
+import CarveOutCaseStudyPage from './CarveOutCaseStudyPage.jsx';
 import TargetIdentificationCaseStudyPage from './TargetIdentificationCaseStudyPage.jsx';
 import KPIDataCubeCaseStudyPage from './KPIDataCubeCaseStudyPage.jsx';
 import DataChallengedCaseStudyPage from './DataChallengedCaseStudyPage.jsx';
@@ -468,7 +469,7 @@ function HomePage() {
             </Link>
 
             <Link to="/case-studies/corporate-development" className="group block border-t-2 border-[#051c2c] pt-4 hover:border-[#2563EB] transition-colors">
-              <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">2 Case Studies</span>
+              <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">3 Case Studies</span>
               <h3 className="text-lg font-medium text-[#051c2c] mt-2 mb-2 group-hover:text-[#2563EB] transition-colors">
                 Corporate Development
               </h3>
@@ -680,6 +681,7 @@ const isRoundupLanding =
         <Route path="/case-studies/sell-side-operations-marketing" element={<StreamliningOperationsCaseStudyPage />} />
         <Route path="/case-studies/corporate-operations-to-ownership" element={<CarRentalCaseStudyPage />} />
         <Route path="/case-studies/corporate-acquisition-roadmap" element={<TargetIdentificationCaseStudyPage />} />
+        <Route path="/case-studies/corporate-dental-carve-out" element={<CarveOutCaseStudyPage />} />
         <Route path="/case-studies/dashboarding-pe-value-visibility" element={<DashboardingCaseStudyPage />} />
 
         {/* Blog */}
