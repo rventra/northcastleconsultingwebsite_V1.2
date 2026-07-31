@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 
+      NORTH CASTLE CONSULTING - META TAGS
+      ===================================
+      IMPORTANT: For LinkedIn Ads and social sharing to work, OG tags must be 
+      present in this static HTML file. React Helmet/meta tags added at runtime 
+      will NOT work for link preview crawlers.
+      
+      When creating new landing pages:
+      1. Update the title, description, and og:url below
+      2. Create a 1200x627px OG image and upload to public/images/
+      3. Update og:image and twitter:image paths
+      4. Test with LinkedIn Post Inspector before launching ads
+      
+      See AGENTS.md for full SOP on landing page meta tags.
+    -->
+    
+    <!--
+      Primary Meta Tags = SITE-WIDE DEFAULTS.
+      This is a single-page app: this static <head> is shared by every route and
+      is what social crawlers / view-source see. Per-page <title>/<description>/
+      canonical are set at runtime by src/components/MetaTags.jsx (works for
+      browsers and JS-executing crawlers like Google). Keep these values generic
+      to the brand — do NOT hardcode a single landing page's metadata here.
+    -->
+    <title>North Castle Consulting | Financial Advisory for PE &amp; Corporate Development</title>
+    <meta name="title" content="North Castle Consulting | Financial Advisory for PE &amp; Corporate Development">
+    <meta name="description" content="Financial expertise for Private Equity and Corporate Development teams seeking measurable outcomes. Sell-side readiness, M&amp;A support, and data infrastructure.">
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://northcastleconsulting.com/">
+    <meta property="og:title" content="North Castle Consulting | Financial Advisory for PE &amp; Corporate Development">
+    <meta property="og:description" content="Financial expertise for Private Equity and Corporate Development teams seeking measurable outcomes. Sell-side readiness, M&amp;A support, and data infrastructure.">
+    <meta property="og:image" content="https://northcastleconsulting.com/images/hero-bg.jpg">
+    <meta property="og:site_name" content="North Castle Consulting">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://northcastleconsulting.com/">
+    <meta property="twitter:title" content="North Castle Consulting | Financial Advisory for PE &amp; Corporate Development">
+    <meta property="twitter:description" content="Financial expertise for Private Equity and Corporate Development teams seeking measurable outcomes. Sell-side readiness, M&amp;A support, and data infrastructure.">
+    <meta property="twitter:image" content="https://northcastleconsulting.com/images/hero-bg.jpg">
+
+    <!-- Additional SEO Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="North Castle Consulting">
+    <link rel="canonical" href="https://northcastleconsulting.com/">
+
+    <!-- Google Tag Manager -->
+    <script async="" src="https://snap.licdn.com/li.lms-analytics/insight.old.min.js"></script><script type="text/javascript" async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script><script async="" src="https://scripts.clarity.ms/0.8.67/clarity.js"></script><script async="" src="https://snap.licdn.com/li.lms-analytics/insight.old.min.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/destination?id=AW-AW-17974788830&amp;cx=c&amp;gtm=4e67t1"></script><script async="" src="https://snap.licdn.com/li.lms-analytics/insight.old.min.js"></script><script async="" src="https://snap.licdn.com/li.lms-analytics/insight.old.min.js"></script><script async="" src="https://snap.licdn.com/li.lms-analytics/insight.old.min.js"></script><script src="https://js.hs-banner.com/v2/49292932/banner.js" type="text/javascript" id="cookieBanner-49292932" data-cookieconsent="ignore" data-hs-ignore="true" data-loader="hs-scriptloader" data-hsjs-portal="49292932" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="https://js.hscollectedforms.net/collectedforms.js" type="text/javascript" id="CollectedForms-49292932" crossorigin="anonymous" data-leadin-portal-id="49292932" data-leadin-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="49292932" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="https://js.hs-analytics.net/analytics/1785532500000/49292932.js" type="text/javascript" id="hs-analytics"></script><script src="https://js.hsadspixel.net/pixels.js" type="text/javascript" id="hs-ads-pixel-49292932" data-ads-portal-id="49292932" data-ads-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="49292932" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="https://connect.facebook.net/signals/config/2139958930173970?v=2.9.368&amp;r=stable&amp;domain=northcastleconsulting.com&amp;hme=78c3d709c6e52779dc9d6e8b8770857bb5dfd27159797805bacb5f93b9e7568a&amp;ex_m=108%2C210%2C160%2C22%2C73%2C74%2C151%2C69%2C68%2C11%2C169%2C93%2C16%2C143%2C131%2C39%2C76%2C81%2C139%2C165%2C171%2C26%2C27%2C28%2C30%2C48%2C152%2C78%2C116%2C18%2C20%2C44%2C40%2C42%2C41%2C86%2C95%2C99%2C114%2C150%2C153%2C46%2C115%2C24%2C21%2C123%2C70%2C36%2C155%2C154%2C156%2C147%2C145%2C25%2C35%2C59%2C113%2C167%2C71%2C17%2C158%2C118%2C84%2C67%2C19%2C88%2C89%2C120%2C87%2C141%2C140%2C144%2C100%2C166%2C34%2C49%2C117%2C47%2C8%2C4%2C5%2C7%2C6%2C3%2C94%2C105%2C172%2C177%2C224%2C75%2C237%2C236%2C235%2C23%2C33%2C55%2C107%2C61%2C10%2C64%2C101%2C102%2C103%2C109%2C134%2C31%2C29%2C136%2C137%2C138%2C133%2C132%2C161%2C77%2C164%2C162%2C163%2C50%2C60%2C127%2C15%2C168%2C45%2C281%2C282%2C280%2C295%2C313%2C217%2C206%2C62%2C207%2C205%2C316%2C307%2C52%2C218%2C111%2C135%2C83%2C125%2C54%2C124%2C130%2C129%2C58%2C65%2C63%2C157%2C79%2C80%2C119%2C37%2C32%2C53%2C56%2C104%2C170%2C1%2C128%2C14%2C126%2C12%2C2%2C57%2C96%2C66%2C122%2C92%2C91%2C173%2C174%2C97%2C98%2C9%2C106%2C51%2C148%2C90%2C82%2C72%2C121%2C110%2C43%2C149%2C0%2C85%2C142%2C146%2C159%2C38%2C112%2C13%2C175" async=""></script><script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script><script type="text/javascript" async="" src="https://www.clarity.ms/tag/vq38ux6uxm?ref=gtm"></script><script type="text/javascript" async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-7EF3FR4261&amp;cx=c&amp;gtm=4e67t1"></script><script type="text/javascript" async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script><script type="text/javascript" async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script><script type="text/javascript" async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-WLMPS75V"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WLMPS75V');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- LinkedIn Insight Tag -->
+    <script type="text/javascript">
+    _linkedin_partner_id = "7930930";
+    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+    window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    </script>
+    <script type="text/javascript">
+    (function(l) {
+    if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+    window.lintrk.q=[]}
+    var s = document.getElementsByTagName("script")[0];
+    var b = document.createElement("script");
+    b.type = "text/javascript";b.async = true;
+    b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+    s.parentNode.insertBefore(b, s);})(window.lintrk);
+    </script>
+    <!-- End LinkedIn Insight Tag -->
+    <script type="module" crossorigin="" src="/assets/index-j5BtSXmx.js"></script>
+    <link rel="stylesheet" crossorigin="" href="/assets/index-LiAZHyf3.css">
+  <script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/AW-17974788830/?random=1785532578660&amp;cv=11&amp;fst=1785532578660&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be67t1z89244460698za20gzb9244460698zd9244460698xea&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=115938465~115938469~118012009~118897920~118897930~119896802&amp;u_w=1440&amp;u_h=900&amp;url=https%3A%2F%2Fnorthcastleconsulting.com%2Fcase-studies%2Fsell-side-readiness&amp;rcb=17&amp;frm=0&amp;tiba=North%20Castle%20Consulting%20%7C%20Financial%20Advisory%20for%20PE%20%26%20Corporate%20Development&amp;hn=www.googleadservices.com&amp;npa=0&amp;pscdl=noapi&amp;auid=773970829.1785532574&amp;uaa=x86&amp;uab=64&amp;uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=19.0.0&amp;uaw=0&amp;_tu=CA&amp;ept=9&amp;rfmt=3&amp;fmt=4"></script></head>
+  <body>
+    <!-- LinkedIn Insight Tag (noscript) -->
+    <noscript>
+    <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=7930930&fmt=gif" />
+    </noscript>
+    <!-- End LinkedIn Insight Tag (noscript) -->
+    
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WLMPS75V"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div id="root"><div class="min-h-screen bg-white"><nav class="fixed top-0 w-full bg-white border-b border-gray-200 z-50"><div class="max-w-7xl mx-auto px-6 py-4"><div class="flex justify-between items-center"><a class="text-xl font-semibold text-[#051c2c] hover:text-[#2563EB] transition-colors tracking-tight" href="/" data-discover="true">North Castle Consulting</a><div class="hidden md:flex gap-8 items-center"><div class="relative group"><button class="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium flex items-center gap-1">Services<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button><div class="absolute top-full left-0 pt-2 w-56 hidden group-hover:block z-50"><div class="bg-white border border-gray-200 rounded-lg shadow-lg py-2"><a class="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]" href="/services/sell-side-readiness" data-discover="true">Sell-Side Readiness</a><a class="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]" href="/services/corporate-development" data-discover="true">Corporate Development</a><a class="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]" href="/services/mass-tort" data-discover="true">Mass Tort</a><a class="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]" href="/services/dashboarding-data-portal" data-discover="true">Dashboarding &amp; Data Portal</a><a class="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]" href="/services/quality-of-earnings" data-discover="true">Quality of Earnings</a></div></div></div><a class="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium" href="/case-studies" data-discover="true">Case Studies</a><a class="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium" href="/blog" data-discover="true">Insights</a><a class="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium" href="/about-us" data-discover="true">About</a><a class="bg-[#051c2c] text-white px-4 py-2 rounded text-sm font-medium hover:bg-[#2563EB] transition-colors" href="/contact-us" data-discover="true">Contact</a></div><button class="md:hidden text-[#051c2c] text-xl">☰</button></div></div></nav><div class="pt-16"><div class="bg-[#0D3BC3] text-white py-16 px-6"><div class="max-w-6xl mx-auto"><div class="mb-6"><span class="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">Case Studies</span></div><h1 class="text-3xl md:text-4xl font-bold mb-4">Sell-Side Readiness</h1><p class="text-gray-300 text-lg max-w-3xl">Preparing your portfolio company for sale is critical to achieving optimal valuation and a smooth transaction. Explore our proven case studies demonstrating how we streamline financials, validate operational metrics, and enhance management credibility to attract buyers and minimize last-minute surprises.</p></div></div><section class="py-12 md:py-16 px-6 bg-white"><div class="max-w-6xl mx-auto"><div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center"><div class="rounded-xl overflow-hidden shadow-lg"><img src="https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/f358c6ff-8466-4cc0-93c1-929f421f131a/getty-images-idzNvTzu7R0-unsplash.jpg?format=2500w" alt="Developing a KPI Data Cube For a Company Sale" class="w-full h-auto object-cover"></div><div class="flex flex-col justify-center"><h3 class="text-2xl md:text-3xl font-bold text-[#1A2234] mb-4">Developing a KPI Data Cube For a Company Sale</h3><p class="text-[#1A2234]/70 text-base leading-relaxed mb-6">A private equity-backed auto parts manufacturer preparing for a sale required a consolidated, enterprise-level view of sales, gross margin, and KPIs across customers, SKUs, and other dimensions.</p><a class="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-amber-300 transition-all duration-300 self-start" href="/case-studies/sell-side-kpi-data-cube" data-discover="true">View More</a></div></div></div></section><section class="py-12 md:py-16 px-6 bg-[#F6F7F7]"><div class="max-w-6xl mx-auto"><div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center"><div class="rounded-xl overflow-hidden shadow-lg"><img src="https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/747fe8f0-9a4c-4411-a7b4-927b373ac2ac/getty-images-y1mJOq-cq3Q-unsplash.jpg?format=2500w" alt="Unlocking Value in a Data-Challenged Business Sale" class="w-full h-auto object-cover"></div><div class="flex flex-col justify-center"><h3 class="text-2xl md:text-3xl font-bold text-[#1A2234] mb-4">Unlocking Value in a Data-Challenged Business Sale</h3><p class="text-[#1A2234]/70 text-base leading-relaxed mb-6">Transforming complex, fragmented data into actionable insights to drive value and operational clarity for portfolio companies.</p><a class="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-amber-300 transition-all duration-300 self-start" href="/case-studies/sell-side-data-challenged-sale" data-discover="true">View More</a></div></div></div></section><section class="py-12 md:py-16 px-6 bg-white"><div class="max-w-6xl mx-auto"><div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center"><div class="rounded-xl overflow-hidden shadow-lg"><img src="https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/336a2faf-57ab-4af7-b678-6f89d365ec55/nighttime-concert-musicians-play-excited-crowd-generated-by-ai.jpg?format=2500w" alt="Building Credibility &amp; Justifying Multiples" class="w-full h-auto object-cover"></div><div class="flex flex-col justify-center"><h1 class="text-2xl md:text-3xl font-bold text-[#1A2234] mb-4">Building Credibility &amp; Justifying Multiples</h1><p class="text-[#1A2234]/70 text-base leading-relaxed mb-6">A private equity-backed venue management company, was preparing for a sale, but its finance team lacked the expertise to handle the complex due diligence process.</p><a class="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-amber-300 transition-all duration-300 self-start" href="/case-studies/sell-side-credibility-multiples" data-discover="true">View More</a></div></div></div></section><section class="py-12 md:py-16 px-6 bg-[#F6F7F7]"><div class="max-w-6xl mx-auto"><div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center"><div class="rounded-xl overflow-hidden shadow-lg"><img src="https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/8172fd02-4248-41ad-9ff3-32fd06784f0e/Fintech+payment.jpg?format=2500w" alt="Enhancing Investment Credibility: Structuring Key Growth &amp; Churn Analysis for a FinTech Sale" class="w-full h-auto object-cover"></div><div class="flex flex-col justify-center"><h1 class="text-2xl md:text-3xl font-bold text-[#1A2234] mb-4">Enhancing Investment Credibility: Structuring Key Growth &amp; Churn Analysis for a FinTech Sale</h1><p class="text-[#1A2234]/70 text-base leading-relaxed mb-6">A private equity-backed FinTech payments company was preparing for a sale but lacked the critical analysis that buyers required.</p><a class="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-amber-300 transition-all duration-300 self-start" href="/case-studies/sell-side-investment-credibility" data-discover="true">View More</a></div></div></div></section><section class="py-12 md:py-16 px-6 bg-white"><div class="max-w-6xl mx-auto"><div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center"><div class="rounded-xl overflow-hidden shadow-lg"><img src="https://images.squarespace-cdn.com/content/v1/67a3d67b7ec4550695844db8/e4fa03d3-8b0d-421a-9cc9-1da61e74ba9e/getty-images-4PPY1v2xChU-unsplash.jpg?format=2500w" alt="Streamlining Operations and Marketing Insights for a Successful Exit" class="w-full h-auto object-cover"></div><div class="flex flex-col justify-center"><h1 class="text-2xl md:text-3xl font-bold text-[#1A2234] mb-4">Streamlining Operations and Marketing Insights for a Successful Exit</h1><p class="text-[#1A2234]/70 text-base leading-relaxed mb-6">A private equity-owned HVAC and plumbing company was preparing to go to market but needed robust data analysis to support the sale process.</p><a class="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-amber-300 transition-all duration-300 self-start" href="/case-studies/sell-side-operations-marketing" data-discover="true">View More</a></div></div></div></section><section class="py-16 px-6 bg-[#0D3BC3]"><div class="max-w-3xl mx-auto text-center"><h2 class="text-2xl md:text-3xl font-bold text-white mb-3">Ready to Maximize Your Exit Value?</h2><p class="text-gray-300 text-lg mb-6">Let's discuss how our sell-side readiness services can position your portfolio company for optimal valuation and a smooth transaction.</p><a href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Sell-Side%20Readiness%20Inquiry" class="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-white transition-all duration-300">Contact Us</a></div></section></div></div></div>
+  
+
+
+<script type="text/javascript" id="" charset="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","2139958930173970");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2139958930173970&amp;ev=PageView&amp;noscript=1"></noscript>
+
+<script id="hs-script-loader" text="" charset="" type="text/javascript" src="//js.hs-scripts.com/49292932.js"></script>
+<iframe owner="archetype" title="archetype" style="display: none; visibility: hidden;"></iframe></body></html>
