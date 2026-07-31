@@ -147,14 +147,14 @@ export default function DSODisentanglementPage() {
       {/* ═══════════════════════════════════════════════════════════════
           WORKSTREAMS — Hairline numbered rows, editorial column
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-white py-20 md:py-28 px-6">
+      <div className="bg-white py-12 md:py-16 px-6">
         <div className="max-w-3xl mx-auto">
           {workstreams.map((w) => (
-            <div key={w.num} className="border-t border-gray-200 py-10 flex gap-8">
-              <span className="text-sm font-semibold text-[#2563EB] mt-1 flex-shrink-0">{w.num}</span>
+            <div key={w.num} className="border-t border-gray-200 py-4 md:py-5 flex gap-6">
+              <span className="text-sm font-semibold text-[#2563EB] mt-0.5 flex-shrink-0">{w.num}</span>
               <div>
-                <h3 className="text-xl font-semibold text-[#051c2c] mb-3">{w.title}</h3>
-                <p className="text-gray-600 text-base leading-relaxed">{w.desc}</p>
+                <h3 className="text-base md:text-lg font-semibold text-[#051c2c] mb-1">{w.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{w.desc}</p>
               </div>
             </div>
           ))}
