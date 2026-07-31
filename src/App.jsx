@@ -97,7 +97,6 @@ function Navigation() {
                 <Link to="/services/mass-tort" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Mass Tort</Link>
                 <Link to="/services/dashboarding-data-portal" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Dashboarding & Data Portal</Link>
                 <Link to="/services/quality-of-earnings" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Quality of Earnings</Link>
-                <Link to="/services/dso-disentanglement" className="block px-4 py-2 text-sm text-[#051c2c] hover:bg-gray-50 hover:text-[#2563EB]">Dental &amp; DSO Disentanglement</Link>
               </div></div>
             </div>
             <Link to="/case-studies" className="text-[#051c2c] hover:text-[#2563EB] transition-colors text-sm font-medium">Case Studies</Link>
@@ -120,7 +119,6 @@ function Navigation() {
               <Link to="/services/mass-tort" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Mass Tort</Link>
               <Link to="/services/dashboarding-data-portal" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Dashboarding & Data Portal</Link>
               <Link to="/services/quality-of-earnings" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Quality of Earnings</Link>
-              <Link to="/services/dso-disentanglement" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c]/80 hover:text-[#2563EB] py-1">Dental &amp; DSO Disentanglement</Link>
             </div>
             <Link to="/case-studies" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Case Studies</Link>
             <Link to="/blog" onClick={() => setMobileMenuOpen(false)} className="text-[#051c2c] hover:text-[#2563EB] py-1">Insights</Link>
@@ -431,13 +429,6 @@ function HomePage() {
               <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Quality of Earnings</h3>
               <p className="text-[#051c2c]/60 text-sm">
                 Forensic financial analysis for buy-side and sell-side due diligence.
-              </p>
-            </Link>
-
-            <Link to="/services/dso-disentanglement" className="group bg-white p-6 hover:bg-gray-50 transition-colors">
-              <h3 className="text-base font-medium text-[#051c2c] mb-2 group-hover:text-[#2563EB] transition-colors">Dental &amp; DSO Disentanglement</h3>
-              <p className="text-[#051c2c]/60 text-sm">
-                Partner buyouts and entity unwinding for multi-location dental groups and DSO-affiliated practices.
               </p>
             </Link>
           </div>
