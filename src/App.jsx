@@ -487,6 +487,16 @@ function HomePage() {
                 Custom dashboards and data portals for real-time visibility and value-creation plan execution.
               </p>
             </Link>
+
+            <Link to="/case-studies/corporate-dental-carve-out" className="group block border-t-2 border-[#051c2c] pt-4 hover:border-[#2563EB] transition-colors">
+              <span className="text-xs font-medium text-[#2563EB] uppercase tracking-wider">Featured Case Study</span>
+              <h3 className="text-lg font-medium text-[#051c2c] mt-2 mb-2 group-hover:text-[#2563EB] transition-colors">
+                Dental Service Organization Partner Carve-Out
+              </h3>
+              <p className="text-[#051c2c]/60 text-sm leading-relaxed">
+                Unwinding a partner buyout across 8 entities, 7 practices, a captive lab, and 30+ debt instruments.
+              </p>
+            </Link>
           </div>
         </div>
       </section>

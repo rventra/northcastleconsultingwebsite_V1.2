@@ -12,7 +12,7 @@ export default function CorporateDevPage() {
             Corporate Development
           </h1>
           <p className="text-lg text-white/70 leading-relaxed max-w-2xl">
-            End-to-end M&A support from target identification through closing. We help independent sponsors and family offices execute acquisitions with the rigor of institutional buyers.
+            End-to-end M&A support from target identification through closing — and carve-outs, divestitures, and partner buyouts when it's time to separate. We help independent sponsors and family offices execute with the rigor of institutional buyers.
           </p>
         </div>
       </div>
@@ -89,6 +89,13 @@ export default function CorporateDevPage() {
                     <p className="text-[#051c2c]/60 text-sm">Support through LOI, purchase agreement, and closing—coordinating workstreams and managing the process.</p>
                   </div>
                 </div>
+                <div className="flex gap-4">
+                  <div className="text-[#2563EB] font-semibold text-sm">05</div>
+                  <div>
+                    <h3 className="text-sm font-semibold text-[#051c2c] mb-1">Carve-Outs &amp; Divestitures</h3>
+                    <p className="text-[#051c2c]/60 text-sm">Entity unwinding, shared-service separation, and settlement structuring for partner exits, carve-outs, and divestitures.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -116,6 +123,16 @@ export default function CorporateDevPage() {
                 <div>
                   <p className="text-xs text-[#051c2c]/50 mb-1">Business Services</p>
                   <h3 className="text-base font-medium text-[#051c2c] group-hover:text-[#2563EB] transition-colors">Building an Acquisition Roadmap</h3>
+                </div>
+                <span className="text-[#2563EB] group-hover:translate-x-1 transition-transform flex-shrink-0">→</span>
+              </div>
+            </Link>
+
+            <Link to="/case-studies/corporate-dental-carve-out" className="group block py-5 border-b border-gray-200">
+              <div className="flex justify-between items-start gap-4">
+                <div>
+                  <p className="text-xs text-[#051c2c]/50 mb-1">Dental Services / DSO — Carve-Out</p>
+                  <h3 className="text-base font-medium text-[#051c2c] group-hover:text-[#2563EB] transition-colors">Unwinding a Multi-Entity Dental Partnership</h3>
                 </div>
                 <span className="text-[#2563EB] group-hover:translate-x-1 transition-transform flex-shrink-0">→</span>
               </div>
