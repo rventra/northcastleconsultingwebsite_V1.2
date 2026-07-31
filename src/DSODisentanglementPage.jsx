@@ -164,15 +164,23 @@ export default function DSODisentanglementPage() {
       {/* ═══════════════════════════════════════════════════════════════
           FULL-BLEED IMAGE — with navy caption card (McKinsey style)
       ═══════════════════════════════════════════════════════════════ */}
-      <div className="relative">
+      <div className="relative overflow-hidden">
+        {/* Blurred background image + navy opacity overlay for readability */}
         <img
           src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600&h=900&fit=crop"
-          alt="Modern dental practice operatory"
-          className="w-full h-[60vh] object-cover"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover blur-md scale-110"
         />
-        <div className="absolute bottom-0 left-0 md:left-12 bg-[#051c2c] text-white p-8 max-w-md">
-          <p className="text-base leading-relaxed">
-            Every thread mapped before any is pulled: entities, ownership, intercompany balances, deferred compensation, and debt — verified against source records.
+        <div className="absolute inset-0 bg-[#051c2c]/70"></div>
+
+        {/* Centered statement across the image */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 py-24 md:py-36 text-center">
+          <p className="text-white text-2xl md:text-4xl font-light leading-snug md:leading-snug">
+            Every thread mapped before any is pulled — entities, ownership, intercompany balances, deferred compensation, and debt.
+          </p>
+          <p className="text-white/60 text-xs font-semibold tracking-[0.25em] uppercase mt-8">
+            Verified against source records
           </p>
         </div>
       </div>
