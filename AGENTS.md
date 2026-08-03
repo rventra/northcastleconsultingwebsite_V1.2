@@ -555,6 +555,7 @@ gh repo view rventra/northcastleconsultingwebsite_V1.2
 
 | Date | Change | Description |
 |------|--------|-------------|
+| 2026-07-31 | Case Studies McKinsey Restyle | All 9 case studies converted to shared `src/components/CaseStudyLayout.jsx` (data-driven McKinsey template); 3 category pages + hub restyled to quiet editorial style; archive in /archive/case-studies preserves old versions |
 | 2026-07-31 | Carve-Out McKinsey Restyle + Placement | Case study restyled to McKinsey editorial template (2-hero structure); featured card added to homepage Case Studies section; Corporate Development page amended for carve-outs/divestitures + links to case study |
 | 2026-07-31 | DSO Hero Background | Blurred dental bg image + navy overlay on the DSO page title hero |
 | 2026-07-31 | DSO Page Title/SEO/Density | H1 now "Dental Service Organization Partner Carve-Out"; added PAGE_META entry + PageMeta on page; re-added Who We Help rows; case study cross-links back to service page; global density pass (sections/rows tightened ~10-15%) |
