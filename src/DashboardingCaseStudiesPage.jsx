@@ -1,73 +1,55 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+const studies = [
+  { to: '/case-studies/dashboarding-pe-value-visibility', tag: 'Manufacturing — $100M Revenue', title: 'Driving PE Value Through Operational Visibility' },
+];
+
 export default function DashboardingCaseStudiesPage() {
   return (
     <div className="pt-16">
-      {/* Hero Section */}
-      <div className="bg-[#0D3BC3] text-white py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-6">
-            <span className="inline-block bg-[#EDB624] text-[#1A2234] text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">
-              Case Studies
-            </span>
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Dashboarding &amp; Reporting
-          </h1>
-          <p className="text-gray-300 text-lg max-w-3xl">
-            Custom dashboards and data portals for real-time visibility into portfolio performance. See how we transform fragmented data into actionable intelligence that drives value creation.
+      {/* Hero */}
+      <div className="bg-[#051c2c] py-16 md:py-20 px-6">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-white/50 text-xs font-semibold tracking-[0.25em] uppercase mb-6">Case Studies</p>
+          <h1 className="text-4xl md:text-5xl font-light text-white leading-[1.15] mb-6">Dashboarding &amp; Reporting</h1>
+          <p className="text-white/70 text-lg font-light leading-relaxed max-w-2xl">
+            Custom dashboards and data portals for real-time visibility into portfolio performance and value-creation plan execution.
           </p>
         </div>
       </div>
 
-      {/* Featured Case Study */}
-      <section className="py-12 md:py-16 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Image - Left */}
-            <div className="rounded-xl overflow-hidden shadow-lg">
-              <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop"
-                alt="Manufacturing data automation"
-                className="w-full h-auto object-cover"
-              />
-            </div>
-
-            {/* Content - Right */}
-            <div className="flex flex-col justify-center">
-              <h1 className="text-2xl md:text-3xl font-bold text-[#1A2234] mb-4">
-                Driving PE Value Through Operational Visibility and Data Automation
-              </h1>
-              <p className="text-[#1A2234]/70 text-base leading-relaxed mb-6">
-                A PE-backed $100M revenue manufacturer had no ERP, limited Excel usage, and no centralized reporting. With 40,000+ SKUs lacking a product hierarchy, leadership had no visibility into margins, win rates, or operational performance.
-              </p>
-              <Link
-                to="/case-studies/dashboarding-pe-value-visibility"
-                className="inline-block bg-[#EDB624] text-[#1A2234] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-amber-300 transition-all duration-300 self-start"
-              >
-                View More
-              </Link>
-            </div>
-          </div>
+      {/* Study rows */}
+      <div className="bg-white py-12 md:py-16 px-6">
+        <div className="max-w-3xl mx-auto border-t border-gray-200">
+          {studies.map((s) => (
+            <Link key={s.to} to={s.to} className="group flex items-center gap-6 py-5 border-b border-gray-200">
+              <div className="flex-1">
+                <p className="text-xs text-[#051c2c]/50 mb-1">{s.tag}</p>
+                <h3 className="text-base md:text-lg font-medium text-[#051c2c] group-hover:text-[#2563EB] transition-colors">{s.title}</h3>
+              </div>
+              <span className="text-[#2563EB] group-hover:translate-x-1 transition-transform flex-shrink-0">&rarr;</span>
+            </Link>
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* CTA Section */}
-      <section className="py-16 px-6 bg-[#0D3BC3]">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Ready to Transform Your Data Into Action?</h2>
-          <p className="text-gray-300 text-lg mb-6">
-            Let's discuss how our dashboarding and reporting services can give you real-time visibility into your business.
-          </p>
-          <a
-            href="mailto:admin@northcastleconsulting.com,rventrapragada@northcastleconsulting.com?subject=Dashboarding%20%26%20Reporting%20Inquiry"
-            className="inline-block bg-[#EDB624] text-[#1A2234] px-8 py-4 rounded-lg font-semibold hover:bg-white transition-all duration-300"
-          >
-            Contact Us
-          </a>
+      {/* CTA */}
+      <div className="bg-white py-14 px-6 border-t border-gray-200">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="font-serif text-2xl md:text-3xl text-[#051c2c] mb-4">Need visibility into your business?</h2>
+          <p className="text-gray-600 mb-6 max-w-2xl">Let&rsquo;s discuss how we can build the data infrastructure behind your value-creation plan.</p>
+          <Link to="/services/dashboarding-data-portal" className="inline-flex items-center text-[#051c2c] text-sm font-semibold border-b border-[#051c2c]/30 pb-1 hover:border-[#2563EB] hover:text-[#2563EB] transition-colors">
+            Related Service: Dashboarding &amp; Data Portal <span className="ml-2">&rarr;</span>
+          </Link>
         </div>
-      </section>
+      </div>
+
+      <div className="bg-white py-6 px-6 border-t border-gray-200">
+        <div className="max-w-3xl mx-auto">
+          <Link to="/case-studies" className="text-[#051c2c]/50 hover:text-[#051c2c] transition-colors text-sm">&larr; Back to Case Studies</Link>
+        </div>
+      </div>
     </div>
   );
 }
