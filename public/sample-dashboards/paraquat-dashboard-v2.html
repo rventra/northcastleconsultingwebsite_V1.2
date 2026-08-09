@@ -475,11 +475,11 @@
       <table>
         <thead><tr><th>Tier</th><th>Published range</th><th class="num">$/case ($000s)</th><th class="num">Open matters</th><th class="num">GSV</th></tr></thead>
         <tbody>
-          <tr><td><span class="tiersw" style="background:var(--tier-1)"></span>Tier I</td><td>$400K – $1M+</td><td class="num"><input class="tv" id="tvI" type="number" min="0" step="25" value="700"></td><td class="num">6</td><td class="num" id="gsvI">$4.2M</td></tr>
-          <tr><td><span class="tiersw" style="background:var(--tier-2)"></span>Tier II</td><td>$150K – $300K</td><td class="num"><input class="tv" id="tvII" type="number" min="0" step="25" value="225"></td><td class="num">194</td><td class="num" id="gsvII">$43.7M</td></tr>
-          <tr><td><span class="tiersw" style="background:var(--tier-3)"></span>Tier III</td><td>$20K – $150K</td><td class="num"><input class="tv" id="tvIII" type="number" min="0" step="25" value="85"></td><td class="num">326</td><td class="num" id="gsvIII">$27.7M</td></tr>
+          <tr><td><span class="tiersw" style="background:var(--tier-1)"></span>Tier I</td><td>$400K – $1M+</td><td class="num"><input class="tv" id="tvI" type="number" min="0" step="25" value="700"></td><td class="num" id="openI">6</td><td class="num" id="gsvI">$4.2M</td></tr>
+          <tr><td><span class="tiersw" style="background:var(--tier-2)"></span>Tier II</td><td>$150K – $300K</td><td class="num"><input class="tv" id="tvII" type="number" min="0" step="25" value="225"></td><td class="num" id="openII">194</td><td class="num" id="gsvII">$43.7M</td></tr>
+          <tr><td><span class="tiersw" style="background:var(--tier-3)"></span>Tier III</td><td>$20K – $150K</td><td class="num"><input class="tv" id="tvIII" type="number" min="0" step="25" value="85"></td><td class="num" id="openIII">326</td><td class="num" id="gsvIII">$27.7M</td></tr>
           <tr><td>Below grid</td><td>—</td><td class="num">$0</td><td class="num">132</td><td class="num">$0</td></tr>
-          <tr><td style="color:var(--muted)">Dormant (off-grid)</td><td>—</td><td class="num">$0</td><td class="num">342</td><td class="num">$0</td></tr>
+          <tr><td style="color:var(--muted)">Dormant (off-grid)</td><td>—</td><td class="num">$0</td><td class="num" id="dormCell">342</td><td class="num">$0</td></tr>
           <tr class="total"><td>Total</td><td></td><td></td><td class="num">1,000</td><td class="num" id="gsvTot">$75.6M</td></tr>
         </tbody>
       </table>
@@ -692,9 +692,9 @@
   }
 
   // ---------- bridge (waterfall) — LEFT → RIGHT ----------
-  function renderBridge(V) {
+  function renderBridge(V, effFull, effReal) {
     var cur = currentGsv(V);
-    var lifts = LEVERS.map(function (l) { return leverRealized(l, V); });
+    var lifts = LEVERS.map(function (l) { return (effReal ? effReal(l) : leverRealized(l, V)); });
     var pot = cur + lifts.reduce(function (a, b) { return a + b; }, 0);
     var cols = [
       { label: 'Current GSV', from: 0, to: cur, kind: 'level' },
@@ -704,7 +704,7 @@
       { label: 'Re-screen', from: cur + lifts[0] + lifts[1] + lifts[2], to: pot, kind: 'lift', lever: 'reopen' },
       { label: 'Potential GSV', from: 0, to: pot, kind: 'level' }
     ];
-    var fullPot = cur + LEVERS.reduce(function (a, l) { return a + leverFull(l, V); }, 0);
+    var fullPot = cur + LEVERS.reduce(function (a, l) { return a + (effFull ? effFull(l) : leverFull(l, V)); }, 0);
     var FLOOR = 60000; // truncated baseline — start at $60M so lifts read; zero would flatten them
     if (cur <= FLOOR) FLOOR = 0; // fallback if tier edits drop current below floor
     var maxV = Math.max(fullPot, pot, FLOOR + 1);
@@ -758,11 +758,11 @@
     s += '</svg>';
     $('bridge').innerHTML = s;
     // hover layer + lift-map spotlight
-    var paths = $('bridge').querySelectorAll('path');
+    var paths = $('bridge').querySelectorAll('path[data-bi]');
     paths.forEach(function (p, i) {
       var m = marks[i], c = cols[i];
       var html = '<b>' + esc(c.label) + '</b>' + (c.kind === 'lift' ? '+' : '') + fmtK(m.v) +
-        (c.kind === 'lift' ? ' at ' + LEVERS[i - 1].real + '% realization (full: ' + fmtK(leverFull(LEVERS[i - 1], V)) + ') — its gaps are spotlighted in the lift map below' : '');
+        (c.kind === 'lift' ? ' at ' + LEVERS[i - 1].real + '% realization (full: ' + fmtK((effFull ? effFull(LEVERS[i - 1]) : leverFull(LEVERS[i - 1], V))) + ') — its gaps are spotlighted in the lift map below' : '');
       hoverable(p, html);
       if (c.lever) {
         p.addEventListener('mouseenter', function () { spotlightLever(c.lever); });
@@ -782,11 +782,21 @@
       el.classList.toggle('dimmed', !!lever && el.getAttribute('data-lever') !== lever);
     });
   }
-  function renderLiftmap(V) {
+  function renderLiftmap(V, effFull) {
     var order = ['gate', 'docs', 'proof', 'reopen'];
     var groups = order.map(function (id) {
       var rows = GAPS.filter(function (g) { return g.lever === id; })
-                     .map(function (g) { return { g: g, v: transValue(g.trans, V) }; })
+                     .map(function (g) {
+                       var tv = g.trans;
+                       if (effFull) {
+                         var lev = LEVERS.find(function(x){return x.id===id;});
+                         if (lev && (lev.id==='docs'||lev.id==='proof')) {
+                           var s = (526 + Math.round((LEVERS[0].trans['none>I']+LEVERS[0].trans['none>II']+LEVERS[0].trans['none>III'])*LEVERS[0].real/100))/526;
+                           tv = {}; Object.keys(g.trans).forEach(function(k){ tv[k]=Math.round(g.trans[k]*s); });
+                         }
+                       }
+                       return { g: g, v: transValue(tv, V) };
+                     })
                      .sort(function (a, b) { return b.v - a.v; });
       return { id: id, rows: rows, sum: rows.reduce(function (a, r) { return a + r.v; }, 0) };
     });
@@ -847,49 +857,73 @@
     $('topTbl').querySelector('tbody').innerHTML = tb;
   }
 
-  // ---------- master render ----------
+  // ---------- master render (TWO-TIER DEPENDENT: on-grid pool scales active lifts) ----------
   function render() {
     var V = tierValues();
-    var b = renderBridge(V);
-    renderLiftmap(V);
+    // two-tier: gate revival first — determines enlargened active pool for downstream lifts
+    var gate = LEVERS[0];
+    var gateTotal = gate.trans['none>I'] + gate.trans['none>II'] + gate.trans['none>III']; // 216 at full
+    var revivedGate = Math.round(gateTotal * gate.real / 100);
+    var scaleActive = (526 + revivedGate) / 526; // docs/proof opportunity scales with on-grid pool
+    function effTrans(l) {
+      if (l.id === 'docs' || l.id === 'proof') {
+        var out = {};
+        Object.keys(l.trans).forEach(function(k){ out[k] = Math.round(l.trans[k] * scaleActive); });
+        return out;
+      }
+      return l.trans;
+    }
+    function effFull(l){ return transValue(effTrans(l), V); }
+    function effReal(l){ return effFull(l) * l.real / 100; }
+    // Effective open tiers for display (gate contribution added to base opens)
+    var effOpen = {
+      I: 6 + Math.round(3 * gate.real / 100),
+      II: 194 + Math.round(68 * gate.real / 100),
+      III: 326 + Math.round(145 * gate.real / 100)
+    };
+    // Bridge computed with effective lifts
+    var b = renderBridge(V, effFull, effReal);
+    renderLiftmap(V, effFull);
     renderTop(V);
-    var full = LEVERS.reduce(function (a, l) { return a + leverFull(l, V); }, 0);
-    $('kpiCur').textContent = fmtM(b.cur);
+    var full = LEVERS.reduce(function (a, l) { return a + effFull(l); }, 0);
+    var curEff = effOpen.I * V.I + effOpen.II * V.II + effOpen.III * V.III;
+    // realized at current sliders (bridge already has it as b.realized, but b.cur was eff-cur; keep in sync)
+    $('kpiCur').textContent = fmtM(curEff);
     $('kpiFull').textContent = fmtM(full);
     $('kpiReal').textContent = fmtM(b.realized);
-    $('kpiRealPct').textContent = '+' + (b.cur > 0 ? (100 * b.realized / b.cur).toFixed(1) : '0') + '% vs current GSV';
-    $('ledeCur').textContent = fmtM(b.cur);
+    $('kpiRealPct').textContent = '+' + (curEff > 0 ? (100 * b.realized / curEff).toFixed(1) : '0') + '% vs current GSV';
+    $('ledeCur').textContent = fmtM(curEff);
     $('ledeGap').textContent = fmtM(full);
     $('hlGap').textContent = fmtM(full);
     $('stGap').textContent = fmtM(full);
     $('sbGap').textContent = fmtM(full);
-    $('gsvI').textContent = fmtM(OPEN.I * V.I);
-    $('gsvII').textContent = fmtM(OPEN.II * V.II);
-    $('gsvIII').textContent = fmtM(OPEN.III * V.III);
-    $('gsvTot').textContent = fmtM(b.cur);
+    // tier table — dynamic counts (except 132 below-grid and 1,000 total)
+    if ($('openI')) $('openI').textContent = effOpen.I.toLocaleString('en-US');
+    if ($('openII')) $('openII').textContent = effOpen.II.toLocaleString('en-US');
+    if ($('openIII')) $('openIII').textContent = effOpen.III.toLocaleString('en-US');
+    var dormRem = 342 - revivedGate;
+    if ($('dormCell')) $('dormCell').textContent = dormRem.toLocaleString('en-US');
+    $('gsvI').textContent = fmtM(effOpen.I * V.I);
+    $('gsvII').textContent = fmtM(effOpen.II * V.II);
+    $('gsvIII').textContent = fmtM(effOpen.III * V.III);
+    $('gsvTot').textContent = fmtM(curEff);
     LEVERS.forEach(function (l) {
-      $('amt-' + l.id).textContent = '+' + fmtM(leverRealized(l, V));
-      $('pct-' + l.id).textContent = l.real + '% · of ' + fmtM(leverFull(l, V));
+      $('amt-' + l.id).textContent = '+' + fmtM(effReal(l));
+      $('pct-' + l.id).textContent = l.real + '% · of ' + fmtM(effFull(l));
     });
-    // dynamic counts: gate revives dormant -> open & on-grid grows, dormant shrinks
+    // dynamic counts: already computed revivedGate/activeMatters/onGrid above — just push to chips/headers
     (function(){
-      var gate = LEVERS[0];
-      var gateTotal = gate.trans['none>I'] + gate.trans['none>II'] + gate.trans['none>III']; // 216 at full
-      var revivedMatters = Math.round(gateTotal * gate.real / 100);
-      var activeMatters = 658 + revivedMatters;
-      var onGridMatters = 526 + revivedMatters;
-      var dormRemaining = 342 - revivedMatters;
+      var dormRemaining = 342 - revivedGate;
+      var activeMatters = 658 + revivedGate;
+      var onGridMatters = 526 + revivedGate;
       var el = $('activeCount');
       if (el) el.textContent = activeMatters.toLocaleString('en-US');
       var hdr = $('activeHdr');
-      if (hdr) hdr.title = revivedMatters + ' revived from dormant at ' + gate.real + '% — 658 base open + ' + revivedMatters + ' = ' + activeMatters + ' active';
-      // gate card counts
+      if (hdr) hdr.title = revivedGate + ' revived from dormant at ' + gate.real + '% — 658 base open + ' + revivedGate + ' = ' + activeMatters + ' active (scale ' + scaleActive.toFixed(2) + 'x on docs/proof)';
       var gog = $('gcOpenGrid'); if (gog) gog.textContent = onGridMatters.toLocaleString('en-US');
       var gdr = $('gcDorm'); if (gdr) gdr.textContent = dormRemaining.toLocaleString('en-US');
-      var grv = $('gcRevived'); if (grv) grv.textContent = revivedMatters.toLocaleString('en-US');
-      // dormant header count
+      var grv = $('gcRevived'); if (grv) grv.textContent = revivedGate.toLocaleString('en-US');
       var dHd = $('dormantCount'); if (dHd) dHd.textContent = dormRemaining.toLocaleString('en-US');
-      // top chips
       var dcOG = $('dcOnGridN'); if (dcOG) dcOG.textContent = onGridMatters.toLocaleString('en-US');
       var dcDM = $('dcDormN'); if (dcDM) dcDM.textContent = dormRemaining.toLocaleString('en-US');
       var dcOP = $('dcOpenN'); if (dcOP) dcOP.textContent = activeMatters.toLocaleString('en-US');
