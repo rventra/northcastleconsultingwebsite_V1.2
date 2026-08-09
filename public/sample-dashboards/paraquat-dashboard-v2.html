@@ -109,7 +109,7 @@
   .card h3 { font-size: 15px; font-weight: 650; margin-bottom: 2px; }
   #bridgeCard { display: flex; flex-direction: column; }
   #bridgeCard #bridge { flex: 1; display: flex; align-items: stretch; }
-  #bridgeCard #bridge svg { height: 100%; min-height: 520px; }
+  #bridgeCard #bridge svg { height: 100%; min-height: 340px; }
   .card .sub { font-size: 12.5px; color: var(--ink-2); margin-bottom: 12px; }
 
   /* ---------- KPI row ---------- */
@@ -124,7 +124,7 @@
   :root:not([data-theme="dark"]) .kpi .delta.up { color: #006300; }
 
   /* ---------- two-col layout ---------- */
-  .cols { display: grid; grid-template-columns: 7fr 5fr; gap: 12px; align-items: stretch; }
+  .cols { display: grid; grid-template-columns: 7fr 5fr; gap: 12px; align-items: start; }
   @media (max-width: 900px) { .cols, .kpis { grid-template-columns: 1fr; } }
 
   /* ---------- lever cards ---------- */
@@ -691,18 +691,29 @@
       { label: 'Potential GSV', from: 0, to: pot, kind: 'level' }
     ];
     var fullPot = cur + LEVERS.reduce(function (a, l) { return a + leverFull(l, V); }, 0);
-    var maxV = Math.max(fullPot, pot, 1);
-    var W = 620, H = 520, padL = 52, padR = 12, padT = 22, padB = 28;
+    var FLOOR = 60000; // truncated baseline — start at $60M so lifts read; zero would flatten them
+    if (cur <= FLOOR) FLOOR = 0; // fallback if tier edits drop current below floor
+    var maxV = Math.max(fullPot, pot, FLOOR + 1);
+    var span = maxV - FLOOR;
+    var W = 620, H = 340, padL = 52, padR = 12, padT = 22, padB = 28;
     var plotW = W - padL - padR, plotH = H - padT - padB;
-    var y = function (v) { return padT + plotH - (v / maxV) * plotH; };
+    var y = function (v) { return padT + plotH - Math.max(0, (v - FLOOR) / span) * plotH; };
     var slot = plotW / cols.length, barW = Math.min(64, slot * 0.55);
-    var step = Math.pow(10, Math.floor(Math.log10(maxV)));
-    if (maxV / step < 3) step = step / 2;
-    if (maxV / step > 7) step = step * 2;
-    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Waterfall bridge from current to potential gross settlement value">';
-    for (var t = 0; t <= maxV; t += step) {
-      s += '<line class="gline" x1="' + padL + '" x2="' + (W - padR) + '" y1="' + y(t) + '" y2="' + y(t) + '"/>';
-      s += '<text class="tick" x="' + (padL - 6) + '" y="' + (y(t) + 3.5) + '" text-anchor="end">' + (t >= 1000 ? '$' + (t / 1000) + 'M' : '$' + t + 'K') + '</text>';
+    // nice step anchored at FLOOR
+    var step = Math.pow(10, Math.floor(Math.log10(span)));
+    if (span / step < 3) step = step / 2;
+    if (span / step > 7) step = step * 2;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Waterfall bridge from current to potential gross settlement value, truncated at $60M">';
+    for (var tv = FLOOR; tv <= maxV + 1e-6; tv += step) {
+      s += '<line class="gline" x1="' + padL + '" x2="' + (W - padR) + '" y1="' + y(tv) + '" y2="' + y(tv) + '"/>';
+      s += '<text class="tick" x="' + (padL - 6) + '" y="' + (y(tv) + 3.5) + '" text-anchor="end">' + (tv >= 1000 ? '$' + (tv / 1000) + 'M' : '$' + tv + 'K') + '</text>';
+    }
+    // axis-break glyph at left edge to signal truncation
+    if (FLOOR > 0) {
+      s += '<g class="axis-break" aria-hidden="true">';
+      s += '<path d="M' + (padL-6) + ',' + (H-padB+4) + ' l6,-8 l6,8" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>';
+      s += '<text x="' + (padL-6) + '" y="' + (H-padB+14) + '" text-anchor="start" font-size="9" fill="var(--muted)">from $' + (FLOOR/1000) + 'M</text>';
+      s += '</g>';
     }
     var marks = [];
     cols.forEach(function (c, i) {
