@@ -1095,6 +1095,7 @@
       var subMiss = $('subMissing'); if (subMiss) subMiss.textContent = missing.toLocaleString('en-US');
       // update slider max/cap label and re-cap if gate changed
       var hzCap = $('expHzMissingCap'); if (hzCap) hzCap.textContent = missing.toLocaleString('en-US');
+      var hzMoved = $('expHzMoved'); if (hzMoved) hzMoved.textContent = (missing - EXP_MISSING_BASE).toLocaleString('en-US');
       EXP_VECTORS.forEach(function(v){
         var el = $('er-' + v.key); if (el) el.max = missing;
       });
