@@ -145,6 +145,18 @@
   }
   .chip:hover { background: var(--wash); }
   .chip.active { background: var(--series-1); color: #fff; border-color: var(--series-1); }
+  /* split preset groups */
+  .preset-group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 8px; }
+  .preset-group.gate { background: var(--wash); border-color: var(--grid); }
+  .preset-group.active { background: var(--surface); }
+  .preset-group .plabel { font-size: 11px; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-2); margin-right: 4px; white-space: nowrap; }
+  .preset-group .chip { font-size: 11px; padding: 4px 10px; font-weight: 600; }
+  .preset-group.gate .chip.active { background: var(--ink); border-color: var(--ink); }
+  .gate-counts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; font-size: 11px; color: var(--ink-2); }
+  .gate-counts .gc { display: inline-flex; gap: 4px; align-items: baseline; padding: 4px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); }
+  .gate-counts .gc b { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .gate-counts .gc.hi { background: var(--wash); border-color: var(--grid); }
+  .docket-chips .dc.pulse { transition: background 0.2s, border-color 0.2s; }
 
   /* ---------- charts ---------- */
   svg text { font: 11.5px system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--ink-2); }
@@ -335,10 +347,10 @@
   <div class="section-title-row">
     <div class="section-title">Value at stake · <span id="stGap">$71.8M</span> lift · 4 levers, dormant → gate → active</div>
     <div class="docket-chips" aria-label="Docket composition">
-      <span class="dc"><b>658</b> Open</span>
-      <span class="dc"><b>526</b> on-grid</span>
+      <span class="dc pulse" id="dcOpen"><b id="dcOpenN">658</b> Open</span>
+      <span class="dc pulse" id="dcOnGrid"><b id="dcOnGridN">526</b> Open & on-grid</span>
       <span class="dc dot"><b>132</b> Open · below grid (fails gate)</span>
-      <span class="dc" style="background:var(--wash); border-color: var(--grid)"><b>342</b> Dormant</span>
+      <span class="dc pulse" id="dcDorm" style="background:var(--wash); border-color: var(--grid)"><b id="dcDormN">342</b> Dormant</span>
       <span class="dc" style="background:var(--ink); color:var(--surface); border-color:var(--ink)"><b style="color:var(--surface)">1,000</b> total</span>
     </div>
   </div>
@@ -359,13 +371,23 @@
     <div class="card">
       <h3>Value-creation levers</h3>
       <div class="sub">Full potential per lever, scaled by how much of it you expect to convert. Lever 1 = % of dormant matters that clear <b>all 5 gates†</b> and revive; Levers 2–4 act on the active docket only.</div>
-      <div class="presets">
-        <span class="plabel">Realization presets:</span>
+      <div class="preset-group gate" id="gatePresets">
+        <span class="plabel">Dormant → gate:</span>
+        <button class="chip" data-preset="0" type="button">0%</button>
         <button class="chip" data-preset="5" type="button">5%</button>
         <button class="chip" data-preset="10" type="button">10%</button>
         <button class="chip active" data-preset="25" type="button">25%</button>
         <button class="chip" data-preset="50" type="button">50%</button>
-        <button class="chip" data-preset="100" type="button">Full cure</button>
+        <button class="chip" data-preset="100" type="button">Full</button>
+      </div>
+      <div class="preset-group active" id="activePresets">
+        <span class="plabel">Active levers:</span>
+        <button class="chip" data-preset="0" type="button">0%</button>
+        <button class="chip" data-preset="5" type="button">5%</button>
+        <button class="chip" data-preset="10" type="button">10%</button>
+        <button class="chip active" data-preset="25" type="button">25%</button>
+        <button class="chip" data-preset="50" type="button">50%</button>
+        <button class="chip" data-preset="100" type="button">Full</button>
       </div>
       <div id="levers"></div>
     </div>
@@ -619,7 +641,8 @@
         '<span class="amt" id="amt-' + l.id + '"></span></div>' +
         '<div class="desc">' + esc(l.desc) + '</div>' +
         '<div class="rrow"><input type="range" min="0" max="100" step="5" value="' + l.real + '" id="rg-' + l.id + '" aria-label="Realization rate for ' + esc(l.name) + '">' +
-        '<span class="pct" id="pct-' + l.id + '"></span></div>';
+        '<span class="pct" id="pct-' + l.id + '"></span></div>' +
+        (l.id === 'gate' ? '<div class="gate-counts" id="gateCounts"><span class="gc"><b id="gcOpenGrid">526</b> Open & on-grid</span><span class="gc hi"><b id="gcDorm">342</b> Dormant remaining</span><span class="gc"><b id="gcRevived">0</b> revived</span></div>' : '');
       host.appendChild(div);
       // gate card tooltip — full detail on hover (abridged desc is 2 lines)
       if (l.tip) {
@@ -648,8 +671,8 @@
       }
       $('rg-' + l.id).addEventListener('input', function () {
         l.real = +this.value;
-        document.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('active'); });
         render();
+        if (typeof syncPresetActive === 'function') syncPresetActive();
       });
     });
   }
@@ -823,30 +846,59 @@
       $('amt-' + l.id).textContent = '+' + fmtM(leverRealized(l, V));
       $('pct-' + l.id).textContent = l.real + '% · of ' + fmtM(leverFull(l, V));
     });
-    // dynamic active count: base open (658) + revived dormant that enter grid (gate lever realized matters)
+    // dynamic counts: gate revives dormant -> open & on-grid grows, dormant shrinks
     (function(){
       var gate = LEVERS[0];
-      var revivedMatters = Math.round((gate.trans['none>I'] + gate.trans['none>II'] + gate.trans['none>III']) * gate.real / 100);
+      var gateTotal = gate.trans['none>I'] + gate.trans['none>II'] + gate.trans['none>III']; // 216 at full
+      var revivedMatters = Math.round(gateTotal * gate.real / 100);
       var activeMatters = 658 + revivedMatters;
+      var onGridMatters = 526 + revivedMatters;
+      var dormRemaining = 342 - revivedMatters;
       var el = $('activeCount');
       if (el) el.textContent = activeMatters.toLocaleString('en-US');
       var hdr = $('activeHdr');
       if (hdr) hdr.title = revivedMatters + ' revived from dormant at ' + gate.real + '% — 658 base open + ' + revivedMatters + ' = ' + activeMatters + ' active';
+      // gate card counts
+      var gog = $('gcOpenGrid'); if (gog) gog.textContent = onGridMatters.toLocaleString('en-US');
+      var gdr = $('gcDorm'); if (gdr) gdr.textContent = dormRemaining.toLocaleString('en-US');
+      var grv = $('gcRevived'); if (grv) grv.textContent = revivedMatters.toLocaleString('en-US');
+      // top chips
+      var dcOG = $('dcOnGridN'); if (dcOG) dcOG.textContent = onGridMatters.toLocaleString('en-US');
+      var dcDM = $('dcDormN'); if (dcDM) dcDM.textContent = dormRemaining.toLocaleString('en-US');
+      var dcOP = $('dcOpenN'); if (dcOP) dcOP.textContent = activeMatters.toLocaleString('en-US');
+      if (typeof syncPresetActive === 'function') syncPresetActive();
     })();
   }
 
   // ---------- wiring ----------
   buildLevers();
   ['tvI', 'tvII', 'tvIII'].forEach(function (id) { $(id).addEventListener('input', render); });
-  document.querySelectorAll('.chip').forEach(function (c) {
+  // split preset groups: gate vs active
+  document.querySelectorAll('#gatePresets .chip').forEach(function (c) {
     c.addEventListener('click', function () {
       var p = +this.dataset.preset;
-      LEVERS.forEach(function (l) { l.real = p; $('rg-' + l.id).value = p; });
-      document.querySelectorAll('.chip').forEach(function (x) { x.classList.remove('active'); });
+      LEVERS[0].real = p; $('rg-' + LEVERS[0].id).value = p;
+      document.querySelectorAll('#gatePresets .chip').forEach(function (x) { x.classList.remove('active'); });
       this.classList.add('active');
       render();
     });
   });
+  document.querySelectorAll('#activePresets .chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      var p = +this.dataset.preset;
+      for (var i = 1; i < LEVERS.length; i++) { LEVERS[i].real = p; $('rg-' + LEVERS[i].id).value = p; }
+      document.querySelectorAll('#activePresets .chip').forEach(function (x) { x.classList.remove('active'); });
+      this.classList.add('active');
+      render();
+    });
+  });
+  function syncPresetActive() {
+    var g = LEVERS[0].real;
+    document.querySelectorAll('#gatePresets .chip').forEach(function (c) { c.classList.toggle('active', +c.dataset.preset === g); });
+    var aVals = LEVERS.slice(1).map(function(l){return l.real;});
+    var aAllSame = aVals.every(function(v){return v===aVals[0];});
+    document.querySelectorAll('#activePresets .chip').forEach(function (c) { c.classList.toggle('active', aAllSame && +c.dataset.preset === aVals[0]); });
+  }
   // sticky conversion bar: show once the hero CTA has scrolled away, hide near the footer CTA
   var heroCta = document.querySelector('.hero-cta');
   var footCta = document.querySelector('.cta');
