@@ -164,6 +164,29 @@
   .exp-row .er-name { font-size:12px; font-weight:600; color:var(--ink); line-height:1.25; }
   .exp-row .er-meta { font-size:10.5px; color:var(--muted); }
   .exp-row .er-meta b { color:var(--ink-2); }
+  /* horizontal exp sliders below bridge */
+  .exp-hz-wrap { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--grid); }
+  .exp-hz-head { display:flex; justify-content:space-between; align-items:baseline; gap:10px; font-size:11px; color:var(--ink-2); margin-bottom:8px; flex-wrap:wrap; }
+  .exp-hz-head b { color:var(--ink); font-variant-numeric:tabular-nums; }
+  .exp-hz-pills { display:flex; gap:6px; flex-wrap:wrap; }
+  .exp-hz-pills .hp { padding:3px 8px; border:1px solid var(--border); border-radius:999px; background:var(--surface); font-size:10.5px; color:var(--ink-2); }
+  .exp-hz-pills .hp b { color:var(--ink); font-weight:700; }
+  .exp-hz-cure { display:flex; align-items:center; gap:8px; margin-bottom:10px; font-size:12px; color:var(--ink-2); }
+  .exp-hz-cure input[type="range"] { flex:1; accent-color:var(--tier-2); height:18px; }
+  .exp-hz-cure .pct { width:52px; text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
+  .exp-hz-row { display:flex; gap:8px; flex-wrap:wrap; }
+  .exp-hz-bucket { flex:1 1 0; min-width:140px; padding:8px 10px; border:1px solid var(--border); border-radius:8px; background:var(--page); }
+  .exp-hz-bucket .bname { font-size:11px; font-weight:600; color:var(--ink); line-height:1.25; margin-bottom:2px; }
+  .exp-hz-bucket .bmeta { font-size:10px; color:var(--muted); margin-bottom:4px; }
+  .exp-hz-bucket .bmeta b { color:var(--ink-2); font-weight:600; }
+  .exp-hz-bucket .blift { font-size:10.5px; font-weight:600; color:var(--series-2); margin-bottom:4px; }
+  .exp-hz-bucket input[type="range"] { width:100%; accent-color:var(--tier-2); height:16px; }
+  .exp-hz-bucket .bpct { font-size:10px; color:var(--ink-2); text-align:right; font-variant-numeric:tabular-nums; }
+  .legend-stacked { display:flex; gap:16px; font-size:12px; color:var(--ink-2); margin-top:8px; flex-wrap:wrap; }
+  .legend-stacked .key { display:inline-flex; align-items:center; gap:6px; }
+  .legend-stacked .sw { width:10px; height:10px; border-radius:3px; display:inline-block; }
+  .legend-stacked .sw-stack { width:10px; height:20px; border-radius:3px; display:inline-flex; flex-direction:column; overflow:hidden; }
+  .legend-stacked .sw-stack span { flex:1; display:block; }
 
   /* ---------- charts ---------- */
   svg text { font: 11.5px system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--ink-2); }
@@ -336,7 +359,7 @@
     <div class="card kpi">
       <div class="label">Value trapped behind curable gaps</div>
       <div class="value" id="kpiFull">$71.8M</div>
-      <div class="note">4 levers · full cure, before realization</div>
+      <div class="note">2 drivers · full cure, before realization</div>
     </div>
     <div class="card kpi">
       <div class="label">Realized lift at current assumptions</div>
@@ -366,28 +389,21 @@
       <h3>Gross settlement value bridge</h3>
       <div class="sub">Current GSV → potential GSV at the realization rates set on the right. Drag the sliders and the bridge moves.</div>
       <div id="bridge"></div>
-      <div class="legend">
+      <div class="legend-stacked">
         <span class="key"><span class="sw" style="background:var(--series-1)"></span>GSV level</span>
-        <span class="key"><span class="sw" style="background:var(--series-2)"></span>Value lift</span>
+        <span class="key"><span class="sw-stack"><span style="background:var(--series-2)"></span><span style="background:var(--tier-2)"></span></span>Lift: volume (green) + quality (blue)</span>
       </div>
       <details class="tblview"><summary>Table view</summary>
         <table id="bridgeTbl"></table>
       </details>
+      <!-- exp sliders: horizontal, below bridge -->
+      <div class="exp-hz-wrap" id="expHzWrap"></div>
     </div>
     <div class="card">
       <h3>Value-creation levers</h3>
       <div class="sub">Two drivers. <b>Volume</b> = % dormant that clear <b>all 5 gates†</b> and become on-grid. <b>Quality</b> = cure missing <b>exposure-vector</b> among on-grid — allocate the missing pool to a vector bucket (15 / 11 / 7 / 4 / 0 pts) to lift score &amp; tier. (<span id="subMissing">126</span> missing today; grows as dormant revive.)</div>
       <div class="preset-group gate" id="gatePresets">
         <span class="plabel">Dormant → gate:</span>
-        <button class="chip" data-preset="0" type="button">0%</button>
-        <button class="chip" data-preset="5" type="button">5%</button>
-        <button class="chip" data-preset="10" type="button">10%</button>
-        <button class="chip active" data-preset="25" type="button">25%</button>
-        <button class="chip" data-preset="50" type="button">50%</button>
-        <button class="chip" data-preset="100" type="button">Full</button>
-      </div>
-      <div class="preset-group active" id="onGridPresets">
-        <span class="plabel">On-grid quality:</span>
         <button class="chip" data-preset="0" type="button">0%</button>
         <button class="chip" data-preset="5" type="button">5%</button>
         <button class="chip" data-preset="10" type="button">10%</button>
@@ -550,8 +566,8 @@
     { id: 'gate',
       name: 'Clear all 5 gates on dormant matters — revive to on-grid †',
       desc: '342 dormant booked at $0 — re-enter the grid when all 5 gates clear. \u2020One gate = all 5 (see footnote).',
-      tip: '342 dormant (no contact / closed / open with no docs) booked at $0. At full cure \u007e216 become on-grid (3 I / 68 II / 145 III). \u2020One gate = all 5 condensed: (1) docScore \u2265 3, (2) Syngenta-era, (3) PDD/PD/parkinsonism, (4) latency \u2265 5 yr, (5) PFS+AQ.',
-      trans: { 'none>I': 3, 'none>II': 68, 'none>III': 145 }, real: 25 },
+      tip: '342 dormant (no contact / closed / open with no docs) booked at $0. At full cure all 342 become on-grid (~5 I / ~108 II / ~229 III). \u2020One gate = all 5 condensed: (1) docScore \u2265 3, (2) Syngenta-era, (3) PDD/PD/parkinsonism, (4) latency \u2265 5 yr, (5) PFS+AQ.',
+      trans: { 'none>I': 5, 'none>II': 108, 'none>III': 229 }, real: 25 },
     { id: 'expVec',
       name: 'Exposure vector — cure missing among on-grid',
       desc: 'Among on-grid matters, 400 have exposure-vector documented; the rest are missing and score 0 on that axis. Allocate the missing pool to a vector bucket.',
@@ -559,7 +575,7 @@
       trans: null, real: 25 }
   ];
   var GAPS = [
-    { label: 'Revive dormant — clear all 5 gates†', lever: 'gate', cases: 342, trans: { 'none>I': 3, 'none>II': 68, 'none>III': 145 } },
+    { label: 'Revive dormant — clear all 5 gates†', lever: 'gate', cases: 342, trans: { 'none>I': 5, 'none>II': 108, 'none>III': 229 } },
     { label: 'Direct applicator (15 pts)', lever: 'expVec', key:'app', cases: 0, trans: {} },
     { label: 'Crew / flagger (11 pts)', lever: 'expVec', key:'crew', cases: 0, trans: {} },
     { label: 'Take-home (7 pts)', lever: 'expVec', key:'take', cases: 0, trans: {} },
@@ -646,79 +662,96 @@
     dormantHdr.style.marginTop = '0';
     dormantHdr.style.borderTop = 'none';
     dormantHdr.style.paddingTop = '0';
-    dormantHdr.innerHTML = '<span>Dormant docket †</span><span><b id="dormantCount">342</b> dormant matters</span>';
+    dormantHdr.innerHTML = '<span>Dormant docket \u2020</span><span><b id="dormantCount">342</b> dormant matters</span>';
     dormantHdr.title = '342 Dormant = closed or missing gate-required information, booked at $0 until cured. Decreases as the gate slider revives matters to on-grid.';
     dormantHdr.style.cursor = 'help';
     host.appendChild(dormantHdr);
     hoverable(dormantHdr, '<b>342 Dormant</b>Closed or missing gate-required information, booked at $0 until cured. Decreases as the gate slider revives matters to on-grid.');
-    LEVERS.forEach(function (l, idx) {
-      var div = document.createElement('div');
-      div.className = 'lever';
-      if (l.id === 'expVec') {
-        div.innerHTML =
-          '<div class="top"><span class="name">' + esc(l.name) + '</span>' +
-          '<span class="amt" id="amt-' + l.id + '"></span></div>' +
-          '<div class="desc">' + esc(l.desc) + '</div>' +
-          '<div class="exp-head"><span><b id="expKnown">400</b> known</span><span><b id="expMissing">126</b> missing vector</span><span style="font-size:10px; color:var(--muted)">*grows as dormant revive</span></div>' +
-          '<div class="exp-rows" id="expRows"></div>' +
-          '<div class="rrow" style="margin-top:8px"><span style="font-size:11px; color:var(--ink-2); font-weight:600">Overall cure</span><input type="range" min="0" max="100" step="5" value="' + l.real + '" id="rg-' + l.id + '" aria-label="Overall cure rate for exposure vector">' +
-          '<span class="pct" id="pct-' + l.id + '"></span></div>' +
-          '<div style="display:flex; gap:8px; margin-top:6px; font-size:11px; color:var(--ink-2); flex-wrap:wrap"><span style="padding:4px 8px; border:1px solid var(--border); border-radius:999px; background:var(--surface)"><b id="expAllocated">0</b> allocated</span><span style="padding:4px 8px; border:1px solid var(--border); border-radius:999px; background:var(--surface)"><b id="expRemaining">126</b> still missing</span><span style="padding:4px 8px; border:1px solid var(--border); border-radius:999px; background:var(--surface)"><b id="expLiftMini">+ $0K</b> quality lift</span></div>';
-      } else {
-        div.innerHTML =
-          '<div class="top"><span class="name">' + esc(l.name) + '</span>' +
-          '<span class="amt" id="amt-' + l.id + '"></span></div>' +
-          '<div class="desc">' + esc(l.desc) + '</div>' +
-          '<div class="rrow"><input type="range" min="0" max="100" step="5" value="' + l.real + '" id="rg-' + l.id + '" aria-label="Realization rate for ' + esc(l.name) + '">' +
-          '<span class="pct" id="pct-' + l.id + '"></span></div>' +
-          (l.id === 'gate' ? '<div class="gate-counts" id="gateCounts"><span class="gc"><b id="gcOpenGrid">526</b> On-grid</span><span class="gc hi"><b id="gcDorm">342</b> Dormant remaining</span><span class="gc"><b id="gcRevived">0</b> revived</span></div>' : '');
+    // Gate lever only
+    var l = LEVERS[0];
+    var div = document.createElement('div');
+    div.className = 'lever';
+    div.innerHTML =
+      '<div class="top"><span class="name">' + esc(l.name) + '</span>' +
+      '<span class="amt" id="amt-' + l.id + '"></span></div>' +
+      '<div class="desc">' + esc(l.desc) + '</div>' +
+      '<div class="rrow"><input type="range" min="0" max="100" step="5" value="' + l.real + '" id="rg-' + l.id + '" aria-label="Realization rate for ' + esc(l.name) + '">' +
+      '<span class="pct" id="pct-' + l.id + '"></span></div>' +
+      '<div class="gate-counts" id="gateCounts"><span class="gc"><b id="gcOpenGrid">526</b> On-grid</span><span class="gc hi"><b id="gcDorm">342</b> Dormant remaining</span><span class="gc"><b id="gcRevived">0</b> revived</span></div>';
+    host.appendChild(div);
+    if (l.tip) {
+      var descEl = div.querySelector('.desc');
+      if (descEl) {
+        descEl.style.cursor = 'help';
+        descEl.style.textDecoration = 'underline';
+        descEl.style.textDecorationStyle = 'dotted';
+        descEl.style.textUnderlineOffset = '3px';
+        hoverable(descEl, '<b>' + esc(l.name) + '</b>' + esc(l.tip));
       }
-      host.appendChild(div);
-      if (l.tip) {
-        var descEl = div.querySelector('.desc');
-        if (descEl) {
-          descEl.style.cursor = 'help';
-          descEl.style.textDecoration = 'underline';
-          descEl.style.textDecorationStyle = 'dotted';
-          descEl.style.textUnderlineOffset = '3px';
-          hoverable(descEl, '<b>' + esc(l.name) + '</b>' + esc(l.tip));
-        }
-        var nameEl = div.querySelector('.name');
-        if (nameEl) hoverable(nameEl, '<b>' + esc(l.name) + '</b>' + esc(l.tip));
-      }
-      if (l.id === 'expVec') {
-        var rowsHost = div.querySelector('#expRows');
-        EXP_VECTORS.forEach(function(v){
-          var row = document.createElement('div');
-          row.className = 'exp-row';
-          row.innerHTML = '<div class="er-left"><div class="er-name">' + esc(v.label) + ' <span style="color:var(--muted); font-weight:400">(' + v.pts + ' pts)</span></div><div class="er-meta"><b id="erCount-' + v.key + '">0</b> cases \u00B7 <span id="erLift-' + v.key + '">$0K</span></div></div>' +
-            '<div class="er-slider" style="display:flex; align-items:center; gap:8px"><input type="range" min="0" max="100" step="5" value="' + (EXP_ALLOC[v.key]||0) + '" id="er-' + v.key + '" aria-label="' + esc(v.label) + ' allocation"><span id="erpct-' + v.key + '" style="width:42px; text-align:right; font-size:11px; color:var(--ink-2); font-variant-numeric:tabular-nums; font-weight:600">' + (EXP_ALLOC[v.key]||0) + '%</span></div>';
-          rowsHost.appendChild(row);
-          row.querySelector('#er-' + v.key).addEventListener('input', function(){
-            EXP_ALLOC[v.key] = +this.value;
-            document.getElementById('erpct-' + v.key).textContent = this.value + '%';
-            render();
-            if (typeof syncOnGridPresetActive === 'function') syncOnGridPresetActive();
-          });
-        });
-      }
-      if (idx === 0) {
-        var sep = document.createElement('div');
-        sep.className = 'lever-sep';
-        host.appendChild(sep);
-        var hdr = document.createElement('div');
-        hdr.className = 'active-hdr';
-        hdr.id = 'activeHdr';
-        hdr.innerHTML = '<span>On-grid matters</span><span><b id="activeCount">526</b> on-grid</span>';
-        hdr.title = 'On-grid = matters currently valued (grows as dormant revive). 132 below-grid stay put. Dormant shrinks.';
-        hdr.style.cursor = 'help';
-        host.appendChild(hdr);
-        hoverable(hdr, '<b>On-grid matters</b>526 base on-grid + revived from dormant. Quality lift (exposure vector) allocates the missing pool.');
-      }
-      $('rg-' + l.id).addEventListener('input', function () {
-        l.real = +this.value;
+      var nameEl = div.querySelector('.name');
+      if (nameEl) hoverable(nameEl, '<b>' + esc(l.name) + '</b>' + esc(l.tip));
+    }
+    // Gate header with dynamic dormant count
+    var hdr = document.createElement('div');
+    hdr.className = 'active-hdr';
+    hdr.id = 'activeHdr';
+    hdr.innerHTML = '<span>On-grid matters</span><span><b id="activeCount">526</b> on-grid</span>';
+    hdr.title = 'On-grid = matters currently valued (grows as dormant revive). 132 below-grid stay put. Dormant shrinks.';
+    hdr.style.cursor = 'help';
+    host.appendChild(hdr);
+    hoverable(hdr, '<b>On-grid matters</b>526 base on-grid + revived from dormant. Quality lift (exposure vector) allocates the missing pool.');
+    $('rg-' + l.id).addEventListener('input', function () {
+      l.real = +this.value;
+      render();
+      if (typeof syncPresetActive === 'function') syncPresetActive();
+    });
+    // Build horizontal exp sliders below bridge
+    buildExpSliders();
+  }
+
+  function buildExpSliders() {
+    var wrap = $('expHzWrap');
+    if (!wrap) return;
+    var cureVal = LEVERS[1].real;
+    // header with known/missing stats + pills
+    var html = '<div class="exp-hz-head">' +
+      '<div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap"><span style="font-size:13px; font-weight:650; color:var(--ink)">' + esc(LEVERS[1].name) + '</span>' +
+      '<span style="font-size:11px; color:var(--muted)">\u2014 allocate missing cases to lift their tier</span></div>' +
+      '<div class="exp-hz-pills">' +
+      '<span class="hp"><b id="expKnownHz">400</b> known (pre-allocated)</span>' +
+      '<span class="hp"><b id="expMissingHz">126</b> missing vector</span>' +
+      '<span class="hp" style="background:var(--wash)"><b id="expAllocatedHz">0</b> allocated</span>' +
+      '<span class="hp"><b id="expRemainingHz">126</b> still missing</span>' +
+      '<span class="hp" style="border-color:var(--series-2)"><b id="expLiftHz" style="color:var(--series-2)">+ $0K</b> quality lift</span>' +
+      '</div></div>';
+    // overall cure slider
+    html += '<div class="exp-hz-cure"><span style="font-weight:600">Overall cure</span>' +
+      '<input type="range" min="0" max="100" step="5" value="' + cureVal + '" id="rg-expVec" aria-label="Overall cure rate for exposure vector">' +
+      '<span class="pct" id="pct-expVec"></span></div>';
+    // bucket cards
+    html += '<div class="exp-hz-row">';
+    EXP_VECTORS.forEach(function(v) {
+      html += '<div class="exp-hz-bucket">' +
+        '<div class="bname">' + esc(v.label) + ' <span style="color:var(--muted); font-weight:400">(' + v.pts + ' pts)</span></div>' +
+        '<div class="bmeta"><b id="erKnown-' + v.key + '">0</b> known + <b id="erCured-' + v.key + '">0</b> cured = <b id="erTotal-' + v.key + '">0</b> total</div>' +
+        '<div class="blift" id="erLift-' + v.key + '">$0K</div>' +
+        '<input type="range" min="0" max="100" step="5" value="' + (EXP_ALLOC[v.key]||0) + '" id="er-' + v.key + '" aria-label="' + esc(v.label) + ' allocation">' +
+        '<div class="bpct"><span id="erpct-' + v.key + '">' + (EXP_ALLOC[v.key]||0) + '%</span> of missing pool</div>' +
+        '</div>';
+    });
+    html += '</div>';
+    wrap.innerHTML = html;
+    // wire sliders
+    $('rg-expVec').addEventListener('input', function() {
+      LEVERS[1].real = +this.value;
+      render();
+      if (typeof syncOnGridPresetActive === 'function') syncOnGridPresetActive();
+    });
+    EXP_VECTORS.forEach(function(v) {
+      $('er-' + v.key).addEventListener('input', function() {
+        EXP_ALLOC[v.key] = +this.value;
+        $('erpct-' + v.key).textContent = this.value + '%';
         render();
-        if (typeof syncPresetActive === 'function') syncPresetActive();
         if (typeof syncOnGridPresetActive === 'function') syncOnGridPresetActive();
       });
     });
@@ -728,23 +761,26 @@
   function renderBridge(V, effFull, effReal) {
     var cur = currentGsv(V);
     var lifts = LEVERS.map(function (l) { return (effReal ? effReal(l) : leverRealized(l, V)); });
-    var pot = cur + lifts.reduce(function (a, b) { return a + b; }, 0);
+    var gateLift = lifts[0] || 0, qualLift = lifts[1] || 0;
+    var pot = cur + gateLift + qualLift;
+    // 3 columns: Current GSV | Stacked lift (volume + quality) | Potential GSV
     var cols = [
       { label: 'Current GSV', from: 0, to: cur, kind: 'level' },
-      { label: 'More on-grid', from: cur, to: cur + lifts[0], kind: 'lift', lever: 'gate' },
-      { label: 'Vector cure', from: cur + lifts[0], to: cur + lifts[0] + lifts[1], kind: 'lift', lever: 'expVec' },
+      { label: 'Total lift', from: cur, to: pot, kind: 'stacked', segments: [
+        { label: 'More on-grid', from: cur, to: cur + gateLift, lever: 'gate', color: 'var(--series-2)' },
+        { label: 'Vector cure', from: cur + gateLift, to: pot, lever: 'expVec', color: 'var(--tier-2)' }
+      ]},
       { label: 'Potential GSV', from: 0, to: pot, kind: 'level' }
     ];
     var fullPot = cur + LEVERS.reduce(function (a, l) { return a + (effFull ? effFull(l) : leverFull(l, V)); }, 0);
-    var FLOOR = 60000; // truncated baseline — start at $60M so lifts read; zero would flatten them
-    if (cur <= FLOOR) FLOOR = 0; // fallback if tier edits drop current below floor
+    var FLOOR = 60000;
+    if (cur <= FLOOR) FLOOR = 0;
     var maxV = Math.max(fullPot, pot, FLOOR + 1);
     var span = maxV - FLOOR;
     var W = 620, H = 340, padL = 52, padR = 12, padT = 22, padB = 28;
     var plotW = W - padL - padR, plotH = H - padT - padB;
     var y = function (v) { return padT + plotH - Math.max(0, (v - FLOOR) / span) * plotH; };
-    var slot = plotW / cols.length, barW = Math.min(64, slot * 0.55);
-    // nice step anchored at FLOOR
+    var nCols = 3, slot = plotW / nCols, barW = Math.min(80, slot * 0.6);
     var step = Math.pow(10, Math.floor(Math.log10(span)));
     if (span / step < 3) step = step / 2;
     if (span / step > 7) step = step * 2;
@@ -753,7 +789,6 @@
       s += '<line class="gline" x1="' + padL + '" x2="' + (W - padR) + '" y1="' + y(tv) + '" y2="' + y(tv) + '"/>';
       s += '<text class="tick" x="' + (padL - 6) + '" y="' + (y(tv) + 3.5) + '" text-anchor="end">' + (tv >= 1000 ? '$' + (tv / 1000) + 'M' : '$' + tv + 'K') + '</text>';
     }
-    // axis-break glyph at left edge to signal truncation
     if (FLOOR > 0) {
       s += '<g class="axis-break" aria-hidden="true">';
       s += '<path d="M' + (padL-6) + ',' + (H-padB+4) + ' l6,-8 l6,8" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>';
@@ -763,17 +798,30 @@
     var marks = [];
     cols.forEach(function (c, i) {
       var x = padL + slot * i + (slot - barW) / 2;
-      var yTop = y(Math.max(c.from, c.to)), yBot = y(Math.min(c.from, c.to));
-      var h = Math.max(2, yBot - yTop);
-      var fill = c.kind === 'level' ? 'var(--series-1)' : (c.lever === 'expVec' ? 'var(--tier-2)' : 'var(--series-2)');
       var r = 4;
-      var d;
-      if (c.kind === 'level') {
-        d = 'M' + x + ',' + (yTop + r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',-' + r + ' h' + (barW - 2 * r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r + ' v' + (h - r) + ' h-' + barW + ' Z';
+      if (c.kind === 'stacked') {
+        // draw two stacked segments bottom-up
+        var totalFrom = c.from, totalTo = c.to;
+        c.segments.forEach(function (seg, si) {
+          var yTop = y(Math.max(seg.from, seg.to)), yBot = y(Math.min(seg.from, seg.to));
+          var h = Math.max(2, yBot - yTop);
+          var isFirst = (si === 0);
+          var d;
+          if (isFirst) {
+            // bottom segment: flat bottom, rounded top if only segment, else flat top
+            d = 'M' + x + ',' + yBot + ' v-' + Math.max(0, h - r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',-' + r + ' h' + (barW - 2 * r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r + ' v' + Math.max(0, h - r) + ' Z';
+          } else {
+            // top segment: flat bottom, rounded top
+            d = 'M' + x + ',' + yBot + ' v-' + Math.max(0, h - r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',-' + r + ' h' + (barW - 2 * r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r + ' v' + Math.max(0, h - r) + ' Z';
+          }
+          marks.push({ d: d, fill: seg.color, label: seg.label, v: seg.to - seg.from, kind: 'lift', lever: seg.lever, x: x, yTop: yTop, stacked: true });
+        });
       } else {
-        d = 'M' + x + ',' + (yTop + r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',-' + r + ' h' + (barW - 2 * r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r + ' v' + Math.max(0, h - r) + ' h-' + barW + ' Z';
+        var yTop = y(Math.max(c.from, c.to)), yBot = y(Math.min(c.from, c.to));
+        var h = Math.max(2, yBot - yTop);
+        var d = 'M' + x + ',' + (yTop + r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',-' + r + ' h' + (barW - 2 * r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r + ' v' + (h - r) + ' h-' + barW + ' Z';
+        marks.push({ d: d, fill: 'var(--series-1)', label: c.label, v: c.to - c.from, kind: c.kind, x: x, yTop: yTop });
       }
-      marks.push({ d: d, fill: fill, label: c.label, v: c.to - c.from, kind: c.kind, x: x, yTop: yTop });
       if (i < cols.length - 1) {
         var nx = padL + slot * (i + 1) + (slot - barW) / 2;
         s += '<line class="conn" x1="' + (x + barW) + '" x2="' + (nx + barW) + '" y1="' + y(c.to) + '" y2="' + y(c.to) + '"/>';
@@ -784,25 +832,40 @@
       s += '<path d="' + m.d + '" fill="' + m.fill + '" data-bi="' + i + '"/>';
       var txt = m.kind === 'lift' ? '+' + fmtM(m.v) : fmtM(m.v);
       s += '<text class="val" x="' + (m.x + barW / 2) + '" y="' + (m.yTop - 6) + '" text-anchor="middle">' + txt + '</text>';
-      s += '<text x="' + (m.x + barW / 2) + '" y="' + (H - 12) + '" text-anchor="middle">' + m.label + '</text>';
+      if (!m.stacked) {
+        s += '<text x="' + (m.x + barW / 2) + '" y="' + (H - 12) + '" text-anchor="middle">' + m.label + '</text>';
+      }
     });
+    // label for stacked bar: show total below
+    if (cols[1].kind === 'stacked') {
+      var cx1 = padL + slot * 1 + (slot - barW) / 2;
+      s += '<text x="' + (cx1 + barW / 2) + '" y="' + (H - 12) + '" text-anchor="middle">Lift</text>';
+    }
     s += '</svg>';
     $('bridge').innerHTML = s;
-    // hover layer + lift-map spotlight
     var paths = $('bridge').querySelectorAll('path[data-bi]');
     paths.forEach(function (p, i) {
-      var m = marks[i], c = cols[i];
-      var html = '<b>' + esc(c.label) + '</b>' + (c.kind === 'lift' ? '+' : '') + fmtK(m.v) +
-        (c.kind === 'lift' ? ' at ' + LEVERS[i - 1].real + '% realization (full: ' + fmtK((effFull ? effFull(LEVERS[i - 1]) : leverFull(LEVERS[i - 1], V))) + ') — spotlighted below' : '');
+      var m = marks[i];
+      var leverIdx = m.lever === 'gate' ? 0 : 1;
+      var l = LEVERS[leverIdx];
+      var html = '<b>' + esc(m.label) + '</b> +' + fmtK(m.v) +
+        (l ? ' at ' + l.real + '% realization (full: ' + fmtK((effFull ? effFull(l) : leverFull(l, V))) + ')' : '');
       hoverable(p, html);
-      if (c.lever) {
-        p.addEventListener('mouseenter', function () { spotlightLever(c.lever); });
+      if (m.lever) {
+        p.addEventListener('mouseenter', function () { spotlightLever(m.lever); });
         p.addEventListener('mouseleave', function () { spotlightLever(null); });
       }
     });
-    // table view
     var tb = '<thead><tr><th>Step</th><th class="num">$000s</th></tr></thead><tbody>';
-    cols.forEach(function (c) { tb += '<tr><td>' + esc(c.label) + '</td><td class="num">' + Math.round(c.to - c.from).toLocaleString('en-US') + '</td></tr>'; });
+    cols.forEach(function (c) {
+      if (c.kind === 'stacked') {
+        c.segments.forEach(function (seg) {
+          tb += '<tr><td>' + esc(seg.label) + '</td><td class="num">' + Math.round(seg.to - seg.from).toLocaleString('en-US') + '</td></tr>';
+        });
+      } else {
+        tb += '<tr><td>' + esc(c.label) + '</td><td class="num">' + Math.round(c.to - c.from).toLocaleString('en-US') + '</td></tr>';
+      }
+    });
     $('bridgeTbl').innerHTML = tb + '</tbody>';
     return { cur: cur, pot: pot, realized: pot - cur };
   }
@@ -886,33 +949,36 @@
   }
 
   // ---------- master render \u2014 TWO DRIVERS: volume (gate) + quality (exposure vector) ----------
-  function computeExpQuality(missing, alloc, curePct) {
+  function computeExpQuality(missing, knownBase, alloc, curePct) {
     var toAllocate = Math.round(missing * curePct / 100);
     var sumAlloc = 0; Object.keys(alloc).forEach(function(k){ sumAlloc += alloc[k]||0; });
-    if (sumAlloc === 0 || toAllocate === 0) {
-      var emptyPer = {}; var emptyCnt = {};
-      EXP_VECTORS.forEach(function(vv){ emptyPer[vv.key]=0; emptyCnt[vv.key]=0; });
-      return { total:0, per:emptyPer, counts:emptyCnt, toAllocate:0, missing:missing };
-    }
-    var per = {}; var counts = {}; var assigned = 0;
+    var per = {}; var counts = {}; var knownCounts = {}; var totalCounts = {};
+    var assigned = 0; var total = 0; var liftPer = {};
     EXP_VECTORS.forEach(function(v){
-      var share = (alloc[v.key]||0) / sumAlloc;
-      var cnt = Math.round(toAllocate * share);
-      counts[v.key] = cnt; assigned += cnt;
+      var share = sumAlloc > 0 ? (alloc[v.key]||0) / sumAlloc : 0;
+      knownCounts[v.key] = Math.round(knownBase * share);
+      if (sumAlloc === 0 || toAllocate === 0) {
+        counts[v.key] = 0;
+      } else {
+        var cnt = Math.round(toAllocate * share);
+        counts[v.key] = cnt; assigned += cnt;
+      }
     });
-    var drift = toAllocate - assigned;
-    if (drift !== 0) {
-      var keys = Object.keys(alloc).sort(function(a,b){ return alloc[b]-alloc[a]; });
-      var k2 = keys[0] || 'app';
-      counts[k2] = (counts[k2]||0) + drift;
-      if (counts[k2] < 0) counts[k2] = 0;
+    if (sumAlloc > 0 && toAllocate > 0) {
+      var drift = toAllocate - assigned;
+      if (drift !== 0) {
+        var keys = Object.keys(alloc).sort(function(a,b){ return alloc[b]-alloc[a]; });
+        var k2 = keys[0] || 'app';
+        counts[k2] = (counts[k2]||0) + drift;
+        if (counts[k2] < 0) counts[k2] = 0;
+      }
     }
-    var total = 0; var liftPer = {};
     EXP_VECTORS.forEach(function(v){
+      totalCounts[v.key] = (knownCounts[v.key]||0) + (counts[v.key]||0);
       var lift = (counts[v.key]||0) * v.pLift * 140;
       liftPer[v.key] = lift; total += lift;
     });
-    return { total: total, per: liftPer, counts: counts, toAllocate: toAllocate, missing: missing };
+    return { total: total, per: liftPer, counts: counts, knownCounts: knownCounts, totalCounts: totalCounts, toAllocate: toAllocate, missing: missing };
   }
   function render() {
     var V = tierValues();
@@ -922,10 +988,10 @@
     var onGrid = 526 + revivedGate;
     var missing = EXP_MISSING_BASE + revivedGate; // 126 -> 342
     var known = EXP_KNOWN_BASE; // 400
-    var expQuality = computeExpQuality(missing, EXP_ALLOC, LEVERS[1].real);
+    var expQuality = computeExpQuality(missing, known, EXP_ALLOC, LEVERS[1].real);
     var gateFull = transValue(gate.trans, V);
     var gateReal = gateFull * gate.real / 100;
-    var qualityFull = computeExpQuality(missing, EXP_ALLOC, 100).total;
+    var qualityFull = computeExpQuality(missing, known, EXP_ALLOC, 100).total;
     var qualityReal = expQuality.total;
     function effFull(l){
       if (l.id === 'gate') return gateFull;
@@ -938,9 +1004,9 @@
       return 0;
     }
     var effOpen = {
-      I: 6 + Math.round(3 * gate.real / 100),
-      II: 194 + Math.round(68 * gate.real / 100),
-      III: 326 + Math.round(145 * gate.real / 100)
+      I: 6 + Math.round((gate.trans['none>I']||0) * gate.real / 100),
+      II: 194 + Math.round((gate.trans['none>II']||0) * gate.real / 100),
+      III: 326 + Math.round((gate.trans['none>III']||0) * gate.real / 100)
     };
     var curEff = effOpen.I * V.I + effOpen.II * V.II + effOpen.III * V.III;
     var b = renderBridge(V, effFull, effReal);
@@ -965,8 +1031,8 @@
     $('gsvIII').textContent = fmtM(effOpen.III * V.III);
     $('gsvTot').textContent = fmtM(curEff);
     LEVERS.forEach(function (l) {
-      $('amt-' + l.id).textContent = '+' + fmtM(effReal(l));
-      $('pct-' + l.id).textContent = l.real + '% · of ' + fmtM(effFull(l));
+      var amtEl = $('amt-' + l.id); if (amtEl) amtEl.textContent = '+' + fmtM(effReal(l));
+      var pctEl = $('pct-' + l.id); if (pctEl) pctEl.textContent = l.real + '% · of ' + fmtM(effFull(l));
     });
         // dynamic counts — all except 1,000 total
     (function(){
@@ -984,14 +1050,17 @@
       var dcOG = $('dcOnGridN'); if (dcOG) dcOG.textContent = onGridMatters.toLocaleString('en-US');
       var dcDM = $('dcDormN'); if (dcDM) dcDM.textContent = dormRemaining.toLocaleString('en-US');
       var dcOP = $('dcOpenN'); if (dcOP) dcOP.textContent = activeMatters.toLocaleString('en-US');
-      var expKnownEl = $('expKnown'); if (expKnownEl) expKnownEl.textContent = known.toLocaleString('en-US');
-      var expMissEl = $('expMissing'); if (expMissEl) expMissEl.textContent = missing.toLocaleString('en-US');
+      // horizontal exp slider counts
+      var expKnownHz = $('expKnownHz'); if (expKnownHz) expKnownHz.textContent = known.toLocaleString('en-US');
+      var expMissHz = $('expMissingHz'); if (expMissHz) expMissHz.textContent = missing.toLocaleString('en-US');
       var subMiss = $('subMissing'); if (subMiss) subMiss.textContent = missing.toLocaleString('en-US');
-      var expAllocEl = $('expAllocated'); if (expAllocEl) expAllocEl.textContent = (expQuality.toAllocate||0).toLocaleString('en-US');
-      var expRemEl = $('expRemaining'); if (expRemEl) expRemEl.textContent = (missing - (expQuality.toAllocate||0)).toLocaleString('en-US');
-      var expLiftEl = $('expLiftMini'); if (expLiftEl) expLiftEl.textContent = '+ ' + fmtK(expQuality.total||0);
+      var expAllocHz = $('expAllocatedHz'); if (expAllocHz) expAllocHz.textContent = (expQuality.toAllocate||0).toLocaleString('en-US');
+      var expRemHz = $('expRemainingHz'); if (expRemHz) expRemHz.textContent = (missing - (expQuality.toAllocate||0)).toLocaleString('en-US');
+      var expLiftHz = $('expLiftHz'); if (expLiftHz) expLiftHz.textContent = '+ ' + fmtK(expQuality.total||0);
       EXP_VECTORS.forEach(function(v){
-        var cntEl = $('erCount-' + v.key); if (cntEl) cntEl.textContent = (expQuality.counts && expQuality.counts[v.key] != null ? expQuality.counts[v.key].toLocaleString('en-US') : '0');
+        var knownEl = $('erKnown-' + v.key); if (knownEl) knownEl.textContent = (expQuality.knownCounts && expQuality.knownCounts[v.key] != null ? expQuality.knownCounts[v.key].toLocaleString('en-US') : '0');
+        var curedEl = $('erCured-' + v.key); if (curedEl) curedEl.textContent = (expQuality.counts && expQuality.counts[v.key] != null ? expQuality.counts[v.key].toLocaleString('en-US') : '0');
+        var totalEl = $('erTotal-' + v.key); if (totalEl) totalEl.textContent = (expQuality.totalCounts && expQuality.totalCounts[v.key] != null ? expQuality.totalCounts[v.key].toLocaleString('en-US') : '0');
         var liftEl = $('erLift-' + v.key); if (liftEl) liftEl.textContent = fmtK(expQuality.per ? (expQuality.per[v.key]||0) : 0);
       });
       if (typeof syncPresetActive === 'function') syncPresetActive();
