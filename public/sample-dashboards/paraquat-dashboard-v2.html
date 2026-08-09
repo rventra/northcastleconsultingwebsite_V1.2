@@ -190,6 +190,14 @@
   .score-matrix tr:last-child td { border-bottom:none; font-weight:600; background:var(--wash); }
   .score-matrix .num { text-align:right; }
   .score-matrix .tier-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+  .hist-wrap { display:flex; align-items:flex-end; gap:4px; height:140px; padding:8px 4px 0; border-bottom:1px solid var(--grid); }
+  .hist-bar { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .hist-col { width:100%; border-radius:4px 4px 0 0; background:var(--tier-2); min-height:2px; transition:height 0.25s; }
+  .hist-col.zero { background:var(--muted); opacity:0.55; }
+  .hist-val { font-size:10px; font-weight:600; color:var(--ink-2); font-variant-numeric:tabular-nums; min-height:12px; }
+  .hist-label { font-size:9px; color:var(--muted); text-align:center; line-height:1.2; white-space:nowrap; }
+  .hist-label.tier { font-weight:650; color:var(--ink-2); }
+
 
   /* horizontal exp sliders below bridge */
   .exp-hz-wrap { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--grid); }
@@ -219,6 +227,14 @@
   .score-matrix tr:last-child td { border-bottom:none; font-weight:600; background:var(--wash); }
   .score-matrix .num { text-align:right; }
   .score-matrix .tier-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+  .hist-wrap { display:flex; align-items:flex-end; gap:4px; height:140px; padding:8px 4px 0; border-bottom:1px solid var(--grid); }
+  .hist-bar { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .hist-col { width:100%; border-radius:4px 4px 0 0; background:var(--tier-2); min-height:2px; transition:height 0.25s; }
+  .hist-col.zero { background:var(--muted); opacity:0.55; }
+  .hist-val { font-size:10px; font-weight:600; color:var(--ink-2); font-variant-numeric:tabular-nums; min-height:12px; }
+  .hist-label { font-size:9px; color:var(--muted); text-align:center; line-height:1.2; white-space:nowrap; }
+  .hist-label.tier { font-weight:650; color:var(--ink-2); }
+
   .score-matrix .delta { font-size:10.5px; color:var(--series-2); font-weight:600; }
   .legend-stacked { display:flex; gap:16px; font-size:12px; color:var(--ink-2); margin-top:8px; flex-wrap:wrap; }
   .legend-stacked .key { display:inline-flex; align-items:center; gap:6px; }
@@ -427,29 +443,17 @@
       <div class="sm-title">Portfolio by exposure vector → tier score bucket</div>
       <div class="sm-note"><span id="smMissing">126</span> missing vector today · <span id="smAllocated">0</span> allocated · <span id="smRemaining">126</span> still missing · grows as dormant revive</div>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Exposure vector</th>
-          <th style="text-align:center">Pts</th>
-          <th class="num"><span class="tier-dot" style="background:var(--tier-1)"></span>Tier I</th>
-          <th class="num"><span class="tier-dot" style="background:var(--tier-2)"></span>Tier II</th>
-          <th class="num"><span class="tier-dot" style="background:var(--tier-3)"></span>Tier III</th>
-          <th class="num">Total cases</th>
-        </tr>
-      </thead>
-      <tbody id="scoreMatrixBody"></tbody>
-    </table>
-    <div class="sm-note" style="margin-top:8px">How to read: <b>Known</b> 400 are pre-allocated by vector; sliders allocate the <b>missing</b> pool (<span id="smMissing2">126</span>) to a vector bucket. More points = higher score bucket = more likely to tier up. Totals align to market tiers I/II/III. Still-missing rows stay at 0 pts.</div>
+    <div id="scoreHistogram" style="margin-top:10px"></div>
+    <div class="sm-note" style="margin-top:6px">Score = weighted total (today only exposure vector: Direct 15 / Para 7 / Drift 4). Add criteria and scores stack. Buckets: <b>0</b> is discrete, then <b>1–10</b>, <b>11–20</b> … <b>91–100</b>. Bands: Tier I 67–100 &middot; Tier II 34–66 &middot; Tier III 0–33.</div>
   </div>
   <div class="cols">
     <div class="card" id="bridgeCard">
       <h3>Gross settlement value bridge</h3>
       <div class="sub">Current GSV → potential GSV at the realization rates set on the right. Drag the sliders and the bridge moves.</div>
       <div id="bridge"></div>
-      <div class="legend-stacked">
+      <div class="legend">
         <span class="key"><span class="sw" style="background:var(--series-1)"></span>GSV level</span>
-        <span class="key"><span class="sw-stack"><span style="background:var(--series-2)"></span><span style="background:var(--tier-2)"></span></span>Lift: volume (green) + quality (blue)</span>
+        <span class="key"><span class="sw" style="background:var(--series-2)"></span>Lift</span>
       </div>
       <details class="tblview"><summary>Table view</summary>
         <table id="bridgeTbl"></table>
@@ -459,7 +463,7 @@
     </div>
     <div class="card">
       <h3>Value-creation levers</h3>
-      <div class="sub">Two drivers. <b>Volume</b> = % dormant that clear <b>all 5 gates†</b> and become on-grid. <b>Quality</b> = cure missing <b>exposure-vector</b> among on-grid — allocate the missing pool to a vector bucket (15 / 11 / 7 / 4 / 0 pts) to lift score &amp; tier. (<span id="subMissing">126</span> missing today; grows as dormant revive.)</div>
+      <div class="sub">Two drivers. <b>Volume</b> = % dormant that clear <b>all 5 gates†</b> and become on-grid. <b>Quality</b> = cure missing <b>exposure-vector</b> among on-grid — allocate the missing pool to a vector bucket (Direct 15 / Para 7 / Drift 4). (<span id="subMissing">126</span> missing today; grows as dormant revive.)</div>
       <div class="preset-group gate" id="gatePresets">
         <span class="plabel">Dormant → gate:</span>
         <button class="chip" data-preset="0" type="button">0%</button>
@@ -617,7 +621,13 @@
     { key:'direct',  label:'Direct occupational handling — Mix / Load / Apply', pts:15, pLift:0.55 },
     { key:'drift',   label:'Drift / Bystander / Re-entry exposure',            pts:4,  pLift:0.15 },
     { key:'para',    label:'Para-occupational / Take-home / Residue',          pts:7,  pLift:0.28 }
+  ]
+  var TIER_BANDS = [
+    { tier:'I',   label:'Tier I',   band:'67–100', min:67, max:100, color:'var(--tier-1)' },
+    { tier:'II',  label:'Tier II',  band:'34–66',  min:34, max:66,  color:'var(--tier-2)' },
+    { tier:'III', label:'Tier III', band:'0–33',   min:0,  max:33,  color:'var(--tier-3)' }
   ];
+  function tierForScore(s){ if(s>=67) return 'I'; if(s>=34) return 'II'; return 'III'; };
   var LEVERS = [
     { id: 'gate',
       name: 'Clear all 5 gates on dormant matters — revive to on-grid †',
@@ -752,7 +762,7 @@
     var wrap = $('expHzWrap');
     if (!wrap) return;
     var missing = EXP_MISSING_BASE + Math.round((LEVERS[0].trans['none>I']+LEVERS[0].trans['none>II']+LEVERS[0].trans['none>III']) * LEVERS[0].real / 100);
-    var html = '<div class="exp-hz-head"><div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap"><span style="font-size:13px; font-weight:650; color:var(--ink)">' + esc(LEVERS[1].name) + '</span><span style="font-size:11px; color:var(--muted)">\u2014 allocate the missing pool (caps at <b id="expHzMissingCap">' + missing + '</b>)</span></div></div>';
+    var html = '<div class="exp-hz-head"><div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap"><span style="font-size:13px; font-weight:650; color:var(--ink)">Exposure vector</span><span style="font-size:11px; color:var(--muted)">\u2014 <b>400</b> known (allocated) + <b id="expHzMissingCap">'+missing+'</b> missing = cap &nbsp; <span style="color:var(--muted)">(126 base + <b id="expHzMoved">'+(missing-126)+'</b> moved from off-grid)</span></span></div></div>';
     html += '<div class="exp-hz-row">';
     EXP_VECTORS.forEach(function(v) {
       var known = EXP_KNOWN_SPLIT[v.key]||0;
@@ -782,10 +792,7 @@
     // 3 columns: Current GSV | Stacked lift (volume + quality) | Potential GSV
     var cols = [
       { label: 'Current GSV', from: 0, to: cur, kind: 'level' },
-      { label: 'Total lift', from: cur, to: pot, kind: 'stacked', segments: [
-        { label: 'More on-grid', from: cur, to: cur + gateLift, lever: 'gate', color: 'var(--series-2)' },
-        { label: 'Vector cure', from: cur + gateLift, to: pot, lever: 'expVec', color: 'var(--tier-2)' }
-      ]},
+      { label: 'Lift', from: cur, to: pot, kind: 'lift', lever: 'combined' },
       { label: 'Potential GSV', from: 0, to: pot, kind: 'level' }
     ];
     var fullPot = cur + LEVERS.reduce(function (a, l) { return a + (effFull ? effFull(l) : leverFull(l, V)); }, 0);
@@ -815,7 +822,7 @@
     cols.forEach(function (c, i) {
       var x = padL + slot * i + (slot - barW) / 2;
       var r = 4;
-      if (c.kind === 'stacked') {
+      if (false && c.kind === 'stacked') {
         // draw two stacked segments bottom-up
         var totalFrom = c.from, totalTo = c.to;
         c.segments.forEach(function (seg, si) {
@@ -874,7 +881,7 @@
     });
     var tb = '<thead><tr><th>Step</th><th class="num">$000s</th></tr></thead><tbody>';
     cols.forEach(function (c) {
-      if (c.kind === 'stacked') {
+      if (false && c.kind === 'stacked') {
         c.segments.forEach(function (seg) {
           tb += '<tr><td>' + esc(seg.label) + '</td><td class="num">' + Math.round(seg.to - seg.from).toLocaleString('en-US') + '</td></tr>';
         });
@@ -978,39 +985,75 @@
     EXP_VECTORS.forEach(function(v){ totalCounts[v.key] = (knownCounts[v.key]||0) + (counts[v.key]||0); var lift = (counts[v.key]||0) * v.pLift * 140; liftPer[v.key] = lift; total += lift; });
     return { total: total, per: liftPer, counts: counts, knownCounts: knownCounts, totalCounts: totalCounts, toAllocate: toAllocate, missing: missing, remaining: missing - toAllocate };
   }
+  function renderHistogram(){
+    var missing = EXP_MISSING_BASE + Math.round((LEVERS[0].trans['none>I']+LEVERS[0].trans['none>II']+LEVERS[0].trans['none>III']) * LEVERS[0].real / 100);
+    var eq = computeExpQuality(missing, EXP_ALLOC);
+    // buckets: 0 | 1-10 | 11-20 | ... | 91-100  (11 buckets)
+    var buckets = [ {label:'0', lo:0, hi:0, count:0, isZero:true} ];
+    for(var lo=1; lo<=91; lo+=10) buckets.push({label: lo+'–'+Math.min(lo+9,100), lo:lo, hi:Math.min(lo+9,100), count:0});
+    function add(n, pts){
+      var tier = pts===0 ? 0 : (pts<=10 ? 1 : (pts<=20 ? 2 : 0));
+      // actually bucket by pts value: 0->bucket0, 1-10->1, 11-20->2, else higher (all 0 for now)
+      if(pts===0) buckets[0].count += n;
+      else if(pts<=10) buckets[1].count += n;
+      else if(pts<=20) buckets[2].count += n;
+      else {
+        // generic: find bucket containing pts
+        for(var i=1;i<buckets.length;i++) if(pts>=buckets[i].lo && pts<=buckets[i].hi){ buckets[i].count+=n; break; }
+      }
+    }
+    // Known 400 by vector pts
+    EXP_VECTORS.forEach(function(v){ add(EXP_KNOWN_SPLIT[v.key]||0, v.pts); });
+    // Allocated from missing
+    EXP_VECTORS.forEach(function(v){ add(eq.counts[v.key]||0, v.pts); });
+    // Still missing stays at 0
+    add(eq.remaining||0, 0);
+
+    var maxC = Math.max.apply(null, buckets.map(function(b){return b.count;})) || 1;
+    var html = '<div class="hist-wrap">';
+    buckets.forEach(function(b){
+      var h = b.count===0 ? 2 : Math.round((b.count / maxC) * 110);
+      var cls = b.isZero ? 'hist-col zero' : 'hist-col';
+      html += '<div class="hist-bar"><div class="hist-val">'+b.count+'</div><div class="'+cls+'" style="height:'+h+'px"></div><div class="hist-label'+(b.isZero?' tier':'')+'">'+b.label+'</div></div>';
+    });
+    html += '</div>';
+    // tier band labels below
+    html += '<div style="display:flex; gap:4px; margin-top:4px; font-size:9px; color:var(--muted); text-align:center;">';
+    html += '<div style="flex:1; border-top:2px solid var(--tier-3); padding-top:2px;">Tier III<br>0–33</div>';
+    html += '<div style="flex:5; border-top:2px solid var(--tier-2); padding-top:2px;">Tier II: 34–66 (empty until more criteria)</div>';
+    html += '<div style="flex:3.4; border-top:2px solid var(--tier-1); padding-top:2px;">Tier I<br>67–100</div>';
+    html += '</div>';
+    var el=$('scoreHistogram'); if(el) el.innerHTML=html;
+    // update header stats
+    var smMiss=$('smMissing'); if(smMiss) smMiss.textContent=missing.toLocaleString('en-US');
+    var smMiss2=$('smMissing2'); if(smMiss2) smMiss2.textContent=missing.toLocaleString('en-US');
+    var smAlloc=$('smAllocated'); if(smAlloc) smAlloc.textContent=(eq.toAllocate||0).toLocaleString('en-US');
+    var smRem=$('smRemaining'); if(smRem) smRem.textContent=(eq.remaining||0).toLocaleString('en-US');
+  }
   function render() {
     var V = tierValues();
     var gate = LEVERS[0];
     var gateTotal = gate.trans['none>I'] + gate.trans['none>II'] + gate.trans['none>III']; // 216
     var revivedGate = Math.round(gateTotal * gate.real / 100);
     var onGrid = 526 + revivedGate;
-    var missing = EXP_MISSING_BASE + revivedGate; // 126 -> 342
-    var known = EXP_KNOWN_BASE; // 400
+    var missing = EXP_MISSING_BASE + revivedGate;
     var expQuality = computeExpQuality(missing, EXP_ALLOC);
+    // FROZEN GSV — histogram phase, do not wire to tier yet
     var gateFull = transValue(gate.trans, V);
     var gateReal = gateFull * gate.real / 100;
-    var qualityFull = (function(){ var best={}; EXP_VECTORS.forEach(function(v){best[v.key]=0;}); var top = EXP_VECTORS.slice().sort(function(a,b){return b.pLift-a.pLift;})[0]; best[top.key]=missing; return computeExpQuality(missing, best).total; })();
-    var qualityReal = expQuality.total;
-    function effFull(l){
-      if (l.id === 'gate') return gateFull;
-      if (l.id === 'expVec') return qualityFull;
-      return 0;
-    }
-    function effReal(l){
-      if (l.id === 'gate') return gateReal;
-      if (l.id === 'expVec') return qualityReal;
-      return 0;
-    }
-    var effOpen = {
+    function effFull(l){ if(l.id==='gate') return gateFull; if(l.id==='combined') return gateFull; return 0; }
+    function effReal(l){ if(l.id==='gate' || l.id==='combined') return gateReal; return 0; }
+    // Display tiers use base OPEN+gate only (no exp scoring) — histogram is separate
+    var curEffCounts = {
       I: 6 + Math.round((gate.trans['none>I']||0) * gate.real / 100),
       II: 194 + Math.round((gate.trans['none>II']||0) * gate.real / 100),
       III: 326 + Math.round((gate.trans['none>III']||0) * gate.real / 100)
     };
-    var curEff = effOpen.I * V.I + effOpen.II * V.II + effOpen.III * V.III;
+    var curEff = curEffCounts.I * V.I + curEffCounts.II * V.II + curEffCounts.III * V.III;
     var b = renderBridge(V, effFull, effReal);
     renderLiftmap(V, effFull, expQuality);
     renderTop(V);
-    var full = gateFull + qualityFull;
+    var full = gateFull;
     $('kpiCur').textContent = fmtM(curEff);
     $('kpiFull').textContent = fmtM(full);
     $('kpiReal').textContent = fmtM(b.realized);
@@ -1020,13 +1063,13 @@
     $('hlGap').textContent = fmtM(full);
     $('stGap').textContent = fmtM(full);
     $('sbGap').textContent = fmtM(full);
-    if ($('openI')) $('openI').textContent = effOpen.I.toLocaleString('en-US');
-    if ($('openII')) $('openII').textContent = effOpen.II.toLocaleString('en-US');
-    if ($('openIII')) $('openIII').textContent = effOpen.III.toLocaleString('en-US');
+    if ($('openI')) $('openI').textContent = curEffCounts.I.toLocaleString('en-US');
+    if ($('openII')) $('openII').textContent = curEffCounts.II.toLocaleString('en-US');
+    if ($('openIII')) $('openIII').textContent = curEffCounts.III.toLocaleString('en-US');
     if ($('dormCell')) $('dormCell').textContent = (342 - revivedGate).toLocaleString('en-US');
-    $('gsvI').textContent = fmtM(effOpen.I * V.I);
-    $('gsvII').textContent = fmtM(effOpen.II * V.II);
-    $('gsvIII').textContent = fmtM(effOpen.III * V.III);
+    $('gsvI').textContent = fmtM(curEffCounts.I * V.I);
+    $('gsvII').textContent = fmtM(curEffCounts.II * V.II);
+    $('gsvIII').textContent = fmtM(curEffCounts.III * V.III);
     $('gsvTot').textContent = fmtM(curEff);
     LEVERS.forEach(function (l) {
       var amtEl = $('amt-' + l.id); if (amtEl) amtEl.textContent = '+' + fmtM(effReal(l));
@@ -1076,38 +1119,7 @@
         var pctEl = $('erpct-' + v.key); if (pctEl) pctEl.textContent = (expQuality.counts && expQuality.counts[v.key] != null ? expQuality.counts[v.key] : 0);
         var sliderEl = $('er-' + v.key); if (sliderEl && document.activeElement !== sliderEl) sliderEl.value = (expQuality.counts && expQuality.counts[v.key]!=null?expQuality.counts[v.key]:0);
       });
-      // score matrix: for each vector bucket, split total cases into tier score buckets by pts tier propensity
-      (function(){
-        var tierProp = {
-          direct: { I:0.10, II:0.42, III:0.48 },
-          para:   { I:0.03, II:0.32, III:0.65 },
-          drift:  { I:0.01, II:0.22, III:0.77 },
-          missing:{ I:0.00, II:0.08, III:0.92 }
-        };
-        var rows = [];
-        EXP_VECTORS.forEach(function(v){
-          var tot = expQuality.totalCounts[v.key]||0;
-          var p = tierProp[v.key]||tierProp.missing;
-          rows.push({ label: v.label + ' ('+v.pts+' pts)', pts: v.pts, I: Math.round(tot*p.I), II: Math.round(tot*p.II), III: Math.round(tot*p.III), tot: tot });
-        });
-        var rem = expQuality.remaining||0;
-        var pm = tierProp.missing;
-        rows.push({ label: 'Still missing (0 pts)', pts: 0, I: Math.round(rem*pm.I), II: Math.round(rem*pm.II), III: Math.round(rem*pm.III), tot: rem });
-        // totals
-        var totI=0, totII=0, totIII=0, totAll=0;
-        rows.forEach(function(r){ totI+=r.I; totII+=r.II; totIII+=r.III; totAll+=r.tot; });
-        // gate-adjusted on-grid tier totals: blend rows totals with OPEN+gate base (OPEN already in rows via known split, but we also have OPEN base outside vector — instead show rows as the portfolio view)
-        // For display, show rows plus a total row that should equal onGrid (526+revived = totAll check)
-        var tb=''; rows.forEach(function(r){
-          tb+='<tr><td>'+esc(r.label)+'</td><td style="text-align:center">'+r.pts+'</td><td class="num">'+r.I.toLocaleString('en-US')+'</td><td class="num">'+r.II.toLocaleString('en-US')+'</td><td class="num">'+r.III.toLocaleString('en-US')+'</td><td class="num"><b>'+r.tot.toLocaleString('en-US')+'</b></td></tr>';
-        });
-        tb+='<tr><td>Total on-grid</td><td style="text-align:center">—</td><td class="num">'+totI.toLocaleString('en-US')+'</td><td class="num">'+totII.toLocaleString('en-US')+'</td><td class="num">'+totIII.toLocaleString('en-US')+'</td><td class="num">'+totAll.toLocaleString('en-US')+'</td></tr>';
-        var body=$('scoreMatrixBody'); if(body) body.innerHTML=tb;
-        var smMiss=$('smMissing'); if(smMiss) smMiss.textContent=missing.toLocaleString('en-US');
-        var smMiss2=$('smMissing2'); if(smMiss2) smMiss2.textContent=missing.toLocaleString('en-US');
-        var smAlloc=$('smAllocated'); if(smAlloc) smAlloc.textContent=(expQuality.toAllocate||0).toLocaleString('en-US');
-        var smRem=$('smRemaining'); if(smRem) smRem.textContent=(expQuality.remaining||0).toLocaleString('en-US');
-      })();
+      renderHistogram();
       if (typeof syncPresetActive === 'function') syncPresetActive();
       if (typeof syncOnGridPresetActive === 'function') syncOnGridPresetActive();
     })();
