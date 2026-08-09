@@ -242,6 +242,22 @@
   .legend-stacked .sw-stack { width:10px; height:20px; border-radius:3px; display:inline-flex; flex-direction:column; overflow:hidden; }
   .legend-stacked .sw-stack span { flex:1; display:block; }
 
+  /* criteria strip — 4 cute boxes */
+  .crit-strip { display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin:12px 0 0; }
+  @media (max-width: 900px) { .crit-strip { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .crit-strip { grid-template-columns: 1fr; } }
+  .crit-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 12px 10px; }
+  .crit-box.placeholder { opacity:0.55; border-style:dashed; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:120px; text-align:center; }
+  .crit-box .cb-head { font-size:11px; font-weight:650; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+  .crit-box .cb-sub { font-size:10.5px; color:var(--muted); margin-bottom:8px; }
+  .crit-box .cb-sub b { color:var(--ink-2); }
+  .crit-bucket { padding:7px 8px; border:1px solid var(--border); border-radius:7px; background:var(--page); margin-bottom:6px; }
+  .crit-bucket .bname { font-size:11px; font-weight:600; color:var(--ink); }
+  .crit-bucket .bmeta { font-size:10px; color:var(--muted); }
+  .crit-bucket .bmeta b { color:var(--ink-2); }
+  .crit-bucket input[type=range] { width:100%; accent-color:var(--tier-2); height:14px; margin-top:4px; }
+  .crit-bucket .bpct { font-size:10px; color:var(--ink-2); text-align:right; font-variant-numeric:tabular-nums; }
+
   /* ---------- charts ---------- */
   svg text { font: 11.5px system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--ink-2); }
   svg .val { font-weight: 600; fill: var(--ink); }
@@ -476,6 +492,8 @@
     </div>
   </div>
 
+  <div class="crit-strip" id="critStrip"></div>
+
   <div class="cta-mid">
     <div class="line">That jump you just made with a slider? In an engagement it's a <b>ranked work list</b> — file numbers, the gap on each, and what curing it is worth.</div>
     <div class="action">
@@ -621,12 +639,25 @@
     { key:'drift',   label:'Drift / Bystander / Re-entry exposure',            pts:4,  pLift:0.15 },
     { key:'para',    label:'Para-occupational / Take-home / Residue',          pts:7,  pLift:0.28 }
   ]
+  var PD_SEVERITY = [
+    { key:'advanced', label:'Advanced', pts:25, known: 70 },
+    { key:'moderate', label:'Moderate', pts:14, known: 140 },
+    { key:'early',    label:'Early / Mild', pts:6,  known: 115 }
+  ];
+  // known sums: 70+140+115=325 (of 400, rest pd-missing). pd missing grows with gate same as exp.
+  var PD_MISSING_BASE = 201; // 526-325=201 pd-missing at gate 25%? wait 526 on-grid - 325 known =201. But base 526-325=201. At gate0 526->201. At gate25 612->287.
+  var PD_ALLOC = { advanced: 42, moderate: 42, early: 42 };
+  window.PD_ALLOC = PD_ALLOC;
+
   var TIER_BANDS = [
     { tier:'I',   label:'Tier I',   band:'67–100', min:67, max:100, color:'var(--tier-1)' },
     { tier:'II',  label:'Tier II',  band:'34–66',  min:34, max:66,  color:'var(--tier-2)' },
     { tier:'III', label:'Tier III', band:'0–33',   min:0,  max:33,  color:'var(--tier-3)' }
   ];
   function tierForScore(s){ if(s>=67) return 'I'; if(s>=34) return 'II'; return 'III'; };
+  function pdMissing(){ return PD_MISSING_BASE + Math.round((LEVERS[0].trans['none>I']+LEVERS[0].trans['none>II']+LEVERS[0].trans['none>III']) * LEVERS[0].real / 100); }
+  function expMissing(){ return EXP_MISSING_BASE + Math.round((LEVERS[0].trans['none>I']+LEVERS[0].trans['none>II']+LEVERS[0].trans['none>III']) * LEVERS[0].real / 100); }
+
   var LEVERS = [
     { id: 'gate',
       name: 'Clear all 5 gates on dormant matters — revive to on-grid †',
@@ -971,6 +1002,13 @@
   }
 
   // ---------- master render \u2014 TWO DRIVERS: volume (gate) + quality (exposure vector) ----------
+  function computePdQuality(missing, alloc){
+    var counts={}; var total=0; var toAlloc=0;
+    PD_SEVERITY.forEach(function(v){ var c=Math.max(0,alloc[v.key]||0); counts[v.key]=c; toAlloc+=c; });
+    if(toAlloc>missing){ var keys=PD_SEVERITY.map(function(v){return v.key;}).sort(function(a,b){return (alloc[b]||0)-(alloc[a]||0);}); var over=toAlloc-missing; for(var i=0;i<keys.length&&over>0;i++){ var k=keys[i]; var take=Math.min(over, counts[k]); counts[k]-=take; over-=take; } toAlloc=missing; }
+    var knownCounts={}; var totalCounts={}; PD_SEVERITY.forEach(function(v){ knownCounts[v.key]=v.known||0; totalCounts[v.key]=knownCounts[v.key]+counts[v.key]; });
+    return { counts:counts, knownCounts:knownCounts, totalCounts:totalCounts, toAllocate:toAlloc, remaining: missing-toAlloc, missing:missing };
+  }
   function computeExpQuality(missing, alloc) {
     var per = {}; var counts = {}; var knownCounts = {}; var totalCounts = {};
     var total = 0; var liftPer = {}; var toAllocate = 0;
@@ -1001,12 +1039,38 @@
         for(var i=1;i<buckets.length;i++) if(pts>=buckets[i].lo && pts<=buckets[i].hi){ buckets[i].count+=n; break; }
       }
     }
-    // Known 400 by vector pts
-    EXP_VECTORS.forEach(function(v){ add(EXP_KNOWN_SPLIT[v.key]||0, v.pts); });
-    // Allocated from missing
-    EXP_VECTORS.forEach(function(v){ add(eq.counts[v.key]||0, v.pts); });
-    // Still missing stays at 0
-    add(eq.remaining||0, 0);
+    // Weighted total per case — sum of criteria pts. Model joint distribution
+    // via proportional overlap: assume criteria independent, distribute cases across score combos.
+    // Simplified: treat populations as overlapping — each bucket maps to combined score ranges.
+    // For now with 2 criteria, enumerate case groups and add to bucket by sum.
+    (function(){
+      // Build group lists: {pts, count} for each criterion including still-missing (0)
+      var expGroups = [];
+      EXP_VECTORS.forEach(function(v){ expGroups.push({pts: v.pts, n: EXP_KNOWN_SPLIT[v.key]||0}); expGroups.push({pts: v.pts, n: eq.counts[v.key]||0}); });
+      expGroups.push({pts: 0, n: eq.remaining||0});
+      var pdEq = window._pdQual || computePdQuality(pdMissing(), PD_ALLOC);
+      var pdGroups = [];
+      PD_SEVERITY.forEach(function(v){ pdGroups.push({pts: v.pts, n: v.known||0}); pdGroups.push({pts: v.pts, n: pdEq.counts[v.key]||0}); });
+      pdGroups.push({pts: 0, n: pdEq.remaining||0});
+      // Cross-product proportional: each exp group overlaps proportionally with each pd group
+      var expTot=0, pdTot=0; expGroups.forEach(function(g){expTot+=g.n;}); pdGroups.forEach(function(g){pdTot+=g.n;});
+      // expTot and pdTot should both equal onGrid; if mismatch, normalize
+      expGroups.forEach(function(eg){
+        pdGroups.forEach(function(pg){
+          var jointN = Math.round(eg.n * pg.n / pdTot);
+          var sum = eg.pts + pg.pts;
+          add(jointN, sum);
+        });
+      });
+      // Drift correction: ensure total = onGrid
+      var onGrid2 = EXP_MISSING_BASE + 400 + Math.round((LEVERS[0].trans['none>I']+LEVERS[0].trans['none>II']+LEVERS[0].trans['none>III']) * LEVERS[0].real / 100);
+      var curTot=0; buckets.forEach(function(b){curTot+=b.count;});
+      var drift = onGrid2 - curTot;
+      if(drift!==0){ // add to highest populated bucket
+        var bi=0; for(var i=0;i<buckets.length;i++) if(buckets[i].count>buckets[bi].count) bi=i;
+        buckets[bi].count+=drift;
+      }
+    })();
 
     var maxC = Math.max.apply(null, buckets.map(function(b){return b.count;})) || 1;
     var html = '<div class="hist-wrap">';
@@ -1028,6 +1092,65 @@
     var smMiss2=$('smMissing2'); if(smMiss2) smMiss2.textContent=missing.toLocaleString('en-US');
     var smAlloc=$('smAllocated'); if(smAlloc) smAlloc.textContent=(eq.toAllocate||0).toLocaleString('en-US');
     var smRem=$('smRemaining'); if(smRem) smRem.textContent=(eq.remaining||0).toLocaleString('en-US');
+  }
+  function renderCritStrip(){
+    var expMiss = expMissing();
+    var pdMiss = pdMissing();
+    var html = '';
+
+    // Box 1: Exposure vector (vertical, capped)
+    html += '<div class="crit-box"><div class="cb-head">Exposure vector</div><div class="cb-sub"><b>400</b> known + <b>'+expMiss+'</b> missing &nbsp;<span style="color:var(--muted)">(126 base + '+(expMiss-126)+' moved)</span></div>';
+    EXP_VECTORS.forEach(function(v){
+      var known = EXP_KNOWN_SPLIT[v.key]||0;
+      var cured = (window._expQual ? window._expQual.counts[v.key]||0 : EXP_ALLOC[v.key]||0);
+      html += '<div class="crit-bucket"><div class="bname">'+esc(v.label)+' <span style="color:var(--muted); font-weight:400">('+v.pts+' pts)</span></div><div class="bmeta"><b>'+known.toLocaleString('en-US')+'</b> known + <b id="cs-erCured-'+v.key+'">'+cured+'</b> from missing = <b id="cs-erTotal-'+v.key+'">'+(known+cured)+'</b> total</div><input type="range" min="0" max="'+expMiss+'" step="1" value="'+(EXP_ALLOC[v.key]||0)+'" id="cs-er-'+v.key+'"><div class="bpct"><span id="cs-erpct-'+v.key+'">'+(EXP_ALLOC[v.key]||0)+'</span> from missing</div></div>';
+    });
+    html += '</div>';
+
+    // Box 2: Parkinson severity
+    html += "<div class='crit-box'><div class='cb-head'>Parkinson's severity</div><div class='cb-sub'><b>325</b> known + <b>"+pdMiss+"</b> missing &nbsp;<span style='color:var(--muted)'>(201 base + "+(pdMiss-201)+" moved)</span></div>";
+    PD_SEVERITY.forEach(function(v){
+      var known = v.known||0;
+      var cured = (window._pdQual ? window._pdQual.counts[v.key]||0 : PD_ALLOC[v.key]||0);
+      html += '<div class="crit-bucket"><div class="bname">'+esc(v.label)+' <span style="color:var(--muted); font-weight:400">('+v.pts+' pts)</span></div><div class="bmeta"><b>'+known+'</b> known + <b id="cs-pdCured-'+v.key+'">'+cured+'</b> from missing = <b id="cs-pdTotal-'+v.key+'">'+(known+cured)+'</b> total</div><input type="range" min="0" max="'+pdMiss+'" step="1" value="'+(PD_ALLOC[v.key]||0)+'" id="cs-pd-'+v.key+'"><div class="bpct"><span id="cs-pdpct-'+v.key+'">'+(PD_ALLOC[v.key]||0)+'</span> from missing</div></div>';
+    });
+    html += '</div>';
+
+    // Boxes 3 & 4: placeholders
+    html += '<div class="crit-box placeholder"><div class="cb-head" style="color:var(--muted)">Criterion 3</div><div style="font-size:22px; margin:6px 0; color:var(--muted)">+</div><div style="font-size:11px; color:var(--muted)">Coming soon<br><span style="font-size:10px">e.g. Exposure duration</span></div></div>';
+    html += '<div class="crit-box placeholder"><div class="cb-head" style="color:var(--muted)">Criterion 4</div><div style="font-size:22px; margin:6px 0; color:var(--muted)">+</div><div style="font-size:11px; color:var(--muted)">Coming soon<br><span style="font-size:10px">e.g. Age / latency</span></div></div>';
+
+    var el = document.getElementById('critStrip');
+    if(el) el.innerHTML = html;
+
+    // Wire exp buckets (mirror id cs-er-*)
+    EXP_VECTORS.forEach(function(v){
+      var inp = document.getElementById('cs-er-'+v.key);
+      if(!inp) return;
+      inp.addEventListener('input', function(){
+        var miss = expMissing();
+        var other=0; EXP_VECTORS.forEach(function(vv){ if(vv.key!==v.key) other+=(EXP_ALLOC[vv.key]||0); });
+        var cap = Math.max(0, miss-other);
+        var val = Math.min(+this.value, cap);
+        EXP_ALLOC[v.key]=val; this.value=val;
+        var lab=document.getElementById('cs-erpct-'+v.key); if(lab) lab.textContent=val;
+        render();
+      });
+    });
+    // Wire pd buckets
+    PD_SEVERITY.forEach(function(v){
+      var inp = document.getElementById('cs-pd-'+v.key);
+      if(!inp) return;
+      inp.addEventListener('input', function(){
+        var miss = pdMissing();
+        var other=0; PD_SEVERITY.forEach(function(vv){ if(vv.key!==v.key) other+=(PD_ALLOC[vv.key]||0); });
+        var cap = Math.max(0, miss-other);
+        var val = Math.min(+this.value, cap);
+        PD_ALLOC[v.key]=val; this.value=val;
+        var lab=document.getElementById('cs-pdpct-'+v.key); if(lab) lab.textContent=val;
+        render();
+      });
+    });
   }
   function render() {
     var V = tierValues();
@@ -1098,6 +1221,10 @@
       EXP_VECTORS.forEach(function(v){
         var el = $('er-' + v.key); if (el) el.max = missing;
       });
+      // keep 4-box strip in sync (re-render strip each render so caps update)
+      renderCritStrip();
+      // also update legacy expHzWrap if present (hide its inner but keep compat)
+      (function(){ var w=$('expHzWrap'); if(w) w.style.display='none'; })();
       // enforce cap after gate change
       (function(){
         var sum=0; EXP_VECTORS.forEach(function(v){ sum+=EXP_ALLOC[v.key]||0; });
