@@ -95,7 +95,19 @@
     border-radius: 10px; padding: 18px 20px;
   }
   .section-title { font-size: 12px; font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 30px 0 10px; }
+  .section-title-row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 16px; margin: 30px 0 10px; }
+  .section-title-row .section-title { margin: 0; }
+  .docket-chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .docket-chips .dc { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-2); white-space: nowrap; }
+  .docket-chips .dc b { color: var(--ink); font-weight: 700; }
+  .docket-chips .dc.dot { border-style: dashed; }
+  .active-hdr { font-size: 11px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 8px 0 6px; margin: 6px 0 0; border-top: 1px solid var(--grid); display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .active-hdr b { color: var(--ink); }
+  .lever-sep { height: 1px; background: var(--grid); margin: 2px 0 10px; }
   .card h3 { font-size: 15px; font-weight: 650; margin-bottom: 2px; }
+  #bridgeCard { display: flex; flex-direction: column; }
+  #bridgeCard #bridge { flex: 1; display: flex; align-items: stretch; }
+  #bridgeCard #bridge svg { height: 100%; min-height: 400px; }
   .card .sub { font-size: 12.5px; color: var(--ink-2); margin-bottom: 12px; }
 
   /* ---------- KPI row ---------- */
@@ -318,7 +330,16 @@
     </div>
   </div>
 
-  <div class="section-title">Four levers · <span id="stGap">$71.8M</span> of lift · dormant → gate → active</div>
+  <div class="section-title-row">
+    <div class="section-title">Value at stake · <span id="stGap">$71.8M</span> lift · 4 levers, dormant → gate → active</div>
+    <div class="docket-chips" aria-label="Docket composition">
+      <span class="dc"><b>658</b> Open</span>
+      <span class="dc"><b>526</b> on-grid</span>
+      <span class="dc dot"><b>132</b> Open · below grid (fails gate)</span>
+      <span class="dc" style="background:var(--wash); border-color: var(--grid)"><b>342</b> Dormant</span>
+      <span class="dc" style="background:var(--ink); color:var(--surface); border-color:var(--ink)"><b>1,000</b> total</span>
+    </div>
+  </div>
   <div class="cols">
     <div class="card" id="bridgeCard">
       <h3>Gross settlement value bridge</h3>
@@ -586,7 +607,7 @@
   function buildLevers() {
     var host = $('levers');
     host.innerHTML = '';
-    LEVERS.forEach(function (l) {
+    LEVERS.forEach(function (l, idx) {
       var div = document.createElement('div');
       div.className = 'lever';
       div.innerHTML =
@@ -596,6 +617,18 @@
         '<div class="rrow"><input type="range" min="0" max="100" step="5" value="' + l.real + '" id="rg-' + l.id + '" aria-label="Realization rate for ' + esc(l.name) + '">' +
         '<span class="pct" id="pct-' + l.id + '"></span></div>';
       host.appendChild(div);
+      // thin separator + dynamic ACTIVE header between gate (idx 0) and the 3 active levers
+      if (idx === 0) {
+        var sep = document.createElement('div');
+        sep.className = 'lever-sep';
+        host.appendChild(sep);
+        var hdr = document.createElement('div');
+        hdr.className = 'active-hdr';
+        hdr.id = 'activeHdr';
+        // content filled in render(); placeholder here
+        hdr.innerHTML = '<span>Active docket levers</span><span><b id="activeCount">658</b> active matters</span>';
+        host.appendChild(hdr);
+      }
       $('rg-' + l.id).addEventListener('input', function () {
         l.real = +this.value;
         document.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('active'); });
@@ -620,7 +653,7 @@
     // stable-ish scale: full-cure potential so slider motion reads against a fixed frame
     var fullPot = cur + LEVERS.reduce(function (a, l) { return a + leverFull(l, V); }, 0);
     var maxV = Math.max(fullPot, pot, 1);
-    var W = 620, H = 300, padL = 52, padR = 12, padT = 26, padB = 34;
+    var W = 620, H = 400, padL = 52, padR = 12, padT = 22, padB = 22;
     var plotW = W - padL - padR, plotH = H - padT - padB;
     var y = function (v) { return padT + plotH - (v / maxV) * plotH; };
     var slot = plotW / cols.length, barW = Math.min(64, slot * 0.55);
@@ -777,6 +810,16 @@
       $('amt-' + l.id).textContent = '+' + fmtM(leverRealized(l, V));
       $('pct-' + l.id).textContent = l.real + '% · of ' + fmtM(leverFull(l, V));
     });
+    // dynamic active count: base open (658) + revived dormant that enter grid (gate lever realized matters)
+    (function(){
+      var gate = LEVERS[0];
+      var revivedMatters = Math.round((gate.trans['none>I'] + gate.trans['none>II'] + gate.trans['none>III']) * gate.real / 100);
+      var activeMatters = 658 + revivedMatters;
+      var el = $('activeCount');
+      if (el) el.textContent = activeMatters.toLocaleString('en-US');
+      var hdr = $('activeHdr');
+      if (hdr) hdr.title = revivedMatters + ' revived from dormant at ' + gate.real + '% — 658 base open + ' + revivedMatters + ' = ' + activeMatters + ' active';
+    })();
   }
 
   // ---------- wiring ----------
