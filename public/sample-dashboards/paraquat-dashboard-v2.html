@@ -167,8 +167,8 @@
   /* horizontal exp sliders below bridge */
   .exp-hz-head { display:flex; justify-content:space-between; align-items:baseline; gap:10px; font-size:11px; color:var(--ink-2); margin-bottom:8px; flex-wrap:wrap; }
   .exp-hz-head b { color:var(--ink); }
-  .exp-hz-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
-  .exp-hz-bucket { flex:1 1 0; min-width:150px; padding:10px; border:1px solid var(--border); border-radius:8px; background:var(--page); }
+  .exp-hz-row { display:flex; flex-direction:column; gap:6px; margin-bottom:6px; }
+  .exp-hz-bucket { padding:10px; border:1px solid var(--border); border-radius:8px; background:var(--page); }
   .exp-hz-bucket .bname { font-size:11px; font-weight:600; color:var(--ink); line-height:1.25; margin-bottom:4px; }
   .exp-hz-bucket .bmeta { font-size:10.5px; color:var(--muted); margin-bottom:6px; }
   .exp-hz-bucket .bmeta b { color:var(--ink-2); }
@@ -209,8 +209,8 @@
   .exp-hz-cure { display:flex; align-items:center; gap:8px; margin-bottom:10px; font-size:12px; color:var(--ink-2); }
   .exp-hz-cure input[type="range"] { flex:1; accent-color:var(--tier-2); height:18px; }
   .exp-hz-cure .pct { width:52px; text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
-  .exp-hz-row { display:flex; gap:8px; flex-wrap:wrap; }
-  .exp-hz-bucket { flex:1 1 0; min-width:140px; padding:8px 10px; border:1px solid var(--border); border-radius:8px; background:var(--page); }
+  .exp-hz-row { display:flex; flex-direction:column; gap:6px; }
+  .exp-hz-bucket { padding:8px 10px; border:1px solid var(--border); border-radius:8px; background:var(--page); }
   .exp-hz-bucket .bname { font-size:11px; font-weight:600; color:var(--ink); line-height:1.25; margin-bottom:2px; }
   .exp-hz-bucket .bmeta { font-size:10px; color:var(--muted); margin-bottom:4px; }
   .exp-hz-bucket .bmeta b { color:var(--ink-2); font-weight:600; }
@@ -431,7 +431,6 @@
   <div class="section-title-row">
     <div class="section-title">Value at stake · <span id="stGap">$71.8M</span> lift · 2 drivers: volume + quality</div>
     <div class="docket-chips" aria-label="Docket composition">
-      <span class="dc pulse" id="dcOpen"><b id="dcOpenN">658</b> Open</span>
       <span class="dc pulse" id="dcOnGrid"><b id="dcOnGridN">526</b> Open & on-grid</span>
       <span class="dc dot"><b>132</b> Open · below grid (fails gate)</span>
       <span class="dc pulse" id="dcDorm" style="background:var(--wash); border-color: var(--grid)"><b id="dcDormN">342</b> Dormant</span>
@@ -762,7 +761,7 @@
     var wrap = $('expHzWrap');
     if (!wrap) return;
     var missing = EXP_MISSING_BASE + Math.round((LEVERS[0].trans['none>I']+LEVERS[0].trans['none>II']+LEVERS[0].trans['none>III']) * LEVERS[0].real / 100);
-    var html = '<div class="exp-hz-head"><div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap"><span style="font-size:13px; font-weight:650; color:var(--ink)">Exposure vector</span><span style="font-size:11px; color:var(--muted)">\u2014 <b>400</b> known (allocated) + <b id="expHzMissingCap">'+missing+'</b> missing = cap &nbsp; <span style="color:var(--muted)">(126 base + <b id="expHzMoved">'+(missing-126)+'</b> moved from off-grid)</span></span></div></div>';
+    var html = '<div class="exp-hz-head"><div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap"><span style="font-size:13px; font-weight:650; color:var(--ink)">Exposure vector</span><span style="font-size:11px; color:var(--muted)">\u2014 <b>400</b> known (allocated) + <b id="expHzMissingCap">'+missing+'</b> missing &nbsp; <span style="color:var(--muted)">(126 base + <b id="expHzMoved">'+(missing-126)+'</b> moved from off-grid)</span></span></div></div>';
     html += '<div class="exp-hz-row">';
     EXP_VECTORS.forEach(function(v) {
       var known = EXP_KNOWN_SPLIT[v.key]||0;
