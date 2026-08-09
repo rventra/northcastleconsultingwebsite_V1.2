@@ -214,7 +214,7 @@
   .exp-hz-bucket .bname { font-size:11px; font-weight:600; color:var(--ink); line-height:1.25; margin-bottom:2px; }
   .exp-hz-bucket .bmeta { font-size:10px; color:var(--muted); margin-bottom:4px; }
   .exp-hz-bucket .bmeta b { color:var(--ink-2); font-weight:600; }
-  .exp-hz-bucket input[type="range"] { width:100%; accent-color:var(--tier-2); height:16px; }
+  .exp-hz-bucket input[type="range"] { width:100%; accent-color:var(--cta); height:16px; }
   .exp-hz-bucket .bpct { font-size:10px; color:var(--ink-2); text-align:right; font-variant-numeric:tabular-nums; }
   /* portfolio score matrix below docket chips */
   .score-matrix { margin: 14px 0 10px; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px; }
@@ -255,7 +255,13 @@
   .crit-bucket .bname { font-size:11px; font-weight:600; color:var(--ink); }
   .crit-bucket .bmeta { font-size:10px; color:var(--muted); }
   .crit-bucket .bmeta b { color:var(--ink-2); }
-  .crit-bucket input[type=range] { width:100%; accent-color:var(--tier-2); height:14px; margin-top:4px; }
+  .crit-bucket input[type=range] { width:100%; accent-color:var(--cta); height:18px; margin-top:6px; -webkit-appearance:none; appearance:none; background:transparent; }
+  .crit-bucket input[type=range]::-webkit-slider-runnable-track { height:6px; background:var(--grid); border-radius:999px; }
+  .crit-bucket input[type=range]::-moz-range-track { height:6px; background:var(--grid); border-radius:999px; }
+  .crit-bucket input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:20px; height:20px; border-radius:50%; background:var(--cta); border:2px solid #fff; box-shadow:0 1px 6px rgba(0,0,0,0.25); cursor:grab; margin-top:-7px; }
+  .crit-bucket input[type=range]::-moz-range-thumb { width:20px; height:20px; border-radius:50%; background:var(--cta); border:2px solid #fff; box-shadow:0 1px 6px rgba(0,0,0,0.25); cursor:grab; }
+  .crit-bucket input[type=range]:active::-webkit-slider-thumb { cursor:grabbing; transform:scale(1.08); }
+  .crit-bucket input[type=range]:active::-moz-range-thumb { cursor:grabbing; transform:scale(1.08); }
   .crit-bucket .bpct { font-size:10px; color:var(--ink-2); text-align:right; font-variant-numeric:tabular-nums; }
 
   /* ---------- charts ---------- */
