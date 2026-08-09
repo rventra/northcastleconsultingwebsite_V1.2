@@ -1031,52 +1031,48 @@
   function renderHistogram(){
     var missing = EXP_MISSING_BASE + Math.round((LEVERS[0].trans['none>I']+LEVERS[0].trans['none>II']+LEVERS[0].trans['none>III']) * LEVERS[0].real / 100);
     var eq = computeExpQuality(missing, EXP_ALLOC);
-    // buckets: 0 | 1-10 | 11-20 | ... | 91-100  (11 buckets)
+    var pdEq = window._pdQual || computePdQuality(pdMissing(), PD_ALLOC);
+    var gate = LEVERS[0];
+    var gateTotal = gate.trans['none>I']+gate.trans['none>II']+gate.trans['none>III'];
+    var revived = Math.round(gateTotal * gate.real / 100);
+    var dormantRem = 342 - revived;
+    var belowGridStatic = 132;
+    // buckets: 0 | 1-10 | 11-20 | ... | 91-100
     var buckets = [ {label:'0', lo:0, hi:0, count:0, isZero:true} ];
     for(var lo=1; lo<=91; lo+=10) buckets.push({label: lo+'–'+Math.min(lo+9,100), lo:lo, hi:Math.min(lo+9,100), count:0});
-    function add(n, pts){
-      var tier = pts===0 ? 0 : (pts<=10 ? 1 : (pts<=20 ? 2 : 0));
-      // actually bucket by pts value: 0->bucket0, 1-10->1, 11-20->2, else higher (all 0 for now)
-      if(pts===0) buckets[0].count += n;
-      else if(pts<=10) buckets[1].count += n;
-      else if(pts<=20) buckets[2].count += n;
-      else {
-        // generic: find bucket containing pts
-        for(var i=1;i<buckets.length;i++) if(pts>=buckets[i].lo && pts<=buckets[i].hi){ buckets[i].count+=n; break; }
-      }
+    function bucketFor(pts){
+      if(pts===0) return 0;
+      if(pts<=10) return 1;
+      if(pts<=20) return 2;
+      for(var i=1;i<buckets.length;i++) if(pts>=buckets[i].lo && pts<=buckets[i].hi) return i;
+      return buckets.length-1;
     }
-    // Weighted total per case — sum of criteria pts. Model joint distribution
-    // via proportional overlap: assume criteria independent, distribute cases across score combos.
-    // Simplified: treat populations as overlapping — each bucket maps to combined score ranges.
-    // For now with 2 criteria, enumerate case groups and add to bucket by sum.
-    (function(){
-      // Build group lists: {pts, count} for each criterion including still-missing (0)
-      var expGroups = [];
-      EXP_VECTORS.forEach(function(v){ expGroups.push({pts: v.pts, n: EXP_KNOWN_SPLIT[v.key]||0}); expGroups.push({pts: v.pts, n: eq.counts[v.key]||0}); });
-      expGroups.push({pts: 0, n: eq.remaining||0});
-      var pdEq = window._pdQual || computePdQuality(pdMissing(), PD_ALLOC);
-      var pdGroups = [];
-      PD_SEVERITY.forEach(function(v){ pdGroups.push({pts: v.pts, n: v.known||0}); pdGroups.push({pts: v.pts, n: pdEq.counts[v.key]||0}); });
-      pdGroups.push({pts: 0, n: pdEq.remaining||0});
-      // Cross-product proportional: each exp group overlaps proportionally with each pd group
-      var expTot=0, pdTot=0; expGroups.forEach(function(g){expTot+=g.n;}); pdGroups.forEach(function(g){pdTot+=g.n;});
-      // expTot and pdTot should both equal onGrid; if mismatch, normalize
-      expGroups.forEach(function(eg){
-        pdGroups.forEach(function(pg){
-          var jointN = Math.round(eg.n * pg.n / pdTot);
-          var sum = eg.pts + pg.pts;
-          add(jointN, sum);
-        });
+    function add(n, pts){ if(n<=0) return; buckets[bucketFor(pts)].count += n; }
+    // On-grid diagnosed pools: known + cured, still-missing at 0
+    var expGroups = [];
+    EXP_VECTORS.forEach(function(v){ expGroups.push({pts: v.pts, n: EXP_KNOWN_SPLIT[v.key]||0}); if(eq.counts[v.key]) expGroups.push({pts: v.pts, n: eq.counts[v.key]}); });
+    expGroups.push({pts: 0, n: eq.remaining||0});
+    var pdGroups = [];
+    PD_SEVERITY.forEach(function(v){ pdGroups.push({pts: v.pts, n: v.known||0}); if(pdEq.counts[v.key]) pdGroups.push({pts: v.pts, n: pdEq.counts[v.key]}); });
+    pdGroups.push({pts: 0, n: pdEq.remaining||0});
+    // Joint = exp x pd cross-product, normalized to onGrid
+    var pdTot=0; pdGroups.forEach(function(g){pdTot+=g.n;});
+    expGroups.forEach(function(eg){
+      pdGroups.forEach(function(pg){
+        var jointN = Math.round(eg.n * pg.n / pdTot);
+        add(jointN, eg.pts + pg.pts);
       });
-      // Drift correction: ensure total = onGrid
-      var onGrid2 = EXP_MISSING_BASE + 400 + Math.round((LEVERS[0].trans['none>I']+LEVERS[0].trans['none>II']+LEVERS[0].trans['none>III']) * LEVERS[0].real / 100);
-      var curTot=0; buckets.forEach(function(b){curTot+=b.count;});
-      var drift = onGrid2 - curTot;
-      if(drift!==0){ // add to highest populated bucket
-        var bi=0; for(var i=0;i<buckets.length;i++) if(buckets[i].count>buckets[bi].count) bi=i;
-        buckets[bi].count+=drift;
-      }
-    })();
+    });
+    // Drift -> onGrid (400 known exp already counted in joint, but joint double-normalizes)
+    var onGrid = 526 + revived;
+    var curTot=0; buckets.forEach(function(b){curTot+=b.count;});
+    var belowDorm = dormantRem + belowGridStatic;
+    // curTot currently = onGrid (joint of on-grid pools). Add below/dormant at 0.
+    add(belowDorm, 0);
+    curTot=0; buckets.forEach(function(b){curTot+=b.count;});
+    var drift = 1000 - curTot;
+    if(drift!==0){ buckets[drift>0 ? 0 : 0].count += drift; buckets[0].count = Math.max(0, buckets[0].count); }
+
 
     var maxC = Math.max.apply(null, buckets.map(function(b){return b.count;})) || 1;
     var html = '<div class="hist-wrap">';
