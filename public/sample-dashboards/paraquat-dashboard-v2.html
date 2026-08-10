@@ -98,6 +98,15 @@
   }
   .card-hdr-row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; flex-wrap:wrap; }
   .sales-headline { font-size:24px; font-weight:700; color:var(--ink); letter-spacing:-0.015em; line-height:1.2; margin-bottom:6px; }
+  .sales-headline.salesy {
+    font-size:26px; font-weight:800;
+    color:#0F5132;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: #16A34A;
+    text-underline-offset: 4px;
+    letter-spacing: -0.02em;
+  }
   .sales-sub { font-size:14px; color:var(--ink-2); line-height:1.45; margin-bottom:14px; }
   .lever-box-header { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--grid); }
   .lever-box-title { font-size:14px; font-weight:600; color:var(--ink); letter-spacing:-0.005em; }
@@ -743,7 +752,7 @@
   <p class="lede">Law firms litigate cases, but the gap between current settlement value and maximum potential is often left unmanaged. That gap represents a decaying asset: deadlines blow, claimants disengage, and thin files result in thin payouts. On this 1,000-matter illustrative docket, we isolated a <strong id="ledeGap">$116M</strong> gap against <strong id="ledeCur">$185M</strong> in current GSV. The recovery mechanism is strictly mechanical: revive dormant cases that clear the gate, then systematically cure the active docket. The dashboard below models the four levers, the underlying case gaps, and the projected yield of curing each one.</p>
 
   <div class="lift-levers" style="margin-bottom:16px;">
-    <div class="sales-headline">Unlock a higher Gross Settlement Value</div>
+    <div class="sales-headline salesy">Increase Returns on your financed mass tort Portfolios</div>
     <div class="sales-sub">We can increase GSV in two ways. They run in parallel on every matter.</div>
     <ul style="margin:0 0 0 18px; padding:0; font-size:13px; line-height:1.55; color:var(--ink-2);">
       <li><b style="color:var(--ink); font-style:italic;">Volume</b> &mdash; revive dormant cases that clear all eligibility gates onto the active grid.</li>
