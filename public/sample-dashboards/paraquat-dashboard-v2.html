@@ -615,6 +615,8 @@
 
   /* Execution machinery — clean 3-column */
   .exec3 { gap: 14px; margin-top: 8px; }
+  .exec4 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+  @media (max-width: 900px) { .exec4 { grid-template-columns: 1fr; } }
   .exec {
     padding: 18px 18px 16px;
     border-radius: 12px;
@@ -832,25 +834,25 @@
 
   <div class="section-title">Diagnosis is half the job — here's how the value gets unlocked</div>
   <div class="card">
-    <h3>The dashboard finds the value. The platform recovers it.</h3>
-    <div class="sub">Each lever maps to execution machinery North Castle runs inside mass tort practices — the same 8-stage platform this diagnostic comes from. You don't get a finding; you get the fix.</div>
-    <div class="exec3">
+    <div class="sub" style="margin-top:2px; margin-bottom:12px; font-size:13.5px; color:var(--ink); font-weight:600; line-height:1.55;">Here is the revised 4-lever structure with Lever 1 sharply focused on systematizing missing evidence for your existing inventory.</div>
+    <div class="sub" style="margin-bottom:14px;">The diagnostic finds the yield. The platform extracts it. Each gap priced above is tied to a specific operational failure. North Castle runs the execution machinery to cure them. This is the operational platform driving the diagnostic—designed entirely to convert potential GSV into realized capital.</div>
+    <div class="exec4">
       <div class="exec">
-        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg></div>
-        <div class="lever-tag">Lever 1 · unlock</div>
-        <div class="lever-name">Cure documentation gaps</div>
-        <div class="how">Structured intake QA and automated claimant communication chase down the missing licenses, receipts and records — without burning paralegal hours.</div>
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div class="lever-tag">Lever 1 · cure</div>
+        <div class="lever-name">Systematize Missing Evidence on Existing Cases</div>
+        <div class="how">We isolate the curable gaps across your current inventory and deploy automated claimant logic to retrieve them. Structured QA chases down the missing records, licenses, and receipts needed to upgrade an existing file without draining paralegal capacity.</div>
         <ul>
           <li><b>40–60% higher</b> document completeness rates</li>
-          <li><b>60–80%</b> claimant response rate (industry: 30–40%)</li>
+          <li><b>60–80%</b> claimant response rate (vs. 30–40% baseline)</li>
           <li><b>75% shorter</b> document cycle times</li>
         </ul>
       </div>
       <div class="exec">
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6M11 8v6"/></svg></div>
-        <div class="lever-tag">Lever 2 · unlock</div>
-        <div class="lever-name">Raise document scores</div>
-        <div class="how">AI medical record review and medical-grade OCR turn unstructured files into scored, defensible evidence that holds up in negotiation.</div>
+        <div class="lever-tag">Lever 2 · cure</div>
+        <div class="lever-name">Defensible Medical Extraction</div>
+        <div class="how">Replace manual review with medical-grade OCR and AI extraction. Unstructured files become structured, highly scored evidence.</div>
         <ul>
           <li><b>200+ data points</b> extracted per case file</li>
           <li><b>50% less</b> medical review time per case</li>
@@ -859,18 +861,29 @@
       </div>
       <div class="exec">
         <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 3v6h-6"/></svg></div>
-        <div class="lever-tag">Lever 3 · unlock</div>
-        <div class="lever-name">Re-screen recoverable matters</div>
-        <div class="how">Automated rescreening triggers re-grade closed and shelved files the moment new evidence, criteria or settlement terms land.</div>
+        <div class="lever-tag">Lever 3 · cure</div>
+        <div class="lever-name">Automated Pipeline Upgrades</div>
+        <div class="how">Shelved files don't stay shelved. Continuous re-screening automatically re-grades closed or dormant matters when new evidence or criteria hit the docket.</div>
         <ul>
-          <li>Standardized tier schemas — <b>no tier disputes</b> with defense</li>
+          <li>Standardized tier schemas—eliminating <b>tier disputes</b> with defense</li>
           <li><b>90%</b> portfolio forecast accuracy</li>
-          <li>Automated escalation the moment a file becomes viable</li>
+          <li>Automated escalation the moment a file clears the gate</li>
+        </ul>
+      </div>
+      <div class="exec">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="lever-tag">Lever 4 · control</div>
+        <div class="lever-name">Actionable Reporting &amp; Control</div>
+        <div class="how">Raw data is converted into persistent, real-time oversight. We deploy dynamic reporting systems that monitor docket health, track remediation efforts, and isolate execution bottlenecks.</div>
+        <ul>
+          <li>Real-time visibility into <b>tier distribution</b> and settlement posture</li>
+          <li>Immediate flags for <b>expiring statutes</b> and compliance failures</li>
+          <li>One-click transition from portfolio analytics to <b>matter-level execution</b></li>
         </ul>
       </div>
     </div>
-    <div class="sub" style="margin:14px 0 0;">The full lifecycle: intake QA → claimant communication → AI medical review → docket tiering → workflow control → OCR pipelines → dashboards &amp; portals. <a class="alink" href="https://www.northcastleconsulting.com/services/mass-tort" target="_blank" rel="noopener">Explore the 8-stage platform →</a></div>
   </div>
+
 
   <div class="section-title">Your assumptions, live — edit the grid and every number recomputes</div>
   <div class="cols">
