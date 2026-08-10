@@ -273,6 +273,12 @@
   .crit-strip { display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin:12px 0 0; }
   @media (max-width: 900px) { .crit-strip { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .crit-strip { grid-template-columns: 1fr; } }
+  /* KPI blurb card (replaces the "How value gets created" card) */
+  .kpi-blurb { padding: 14px 20px; }
+  .kpi-blurb .value-blurb { font-size: 12.5px; line-height: 1.55; color: var(--ink-2); font-weight: 500; }
+  /* Latency sliders horizontal inside the latency box */
+  .lat-hz-row { display:flex; gap:10px; }
+  .lat-hz-row .crit-bucket { flex:1; min-width:0; }
   /* Secondary crit strip — lives inside the levers card, stacked vertically (cert on top, lat below) */
   .crit-strip-secondary { display:grid; grid-template-columns: 1fr; gap:10px; margin-top:8px; }
   .crit-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 12px 10px; position:relative; overflow:hidden; }
@@ -476,21 +482,12 @@
       <div class="delta up" id="kpiRealPct">+23.7% vs current GSV</div>
       <div class="note">set realization per lever below</div>
     </div>
-    <div class="card kpi kpi-blurb">
-      <div class="label">How value gets created</div>
-      <div class="value-blurb"><b style="color:var(--ink); font-style:italic;">Volume</b> — revive dormant cases that clear eligibility gates onto the active grid.<br><b style="color:var(--ink); font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
+    <div class="card kpi-blurb">
+      <div class="label">Gross Settlement Value lift levers</div>
+      <div class="value-blurb">Two ways we add value. <b style="color:var(--ink); font-style:italic;">Volume</b> — revive dormant cases that clear all eligibility gates onto the active grid. <b style="color:var(--ink); font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
     </div>
   </div>
 
-  <div class="section-title-row">
-    <div class="section-title">Value at stake · <span id="stGap">$71.8M</span> lift · 2 drivers: volume + quality</div>
-    <div class="docket-chips" aria-label="Docket composition">
-      <span class="dc pulse" id="dcOnGrid"><b id="dcOnGridN">526</b> Open & on-grid</span>
-      <span class="dc dot"><b>132</b> Open · below grid (fails gate)</span>
-      <span class="dc pulse" id="dcDorm" style="background:var(--wash); border-color: var(--grid)"><b id="dcDormN">342</b> Dormant</span>
-      <span class="dc" style="background:var(--ink); color:var(--surface); border-color:var(--ink)"><b style="color:var(--surface)">1,000</b> total</span>
-    </div>
-  </div>
   <div class="score-matrix" id="scoreMatrix">
     <details id="scoreDetails">
       <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px;">
@@ -781,6 +778,18 @@
 
   function applyDDGate(){
     if(!DD) buildDD();
+  // Detail link: opens the scoreDetails section and scrolls to it
+  var linkDetail = document.getElementById('linkTierDetail');
+  if (linkDetail && !linkDetail._wired) {
+    linkDetail._wired = true;
+    linkDetail.addEventListener('click', function(e){
+      e.preventDefault();
+      var d = document.getElementById('scoreDetails');
+      if (d && !d.open) d.open = true;
+      var m = document.getElementById('scoreMatrix');
+      if (m) m.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  }
     if(!window._ddGateSnapshot){
       window._ddGateSnapshot = DD.map(function(r){ return {id:r.id, status:r.status, exp:r.exp, pd:r.pd}; });
     }
@@ -1019,12 +1028,13 @@
       // Latency
       html += '<div class="crit-box"><div class="cb-head">Latency <span style="font-weight:400; text-transform:none; letter-spacing:0">— yrs first exposure → Dx (gate ≥5 yr)</span></div>';
       html += '<div class="cb-sub"><b>'+latMiss+'</b> missing (fails gate)</div>';
+      html += '<div class="lat-hz-row">';
       var latOpts = [{k:'15+', label:'15+ years', pts:15},{k:'5-15', label:'5–15 years', pts:7}];
       latOpts.forEach(function(o){
         var val = (window._latAlloc && window._latAlloc[o.k]!=null) ? window._latAlloc[o.k] : 0;
         html += '<div class="crit-bucket"><div class="bname">'+o.label+' <span style="color:var(--muted); font-weight:400">('+o.pts+' pts)</span></div><div class="bmeta"><b id="cs-lat-val-'+o.k+'">'+val+'</b> from missing</div><input type="range" min="0" max="'+latMiss+'" step="1" value="'+val+'" id="cs-lat-'+o.k+'"><div class="bpct">capped at '+latMiss+'</div></div>';
       });
-      html += '</div>';
+      html += '</div></div>';
 
       // Exposure vector
       html += '<div class="crit-box"><div class="cb-head">Exposure vector</div><div class="cb-sub"><b>400</b> known + <b>'+expMiss+'</b> missing &nbsp;<span style="color:var(--muted)">(126 base + '+(expMiss-126)+' moved)</span></div>';
@@ -1463,7 +1473,7 @@
         h += '</div>';
       });
       // Footer summary + detail link
-      h += '<div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; color:var(--muted); margin-top:10px; padding-top:8px; border-top:1px solid var(--grid);"><span><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain</span><span style="display:inline-flex; gap:10px; align-items:center;"><a href="#scoreDetails" id="linkTierDetail" style="color:var(--accent); text-decoration:none; font-weight:600;">Detail →</a><span style="font-weight:600;">Total: '+total.toLocaleString('en-US')+'</span></span></div>';
+      h += '<div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; color:var(--muted); margin-top:10px; padding-top:8px; border-top:1px solid var(--grid);"><span><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain</span><span style="display:inline-flex; gap:10px; align-items:center;"><a href="#" id="linkTierDetail" style="color:var(--accent); text-decoration:none; font-weight:600;">Detail →</a><span style="font-weight:600;">Total: '+total.toLocaleString('en-US')+'</span></span></div>';
       var el2=document.getElementById('bridgeTierHist'); if(el2) el2.innerHTML=h;
       var el3=document.getElementById('scoreBuckets'); if(el3) el3.innerHTML='';
     })();
@@ -1508,9 +1518,9 @@
     $('kpiRealPct').textContent = '+' + (curEff > 0 ? (100 * b.realized / curEff).toFixed(1) : '0') + '% vs current GSV';
     $('ledeCur').textContent = fmtM(curEff);
     $('ledeGap').textContent = fmtM(full);
-    $('hlGap').textContent = fmtM(full);
-    $('stGap').textContent = fmtM(full);
-    $('sbGap').textContent = fmtM(full);
+    if ($('hlGap')) $('hlGap').textContent = fmtM(full);
+    if ($('stGap')) $('stGap').textContent = fmtM(full);
+    if ($('sbGap')) $('sbGap').textContent = fmtM(full);
     if ($('openI')) $('openI').textContent = curEffCounts.I.toLocaleString('en-US');
     if ($('openII')) $('openII').textContent = curEffCounts.II.toLocaleString('en-US');
     if ($('openIII')) $('openIII').textContent = curEffCounts.III.toLocaleString('en-US');
