@@ -472,7 +472,7 @@
     </div>
   </div>
   <div class="score-matrix" id="scoreMatrix">
-    <details open id="scoreDetails">
+    <details id="scoreDetails">
       <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px;">
         <span class="sm-title">Score distribution → tier score bucket</span>
         <span class="sm-note"><span id="smMissing">126</span> missing vector today · <span id="smAllocated">0</span> allocated · <span id="smRemaining">126</span> still missing · grows as dormant revive</span>
@@ -507,7 +507,7 @@
     </div>
     <div class="card">
       <h3>Value-creation levers</h3>
-      <div class="sub">Two ways we add value. <b>Volume</b> — revive dormant cases that clear all eligibility gates<sup>†</sup> onto the active grid. <b>Quality</b> — fill in the missing story on each active case so it scores (and pays) higher. (<span id="subMissing">126</span> open cases need a better story today — and that number grows as dormant matters wake up.)</div>
+      <div class="sub" style="color:var(--ink); font-size:13px; line-height:1.55;">Two ways we add value. <b style="font-style:italic;">Volume</b> — revive dormant cases that clear all eligibility gates<sup>†</sup> onto the active grid. <b style="font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
       <div class="preset-group gate" id="gatePresets">
         <span class="plabel">Dormant → gate:</span>
         <button class="chip" data-preset="0" type="button">0%</button>
