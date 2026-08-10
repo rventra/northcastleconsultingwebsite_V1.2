@@ -273,17 +273,12 @@
   .crit-strip { display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin:12px 0 0; }
   @media (max-width: 900px) { .crit-strip { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .crit-strip { grid-template-columns: 1fr; } }
-  /* Secondary crit strip — lives inside the levers card, 2 columns (cert + lat) */
-  .crit-strip-secondary { display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:8px; }
-  @media (max-width: 720px) { .crit-strip-secondary { grid-template-columns: 1fr; } }
+  /* Secondary crit strip — lives inside the levers card, stacked vertically (cert on top, lat below) */
+  .crit-strip-secondary { display:grid; grid-template-columns: 1fr; gap:10px; margin-top:8px; }
   .crit-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 12px 10px; position:relative; overflow:hidden; }
-  .crit-box.crit-cert { border-left:3px solid #10B981; }
-  .crit-box.crit-lat  { border-left:3px solid #F59E0B; }
   .crit-box.placeholder { opacity:0.55; border-style:dashed; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:120px; text-align:center; }
   .crit-box .cb-head { font-size:11px; font-weight:650; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-2); margin-bottom:2px; display:flex; align-items:center; gap:6px; }
-  .cb-dot { display:inline-block; width:8px; height:8px; border-radius:50%; }
-  .cb-dot-cert { background:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,0.18); }
-  .cb-dot-lat  { background:#F59E0B; box-shadow:0 0 0 3px rgba(245,158,11,0.18); }
+  .cb-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--grid); }
   .crit-box .cb-sub { font-size:10.5px; color:var(--muted); margin-bottom:8px; }
   .crit-box .cb-sub b { color:var(--ink-2); }
   .crit-bucket { padding:7px 8px; border:1px solid var(--border); border-radius:7px; background:var(--page); margin-bottom:6px; }
@@ -538,7 +533,7 @@
         <h3 style="margin:0;">Value-creation levers</h3>
         <button id="btnResetDocket" type="button" class="btn-reset" title="Restore the 1,000-case dataset to its original state (all sliders back to loaded defaults)."><span class="r-arrow">↻</span> Reset to original 1,000</button>
       </div>
-      <div class="sub" style="color:var(--ink); font-size:13px; line-height:1.55;">Two ways we add value. <b style="font-style:italic;">Volume</b> — revive dormant cases that clear all eligibility gates<sup>†</sup> onto the active grid. <b style="font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
+      <div class="sub" style="color:var(--ink); font-size:13px; line-height:1.55;">Two ways we add value. <b style="font-style:italic;">Volume</b> — revive dormant cases that clear all eligibility gates onto the active grid. <b style="font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
       <div class="preset-group gate" id="gatePresets">
         <span class="plabel">Dormant → gate:</span>
         <button class="chip" data-preset="0" type="button">0%</button>
@@ -678,7 +673,7 @@
     </div>
   </div>
 
-  <p class="foot" style="margin-top:10px"><span style="font-weight:650">† One gate = all 5 eligibility gates condensed:</span> (1) credible paraquat exposure <code style="background:var(--wash);padding:1px 5px;border-radius:4px">docScore ≥ 3</code> or verified proof, (2) Syngenta-era defendant, (3) qualifying diagnosis PDD / confirmed PD / parkinsonism (prodromal fails), (4) latency ≥ 5 yr, (5) PFS + Assessment Questionnaire admin complete. Must pass <b>ALL 5</b> to reach the weighted 0–100 score; any fail → $0 / below grid until cured.</p>
+  <p class="foot" style="margin-top:10px"><span style="font-weight:650">One gate = all 5 eligibility gates condensed:</span> (1) credible paraquat exposure <code style="background:var(--wash);padding:1px 5px;border-radius:4px">docScore ≥ 3</code> or verified proof, (2) Syngenta-era defendant, (3) qualifying diagnosis PDD / confirmed PD / parkinsonism (prodromal fails), (4) latency ≥ 5 yr, (5) PFS + Assessment Questionnaire admin complete. Must pass <b>ALL 5</b> to reach the weighted 0–100 score; any fail → $0 / below grid until cured.</p>
   <p class="foot">Illustrative diagnostic built on a synthetic 1,000-matter Paraquat docket (658 open + 342 dormant)  — no client data. Dormant = no contact / closed / open with no documentation, booked at $0. Revived matters re-enter the active grid at their weighted-score tier. Tier point values default to the midpoints North Castle uses for negotiation modeling and are editable within published ranges. Levers are modeled independently and not additive at the individual-matter level; realization rates are user assumptions, not projections. Nothing here is legal or investment advice.</p>
 
 </div>
@@ -869,9 +864,9 @@
 
   var LEVERS = [
     { id: 'gate',
-      name: 'Clear all 5 gates on dormant matters — revive to on-grid †',
+      name: 'Clear all 5 gates on dormant matters — revive to on-grid',
       desc: '',
-      tip: '342 dormant matters (no contact / closed / open with no docs) booked at $0.<br>† One gate = <b>all 5</b> condensed:<br>&nbsp;&nbsp;• docScore &ge; 3<br>&nbsp;&nbsp;• Syngenta-era<br>&nbsp;&nbsp;• PDD / PD / parkinsonism<br>&nbsp;&nbsp;• latency &ge; 5 yr<br>&nbsp;&nbsp;• PFS + AQ',
+      tip: '342 dormant matters (no contact / closed / open with no docs) booked at $0.<br>One gate = <b>all 5</b> condensed:<br>&nbsp;&nbsp;• docScore &ge; 3<br>&nbsp;&nbsp;• Syngenta-era<br>&nbsp;&nbsp;• PDD / PD / parkinsonism<br>&nbsp;&nbsp;• latency &ge; 5 yr<br>&nbsp;&nbsp;• PFS + AQ',
       trans: { 'none>I': 5, 'none>II': 108, 'none>III': 229 }, real: 0 },
     { id: 'expVec',
       name: 'Exposure vector — cure missing among on-grid',
@@ -881,7 +876,7 @@
   ];
 
   var GAPS = [
-    { label: 'Revive dormant — clear all 5 gates†', lever: 'gate', cases: 342, trans: { 'none>I': 5, 'none>II': 108, 'none>III': 229 } },
+    { label: 'Revive dormant — clear all 5 gates', lever: 'gate', cases: 342, trans: { 'none>I': 5, 'none>II': 108, 'none>III': 229 } },
     { label: 'Direct handling (15 pts)', lever: 'expVec', key:'direct', cases: 0, trans: {} },
     { label: 'Drift / bystander (4 pts)', lever: 'expVec', key:'drift', cases: 0, trans: {} },
     { label: 'Para-occupational (7 pts)', lever: 'expVec', key:'para', cases: 0, trans: {} }
@@ -967,7 +962,7 @@
     dormantHdr.className = 'active-hdr';
     dormantHdr.id = 'dormantHdr';
     dormantHdr.style.marginTop = '0'; dormantHdr.style.borderTop = 'none'; dormantHdr.style.paddingTop = '0';
-    dormantHdr.innerHTML = '<span>Dormant docket \u2020</span><span><b id="dormantCount">342</b> dormant matters</span>';
+    dormantHdr.innerHTML = '<span>Dormant docket</span><span><b id="dormantCount">342</b> dormant matters</span>';
     dormantHdr.title = '342 Dormant = closed or missing gate-required information, booked at $0 until cured. Decreases as the gate slider revives matters to on-grid.';
     dormantHdr.style.cursor = 'help';
     host.appendChild(dormantHdr);
@@ -1014,12 +1009,12 @@
     if (DD) DD.forEach(function(r){ if(r.status==='on-grid' && r.lat!=null) latCounts[r.lat]=(latCounts[r.lat]||0)+1; });
     var html = '';
     // Box: Certified Applicator
-    html += '<div class="crit-box crit-cert"><div class="cb-head"><span class="cb-dot cb-dot-cert"></span>Certified applicator</div>';
+    html += '<div class="crit-box crit-cert"><div class="cb-head">Certified applicator</div>';
     html += '<div class="cb-sub"><b>'+certKnown+'</b> YES (30) + <b>'+certNoKnown+'</b> NO (0) known + <b>'+certMiss+'</b> missing</div>';
     html += '<div class="crit-bucket"><div class="bname">YES <span style="color:var(--muted); font-weight:400">(30 pts)</span></div><div class="bmeta">Allocate YES to missing</div><input type="range" min="0" max="'+certMiss+'" step="1" value="'+(window._certYesAlloc||0)+'" id="cs-cert-yes"><div class="bpct"><span id="cs-cert-yes-pct">'+(window._certYesAlloc||0)+'</span> from missing &middot; <b id="cs-cert-no-pct" style="color:var(--ink)">'+Math.max(0, certMiss-(window._certYesAlloc||0))+'</b> remain NO</div></div>';
     html += '</div>';
     // Box: Latency
-    html += '<div class="crit-box crit-lat"><div class="cb-head"><span class="cb-dot cb-dot-lat"></span>Latency <span style="font-weight:400; text-transform:none; letter-spacing:0">— yrs first exposure → Dx (gate ≥5 yr)</span></div>';
+    html += '<div class="crit-box crit-lat"><div class="cb-head">Latency <span style="font-weight:400; text-transform:none; letter-spacing:0">— yrs first exposure → Dx (gate ≥5 yr)</span></div>';
     html += '<div class="cb-sub"><b>'+latMiss+'</b> missing (fails gate) &nbsp;<span style="color:var(--muted)">known: 15+ '+(latCounts['15+']||0)+' &middot; 5–15 '+(latCounts['5-15']||0)+'</span></div>';
     var latOpts = [{k:'15+', label:'15+ years', pts:15},{k:'5-15', label:'5–15 years', pts:7}];
     latOpts.forEach(function(o){
