@@ -476,10 +476,9 @@
       <div class="delta up" id="kpiRealPct">+23.7% vs current GSV</div>
       <div class="note">set realization per lever below</div>
     </div>
-    <div class="card kpi">
-      <div class="label">Matters a team could be working today</div>
-      <div class="value">508</div>
-      <div class="note">342 dormant + 166 active near-tier with curable gaps</div>
+    <div class="card kpi kpi-blurb">
+      <div class="label">How value gets created</div>
+      <div class="value-blurb"><b style="color:var(--ink); font-style:italic;">Volume</b> — revive dormant cases that clear eligibility gates onto the active grid.<br><b style="color:var(--ink); font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
     </div>
   </div>
 
@@ -534,20 +533,11 @@
         <button id="btnResetDocket" type="button" class="btn-reset" title="Restore the 1,000-case dataset to its original state (all sliders back to loaded defaults)."><span class="r-arrow">↻</span> Reset to original 1,000</button>
       </div>
       <div class="sub" style="color:var(--ink); font-size:13px; line-height:1.55;">Two ways we add value. <b style="font-style:italic;">Volume</b> — revive dormant cases that clear all eligibility gates onto the active grid. <b style="font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
-      <div class="preset-group gate" id="gatePresets">
-        <span class="plabel">Dormant → gate:</span>
-        <button class="chip" data-preset="0" type="button">0%</button>
-        <button class="chip" data-preset="5" type="button">5%</button>
-        <button class="chip" data-preset="10" type="button">10%</button>
-        <button class="chip active" data-preset="0" type="button">0%</button>
-        <button class="chip" data-preset="50" type="button">50%</button>
-        <button class="chip" data-preset="100" type="button">Full</button>
-      </div>
+
       <div id="levers"></div>
     </div>
   </div>
 
-  <div class="crit-strip" id="critStrip"></div>
 
   <div class="cta-mid">
     <div class="line">That jump you just made with a slider? In an engagement it's a <b>ranked work list</b> — file numbers, the gap on each, and what curing it is worth.</div>
@@ -997,66 +987,157 @@
     buildExpSliders();
   }
 
-  // render cert + lat boxes into the secondary crit box inside the levers card
+  // Render all 4 quality criteria (cert, latency, exposure vector, PD severity)
+  // into the levers card on the right. Only rebuilds HTML when the
+  // missing pool changes; otherwise updates values in place so the
+  // user's drag isn't interrupted by DOM replacement.
+  var _secBuilt = { expMiss: -1, pdMiss: -1, certMiss: -1, latMiss: -1 };
+
   function renderSecondaryCritBox() {
     var sec = $('secondaryCritBox');
     if (!sec) return;
     var certMiss = certMissing();
     var latMiss = latMissing();
-    var certKnown = DD ? DD.filter(function(r){ return r.status==='on-grid' && r.cert==='yes'; }).length : 330;
-    var certNoKnown = DD ? DD.filter(function(r){ return r.status==='on-grid' && r.cert==='no'; }).length : 157;
-    var latCounts = { '15+':0, '5-15':0 };
-    if (DD) DD.forEach(function(r){ if(r.status==='on-grid' && r.lat!=null) latCounts[r.lat]=(latCounts[r.lat]||0)+1; });
-    var html = '';
-    // Box: Certified Applicator
-    html += '<div class="crit-box crit-cert"><div class="cb-head">Certified applicator</div>';
-    html += '<div class="cb-sub"><b>'+certKnown+'</b> YES (30) + <b>'+certNoKnown+'</b> NO (0) known + <b>'+certMiss+'</b> missing</div>';
-    html += '<div class="crit-bucket"><div class="bname">YES <span style="color:var(--muted); font-weight:400">(30 pts)</span></div><div class="bmeta">Allocate YES to missing</div><input type="range" min="0" max="'+certMiss+'" step="1" value="'+(window._certYesAlloc||0)+'" id="cs-cert-yes"><div class="bpct"><span id="cs-cert-yes-pct">'+(window._certYesAlloc||0)+'</span> from missing &middot; <b id="cs-cert-no-pct" style="color:var(--ink)">'+Math.max(0, certMiss-(window._certYesAlloc||0))+'</b> remain NO</div></div>';
-    html += '</div>';
-    // Box: Latency
-    html += '<div class="crit-box crit-lat"><div class="cb-head">Latency <span style="font-weight:400; text-transform:none; letter-spacing:0">— yrs first exposure → Dx (gate ≥5 yr)</span></div>';
-    html += '<div class="cb-sub"><b>'+latMiss+'</b> missing (fails gate) &nbsp;<span style="color:var(--muted)">known: 15+ '+(latCounts['15+']||0)+' &middot; 5–15 '+(latCounts['5-15']||0)+'</span></div>';
-    var latOpts = [{k:'15+', label:'15+ years', pts:15},{k:'5-15', label:'5–15 years', pts:7}];
-    latOpts.forEach(function(o){
-      var val = (window._latAlloc && window._latAlloc[o.k]!=null) ? window._latAlloc[o.k] : 0;
-      html += '<div class="crit-bucket"><div class="bname">'+o.label+' <span style="color:var(--muted); font-weight:400">('+o.pts+' pts)</span></div><div class="bmeta"><b id="cs-lat-val-'+o.k+'">'+val+'</b> from missing</div><input type="range" min="0" max="'+latMiss+'" step="1" value="'+val+'" id="cs-lat-'+o.k+'"><div class="bpct">capped at '+latMiss+'</div></div>';
-    });
-    html += '</div>';
-    sec.innerHTML = html;
-    // Attach cert + lat listeners here (elements exist now after innerHTML set)
-    (function(){
-      var inp = document.getElementById('cs-cert-yes');
-      if (inp && !inp._list) {
-        inp._list = true;
-        inp.addEventListener('input', function(){
-          var miss = certMissing();
-          var val = Math.min(Math.max(0, +this.value), miss);
-          window._certYesAlloc = val; this.value = val;
-          var lab = document.getElementById('cs-cert-yes-pct'); if (lab) lab.textContent = val;
-          var noLab = document.getElementById('cs-cert-no-pct'); if (noLab) noLab.textContent = Math.max(0, miss-val);
-          render();
-        });
-      }
-    })();
-    (function(){
-      var keys = ['15+', '5-15'];
-      if (!window._latAlloc) window._latAlloc = {'15+':0,'5-15':0};
-      keys.forEach(function(k){
-        var inp = document.getElementById('cs-lat-'+k);
-        if (!inp || inp._list) return;
-        inp._list = true;
-        inp.addEventListener('input', function(){
-          var miss = latMissing();
-          var other = 0; keys.forEach(function(kk){ if(kk!==k) other += (window._latAlloc[kk]||0); });
-          var cap = Math.max(0, miss-other);
-          var val = Math.min(Math.max(0, +this.value), cap);
-          window._latAlloc[k] = val; this.value = val;
-          var lab = document.getElementById('cs-lat-val-'+k); if (lab) lab.textContent = val;
-          render();
-        });
+    var expMiss = expMissing();
+    var pdMiss = pdMissing();
+
+    // Build HTML only when the structure (missing-pool caps) changes.
+    var needsBuild = (_secBuilt.expMiss !== expMiss || _secBuilt.pdMiss !== pdMiss ||
+                      _secBuilt.certMiss !== certMiss || _secBuilt.latMiss !== latMiss);
+
+    if (needsBuild) {
+      var certKnown = DD ? DD.filter(function(r){ return r.status==='on-grid' && r.cert==='yes'; }).length : 330;
+      var certNoKnown = DD ? DD.filter(function(r){ return r.status==='on-grid' && r.cert==='no'; }).length : 157;
+      var html = '';
+
+      // Cert
+      html += '<div class="crit-box"><div class="cb-head">Certified applicator</div>';
+      html += '<div class="cb-sub"><b>'+certKnown+'</b> YES (30) + <b>'+certNoKnown+'</b> NO (0) known + <b>'+certMiss+'</b> missing</div>';
+      html += '<div class="crit-bucket"><div class="bname">YES <span style="color:var(--muted); font-weight:400">(30 pts)</span></div><div class="bmeta">Allocate YES to missing</div><input type="range" min="0" max="'+certMiss+'" step="1" value="'+(window._certYesAlloc||0)+'" id="cs-cert-yes"><div class="bpct"><span id="cs-cert-yes-pct">'+(window._certYesAlloc||0)+'</span> from missing &middot; <b id="cs-cert-no-pct" style="color:var(--ink)">'+Math.max(0, certMiss-(window._certYesAlloc||0))+'</b> remain NO</div></div>';
+      html += '</div>';
+
+      // Latency
+      html += '<div class="crit-box"><div class="cb-head">Latency <span style="font-weight:400; text-transform:none; letter-spacing:0">— yrs first exposure → Dx (gate ≥5 yr)</span></div>';
+      html += '<div class="cb-sub"><b>'+latMiss+'</b> missing (fails gate)</div>';
+      var latOpts = [{k:'15+', label:'15+ years', pts:15},{k:'5-15', label:'5–15 years', pts:7}];
+      latOpts.forEach(function(o){
+        var val = (window._latAlloc && window._latAlloc[o.k]!=null) ? window._latAlloc[o.k] : 0;
+        html += '<div class="crit-bucket"><div class="bname">'+o.label+' <span style="color:var(--muted); font-weight:400">('+o.pts+' pts)</span></div><div class="bmeta"><b id="cs-lat-val-'+o.k+'">'+val+'</b> from missing</div><input type="range" min="0" max="'+latMiss+'" step="1" value="'+val+'" id="cs-lat-'+o.k+'"><div class="bpct">capped at '+latMiss+'</div></div>';
       });
-    })();
+      html += '</div>';
+
+      // Exposure vector
+      html += '<div class="crit-box"><div class="cb-head">Exposure vector</div><div class="cb-sub"><b>400</b> known + <b>'+expMiss+'</b> missing &nbsp;<span style="color:var(--muted)">(126 base + '+(expMiss-126)+' moved)</span></div>';
+      EXP_VECTORS.forEach(function(v){
+        var known = EXP_KNOWN_SPLIT[v.key]||0;
+        var cured = EXP_ALLOC[v.key]||0;
+        html += '<div class="crit-bucket"><div class="bname">'+esc(v.label)+' <span style="color:var(--muted); font-weight:400">('+v.pts+' pts)</span></div><div class="bmeta"><b>'+known.toLocaleString('en-US')+'</b> known + <b id="cs-erCured-'+v.key+'">'+cured+'</b> from missing = <b id="cs-erTotal-'+v.key+'">'+(known+cured)+'</b> total</div><input type="range" min="0" max="'+expMiss+'" step="1" value="'+cured+'" id="cs-er-'+v.key+'"><div class="bpct"><span id="cs-erpct-'+v.key+'">'+cured+'</span> from missing</div></div>';
+      });
+      html += '</div>';
+
+      // PD severity
+      html += '<div class="crit-box"><div class="cb-head">Parkinson\u0027s severity</div><div class="cb-sub"><b>325</b> known + <b>'+pdMiss+'</b> missing &nbsp;<span style="color:var(--muted)">(201 base + '+(pdMiss-201)+' moved)</span></div>';
+      PD_SEVERITY.forEach(function(v){
+        var known = v.known||0;
+        var cured = PD_ALLOC[v.key]||0;
+        html += '<div class="crit-bucket"><div class="bname">'+esc(v.label)+' <span style="color:var(--muted); font-weight:400">('+v.pts+' pts)</span></div><div class="bmeta"><b>'+known+'</b> known + <b id="cs-pdCured-'+v.key+'">'+cured+'</b> from missing = <b id="cs-pdTotal-'+v.key+'">'+(known+cured)+'</b> total</div><input type="range" min="0" max="'+pdMiss+'" step="1" value="'+cured+'" id="cs-pd-'+v.key+'"><div class="bpct"><span id="cs-pdpct-'+v.key+'">'+cured+'</span> from missing</div></div>';
+      });
+      html += '</div>';
+
+      sec.innerHTML = html;
+      _secBuilt = { expMiss: expMiss, pdMiss: pdMiss, certMiss: certMiss, latMiss: latMiss };
+
+      // Attach listeners once
+      wireSecondaryListeners();
+    } else {
+      // Just update values in place — keeps the drag fluid.
+      EXP_VECTORS.forEach(function(v){
+        var inp = $('cs-er-'+v.key); if (inp && document.activeElement !== inp) inp.value = EXP_ALLOC[v.key]||0;
+        var known = EXP_KNOWN_SPLIT[v.key]||0;
+        var cured = EXP_ALLOC[v.key]||0;
+        var c1 = $('cs-erCured-'+v.key); if (c1) c1.textContent = cured;
+        var c2 = $('cs-erTotal-'+v.key); if (c2) c2.textContent = (known+cured);
+        var p  = $('cs-erpct-'+v.key); if (p) p.textContent = cured;
+      });
+      PD_SEVERITY.forEach(function(v){
+        var inp = $('cs-pd-'+v.key); if (inp && document.activeElement !== inp) inp.value = PD_ALLOC[v.key]||0;
+        var known = v.known||0;
+        var cured = PD_ALLOC[v.key]||0;
+        var c1 = $('cs-pdCured-'+v.key); if (c1) c1.textContent = cured;
+        var c2 = $('cs-pdTotal-'+v.key); if (c2) c2.textContent = (known+cured);
+        var p  = $('cs-pdpct-'+v.key); if (p) p.textContent = cured;
+      });
+      var inpC = $('cs-cert-yes'); if (inpC && document.activeElement !== inpC) inpC.value = window._certYesAlloc||0;
+      var lp = $('cs-cert-yes-pct'); if (lp) lp.textContent = window._certYesAlloc||0;
+      var np = $('cs-cert-no-pct'); if (np) np.textContent = Math.max(0, certMiss-(window._certYesAlloc||0));
+      ['15+','5-15'].forEach(function(k){
+        var inpL = $('cs-lat-'+k); if (inpL && document.activeElement !== inpL) inpL.value = (window._latAlloc && window._latAlloc[k])||0;
+        var lv = $('cs-lat-val-'+k); if (lv) lv.textContent = (window._latAlloc && window._latAlloc[k])||0;
+      });
+    }
   }
+
+  function wireSecondaryListeners() {
+    // Cert
+    var inpCert = $('cs-cert-yes');
+    if (inpCert && !inpCert._list) {
+      inpCert._list = true;
+      inpCert.addEventListener('input', function(){
+        var miss = certMissing();
+        var val = Math.min(Math.max(0, +this.value), miss);
+        window._certYesAlloc = val; this.value = val;
+        var lab = $('cs-cert-yes-pct'); if (lab) lab.textContent = val;
+        var noLab = $('cs-cert-no-pct'); if (noLab) noLab.textContent = Math.max(0, miss-val);
+        render();
+      });
+    }
+    // Latency
+    ['15+', '5-15'].forEach(function(k){
+      var inp = $('cs-lat-'+k);
+      if (!inp || inp._list) return;
+      inp._list = true;
+      inp.addEventListener('input', function(){
+        var miss = latMissing();
+        var other = 0; ['15+','5-15'].forEach(function(kk){ if(kk!==k) other += (window._latAlloc[kk]||0); });
+        var cap = Math.max(0, miss-other);
+        var val = Math.min(Math.max(0, +this.value), cap);
+        window._latAlloc[k] = val; this.value = val;
+        var lab = $('cs-lat-val-'+k); if (lab) lab.textContent = val;
+        render();
+      });
+    });
+    // Exposure vector
+    EXP_VECTORS.forEach(function(v){
+      var inp = $('cs-er-'+v.key);
+      if (!inp || inp._list) return;
+      inp._list = true;
+      inp.addEventListener('input', function(){
+        var miss = expMissing();
+        var other = 0; EXP_VECTORS.forEach(function(vv){ if(vv.key!==v.key) other += (EXP_ALLOC[vv.key]||0); });
+        var cap = Math.max(0, miss-other);
+        var val = Math.min(Math.max(0, +this.value), cap);
+        EXP_ALLOC[v.key] = val; this.value = val;
+        var lab = $('cs-erpct-'+v.key); if (lab) lab.textContent = val;
+        render();
+      });
+    });
+    // PD severity
+    PD_SEVERITY.forEach(function(v){
+      var inp = $('cs-pd-'+v.key);
+      if (!inp || inp._list) return;
+      inp._list = true;
+      inp.addEventListener('input', function(){
+        var miss = pdMissing();
+        var other = 0; PD_SEVERITY.forEach(function(vv){ if(vv.key!==v.key) other += (PD_ALLOC[vv.key]||0); });
+        var cap = Math.max(0, miss-other);
+        var val = Math.min(Math.max(0, +this.value), cap);
+        PD_ALLOC[v.key] = val; this.value = val;
+        var lab = $('cs-pdpct-'+v.key); if (lab) lab.textContent = val;
+        render();
+      });
+    });
+  }
+
 
   function buildExpSliders() {
     var wrap = $('expHzWrap');
@@ -1115,7 +1196,6 @@
     if (FLOOR > 0) {
       s += '<g class="axis-break" aria-hidden="true">';
       s += '<path d="M' + (padL-6) + ',' + (H-padB+4) + ' l6,-8 l6,8" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>';
-      s += '<text x="' + (padL-6) + '" y="' + (H-padB+14) + '" text-anchor="start" font-size="9" fill="var(--muted)">from $' + (FLOOR/1000) + 'M</text>';
       s += '</g>';
     }
     var marks = [];
@@ -1361,110 +1441,34 @@
         {label:'Tier I',      sub:'71–100', key:'t1'},
         {label:'Tier II',     sub:'36–70',  key:'t2'},
         {label:'Tier III',    sub:'0–35',   key:'t3'},
-        {label:'Below Grid',  sub:'fails gate',  key:'below'}
+        {label:'Below Grid',  sub:'fails gate',  key:'below', warning:true}
       ];
       rows4.forEach(function(r){
         var on = c[r.key].on, off = c[r.key].off, tot = on + off;
         var pctFrac = maxC===0 ? 0 : Math.max(2, Math.round((tot/maxC)*100));
+        var bg, shadow, border;
+        if (r.warning) {
+          bg = 'linear-gradient(90deg, #B45309 0%, #D97706 60%, #F59E0B 100%)';
+          shadow = '0 0 0 1px rgba(217,119,6,0.18), 0 1px 4px rgba(217,119,6,0.22)';
+        } else {
+          bg = 'linear-gradient(90deg, #1E40AF 0%, #2563EB 60%, #3B82F6 100%)';
+          shadow = '0 0 0 1px rgba(37,99,235,0.15), 0 1px 4px rgba(37,99,235,0.18)';
+        }
         h += '<div style="display:grid; grid-template-columns: 92px 1fr 84px; gap:10px; align-items:center; padding:4px 0;">';
         h += '<div style="font-size:12px; font-weight:700; color:var(--ink); text-align:right; line-height:1.15; letter-spacing:-0.005em;">'+r.label+'<div style="font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px;">'+r.sub+'</div></div>';
         h += '<div style="height:18px; background:var(--page); border:1px solid var(--grid); border-radius:4px; overflow:hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">';
-        h += '<div style="background:linear-gradient(90deg, #1E40AF 0%, #2563EB 60%, #3B82F6 100%); height:100%; width:'+pctFrac+'%; box-shadow:0 0 0 1px rgba(37,99,235,0.15), 0 1px 4px rgba(37,99,235,0.18); border-radius:3px;"></div>';
+        h += '<div style="background:'+bg+'; height:100%; width:'+pctFrac+'%; box-shadow:'+shadow+'; border-radius:3px;"></div>';
         h += '</div>';
         h += '<div style="font-size:13px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; line-height:1.15; text-align:right;">'+tot.toLocaleString('en-US')+'<div style="font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px;">'+pct(tot)+'%</div></div>';
         h += '</div>';
       });
-      // Footer summary
-      h += '<div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; color:var(--muted); margin-top:10px; padding-top:8px; border-top:1px solid var(--grid);"><span><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain</span><span style="font-weight:600;">Total: '+total.toLocaleString('en-US')+'</span></div>';
+      // Footer summary + detail link
+      h += '<div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; color:var(--muted); margin-top:10px; padding-top:8px; border-top:1px solid var(--grid);"><span><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain</span><span style="display:inline-flex; gap:10px; align-items:center;"><a href="#scoreDetails" id="linkTierDetail" style="color:var(--accent); text-decoration:none; font-weight:600;">Detail →</a><span style="font-weight:600;">Total: '+total.toLocaleString('en-US')+'</span></span></div>';
       var el2=document.getElementById('bridgeTierHist'); if(el2) el2.innerHTML=h;
       var el3=document.getElementById('scoreBuckets'); if(el3) el3.innerHTML='';
     })();
   }
-  function renderCritStrip(){
-    var expMiss = expMissing();
-    var pdMiss = pdMissing();
-    var certMiss = certMissing();
-    var latMiss = latMissing();
-    var html = '';
 
-    // Box 1: Exposure vector
-    html += '<div class="crit-box"><div class="cb-head">Exposure vector</div><div class="cb-sub"><b>400</b> known + <b>'+expMiss+'</b> missing &nbsp;<span style="color:var(--muted)">(126 base + '+(expMiss-126)+' moved)</span></div>';
-    EXP_VECTORS.forEach(function(v){
-      var known = EXP_KNOWN_SPLIT[v.key]||0;
-      var cured = (window._expQual ? window._expQual.counts[v.key]||0 : EXP_ALLOC[v.key]||0);
-      html += '<div class="crit-bucket"><div class="bname">'+esc(v.label)+' <span style="color:var(--muted); font-weight:400">('+v.pts+' pts)</span></div><div class="bmeta"><b>'+known.toLocaleString('en-US')+'</b> known + <b id="cs-erCured-'+v.key+'">'+cured+'</b> from missing = <b id="cs-erTotal-'+v.key+'">'+(known+cured)+'</b> total</div><input type="range" min="0" max="'+expMiss+'" step="1" value="'+(EXP_ALLOC[v.key]||0)+'" id="cs-er-'+v.key+'"><div class="bpct"><span id="cs-erpct-'+v.key+'">'+(EXP_ALLOC[v.key]||0)+'</span> from missing</div></div>';
-    });
-    html += '</div>';
-
-    // Box 2: Parkinson severity
-    html += '<div class="crit-box"><div class="cb-head">Parkinson\u0027s severity</div><div class="cb-sub"><b>325</b> known + <b>'+pdMiss+'</b> missing &nbsp;<span style="color:var(--muted)">(201 base + '+(pdMiss-201)+' moved)</span></div>';
-    PD_SEVERITY.forEach(function(v){
-      var known = v.known||0;
-      var cured = (window._pdQual ? window._pdQual.counts[v.key]||0 : PD_ALLOC[v.key]||0);
-      html += '<div class="crit-bucket"><div class="bname">'+esc(v.label)+' <span style="color:var(--muted); font-weight:400">('+v.pts+' pts)</span></div><div class="bmeta"><b>'+known+'</b> known + <b id="cs-pdCured-'+v.key+'">'+cured+'</b> from missing = <b id="cs-pdTotal-'+v.key+'">'+(known+cured)+'</b> total</div><input type="range" min="0" max="'+pdMiss+'" step="1" value="'+(PD_ALLOC[v.key]||0)+'" id="cs-pd-'+v.key+'"><div class="bpct"><span id="cs-pdpct-'+v.key+'">'+(PD_ALLOC[v.key]||0)+'</span> from missing</div></div>';
-    });
-    html += '</div>';
-
-    // Cert + Lat boxes now render in the levers card via renderSecondaryCritBox().
-
-    var el = document.getElementById('critStrip');
-    if(el) el.innerHTML = html;
-
-    EXP_VECTORS.forEach(function(v){
-      var inp = document.getElementById('cs-er-'+v.key);
-      if(!inp) return;
-      inp.addEventListener('input', function(){
-        var miss = expMissing();
-        var other=0; EXP_VECTORS.forEach(function(vv){ if(vv.key!==v.key) other+=(EXP_ALLOC[vv.key]||0); });
-        var cap = Math.max(0, miss-other);
-        var val = Math.min(+this.value, cap);
-        EXP_ALLOC[v.key]=val; this.value=val;
-        var lab=document.getElementById('cs-erpct-'+v.key); if(lab) lab.textContent=val;
-        render();
-      });
-    });
-    PD_SEVERITY.forEach(function(v){
-      var inp = document.getElementById('cs-pd-'+v.key);
-      if(!inp) return;
-      inp.addEventListener('input', function(){
-        var miss = pdMissing();
-        var other=0; PD_SEVERITY.forEach(function(vv){ if(vv.key!==v.key) other+=(PD_ALLOC[vv.key]||0); });
-        var cap = Math.max(0, miss-other);
-        var val = Math.min(+this.value, cap);
-        PD_ALLOC[v.key]=val; this.value=val;
-        var lab=document.getElementById('cs-pdpct-'+v.key); if(lab) lab.textContent=val;
-        render();
-      });
-    });
-    (function(){
-      var inp=document.getElementById('cs-cert-yes');
-      if(inp) inp.addEventListener('input', function(){
-        var miss = certMissing();
-        var val = Math.min(Math.max(0, +this.value), miss);
-        window._certYesAlloc = val; this.value=val;
-        var lab=document.getElementById('cs-cert-yes-pct'); if(lab) lab.textContent=val;
-        var noLab=document.getElementById('cs-cert-no-pct'); if(noLab) noLab.textContent=Math.max(0, miss-val);
-        render();
-      });
-    })();
-    (function(){
-      var keys=['15+','5-15'];
-      if(!window._latAlloc) window._latAlloc={'15+':0,'5-15':0};
-      keys.forEach(function(k){
-        var inp=document.getElementById('cs-lat-'+k);
-        if(!inp) return;
-        inp.addEventListener('input', function(){
-          var miss = latMissing();
-          var other=0; keys.forEach(function(kk){ if(kk!==k) other+=(window._latAlloc[kk]||0); });
-          var cap = Math.max(0, miss-other);
-          var val = Math.min(Math.max(0, +this.value), cap);
-          window._latAlloc[k]=val; this.value=val;
-          var lab=document.getElementById('cs-lat-val-'+k); if(lab) lab.textContent=val;
-          render();
-        });
-      });
-    })();
-  }
   function render() {
     var V = tierValues();
     var gate = LEVERS[0];
@@ -1544,7 +1548,6 @@
         var el = $('er-' + v.key); if (el) el.max = missing;
       });
       // keep 4-box strip in sync (re-render strip each render so caps update)
-      renderCritStrip();
       renderSecondaryCritBox();
       // also update legacy expHzWrap if present (hide its inner but keep compat)
       (function(){ var w=$('expHzWrap'); if(w) w.style.display='none'; })();
