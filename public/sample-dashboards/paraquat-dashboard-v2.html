@@ -262,7 +262,7 @@
   .lat-hz-row { display:flex; gap:10px; }
   .lat-hz-row .crit-bucket { flex:1; min-width:0; }
   /* Exposure vector + PD severity sliders horizontal inside the box */
-  .exp-hz-row, .pd-hz-row { display:flex; gap:10px; }
+  .exp-hz-row, .pd-hz-row { display:flex; flex-direction:row; gap:10px; flex-wrap:wrap; }
   .exp-hz-row .crit-bucket, .pd-hz-row .crit-bucket { flex:1; min-width:0; }
   .exp-hz-row .crit-bucket .bmeta, .pd-hz-row .crit-bucket .bmeta { font-size:9.5px; }
   /* Tighten the levers card right-column a bit so 3-up slider rows fit */
@@ -451,7 +451,12 @@
   <p class="lede">Attorneys manage cases. Nobody's job is the gap between what a docket is <em>worth</em> and what it <em>could be worth</em> — and that gap doesn't sit still: statutes run, claimants disengage, thin files settle thin. On this 1,000-matter illustrative docket the gap is <strong id="ledeGap">$71.8M</strong> against <strong id="ledeCur">$75.6M</strong> of current gross settlement value. First we revive dormant matters past the gate; then we cure gaps on the active docket. Below: the four levers, the gaps behind them, and what each is worth at your assumptions.</p>
 
   <div class="card lift-levers-card" style="margin-bottom:14px;">
-    <div style="font-size:11px; font-weight:650; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Gross Settlement Value Lift Levers</div>
+    <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink); margin-bottom:8px;">Gross Settlement Value Lift Levers</div>
+    <div style="display:flex; flex-wrap:wrap; gap:14px 28px; margin-bottom:12px;">
+      <div style="font-size:13px; color:var(--ink-2);"><b style="font-size:18px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">526</b>&nbsp;On-grid cases</div>
+      <div style="font-size:13px; color:var(--ink-2);"><b style="font-size:18px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">132</b>&nbsp;Do not meet gate criteria</div>
+      <div style="font-size:13px; color:var(--ink-2);"><b style="font-size:18px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">342</b>&nbsp;Dormant</div>
+    </div>
     <div style="font-size:13px; line-height:1.55; color:var(--ink-2);">Two ways we add value. <b style="color:var(--ink); font-style:italic;">Volume</b> — revive dormant cases that clear all eligibility gates onto the active grid. <b style="color:var(--ink); font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
   </div>
 
@@ -474,7 +479,6 @@
         <h3 style="margin:0;">Value-creation levers</h3>
         <button id="btnResetDocket" type="button" class="btn-reset" title="Restore the 1,000-case dataset to its original state (all sliders back to loaded defaults)."><span class="r-arrow">↻</span> Reset to original 1,000</button>
       </div>
-      <div class="sub" style="color:var(--ink); font-size:13px; line-height:1.55;">Two ways we add value. <b style="font-style:italic;">Volume</b> — revive dormant cases that clear all eligibility gates onto the active grid. <b style="font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
 
       <div id="levers"></div>
     </div>
