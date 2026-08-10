@@ -1643,15 +1643,15 @@
     // 1. Rebuild DD from snapshot (restores status, exp, pd, cert, lat, _origStatus)
     buildDD();
 
-    // 2. Reset gate & expVec levers to loaded defaults
-    LEVERS[0].real = 25;
+    // 2. Reset EVERY lever to 0 (truly clean slate — all the way to the left)
+    LEVERS[0].real = 0;
     LEVERS[1].real = 0;
-    var rg0 = $('rg-' + LEVERS[0].id); if (rg0) rg0.value = 25;
+    var rg0 = $('rg-' + LEVERS[0].id); if (rg0) rg0.value = 0;
     var rg1 = $('rg-' + LEVERS[1].id); if (rg1) rg1.value = 0;
 
-    // 3. Reset quality allocation maps to loaded defaults
-    EXP_ALLOC.direct = 42; EXP_ALLOC.para = 42; EXP_ALLOC.drift = 42;
-    PD_ALLOC.advanced = 42; PD_ALLOC.moderate = 42; PD_ALLOC.early = 42;
+    // 3. Reset all quality allocation maps to 0 — nothing cured, nothing allocated
+    EXP_ALLOC.direct = 0; EXP_ALLOC.para = 0; EXP_ALLOC.drift = 0;
+    PD_ALLOC.advanced = 0; PD_ALLOC.moderate = 0; PD_ALLOC.early = 0;
     window._certYesAlloc = 0;
     window._latAlloc = { '15+': 0, '5-15': 0 };
 
