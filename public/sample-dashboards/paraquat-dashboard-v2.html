@@ -1585,7 +1585,8 @@
       });
     });
     s += '</svg>';
-    $('liftmap').innerHTML = s;
+    // liftmap section removed from the page; skip its DOM write to avoid null innerHTML throw
+    if ($('liftmap')) $('liftmap').innerHTML = s;
     // (hoverable/tooltip removed — hover still drives spotlight via spotlightLever())
     var tb = '<thead><tr><th>Gap</th><th>Bridge lever</th><th class="num">Matters</th><th class="num">Full lift ($000s)</th></tr></thead><tbody>';
     allRows.forEach(function (r) { tb += '<tr><td>' + esc(r.g.label) + '</td><td>' + esc(LEVER_LABELS[r.g.lever]) + '</td><td class="num">' + r.g.cases + '</td><td class="num">' + Math.round(r.v).toLocaleString('en-US') + '</td></tr>'; });
