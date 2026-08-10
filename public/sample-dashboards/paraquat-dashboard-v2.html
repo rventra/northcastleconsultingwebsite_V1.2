@@ -1253,7 +1253,6 @@
         var wasOff = (r._origStatus && r._origStatus !== 'on-grid');
         if(r.status==='below'){ c.below[wasOff?'off':'on']++; continue; }
         if(r.status==='dormant'){ c.t3.off++; continue; }
-        // on-grid tier by score
         var t = r.score>=71 ? 't1' : (r.score>=36 ? 't2' : 't3');
         c[t][wasOff?'off':'on']++;
       }
@@ -1262,40 +1261,48 @@
       function tierTotal(k){ return c[k].on + c[k].off; }
       var maxC = Math.max(tierTotal('below'), tierTotal('t3'), tierTotal('t2'), tierTotal('t1')) || 1;
       var h = '';
-      h += '<div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:6px;">';
+      // Header row
+      h += '<div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px;">';
       h += '<div style="font-size:11px; font-weight:650; color:var(--ink); letter-spacing:0.04em; text-transform:uppercase;">Where the 1,000 cases land by tier</div>';
-      h += '<div style="display:flex; gap:12px; font-size:10px; color:var(--muted);"><span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:var(--tier-3); margin-right:4px; vertical-align:middle; opacity:0.55;"></span>Originally on-grid</span><span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:var(--tier-3); margin-right:4px; vertical-align:middle;"></span>Revived from off-grid</span></div>';
-      h += '</div>';
-      h += '<div style="display:flex; align-items:flex-end; gap:6px; height:64px; padding:4px 0 0;">';
-      var buckets4 = [
-        {label:'Below Grid', key:'below', baseColor:'#7a7a7a'},
-        {label:'Tier III', sub:'0\u201335', key:'t3', baseColor:'var(--tier-3)'},
-        {label:'Tier II',  sub:'36\u201370', key:'t2', baseColor:'var(--tier-2)'},
-        {label:'Tier I',   sub:'71\u2013100', key:'t1', baseColor:'var(--tier-1)'}
+      h += '<div style="display:flex; gap:14px; font-size:10px; color:var(--muted);">';
+      h += '<span><span style="display:inline-block; width:10px; height:8px; border-radius:2px; background:var(--ink-2); opacity:0.45; margin-right:5px; vertical-align:middle;"></span>Originally on-grid</span>';
+      h += '<span><span style="display:inline-block; width:10px; height:8px; border-radius:2px; background:var(--ink-2); margin-right:5px; vertical-align:middle;"></span>Revived from off-grid</span>';
+      h += '</div></div>';
+      // Vertical stack of horizontal bars
+      var rows4 = [
+        {label:'Tier I',   sub:'71\u2013100', key:'t1',   baseColor:'var(--tier-1)'},
+        {label:'Tier II',  sub:'36\u201370',  key:'t2',   baseColor:'var(--tier-2)'},
+        {label:'Tier III', sub:'0\u201335',   key:'t3',   baseColor:'var(--tier-3)'},
+        {label:'Below Grid', sub:'',     key:'below',baseColor:'#7a7a7a'}
       ];
-      buckets4.forEach(function(b){
-        var on = c[b.key].on, off = c[b.key].off, tot = on + off;
-        var bh = tot===0 ? 2 : Math.max(2, Math.round((tot/maxC)*44));
-        var onFrac = tot===0 ? 0 : on/tot;
-        var onH = Math.max(0, Math.round(bh * onFrac));
-        var offH = bh - onH;
-        h += '<div style="flex:1; text-align:center; display:flex; flex-direction:column; align-items:center; gap:3px;">';
-        h += '<div style="font-size:11px; font-weight:650; color:var(--ink);">'+tot+'</div>';
-        h += '<div style="width:100%; display:flex; flex-direction:column; border-radius:4px 4px 0 0; overflow:hidden; height:'+bh+'px; min-height:2px;">';
-        if(offH>0){
-          h += '<div style="background:'+b.baseColor+'; height:'+offH+'px;" title="'+off+' revived"></div>';
+      rows4.forEach(function(r){
+        var on = c[r.key].on, off = c[r.key].off, tot = on + off;
+        var onFrac = maxC===0 ? 0 : Math.round((on/maxC)*100);
+        var offFrac = maxC===0 ? 0 : Math.round((off/maxC)*100);
+        h += '<div style="display:grid; grid-template-columns: 78px 1fr 70px; gap:8px; align-items:center; padding:3px 0;">';
+        h += '<div style="font-size:11px; font-weight:600; color:var(--ink); text-align:right; line-height:1.1;">'+r.label+(r.sub?' <span style="color:var(--muted); font-weight:400; font-size:10px;">'+r.sub+'</span>':'')+'</div>';
+        h += '<div style="height:14px; background:var(--page); border:1px solid var(--grid); border-radius:3px; overflow:hidden; display:flex;">';
+        if(on>0){
+          h += '<div style="background:'+r.baseColor+'; opacity:0.45; width:'+onFrac+'%; height:100%;" title="'+on+' originally on-grid"></div>';
         }
-        if(onH>0){
-          // dim the on-grid portion (lighter, opacity)
-          h += '<div style="background:'+b.baseColor+'; opacity:0.45; height:'+onH+'px;" title="'+on+' originally on-grid"></div>';
+        if(off>0){
+          h += '<div style="background:'+r.baseColor+'; width:'+offFrac+'%; height:100%;" title="'+off+' revived from off-grid"></div>';
         }
         h += '</div>';
-        h += '<div style="font-size:9.5px; color:var(--muted); white-space:nowrap;">'+b.label+(b.sub?' <span style="color:var(--baseline)">'+b.sub+'</span>':'')+'</div>';
-        h += '<div style="font-size:9.5px; color:var(--muted);">'+pct(tot)+'%</div>';
+        h += '<div style="font-size:11px; color:var(--ink-2); font-variant-numeric:tabular-nums; line-height:1.1;">';
+        h += '<b style="color:var(--ink);">'+tot+'</b> <span style="color:var(--muted); font-size:10px;">('+pct(tot)+'%)</span>';
+        if(off>0 && on>0){
+          h += ' <span style="color:var(--muted); font-size:9.5px;">&middot; '+off+' rev</span>';
+        } else if(off>0 && on===0){
+          h += ' <span style="color:var(--muted); font-size:9.5px;">all rev</span>';
+        } else if(on>0 && off===0){
+          h += ' <span style="color:var(--muted); font-size:9.5px;">all on-grid</span>';
+        }
+        h += '</div>';
         h += '</div>';
       });
-      h += '</div>';
-      h += '<div style="display:flex; justify-content:space-between; font-size:10px; color:var(--muted); margin-top:6px;"><span><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain</span><span>Total: '+total.toLocaleString('en-US')+'</span></div>';
+      // Footer summary
+      h += '<div style="display:flex; justify-content:space-between; font-size:10px; color:var(--muted); margin-top:8px; padding-top:6px; border-top:1px dashed var(--grid);"><span><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain</span><span>Total: '+total.toLocaleString('en-US')+'</span></div>';
       var el2=document.getElementById('bridgeTierHist'); if(el2) el2.innerHTML=h;
       var el3=document.getElementById('scoreBuckets'); if(el3) el3.innerHTML='';
     })();
