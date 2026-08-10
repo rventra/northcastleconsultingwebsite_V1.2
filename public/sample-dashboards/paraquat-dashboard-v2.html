@@ -544,7 +544,7 @@
         <button class="chip" data-preset="0" type="button">0%</button>
         <button class="chip" data-preset="5" type="button">5%</button>
         <button class="chip" data-preset="10" type="button">10%</button>
-        <button class="chip active" data-preset="25" type="button">25%</button>
+        <button class="chip active" data-preset="0" type="button">0%</button>
         <button class="chip" data-preset="50" type="button">50%</button>
         <button class="chip" data-preset="100" type="button">Full</button>
       </div>
@@ -853,7 +853,7 @@
   ];
   // known sums: 70+140+115=325 (of 400, rest pd-missing). pd missing grows with gate same as exp.
   var PD_MISSING_BASE = 201; // 526-325=201 pd-missing at gate 25%? wait 526 on-grid - 325 known =201. But base 526-325=201. At gate0 526->201. At gate25 612->287.
-  var PD_ALLOC = { advanced: 42, moderate: 42, early: 42 };
+  var PD_ALLOC = { advanced: 0, moderate: 0, early: 0 };
   window.PD_ALLOC = PD_ALLOC;
 
   var TIER_BANDS = [
@@ -872,7 +872,7 @@
       name: 'Clear all 5 gates on dormant matters — revive to on-grid †',
       desc: '',
       tip: '342 dormant matters (no contact / closed / open with no docs) booked at $0.<br>† One gate = <b>all 5</b> condensed:<br>&nbsp;&nbsp;• docScore &ge; 3<br>&nbsp;&nbsp;• Syngenta-era<br>&nbsp;&nbsp;• PDD / PD / parkinsonism<br>&nbsp;&nbsp;• latency &ge; 5 yr<br>&nbsp;&nbsp;• PFS + AQ',
-      trans: { 'none>I': 5, 'none>II': 108, 'none>III': 229 }, real: 25 },
+      trans: { 'none>I': 5, 'none>II': 108, 'none>III': 229 }, real: 0 },
     { id: 'expVec',
       name: 'Exposure vector — cure missing among on-grid',
       desc: 'Among on-grid matters, 400 have exposure-vector documented; the rest are missing and score 0 on that axis. Allocate the missing pool to a vector bucket — total allocated can’t exceed the missing pool.',
@@ -891,7 +891,7 @@
   // known 400 split across the 3 vectors (illustrative — sums to 400)
   var EXP_KNOWN_SPLIT = { direct: 180, drift: 100, para: 120 };
   // slider counts: how many of the *missing* pool to allocate to each bucket — sum capped at missing
-  var EXP_ALLOC = { direct: 42, drift: 42, para: 42 };
+  var EXP_ALLOC = { direct: 0, drift: 0, para: 0 };
   window.EXP_ALLOC = EXP_ALLOC;
   var EXP_KNOWN_BASE = 400;
   var EXP_MISSING_BASE = 126;
