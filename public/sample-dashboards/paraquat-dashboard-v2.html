@@ -460,6 +460,17 @@
       <li><b style="color:var(--ink); font-style:italic;">Volume</b> &mdash; revive dormant cases that clear all eligibility gates onto the active grid.</li>
       <li><b style="color:var(--ink); font-style:italic;">Quality</b> &u2014 fill in the missing story on each active case so it scores (and pays) higher.</li>
     </ul>
+    <!-- Dynamic docket stats: subtle, updates as sliders move -->
+    <div class="sample-docket-stats" style="margin-top:14px; padding:10px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:8px;">Illustrative synthetic 1,000-case docket &mdash; no client data</div>
+      <div style="display:flex; flex-wrap:wrap; gap:10px 28px; align-items:baseline;">
+        <div style="display:flex; align-items:baseline; gap:6px;"><b id="dynOnGridN" style="font-size:18px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">526</b><span style="font-size:11px; color:var(--ink-2);">On-grid cases</span></div>
+        <div style="display:flex; align-items:baseline; gap:6px;"><b id="dynBelowGridN" style="font-size:18px; font-weight:700; color:#B45309; font-variant-numeric:tabular-nums;">132</b><span style="font-size:11px; color:var(--ink-2);">Do not meet gate</span></div>
+        <div style="display:flex; align-items:baseline; gap:6px;"><b id="dynDormantN" style="font-size:18px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">342</b><span style="font-size:11px; color:var(--ink-2);">Dormant</span></div>
+        <div style="display:flex; align-items:baseline; gap:6px;"><b id="dynMovedN" style="font-size:18px; font-weight:700; color:#059669; font-variant-numeric:tabular-nums;">0</b><span style="font-size:11px; color:var(--ink-2);">Moved to on-grid</span></div>
+      </div>
+      <div style="font-size:10px; color:var(--muted); margin-top:6px;">Total: <b style="color:var(--ink);">1,000</b> matters &middot; on-grid valued &middot; below-grid fail gate &middot; dormant $0 until cured</div>
+    </div>
   </div>
 
   <div class="cols">
@@ -500,17 +511,6 @@
     </div>
   </div>
 
-
-  <!-- Sample docket: illustrative stats block -->
-  <div class="sample-docket-stats" style="margin:24px 0 8px 0; padding:16px 20px; background:var(--surface); border:1px solid var(--border); border-radius:10px;">
-    <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:10px;">Illustrative synthetic 1,000-case docket &mdash; no client data</div>
-    <div style="display:flex; flex-wrap:wrap; gap:18px 40px; align-items:baseline;">
-      <div style="display:flex; align-items:baseline; gap:8px;"><b style="font-size:26px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">526</b><span style="font-size:13px; color:var(--ink-2);">On-grid cases</span></div>
-      <div style="display:flex; align-items:baseline; gap:8px;"><b style="font-size:26px; font-weight:700; color:#B45309; font-variant-numeric:tabular-nums;">132</b><span style="font-size:13px; color:var(--ink-2);">Do not meet gate criteria</span></div>
-      <div style="display:flex; align-items:baseline; gap:8px;"><b style="font-size:26px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">342</b><span style="font-size:13px; color:var(--ink-2);">Dormant</span></div>
-    </div>
-    <div style="font-size:11px; color:var(--muted); margin-top:10px;">Total: <b style="color:var(--ink);">1,000</b> matters &middot; on-grid valued &middot; below-grid fail gate &middot; dormant $0 until cured</div>
-  </div>
 
 
   <div class="section-title">The eight gaps, priced — biggest first</div>
@@ -1441,9 +1441,9 @@
       var gdr = $('gcDorm'); if (gdr) gdr.textContent = dormRemaining.toLocaleString('en-US');
       var grv = $('gcRevived'); if (grv) grv.textContent = revivedGate.toLocaleString('en-US');
       var dHd = $('dormantCount'); if (dHd) dHd.textContent = dormRemaining.toLocaleString('en-US');
-      var dcOG = $('dcOnGridN'); if (dcOG) dcOG.textContent = onGridMatters.toLocaleString('en-US');
-      var dcDM = $('dcDormN'); if (dcDM) dcDM.textContent = dormRemaining.toLocaleString('en-US');
-      var dcOP = $('dcOpenN'); if (dcOP) dcOP.textContent = activeMatters.toLocaleString('en-US');
+      var dOnGrid = $('dynOnGridN'); if (dOnGrid) dOnGrid.textContent = onGridMatters.toLocaleString('en-US');
+      var dDormant = $('dynDormantN'); if (dDormant) dDormant.textContent = dormRemaining.toLocaleString('en-US');
+      var dMoved = $('dynMovedN'); if (dMoved) dMoved.textContent = revivedGate.toLocaleString('en-US');
       // exp counts + portfolio matrix
       var subMiss = $('subMissing'); if (subMiss) subMiss.textContent = missing.toLocaleString('en-US');
       // update slider max/cap label and re-cap if gate changed
