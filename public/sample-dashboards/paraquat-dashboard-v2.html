@@ -415,13 +415,7 @@
   svg .grpsum { font-weight: 650; fill: var(--ink-2); font-variant-numeric: tabular-nums; }
   .foot { font-size: 11.5px; color: var(--muted); margin-top: 16px; line-height: 1.6; }
 
-  /* ---------- tooltip ---------- */
-  #tip {
-    position: fixed; pointer-events: none; z-index: 50; display: none;
-    background: var(--ink); color: var(--surface); font-size: 12px;
-    padding: 6px 9px; border-radius: 6px; max-width: 260px;
-  }
-  #tip b { display: block; }
+  /* ---------- tooltip removed ---------- */
 
   /* ========================================================== */
   /* Executive SaaS visual upgrade                                */
@@ -759,7 +753,7 @@
     <div class="sample-docket-stats" style="margin-top:14px; padding:10px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px;">
       <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:8px;">
         <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted);">Illustrative synthetic 1,000-case docket &mdash; no client data</div>
-        <button id="btnResetDocket" type="button" class="btn-reset" style="padding:4px 12px; font-size:11px;" title="Restore the 1,000-case dataset to its original state (all sliders back to loaded defaults)."><span class="r-arrow">↻</span> Reset to original 1,000</button>
+        <button id="btnResetDocket" type="button" class="btn-reset" style="padding:4px 12px; font-size:11px;"><span class="r-arrow">↻</span> Reset to original 1,000</button>
       </div>
       <div style="display:flex; flex-wrap:wrap; gap:10px 28px; align-items:baseline;">
         <div style="display:flex; align-items:baseline; gap:6px;"><b id="dynOnGridN" style="font-size:18px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">526</b><span style="font-size:11px; color:var(--ink-2);">On-grid cases</span></div>
@@ -785,8 +779,14 @@
     </div>
     <div class="levers-column">
     <div class="card">
-      <div class="lever-box-header">
-        <span class="lever-box-title"><em>Dormant Docket</em> &mdash; <span class="lever-box-sub">The Quantity Lever</span></span>
+      <div class="lever-box-header" style="align-items:center;">
+        <span class="lever-box-title">
+          <em>Dormant Docket</em> &mdash; <span class="lever-box-sub">The Quantity Lever</span>
+          <span style="margin-left:8px; padding:2px 10px; border-radius:999px; background:var(--wash); border:1px solid var(--grid); font-size:11px; font-weight:650; color:var(--ink); font-style:normal; letter-spacing:0; white-space:nowrap;"><b id="hdrDormCount">342</b> dormant matters</span>
+        </span>
+      </div>
+      <div style="font-size:12px; color:var(--ink-2); line-height:1.55; margin: 4px 0 12px; padding:9px 12px; background:var(--page); border:1px solid var(--grid); border-radius:7px;">
+        <b style="color:var(--ink);">What "dormant" means:</b> a matter is dormant when the firm has lost contact with the claimant, the file was closed, or no paperwork is on record. Each sits at $0 today because at least one eligibility gate isn't met. Moving the slider revives matters that <em>would</em> clear all 5 gates once the missing documentation is supplied &mdash; each revived matter re-enters the active grid at its paid tier.
       </div>
       <div id="dormantLeverHost"></div>
     </div>
@@ -939,7 +939,7 @@
 
 </div>
 
-<div id="tip"></div>
+<div id="tip" style="display:none"></div>
 
 <script>
 (function () {
@@ -1107,14 +1107,42 @@
     { id: 'gate',
       name: 'Clear all 5 gates on dormant matters — revive to on-grid',
       desc: '',
-      tip: '342 dormant matters (no contact / closed / open with no docs) booked at $0.<br>One gate = <b>all 5</b> condensed:<br>&nbsp;&nbsp;• docScore &ge; 3<br>&nbsp;&nbsp;• Syngenta-era<br>&nbsp;&nbsp;• PDD / PD / parkinsonism<br>&nbsp;&nbsp;• latency &ge; 5 yr<br>&nbsp;&nbsp;• PFS + AQ',
       trans: { 'none>I': 5, 'none>II': 108, 'none>III': 229 }, real: 0 },
     { id: 'expVec',
       name: 'Exposure vector — cure missing among on-grid',
       desc: 'Among on-grid matters, 400 have exposure-vector documented; the rest are missing and score 0 on that axis. Allocate the missing pool to a vector bucket — total allocated can’t exceed the missing pool.',
-      tip: 'Quality: allocating a missing case to a bucket grants that bucket’s points (15 / 7 / 4). More points = higher weighted score = tier lift. Sliders allocate the missing pool (current missing shown above).',
       trans: null, real: 0 }
   ];
+
+  // BASELINE tier counts snapshot (sliders at 0 — i.e. page load state). Captured once on first render().
+  // LIFT (live) = (liveTierCounts × V) − (baselineTierCounts × V), derived from the actual DD scoring
+  // pipeline — when dormant cases revive AND quality sliders cure missing data, the tier of each case
+  // moves through that pipeline, and THAT is what determines the lift number.
+  var _baselineTierCounts = null;
+
+  // MAX-POTENTIAL tier counts: computed once at init. Assumes dormant→on-grid (gate cure) and all
+  // missing data filled with the best-bucket values. Below-grid stays $0 (gate failures can't be cured
+  // with these 4 sliders). The hero/lede display this stable number so the headline reads as the
+  // "size of the prize" instead of the current (slider-dependent) lift.
+  var _maxPotentialTierCounts = null;
+  function maxPotentialTierCounts() {
+    if (_maxPotentialTierCounts) return _maxPotentialTierCounts;
+    var c = { I: 0, II: 0, III: 0 };
+    for (var i = 0; i < DD.length; i++) {
+      var r = DD[i];
+      if (r._origStatus === 'below') continue; // below-grid can't be cured by these 4 levers
+      var exp  = r.exp !== null ? (r.exp === 'direct' ? 15 : r.exp === 'para' ? 7 : 4) : 15;
+      var pd   = r.pd  !== null ? (r.pd  === 'advanced' ? 25 : r.pd  === 'moderate' ? 14 : 6) : 25;
+      var cert = r.cert === 'yes' ? 30 : (r.cert === 'no' ? 0 : 30); // null → best (30)
+      var lat  = r.lat !== null ? (r.lat === '15+' ? 15 : 7) : 15;
+      var s = exp + pd + cert + lat;
+      if (s >= 71) c.I++;
+      else if (s >= 36) c.II++;
+      else c.III++;
+    }
+    _maxPotentialTierCounts = c;
+    return c;
+  }
 
   var GAPS = [
     { label: 'Revive dormant — clear all 5 gates', lever: 'gate', cases: 342, trans: { 'none>I': 5, 'none>II': 108, 'none>III': 229 } },
@@ -1174,21 +1202,7 @@
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
   function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
 
-  // ---------- tooltip ----------
-  var tip = $('tip');
-  function tipOn(html, ev) { tip.innerHTML = html; tip.style.display = 'block'; tipMove(ev); }
-  function tipMove(ev) {
-    var x = ev.clientX + 14, y = ev.clientY + 10;
-    if (x + 270 > window.innerWidth) x = ev.clientX - 270;
-    tip.style.left = x + 'px'; tip.style.top = y + 'px';
-  }
-  function tipOff() { tip.style.display = 'none'; }
-  function hoverable(el, html) {
-    el.style.cursor = 'default';
-    el.addEventListener('mouseenter', function (e) { tipOn(html, e); });
-    el.addEventListener('mousemove', tipMove);
-    el.addEventListener('mouseleave', tipOff);
-  }
+  // ---------- tooltip helpers (removed — no hover tooltips anywhere) ----------
 
   // ---------- state ----------
   function currentGsv(V) { return OPEN.I * V.I + OPEN.II * V.II + OPEN.III * V.III; }
@@ -1201,17 +1215,8 @@
     var onGridHost = $('onGridLeverHost');
     if (dormHost) dormHost.innerHTML = '';
     if (onGridHost) onGridHost.innerHTML = '';
-    var dormantHdr = document.createElement('div');
-    dormantHdr.className = 'active-hdr';
-    dormantHdr.id = 'dormantHdr';
-    dormantHdr.style.marginTop = '0'; dormantHdr.style.borderTop = 'none'; dormantHdr.style.paddingTop = '0';
-    dormantHdr.innerHTML = '<span>Dormant docket</span><span><b id="dormantCount">342</b> dormant matters</span>';
-    dormantHdr.title = '342 Dormant = closed or missing gate-required information, booked at $0 until cured. Decreases as the gate slider revives matters to on-grid.';
-    dormantHdr.style.cursor = 'help';
-    if (dormHost) {
-      dormHost.appendChild(dormantHdr);
-      hoverable(dormantHdr, '<b>342 Dormant</b>Closed or missing gate-required information, booked at $0 until cured. Decreases as the gate slider revives matters to on-grid.');
-    }
+    // Dormant matter count now lives inline in the card header (#hdrDormCount) — see HTML.
+    if (dormHost) {/* dormantHdr is now visual in the card header; nothing to append here */}
     var l = LEVERS[0];
     var div = document.createElement('div');
     div.className = 'lever';
@@ -1221,19 +1226,13 @@
       '<div class="rrow"><input type="range" min="0" max="100" step="5" value="' + l.real + '" id="rg-' + l.id + '" aria-label="Realization rate for ' + esc(l.name) + '"><span class="pct" id="pct-' + l.id + '"></span></div>' +
       '<div class="gate-counts" id="gateCounts"><span class="gc"><b id="gcOpenGrid">526</b> On-grid</span><span class="gc hi"><b id="gcDorm">342</b> Dormant remaining</span><span class="gc"><b id="gcRevived">0</b> revived</span></div>';
     if (dormHost) dormHost.appendChild(div);
-    if (l.tip) {
-      var descEl = div.querySelector('.desc');
-      if (descEl) { descEl.style.cursor='help'; descEl.style.textDecoration='underline'; descEl.style.textDecorationStyle='dotted'; descEl.style.textUnderlineOffset='3px'; hoverable(descEl, '<b>'+esc(l.name)+'</b>'+esc(l.tip)); }
-      var nameEl = div.querySelector('.name'); if (nameEl) hoverable(nameEl, '<b>'+esc(l.name)+'</b>'+esc(l.tip));
-    }
+    if (l.tip) { /* tooltips removed — desc copy lives in the card body */ }
     var hdr = document.createElement('div');
     hdr.className = 'active-hdr'; hdr.id = 'activeHdr';
     hdr.innerHTML = '<span>On-grid matters</span><span><b id="activeCount">526</b> on-grid</span>';
-    hdr.title = 'On-grid = matters currently valued (grows as dormant revive). 132 below-grid stay put. Dormant shrinks.';
-    hdr.style.cursor = 'help';
+    // tooltip removed
     if (onGridHost) {
       onGridHost.appendChild(hdr);
-      hoverable(hdr, '<b>On-grid matters</b>526 base on-grid + revived from dormant. Quality lift (exposure vector) allocates the missing pool.');
     }
     var sec = document.createElement('div');
     sec.id = 'secondaryCritBox';
@@ -1425,18 +1424,15 @@
   }
 
   // ---------- bridge (waterfall) — LEFT → RIGHT ----------
-  function renderBridge(V, effFull, effReal) {
-    var cur = currentGsv(V);
-    var lifts = LEVERS.map(function (l) { return (effReal ? effReal(l) : leverRealized(l, V)); });
-    var gateLift = lifts[0] || 0;
-    // quality lift from current exposure-vector allocation (in $K, same units as gateFull)
-    var qualLift = (typeof expQuality !== 'undefined' && expQuality) ? (expQuality.total || 0) : 0;
-    var pot = cur + gateLift + qualLift;
-    // 3 columns: Current GSV | Stacked lift (volume + quality) | Potential GSV
+  function renderBridge(V, effFull, effReal, curEff, pot) {
+    // curEff (baseline GSV) and pot (live GSV) come from render() — both derived from DD scoring.
+    // Bridge simply visualises the gap between them. Don't recompute here.
+    var cur = (typeof curEff === 'number') ? curEff : currentGsv(V);
+    var livePot = (typeof pot === 'number') ? pot : cur;
     var cols = [
       { label: 'Current GSV', from: 0, to: cur, kind: 'level' },
-      { label: 'Lift', from: cur, to: pot, kind: 'lift', lever: 'combined' },
-      { label: 'Potential GSV', from: 0, to: pot, kind: 'level' }
+      { label: 'Lift', from: cur, to: livePot, kind: 'lift', lever: 'combined' },
+      { label: 'Potential GSV', from: 0, to: livePot, kind: 'level' }
     ];
     var fullPot = cur + LEVERS.reduce(function (a, l) { return a + (effFull ? effFull(l) : leverFull(l, V)); }, 0);
     var FLOOR = 60000;
@@ -1511,11 +1507,7 @@
     var paths = $('bridge').querySelectorAll('path[data-bi]');
     paths.forEach(function (p, i) {
       var m = marks[i];
-      var leverIdx = m.lever === 'gate' ? 0 : 1;
-      var l = LEVERS[leverIdx];
-      var html = '<b>' + esc(m.label) + '</b> +' + fmtK(m.v) +
-        (l ? ' at ' + l.real + '% realization (full: ' + fmtK((effFull ? effFull(l) : leverFull(l, V))) + ')' : '');
-      hoverable(p, html);
+      // tooltip removed; keep spotlight on hover (mouseenter/mouseleave) for the liftmap group
       if (m.lever) {
         p.addEventListener('mouseenter', function () { spotlightLever(m.lever); });
         p.addEventListener('mouseleave', function () { spotlightLever(null); });
@@ -1532,7 +1524,7 @@
       }
     });
     if ($('bridgeTbl')) $('bridgeTbl').innerHTML = tb + '</tbody>';
-    return { cur: cur, pot: pot, realized: pot - cur };
+    return { cur: cur, pot: livePot, realized: livePot - cur };
   }
 
   // ---------- lift map (grouped by bridge lever) ----------
@@ -1588,14 +1580,7 @@
     });
     s += '</svg>';
     $('liftmap').innerHTML = s;
-    $('liftmap').querySelectorAll('path').forEach(function (p) {
-      var r = barMeta[+p.getAttribute('data-bi')];
-      var moves = Object.keys(r.g.trans).map(function (k) {
-        var pr = k.split('>');
-        return r.g.trans[k] + ' matters ' + (pr[0] === 'none' ? 'onto the grid' : 'Tier ' + pr[0]) + ' → Tier ' + pr[1];
-      }).join(' · ');
-      hoverable(p, '<b>' + esc(r.g.label) + ' — ' + fmtK(r.v) + '</b>' + esc(LEVER_LABELS[r.g.lever]) + ' · ' + r.g.cases + ' matters · ' + esc(moves));
-    });
+    // (hoverable/tooltip removed — hover still drives spotlight via spotlightLever())
     var tb = '<thead><tr><th>Gap</th><th>Bridge lever</th><th class="num">Matters</th><th class="num">Full lift ($000s)</th></tr></thead><tbody>';
     allRows.forEach(function (r) { tb += '<tr><td>' + esc(r.g.label) + '</td><td>' + esc(LEVER_LABELS[r.g.lever]) + '</td><td class="num">' + r.g.cases + '</td><td class="num">' + Math.round(r.v).toLocaleString('en-US') + '</td></tr>'; });
     if ($('liftTbl')) $('liftTbl').innerHTML = tb + '</tbody>';
@@ -1608,7 +1593,7 @@
       var lift = Math.max(0, (V[r.to] || 0) - (V[r.from] || 0));
       var move = (r.from === 'none' ? 'Below grid' : 'Tier ' + r.from) + ' → Tier ' + r.to;
       var shortM = r.m.indexOf('3:21-md-03004-') === 0 ? 'MDL …' + r.m.slice(-5) : r.m;
-      tb += '<tr><td class="matter" title="' + esc(r.m) + '">' + esc(shortM) + '</td><td>' + esc(r.f) + '</td><td>' + esc(r.a) + '</td><td class="move">' + move + '</td><td class="num">' + fmtK(lift) + '</td></tr>';
+      tb += '<tr><td class="matter">' + esc(shortM) + '</td><td>' + esc(r.f) + '</td><td>' + esc(r.a) + '</td><td class="move">' + move + '</td><td class="num">' + fmtK(lift) + '</td></tr>';
     });
     $('topTbl').querySelector('tbody').innerHTML = tb;
   }
@@ -1716,34 +1701,53 @@
       if(l.id==='expVec') return (typeof expQuality!=='undefined'&&expQuality?expQuality.total:0);
       return 0;
     }
-    // Display tiers use base OPEN+gate only (no exp scoring) — histogram is separate
-    var curEffCounts = {
-      I: 6 + Math.round((gate.trans['none>I']||0) * gate.real / 100),
-      II: 194 + Math.round((gate.trans['none>II']||0) * gate.real / 100),
-      III: 326 + Math.round((gate.trans['none>III']||0) * gate.real / 100)
-    };
-    var curEff = curEffCounts.I * V.I + curEffCounts.II * V.II + curEffCounts.III * V.III;
-    var b = renderBridge(V, effFull, effReal);
+    // LIFT = live − baseline, both from ACTUAL DD scoring.
+    // Baseline tier counts snapshotted once on first render (sliders = 0). After that,
+    // each render counts the live tier distribution from the same DD rows (status=on-grid + slider-applied scores).
+    // Moving cases dormant→on-grid via the gate slider AND curing missing data via the quality sliders
+    // both flow through the same scoring pipeline — and THAT is what determines the lift number.
+    var liveTierCounts = { I: 0, II: 0, III: 0 };
+    for (var li = 0; li < DD.length; li++) {
+      var lr = DD[li];
+      if (lr.status !== 'on-grid') continue;
+      if (lr.score >= 71) liveTierCounts.I++;
+      else if (lr.score >= 36) liveTierCounts.II++;
+      else liveTierCounts.III++;
+    }
+    if (_baselineTierCounts === null) {
+      _baselineTierCounts = { I: liveTierCounts.I, II: liveTierCounts.II, III: liveTierCounts.III };
+    }
+    var liveI = liveTierCounts.I, liveII = liveTierCounts.II, liveIII = liveTierCounts.III;
+    var baseI = _baselineTierCounts.I, baseII = _baselineTierCounts.II, baseIII = _baselineTierCounts.III;
+    var curEff = baseI * V.I + baseII * V.II + baseIII * V.III;  // baseline GSV (Current)
+    var pot    = liveI * V.I + liveII * V.II + liveIII * V.III;  // live GSV (Potential)
+    var full   = pot;                                            // alias kept for KPI wiring
+    var lift   = pot - curEff;                                    // live gap = derived from scoring change
+    // Hero/lede headline = SIZE OF THE PRIZE (stable, doesn't change with sliders).
+    // = max-potential GSV (dormant cured + all data filled to best bucket) minus baseline GSV.
+    var mxT = maxPotentialTierCounts();
+    var maxPotentialLift = (mxT.I * V.I + mxT.II * V.II + mxT.III * V.III) - curEff;
+    // bridge consumes {cur, pot, realized=pot-cur}
+    var b = renderBridge(V, effFull, effReal, curEff, pot);
     renderLiftmap(V, effFull, expQuality);
     renderTop(V);
-    var full = gateFull;
     if ($('kpiCur')) $('kpiCur').textContent = fmtM(curEff);
     if ($('kpiFull')) $('kpiFull').textContent = fmtM(full);
-    if ($('kpiReal')) $('kpiReal').textContent = fmtM(b.realized);
-    if ($('kpiRealPct')) $('kpiRealPct').textContent = '+' + (curEff > 0 ? (100 * b.realized / curEff).toFixed(1) : '0') + '% vs current GSV';
+    if ($('kpiReal')) $('kpiReal').textContent = fmtM(lift);
+    if ($('kpiRealPct')) $('kpiRealPct').textContent = '+' + (curEff > 0 ? (100 * lift / curEff).toFixed(1) : '0') + '% vs current GSV';
     if ($('ledeCur')) $('ledeCur').textContent = fmtM(curEff);
-    if ($('ledeGap')) $('ledeGap').textContent = fmtM(full);
-    if ($('hlGap')) $('hlGap').textContent = fmtM(full);
-    if ($('stGap')) $('stGap').textContent = fmtM(full);
-    if ($('sbGap')) $('sbGap').textContent = fmtM(full);
-    if ($('openI')) $('openI').textContent = curEffCounts.I.toLocaleString('en-US');
-    if ($('openII')) $('openII').textContent = curEffCounts.II.toLocaleString('en-US');
-    if ($('openIII')) $('openIII').textContent = curEffCounts.III.toLocaleString('en-US');
+    if ($('ledeGap')) $('ledeGap').textContent = fmtM(maxPotentialLift);
+    if ($('hlGap')) $('hlGap').textContent = fmtM(maxPotentialLift);
+    if ($('stGap')) $('stGap').textContent = fmtM(maxPotentialLift);
+    if ($('sbGap')) $('sbGap').textContent = fmtM(maxPotentialLift);
+    if ($('openI')) $('openI').textContent = liveI.toLocaleString('en-US');
+    if ($('openII')) $('openII').textContent = liveII.toLocaleString('en-US');
+    if ($('openIII')) $('openIII').textContent = liveIII.toLocaleString('en-US');
     if ($('dormCell')) $('dormCell').textContent = (342 - revivedGate).toLocaleString('en-US');
-    $('gsvI').textContent = fmtM(curEffCounts.I * V.I);
-    $('gsvII').textContent = fmtM(curEffCounts.II * V.II);
-    $('gsvIII').textContent = fmtM(curEffCounts.III * V.III);
-    $('gsvTot').textContent = fmtM(curEff);
+    $('gsvI').textContent = fmtM(liveI * V.I);
+    $('gsvII').textContent = fmtM(liveII * V.II);
+    $('gsvIII').textContent = fmtM(liveIII * V.III);
+    $('gsvTot').textContent = fmtM(pot);
     LEVERS.forEach(function (l) {
       var amtEl = $('amt-' + l.id); if (amtEl) amtEl.textContent = '+' + fmtM(effReal(l));
       var pctEl = $('pct-' + l.id); if (pctEl) pctEl.textContent = l.real + '% · of ' + fmtM(effFull(l));
@@ -1756,11 +1760,11 @@
       var el = $('activeCount');
       if (el) el.textContent = onGridMatters.toLocaleString('en-US');
       var hdr = $('activeHdr');
-      if (hdr) hdr.title = revivedGate + ' revived from dormant at ' + gate.real + '% \u2014 526 base on-grid + ' + revivedGate + ' = ' + onGridMatters + ' on-grid';
+      // tooltip removed
       var gog = $('gcOpenGrid'); if (gog) gog.textContent = onGridMatters.toLocaleString('en-US');
       var gdr = $('gcDorm'); if (gdr) gdr.textContent = dormRemaining.toLocaleString('en-US');
       var grv = $('gcRevived'); if (grv) grv.textContent = revivedGate.toLocaleString('en-US');
-      var dHd = $('dormantCount'); if (dHd) dHd.textContent = dormRemaining.toLocaleString('en-US');
+      var dHd = $('hdrDormCount'); if (dHd) dHd.textContent = dormRemaining.toLocaleString('en-US');
       var dOnGrid = $('dynOnGridN'); if (dOnGrid) dOnGrid.textContent = onGridMatters.toLocaleString('en-US');
       var dDormant = $('dynDormantN'); if (dDormant) dDormant.textContent = dormRemaining.toLocaleString('en-US');
       var dMoved = $('dynMovedN'); if (dMoved) dMoved.textContent = revivedGate.toLocaleString('en-US');
