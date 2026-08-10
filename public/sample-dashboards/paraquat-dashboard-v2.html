@@ -976,6 +976,27 @@
   function latPts(k){ if(k==='15+') return 15; if(k==='5-15') return 7; return 0; }
   function latFailsGate(k){ return k==null; }
   function recomputeDDScores(){ if(!DD) return; for(var i=0;i<DD.length;i++){ var r=DD[i]; if(r.status!=='on-grid'){ r.score=0; continue; } r.score = expPts(r.exp) + pdPts(r.pd) + certPts(r.cert) + latPts(r.lat); } }
+  // GSV at current gate but with quality sliders held at 0. Computed from DD_SNAPSHOT (the
+  // original 1,000-case data) so we don't mutate the live DD rows. Each row's original data
+  // represents the "no cures" scenario — null fields score 0, so revived dormant cases land
+  // in Tier III by default. This is the source of truth for the gate lever's contribution.
+  function liveGsVGateOnly(V) {
+    var c = { I: 0, II: 0, III: 0 };
+    for (var i = 0; i < DD.length; i++) {
+      var r = DD[i];
+      if (r.status !== 'on-grid') continue; // respects current gate slider
+      var s = DD_SNAPSHOT[i];
+      var exp  = s.exp !== null ? (s.exp === 'direct' ? 15 : s.exp === 'para' ? 7 : 4) : 0;
+      var pd   = s.pd  !== null ? (s.pd  === 'advanced' ? 25 : s.pd  === 'moderate' ? 14 : 6) : 0;
+      var cert = s.cert === 'yes' ? 30 : 0;
+      var lat  = s.lat !== null ? (s.lat === '15+' ? 15 : 7) : 0;
+      var score = exp + pd + cert + lat;
+      if (score >= 71) c.I++;
+      else if (score >= 36) c.II++;
+      else c.III++;
+    }
+    return c.I * V.I + c.II * V.II + c.III * V.III;
+  }
   function rebuildDDMissingOrders(){
     DD_EXP_MISSING_ORDER=[]; DD_PD_MISSING_ORDER=[];
     for(var i=0;i<DD.length;i++){ var r=DD[i]; if(r.status!=='on-grid') continue; if(r.exp==null) DD_EXP_MISSING_ORDER.push(r.id); if(r.pd==null) DD_PD_MISSING_ORDER.push(r.id); }
@@ -1687,8 +1708,12 @@
     })();
     var expQuality = computeExpQuality(missing, EXP_ALLOC);
     // FROZEN GSV — histogram phase, do not wire to tier yet
-    var gateFull = transValue(gate.trans, V);
-    var gateReal = gateFull * gate.real / 100;
+    // Gate lift = scoring-derived (from DD_SNAPSHOT — no cures applied). At gate=100%, all 342
+    // dormant cases have null data → score 0 → Tier III → $V.III × 342 ≈ $29.1M. The old static
+    // $47.3M assumed 5/108/229 bucket splits that the actual scoring pipeline never produces.
+    var gateOnlyGsV = liveGsVGateOnly(V);
+    var gateFull = 342 * V.III; // max gate lift at gate=100%, quality=0 — all dormant → Tier III
+    var gateReal = 0; // patched after curEff is computed below
     function effFull(l){
       if(l.id==='gate') return gateFull;
       if(l.id==='combined') return gateFull + (typeof expQuality!=='undefined'&&expQuality?expQuality.total:0);
@@ -1723,6 +1748,10 @@
     var pot    = liveI * V.I + liveII * V.II + liveIII * V.III;  // live GSV (Potential)
     var full   = pot;                                            // alias kept for KPI wiring
     var lift   = pot - curEff;                                    // live gap = derived from scoring change
+    // Gate lever card: actual lift from gate alone (with quality held at 0). Equals the gap
+    // between "current gate, no cures" and baseline. At gate=100% with no other sliders, this is
+    // 342 × V.III ≈ $29.1M (all revived cases land in Tier III by default).
+    gateReal = Math.max(0, gateOnlyGsV - curEff);
     // Hero/lede headline = SIZE OF THE PRIZE (stable, doesn't change with sliders).
     // = max-potential GSV (dormant cured + all data filled to best bucket) minus baseline GSV.
     var mxT = maxPotentialTierCounts();
