@@ -817,28 +817,6 @@
 
 
 
-  <div class="section-title">The eight gaps, priced — biggest first</div>
-  <div class="cols">
-    <div class="card">
-      <h3>Full lift potential by gap</h3>
-      <div class="sub">Grouped under the bridge lever each gap rolls up to, priced at the grid values below. Hover a lever bar in the bridge to spotlight its gaps here.</div>
-      <div id="liftmap"></div>
-    </div>
-    <div class="card">
-      <h3>Near-tier inventory</h3>
-      <div class="sub">Open matters sitting one to two <em>curable</em> gaps from a higher grid position — the cheapest value in the docket.</div>
-      <div class="neartier">
-        <div class="nt"><b>117</b> one PDD / cognitive-decline documentation from the top clinical tier</div>
-        <div class="nt"><b>71</b> one neurologist confirmation from Confirmed&nbsp;PD</div>
-        <div class="nt"><b>27</b> one eligibility gate from Confirmed&nbsp;PD — currently below grid</div>
-        <div class="nt"><b>22</b> one gate from Parkinsonism — currently below grid</div>
-        <div class="nt"><b>14</b> one gate from the top clinical tier — currently below grid</div>
-        <div class="nt"><b>13</b> one contemporaneous record from Parkinsonism</div>
-      </div>
-
-    </div>
-  </div>
-
   <div class="section-title">Diagnosis is half the job — here's how the value gets unlocked</div>
   <div class="card">
     <div class="sub" style="margin-top:2px; margin-bottom:12px; font-size:13.5px; color:var(--ink); font-weight:600; line-height:1.55;">Here is the revised 4-lever structure with Lever 1 sharply focused on systematizing missing evidence for your existing inventory.</div>
@@ -1650,50 +1628,56 @@
 
   function renderBridgeTierHist(){
     if(!DD) return;
-    var c = { below:{on:0,off:0}, t3:{on:0,off:0}, t2:{on:0,off:0}, t1:{on:0,off:0} };
+    var c = { below:{on:0,off:0}, t3:{on:0,off:0}, t2:{on:0,off:0}, t1:{on:0,off:0}, dormant:0 };
     for(var i=0;i<DD.length;i++){
       var r=DD[i];
       var wasOff = (r._origStatus && r._origStatus !== 'on-grid');
       if(r.status==='below'){ c.below[wasOff?'off':'on']++; continue; }
-      if(r.status==='dormant'){ c.t3.off++; continue; }
+      if(r.status==='dormant'){ c.dormant++; continue; }
       var t = r.score>=71 ? 't1' : (r.score>=36 ? 't2' : 't3');
       c[t][wasOff?'off':'on']++;
     }
     var total = 1000;
     function pct(n){ return Math.round(100*n/total); }
     function tierTotal(k){ return c[k].on + c[k].off; }
-    var maxC = Math.max(tierTotal('below'), tierTotal('t3'), tierTotal('t2'), tierTotal('t1')) || 1;
+    var V = tierValues();
+    function gsvK(k){ return tierTotal(k) * V[k]; }
+    var maxC = Math.max(tierTotal('below'), tierTotal('t3'), tierTotal('t2'), tierTotal('t1'), c.dormant) || 1;
     var h = '';
     h += '<div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 12px; margin-bottom:8px;">';
     h += '<div style="font-size:12px; font-weight:700; color:var(--ink); letter-spacing:0.06em; text-transform:uppercase;">Where the 1,000 cases land by tier</div>';
     h += '<div style="font-size:10px; color:var(--muted); font-weight:500;">Total docket: <b style="color:var(--ink); font-weight:700;">1,000</b></div>';
     h += '</div>';
-    var rows4 = [
-      {label:'Tier I',      sub:'71–100', key:'t1'},
-      {label:'Tier II',     sub:'36–70',  key:'t2'},
-      {label:'Tier III',    sub:'0–35',   key:'t3'},
-      {label:'Below Grid',  sub:'fails gate',  key:'below', warning:true}
+    var rows = [
+      {label:'Tier I',     sub:'71–100',   key:'t1'},
+      {label:'Tier II',    sub:'36–70',    key:'t2'},
+      {label:'Tier III',   sub:'0–35',     key:'t3'},
+      {label:'Below Grid', sub:'fails gate', key:'below', warning:true},
+      {label:'Dormant',    sub:'$0 until cured', dormant:true}
     ];
-    rows4.forEach(function(r){
-      var on = c[r.key].on, off = c[r.key].off, tot = on + off;
+    rows.forEach(function(r){
+      var tot = r.dormant ? c.dormant : tierTotal(r.key);
       var pctFrac = maxC===0 ? 0 : Math.max(2, Math.round((tot/maxC)*100));
       var bg, shadow;
-      if (r.warning) {
+      if (r.dormant) {
+        bg = 'repeating-linear-gradient(45deg, #9CA3AF 0 6px, #D1D5DB 6px 12px)';
+        shadow = '0 0 0 1px rgba(156,163,175,0.18), 0 1px 4px rgba(156,163,175,0.20)';
+      } else if (r.warning) {
         bg = 'linear-gradient(90deg, #B45309 0%, #D97706 60%, #F59E0B 100%)';
         shadow = '0 0 0 1px rgba(217,119,6,0.18), 0 1px 4px rgba(217,119,6,0.22)';
       } else {
         bg = 'linear-gradient(90deg, #1E40AF 0%, #2563EB 60%, #3B82F6 100%)';
         shadow = '0 0 0 1px rgba(37,99,235,0.15), 0 1px 4px rgba(37,99,235,0.18)';
       }
-      h += '<div style="display:grid; grid-template-columns: 92px 1fr 84px; gap:10px; align-items:center; padding:4px 0;">';
+      var gsvK = r.dormant ? 0 : gsvK(r.key);
+      h += '<div style="display:grid; grid-template-columns: 92px 1fr 110px; gap:10px; align-items:center; padding:4px 0;">';
       h += '<div style="font-size:12px; font-weight:700; color:var(--ink); text-align:right; line-height:1.15; letter-spacing:-0.005em;">'+r.label+'<div style="font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px;">'+r.sub+'</div></div>';
       h += '<div style="height:18px; background:var(--page); border:1px solid var(--grid); border-radius:4px; overflow:hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">';
       h += '<div style="background:'+bg+'; height:100%; width:'+pctFrac+'%; box-shadow:'+shadow+'; border-radius:3px;"></div>';
       h += '</div>';
-      h += '<div style="font-size:13px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; line-height:1.15; text-align:right;">'+tot.toLocaleString('en-US')+'<div style="font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px;">'+pct(tot)+'%</div></div>';
+      h += '<div style="font-size:13px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; line-height:1.15; text-align:right;">'+tot.toLocaleString('en-US')+' &middot; <span style="color:var(--series-1)">'+fmtK(gsvK)+'</span><div style="font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px;">'+pct(tot)+'%</div></div>';
       h += '</div>';
     });
-    h += '<div style="font-size:10px; color:var(--muted); margin-top:12px; padding-top:10px; border-top:1px solid var(--grid);"><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain &middot; <b style="font-weight:600;">Total: '+total.toLocaleString('en-US')+'</b></div>';
     var el = document.getElementById('bridgeTierHist'); if (el) el.innerHTML = h;
   }
 
