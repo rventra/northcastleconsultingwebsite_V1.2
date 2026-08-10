@@ -502,6 +502,8 @@
       <details class="tblview"><summary>Table view</summary>
         <table id="bridgeTbl"></table>
       </details>
+      <!-- tiny tier histogram: Below Grid + Tier III/II/I, split on-grid vs revived -->
+      <div id="bridgeTierHist" style="margin-top:14px; padding-top:12px; border-top:1px solid var(--grid);"></div>
       <!-- exp sliders: horizontal, below bridge -->
       <div class="exp-hz-wrap" id="expHzWrap"></div>
     </div>
@@ -516,6 +518,7 @@
         <button class="chip active" data-preset="25" type="button">25%</button>
         <button class="chip" data-preset="50" type="button">50%</button>
         <button class="chip" data-preset="100" type="button">Full</button>
+        <button id="btnResetDocket" type="button" style="margin-left:auto; font-size:11px; padding:4px 12px; font-weight:600; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--ink-2); cursor:pointer;" title="Restore the 1,000-case dataset to its original state (all sliders back to loaded defaults).">↻ Reset to original</button>
       </div>
       <div id="levers"></div>
     </div>
@@ -668,15 +671,15 @@
     var snap = typeof DD_SNAPSHOT !== 'undefined' ? DD_SNAPSHOT : null;
     var rows=[];
     if(snap && snap.length===1000){
-      for(var i=0;i<snap.length;i++){ var s=snap[i]; rows.push({id:s.id, status:s.status, exp:s.exp, pd:s.pd, cert:s.cert, lat:s.lat, score:0}); }
+      for(var i=0;i<snap.length;i++){ var s=snap[i]; rows.push({id:s.id, status:s.status, exp:s.exp, pd:s.pd, cert:s.cert, lat:s.lat, _origStatus:s.status, score:0}); }
     } else {
       var id2=1;
-      for(var i=0;i<132;i++) rows.push({id:id2++, status:'below', exp:null, pd:null, cert:null, lat:null, score:0});
+      for(var i=0;i<132;i++) rows.push({id:id2++, status:'below', exp:null, pd:null, cert:null, lat:null, _origStatus:'below', score:0});
       var expKnown=[]; for(var i=0;i<180;i++) expKnown.push('direct'); for(var i=0;i<100;i++) expKnown.push('drift'); for(var i=0;i<120;i++) expKnown.push('para');
       var pdKnown=[]; for(var i=0;i<70;i++) pdKnown.push('advanced'); for(var i=0;i<140;i++) pdKnown.push('moderate'); for(var i=0;i<115;i++) pdKnown.push('early');
       var certKnown=[]; for(var i=0;i<330;i++) certKnown.push('yes');
-      for(var i=0;i<526;i++){ var exp = i<400 ? expKnown[i] : null; var pd=i<325 ? pdKnown[i]:null; var cert=i<330 ? certKnown[i]:null; rows.push({id:id2++, status:'on-grid', exp:exp, pd:pd, cert:cert, lat:null, score:0}); }
-      for(var i=0;i<342;i++) rows.push({id:id2++, status:'dormant', exp:null, pd:null, cert:null, lat:null, score:0});
+      for(var i=0;i<526;i++){ var exp = i<400 ? expKnown[i] : null; var pd=i<325 ? pdKnown[i]:null; var cert=i<330 ? certKnown[i]:null; rows.push({id:id2++, status:'on-grid', exp:exp, pd:pd, cert:cert, lat:null, _origStatus:'on-grid', score:0}); }
+      for(var i=0;i<342;i++) rows.push({id:id2++, status:'dormant', exp:null, pd:null, cert:null, lat:null, _origStatus:'dormant', score:0});
     }
     DD = rows; window.DD = DD;
     window._ddExpKnownIds = null; window._ddPdKnownIds = null; window._ddCertKnownIds = null; window._ddLatKnownIds = null; window._certYesAlloc = 0; window._latAlloc = {'15+':0,'5-15':0}; window._ddGateSnapshot = null;
@@ -839,8 +842,8 @@
   var LEVERS = [
     { id: 'gate',
       name: 'Clear all 5 gates on dormant matters — revive to on-grid †',
-      desc: '342 dormant booked at $0 — re-enter the grid when all 5 gates clear. †One gate = all 5 (see footnote).',
-      tip: '342 dormant (no contact / closed / open with no docs) booked at $0. At full cure all 342 become on-grid (~5 I / ~108 II / ~229 III). †One gate = all 5 condensed: (1) docScore ≥ 3, (2) Syngenta-era, (3) PDD/PD/parkinsonism, (4) latency ≥ 5 yr, (5) PFS+AQ.',
+      desc: '',
+      tip: '342 dormant matters (no contact / closed / open with no docs) booked at $0.<br>† One gate = <b>all 5</b> condensed:<br>&nbsp;&nbsp;• docScore &ge; 3<br>&nbsp;&nbsp;• Syngenta-era<br>&nbsp;&nbsp;• PDD / PD / parkinsonism<br>&nbsp;&nbsp;• latency &ge; 5 yr<br>&nbsp;&nbsp;• PFS + AQ',
       trans: { 'none>I': 5, 'none>II': 108, 'none>III': 229 }, real: 25 },
     { id: 'expVec',
       name: 'Exposure vector — cure missing among on-grid',
@@ -1244,33 +1247,57 @@
     })();
     // 4-bucket summary: Below Grid + Tier III/II/I (always visible even when details collapsed)
     (function(){
-      var c = { below:0, t3:0, t2:0, t1:0 };
+      var c = { below:{on:0,off:0}, t3:{on:0,off:0}, t2:{on:0,off:0}, t1:{on:0,off:0} };
       for(var i=0;i<DD.length;i++){
         var r=DD[i];
-        if(r.status==='below'){ c.below++; continue; }
-        if(r.status==='dormant'){ c.t3++; continue; }
+        var wasOff = (r._origStatus && r._origStatus !== 'on-grid');
+        if(r.status==='below'){ c.below[wasOff?'off':'on']++; continue; }
+        if(r.status==='dormant'){ c.t3.off++; continue; }
         // on-grid tier by score
         var t = r.score>=71 ? 't1' : (r.score>=36 ? 't2' : 't3');
-        c[t]++;
+        c[t][wasOff?'off':'on']++;
       }
       var total = 1000;
       function pct(n){ return Math.round(100*n/total); }
-      var maxC = Math.max(c.below, c.t3, c.t2, c.t1) || 1;
+      function tierTotal(k){ return c[k].on + c[k].off; }
+      var maxC = Math.max(tierTotal('below'), tierTotal('t3'), tierTotal('t2'), tierTotal('t1')) || 1;
       var h = '';
-      h += '<div style="display:flex; align-items:flex-end; gap:4px; height:68px; padding:6px 4px 0; margin-top:6px;">';
+      h += '<div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:6px;">';
+      h += '<div style="font-size:11px; font-weight:650; color:var(--ink); letter-spacing:0.04em; text-transform:uppercase;">Where the 1,000 cases land by tier</div>';
+      h += '<div style="display:flex; gap:12px; font-size:10px; color:var(--muted);"><span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:var(--tier-3); margin-right:4px; vertical-align:middle; opacity:0.55;"></span>Originally on-grid</span><span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:var(--tier-3); margin-right:4px; vertical-align:middle;"></span>Revived from off-grid</span></div>';
+      h += '</div>';
+      h += '<div style="display:flex; align-items:flex-end; gap:6px; height:64px; padding:4px 0 0;">';
       var buckets4 = [
-        {label:'Below Grid', n:c.below, color:'#7a7a7a'},
-        {label:'Tier III (0\u201335)', n:c.t3, color:'var(--tier-3)'},
-        {label:'Tier II (36\u201370)', n:c.t2, color:'var(--tier-2)'},
-        {label:'Tier I (71\u2013100)', n:c.t1, color:'var(--tier-1)'}
+        {label:'Below Grid', key:'below', baseColor:'#7a7a7a'},
+        {label:'Tier III', sub:'0\u201335', key:'t3', baseColor:'var(--tier-3)'},
+        {label:'Tier II',  sub:'36\u201370', key:'t2', baseColor:'var(--tier-2)'},
+        {label:'Tier I',   sub:'71\u2013100', key:'t1', baseColor:'var(--tier-1)'}
       ];
       buckets4.forEach(function(b){
-        var bh = b.n===0 ? 2 : Math.round((b.n/maxC)*52);
-        h += '<div style="flex:1; text-align:center; display:flex; flex-direction:column; align-items:center; gap:3px;"><div style="font-size:10px; font-weight:600; color:var(--ink-2);">'+b.n+'</div><div style="width:100%; border-radius:4px 4px 0 0; background:'+b.color+'; height:'+bh+'px; min-height:2px;"></div><div style="font-size:8.5px; color:var(--muted); white-space:nowrap;">'+b.label+'</div><div style="font-size:8.5px; color:var(--muted);">'+pct(b.n)+'%</div></div>';
+        var on = c[b.key].on, off = c[b.key].off, tot = on + off;
+        var bh = tot===0 ? 2 : Math.max(2, Math.round((tot/maxC)*44));
+        var onFrac = tot===0 ? 0 : on/tot;
+        var onH = Math.max(0, Math.round(bh * onFrac));
+        var offH = bh - onH;
+        h += '<div style="flex:1; text-align:center; display:flex; flex-direction:column; align-items:center; gap:3px;">';
+        h += '<div style="font-size:11px; font-weight:650; color:var(--ink);">'+tot+'</div>';
+        h += '<div style="width:100%; display:flex; flex-direction:column; border-radius:4px 4px 0 0; overflow:hidden; height:'+bh+'px; min-height:2px;">';
+        if(offH>0){
+          h += '<div style="background:'+b.baseColor+'; height:'+offH+'px;" title="'+off+' revived"></div>';
+        }
+        if(onH>0){
+          // dim the on-grid portion (lighter, opacity)
+          h += '<div style="background:'+b.baseColor+'; opacity:0.45; height:'+onH+'px;" title="'+on+' originally on-grid"></div>';
+        }
+        h += '</div>';
+        h += '<div style="font-size:9.5px; color:var(--muted); white-space:nowrap;">'+b.label+(b.sub?' <span style="color:var(--baseline)">'+b.sub+'</span>':'')+'</div>';
+        h += '<div style="font-size:9.5px; color:var(--muted);">'+pct(tot)+'%</div>';
+        h += '</div>';
       });
       h += '</div>';
-      h += '<div style="display:flex; justify-content:space-between; font-size:10px; color:var(--muted); margin-top:4px;"><span>Below + Tier III at 0</span><span>Total: '+total.toLocaleString('en-US')+'</span></div>';
-      var el2=document.getElementById('scoreBuckets'); if(el2) el2.innerHTML=h;
+      h += '<div style="display:flex; justify-content:space-between; font-size:10px; color:var(--muted); margin-top:6px;"><span><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain</span><span>Total: '+total.toLocaleString('en-US')+'</span></div>';
+      var el2=document.getElementById('bridgeTierHist'); if(el2) el2.innerHTML=h;
+      var el3=document.getElementById('scoreBuckets'); if(el3) el3.innerHTML='';
     })();
   }
   function renderCritStrip(){
@@ -1526,6 +1553,62 @@
     var q = LEVERS[1].real;
     document.querySelectorAll('#onGridPresets .chip').forEach(function (c) { c.classList.toggle('active', +c.dataset.preset === q); });
   }
+
+  // ---------- reset to original dataset ----------
+  function resetDocketToOriginal() {
+    // 1. Rebuild DD from snapshot (restores status, exp, pd, cert, lat, _origStatus)
+    buildDD();
+
+    // 2. Reset gate & expVec levers to loaded defaults
+    LEVERS[0].real = 25;
+    LEVERS[1].real = 0;
+    var rg0 = $('rg-' + LEVERS[0].id); if (rg0) rg0.value = 25;
+    var rg1 = $('rg-' + LEVERS[1].id); if (rg1) rg1.value = 0;
+
+    // 3. Reset quality allocation maps to loaded defaults
+    EXP_ALLOC.direct = 42; EXP_ALLOC.para = 42; EXP_ALLOC.drift = 42;
+    PD_ALLOC.advanced = 42; PD_ALLOC.moderate = 42; PD_ALLOC.early = 42;
+    window._certYesAlloc = 0;
+    window._latAlloc = { '15+': 0, '5-15': 0 };
+
+    // 4. Re-sync every slider DOM value to match
+    ['direct', 'para', 'drift'].forEach(function (k) {
+      var e = $('cs-er-' + k); if (e) e.value = EXP_ALLOC[k];
+      var p = $('erpct-' + k); if (p) p.textContent = EXP_ALLOC[k];
+    });
+    ['advanced', 'moderate', 'early'].forEach(function (k) {
+      var e = $('cs-pd-' + k); if (e) e.value = PD_ALLOC[k];
+      var p = $('cs-pdpct-' + k); if (p) p.textContent = PD_ALLOC[k];
+    });
+    var cy = $('cs-cert-yes'); if (cy) cy.value = 0;
+    var cyp = $('cs-cert-yes-pct'); if (cyp) cyp.textContent = 0;
+    ['15+', '5-15'].forEach(function (k) {
+      var e = $('cs-lat-' + k); if (e) e.value = 0;
+      var p = $('cs-lat-' + k); if (p) p.textContent = 0;
+    });
+
+    // 5. Clear any per-row known-id caches so cures re-allocate from a clean slate
+    window._ddExpKnownIds = null;
+    window._ddPdKnownIds = null;
+    window._ddCertKnownIds = null;
+    window._ddLatKnownIds = null;
+    window._ddGateSnapshot = null;
+
+    // 6. Reset tier value editors to published defaults
+    var tvI = $('tvI'); if (tvI) tvI.value = 1000;
+    var tvII = $('tvII'); if (tvII) tvII.value = 500;
+    var tvIII = $('tvIII'); if (tvIII) tvIII.value = 250;
+
+    // 7. Rebuild exp sliders (in case missing count changed) and re-render
+    buildExpSliders();
+    if (typeof syncPresetActive === 'function') syncPresetActive();
+    if (typeof syncOnGridPresetActive === 'function') syncOnGridPresetActive();
+    render();
+  }
+
+  // wire the reset button
+  var btnReset = $('btnResetDocket');
+  if (btnReset) btnReset.addEventListener('click', resetDocketToOriginal);
   // sticky conversion bar: show once the hero CTA has scrolled away, hide near the footer CTA
   var heroCta = document.querySelector('.hero-cta');
   var footCta = document.querySelector('.cta');
