@@ -314,9 +314,6 @@
   .legend .key { display: inline-flex; align-items: center; gap: 6px; }
   .legend .sw { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
 
-  details.tblview { margin-top: 10px; font-size: 12.5px; }
-  details.tblview summary { color: var(--muted); cursor: pointer; }
-  details.tblview table { margin-top: 8px; }
 
   /* ---------- chips / near-tier ---------- */
   .neartier { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -465,28 +462,6 @@
 
   <p class="lede">Attorneys manage cases. Nobody's job is the gap between what a docket is <em>worth</em> and what it <em>could be worth</em> — and that gap doesn't sit still: statutes run, claimants disengage, thin files settle thin. On this 1,000-matter illustrative docket the gap is <strong id="ledeGap">$71.8M</strong> against <strong id="ledeCur">$75.6M</strong> of current gross settlement value. First we revive dormant matters past the gate; then we cure gaps on the active docket. Below: the four levers, the gaps behind them, and what each is worth at your assumptions.</p>
 
-  <div class="kpis">
-    <div class="card kpi hero">
-      <div class="label">Current gross settlement value</div>
-      <div class="value" id="kpiCur">$75.6M</div>
-      <div class="note">526 on-grid of 658 open matters</div>
-    </div>
-    <div class="card kpi">
-      <div class="label">Value trapped behind curable gaps</div>
-      <div class="value" id="kpiFull">$71.8M</div>
-      <div class="note">2 drivers · full cure, before realization</div>
-    </div>
-    <div class="card kpi">
-      <div class="label">Realized lift at current assumptions</div>
-      <div class="value" id="kpiReal">$17.9M</div>
-      <div class="delta up" id="kpiRealPct">+23.7% vs current GSV</div>
-      <div class="note">set realization per lever below</div>
-    </div>
-    <div class="card kpi-blurb">
-      <div class="label">Gross Settlement Value lift levers</div>
-      <div class="value-blurb">Two ways we add value. <b style="color:var(--ink); font-style:italic;">Volume</b> — revive dormant cases that clear all eligibility gates onto the active grid. <b style="color:var(--ink); font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
-    </div>
-  </div>
 
   <div class="score-matrix" id="scoreMatrix">
     <details id="scoreDetails">
@@ -500,7 +475,6 @@
       <span style="display:inline-flex; gap:6px;">
         <button id="btnDownloadCsv" type="button" style="font-size:11px; padding:5px 12px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--ink-2); cursor:pointer;">Download CSV</button>
         <button id="btnDownloadJson" type="button" style="font-size:11px; padding:5px 12px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--ink-2); cursor:pointer;">Download JSON</button>
-        <button id="btnToggleTable" type="button" style="font-size:11px; padding:5px 12px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--ink-2); cursor:pointer;">Show table</button>
       </span>
     </div>
     <div id="ddTableWrap" style="display:none; margin-top:10px; max-height:360px; overflow:auto; border:1px solid var(--grid); border-radius:8px;"></div>
@@ -516,9 +490,6 @@
         <span class="key"><span class="sw" style="background:var(--series-1)"></span>GSV level</span>
         <span class="key"><span class="sw" style="background:var(--series-2)"></span>Lift</span>
       </div>
-      <details class="tblview"><summary>Table view</summary>
-        <table id="bridgeTbl"></table>
-      </details>
       <!-- tiny tier histogram: Below Grid + Tier III/II/I, split on-grid vs revived -->
       <div id="bridgeTierHist" style="margin-top:14px; padding-top:12px; border-top:1px solid var(--grid);"></div>
       <!-- exp sliders: horizontal, below bridge -->
@@ -550,9 +521,6 @@
       <h3>Full lift potential by gap</h3>
       <div class="sub">Grouped under the bridge lever each gap rolls up to, priced at the grid values below. Hover a lever bar in the bridge to spotlight its gaps here.</div>
       <div id="liftmap"></div>
-      <details class="tblview"><summary>Table view</summary>
-        <table id="liftTbl"></table>
-      </details>
     </div>
     <div class="card">
       <h3>Near-tier inventory</h3>
@@ -778,18 +746,6 @@
 
   function applyDDGate(){
     if(!DD) buildDD();
-  // Detail link: opens the scoreDetails section and scrolls to it
-  var linkDetail = document.getElementById('linkTierDetail');
-  if (linkDetail && !linkDetail._wired) {
-    linkDetail._wired = true;
-    linkDetail.addEventListener('click', function(e){
-      e.preventDefault();
-      var d = document.getElementById('scoreDetails');
-      if (d && !d.open) d.open = true;
-      var m = document.getElementById('scoreMatrix');
-      if (m) m.scrollIntoView({behavior:'smooth', block:'start'});
-    });
-  }
     if(!window._ddGateSnapshot){
       window._ddGateSnapshot = DD.map(function(r){ return {id:r.id, status:r.status, exp:r.exp, pd:r.pd}; });
     }
@@ -1279,7 +1235,7 @@
         tb += '<tr><td>' + esc(c.label) + '</td><td class="num">' + Math.round(c.to - c.from).toLocaleString('en-US') + '</td></tr>';
       }
     });
-    $('bridgeTbl').innerHTML = tb + '</tbody>';
+    if ($('bridgeTbl')) $('bridgeTbl').innerHTML = tb + '</tbody>';
     return { cur: cur, pot: pot, realized: pot - cur };
   }
 
@@ -1346,7 +1302,7 @@
     });
     var tb = '<thead><tr><th>Gap</th><th>Bridge lever</th><th class="num">Matters</th><th class="num">Full lift ($000s)</th></tr></thead><tbody>';
     allRows.forEach(function (r) { tb += '<tr><td>' + esc(r.g.label) + '</td><td>' + esc(LEVER_LABELS[r.g.lever]) + '</td><td class="num">' + r.g.cases + '</td><td class="num">' + Math.round(r.v).toLocaleString('en-US') + '</td></tr>'; });
-    $('liftTbl').innerHTML = tb + '</tbody>';
+    if ($('liftTbl')) $('liftTbl').innerHTML = tb + '</tbody>';
   }
 
   // ---------- top table ----------
@@ -1472,8 +1428,8 @@
         h += '<div style="font-size:13px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; line-height:1.15; text-align:right;">'+tot.toLocaleString('en-US')+'<div style="font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px;">'+pct(tot)+'%</div></div>';
         h += '</div>';
       });
-      // Footer summary + detail link
-      h += '<div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; color:var(--muted); margin-top:10px; padding-top:8px; border-top:1px solid var(--grid);"><span><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain</span><span style="display:inline-flex; gap:10px; align-items:center;"><a href="#" id="linkTierDetail" style="color:var(--accent); text-decoration:none; font-weight:600;">Detail →</a><span style="font-weight:600;">Total: '+total.toLocaleString('en-US')+'</span></span></div>';
+      // Footer summary + prominent detail link
+      h += '<div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--muted); margin-top:12px; padding-top:10px; border-top:1px solid var(--grid); flex-wrap:wrap; gap:10px;"><span><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain &middot; <b style="font-weight:600;">Total: '+total.toLocaleString('en-US')+'</b></span><a href="#" id="linkTierDetail" style="display:inline-flex; align-items:center; gap:6px; padding:7px 16px; border-radius:999px; background:linear-gradient(135deg, #F4B53F 0%, #E89B2A 100%); color:#1A1207; border:1px solid #C5811F; text-decoration:none; font-weight:700; font-size:12px; box-shadow:0 1px 0 rgba(255,255,255,0.4) inset, 0 1px 3px rgba(229,155,42,0.25);">Detail →</a></div>';
       var el2=document.getElementById('bridgeTierHist'); if(el2) el2.innerHTML=h;
       var el3=document.getElementById('scoreBuckets'); if(el3) el3.innerHTML='';
     })();
@@ -1512,12 +1468,12 @@
     renderLiftmap(V, effFull, expQuality);
     renderTop(V);
     var full = gateFull;
-    $('kpiCur').textContent = fmtM(curEff);
-    $('kpiFull').textContent = fmtM(full);
-    $('kpiReal').textContent = fmtM(b.realized);
-    $('kpiRealPct').textContent = '+' + (curEff > 0 ? (100 * b.realized / curEff).toFixed(1) : '0') + '% vs current GSV';
-    $('ledeCur').textContent = fmtM(curEff);
-    $('ledeGap').textContent = fmtM(full);
+    if ($('kpiCur')) $('kpiCur').textContent = fmtM(curEff);
+    if ($('kpiFull')) $('kpiFull').textContent = fmtM(full);
+    if ($('kpiReal')) $('kpiReal').textContent = fmtM(b.realized);
+    if ($('kpiRealPct')) $('kpiRealPct').textContent = '+' + (curEff > 0 ? (100 * b.realized / curEff).toFixed(1) : '0') + '% vs current GSV';
+    if ($('ledeCur')) $('ledeCur').textContent = fmtM(curEff);
+    if ($('ledeGap')) $('ledeGap').textContent = fmtM(full);
     if ($('hlGap')) $('hlGap').textContent = fmtM(full);
     if ($('stGap')) $('stGap').textContent = fmtM(full);
     if ($('sbGap')) $('sbGap').textContent = fmtM(full);
@@ -1593,8 +1549,25 @@
     function wireDD(){
       var b1=document.getElementById('btnDownloadCsv'); if(b1 && !b1._wired){ b1._wired=true; b1.addEventListener('click', function(){ if(!DD) buildDD(); downloadDDCsv(); }); }
       var b2=document.getElementById('btnDownloadJson'); if(b2 && !b2._wired){ b2._wired=true; b2.addEventListener('click', function(){ if(!DD) buildDD(); downloadDDJson(); }); }
-      var b3=document.getElementById('btnToggleTable'); if(b3 && !b3._wired){ b3._wired=true; b3.addEventListener('click', function(){ var w=document.getElementById('ddTableWrap'); if(!w) return; var show=w.style.display==='none'; w.style.display=show?'block':'none'; b3.textContent=show?'Hide table':'Show table'; if(show) renderDDTable(); }); }
       if(!DD) buildDD();
+  // Delegated handler for the Detail link (works regardless of when the link is added)
+  if (!document._detailLinkWired) {
+    document._detailLinkWired = true;
+    document.addEventListener('click', function(e){
+      var t = e.target;
+      while (t && t !== document) {
+        if (t.id === 'linkTierDetail') {
+          e.preventDefault();
+          var d = document.getElementById('scoreDetails');
+          if (d && !d.open) d.open = true;
+          var m = document.getElementById('scoreMatrix');
+          if (m) m.scrollIntoView({behavior:'smooth', block:'start'});
+          return;
+        }
+        t = t.parentNode;
+      }
+    });
+  }
     }
     if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', wireDD); else wireDD();
   })();
