@@ -732,7 +732,7 @@
       <a class="ghost-hero" href="#bridgeCard">See it work — 60-second tour ↓</a>
       <div class="micro">NDA first · No commitment — starts with a case-file export · All data housed in AWS</div>
     </div>
-    <div class="subline">Paraquat Products Liability · MDL 3004 (S.D. Ill.) · 1,000-matter illustrative docket · 658 open matters · 342 dormant</div>
+
   </div>
 </header>
 
@@ -744,7 +744,7 @@
 
 <div class="wrap">
 
-  <p class="lede">Attorneys manage cases. Nobody's job is the gap between what a docket is <em>worth</em> and what it <em>could be worth</em> — and that gap doesn't sit still: statutes run, claimants disengage, thin files settle thin. On this 1,000-matter illustrative docket the gap is <strong id="ledeGap">$71.8M</strong> against <strong id="ledeCur">$75.6M</strong> of current gross settlement value. First we revive dormant matters past the gate; then we cure gaps on the active docket. Below: the four levers, the gaps behind them, and what each is worth at your assumptions.</p>
+  <p class="lede">Law firms litigate cases, but the gap between current settlement value and maximum potential is often left unmanaged. That gap represents a decaying asset: deadlines blow, claimants disengage, and thin files result in thin payouts. On this 1,000-matter illustrative docket, we isolated a <strong id="ledeGap">$116M</strong> gap against <strong id="ledeCur">$185M</strong> in current GSV. The recovery mechanism is strictly mechanical: revive dormant cases that clear the gate, then systematically cure the active docket. The dashboard below models the four levers, the underlying case gaps, and the projected yield of curing each one.</p>
 
   <div class="lift-levers" style="margin-bottom:16px;">
     <div class="sales-headline">Unlock a higher Gross Settlement Value</div>
@@ -755,7 +755,10 @@
     </ul>
     <!-- Dynamic docket stats: subtle, updates as sliders move -->
     <div class="sample-docket-stats" style="margin-top:14px; padding:10px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px;">
-      <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:8px;">Illustrative synthetic 1,000-case docket &mdash; no client data</div>
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:8px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted);">Illustrative synthetic 1,000-case docket &mdash; no client data</div>
+        <button id="btnResetDocket" type="button" class="btn-reset" style="padding:4px 12px; font-size:11px;" title="Restore the 1,000-case dataset to its original state (all sliders back to loaded defaults)."><span class="r-arrow">↻</span> Reset to original 1,000</button>
+      </div>
       <div style="display:flex; flex-wrap:wrap; gap:10px 28px; align-items:baseline;">
         <div style="display:flex; align-items:baseline; gap:6px;"><b id="dynOnGridN" style="font-size:18px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">526</b><span style="font-size:11px; color:var(--ink-2);">On-grid cases</span></div>
         <div style="display:flex; align-items:baseline; gap:6px;"><b id="dynBelowGridN" style="font-size:18px; font-weight:700; color:#B45309; font-variant-numeric:tabular-nums;">132</b><span style="font-size:11px; color:var(--ink-2);">Do not meet gate</span></div>
@@ -788,8 +791,7 @@
     <div class="card" style="margin-top:10px;">
       <div class="lever-box-header">
         <span class="lever-box-title"><em>On-grid matters</em> &mdash; <span class="lever-box-sub">The Quality Lever</span></span>
-        <button id="btnResetDocket" type="button" class="btn-reset" title="Restore the 1,000-case dataset to its original state (all sliders back to loaded defaults)."><span class="r-arrow">↻</span> Reset to original 1,000</button>
-      </div>
+        </div>
       <div id="onGridLeverHost"></div>
     </div>
     </div>
@@ -824,7 +826,7 @@
         <div class="nt"><b>14</b> one gate from the top clinical tier — currently below grid</div>
         <div class="nt"><b>13</b> one contemporaneous record from Parkinsonism</div>
       </div>
-      <div class="sub" style="margin-top:12px; margin-bottom:0;">These counts come from grading every matter against the tier grid and flagging failures caused by <em>missing</em> information (curable) rather than disconfirming records (not curable).</div>
+
     </div>
   </div>
 
@@ -1413,7 +1415,9 @@
   function renderBridge(V, effFull, effReal) {
     var cur = currentGsv(V);
     var lifts = LEVERS.map(function (l) { return (effReal ? effReal(l) : leverRealized(l, V)); });
-    var gateLift = lifts[0] || 0, qualLift = lifts[1] || 0;
+    var gateLift = lifts[0] || 0;
+    // quality lift from current exposure-vector allocation (in $K, same units as gateFull)
+    var qualLift = (typeof expQuality !== 'undefined' && expQuality) ? (expQuality.total || 0) : 0;
     var pot = cur + gateLift + qualLift;
     // 3 columns: Current GSV | Stacked lift (volume + quality) | Potential GSV
     var cols = [
@@ -1687,8 +1691,18 @@
     // FROZEN GSV — histogram phase, do not wire to tier yet
     var gateFull = transValue(gate.trans, V);
     var gateReal = gateFull * gate.real / 100;
-    function effFull(l){ if(l.id==='gate') return gateFull; if(l.id==='combined') return gateFull; return 0; }
-    function effReal(l){ if(l.id==='gate' || l.id==='combined') return gateReal; return 0; }
+    function effFull(l){
+      if(l.id==='gate') return gateFull;
+      if(l.id==='combined') return gateFull + (typeof expQuality!=='undefined'&&expQuality?expQuality.total:0);
+      if(l.id==='expVec') return (typeof expQuality!=='undefined'&&expQuality?expQuality.total:0);
+      return 0;
+    }
+    function effReal(l){
+      if(l.id==='gate') return gateReal;
+      if(l.id==='combined') return gateReal + (typeof expQuality!=='undefined'&&expQuality?expQuality.total:0);
+      if(l.id==='expVec') return (typeof expQuality!=='undefined'&&expQuality?expQuality.total:0);
+      return 0;
+    }
     // Display tiers use base OPEN+gate only (no exp scoring) — histogram is separate
     var curEffCounts = {
       I: 6 + Math.round((gate.trans['none>I']||0) * gate.real / 100),
@@ -1760,8 +1774,7 @@
           expQuality = computeExpQuality(missing, EXP_ALLOC);
           qualityFull = (function(){ var best={}; EXP_VECTORS.forEach(function(v){best[v.key]=0;}); var top = EXP_VECTORS.slice().sort(function(a,b){return b.pLift-a.pLift;})[0]; best[top.key]=missing; return computeExpQuality(missing, best).total; })();
           // recompute eff closures
-          effFull = function(l){ if(l.id==='gate') return gateFull; if(l.id==='expVec') return qualityFull; return 0; };
-          effReal = function(l){ if(l.id==='gate') return gateReal; if(l.id==='expVec') return expQuality.total; return 0; };
+
         }
       })();
       EXP_VECTORS.forEach(function(v){
