@@ -97,6 +97,10 @@
     border-radius: 10px; padding: 18px 20px;
   }
   .card-hdr-row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; flex-wrap:wrap; }
+  .lever-box-header { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--grid); }
+  .lever-box-title { font-size:14px; font-weight:600; color:var(--ink); letter-spacing:-0.005em; }
+  .lever-box-title em { font-style:italic; font-weight:600; color:var(--ink); }
+  .lever-box-sub { color:var(--muted); font-weight:500; font-size:13px; }
   .card-hdr-row h3 { margin:0; }
   /* brighter reset button — gold pill, pops without screaming */
   .btn-reset {
@@ -471,12 +475,17 @@
       <div id="bridgeTierHist" style="margin-top:14px; padding-top:12px; border-top:1px solid var(--grid);"></div>
     </div>
     <div class="card">
-      <div class="card-hdr-row">
-        <h3 style="margin:0;">Value-creation levers</h3>
+      <div class="lever-box-header">
+        <span class="lever-box-title"><em>Dormant Docket</em> &mdash; <span class="lever-box-sub">The Quantity Lever</span></span>
+      </div>
+      <div id="dormantLeverHost"></div>
+    </div>
+    <div class="card" style="margin-top:10px;">
+      <div class="lever-box-header">
+        <span class="lever-box-title"><em>On-grid matters</em> &mdash; <span class="lever-box-sub">The Quality Lever</span></span>
         <button id="btnResetDocket" type="button" class="btn-reset" title="Restore the 1,000-case dataset to its original state (all sliders back to loaded defaults)."><span class="r-arrow">↻</span> Reset to original 1,000</button>
       </div>
-
-      <div id="levers"></div>
+      <div id="onGridLeverHost"></div>
     </div>
   </div>
 
@@ -876,10 +885,12 @@
   function leverFull(l, V) { return transValue(l.trans, V); }
   function leverRealized(l, V) { return leverFull(l, V) * l.real / 100; }
 
-  // ---------- lever cards ----------
+  // ---------- lever cards (split into two boxes: Dormant Docket + On-grid matters) ----------
   function buildLevers() {
-    var host = $('levers');
-    host.innerHTML = '';
+    var dormHost = $('dormantLeverHost');
+    var onGridHost = $('onGridLeverHost');
+    if (dormHost) dormHost.innerHTML = '';
+    if (onGridHost) onGridHost.innerHTML = '';
     var dormantHdr = document.createElement('div');
     dormantHdr.className = 'active-hdr';
     dormantHdr.id = 'dormantHdr';
@@ -887,8 +898,10 @@
     dormantHdr.innerHTML = '<span>Dormant docket</span><span><b id="dormantCount">342</b> dormant matters</span>';
     dormantHdr.title = '342 Dormant = closed or missing gate-required information, booked at $0 until cured. Decreases as the gate slider revives matters to on-grid.';
     dormantHdr.style.cursor = 'help';
-    host.appendChild(dormantHdr);
-    hoverable(dormantHdr, '<b>342 Dormant</b>Closed or missing gate-required information, booked at $0 until cured. Decreases as the gate slider revives matters to on-grid.');
+    if (dormHost) {
+      dormHost.appendChild(dormantHdr);
+      hoverable(dormantHdr, '<b>342 Dormant</b>Closed or missing gate-required information, booked at $0 until cured. Decreases as the gate slider revives matters to on-grid.');
+    }
     var l = LEVERS[0];
     var div = document.createElement('div');
     div.className = 'lever';
@@ -897,7 +910,7 @@
       '<div class="desc">' + esc(l.desc) + '</div>' +
       '<div class="rrow"><input type="range" min="0" max="100" step="5" value="' + l.real + '" id="rg-' + l.id + '" aria-label="Realization rate for ' + esc(l.name) + '"><span class="pct" id="pct-' + l.id + '"></span></div>' +
       '<div class="gate-counts" id="gateCounts"><span class="gc"><b id="gcOpenGrid">526</b> On-grid</span><span class="gc hi"><b id="gcDorm">342</b> Dormant remaining</span><span class="gc"><b id="gcRevived">0</b> revived</span></div>';
-    host.appendChild(div);
+    if (dormHost) dormHost.appendChild(div);
     if (l.tip) {
       var descEl = div.querySelector('.desc');
       if (descEl) { descEl.style.cursor='help'; descEl.style.textDecoration='underline'; descEl.style.textDecorationStyle='dotted'; descEl.style.textUnderlineOffset='3px'; hoverable(descEl, '<b>'+esc(l.name)+'</b>'+esc(l.tip)); }
@@ -908,14 +921,16 @@
     hdr.innerHTML = '<span>On-grid matters</span><span><b id="activeCount">526</b> on-grid</span>';
     hdr.title = 'On-grid = matters currently valued (grows as dormant revive). 132 below-grid stay put. Dormant shrinks.';
     hdr.style.cursor = 'help';
-    host.appendChild(hdr);
-    hoverable(hdr, '<b>On-grid matters</b>526 base on-grid + revived from dormant. Quality lift (exposure vector) allocates the missing pool.');
-    // Secondary criteria: Certified Applicator + Latency (live in the right column, under Dormant docket section)
+    if (onGridHost) {
+      onGridHost.appendChild(hdr);
+      hoverable(hdr, '<b>On-grid matters</b>526 base on-grid + revived from dormant. Quality lift (exposure vector) allocates the missing pool.');
+    }
     var sec = document.createElement('div');
     sec.id = 'secondaryCritBox';
     sec.className = 'crit-strip-secondary';
-    host.appendChild(sec);
-    $('rg-' + l.id).addEventListener('input', function () { l.real = +this.value; render(); if (typeof syncPresetActive === 'function') syncPresetActive(); });
+    if (onGridHost) onGridHost.appendChild(sec);
+    var rg = $('rg-' + l.id);
+    if (rg) rg.addEventListener('input', function () { l.real = +this.value; render(); if (typeof syncPresetActive === 'function') syncPresetActive(); });
     buildExpSliders();
   }
 
