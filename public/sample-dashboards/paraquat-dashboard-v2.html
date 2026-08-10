@@ -209,21 +209,12 @@
   /* portfolio score matrix */
   .score-matrix { margin:14px 0 10px; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px; }
   .score-matrix .sm-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
-  .score-matrix .sm-title { font-size:12px; font-weight:650; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); }
-  .score-matrix .sm-note { font-size:11px; color:var(--muted); }
   .score-matrix table { width:100%; border-collapse:collapse; font-size:12.5px; }
   .score-matrix th { text-align:left; font-size:10.5px; font-weight:650; letter-spacing:0.05em; text-transform:uppercase; color:var(--muted); padding:6px 8px; border-bottom:1px solid var(--grid); }
   .score-matrix td { padding:6px 8px; border-bottom:1px solid var(--grid); font-variant-numeric:tabular-nums; }
   .score-matrix tr:last-child td { border-bottom:none; font-weight:600; background:var(--wash); }
   .score-matrix .num { text-align:right; }
   .score-matrix .tier-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:middle; }
-  .hist-wrap { display:flex; align-items:flex-end; gap:4px; height:140px; padding:8px 4px 0; border-bottom:1px solid var(--grid); }
-  .hist-bar { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
-  .hist-col { width:100%; border-radius:4px 4px 0 0; background:#0b0b0b; border:1px solid #fff; border-bottom:none; min-height:2px; transition:height 0.25s; }
-  .hist-col.zero { background:#0b0b0b; opacity:0.45; border:1px solid #fff; border-bottom:none; }
-  .hist-val { font-size:10px; font-weight:600; color:var(--ink-2); font-variant-numeric:tabular-nums; min-height:12px; }
-  .hist-label { font-size:9px; color:var(--muted); text-align:center; line-height:1.2; white-space:nowrap; }
-  .hist-label.tier { font-weight:650; color:var(--ink-2); }
 
 
   /* horizontal exp sliders below bridge */
@@ -246,21 +237,12 @@
   /* portfolio score matrix below docket chips */
   .score-matrix { margin: 14px 0 10px; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px; }
   .score-matrix .sm-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
-  .score-matrix .sm-title { font-size:12px; font-weight:650; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); }
-  .score-matrix .sm-note { font-size:11px; color:var(--muted); }
   .score-matrix table { width:100%; border-collapse:collapse; font-size:12.5px; }
   .score-matrix th { text-align:left; font-size:10.5px; font-weight:650; letter-spacing:0.05em; text-transform:uppercase; color:var(--muted); padding:6px 8px; border-bottom:1px solid var(--grid); }
   .score-matrix td { padding:6px 8px; border-bottom:1px solid var(--grid); font-variant-numeric:tabular-nums; }
   .score-matrix tr:last-child td { border-bottom:none; font-weight:600; background:var(--wash); }
   .score-matrix .num { text-align:right; }
   .score-matrix .tier-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:middle; }
-  .hist-wrap { display:flex; align-items:flex-end; gap:4px; height:140px; padding:8px 4px 0; border-bottom:1px solid var(--grid); }
-  .hist-bar { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
-  .hist-col { width:100%; border-radius:4px 4px 0 0; background:#0b0b0b; border:1px solid #fff; border-bottom:none; min-height:2px; transition:height 0.25s; }
-  .hist-col.zero { background:#0b0b0b; opacity:0.45; border:1px solid #fff; border-bottom:none; }
-  .hist-val { font-size:10px; font-weight:600; color:var(--ink-2); font-variant-numeric:tabular-nums; min-height:12px; }
-  .hist-label { font-size:9px; color:var(--muted); text-align:center; line-height:1.2; white-space:nowrap; }
-  .hist-label.tier { font-weight:650; color:var(--ink-2); }
 
   .score-matrix .delta { font-size:10.5px; color:var(--series-2); font-weight:600; }
   .legend-stacked { display:flex; gap:16px; font-size:12px; color:var(--ink-2); margin-top:8px; flex-wrap:wrap; }
@@ -473,23 +455,6 @@
     <div style="font-size:13px; line-height:1.55; color:var(--ink-2);">Two ways we add value. <b style="color:var(--ink); font-style:italic;">Volume</b> — revive dormant cases that clear all eligibility gates onto the active grid. <b style="color:var(--ink); font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
   </div>
 
-  <div class="score-matrix" id="scoreMatrix">
-    <details id="scoreDetails">
-      <summary style="cursor:pointer; list-style:none; display:flex; align-items:center; gap:12px;">
-        <span class="sm-title">Score distribution → tier score bucket</span>
-      </summary>
-      <div id="scoreHistogram" style="margin-top:10px"></div>
-    <div class="sm-note" style="margin-top:6px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-      <span>Score = weighted total (exposure vector: Direct 15 / Para 7 / Drift 4 + PD severity: Advanced 25 / Moderate 14 / Early 6). Buckets: <b>0</b> discrete, then <b>1–5</b> … <b>96–100</b> (5-pt). Total always 1,000.</span>
-      <span style="display:inline-flex; gap:6px;">
-        <button id="btnDownloadCsv" type="button" style="font-size:11px; padding:5px 12px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--ink-2); cursor:pointer;">Download CSV</button>
-        <button id="btnDownloadJson" type="button" style="font-size:11px; padding:5px 12px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--ink-2); cursor:pointer;">Download JSON</button>
-      </span>
-    </div>
-    <div id="ddTableWrap" style="display:none; margin-top:10px; max-height:360px; overflow:auto; border:1px solid var(--grid); border-radius:8px;"></div>
-    </details>
-    <div id="scoreBuckets" style="margin-top:10px;"></div>
-  </div>
   <div class="cols">
     <div class="card" id="bridgeCard">
       <h3>Gross settlement value bridge</h3>
@@ -775,26 +740,6 @@
     recomputeDDScores(); rebuildDDMissingOrders();
   }
   function ddById(id){ return findRow(id); }
-  function downloadDDCsv(){
-    var header=['id','status','exp_vector','exp_pts','pd_severity','pd_pts','cert','cert_pts','lat','lat_pts','score','bucket'];
-    function bucket(s){ if(s===0) return '0'; if(s<=5) return '1-5'; if(s<=10) return '6-10'; if(s<=15) return '11-15'; if(s<=20) return '16-20'; if(s<=25) return '21-25'; if(s<=30) return '26-30'; if(s<=35) return '31-35'; if(s<=40) return '36-40'; if(s<=45) return '41-45'; if(s<=50) return '46-50'; if(s<=55) return '51-55'; if(s<=60) return '56-60'; if(s<=65) return '61-65'; if(s<=70) return '66-70'; if(s<=75) return '71-75'; if(s<=80) return '76-80'; if(s<=85) return '81-85'; if(s<=90) return '86-90'; if(s<=95) return '91-95'; return '96-100'; }
-    var lines=[header.join(',')];
-    function esc(v){ var s=String(v==null?'':v); if(s.indexOf(',')>=0||s.indexOf('"')>=0||s.indexOf('\n')>=0) return '"'+s.replace(/"/g,'""')+'"'; return s; }
-    for(var i=0;i<DD.length;i++){ var r=DD[i]; lines.push([r.id, r.status, r.exp||'', expPts(r.exp), r.pd||'', pdPts(r.pd), r.cert||'', certPts(r.cert), r.lat||'', latPts(r.lat), r.score, bucket(r.score)].map(esc).join(',')); }
-    var blob=new Blob([lines.join('\n')],{type:'text/csv'}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download='paraquat-dummy-data-1000.csv'; a.click(); setTimeout(function(){URL.revokeObjectURL(url);},800);
-  }
-  function downloadDDJson(){
-    var out=DD.map(function(r){ return {id:r.id, status:r.status, exp_vector:r.exp, exp_pts:expPts(r.exp), pd_severity:r.pd, pd_pts:pdPts(r.pd), cert:r.cert, cert_pts:certPts(r.cert), lat:r.lat, lat_pts:latPts(r.lat), score:r.score}; });
-    var blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download='paraquat-dummy-data-1000.json'; a.click(); setTimeout(function(){URL.revokeObjectURL(url);},800);
-  }
-  function renderDDTable(){
-    var wrap=document.getElementById('ddTableWrap'); if(!wrap||!DD) return;
-    var h='<table style="width:100%; border-collapse:collapse; font-size:11px;"><thead><tr><th style="text-align:left; padding:6px 8px; border-bottom:1px solid var(--grid)">id</th><th style="padding:6px 8px; border-bottom:1px solid var(--grid)">status</th><th style="padding:6px 8px; border-bottom:1px solid var(--grid)">exp</th><th style="padding:6px 8px; border-bottom:1px solid var(--grid)">pd</th><th style="padding:6px 8px; border-bottom:1px solid var(--grid)">cert</th><th style="padding:6px 8px; border-bottom:1px solid var(--grid)">lat</th><th style="text-align:right; padding:6px 8px; border-bottom:1px solid var(--grid)">score</th><th style="padding:6px 8px; border-bottom:1px solid var(--grid)">bucket</th></tr></thead><tbody>';
-    function bucket2(s){ if(s===0) return '0'; if(s<=10) return '1-10'; if(s<=20) return '11-20'; if(s<=30) return '21-30'; if(s<=40) return '31-40'; if(s<=50) return '41-50'; if(s<=60) return '51-60'; if(s<=70) return '61-70'; if(s<=80) return '71-80'; if(s<=90) return '81-90'; return '91-100'; }
-    for(var i=0;i<DD.length;i++){ var r=DD[i]; h+='<tr><td style="padding:4px 8px; border-bottom:1px solid var(--grid)">'+r.id+'</td><td style="padding:4px 8px; border-bottom:1px solid var(--grid)">'+r.status+'</td><td style="padding:4px 8px; border-bottom:1px solid var(--grid)">'+(r.exp||'<span style="color:var(--muted)">null</span>')+'</td><td style="padding:4px 8px; border-bottom:1px solid var(--grid)">'+(r.pd||'<span style="color:var(--muted)">null</span>')+'</td><td style="padding:4px 8px; border-bottom:1px solid var(--grid)">'+(r.cert||'<span style="color:var(--muted)">null</span>')+'</td><td style="padding:4px 8px; border-bottom:1px solid var(--grid)">'+(r.lat||'<span style="color:var(--muted)">null</span>')+'</td><td style="text-align:right; padding:4px 8px; border-bottom:1px solid var(--grid)">'+r.score+'</td><td style="padding:4px 8px; border-bottom:1px solid var(--grid)">'+bucket2(r.score)+'</td></tr>'; }
-    h+='</tbody></table>';
-    wrap.innerHTML=h;
-  }
 
   // Docket = 1,000 total: 658 open (526 on-grid + 132 below-grid / fail) + 342 dormant. Total static.
   // Volume: % dormant that clear ALL 5 gates and become on-grid (342 at 100% -> 5 I / 108 II / 229 III) — $29.7M full
@@ -1349,104 +1294,54 @@
     EXP_VECTORS.forEach(function(v){ totalCounts[v.key] = (knownCounts[v.key]||0) + (counts[v.key]||0); var lift = (counts[v.key]||0) * v.pLift * 140; liftPer[v.key] = lift; total += lift; });
     return { total: total, per: liftPer, counts: counts, knownCounts: knownCounts, totalCounts: totalCounts, toAllocate: toAllocate, missing: missing, remaining: missing - toAllocate };
   }
-  function renderHistogram(){
-    if(!DD) buildDD();
-    var gate = LEVERS[0];
-    var gateTotal = gate.trans['none>I']+gate.trans['none>II']+gate.trans['none>III'];
-    var revived = Math.round(gateTotal * gate.real / 100);
-    var dormantRem = 342 - revived;
-    // buckets: 0 | 1-10 | 11-20 | ... | 91-100
-    var buckets = [ {label:'0', lo:0, hi:0, count:0, isZero:true} ];
-    for(var lo=1; lo<=96; lo+=5) buckets.push({label: lo+'–'+Math.min(lo+4,100), lo:lo, hi:Math.min(lo+4,100), count:0});
-    function bucketFor(pts){
-      if(pts===0) return 0;
-      for(var i=1;i<buckets.length;i++) if(pts>=buckets[i].lo && pts<=buckets[i].hi) return i;
-      return buckets.length-1;
+
+  function renderBridgeTierHist(){
+    if(!DD) return;
+    var c = { below:{on:0,off:0}, t3:{on:0,off:0}, t2:{on:0,off:0}, t1:{on:0,off:0} };
+    for(var i=0;i<DD.length;i++){
+      var r=DD[i];
+      var wasOff = (r._origStatus && r._origStatus !== 'on-grid');
+      if(r.status==='below'){ c.below[wasOff?'off':'on']++; continue; }
+      if(r.status==='dormant'){ c.t3.off++; continue; }
+      var t = r.score>=71 ? 't1' : (r.score>=36 ? 't2' : 't3');
+      c[t][wasOff?'off':'on']++;
     }
-    function add(n, pts){ if(n<=0) return; buckets[bucketFor(pts)].count += n; }
-    for(var i=0;i<DD.length;i++) add(1, DD[i].score);
-
-
-    var maxC = Math.max.apply(null, buckets.map(function(b){return b.count;})) || 1;
-    var html = '<div class="hist-wrap">';
-    buckets.forEach(function(b){
-      var h = b.count===0 ? 2 : Math.round((b.count / maxC) * 110);
-      var cls = b.isZero ? 'hist-col zero' : 'hist-col';
-      html += '<div class="hist-bar"><div class="hist-val">'+b.count+'</div><div class="'+cls+'" style="height:'+h+'px"></div><div class="hist-label'+(b.isZero?' tier':'')+'">'+b.label+'</div></div>';
-    });
-    html += '</div>';
-    // tier band labels below
-    html += '<div style="display:flex; gap:4px; margin-top:6px; font-size:9px; color:var(--muted); text-align:center;">';
-    html += '<div style="flex:8; border-top:2px solid var(--tier-3); padding-top:3px;">Tier III &mdash; 0–35</div>';
-    html += '<div style="flex:7; border-top:2px solid var(--tier-2); padding-top:3px;">Tier II &mdash; 36–70</div>';
-    html += '<div style="flex:6; border-top:2px solid var(--tier-1); padding-top:3px;">Tier I &mdash; 71–100</div>';
-    html += '</div>';
-    var el=$('scoreHistogram'); if(el) el.innerHTML=html;
-    // header stats from DD / gate
-    (function(){
-      var miss = EXP_MISSING_BASE + Math.round((LEVERS[0].trans['none>I']+LEVERS[0].trans['none>II']+LEVERS[0].trans['none>III']) * LEVERS[0].real / 100);
-      var allocated = DD.filter(function(r){ return r.status==='on-grid' && r.exp!==null && window._ddExpKnownIds && !window._ddExpKnownIds.has(r.id); }).length;
-      var smMiss=$('smMissing'); if(smMiss) smMiss.textContent=miss.toLocaleString('en-US');
-      var smMiss2=$('smMissing2'); if(smMiss2) smMiss2.textContent=miss.toLocaleString('en-US');
-      var smAlloc=$('smAllocated'); if(smAlloc) smAlloc.textContent=allocated.toLocaleString('en-US');
-      var smRem=$('smRemaining'); if(smRem) smRem.textContent=(miss-allocated).toLocaleString('en-US');
-    })();
-    // 4-bucket summary: Below Grid + Tier III/II/I (always visible even when details collapsed)
-    (function(){
-      var c = { below:{on:0,off:0}, t3:{on:0,off:0}, t2:{on:0,off:0}, t1:{on:0,off:0} };
-      for(var i=0;i<DD.length;i++){
-        var r=DD[i];
-        var wasOff = (r._origStatus && r._origStatus !== 'on-grid');
-        if(r.status==='below'){ c.below[wasOff?'off':'on']++; continue; }
-        if(r.status==='dormant'){ c.t3.off++; continue; }
-        var t = r.score>=71 ? 't1' : (r.score>=36 ? 't2' : 't3');
-        c[t][wasOff?'off':'on']++;
+    var total = 1000;
+    function pct(n){ return Math.round(100*n/total); }
+    function tierTotal(k){ return c[k].on + c[k].off; }
+    var maxC = Math.max(tierTotal('below'), tierTotal('t3'), tierTotal('t2'), tierTotal('t1')) || 1;
+    var h = '';
+    h += '<div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 12px; margin-bottom:8px;">';
+    h += '<div style="font-size:12px; font-weight:700; color:var(--ink); letter-spacing:0.06em; text-transform:uppercase;">Where the 1,000 cases land by tier</div>';
+    h += '<div style="font-size:10px; color:var(--muted); font-weight:500;">Total docket: <b style="color:var(--ink); font-weight:700;">1,000</b></div>';
+    h += '</div>';
+    var rows4 = [
+      {label:'Tier I',      sub:'71–100', key:'t1'},
+      {label:'Tier II',     sub:'36–70',  key:'t2'},
+      {label:'Tier III',    sub:'0–35',   key:'t3'},
+      {label:'Below Grid',  sub:'fails gate',  key:'below', warning:true}
+    ];
+    rows4.forEach(function(r){
+      var on = c[r.key].on, off = c[r.key].off, tot = on + off;
+      var pctFrac = maxC===0 ? 0 : Math.max(2, Math.round((tot/maxC)*100));
+      var bg, shadow;
+      if (r.warning) {
+        bg = 'linear-gradient(90deg, #B45309 0%, #D97706 60%, #F59E0B 100%)';
+        shadow = '0 0 0 1px rgba(217,119,6,0.18), 0 1px 4px rgba(217,119,6,0.22)';
+      } else {
+        bg = 'linear-gradient(90deg, #1E40AF 0%, #2563EB 60%, #3B82F6 100%)';
+        shadow = '0 0 0 1px rgba(37,99,235,0.15), 0 1px 4px rgba(37,99,235,0.18)';
       }
-      var total = 1000;
-      function pct(n){ return Math.round(100*n/total); }
-      function tierTotal(k){ return c[k].on + c[k].off; }
-      var maxC = Math.max(tierTotal('below'), tierTotal('t3'), tierTotal('t2'), tierTotal('t1')) || 1;
-      var h = '';
-      // Header row
-      // Header row — bold, marketing-striking + inline Detail link
-      h += '<div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 12px; margin-bottom:8px;">';
-      h += '<div style="display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;">';
-      h += '<div style="font-size:12px; font-weight:700; color:var(--ink); letter-spacing:0.06em; text-transform:uppercase;">Where the 1,000 cases land by tier</div>';
-      h += '<a href="#" id="linkTierDetail" style="font-size:11px; font-weight:600; color:var(--accent); text-decoration:none; border-bottom:1.5px solid var(--accent); padding-bottom:1px;">Detail →</a>';
+      h += '<div style="display:grid; grid-template-columns: 92px 1fr 84px; gap:10px; align-items:center; padding:4px 0;">';
+      h += '<div style="font-size:12px; font-weight:700; color:var(--ink); text-align:right; line-height:1.15; letter-spacing:-0.005em;">'+r.label+'<div style="font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px;">'+r.sub+'</div></div>';
+      h += '<div style="height:18px; background:var(--page); border:1px solid var(--grid); border-radius:4px; overflow:hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">';
+      h += '<div style="background:'+bg+'; height:100%; width:'+pctFrac+'%; box-shadow:'+shadow+'; border-radius:3px;"></div>';
       h += '</div>';
-      h += '<div style="font-size:10px; color:var(--muted); font-weight:500;">Total docket: <b style="color:var(--ink); font-weight:700;">1,000</b></div>';
+      h += '<div style="font-size:13px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; line-height:1.15; text-align:right;">'+tot.toLocaleString('en-US')+'<div style="font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px;">'+pct(tot)+'%</div></div>';
       h += '</div>';
-      // Vertical stack of horizontal bars — single strong color, marketing-striking
-      var rows4 = [
-        {label:'Tier I',      sub:'71–100', key:'t1'},
-        {label:'Tier II',     sub:'36–70',  key:'t2'},
-        {label:'Tier III',    sub:'0–35',   key:'t3'},
-        {label:'Below Grid',  sub:'fails gate',  key:'below', warning:true}
-      ];
-      rows4.forEach(function(r){
-        var on = c[r.key].on, off = c[r.key].off, tot = on + off;
-        var pctFrac = maxC===0 ? 0 : Math.max(2, Math.round((tot/maxC)*100));
-        var bg, shadow, border;
-        if (r.warning) {
-          bg = 'linear-gradient(90deg, #B45309 0%, #D97706 60%, #F59E0B 100%)';
-          shadow = '0 0 0 1px rgba(217,119,6,0.18), 0 1px 4px rgba(217,119,6,0.22)';
-        } else {
-          bg = 'linear-gradient(90deg, #1E40AF 0%, #2563EB 60%, #3B82F6 100%)';
-          shadow = '0 0 0 1px rgba(37,99,235,0.15), 0 1px 4px rgba(37,99,235,0.18)';
-        }
-        h += '<div style="display:grid; grid-template-columns: 92px 1fr 84px; gap:10px; align-items:center; padding:4px 0;">';
-        h += '<div style="font-size:12px; font-weight:700; color:var(--ink); text-align:right; line-height:1.15; letter-spacing:-0.005em;">'+r.label+'<div style="font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px;">'+r.sub+'</div></div>';
-        h += '<div style="height:18px; background:var(--page); border:1px solid var(--grid); border-radius:4px; overflow:hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">';
-        h += '<div style="background:'+bg+'; height:100%; width:'+pctFrac+'%; box-shadow:'+shadow+'; border-radius:3px;"></div>';
-        h += '</div>';
-        h += '<div style="font-size:13px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; line-height:1.15; text-align:right;">'+tot.toLocaleString('en-US')+'<div style="font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px;">'+pct(tot)+'%</div></div>';
-        h += '</div>';
-      });
-      // Footer summary (Detail link moved to header)
-      h += '<div style="font-size:10px; color:var(--muted); margin-top:12px; padding-top:10px; border-top:1px solid var(--grid);"><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain &middot; <b style="font-weight:600;">Total: '+total.toLocaleString('en-US')+'</b></div>';
-      var el2=document.getElementById('bridgeTierHist'); if(el2) el2.innerHTML=h;
-      var el3=document.getElementById('scoreBuckets'); if(el3) el3.innerHTML='';
-    })();
+    });
+    h += '<div style="font-size:10px; color:var(--muted); margin-top:12px; padding-top:10px; border-top:1px solid var(--grid);"><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain &middot; <b style="font-weight:600;">Total: '+total.toLocaleString('en-US')+'</b></div>';
+    var el = document.getElementById('bridgeTierHist'); if (el) el.innerHTML = h;
   }
 
   function render() {
@@ -1529,6 +1424,7 @@
       });
       // keep 4-box strip in sync (re-render strip each render so caps update)
       renderSecondaryCritBox();
+      renderBridgeTierHist();
       // also update legacy expHzWrap if present (hide its inner but keep compat)
       (function(){ var w=$('expHzWrap'); if(w) w.style.display='none'; })();
       // enforce cap after gate change
@@ -1552,39 +1448,11 @@
         var pctEl = $('erpct-' + v.key); if (pctEl) pctEl.textContent = (expQuality.counts && expQuality.counts[v.key] != null ? expQuality.counts[v.key] : 0);
         var sliderEl = $('er-' + v.key); if (sliderEl && document.activeElement !== sliderEl) sliderEl.value = (expQuality.counts && expQuality.counts[v.key]!=null?expQuality.counts[v.key]:0);
       });
-      renderHistogram();
       if (typeof syncPresetActive === 'function') syncPresetActive();
       if (typeof syncOnGridPresetActive === 'function') syncOnGridPresetActive();
     })();
   }
 
-  // DD downloads + table toggle
-  (function(){
-    function wireDD(){
-      var b1=document.getElementById('btnDownloadCsv'); if(b1 && !b1._wired){ b1._wired=true; b1.addEventListener('click', function(){ if(!DD) buildDD(); downloadDDCsv(); }); }
-      var b2=document.getElementById('btnDownloadJson'); if(b2 && !b2._wired){ b2._wired=true; b2.addEventListener('click', function(){ if(!DD) buildDD(); downloadDDJson(); }); }
-      if(!DD) buildDD();
-  // Delegated handler for the Detail link (works regardless of when the link is added)
-  if (!document._detailLinkWired) {
-    document._detailLinkWired = true;
-    document.addEventListener('click', function(e){
-      var t = e.target;
-      while (t && t !== document) {
-        if (t.id === 'linkTierDetail') {
-          e.preventDefault();
-          var d = document.getElementById('scoreDetails');
-          if (d && !d.open) d.open = true;
-          var m = document.getElementById('scoreMatrix');
-          if (m) m.scrollIntoView({behavior:'smooth', block:'start'});
-          return;
-        }
-        t = t.parentNode;
-      }
-    });
-  }
-    }
-    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', wireDD); else wireDD();
-  })();
 
   // ---------- wiring ----------
   buildLevers();
