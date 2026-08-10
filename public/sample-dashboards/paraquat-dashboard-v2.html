@@ -1916,10 +1916,9 @@
     window._ddLatKnownIds = null;
     window._ddGateSnapshot = null;
 
-    // 6. Reset tier value editors to published defaults
-    var tvI = $('tvI'); if (tvI) tvI.value = 1000;
-    var tvII = $('tvII'); if (tvII) tvII.value = 500;
-    var tvIII = $('tvIII'); if (tvIII) tvIII.value = 250;
+    // NOTE: tier value editors (tvI, tvII, tvIII) are deliberately NOT reset — they stay at
+    // whatever the user has set. The HTML defaults load first; the user can edit per their
+    // negotiation model. Reset only restores the 1,000-case dataset + zeros out the sliders.
 
     // 7. Rebuild exp sliders (in case missing count changed) and re-render
     buildExpSliders();
