@@ -279,6 +279,12 @@
   /* Latency sliders horizontal inside the latency box */
   .lat-hz-row { display:flex; gap:10px; }
   .lat-hz-row .crit-bucket { flex:1; min-width:0; }
+  /* Exposure vector + PD severity sliders horizontal inside the box */
+  .exp-hz-row, .pd-hz-row { display:flex; gap:10px; }
+  .exp-hz-row .crit-bucket, .pd-hz-row .crit-bucket { flex:1; min-width:0; }
+  .exp-hz-row .crit-bucket .bmeta, .pd-hz-row .crit-bucket .bmeta { font-size:9.5px; }
+  /* Tighten the levers card right-column a bit so 3-up slider rows fit */
+  .cols.lever-cols > .card:last-child { padding: 16px 14px; }
   /* Secondary crit strip — lives inside the levers card, stacked vertically (cert on top, lat below) */
   .crit-strip-secondary { display:grid; grid-template-columns: 1fr; gap:10px; margin-top:8px; }
   .crit-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 12px 10px; position:relative; overflow:hidden; }
@@ -462,12 +468,15 @@
 
   <p class="lede">Attorneys manage cases. Nobody's job is the gap between what a docket is <em>worth</em> and what it <em>could be worth</em> — and that gap doesn't sit still: statutes run, claimants disengage, thin files settle thin. On this 1,000-matter illustrative docket the gap is <strong id="ledeGap">$71.8M</strong> against <strong id="ledeCur">$75.6M</strong> of current gross settlement value. First we revive dormant matters past the gate; then we cure gaps on the active docket. Below: the four levers, the gaps behind them, and what each is worth at your assumptions.</p>
 
+  <div class="card lift-levers-card" style="margin-bottom:14px;">
+    <div style="font-size:11px; font-weight:650; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Gross Settlement Value Lift Levers</div>
+    <div style="font-size:13px; line-height:1.55; color:var(--ink-2);">Two ways we add value. <b style="color:var(--ink); font-style:italic;">Volume</b> — revive dormant cases that clear all eligibility gates onto the active grid. <b style="color:var(--ink); font-style:italic;">Quality</b> — fill in the missing story on each active case so it scores (and pays) higher.</div>
+  </div>
 
   <div class="score-matrix" id="scoreMatrix">
     <details id="scoreDetails">
-      <summary style="cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px;">
+      <summary style="cursor:pointer; list-style:none; display:flex; align-items:center; gap:12px;">
         <span class="sm-title">Score distribution → tier score bucket</span>
-        <span class="sm-note"><span id="smMissing">126</span> missing vector today · <span id="smAllocated">0</span> allocated · <span id="smRemaining">126</span> still missing · grows as dormant revive</span>
       </summary>
       <div id="scoreHistogram" style="margin-top:10px"></div>
     <div class="sm-note" style="margin-top:6px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
@@ -994,21 +1003,23 @@
 
       // Exposure vector
       html += '<div class="crit-box"><div class="cb-head">Exposure vector</div><div class="cb-sub"><b>400</b> known + <b>'+expMiss+'</b> missing &nbsp;<span style="color:var(--muted)">(126 base + '+(expMiss-126)+' moved)</span></div>';
+      html += '<div class="exp-hz-row">';
       EXP_VECTORS.forEach(function(v){
         var known = EXP_KNOWN_SPLIT[v.key]||0;
         var cured = EXP_ALLOC[v.key]||0;
-        html += '<div class="crit-bucket"><div class="bname">'+esc(v.label)+' <span style="color:var(--muted); font-weight:400">('+v.pts+' pts)</span></div><div class="bmeta"><b>'+known.toLocaleString('en-US')+'</b> known + <b id="cs-erCured-'+v.key+'">'+cured+'</b> from missing = <b id="cs-erTotal-'+v.key+'">'+(known+cured)+'</b> total</div><input type="range" min="0" max="'+expMiss+'" step="1" value="'+cured+'" id="cs-er-'+v.key+'"><div class="bpct"><span id="cs-erpct-'+v.key+'">'+cured+'</span> from missing</div></div>';
+        html += '<div class="crit-bucket"><div class="bname">'+esc(v.label).replace('Direct occupational handling — Mix / Load / Apply','Direct handling').replace('Drift / Bystander / Re-entry exposure','Drift / bystander').replace('Para-occupational / Take-home / Residue','Para-occ.')+' <span style="color:var(--muted); font-weight:400">('+v.pts+' pts)</span></div><div class="bmeta"><b>'+known+'</b> known + <b id="cs-erCured-'+v.key+'">'+cured+'</b> = <b id="cs-erTotal-'+v.key+'">'+(known+cured)+'</b></div><input type="range" min="0" max="'+expMiss+'" step="1" value="'+cured+'" id="cs-er-'+v.key+'"><div class="bpct"><span id="cs-erpct-'+v.key+'">'+cured+'</span> from missing</div></div>';
       });
-      html += '</div>';
+      html += '</div></div>';
 
       // PD severity
       html += '<div class="crit-box"><div class="cb-head">Parkinson\u0027s severity</div><div class="cb-sub"><b>325</b> known + <b>'+pdMiss+'</b> missing &nbsp;<span style="color:var(--muted)">(201 base + '+(pdMiss-201)+' moved)</span></div>';
+      html += '<div class="pd-hz-row">';
       PD_SEVERITY.forEach(function(v){
         var known = v.known||0;
         var cured = PD_ALLOC[v.key]||0;
-        html += '<div class="crit-bucket"><div class="bname">'+esc(v.label)+' <span style="color:var(--muted); font-weight:400">('+v.pts+' pts)</span></div><div class="bmeta"><b>'+known+'</b> known + <b id="cs-pdCured-'+v.key+'">'+cured+'</b> from missing = <b id="cs-pdTotal-'+v.key+'">'+(known+cured)+'</b> total</div><input type="range" min="0" max="'+pdMiss+'" step="1" value="'+cured+'" id="cs-pd-'+v.key+'"><div class="bpct"><span id="cs-pdpct-'+v.key+'">'+cured+'</span> from missing</div></div>';
+        html += '<div class="crit-bucket"><div class="bname">'+esc(v.label)+' <span style="color:var(--muted); font-weight:400">('+v.pts+' pts)</span></div><div class="bmeta"><b>'+known+'</b> known + <b id="cs-pdCured-'+v.key+'">'+cured+'</b> = <b id="cs-pdTotal-'+v.key+'">'+(known+cured)+'</b></div><input type="range" min="0" max="'+pdMiss+'" step="1" value="'+cured+'" id="cs-pd-'+v.key+'"><div class="bpct"><span id="cs-pdpct-'+v.key+'">'+cured+'</span> from missing</div></div>';
       });
-      html += '</div>';
+      html += '</div></div>';
 
       sec.innerHTML = html;
       _secBuilt = { expMiss: expMiss, pdMiss: pdMiss, certMiss: certMiss, latMiss: latMiss };
@@ -1397,9 +1408,12 @@
       var maxC = Math.max(tierTotal('below'), tierTotal('t3'), tierTotal('t2'), tierTotal('t1')) || 1;
       var h = '';
       // Header row
-      // Header row — bold, marketing-striking
-      h += '<div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:10px;">';
+      // Header row — bold, marketing-striking + inline Detail link
+      h += '<div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 12px; margin-bottom:8px;">';
+      h += '<div style="display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;">';
       h += '<div style="font-size:12px; font-weight:700; color:var(--ink); letter-spacing:0.06em; text-transform:uppercase;">Where the 1,000 cases land by tier</div>';
+      h += '<a href="#" id="linkTierDetail" style="font-size:11px; font-weight:600; color:var(--accent); text-decoration:none; border-bottom:1.5px solid var(--accent); padding-bottom:1px;">Detail →</a>';
+      h += '</div>';
       h += '<div style="font-size:10px; color:var(--muted); font-weight:500;">Total docket: <b style="color:var(--ink); font-weight:700;">1,000</b></div>';
       h += '</div>';
       // Vertical stack of horizontal bars — single strong color, marketing-striking
@@ -1428,8 +1442,8 @@
         h += '<div style="font-size:13px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; line-height:1.15; text-align:right;">'+tot.toLocaleString('en-US')+'<div style="font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px;">'+pct(tot)+'%</div></div>';
         h += '</div>';
       });
-      // Footer summary + prominent detail link
-      h += '<div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--muted); margin-top:12px; padding-top:10px; border-top:1px solid var(--grid); flex-wrap:wrap; gap:10px;"><span><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain &middot; <b style="font-weight:600;">Total: '+total.toLocaleString('en-US')+'</b></span><a href="#" id="linkTierDetail" style="display:inline-flex; align-items:center; gap:6px; padding:7px 16px; border-radius:999px; background:linear-gradient(135deg, #F4B53F 0%, #E89B2A 100%); color:#1A1207; border:1px solid #C5811F; text-decoration:none; font-weight:700; font-size:12px; box-shadow:0 1px 0 rgba(255,255,255,0.4) inset, 0 1px 3px rgba(229,155,42,0.25);">Detail →</a></div>';
+      // Footer summary (Detail link moved to header)
+      h += '<div style="font-size:10px; color:var(--muted); margin-top:12px; padding-top:10px; border-top:1px solid var(--grid);"><b style="color:var(--ink)">'+c.t1.off+'</b> Tier I revived (gate clears) &middot; <b style="color:var(--ink)">'+c.t3.off+'</b> dormant remain &middot; <b style="font-weight:600;">Total: '+total.toLocaleString('en-US')+'</b></div>';
       var el2=document.getElementById('bridgeTierHist'); if(el2) el2.innerHTML=h;
       var el3=document.getElementById('scoreBuckets'); if(el3) el3.innerHTML='';
     })();
