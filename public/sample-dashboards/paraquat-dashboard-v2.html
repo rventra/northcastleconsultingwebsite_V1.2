@@ -1642,7 +1642,8 @@
     function pct(n){ return Math.round(100*n/total); }
     function tierTotal(k){ return c[k].on + c[k].off; }
     var V = tierValues();
-    function gsvK(k){ return tierTotal(k) * V[k]; }
+    var tierValueFor = { t1: V.I, t2: V.II, t3: V.III, below: 0 };
+    function gsvK(k){ return tierTotal(k) * tierValueFor[k]; }
     var maxC = Math.max(tierTotal('below'), tierTotal('t3'), tierTotal('t2'), tierTotal('t1'), c.dormant) || 1;
     var h = '';
     h += '<div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 12px; margin-bottom:8px;">';
