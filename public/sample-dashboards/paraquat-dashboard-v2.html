@@ -621,29 +621,88 @@
   .crit-bucket input[type=range]:hover::-webkit-slider-thumb,
   .cert-bucket input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.15); }
 
-  /* Our Expertise cards — hover states */
+  /* Our Expertise — premium section */
+  .exp-section {
+    position: relative;
+    background: linear-gradient(160deg, #051c2c 0%, #0a2540 40%, #051c2c 100%);
+    color: var(--navy-ink);
+    padding: 56px 24px 48px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .exp-section::before {
+    content: '';
+    position: absolute;
+    top: -40%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .exp-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%; left: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(200,151,62,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .exp-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 1;
+  }
+  .exp-stat {
+    text-align: center;
+  }
+  .exp-stat .num {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .exp-stat .lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.55;
+    margin-top: 6px;
+  }
   .exp-card {
-    background: rgba(255,255,255,0.06);
-    border: 2px solid rgba(255,255,255,0.1);
-    border-radius: 10px;
-    padding: 28px 24px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 28px 24px 24px;
     position: relative;
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    backdrop-filter: blur(8px);
   }
   .exp-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(255,255,255,0.2);
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.15);
   }
-  .exp-card.exp-blue:hover { box-shadow: 0 8px 24px rgba(37,99,235,0.2); border-color: rgba(37,99,235,0.3); }
-  .exp-card.exp-green:hover { box-shadow: 0 8px 24px rgba(16,185,129,0.2); border-color: rgba(16,185,129,0.3); }
-  .exp-card.exp-amber:hover { box-shadow: 0 8px 24px rgba(245,158,11,0.2); border-color: rgba(245,158,11,0.3); }
+  .exp-card.exp-blue:hover { box-shadow: 0 12px 32px rgba(37,99,235,0.18), 0 0 0 1px rgba(37,99,235,0.15); }
+  .exp-card.exp-green:hover { box-shadow: 0 12px 32px rgba(16,185,129,0.18), 0 0 0 1px rgba(16,185,129,0.15); }
+  .exp-card.exp-amber:hover { box-shadow: 0 12px 32px rgba(245,158,11,0.18), 0 0 0 1px rgba(245,158,11,0.15); }
+  .exp-card .card-stat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-top: 16px;
+  }
   .exp-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 42px; height: 42px;
-    border-radius: 50%;
+    width: 46px; height: 46px;
+    border-radius: 12px;
     flex-shrink: 0;
   }
   /* Alert hierarchy for SOL risks — clear color coding */
@@ -935,99 +994,113 @@
   </div>
 
 
-  <div id="our-expertise" style="scroll-margin-top:20px; margin-top:20px; background:var(--navy); color:var(--navy-ink); padding:48px 24px; border-radius:10px;">
-    <div style="text-align:center; max-width:720px; margin:0 auto 36px;">
-      <div style="font-size:28px; font-weight:700; letter-spacing:-0.02em; line-height:1.2; margin-bottom:12px;">Our Expertise</div>
-      <div style="font-size:15px; opacity:0.75; line-height:1.6; max-width:560px; margin:0 auto;"></div>
+  <div id="our-expertise" class="exp-section" style="scroll-margin-top:20px; margin-top:20px;">
+    <!-- Stats bar -->
+    <div class="exp-stats">
+      <div class="exp-stat"><div class="num" style="color:var(--accent);">40–60%</div><div class="lbl">Doc completeness lift</div></div>
+      <div class="exp-stat"><div class="num" style="color:var(--good);">90%</div><div class="lbl">Forecast accuracy</div></div>
+      <div class="exp-stat"><div class="num" style="color:var(--accent-2);">75%</div><div class="lbl">Faster cycle times</div></div>
+      <div class="exp-stat"><div class="num" style="color:#fff;">100%</div><div class="lbl">U.S.-based team</div></div>
     </div>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; max-width:1080px; margin:0 auto;">
-      <!-- Column 1: Revive Dormant Cases -->
+    <!-- Heading -->
+    <div style="text-align:center; max-width:720px; margin:0 auto 40px; position:relative; z-index:1;">
+      <div style="font-size:32px; font-weight:700; letter-spacing:-0.025em; line-height:1.15; margin-bottom:10px;">Our Expertise</div>
+      <div style="font-size:15px; opacity:0.6; line-height:1.6;">Three pillars. One platform. Every case monetized.</div>
+    </div>
+    <!-- Cards -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; max-width:1080px; margin:0 auto; position:relative; z-index:1;">
+      <!-- Card 1 -->
       <div class="exp-card exp-blue">
-        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--accent);"></div>
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
-          <span class="exp-icon" style="background:rgba(37,99,235,0.12);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--accent), rgba(37,99,235,0.4));"></div>
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+          <span class="exp-icon" style="background:rgba(37,99,235,0.1);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </span>
-          <div style="font-size:17px; font-weight:700;">Revive Dormant Cases</div>
+          <div style="font-size:18px; font-weight:700; letter-spacing:-0.01em;">Revive Dormant Cases</div>
         </div>
         <ul style="list-style:none; padding:0; margin:0; display:grid; gap:14px;">
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--accent); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Contact Enrichment</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">Locate current emails, phones, and addresses for claimants who've gone dark.</div></div>
+            <span style="color:var(--accent); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Contact Enrichment</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Locate current emails, phones, and addresses for claimants who've gone dark.</div></div>
           </li>
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--accent); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Communications Bridges</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">Multi-channel outreach to recover lost plaintiffs and re-engage closed files.</div></div>
+            <span style="color:var(--accent); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Communications Bridges</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Multi-channel outreach to recover lost plaintiffs and re-engage closed files.</div></div>
           </li>
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--accent); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Dormant &amp; Thin Case ID</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">Flag off-grid and under-performing matters the firm already owns.</div></div>
+            <span style="color:var(--accent); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Dormant &amp; Thin Case ID</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Flag off-grid and under-performing matters the firm already owns.</div></div>
           </li>
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--accent); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Document Retrieval</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">Medical, employment, and purchase proof to cure tier-blocking gaps.</div></div>
+            <span style="color:var(--accent); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Document Retrieval</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Medical, employment, and purchase proof to cure tier-blocking gaps.</div></div>
           </li>
         </ul>
+        <div class="card-stat" style="background:rgba(37,99,235,0.12); color:var(--accent);">60–80% claimant response rate</div>
       </div>
-      <!-- Column 2: Docket Intelligence & Dashboarding -->
+      <!-- Card 2 -->
       <div class="exp-card exp-green">
-        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--good);"></div>
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
-          <span class="exp-icon" style="background:rgba(16,185,129,0.12);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--good), rgba(16,185,129,0.4));"></div>
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+          <span class="exp-icon" style="background:rgba(16,185,129,0.1);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           </span>
-          <div style="font-size:17px; font-weight:700;">Docket Intelligence &amp; Dashboarding</div>
+          <div style="font-size:18px; font-weight:700; letter-spacing:-0.01em;">Docket Intelligence &amp; Dashboarding</div>
         </div>
         <ul style="list-style:none; padding:0; margin:0; display:grid; gap:14px;">
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--good); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Tier Modeling &amp; Scoring</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">Defensible tier schemas with automated scoring — no disputes with defense.</div></div>
+            <span style="color:var(--good); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Tier Modeling &amp; Scoring</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Defensible tier schemas with automated scoring — no disputes with defense.</div></div>
           </li>
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--good); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Settlement Valuation</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">Per-matter GSV forecasting grounded in tier distribution and cure potential.</div></div>
+            <span style="color:var(--good); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Settlement Valuation</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Per-matter GSV forecasting grounded in tier distribution and cure potential.</div></div>
           </li>
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--good); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Gap Detection &amp; Pricing</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">Every curable gap ranked by dollar impact, tied to a specific operational fix.</div></div>
+            <span style="color:var(--good); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Gap Detection &amp; Pricing</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Every curable gap ranked by dollar impact, tied to a specific operational fix.</div></div>
           </li>
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--good); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Portfolio Forecasting</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">90%+ accuracy on settlement timing and payout projections.</div></div>
+            <span style="color:var(--good); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Portfolio Forecasting</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">90%+ accuracy on settlement timing and payout projections.</div></div>
           </li>
         </ul>
+        <div class="card-stat" style="background:rgba(16,185,129,0.12); color:var(--good);">200+ data points per case</div>
       </div>
-      <!-- Column 3: Maximize GSV -->
+      <!-- Card 3 -->
       <div class="exp-card exp-amber">
-        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--accent-2);"></div>
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
-          <span class="exp-icon" style="background:rgba(245,158,11,0.12);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--accent-2), rgba(245,158,11,0.4));"></div>
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+          <span class="exp-icon" style="background:rgba(245,158,11,0.1);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
           </span>
-          <div style="font-size:17px; font-weight:700;">Maximize GSV for On-Grid Cases</div>
+          <div style="font-size:18px; font-weight:700; letter-spacing:-0.01em;">Maximize GSV for On-Grid Cases</div>
         </div>
         <ul style="list-style:none; padding:0; margin:0; display:grid; gap:14px;">
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--accent-2); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Data Curation &amp; QA</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">Systematic review of case files to eliminate thin spots and scoring drag.</div></div>
+            <span style="color:var(--accent-2); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Data Curation &amp; QA</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Systematic review of case files to eliminate thin spots and scoring drag.</div></div>
           </li>
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--accent-2); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Medical Extraction</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">AI-assisted extraction converts unstructured files into scored, tier-ready evidence.</div></div>
+            <span style="color:var(--accent-2); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Medical Extraction</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">AI-assisted extraction converts unstructured files into scored, tier-ready evidence.</div></div>
           </li>
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--accent-2); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Tier Upgrade Pathways</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">Identify which cases can move up a tier and what cures get them there.</div></div>
+            <span style="color:var(--accent-2); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Tier Upgrade Pathways</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Identify which cases can move up a tier and what cures get them there.</div></div>
           </li>
           <li style="display:flex; gap:10px; align-items:flex-start;">
-            <span style="color:var(--accent-2); font-weight:700; font-size:15px; line-height:1.3; flex-shrink:0;">›</span>
-            <div><b style="font-size:13px;">Continuous Re-Screening</b><div style="font-size:12px; opacity:0.7; margin-top:3px; line-height:1.6;">Automated re-grading when new evidence hits — no case sits stale.</div></div>
+            <span style="color:var(--accent-2); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Continuous Re-Screening</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Automated re-grading when new evidence hits — no case sits stale.</div></div>
           </li>
         </ul>
+        <div class="card-stat" style="background:rgba(245,158,11,0.12); color:var(--accent-2);">50% less review time per case</div>
       </div>
     </div>
-    <div style="text-align:center; margin-top:32px;">
-      <a class="btn-primary" href="https://www.northcastleconsulting.com/contact-us" target="_blank" rel="noopener" style="font-size:14px; padding:10px 28px;">Evaluate Your Docket →</a>
+    <!-- CTA -->
+    <div style="text-align:center; margin-top:36px; position:relative; z-index:1;">
+      <a class="btn-primary" href="https://www.northcastleconsulting.com/contact-us" target="_blank" rel="noopener" style="font-size:15px; padding:12px 32px; box-shadow:0 4px 16px rgba(194,65,12,0.3);">Evaluate Your Docket →</a>
+      <div style="margin-top:10px; font-size:11.5px; opacity:0.45;">NDA first · All data housed in AWS · No commitment</div>
     </div>
   </div>
 
