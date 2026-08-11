@@ -409,6 +409,8 @@
   /* Cert bucket — no inner card; sits directly in the parameter box */
   .cert-bucket { padding:0 0 2px; margin-bottom:0; background:transparent; border:none; }
   .cert-bucket .bname { font-size:11.5px; font-weight:700; color:var(--ink); margin-bottom:4px; letter-spacing:-0.005em; }
+  .cert-bucket .bmeta { font-size: 10.5px; color: var(--ink-2); margin-bottom: 6px; }
+  .cert-bucket .bmeta b { color: var(--ink); }
   .cert-bucket .bpct { font-size:10px; color:var(--ink-2); text-align:right; font-variant-numeric:tabular-nums; margin-top:4px; }
   .crit-bucket input[type=range] { width:100%; accent-color:#1D4ED8; height:22px; margin-top:8px; padding:0; -webkit-appearance:none; appearance:none; background:transparent; cursor:pointer; }
   .crit-bucket input[type=range]::-webkit-slider-runnable-track { height:4px; background:var(--grid); border-radius:999px; border:none; }
@@ -1383,6 +1385,8 @@
     if (needsBuild) {
       var certKnown = DD ? DD.filter(function(r){ return r.status==='on-grid' && r.cert==='yes'; }).length : 330;
       var certNoKnown = DD ? DD.filter(function(r){ return r.status==='on-grid' && r.cert==='no'; }).length : 157;
+      window._certKnown = certKnown;
+      window._certNoKnown = certNoKnown;
       var html = '';
 
       // Certified Applicator + Latency — side by side
@@ -1390,7 +1394,7 @@
 
       // Certified Applicator
       html += '<div class="crit-box"><div class="cb-head">Certified applicator</div><div class="cb-sub"><b>'+certKnown+'</b> YES (30) + <b>'+certNoKnown+'</b> NO (0) known + <b>'+certMiss+'</b> missing</div>';
-      html += '<div class="cert-bucket"><div class="bname">YES <span style="color:var(--muted); font-weight:400">(30 pts)</span></div><input type="range" min="0" max="'+certMiss+'" step="1" value="'+(window._certYesAlloc||0)+'" id="cs-cert-yes"><div class="bpct"><span id="cs-cert-yes-pct">'+(window._certYesAlloc||0)+'</span> from missing &middot; <b id="cs-cert-no-pct" style="color:var(--ink)">'+Math.max(0, certMiss-(window._certYesAlloc||0))+'</b> remain NO</div></div>';
+      html += '<div class="cert-bucket"><div class="bname">YES <span style="color:var(--muted); font-weight:400">(30 pts)</span></div><div class="bmeta"><b>'+certKnown+'</b> known + <b id="cs-cert-assigned">0</b> = <b id="cs-cert-total">'+certKnown+'</b> YES</div><input type="range" min="0" max="'+certMiss+'" step="1" value="'+(window._certYesAlloc||0)+'" id="cs-cert-yes"><div class="bpct"><span id="cs-cert-yes-pct">'+(window._certYesAlloc||0)+'</span> from missing &middot; <b id="cs-cert-no-pct" style="color:var(--ink)">'+Math.max(0, certMiss-(window._certYesAlloc||0))+'</b> remain NO</div></div>';
       html += '</div>';
 
       // Latency
@@ -1400,7 +1404,7 @@
       var latOpts = [{k:'15+', label:'15+ years', pts:15},{k:'5-15', label:'5–15 years', pts:7}];
       latOpts.forEach(function(o){
         var val = (window._latAlloc && window._latAlloc[o.k]!=null) ? window._latAlloc[o.k] : 0;
-        html += '<div class="crit-bucket"><div class="bname">'+o.label+' <span style="color:var(--muted); font-weight:400">('+o.pts+' pts)</span></div><div class="bmeta"><b id="cs-lat-val-'+o.k+'">'+val+'</b> from missing</div><input type="range" min="0" max="'+latMiss+'" step="1" value="'+val+'" id="cs-lat-'+o.k+'"><div class="bpct">capped at '+latMiss+'</div></div>';
+        html += '<div class="crit-bucket"><div class="bname">'+o.label+' <span style="color:var(--muted); font-weight:400">('+o.pts+' pts)</span></div><div class="bmeta"><b id="cs-lat-val-'+o.k+'">'+val+'</b> from missing</div><input type="range" min="0" max="'+latMiss+'" step="1" value="'+val+'" id="cs-lat-'+o.k+'"><div class="bpct">of '+latMiss+' cap</div></div>';
       });
       html += '</div></div>';
 
@@ -1452,6 +1456,9 @@
       var inpC = $('cs-cert-yes'); if (inpC && document.activeElement !== inpC) inpC.value = window._certYesAlloc||0;
       var lp = $('cs-cert-yes-pct'); if (lp) lp.textContent = window._certYesAlloc||0;
       var np = $('cs-cert-no-pct'); if (np) np.textContent = Math.max(0, certMiss-(window._certYesAlloc||0));
+      var ck = window._certKnown || (DD ? DD.filter(function(r){ return r.status==='on-grid' && r.cert==='yes'; }).length : 330);
+      var ap = $('cs-cert-assigned'); if (ap) ap.textContent = window._certYesAlloc||0;
+      var tp = $('cs-cert-total'); if (tp) tp.textContent = ck + (window._certYesAlloc||0);
       ['15+','5-15'].forEach(function(k){
         var inpL = $('cs-lat-'+k); if (inpL && document.activeElement !== inpL) inpL.value = (window._latAlloc && window._latAlloc[k])||0;
         var lv = $('cs-lat-val-'+k); if (lv) lv.textContent = (window._latAlloc && window._latAlloc[k])||0;
@@ -1470,6 +1477,9 @@
         window._certYesAlloc = val; this.value = val;
         var lab = $('cs-cert-yes-pct'); if (lab) lab.textContent = val;
         var noLab = $('cs-cert-no-pct'); if (noLab) noLab.textContent = Math.max(0, miss-val);
+        var ck = window._certKnown || (DD ? DD.filter(function(r){ return r.status==='on-grid' && r.cert==='yes'; }).length : 330);
+        var ap = $('cs-cert-assigned'); if (ap) ap.textContent = val;
+        var tp = $('cs-cert-total'); if (tp) tp.textContent = ck + val;
         render();
       });
     }
