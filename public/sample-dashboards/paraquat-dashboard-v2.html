@@ -315,10 +315,14 @@
   .cb-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--grid); }
   .crit-box .cb-sub { font-size:10.5px; color:var(--muted); margin-bottom:8px; }
   .crit-box .cb-sub b { color:var(--ink-2); }
-  .crit-bucket, .cert-bucket { padding:7px 8px; border:1px solid var(--border); border-radius:7px; background:var(--page); margin-bottom:6px; }
-  .crit-bucket .bname, .cert-bucket .bname { font-size:11px; font-weight:600; color:var(--ink); }
-  .crit-bucket .bmeta, .cert-bucket .bmeta { font-size:10px; color:var(--muted); }
-  .crit-bucket .bmeta b, .cert-bucket .bmeta b { color:var(--ink-2); }
+  .crit-bucket { padding:7px 8px; border:1px solid var(--border); border-radius:7px; background:var(--page); margin-bottom:6px; }
+  .crit-bucket .bname { font-size:11px; font-weight:600; color:var(--ink); }
+  .crit-bucket .bmeta { font-size:10px; color:var(--muted); }
+  .crit-bucket .bmeta b { color:var(--ink-2); }
+  /* Cert bucket — no inner card; sits directly in the parameter box */
+  .cert-bucket { padding:0 0 2px; margin-bottom:0; background:transparent; border:none; }
+  .cert-bucket .bname { font-size:11.5px; font-weight:700; color:var(--ink); margin-bottom:4px; letter-spacing:-0.005em; }
+  .cert-bucket .bpct { font-size:10px; color:var(--ink-2); text-align:right; font-variant-numeric:tabular-nums; margin-top:4px; }
   .crit-bucket input[type=range] { width:100%; accent-color:var(--series-2); height:22px; margin-top:8px; padding:0; -webkit-appearance:none; appearance:none; background:transparent; cursor:pointer; }
   .crit-bucket input[type=range]::-webkit-slider-runnable-track { height:4px; background:var(--grid); border-radius:999px; border:none; }
   .crit-bucket input[type=range]::-moz-range-track { height:4px; background:var(--grid); border-radius:999px; border:none; }
@@ -1294,7 +1298,7 @@
 
       // Certified Applicator
       html += '<div class="crit-box"><div class="cb-head">Certified applicator</div><div class="cb-sub"><b>'+certKnown+'</b> YES (30) + <b>'+certNoKnown+'</b> NO (0) known + <b>'+certMiss+'</b> missing</div>';
-      html += '<div class="cert-bucket"><div class="bname">YES <span style="color:var(--muted); font-weight:400">(30 pts)</span></div><div class="bmeta">Allocate YES to missing</div><input type="range" min="0" max="'+certMiss+'" step="1" value="'+(window._certYesAlloc||0)+'" id="cs-cert-yes"><div class="bpct"><span id="cs-cert-yes-pct">'+(window._certYesAlloc||0)+'</span> from missing &middot; <b id="cs-cert-no-pct" style="color:var(--ink)">'+Math.max(0, certMiss-(window._certYesAlloc||0))+'</b> remain NO</div></div>';
+      html += '<div class="cert-bucket"><div class="bname">YES <span style="color:var(--muted); font-weight:400">(30 pts)</span></div><input type="range" min="0" max="'+certMiss+'" step="1" value="'+(window._certYesAlloc||0)+'" id="cs-cert-yes"><div class="bpct"><span id="cs-cert-yes-pct">'+(window._certYesAlloc||0)+'</span> from missing &middot; <b id="cs-cert-no-pct" style="color:var(--ink)">'+Math.max(0, certMiss-(window._certYesAlloc||0))+'</b> remain NO</div></div>';
       html += '</div>';
 
       // Latency
@@ -1691,7 +1695,6 @@
     var h = '';
     h += '<div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 12px; margin-bottom:6px;">';
     h += '<div style="font-size:11px; font-weight:700; color:var(--ink); letter-spacing:0.06em; text-transform:uppercase;">Score distribution by decade &mdash; same 1,000 cases</div>';
-    h += '<div style="font-size:10px; color:var(--muted); font-weight:500;">Buckets sum to <b style="color:var(--ink); font-weight:700;">1,000</b></div>';
     h += '</div>';
     // bars lane — vertical bars in a flex row, count above, bar, range below
     h += '<div style="display:flex; align-items:flex-end; gap:5px; height:88px; padding:0 2px 0; border-bottom:1px solid var(--grid);">';
