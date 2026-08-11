@@ -129,6 +129,85 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
   .sales-sub strong { color: var(--ink); font-weight: 700; }
+  /* Sales proof + two-card lever explainer */
+  .sales-proof {
+    font-size: 15px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    margin-bottom: 14px;
+    max-width: 760px;
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.005em;
+  }
+  .sales-proof strong {
+    color: var(--ink);
+    font-weight: 700;
+    background: linear-gradient(180deg, transparent 78%, rgba(29,78,216,0.22) 78%, rgba(29,78,216,0.22) 92%, transparent 92%);
+    padding: 0 2px 1px;
+  }
+  .sales-fronts-label {
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--ink-2);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-family: 'Inter', system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sales-fronts-label::before {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background: linear-gradient(90deg, #2563EB 0%, transparent 100%);
+  }
+  .lever-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+    max-width: 760px;
+  }
+  .lever-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px 14px 22px;
+    overflow: hidden;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .lever-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(29,78,216,0.08);
+  }
+  .lever-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #2563EB 0%, #1D4ED8 100%);
+  }
+  .lc-num {
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #1D4ED8;
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+    font-family: 'Inter', sans-serif;
+  }
+  .lc-desc {
+    font-size: 12.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+  @media (max-width: 720px) {
+    .lever-cards { grid-template-columns: 1fr; }
+  }
   .lever-box-header { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--grid); }
   .lever-box-title { font-size:14px; font-weight:600; color:var(--ink); letter-spacing:-0.005em; }
   .lever-box-title em { font-style:italic; font-weight:600; color:var(--ink); }
@@ -323,28 +402,28 @@
   .cert-bucket { padding:0 0 2px; margin-bottom:0; background:transparent; border:none; }
   .cert-bucket .bname { font-size:11.5px; font-weight:700; color:var(--ink); margin-bottom:4px; letter-spacing:-0.005em; }
   .cert-bucket .bpct { font-size:10px; color:var(--ink-2); text-align:right; font-variant-numeric:tabular-nums; margin-top:4px; }
-  .crit-bucket input[type=range] { width:100%; accent-color:var(--series-2); height:22px; margin-top:8px; padding:0; -webkit-appearance:none; appearance:none; background:transparent; cursor:pointer; }
+  .crit-bucket input[type=range] { width:100%; accent-color:#1D4ED8; height:22px; margin-top:8px; padding:0; -webkit-appearance:none; appearance:none; background:transparent; cursor:pointer; }
   .crit-bucket input[type=range]::-webkit-slider-runnable-track { height:4px; background:var(--grid); border-radius:999px; border:none; }
   .crit-bucket input[type=range]::-moz-range-track { height:4px; background:var(--grid); border-radius:999px; border:none; }
-  .crit-bucket input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:var(--series-2); border:2px solid var(--surface); box-shadow:0 0 0 1px var(--series-2); cursor:grab; margin-top:-5px; transition:transform 0.08s ease; }
-  .crit-bucket input[type=range]::-moz-range-thumb { width:14px; height:14px; border-radius:50%; background:var(--series-2); border:2px solid var(--surface); box-shadow:0 0 0 1px var(--series-2); cursor:grab; transition:transform 0.08s ease; }
+  .crit-bucket input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:#1D4ED8; box-shadow:0 2px 6px rgba(29,78,216,0.30); cursor:grab; margin-top:-5px; transition:transform 0.08s ease; }
+  .crit-bucket input[type=range]::-moz-range-thumb { width:14px; height:14px; border-radius:50%; background:#1D4ED8; box-shadow:0 2px 6px rgba(29,78,216,0.30); cursor:grab; transition:transform 0.08s ease; }
   .crit-bucket input[type=range]:hover::-webkit-slider-thumb { transform:scale(1.15); }
   .crit-bucket input[type=range]:hover::-moz-range-thumb { transform:scale(1.15); }
   .crit-bucket input[type=range]:active::-webkit-slider-thumb { cursor:grabbing; transform:scale(1.2); box-shadow:0 0 0 6px rgba(29,78,216,0.18); }
   .crit-bucket input[type=range]:active::-moz-range-thumb { cursor:grabbing; transform:scale(1.2); box-shadow:0 0 0 6px rgba(29,78,216,0.18); }
-  .crit-bucket input[type=range]::-moz-range-progress { background:var(--series-2); height:4px; border-radius:999px; }
+  .crit-bucket input[type=range]::-moz-range-progress { background:#1D4ED8; height:4px; border-radius:999px; }
   .crit-bucket .bpct { font-size:10px; color:var(--ink-2); text-align:right; font-variant-numeric:tabular-nums; }
   /* Cert bucket — same visual treatment as .crit-bucket (unified slider look) */
-  .cert-bucket input[type=range] { width:100%; accent-color:var(--series-2); height:22px; margin-top:8px; padding:0; -webkit-appearance:none; appearance:none; background:transparent; cursor:pointer; }
+  .cert-bucket input[type=range] { width:100%; accent-color:#1D4ED8; height:22px; margin-top:8px; padding:0; -webkit-appearance:none; appearance:none; background:transparent; cursor:pointer; }
   .cert-bucket input[type=range]::-webkit-slider-runnable-track { height:4px; background:var(--grid); border-radius:999px; border:none; }
   .cert-bucket input[type=range]::-moz-range-track { height:4px; background:var(--grid); border-radius:999px; border:none; }
-  .cert-bucket input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:var(--series-2); border:2px solid var(--surface); box-shadow:0 0 0 1px var(--series-2); cursor:grab; margin-top:-5px; transition:transform 0.08s ease; }
-  .cert-bucket input[type=range]::-moz-range-thumb { width:14px; height:14px; border-radius:50%; background:var(--series-2); border:2px solid var(--surface); box-shadow:0 0 0 1px var(--series-2); cursor:grab; transition:transform 0.08s ease; }
+  .cert-bucket input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:#1D4ED8; box-shadow:0 2px 6px rgba(29,78,216,0.30); cursor:grab; margin-top:-5px; transition:transform 0.08s ease; }
+  .cert-bucket input[type=range]::-moz-range-thumb { width:14px; height:14px; border-radius:50%; background:#1D4ED8; box-shadow:0 2px 6px rgba(29,78,216,0.30); cursor:grab; transition:transform 0.08s ease; }
   .cert-bucket input[type=range]:hover::-webkit-slider-thumb { transform:scale(1.15); }
   .cert-bucket input[type=range]:hover::-moz-range-thumb { transform:scale(1.15); }
   .cert-bucket input[type=range]:active::-webkit-slider-thumb { cursor:grabbing; transform:scale(1.2); box-shadow:0 0 0 6px rgba(29,78,216,0.18); }
   .cert-bucket input[type=range]:active::-moz-range-thumb { cursor:grabbing; transform:scale(1.2); box-shadow:0 0 0 6px rgba(29,78,216,0.18); }
-  .cert-bucket input[type=range]::-moz-range-progress { background:var(--series-2); height:4px; border-radius:999px; }
+  .cert-bucket input[type=range]::-moz-range-progress { background:#1D4ED8; height:4px; border-radius:999px; }
   .cert-bucket .bpct { font-size:10px; color:var(--ink-2); text-align:right; font-variant-numeric:tabular-nums; }
 
   /* ---------- charts ---------- */
@@ -550,18 +629,16 @@
   /* Slider hit area — make sliders look more tactile (indigo accent to match Certified Applicator) */
   .crit-bucket input[type=range] { height: 22px; }
   .crit-bucket input[type=range]::-webkit-slider-thumb {
-    width: 18px; height: 18px; border-radius: 50%;
-    background: var(--series-2); border: 2px solid var(--surface);
-    box-shadow: 0 0 0 1px var(--series-2), 0 2px 6px rgba(16,185,129,0.25);
-    margin-top: -7px; cursor: grab;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: #1D4ED8; box-shadow: 0 2px 6px rgba(29,78,216,0.30);
+    margin-top: -6px; cursor: grab;
   }
   .crit-bucket input[type=range]::-moz-range-thumb {
-    width: 18px; height: 18px; border-radius: 50%;
-    background: var(--series-2); border: 2px solid var(--surface);
-    box-shadow: 0 0 0 1px var(--series-2), 0 2px 6px rgba(16,185,129,0.25);
+    width: 16px; height: 16px; border-radius: 50%;
+    background: #1D4ED8; box-shadow: 0 2px 6px rgba(29,78,216,0.30);
     cursor: grab;
   }
-  .crit-bucket input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.10); }
+  .crit-bucket input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.15); }
 
   /* Alert hierarchy for SOL risks — clear color coding */
   .risks {
@@ -792,11 +869,18 @@
 
   <div class="lift-levers" style="margin-bottom:16px;">
     <h2 class="sales-headline salesy">Maximize the worth of your <span class="accent">current docket.</span></h2>
-    <p class="sales-sub">Most portfolios carry an <strong>unrecognized GSV gap</strong> &mdash; created by dormant matters and thin files, not bad lawyering. We close it on two parallel fronts, without adding a single new claim:</p>
-    <ul style="margin:0 0 0 18px; padding:0; font-size:13.5px; line-height:1.6; color:var(--ink-2);">
-      <li><b style="color:var(--ink); font-style:italic;">Volume</b> &mdash; revive dormant matters that already pass every eligibility gate onto the active grid.</li>
-      <li><b style="color:var(--ink); font-style:italic;">Quality</b> &mdash; upgrade active files so each one scores (and pays) at its real tier.</li>
-    </ul>
+    <p class="sales-proof">Most portfolios carry an <strong>unrecognized GSV gap</strong> &mdash; created by dormant matters and thin files, not bad lawyering.</p>
+    <div class="sales-fronts-label">We close it on two parallel fronts. No new claims needed.</div>
+    <div class="lever-cards">
+      <div class="lever-card">
+        <div class="lc-num">01 &middot; Volume Lever</div>
+        <div class="lc-desc">Revive dormant matters that already pass every eligibility gate onto the active grid.</div>
+      </div>
+      <div class="lever-card">
+        <div class="lc-num">02 &middot; Quality Lever</div>
+        <div class="lc-desc">Upgrade active files so each one scores (and pays) at its real tier.</div>
+      </div>
+    </div>
     <!-- Dynamic docket stats: subtle, updates as sliders move -->
     <div class="sample-docket-stats" style="margin-top:14px; padding:10px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px;">
       <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:8px;">
