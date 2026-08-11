@@ -81,18 +81,13 @@
   .hdr-right { display: flex; gap: 10px; align-items: center; margin-left: auto; }
 
   /* ---------- hero split ---------- */
-  header.brand { position: relative; overflow: hidden; }
-  header.brand .wrap { position: relative; z-index: 1; }
-  header.brand::after {
-    content: '';
-    position: absolute; top: 0; right: 0; bottom: 0; width: 40%;
-    background: rgba(255,255,255,0.20);
+  header.brand {
+    position: relative;
+    overflow: hidden;
+    background: var(--navy);
     border-bottom: 1px solid rgba(200,151,62,0.25);
-    pointer-events: none;
   }
-  @media (max-width: 860px) {
-    header.brand::after { display: none; }
-  }
+  header.brand .wrap { position: relative; z-index: 1; }
   .hero-split {
     display: grid;
     grid-template-columns: 60% 40%;
@@ -104,12 +99,25 @@
   @media (max-width: 860px) {
     .hero-split { grid-template-columns: 1fr; gap: 20px; }
   }
-  .hero-left { padding-right: 36px; }
+  .hero-left { padding-right: 36px; min-width: 0; }
   .hero-left h1 { margin-top: 0; }
   .hero-right {
-    padding: 20px 28px 20px 32px;
-    display: flex; flex-direction: column; justify-content: center;
+    background-color: rgba(255,255,255,0.20);
+    /* Alt if 20% transparency meant 80% white: rgba(255,255,255,0.80) */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.18);
+    width: 100%; min-width: 0; box-sizing: border-box;
+    padding: 0;
+    display: flex; align-items: center; justify-content: center;
     position: relative; z-index: 1;
+    overflow: hidden;
+  }
+  .hero-right .right-blurb {
+    width: 100%; max-width: 100%; box-sizing: border-box;
+    padding: 2rem 2.5rem;
+    overflow-wrap: break-word; word-break: break-word;
   }
   .hero-right h2 {
     font-size: 18px; font-weight: 800; letter-spacing: -0.025em;
@@ -990,17 +998,19 @@
           <a class="ghost-hero" href="#bridgeCard">See it work — 60-second tour ↓</a>
         </div>
       </div>
-      <!-- Right: lift explainer -->
+      <!-- Right: lift explainer — translucent white over navy -->
       <div class="hero-right">
-        <h2>Maximize the worth of your <span class="accent">current docket.</span></h2>
-        <p>Most portfolios carry an unrecognized GSV gap — dormant matters sitting at $0 and active files that aren't scoring at their real tier. The gap is curable. No new claims needed.</p>
-        <ul class="lede-bullets">
-          <li><b>Quantity Lever</b> — Just clearing the gate → <u>move on-grid</u></li>
-          <li><b>Quality Lever</b> — Quality cures → Maximize your on-grid files</li>
-        </ul>
-        <div class="hero-links">
-          <a class="primary" href="#bridgeCard" onclick="document.getElementById('bridgeCard').scrollIntoView({behavior:'smooth'});return false;">See the dashboard →</a>
-          <a class="secondary" href="#our-expertise" onclick="document.getElementById('our-expertise').scrollIntoView({behavior:'smooth'});return false;">How we can help →</a>
+        <div class="right-blurb">
+          <h2>Maximize the worth of your <span class="accent">current docket.</span></h2>
+          <p>Most portfolios carry an unrecognized GSV gap — dormant matters sitting at $0 and active files that aren't scoring at their real tier. The gap is curable. No new claims needed.</p>
+          <ul class="lede-bullets">
+            <li><b>Quantity Lever</b> — Just clearing the gate → <u>move on-grid</u></li>
+            <li><b>Quality Lever</b> — Quality cures → Maximize your on-grid files</li>
+          </ul>
+          <div class="hero-links">
+            <a class="primary" href="#bridgeCard" onclick="document.getElementById('bridgeCard').scrollIntoView({behavior:'smooth'});return false;">See the dashboard →</a>
+            <a class="secondary" href="#our-expertise" onclick="document.getElementById('our-expertise').scrollIntoView({behavior:'smooth'});return false;">How we can help →</a>
+          </div>
         </div>
       </div>
     </div>
