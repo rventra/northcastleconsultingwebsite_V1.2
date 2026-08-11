@@ -81,46 +81,51 @@
   .hdr-right { display: flex; gap: 10px; align-items: center; margin-left: auto; }
 
   /* ---------- hero split ---------- */
+  header.brand { position: relative; overflow: hidden; }
+  header.brand .wrap { position: relative; z-index: 1; }
+  header.brand::after {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0; width: 40%;
+    background: rgba(255,255,255,0.20);
+    border-bottom: 1px solid rgba(200,151,62,0.25);
+    pointer-events: none;
+  }
+  @media (max-width: 860px) {
+    header.brand::after { display: none; }
+  }
   .hero-split {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 36px;
-    align-items: center;
+    grid-template-columns: 60% 40%;
+    gap: 0;
+    align-items: stretch;
     margin-top: 18px;
+    position: relative;
   }
   @media (max-width: 860px) {
     .hero-split { grid-template-columns: 1fr; gap: 20px; }
   }
+  .hero-left { padding-right: 36px; }
   .hero-left h1 { margin-top: 0; }
-  .hero-right-card {
-    background: rgba(255,255,255,0.25);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-bottom: 2px solid rgba(200,151,62,0.35);
-    border-radius: 14px;
-    padding: 28px 26px 24px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    position: relative;
-    min-height: 260px;
-    display: flex; flex-direction: column; justify-content: space-between;
+  .hero-right {
+    padding: 20px 28px 20px 32px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 1;
   }
-  .hero-right-card h2 {
+  .hero-right h2 {
     font-size: 18px; font-weight: 800; letter-spacing: -0.025em;
-    color: #0F172A; line-height: 1.2; margin-bottom: 8px;
+    color: #fff; line-height: 1.2; margin-bottom: 10px;
   }
-  .hero-right-card h2 .accent { color: #1D4ED8; }
-  .hero-right-card p {
-    font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 0;
+  .hero-right h2 .accent { color: var(--accent-2); }
+  .hero-right p {
+    font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,0.78); margin-bottom: 0;
   }
-  .hero-right-card p strong { color: #1D4ED8; font-weight: 700; }
-  .hero-right-card p strong.gold { color: #b07d2e; }
-  .hero-right-card .lede-bullets {
-    list-style: disc; padding-left: 18px; margin: 12px 0 0;
+  .hero-right .lede-bullets {
+    list-style: disc; padding-left: 18px; margin: 14px 0 0;
   }
-  .hero-right-card .lede-bullets li {
-    font-size: 12.5px; color: #334155; line-height: 1.5; margin-bottom: 3px;
+  .hero-right .lede-bullets li {
+    font-size: 12.5px; color: rgba(255,255,255,0.75); line-height: 1.5; margin-bottom: 4px;
   }
-  .hero-right-card .lede-bullets li b { color: #0F172A; }
+  .hero-right .lede-bullets li b { color: #fff; }
   .hero-links {
     display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap;
   }
@@ -130,14 +135,13 @@
     padding: 8px 14px; border-radius: 999px; transition: all 0.2s ease;
   }
   .hero-links a.primary {
-    background: #1D4ED8; color: #fff; border: 1px solid #1D4ED8;
-    box-shadow: 0 2px 8px rgba(29,78,216,0.2);
+    background: var(--accent-2); color: var(--navy); border: 1px solid var(--accent-2);
   }
-  .hero-links a.primary:hover { background: #1b3fb3; border-color: #1b3fb3; }
+  .hero-links a.primary:hover { background: #d4a55a; border-color: #d4a55a; }
   .hero-links a.secondary {
-    background: #fff; color: #1D4ED8; border: 1px solid rgba(29,78,216,0.25);
+    background: transparent; color: var(--accent-2); border: 1px solid rgba(200,151,62,0.5);
   }
-  .hero-links a.secondary:hover { border-color: #1D4ED8; background: #eef2ff; }
+  .hero-links a.secondary:hover { border-color: var(--accent-2); background: rgba(200,151,62,0.12); }
   .hero-wave {
     position: absolute; bottom: -1px; left: 0; right: 0; height: 40px;
     overflow: hidden; pointer-events: none;
@@ -986,8 +990,8 @@
           <a class="ghost-hero" href="#bridgeCard">See it work — 60-second tour ↓</a>
         </div>
       </div>
-      <!-- Right: lift explainer card -->
-      <div class="hero-right-card">
+      <!-- Right: lift explainer -->
+      <div class="hero-right">
         <h2>Maximize the worth of your <span class="accent">current docket.</span></h2>
         <p>Most portfolios carry an unrecognized GSV gap — dormant matters sitting at $0 and active files that aren't scoring at their real tier. The gap is curable. No new claims needed.</p>
         <ul class="lede-bullets">
