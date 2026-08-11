@@ -387,14 +387,14 @@
   .exp-hz-row .crit-bucket, .pd-hz-row .crit-bucket { flex:1; min-width:0; }
   .exp-hz-row .crit-bucket .bmeta, .pd-hz-row .crit-bucket .bmeta { font-size:9.5px; }
   /* Certified Applicator + Latency rendered side-by-side; Exposure Vector + PD Severity stack */
-  .cert-lat-row { display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:6px; }
+  .cert-lat-row { display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:6px; align-items:start; }
   .cert-lat-row > .crit-box { margin-bottom:0; }
   @media (max-width: 720px) { .cert-lat-row { grid-template-columns: 1fr; } }
   /* Tighten the levers card right-column a bit so 3-up slider rows fit */
   .cols.lever-cols > .card:last-child { padding: 16px 14px; }
   /* Secondary crit strip — lives inside the levers card, stacked vertically (cert on top, lat below) */
   .crit-strip-secondary { display:grid; grid-template-columns: 1fr; gap:10px; margin-top:8px; }
-  .crit-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 12px 10px; position:relative; overflow:hidden; }
+  .crit-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 14px 8px; position:relative; overflow:hidden; }
   .crit-box.placeholder { opacity:0.55; border-style:dashed; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:120px; text-align:center; }
   .crit-box .cb-head { font-size:11px; font-weight:650; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-2); margin-bottom:2px; display:flex; align-items:center; gap:6px; }
   .cb-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--grid); }
