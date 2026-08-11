@@ -940,17 +940,19 @@
       <li><b>Volume Lever.</b> Revive dormant matters that already pass every eligibility gate onto the active grid.</li>
       <li><b>Quality Lever.</b> Upgrade active files so each one scores (and pays) at its real tier.</li>
     </ol>
-    <!-- Dynamic docket stats: subtle, updates as sliders move -->
-    <div class="sample-docket-stats" style="margin-top:14px; padding:10px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px;">
-      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:8px;">
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted);">Illustrative synthetic 1,000-case docket &mdash; no client data</div>
-        <button id="btnResetDocket" type="button" class="btn-reset" style="padding:4px 12px; font-size:11px;"><span class="r-arrow">↻</span> Reset to original 1,000</button>
-      </div>
-      <div style="display:flex; flex-wrap:wrap; gap:10px 28px; align-items:baseline;">
-        <div style="display:flex; align-items:baseline; gap:6px;"><b id="dynOnGridN" style="font-size:18px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">526</b><span style="font-size:11px; color:var(--ink-2);">On-grid cases</span></div>
-        <div style="display:flex; align-items:baseline; gap:6px;"><b id="dynBelowGridN" style="font-size:18px; font-weight:700; color:#B45309; font-variant-numeric:tabular-nums;">132</b><span style="font-size:11px; color:var(--ink-2);">Do not meet gate</span></div>
-        <div style="display:flex; align-items:baseline; gap:6px;"><b id="dynDormantN" style="font-size:18px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">342</b><span style="font-size:11px; color:var(--ink-2);">Dormant</span></div>
-        <div style="display:flex; align-items:baseline; gap:6px;"><b id="dynMovedN" style="font-size:18px; font-weight:700; color:#059669; font-variant-numeric:tabular-nums;">0</b><span style="font-size:11px; color:var(--ink-2);">Moved to on-grid</span></div>
+    <!-- Dynamic docket stats -->
+    <div class="sample-docket-stats" style="margin-top:14px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding:8px 0; border-top:1px solid var(--grid); border-bottom:1px solid var(--grid);">
+      <div style="display:flex; align-items:baseline; gap:5px;"><b id="dynOnGridN" style="font-size:20px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">526</b><span style="font-size:11px; color:var(--muted);">on-grid</span></div>
+      <span style="color:var(--grid);">·</span>
+      <div style="display:flex; align-items:baseline; gap:5px;"><b id="dynDormantN" style="font-size:20px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;">342</b><span style="font-size:11px; color:var(--muted);">dormant</span></div>
+      <span style="color:var(--grid);">·</span>
+      <div style="display:flex; align-items:baseline; gap:5px;"><b id="dynBelowGridN" style="font-size:20px; font-weight:700; color:#B45309; font-variant-numeric:tabular-nums;">132</b><span style="font-size:11px; color:var(--muted);">below gate</span></div>
+      <span style="color:var(--grid);">·</span>
+      <div style="display:flex; align-items:baseline; gap:5px;"><b id="dynMovedN" style="font-size:20px; font-weight:700; color:#059669; font-variant-numeric:tabular-nums;">0</b><span style="font-size:11px; color:var(--muted);">revived</span></div>
+      <span style="flex:1;"></span>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:10px; color:var(--muted); letter-spacing:0.04em;">Illustrative synthetic docket</span>
+        <button id="btnResetDocket" type="button" class="btn-reset" style="padding:3px 10px; font-size:10.5px;"><span class="r-arrow">↻</span> Reset</button>
       </div>
     </div>
   </div>
@@ -1000,7 +1002,6 @@
       <div class="exp-stat"><div class="num" style="color:var(--accent);">40–60%</div><div class="lbl">Doc completeness lift</div></div>
       <div class="exp-stat"><div class="num" style="color:var(--good);">90%</div><div class="lbl">Forecast accuracy</div></div>
       <div class="exp-stat"><div class="num" style="color:var(--accent-2);">75%</div><div class="lbl">Faster cycle times</div></div>
-      <div class="exp-stat"><div class="num" style="color:#fff;">100%</div><div class="lbl">U.S.-based team</div></div>
     </div>
     <!-- Heading -->
     <div style="text-align:center; max-width:720px; margin:0 auto 40px; position:relative; z-index:1;">
@@ -1100,7 +1101,6 @@
     <!-- CTA -->
     <div style="text-align:center; margin-top:36px; position:relative; z-index:1;">
       <a class="btn-primary" href="https://www.northcastleconsulting.com/contact-us" target="_blank" rel="noopener" style="font-size:15px; padding:12px 32px; box-shadow:0 4px 16px rgba(194,65,12,0.3);">Evaluate Your Docket →</a>
-      <div style="margin-top:10px; font-size:11.5px; opacity:0.45;">NDA first · All data housed in AWS · No commitment</div>
     </div>
   </div>
 
