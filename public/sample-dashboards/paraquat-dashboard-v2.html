@@ -362,7 +362,7 @@
   .cols.lever-cols > .card:last-child { padding: 16px 14px; }
   /* Secondary crit strip — lives inside the levers card, stacked vertically (cert on top, lat below) */
   .crit-strip-secondary { display:grid; grid-template-columns: 1fr; gap:10px; margin-top:8px; }
-  .crit-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 14px 8px; position:relative; overflow:hidden; }
+  .crit-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 14px 8px; position:relative; overflow:visible; }
   .crit-box.placeholder { opacity:0.55; border-style:dashed; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:120px; text-align:center; }
   .crit-box .cb-head { font-size:11px; font-weight:650; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-2); margin-bottom:2px; display:flex; align-items:center; gap:6px; }
   .cb-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--grid); }
@@ -605,18 +605,21 @@
   }
 
   /* Slider hit area — make sliders look more tactile (indigo accent to match Certified Applicator) */
-  .crit-bucket input[type=range] { height: 22px; }
-  .crit-bucket input[type=range]::-webkit-slider-thumb {
+  .crit-bucket input[type=range], .cert-bucket input[type=range] { height: 22px; }
+  .crit-bucket input[type=range]::-webkit-slider-thumb,
+  .cert-bucket input[type=range]::-webkit-slider-thumb {
     width: 16px; height: 16px; border-radius: 50%;
     background: #1D4ED8; box-shadow: 0 2px 6px rgba(29,78,216,0.30);
     margin-top: -6px; cursor: grab;
   }
-  .crit-bucket input[type=range]::-moz-range-thumb {
+  .crit-bucket input[type=range]::-moz-range-thumb,
+  .cert-bucket input[type=range]::-moz-range-thumb {
     width: 16px; height: 16px; border-radius: 50%;
     background: #1D4ED8; box-shadow: 0 2px 6px rgba(29,78,216,0.30);
     cursor: grab;
   }
-  .crit-bucket input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.15); }
+  .crit-bucket input[type=range]:hover::-webkit-slider-thumb,
+  .cert-bucket input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.15); }
 
   /* Alert hierarchy for SOL risks — clear color coding */
   .risks {
@@ -1332,11 +1335,14 @@
   // user's drag isn't interrupted by DOM replacement.
   var _secBuilt = { expMiss: -1, pdMiss: -1, certMiss: -1, latMiss: -1 };
 
-  function renderSecondaryCritBox() {
+  function renderSecondaryCritBox(preCertMiss, preLatMiss) {
     var sec = $('secondaryCritBox');
     if (!sec) return;
-    var certMiss = certMissing();
-    var latMiss = latMissing();
+    // Use pre-allocation snapshots when available — these are stable across slider drags.
+    // certMissing()/latMissing() are DD-based and shrink as allocation fills nulls, which
+    // would trigger a full HTML rebuild on every drag tick (the smoothness bug).
+    var certMiss = (preCertMiss != null) ? preCertMiss : certMissing();
+    var latMiss = (preLatMiss != null) ? preLatMiss : latMissing();
     var expMiss = expMissing();
     var pdMiss = pdMissing();
 
@@ -1435,7 +1441,9 @@
     if (inpCert && !inpCert._list) {
       inpCert._list = true;
       inpCert.addEventListener('input', function(){
-        var miss = certMissing();
+        // Use the slider's max (= pre-allocation cert pool) instead of certMissing(),
+        // which shrinks after applyDDCertAlloc() fills nulls and would over-cap the drag.
+        var miss = +this.max;
         var val = Math.min(Math.max(0, +this.value), miss);
         window._certYesAlloc = val; this.value = val;
         var lab = $('cs-cert-yes-pct'); if (lab) lab.textContent = val;
@@ -1452,7 +1460,9 @@
       if (!inp || inp._list) return;
       inp._list = true;
       inp.addEventListener('input', function(){
-        var miss = latMissing();
+        // Use the slider's max (= pre-allocation latency pool) instead of latMissing(),
+        // which shrinks after applyDDLatAlloc() fills nulls and would over-cap the drag.
+        var miss = +this.max;
         var other = 0; ['15+','5-15'].forEach(function(kk){ if(kk!==k) other += (window._latAlloc[kk]||0); });
         var cap = Math.max(0, miss-other);
         var val = Math.min(Math.max(0, +this.value), cap);
@@ -1797,12 +1807,18 @@
     var onGrid = 526 + revivedGate;
     var missing = EXP_MISSING_BASE + revivedGate;
     if(!DD) buildDD();
+    var _preAllocCertMiss, _preAllocLatMiss;
     (function(){
       var revivedWant = Math.round(gateTotal * gate.real / 100);
       var snap = window._ddGateSnapshot;
       var have = 0;
       if(snap){ var sm={}; for(var i=0;i<snap.length;i++) sm[snap[i].id]=snap[i]; for(var i=0;i<DD.length;i++) if(DD[i].status==='on-grid' && sm[DD[i].id] && sm[DD[i].id].status==='dormant') have++; }
       if(!snap || have!==revivedWant) applyDDGate();
+      // Snapshot DD-based missing counts BEFORE allocation mutates them.
+      // Allocation fills nulls → certMissing()/latMissing() would shrink →
+      // triggers a full HTML rebuild mid-drag, killing slider smoothness.
+      _preAllocCertMiss = Math.max(0, DD.filter(function(r){ return r.status==='on-grid' && r.cert==null; }).length);
+      _preAllocLatMiss = Math.max(0, DD.filter(function(r){ return r.status==='on-grid' && r.lat==null; }).length);
       applyDDExpAlloc(); applyDDPdAlloc(); applyDDCertAlloc(); applyDDLatAlloc();
     })();
     var expQuality = computeExpQuality(missing, EXP_ALLOC);
@@ -1899,8 +1915,11 @@
       EXP_VECTORS.forEach(function(v){
         var el = $('er-' + v.key); if (el) el.max = missing;
       });
+      // keep cert + latency slider max values in sync with gate-derived missing pools
+      var certInp = $('cs-cert-yes'); if (certInp && _preAllocCertMiss!=null) certInp.max = _preAllocCertMiss;
+      ['15+','5-15'].forEach(function(k){ var el = $('cs-lat-'+k); if (el && _preAllocLatMiss!=null) el.max = _preAllocLatMiss; });
       // keep 4-box strip in sync (re-render strip each render so caps update)
-      renderSecondaryCritBox();
+      renderSecondaryCritBox(_preAllocCertMiss, _preAllocLatMiss);
       renderBridgeTierHist();
       // also update legacy expHzWrap if present (hide its inner but keep compat)
       (function(){ var w=$('expHzWrap'); if(w) w.style.display='none'; })();
