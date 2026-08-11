@@ -1394,7 +1394,8 @@
 
       // Certified Applicator
       html += '<div class="crit-box"><div class="cb-head">Certified applicator</div><div class="cb-sub"><b>'+certKnown+'</b> YES (30) + <b>'+certNoKnown+'</b> NO (0) known + <b>'+certMiss+'</b> missing</div>';
-      html += '<div class="cert-bucket"><div class="bname">YES <span style="color:var(--muted); font-weight:400">(30 pts)</span></div><div class="bmeta"><b>'+certKnown+'</b> known + <b id="cs-cert-assigned">0</b> = <b id="cs-cert-total">'+certKnown+'</b> YES</div><input type="range" min="0" max="'+certMiss+'" step="1" value="'+(window._certYesAlloc||0)+'" id="cs-cert-yes"><div class="bpct"><span id="cs-cert-yes-pct">'+(window._certYesAlloc||0)+'</span> from missing &middot; <b id="cs-cert-no-pct" style="color:var(--ink)">'+Math.max(0, certMiss-(window._certYesAlloc||0))+'</b> remain NO</div></div>';
+      var _certCur = window._certYesAlloc||0;
+      html += '<div class="cert-bucket"><div class="bname">YES <span style="color:var(--muted); font-weight:400">(30 pts)</span></div><div class="bmeta"><b>'+certKnown+'</b> known + <b id="cs-cert-assigned">'+_certCur+'</b> = <b id="cs-cert-total">'+(certKnown+_certCur)+'</b> YES</div><input type="range" min="0" max="'+certMiss+'" step="1" value="'+_certCur+'" id="cs-cert-yes"><div class="bpct"><span id="cs-cert-yes-pct">'+_certCur+'</span> from missing &middot; <b id="cs-cert-no-pct" style="color:var(--ink)">'+Math.max(0, certMiss-_certCur)+'</b> remain NO</div></div>';
       html += '</div>';
 
       // Latency
