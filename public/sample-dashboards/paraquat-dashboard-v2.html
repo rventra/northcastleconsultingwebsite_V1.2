@@ -784,6 +784,10 @@
       <div id="bridgeTierHist" style="margin-top:14px; padding-top:12px; border-top:1px solid var(--grid);"></div>
       <!-- score distribution in buckets of 10 — same DD rows, derived from r.score after recompute -->
       <div id="bridgeScoreHist" style="margin-top:14px; padding-top:12px; border-top:1px solid var(--grid);"></div>
+      <!-- footnote defining "dormant" — lives inside the bridge card (45% width span) -->
+      <div class="bridge-footnote" style="font-size:11.5px; color:var(--ink-2); line-height:1.55; margin: 14px 0 0; padding:9px 12px; background:var(--page); border:1px solid var(--grid); border-radius:7px;">
+        <b style="color:var(--ink);">What "dormant" means:</b> a matter is dormant when the firm has lost contact with the claimant, the file was closed, or no paperwork is on record. Each sits at $0 today because at least one eligibility gate isn't met. Moving the slider revives matters that <em>would</em> clear all 5 gates once the missing documentation is supplied &mdash; each revived matter re-enters the active grid at its paid tier.
+      </div>
     </div>
     <div class="levers-column">
     <div class="card">
@@ -803,9 +807,6 @@
     </div>
     </div>
   </div>
-  </div>
-  <div class="bridge-footnote" style="font-size:11.5px; color:var(--ink-2); line-height:1.55; margin: 8px 2px 4px; padding:8px 12px; background:var(--page); border:1px solid var(--grid); border-radius:7px;">
-    <b style="color:var(--ink);">What "dormant" means:</b> a matter is dormant when the firm has lost contact with the claimant, the file was closed, or no paperwork is on record. Each sits at $0 today because at least one eligibility gate isn't met. Moving the slider revives matters that <em>would</em> clear all 5 gates once the missing documentation is supplied &mdash; each revived matter re-enters the active grid at its paid tier.
   </div>
 
 
@@ -1627,33 +1628,53 @@
     renderBridgeScoreHist();
   }
 
-  // Score distribution in buckets of 10. Feeds from the SAME DD rows + r.score that
+  // Score distribution by decade. Bucket 0 = currently dormant (GATED OFF — visually
+  // distinct slate hatch, separate from the score buckets). Buckets 1–10 = scores 1–10,
+  // 11–20, …, 91–100 (decade ranges). Feeds from the SAME DD rows + r.score that
   // renderBridgeTierHist, liveGsVGateOnly, and liveTierCounts all use. Sum across buckets
-  // always equals 1,000. Bucket boundaries are 0–9 / 10–19 / … / 90–99 (decade). Each bar's
-  // height = count ÷ max-bucket-count, so the tallest bucket fills the lane. Min 2% so a
-  // 0-count bucket still shows as a sliver. Bucket color follows the tier the score range
-  // maps to: III=light blue (0–29), II=mid blue (30–69), I=amber (70+).
+  // always equals 1,000. Each bar's height = count ÷ max-bucket-count; min 2% so a 0-count
+  // bucket still shows as a sliver. Bucket color follows the tier the score range maps to:
+  // III=light blue, II=mid blue, I=amber. Below-grid cases (status='below' with r.score=0)
+  // land in bucket 1 (scores 1–10) — they fail the gate but their computed score is 0.
   function renderBridgeScoreHist(){
     if(!DD) return;
-    var buckets = [0,0,0,0,0,0,0,0,0,0];
+    var buckets = [0,0,0,0,0,0,0,0,0,0,0]; // [dormant, 1-10, 11-20, ..., 91-100]
     for(var i=0;i<DD.length;i++){
       var r = DD[i];
+      if (r.status === 'dormant') { buckets[0]++; continue; }
       var s = (typeof r.score === 'number') ? r.score : 0;
-      var b = Math.min(9, Math.max(0, Math.floor(s / 10)));
+      var b;
+      if      (s >= 1  && s <= 10)  b = 1;
+      else if (s >= 11 && s <= 20)  b = 2;
+      else if (s >= 21 && s <= 30)  b = 3;
+      else if (s >= 31 && s <= 40)  b = 4;
+      else if (s >= 41 && s <= 50)  b = 5;
+      else if (s >= 51 && s <= 60)  b = 6;
+      else if (s >= 61 && s <= 70)  b = 7;
+      else if (s >= 71 && s <= 80)  b = 8;
+      else if (s >= 81 && s <= 90)  b = 9;
+      else if (s >= 91 && s <= 100) b = 10;
+      else                          b = 1; // s===0 → bucket 1 (1–10)
       buckets[b]++;
     }
     var total = 0;
-    for(var b=0;b<10;b++) total += buckets[b];
+    for(var b=0;b<11;b++) total += buckets[b];
     var maxC = Math.max.apply(null, buckets.concat([1]));
     function tierForBucket(b){
-      if(b >= 7) return 'I';   // 70–99 → Tier I (71+; bucket 70–79 spans the boundary)
-      if(b >= 3) return 'II';  // 30–69 → Tier II (36–70)
-      return 'III';            // 0–29 → Tier III (0–35)
+      if(b === 0) return 'Dormant';          // gated off
+      if(b >= 8) return 'I';                  // 71–100 → Tier I
+      if(b >= 4) return 'II';                 // 31–70 → Tier II (36–70; off-by-one at 31–35)
+      return 'III';                           // 1–10 (and the s===0 cases) → Tier III
     }
     function colorForBucket(b){
-      if(b >= 7) return 'linear-gradient(180deg, #B45309 0%, #D97706 60%, #F59E0B 100%)';
-      if(b >= 3) return 'linear-gradient(180deg, #1E40AF 0%, #2563EB 60%, #3B82F6 100%)';
+      if(b === 0) return 'repeating-linear-gradient(135deg, #475569 0 8px, #64748B 8px 16px)'; // gated: slate hatch
+      if(b >= 8) return 'linear-gradient(180deg, #B45309 0%, #D97706 60%, #F59E0B 100%)';
+      if(b >= 4) return 'linear-gradient(180deg, #1E40AF 0%, #2563EB 60%, #3B82F6 100%)';
       return 'linear-gradient(180deg, #93C5FD 0%, #60A5FA 60%, #3B82F6 100%)';
+    }
+    function labelForBucket(b){
+      if(b === 0) return 'Dormant';
+      return (b*10-9)+'–'+(b*10);  // 1=1-10, 2=11-20, 3=21-30, ..., 10=91-100
     }
     var h = '';
     h += '<div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 12px; margin-bottom:6px;">';
@@ -1662,24 +1683,26 @@
     h += '</div>';
     // bars lane — vertical bars in a flex row, count above, bar, range below
     h += '<div style="display:flex; align-items:flex-end; gap:5px; height:88px; padding:0 2px 0; border-bottom:1px solid var(--grid);">';
-    for(var b=0; b<10; b++){
+    for(var b=0; b<11; b++){
       var cnt = buckets[b];
       var heightPct = maxC===0 ? 2 : Math.max(2, Math.round(100*cnt/maxC));
       var clr = colorForBucket(b);
       var tier = tierForBucket(b);
+      var lbl = labelForBucket(b);
       h += '<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; min-width:0; height:100%;">';
       h += '<div style="font-size:10px; color:var(--ink); font-weight:700; font-variant-numeric:tabular-nums; line-height:1; margin-bottom:3px; height:12px; display:flex; align-items:flex-end;">'+cnt.toLocaleString('en-US')+'</div>';
-      h += '<div title="Score '+ (b*10) +'–'+(b*10+9)+' · '+cnt+' cases · Tier '+tier+'" style="width:100%; max-width:34px; height:'+heightPct+'%; background:'+clr+'; border-radius:3px 3px 0 0; box-shadow: inset 0 -1px 2px rgba(0,0,0,0.08);"></div>';
+      h += '<div title="'+lbl+' · '+cnt+' cases · '+tier+'" style="width:100%; max-width:34px; height:'+heightPct+'%; background:'+clr+'; border-radius:3px 3px 0 0; box-shadow: inset 0 -1px 2px rgba(0,0,0,0.08);"></div>';
       h += '</div>';
     }
     h += '</div>';
     // bucket range labels
     h += '<div style="display:flex; gap:5px; padding:6px 2px 0;">';
-    for(var b=0; b<10; b++){
+    for(var b=0; b<11; b++){
       var tier = tierForBucket(b);
+      var lbl = labelForBucket(b);
       h += '<div style="flex:1; text-align:center; font-size:9.5px; color:var(--muted); font-weight:600; min-width:0; line-height:1.2;">';
-      h += (b*10)+'–'+(b*10+9);
-      h += '<div style="font-size:8.5px; color:var(--ink-2); font-weight:500; margin-top:1px;">Tier '+tier+'</div>';
+      h += lbl;
+      h += '<div style="font-size:8.5px; color:var(--ink-2); font-weight:500; margin-top:1px;">'+tier+'</div>';
       h += '</div>';
     }
     h += '</div>';
