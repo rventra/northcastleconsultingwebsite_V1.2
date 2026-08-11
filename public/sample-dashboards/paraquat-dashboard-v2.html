@@ -301,6 +301,10 @@
   .exp-hz-row, .pd-hz-row { display:flex; flex-direction:row; gap:10px; flex-wrap:wrap; }
   .exp-hz-row .crit-bucket, .pd-hz-row .crit-bucket { flex:1; min-width:0; }
   .exp-hz-row .crit-bucket .bmeta, .pd-hz-row .crit-bucket .bmeta { font-size:9.5px; }
+  /* Latency + Exposure Vector rendered side-by-side */
+  .lat-exp-row { display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:6px; }
+  .lat-exp-row > .crit-box { margin-bottom:0; }
+  @media (max-width: 720px) { .lat-exp-row { grid-template-columns: 1fr; } }
   /* Tighten the levers card right-column a bit so 3-up slider rows fit */
   .cols.lever-cols > .card:last-child { padding: 16px 14px; }
   /* Secondary crit strip — lives inside the levers card, stacked vertically (cert on top, lat below) */
@@ -1279,6 +1283,9 @@
       html += '<div class="crit-bucket"><div class="bname">YES <span style="color:var(--muted); font-weight:400">(30 pts)</span></div><div class="bmeta">Allocate YES to missing</div><input type="range" min="0" max="'+certMiss+'" step="1" value="'+(window._certYesAlloc||0)+'" id="cs-cert-yes"><div class="bpct"><span id="cs-cert-yes-pct">'+(window._certYesAlloc||0)+'</span> from missing &middot; <b id="cs-cert-no-pct" style="color:var(--ink)">'+Math.max(0, certMiss-(window._certYesAlloc||0))+'</b> remain NO</div></div>';
       html += '</div>';
 
+      // Latency + Exposure Vector — side by side
+      html += '<div class="lat-exp-row">';
+
       // Latency
       html += '<div class="crit-box"><div class="cb-head">Latency <span style="font-weight:400; text-transform:none; letter-spacing:0">— yrs first exposure → Dx (gate ≥5 yr)</span></div>';
       html += '<div class="cb-sub"><b>'+latMiss+'</b> missing (fails gate)</div>';
@@ -1299,6 +1306,8 @@
         html += '<div class="crit-bucket"><div class="bname">'+esc(v.label).replace('Direct occupational handling — Mix / Load / Apply','Direct handling').replace('Drift / Bystander / Re-entry exposure','Drift / bystander').replace('Para-occupational / Take-home / Residue','Para-occ.')+' <span style="color:var(--muted); font-weight:400">('+v.pts+' pts)</span></div><div class="bmeta"><b>'+known+'</b> known + <b id="cs-erCured-'+v.key+'">'+cured+'</b> = <b id="cs-erTotal-'+v.key+'">'+(known+cured)+'</b></div><input type="range" min="0" max="'+expMiss+'" step="1" value="'+cured+'" id="cs-er-'+v.key+'"><div class="bpct"><span id="cs-erpct-'+v.key+'">'+cured+'</span> from missing</div></div>';
       });
       html += '</div></div>';
+
+      html += '</div>'; // close .lat-exp-row
 
       // PD severity
       html += '<div class="crit-box"><div class="cb-head">Parkinson\u0027s severity</div><div class="cb-sub"><b>325</b> known + <b>'+pdMiss+'</b> missing &nbsp;<span style="color:var(--muted)">(201 base + '+(pdMiss-201)+' moved)</span></div>';
