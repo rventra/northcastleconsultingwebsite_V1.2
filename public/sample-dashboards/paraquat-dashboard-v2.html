@@ -83,8 +83,8 @@
   /* ---------- hero split ---------- */
   .hero-split {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 32px;
+    grid-template-columns: 1fr 340px;
+    gap: 40px;
     align-items: center;
     margin-top: 18px;
   }
@@ -93,12 +93,16 @@
   }
   .hero-left h1 { margin-top: 0; }
   .hero-right-card {
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.08);
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(0,0,0,0.06);
     border-radius: 14px;
-    padding: 28px 26px;
+    padding: 28px 26px 24px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     position: relative;
+    min-height: 260px;
+    display: flex; flex-direction: column; justify-content: space-between;
   }
   .hero-right-card h2 {
     font-size: 18px; font-weight: 800; letter-spacing: -0.025em;
@@ -111,7 +115,7 @@
   .hero-right-card p strong { color: #1D4ED8; font-weight: 700; }
   .hero-right-card p strong.gold { color: #b07d2e; }
   .hero-right-card .lede-labels {
-    display: flex; gap: 10px; margin: 14px 0 0;
+    display: flex; flex-direction: column; gap: 8px; margin: 14px 0 0;
   }
   .hero-right-card .lede-label-pill {
     display: inline-flex; align-items: center; gap: 6px;
@@ -990,8 +994,8 @@
         <h2>Maximize the worth of your <span class="accent">current docket.</span></h2>
         <p>Most portfolios carry an unrecognized GSV gap — dormant matters sitting at $0 and active files that aren't scoring at their real tier. The gap is curable. No new claims needed.</p>
         <div class="lede-labels">
-          <span class="lede-label-pill pill-blue">▸ Just clearing the gate = Reviving dormant cases</span>
-          <span class="lede-label-pill pill-gold">▸ Quality cures = Maximize your on-grid files</span>
+          <span class="lede-label-pill pill-blue">Quantity Lever — Just clearing the gate = Reviving dormant cases</span>
+          <span class="lede-label-pill pill-gold">Quality Lever — Quality cures = Maximize your on-grid files</span>
         </div>
         <div class="hero-links">
           <a class="primary" href="#bridgeCard" onclick="document.getElementById('bridgeCard').scrollIntoView({behavior:'smooth'});return false;">See the dashboard →</a>
