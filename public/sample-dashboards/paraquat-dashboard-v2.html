@@ -129,84 +129,52 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
   .sales-sub strong { color: var(--ink); font-weight: 700; }
-  /* Sales proof + two-card lever explainer */
+  /* Sales proof + simple lever list */
   .sales-proof {
     font-size: 15px;
     color: var(--ink-2);
     line-height: 1.55;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     max-width: 760px;
-    font-family: 'Inter', system-ui, sans-serif;
-    letter-spacing: -0.005em;
   }
   .sales-proof strong {
     color: var(--ink);
     font-weight: 700;
-    background: linear-gradient(180deg, transparent 78%, rgba(29,78,216,0.22) 78%, rgba(29,78,216,0.22) 92%, transparent 92%);
-    padding: 0 2px 1px;
   }
-  .sales-fronts-label {
-    font-size: 10.5px;
-    font-weight: 800;
-    color: var(--ink-2);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    font-family: 'Inter', system-ui, sans-serif;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .sales-fronts-label::before {
-    content: '';
-    display: inline-block;
-    width: 22px;
-    height: 2px;
-    background: linear-gradient(90deg, #2563EB 0%, transparent 100%);
-  }
-  .lever-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 14px;
+  .lever-list {
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
     max-width: 760px;
   }
-  .lever-card {
-    position: relative;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px 14px 22px;
-    overflow: hidden;
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
-  }
-  .lever-card:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(29,78,216,0.08);
-  }
-  .lever-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(180deg, #2563EB 0%, #1D4ED8 100%);
-  }
-  .lc-num {
-    font-size: 10.5px;
-    font-weight: 800;
-    color: #1D4ED8;
-    letter-spacing: 0.14em;
-    margin-bottom: 6px;
-    font-family: 'Inter', sans-serif;
-  }
-  .lc-desc {
-    font-size: 12.5px;
-    color: var(--ink-2);
+  .lever-list li {
+    font-size: 14px;
     line-height: 1.55;
+    color: var(--ink-2);
+    padding: 6px 0 6px 26px;
+    position: relative;
   }
-  @media (max-width: 720px) {
-    .lever-cards { grid-template-columns: 1fr; }
+  .lever-list li::before {
+    content: counter(lever);
+    counter-increment: lever;
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--wash);
+    color: #1D4ED8;
+    font-size: 11px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .lever-list { counter-reset: lever; }
+  .lever-list li b {
+    color: var(--ink);
+    font-weight: 600;
   }
   .lever-box-header { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--grid); }
   .lever-box-title { font-size:14px; font-weight:600; color:var(--ink); letter-spacing:-0.005em; }
@@ -880,17 +848,11 @@
   <div class="lift-levers" style="margin-bottom:16px;">
     <h2 class="sales-headline salesy">Maximize the worth of your <span class="accent">current docket.</span></h2>
     <p class="sales-proof">Most portfolios carry an <strong>unrecognized GSV gap</strong> &mdash; created by dormant matters and thin files, not bad lawyering.</p>
-    <div class="sales-fronts-label">We close it on two parallel fronts. No new claims needed.</div>
-    <div class="lever-cards">
-      <div class="lever-card">
-        <div class="lc-num">01 &middot; Volume Lever</div>
-        <div class="lc-desc">Revive dormant matters that already pass every eligibility gate onto the active grid.</div>
-      </div>
-      <div class="lever-card">
-        <div class="lc-num">02 &middot; Quality Lever</div>
-        <div class="lc-desc">Upgrade active files so each one scores (and pays) at its real tier.</div>
-      </div>
-    </div>
+    <p class="sales-proof" style="margin-bottom:8px;">We close it on two parallel fronts. No new claims needed.</p>
+    <ol class="lever-list">
+      <li><b>Volume Lever.</b> Revive dormant matters that already pass every eligibility gate onto the active grid.</li>
+      <li><b>Quality Lever.</b> Upgrade active files so each one scores (and pays) at its real tier.</li>
+    </ol>
     <!-- Dynamic docket stats: subtle, updates as sliders move -->
     <div class="sample-docket-stats" style="margin-top:14px; padding:10px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px;">
       <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:8px;">
