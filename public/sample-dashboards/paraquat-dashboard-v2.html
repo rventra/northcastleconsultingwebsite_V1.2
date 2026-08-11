@@ -904,33 +904,6 @@
   </div>
 
 
-  <div class="section-title">Your assumptions, live — edit the grid and every number recomputes</div>
-  <div class="cols">
-    <div class="card">
-      <h3>Market tiers on the open inventory</h3>
-      <div class="sub">Point values are editable (in $000s) within the published negotiation ranges — every number on this page recomputes.</div>
-      <table>
-        <thead><tr><th>Tier</th><th>Published range</th><th class="num">$/case ($000s)</th><th class="num">Open matters</th><th class="num">GSV</th></tr></thead>
-        <tbody>
-          <tr><td><span class="tiersw" style="background:var(--tier-1)"></span>Tier I</td><td>$400K – $1M+</td><td class="num"><input class="tv" id="tvI" type="number" min="0" step="25" value="700"></td><td class="num" id="openI">6</td><td class="num" id="gsvI">$4.2M</td></tr>
-          <tr><td><span class="tiersw" style="background:var(--tier-2)"></span>Tier II</td><td>$150K – $300K</td><td class="num"><input class="tv" id="tvII" type="number" min="0" step="25" value="225"></td><td class="num" id="openII">194</td><td class="num" id="gsvII">$43.7M</td></tr>
-          <tr><td><span class="tiersw" style="background:var(--tier-3)"></span>Tier III</td><td>$20K – $150K</td><td class="num"><input class="tv" id="tvIII" type="number" min="0" step="25" value="75"></td><td class="num" id="openIII">326</td><td class="num" id="gsvIII">$24.5M</td></tr>
-          <tr><td>Below grid</td><td>—</td><td class="num">$0</td><td class="num">132</td><td class="num">$0</td></tr>
-          <tr><td style="color:var(--muted)">Dormant (off-grid)</td><td>—</td><td class="num">$0</td><td class="num" id="dormCell">342</td><td class="num">$0</td></tr>
-          <tr class="total"><td>Total</td><td></td><td></td><td class="num">1,000</td><td class="num" id="gsvTot">$75.6M</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="card">
-      <h3>Top single-file opportunities</h3>
-      <div class="sub">The ten open matters with the largest one-move lift.</div>
-      <table id="topTbl">
-        <thead><tr><th>Matter</th><th>Firm</th><th>Action</th><th>Move</th><th class="num">Lift</th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-
   <div class="section-title">Six matters go to $0 within 90 days — the diagnostic sees it coming</div>
   <div class="card">
     <div class="risks">
@@ -1215,11 +1188,16 @@
 
   // ---------- helpers ----------
   var $ = function (id) { return document.getElementById(id); };
+  // Tier payout values are hardcoded (the editable editor was removed with the assumptions table).
+  // To tune value-per-case, edit these constants directly. Values are in $000s.
+  var TIER_VALUE_I   = 700;
+  var TIER_VALUE_II  = 225;
+  var TIER_VALUE_III = 75;
   function tierValues() {
     return {
-      I:   Math.max(0, +($('tvI').value)   || 0),
-      II:  Math.max(0, +($('tvII').value)  || 0),
-      III: Math.max(0, +($('tvIII').value) || 0),
+      I:   TIER_VALUE_I,
+      II:  TIER_VALUE_II,
+      III: TIER_VALUE_III,
       none: 0
     };
   }
@@ -1566,16 +1544,9 @@
     return;
   }
 
-  // ---------- top table ----------
+  // ---------- top table (removed with the assumptions table — left as no-op) ----------
   function renderTop(V) {
-    var tb = '';
-    TOP.forEach(function (r) {
-      var lift = Math.max(0, (V[r.to] || 0) - (V[r.from] || 0));
-      var move = (r.from === 'none' ? 'Below grid' : 'Tier ' + r.from) + ' → Tier ' + r.to;
-      var shortM = r.m.indexOf('3:21-md-03004-') === 0 ? 'MDL …' + r.m.slice(-5) : r.m;
-      tb += '<tr><td class="matter">' + esc(shortM) + '</td><td>' + esc(r.f) + '</td><td>' + esc(r.a) + '</td><td class="move">' + move + '</td><td class="num">' + fmtK(lift) + '</td></tr>';
-    });
-    $('topTbl').querySelector('tbody').innerHTML = tb;
+    return;
   }
 
   // ---------- master render \u2014 TWO DRIVERS: volume (gate) + quality (exposure vector) ----------
@@ -1821,14 +1792,8 @@
     if ($('hlGap')) $('hlGap').textContent = fmtM(heroLift);
     if ($('stGap')) $('stGap').textContent = fmtM(heroLift);
     if ($('sbGap')) $('sbGap').textContent = fmtM(heroLift);
-    if ($('openI')) $('openI').textContent = liveI.toLocaleString('en-US');
-    if ($('openII')) $('openII').textContent = liveII.toLocaleString('en-US');
-    if ($('openIII')) $('openIII').textContent = liveIII.toLocaleString('en-US');
-    if ($('dormCell')) $('dormCell').textContent = (342 - revivedGate).toLocaleString('en-US');
-    $('gsvI').textContent = fmtM(liveI * V.I);
-    $('gsvII').textContent = fmtM(liveII * V.II);
-    $('gsvIII').textContent = fmtM(liveIII * V.III);
-    $('gsvTot').textContent = fmtM(pot);
+    // openI/II, dormCell, gsvI/II/III, gsvTot — guarded (the assumptions table they lived in
+    // was removed). Elements don't exist, so we skip the writes silently.
     LEVERS.forEach(function (l) {
       var amtEl = $('amt-' + l.id); if (amtEl) amtEl.textContent = '+' + fmtM(effReal(l));
       var pctEl = $('pct-' + l.id); if (pctEl) pctEl.textContent = l.real + '% · of ' + fmtM(effFull(l));
@@ -1890,7 +1855,8 @@
 
   // ---------- wiring ----------
   buildLevers();
-  ['tvI', 'tvII', 'tvIII'].forEach(function (id) { $(id).addEventListener('input', render); });
+  // tier-value editor event listeners removed (the assumptions table is gone).
+  // To tune TIER_VALUE_I/II/III, edit the constants directly in the helpers block.
   // split preset groups: gate vs on-grid quality
   document.querySelectorAll('#gatePresets .chip').forEach(function (c) {
     c.addEventListener('click', function () {
@@ -1959,9 +1925,8 @@
     window._ddLatKnownIds = null;
     window._ddGateSnapshot = null;
 
-    // NOTE: tier value editors (tvI, tvII, tvIII) are deliberately NOT reset — they stay at
-    // whatever the user has set. The HTML defaults load first; the user can edit per their
-    // negotiation model. Reset only restores the 1,000-case dataset + zeros out the sliders.
+    // Tier payout values (TIER_VALUE_I/II/III constants) are deliberately NOT reset — they're
+    // hardcoded and don't change with the docket reset. Edit them directly in the helpers block.
 
     // 7. Rebuild exp sliders (in case missing count changed) and re-render
     buildExpSliders();
