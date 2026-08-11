@@ -98,58 +98,48 @@
   }
   .card-hdr-row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; flex-wrap:wrap; }
   .sales-headline { font-size:24px; font-weight:700; color:var(--ink); letter-spacing:-0.015em; line-height:1.2; margin-bottom:6px; }
-  .sales-kicker {
-    display:inline-block;
-    padding:5px 13px 4px;
-    background:linear-gradient(135deg, rgba(16,185,129,0.16) 0%, rgba(34,197,94,0.10) 100%);
-    border:1px solid rgba(16,185,129,0.34);
-    border-radius:999px;
-    font-size:10.5px;
-    font-weight:800;
-    color:#047857;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    margin-bottom:12px;
-    box-shadow: 0 1px 2px rgba(16,185,129,0.06);
-    vertical-align:middle;
-  }
-  .sales-kicker .dot {
-    display:inline-block;
-    width:6px; height:6px;
-    border-radius:50%;
-    background:#10B981;
-    margin-right:7px;
-    vertical-align:0.5px;
-    box-shadow: 0 0 0 3px rgba(16,185,129,0.18);
-  }
   .sales-headline.salesy {
-    display:block;
-    font-size:30px;
-    font-weight:850;
-    line-height:1.08;
-    letter-spacing:-0.032em;
-    color:#0B3D20;
-    text-decoration:none;
-    background: linear-gradient(180deg, transparent 78%, rgba(22,163,74,0.28) 78%, rgba(22,163,74,0.28) 92%, transparent 92%);
-    padding:0 1px 1px;
-    margin:0 0 10px 0;
-    max-width:780px;
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 31px;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.028em;
+    color: #0F172A;
+    margin: 0 0 12px 0;
+    max-width: 760px;
+    font-feature-settings: 'ss01', 'cv11', 'kern';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .sales-headline.salesy::before {
+    content: '';
+    display: block;
+    flex: 0 0 4px;
+    width: 4px;
+    background: linear-gradient(180deg, #2563EB 0%, #1D4ED8 100%);
+    border-radius: 3px;
+    margin-top: 6px;
+    min-height: 38px;
   }
   .sales-headline.salesy .accent {
-    color:#047857;
-    font-style:italic;
-    font-weight:900;
-    letter-spacing:-0.04em;
+    color: #1D4ED8;
+    font-weight: 800;
+    font-style: normal;
+    letter-spacing: -0.032em;
   }
   .sales-sub {
-    font-size:14.5px;
-    color:var(--ink-2);
-    line-height:1.55;
-    margin-bottom:14px;
-    max-width:720px;
-    letter-spacing:-0.005em;
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    margin-bottom: 14px;
+    max-width: 720px;
+    letter-spacing: -0.005em;
+    font-family: 'Inter', system-ui, sans-serif;
   }
-  .sales-sub strong { color:var(--ink); font-weight:700; }
+  .sales-sub strong { color: var(--ink); font-weight: 700; }
   .lever-box-header { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--grid); }
   .lever-box-title { font-size:14px; font-weight:600; color:var(--ink); letter-spacing:-0.005em; }
   .lever-box-title em { font-style:italic; font-weight:600; color:var(--ink); }
@@ -792,8 +782,7 @@
   <p class="lede">Law firms litigate cases, but most of the lift lives in two unglamorous levers: reviving dormant matters that already pass the gate, and filling in the missing story on active files. Just clearing the gate on this 1,000-matter illustrative docket unlocks a <strong id="ledeGap">$25.7M</strong> gap against <strong id="ledeCur">$105M</strong> in current GSV &mdash; no quality work required. Stack the quality cures below and the number grows further. The dashboard models both levers, every curable gap, and the projected yield of fixing each one.</p>
 
   <div class="lift-levers" style="margin-bottom:16px;">
-    <span class="sales-kicker"><span class="dot"></span>The Thesis &middot; Two Levers, One Yield Gap</span>
-    <h2 class="sales-headline salesy">Your funded docket is sitting on <span class="accent">more than you booked.</span></h2>
+    <h2 class="sales-headline salesy">Recover the returns already sitting inside your funded docket.</h2>
     <p class="sales-sub">Most portfolios carry an <strong>unrecognized GSV gap</strong> &mdash; created by dormant matters and thin files, not bad lawyering. We close it on two parallel fronts, without adding a single new claim:</p>
     <ul style="margin:0 0 0 18px; padding:0; font-size:13.5px; line-height:1.6; color:var(--ink-2);">
       <li><b style="color:var(--ink); font-style:italic;">Volume</b> &mdash; revive dormant matters that already pass every eligibility gate onto the active grid.</li>
