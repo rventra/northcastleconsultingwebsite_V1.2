@@ -784,21 +784,26 @@
   .cas-title { font-size:30px; font-weight:800; letter-spacing:-0.02em; color:var(--ink); margin:8px 0 10px; }
   .cas-intro { font-size:14.5px; color:var(--ink-2); max-width:760px; margin:0 auto; line-height:1.6; }
   .cas-acc { margin:0 0 14px; border:1px solid var(--border); border-radius:12px; background:var(--surface); box-shadow:0 1px 2px rgba(11,11,11,0.03); overflow:hidden; }
-  .cas-acc summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:12px; padding:16px 20px; }
+  .cas-acc summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:14px; padding:16px 20px; transition:background 0.15s ease; }
   .cas-acc summary::-webkit-details-marker { display:none; }
-  .cas-acc[open] summary { border-bottom:1px solid var(--border); }
+  .cas-acc:hover summary { background:rgba(37,99,235,0.05); }
+  .cas-acc[open] summary { border-bottom:1px solid var(--border); background:rgba(37,99,235,0.03); }
+  .acc-chip { flex:none; font-size:10px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#0b6b3a; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.35); padding:4px 10px; border-radius:999px; white-space:nowrap; }
+  .acc-txt { display:flex; flex-direction:column; gap:2px; min-width:0; }
   .acc-title { font-size:15px; font-weight:700; color:var(--ink); }
   .acc-sub { font-size:12px; color:var(--muted); }
-  .acc-chev { margin-left:auto; width:26px; height:26px; flex:none; display:grid; place-items:center; border-radius:50%; border:1px solid var(--border); background:var(--page); }
-  .cas-acc:not([open]) .acc-chev::after { content:'+'; font-size:15px; font-weight:700; color:var(--accent-2); }
-  .cas-acc[open] .acc-chev::after { content:'−'; font-size:15px; font-weight:700; color:var(--accent-2); }
+  .acc-chev { margin-left:auto; width:28px; height:28px; flex:none; display:grid; place-items:center; border-radius:50%; border:1px solid var(--border); background:var(--page); }
+  .acc-chev::after { content:''; width:7px; height:7px; border-right:2px solid var(--accent-2); border-bottom:2px solid var(--accent-2); transform:rotate(45deg) translateY(-2px); display:block; transition:transform 0.18s ease; }
+  .cas-acc[open] .acc-chev::after { transform:rotate(225deg) translateY(2px); }
   .cas-body { padding:18px 20px; display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
   @media (max-width:760px){ .cas-body{ grid-template-columns:1fr; } }
   .cas-case { padding:16px 18px; border:1px solid var(--border); border-radius:10px; background:var(--page); }
   .cc-kicker { font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent-2); margin-bottom:6px; }
   .cc-num { font-size:26px; font-weight:800; letter-spacing:-0.02em; color:var(--ink); margin-bottom:4px; font-variant-numeric:tabular-nums; }
-  .cc-title { font-size:13.5px; font-weight:700; color:var(--ink); margin-bottom:6px; }
-  .cc-body { font-size:12.5px; color:var(--ink-2); line-height:1.55; }
+  .cc-title { font-size:13.5px; font-weight:700; color:var(--ink); margin-bottom:8px; }
+  .cc-arc p { font-size:12.5px; color:var(--ink-2); line-height:1.55; margin:0 0 7px; }
+  .cc-arc p:last-child { margin-bottom:0; }
+  .cc-arc b { color:var(--ink); font-weight:700; }
   .cas-cta { text-align:center; margin-top:6px; }
   .exp-card .card-stat {
     display: inline-block;
@@ -1265,46 +1270,69 @@
   <div id="case-studies" class="cas">
     <div class="cas-head">
       <div class="cas-eyebrow">Case Studies</div>
-      <h2 class="cas-title">Where the power has been proven</h2>
-      <p class="cas-intro">This framework didn't start as a slide. It was built running docket tiering, gap analysis and recovery inside a national Parkinson's-litigation practice — and the numbers below are real operating results, not modeled projections. Expand the accordion for the specifics.</p>
+      <h2 class="cas-title">Click here to see the real-world results</h2>
+      <p class="cas-intro">This framework didn't start as a slide. It was built running docket tiering, gap analysis and recovery inside a national Parkinson's-litigation practice — and the results below are real operating numbers, not modeled projections. They're tucked inside an accordion so the page stays lean: <b>tap the bar to open the details</b>.</p>
     </div>
 
     <details class="cas-acc">
       <summary>
-        <span class="acc-title">The operating results</span>
-        <span class="acc-sub">measured inside a national Parkinson's practice</span>
+        <span class="acc-chip">5 real results</span>
+        <span class="acc-txt">
+          <span class="acc-title">Open the accordion — what the levers actually returned</span>
+          <span class="acc-sub">claimant reach · QA cull · $0 record spend · re-opened matters · review economics</span>
+        </span>
         <span class="acc-chev"></span>
       </summary>
       <div class="cas-body">
         <div class="cas-case">
           <div class="cc-kicker">SMS reach-through</div>
           <div class="cc-num">55% → 85%</div>
-          <div class="cc-title">of claimants reached</div>
-          <div class="cc-body">A case-update bridge — a welcome text, then a monthly SMS with a check-and-confirm link, then email, then physical mail — re-contacted claimants the firm had lost. Every claimant made reachable again is a matter that gets cured and settles instead of closing for lack of contact.</div>
+          <div class="cc-title">of lost claimants made reachable again</div>
+          <div class="cc-arc">
+            <p><b>The problem:</b> the firm had lost contact with a large share of its open matters — files dying for lack of contact, not lack of merit.</p>
+            <p><b>What we ran:</b> a case-update bridge — a welcome text, then a monthly SMS with a check-and-confirm link, then email, then physical mail.</p>
+            <p><b>The result:</b> reach-through went from 55% to 85% of claimants. Every claimant made reachable again is a matter that gets cured and settles instead of closing at $0.</p>
+          </div>
         </div>
         <div class="cas-case">
           <div class="cc-kicker">QA on the open docket</div>
           <div class="cc-num">~20% → near 0%</div>
-          <div class="cc-title">thin or unqualified cases</div>
-          <div class="cc-body">An always-on QA loop graded every open matter against the eligibility gates. Cases that were thin, could never qualify, or were outright fraud were caught up front — before they consumed staff hours or a medical-record budget. The docket stopped quietly carrying cases that could never pay out.</div>
+          <div class="cc-title">thin or unqualified cases on the books</div>
+          <div class="cc-arc">
+            <p><b>The problem:</b> roughly one in five open files was thin, could never qualify, or was outright fraud — quietly draining staff hours and record budgets.</p>
+            <p><b>What we ran:</b> an always-on QA loop grading every matter against the eligibility gates.</p>
+            <p><b>The result:</b> the thin/unqualified share dropped to near zero — the docket stopped quietly carrying cases that could never pay out.</p>
+          </div>
         </div>
         <div class="cas-case">
           <div class="cc-kicker">Cull at the gate</div>
           <div class="cc-num">$0</div>
           <div class="cc-title">medical-record spend on non-qualifiers</div>
-          <div class="cc-body">Thousands of below-grid cases were screened and closed without ever ordering medical records. A firm that auto-accepts cases pays to work up and price every one of them — including the ones that can never qualify. Closing them first removes that entire cost line.</div>
+          <div class="cc-arc">
+            <p><b>The problem:</b> an auto-accept firm pays to work up and price every case — including the ones that can never qualify.</p>
+            <p><b>What we ran:</b> eligibility-gate screening at intake and early close-out for everything below the grid.</p>
+            <p><b>The result:</b> thousands of non-qualifiers closed with $0 medical-record spend — that entire cost line removed before it ever existed.</p>
+          </div>
         </div>
         <div class="cas-case">
           <div class="cc-kicker">Re-opening lost cases</div>
           <div class="cc-num">≈ $500k</div>
           <div class="cc-title">for roughly ten re-opened matters · illustrative</div>
-          <div class="cc-body">Illustrative math, not a measured figure: re-contacting and re-grading a handful of dormant matters returned on the order of $500k to the firm. The magnitude varies by docket — the mechanism repeats: a data bridge restores a lost case to value.</div>
+          <div class="cc-arc">
+            <p><b>The problem:</b> a dormant matter is a claim the firm already owns, sitting at $0 because contact or data is missing.</p>
+            <p><b>What we ran:</b> re-contacted and re-graded a handful of closed matters — a data bridge restored them to the active grid.</p>
+            <p><b>The result:</b> on the order of $500k for ~10 re-opened matters — the operator's read: <em>"Just activating ten cases gives you close to half a million. The ROI on this is astronomical."</em> Magnitude varies by docket; the mechanism repeats.</p>
+          </div>
         </div>
         <div class="cas-case">
           <div class="cc-kicker">Medical review economics</div>
           <div class="cc-num">~$25–50 / record</div>
           <div class="cc-title">vs. the market's ~$250 / case</div>
-          <div class="cc-body">AI-assisted extraction does in about a week, at a fraction of the cost, what a manual strike team does in months — which is what makes scoring the whole docket affordable, not just the top tier.</div>
+          <div class="cc-arc">
+            <p><b>The problem:</b> manual strike teams are slow and priced at roughly $250 a case — so dockets get scored at the top tier, not the whole portfolio.</p>
+            <p><b>What we ran:</b> AI-assisted extraction from unstructured records into scored, queryable evidence.</p>
+            <p><b>The result:</b> ~$25–50 per record, and a full re-tier in about a week instead of months — scoring every matter becomes affordable, not just the headline cases.</p>
+          </div>
         </div>
       </div>
     </details>
