@@ -795,13 +795,14 @@
   .acc-chev { margin-left:auto; width:28px; height:28px; flex:none; display:grid; place-items:center; border-radius:50%; border:1px solid var(--border); background:var(--page); }
   .acc-chev::after { content:''; width:7px; height:7px; border-right:2px solid var(--accent-2); border-bottom:2px solid var(--accent-2); transform:rotate(45deg) translateY(-2px); display:block; transition:transform 0.18s ease; }
   .cas-acc[open] .acc-chev::after { transform:rotate(225deg) translateY(2px); }
-  .cas-body { padding:18px 20px; display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
-  @media (max-width:760px){ .cas-body{ grid-template-columns:1fr; } }
-  .cas-case { padding:16px 18px; border:1px solid var(--border); border-radius:10px; background:var(--page); }
-  .cc-kicker { font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent-2); margin-bottom:6px; }
-  .cc-num { font-size:26px; font-weight:800; letter-spacing:-0.02em; color:var(--ink); margin-bottom:4px; font-variant-numeric:tabular-nums; }
-  .cc-title { font-size:13.5px; font-weight:700; color:var(--ink); margin-bottom:8px; }
-  .cc-arc p { font-size:12.5px; color:var(--ink-2); line-height:1.55; margin:0 0 7px; }
+  .cas-body { padding:4px 20px 22px; display:flex; flex-direction:column; }
+  .cas-case { padding:18px 0 20px; border-top:1px solid var(--border); }
+  .cas-case:first-child { padding-top:2px; border-top:0; }
+  .cc-kicker { font-size:10.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-2); margin-bottom:8px; }
+  .cc-num { display:inline; font-size:30px; font-weight:800; letter-spacing:-0.02em; color:var(--ink); font-variant-numeric:tabular-nums; margin-right:12px; }
+  .cc-title { display:inline; font-size:16px; font-weight:700; color:var(--ink); }
+  .cc-arc { margin-top:10px; }
+  .cc-arc p { font-size:13.5px; color:var(--ink-2); line-height:1.6; margin:0 0 8px; }
   .cc-arc p:last-child { margin-bottom:0; }
   .cc-arc b { color:var(--ink); font-weight:700; }
   .cas-cta { text-align:center; margin-top:6px; }
