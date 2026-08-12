@@ -763,6 +763,7 @@
   .exp-card.exp-blue:hover { box-shadow: 0 12px 32px rgba(37,99,235,0.18), 0 0 0 1px rgba(37,99,235,0.15); }
   .exp-card.exp-green:hover { box-shadow: 0 12px 32px rgba(16,185,129,0.18), 0 0 0 1px rgba(16,185,129,0.15); }
   .exp-card.exp-amber:hover { box-shadow: 0 12px 32px rgba(245,158,11,0.18), 0 0 0 1px rgba(245,158,11,0.15); }
+  .exp-card.exp-red:hover { box-shadow: 0 12px 32px rgba(220,38,38,0.18), 0 0 0 1px rgba(220,38,38,0.15); }
   .exp-card .card-stat {
     display: inline-block;
     font-size: 11px;
@@ -1090,13 +1091,43 @@
     <!-- Heading -->
     <div style="text-align:center; max-width:720px; margin:0 auto 40px; position:relative; z-index:1;">
       <div style="font-size:32px; font-weight:700; letter-spacing:-0.025em; line-height:1.15; margin-bottom:10px;">Our Expertise</div>
-      <div style="font-size:15px; opacity:0.6; line-height:1.6;">Three pillars that drive monetization</div>
+      <div style="font-size:15px; opacity:0.6; line-height:1.6;">DATA = POWER. Once you can see the data, you can act on it — and action is where the ROI lands.</div>
     </div>
     <!-- Cards -->
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; max-width:1080px; margin:0 auto; position:relative; z-index:1;">
       <!-- Card 1 -->
+      <div class="exp-card exp-red">
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--critical), rgba(220,38,38,0.4));"></div>
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--critical); opacity:0.8; margin-bottom:10px;">Protect · stop the loss at the gate</div>
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+          <span class="exp-icon" style="background:rgba(220,38,38,0.1);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--critical)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+          </span>
+          <div style="font-size:18px; font-weight:700; letter-spacing:-0.01em;">Cull Non-Qualifying Cases</div>
+        </div>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:14px;">
+          <li style="display:flex; gap:10px; align-items:flex-start;">
+            <span style="color:var(--critical); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Eligibility Gate Screening</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Grade every matter against the Tier-0 gates — exposure, diagnosis, latency, compliance — up front.</div></div>
+          </li>
+          <li style="display:flex; gap:10px; align-items:flex-start;">
+            <span style="color:var(--critical); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Below-Grid Triage</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Catch the cases that can never qualify before they burn hours being worked up.</div></div>
+          </li>
+          <li style="display:flex; gap:10px; align-items:flex-start;">
+            <span style="color:var(--critical); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
+            <div><b style="font-size:13.5px;">Early Close-Out</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Close non-qualifiers immediately — and never order their medical records.</div></div>
+          </li>
+        </ul>
+        <div class="card-stat" style="background:rgba(220,38,38,0.12); color:var(--critical);">Closed thousands of non-qualifiers — zero medical-record spend</div>
+        <div style="margin-top:12px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:11px; opacity:0.6; line-height:1.5;">From a national Parkinson's-litigation engagement — the eligibility gate caught cases below the grid, and we closed them out without ever paying for their medical records.</div>
+          <a href="#bridgeCard" onclick="document.getElementById('bridgeCard').scrollIntoView({behavior:'smooth'});return false;" style="color:var(--critical); font-size:12px; font-weight:600; text-decoration:none;">See the below-grid bucket →</a>
+        </div>
+      </div>
       <div class="exp-card exp-blue">
         <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--accent), rgba(37,99,235,0.4));"></div>
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); opacity:0.8; margin-bottom:10px;">Recover · dormant money you already own</div>
         <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
           <span class="exp-icon" style="background:rgba(37,99,235,0.1);">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -1121,11 +1152,16 @@
             <div><b style="font-size:13.5px;">Document Retrieval</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Medical, employment, and purchase proof to cure tier-blocking gaps.</div></div>
           </li>
         </ul>
-        <div class="card-stat" style="background:rgba(37,99,235,0.12); color:var(--accent);">60–80% claimant response rate</div>
+        <div class="card-stat" style="background:rgba(37,99,235,0.12); color:var(--accent);">SMS reach-through: 55% → 85% of claimants</div>
+        <div style="margin-top:12px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:11px; opacity:0.6; line-height:1.5;">From a national Parkinson's-litigation engagement: case-update bridges re-contacted lost claimants and kept cases alive that would have closed. Re-opening ~10 of them is worth ≈ $500k to the firm.</div>
+          <a href="#dormantLeverHost" onclick="document.getElementById('dormantLeverHost').scrollIntoView({behavior:'smooth'});return false;" style="color:var(--accent); font-size:12px; font-weight:600; text-decoration:none;">See it on the docket →</a>
+        </div>
       </div>
       <!-- Card 2 -->
       <div class="exp-card exp-green">
         <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--good), rgba(16,185,129,0.4));"></div>
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--good); opacity:0.8; margin-bottom:10px;">Visualize · make the data decision-ready</div>
         <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
           <span class="exp-icon" style="background:rgba(16,185,129,0.1);">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
@@ -1135,7 +1171,7 @@
         <ul style="list-style:none; padding:0; margin:0; display:grid; gap:14px;">
           <li style="display:flex; gap:10px; align-items:flex-start;">
             <span style="color:var(--good); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
-            <div><b style="font-size:13.5px;">Tier Modeling &amp; Scoring</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Defensible tier schemas with automated scoring — no disputes with defense.</div></div>
+            <div><b style="font-size:13.5px;">Tier Modeling &amp; Scoring</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Consistent, auditable tier schemas with automated scoring.</div></div>
           </li>
           <li style="display:flex; gap:10px; align-items:flex-start;">
             <span style="color:var(--good); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
@@ -1147,14 +1183,19 @@
           </li>
           <li style="display:flex; gap:10px; align-items:flex-start;">
             <span style="color:var(--good); font-weight:700; font-size:16px; line-height:1.2; flex-shrink:0;">›</span>
-            <div><b style="font-size:13.5px;">Portfolio Forecasting</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">90%+ accuracy on settlement timing and payout projections.</div></div>
+            <div><b style="font-size:13.5px;">Portfolio Forecasting</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Settlement timing and payout projections drawn from the tier distribution on this page.</div></div>
           </li>
         </ul>
-        <div class="card-stat" style="background:rgba(16,185,129,0.12); color:var(--good);">200+ data points per case</div>
+        <div class="card-stat" style="background:rgba(16,185,129,0.12); color:var(--good);">Every file scored on diagnosis, exposure and confounders</div>
+        <div style="margin-top:12px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:11px; opacity:0.6; line-height:1.5;">Field-level extraction feeding a defensible tier grid — the same layer that grades every matter on this page.</div>
+          <a href="#bridgeCard" onclick="document.getElementById('bridgeCard').scrollIntoView({behavior:'smooth'});return false;" style="color:var(--good); font-size:12px; font-weight:600; text-decoration:none;">See the scoring on the docket →</a>
+        </div>
       </div>
       <!-- Card 3 -->
       <div class="exp-card exp-amber">
         <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--accent-2), rgba(245,158,11,0.4));"></div>
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent-2); opacity:0.8; margin-bottom:10px;">Maximize · turn visible gaps into higher tiers</div>
         <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
           <span class="exp-icon" style="background:rgba(245,158,11,0.1);">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
@@ -1179,7 +1220,11 @@
             <div><b style="font-size:13.5px;">Continuous Re-Screening</b><div style="font-size:12.5px; opacity:0.6; margin-top:3px; line-height:1.6;">Automated re-grading when new evidence hits — no case sits stale.</div></div>
           </li>
         </ul>
-        <div class="card-stat" style="background:rgba(245,158,11,0.12); color:var(--accent-2);">50% less review time per case</div>
+        <div class="card-stat" style="background:rgba(245,158,11,0.12); color:var(--accent-2);">QA cut thin &amp; unqualified cases from ~20% to near 0%</div>
+        <div style="margin-top:12px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:11px; opacity:0.6; line-height:1.5;">From the same engagement — an always-on QA loop caught cases that would have failed the docket or defrauded the firm before they cost money.</div>
+          <a href="#onGridLeverHost" onclick="document.getElementById('onGridLeverHost').scrollIntoView({behavior:'smooth'});return false;" style="color:var(--accent-2); font-size:12px; font-weight:600; text-decoration:none;">See the quality lever →</a>
+        </div>
       </div>
     </div>
     <!-- CTA -->
