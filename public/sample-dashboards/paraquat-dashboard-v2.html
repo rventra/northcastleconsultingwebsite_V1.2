@@ -120,40 +120,34 @@
   }
   .hero-right .right-blurb {
     width: 100%; max-width: 100%; box-sizing: border-box;
-    padding: 2rem 2.5rem;
+    padding: 2.2rem 2.6rem;
     overflow-wrap: break-word; word-break: break-word;
   }
   .hero-right h2 {
-    font-size: 18px; font-weight: 800; letter-spacing: -0.025em;
-    color: #0F172A; line-height: 1.2; margin-bottom: 10px;
+    font-size: 23px; font-weight: 800; letter-spacing: -0.02em;
+    color: #0B1E2E; line-height: 1.16; margin-bottom: 10px;
   }
   .hero-right h2 .accent { color: #1D4ED8; }
   .hero-right p {
-    font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 0;
+    font-size: 14px; line-height: 1.65; color: #334155; margin-bottom: 0;
   }
-  .hero-right .lede-bullets {
-    list-style: disc; padding-left: 18px; margin: 14px 0 0;
-  }
-  .hero-right .lede-bullets li {
-    font-size: 12.5px; color: #334155; line-height: 1.5; margin-bottom: 4px;
-  }
-  .hero-right .lede-bullets li b { color: #0F172A; }
   .hero-links {
-    display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap;
+    display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;
   }
   .hero-links a {
     display: inline-flex; align-items: center; gap: 6px;
-    font-size: 12.5px; font-weight: 600; text-decoration: none;
-    padding: 8px 14px; border-radius: 999px; transition: all 0.2s ease;
+    font-size: 13.5px; font-weight: 700; text-decoration: none;
+    padding: 11px 20px; border-radius: 999px; transition: all 0.2s ease;
   }
   .hero-links a.primary {
-    background: var(--accent-2); color: var(--navy); border: 1px solid var(--accent-2);
+    background: var(--navy); color: #ffffff; border: 1px solid var(--navy);
+    box-shadow: 0 6px 18px rgba(5,28,44,0.22);
   }
-  .hero-links a.primary:hover { background: #d4a55a; border-color: #d4a55a; }
+  .hero-links a.primary:hover { background: #12324a; border-color: #12324a; transform: translateY(-1px); box-shadow: 0 8px 22px rgba(5,28,44,0.28); }
   .hero-links a.secondary {
-    background: transparent; color: var(--accent-2); border: 1px solid rgba(200,151,62,0.5);
+    background: transparent; color: #0F172A; border: 1.5px solid rgba(37,99,235,0.45);
   }
-  .hero-links a.secondary:hover { border-color: var(--accent-2); background: rgba(200,151,62,0.12); }
+  .hero-links a.secondary:hover { border-color: var(--navy); background: var(--navy); color: #fff; transform: translateY(-1px); }
   .hero-wave {
     position: absolute; bottom: -1px; left: 0; right: 0; height: 40px;
     overflow: hidden; pointer-events: none;
@@ -1052,15 +1046,11 @@
       <!-- Right: lift explainer — translucent white over navy -->
       <div class="hero-right">
         <div class="right-blurb">
-          <h2>Maximize the worth of your <span class="accent">current docket.</span></h2>
-          <p>Most portfolios carry an unrecognized GSV gap — dormant matters sitting at $0 and active files that aren't scoring at their real tier. The gap is curable. No new claims needed.</p>
-          <ul class="lede-bullets">
-            <li><b>Quantity Lever</b> — Just clearing the gate → <u>move on-grid</u></li>
-            <li><b>Quality Lever</b> — Quality cures → Maximize your on-grid files</li>
-          </ul>
+          <h2>See how we can <span class="accent">help</span></h2>
+          <p>A live 1,000-case docket with every lever running — then the frameworks behind each lever.</p>
           <div class="hero-links">
-            <a class="primary" href="#bridgeCard" onclick="document.getElementById('bridgeCard').scrollIntoView({behavior:'smooth'});return false;">See the dashboard →</a>
-            <a class="secondary" href="#our-expertise" onclick="document.getElementById('our-expertise').scrollIntoView({behavior:'smooth'});return false;">How we can help →</a>
+            <a class="primary" href="#bridgeCard" onclick="document.getElementById('bridgeCard').scrollIntoView({behavior:'smooth'});return false;">Open the dashboard →</a>
+            <a class="secondary" href="#our-expertise" onclick="document.getElementById('our-expertise').scrollIntoView({behavior:'smooth'});return false;">See our expertise →</a>
           </div>
         </div>
       </div>
