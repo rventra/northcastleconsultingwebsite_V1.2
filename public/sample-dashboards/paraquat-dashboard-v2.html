@@ -131,8 +131,17 @@
   .hero-right p {
     font-size: 14px; line-height: 1.65; color: #334155; margin-bottom: 0;
   }
+  .rb-sub {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13.5px; font-weight: 700; color: #0F172A; letter-spacing: -0.005em;
+    margin: 0 0 9px;
+  }
+  .rb-sub::before {
+    content: ''; width: 16px; height: 2px; border-radius: 2px;
+    background: #1D4ED8; flex: none;
+  }
   .hero-links {
-    display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;
+    display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap;
   }
   .hero-links a {
     display: inline-flex; align-items: center; gap: 6px;
@@ -1047,6 +1056,7 @@
       <div class="hero-right">
         <div class="right-blurb">
           <h2>See how we can <span class="accent">help</span></h2>
+          <div class="rb-sub">Increase the quantity &amp; quality of your on-grid cases.</div>
           <p>A live 1,000-case docket with every lever running — then the frameworks behind each lever.</p>
           <div class="hero-links">
             <a class="primary" href="#bridgeCard" onclick="document.getElementById('bridgeCard').scrollIntoView({behavior:'smooth'});return false;">Open the dashboard →</a>
