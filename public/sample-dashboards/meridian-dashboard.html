@@ -421,13 +421,10 @@ aside.vpanel .bench .row sup.fn{color:var(--muted);font-size:9px;margin-left:2px
   const officeOpenShare = { TPA: 0.30, ORL: 0.22, ATL: 0.21, HOU: 0.15, PHX: 0.12 };
   const refPartners = ['Bayshore Legal', 'Peach State Trial Group', 'Lone Star Injury Law', 'Sonoran Advocates', 'Gulf Coast Law', 'Brickell Trial Lawyers', 'Magnolia Legal', 'Cactus Counsel', 'Suncoast Law Partners', 'Piedmont Injury Group', 'Bayou Justice', 'Coastal Counsel LLC'];
   let id = 1;
-  OFFICES.forEach(o => {
-    const n = Math.round(openTotal * officeOpenShare[o.id]);
-    for (let k = 0; k < n; k++) {
-      let r = rand(), seg = SEGMENTS[0], acc = 0; for (const s of SEGMENTS) { acc += s.share; if (r <= acc) { seg = s; break; } }
-      if (o.id === 'PHX' && seg.id === 'MT' && rand() < 0.5) seg = SEGMENTS[0];
-      // open inventory skews young: constant intake plus attrition leaves a large treatment pool
-      const ageMo = clamp(-Math.log(1 - rand() * 0.985) * seg.cycleMo * 0.42, 0.2, seg.cycleMo * 1.7);
+  // per-file fields that follow from case age (stage, fees, SOL...). Takes its own random source so the
+  // re-dating pass below can rebuild a file without disturbing the main seeded stream.
+  const asOfDate = new Date(FIRM.asOf + 'T00:00:00Z');
+  const caseFields = (o, seg, ageMo, rand, R, N, redated) => {
       // stage must follow case age — a file signed three weeks ago cannot be in litigation
       const speed = 14.5 / officeCycle[o.id]; // Tampa runs fast, Phoenix slow — same age, less progress
       const prog = clamp(ageMo / seg.cycleMo * speed * Math.exp(N(0, 0.22)), 0.01, 1.6);
@@ -442,9 +439,11 @@ aside.vpanel .bench .row sup.fn{color:var(--muted);font-size:9px;margin-left:2px
       else if (prog < dGate) stage = 'Demand';
       else if (prog < 0.75) stage = 'Negotiation';
       else if (prog < 1.15) stage = (litish || rand() < 0.18) ? 'Litigation' : 'Negotiation';
-      else stage = rand() < 0.6 ? 'Settled – awaiting funds' : 'Disbursement';
+      else if (!redated) stage = rand() < 0.6 ? 'Settled – awaiting funds' : 'Disbursement';
+      // re-dated files: past the usual cycle most are the slow tail (still in suit or negotiation); only a slice is settled and waiting on funds
+      else { const u = rand(); stage = u < 0.16 ? 'Settled – awaiting funds' : u < 0.26 ? 'Disbursement' : (litish || u < 0.6) ? 'Litigation' : 'Negotiation'; }
       if (seg.id === 'MT' && prog >= 0.30) stage = rand() < 0.45 ? 'Records' : 'Litigation';
-      const signDate = new Date(2026, 8, 13); signDate.setMonth(signDate.getMonth() - Math.round(ageMo));
+      const signDate = new Date(asOfDate.getTime() - Math.round(ageMo * 30.44) * 86400000);
       const estRecovery = Math.round(clamp(seg.avgRecovery * Math.exp(N(-0.12, 0.5)), 3000, 3000000));
       const feePct = stage === 'Litigation' ? 0.40 : seg.feePct;
       const probability = STAGE_PROB[stage] * (seg.id === 'MT' ? 0.6 : 1) * (o.id === 'PHX' ? 0.95 : 1);
@@ -455,7 +454,16 @@ aside.vpanel .bench .row sup.fn{color:var(--muted);font-size:9px;margin-left:2px
       const solMonths = o.state === 'FL' ? 24 : o.state === 'TX' ? 24 : o.state === 'AZ' ? 24 : 24;
       const daysToSOL = Math.round(solMonths * 30.4 - ageMo * 30.4);
       const nearSOL = daysToSOL < 150;
-      inventory.push({ id: `M-${String(id++).padStart(5, '0')}`, office: o.id, state: o.state, segment: seg.id, stage, signDate: signDate.toISOString().slice(0, 10), ageMonths: round(ageMo, 1), estRecovery, feePct, estFee: Math.round(estRecovery * feePct), probability: round(probability, 2), expectedFee: Math.round(estRecovery * feePct * probability), monthsToResolve: round(monthsToResolve, 1), costsAdvanced: Math.round(seg.caseCost * clamp(ageMo / seg.cycleMo, 0.1, 1.2) * N(1, 0.3)), source, refPartner, lastActivityDays, suitFiled: stage === 'Litigation' || (stage === 'Negotiation' && rand() < 0.15) || (nearSOL && !(o.id === 'PHX' ? rand() < 0.8 : rand() < 0.03)), daysToSOL, attorney: `${o.id}-ATT-${1 + Math.floor(rand() * o.attorneys)}`, docket: seg.id === 'MT' ? ['Hair relaxer (MDL 3060)', 'AFFF (MDL 2873)', 'Depo-Provera (MDL 3140)'][Math.floor(rand() * 3)] : null });
+      return { office: o.id, state: o.state, segment: seg.id, stage, signDate: signDate.toISOString().slice(0, 10), ageMonths: round(ageMo, 1), estRecovery, feePct, estFee: Math.round(estRecovery * feePct), probability: round(probability, 2), expectedFee: Math.round(estRecovery * feePct * probability), monthsToResolve: round(monthsToResolve, 1), costsAdvanced: Math.round(seg.caseCost * clamp(ageMo / seg.cycleMo, 0.1, 1.2) * N(1, 0.3)), source, refPartner, lastActivityDays, suitFiled: stage === 'Litigation' || (stage === 'Negotiation' && rand() < 0.15) || (nearSOL && !(o.id === 'PHX' ? rand() < 0.8 : rand() < 0.03)), daysToSOL, attorney: `${o.id}-ATT-${1 + Math.floor(rand() * o.attorneys)}`, docket: seg.id === 'MT' ? ['Hair relaxer (MDL 3060)', 'AFFF (MDL 2873)', 'Depo-Provera (MDL 3140)'][Math.floor(rand() * 3)] : null };
+  };
+  OFFICES.forEach(o => {
+    const n = Math.round(openTotal * officeOpenShare[o.id]);
+    for (let k = 0; k < n; k++) {
+      let r = rand(), seg = SEGMENTS[0], acc = 0; for (const s of SEGMENTS) { acc += s.share; if (r <= acc) { seg = s; break; } }
+      if (o.id === 'PHX' && seg.id === 'MT' && rand() < 0.5) seg = SEGMENTS[0];
+      // open inventory skews young: constant intake plus attrition leaves a large treatment pool
+      const ageMo = clamp(-Math.log(1 - rand() * 0.985) * seg.cycleMo * 0.42, 0.2, seg.cycleMo * 1.7);
+      inventory.push({ id: `M-${String(id++).padStart(5, '0')}`, ...caseFields(o, seg, ageMo, rand, R, N) });
     }
   });
 
@@ -502,6 +510,40 @@ aside.vpanel .bench .row sup.fn{color:var(--muted);font-size:9px;margin-left:2px
       droppedCases.push({ id: 'D-' + String(dc++).padStart(5, '0'), office: o.id, signDate: signed, signMonth: r.month, droppedDate: addDays(signed, dd), daysToDrop: dd, reason: ['no contact in first 72 h', 'went to another firm', 'treatment not arranged', 'fee dispute', 'other'][Math.floor(rand() * 5)] });
     }
   });
+  // ---------- tie the open inventory to monthly intake ----------
+  // An open file is a signed case that has not resolved or dropped, so for each office × sign month the
+  // open count follows signed − resolved − dropped. Files inside the 36-month window are re-dated to that
+  // shape (scaled to the office's open count, oldest files to the oldest months) with sign dates spread
+  // across the month, then rebuilt for their new age. Own random stream: nothing else in the pack moves.
+  {
+    const rnd = mulberry32(20261008);
+    const R2 = (lo, hi) => lo + (hi - lo) * rnd();
+    const N2 = (mu, sd) => { let u = 0, v = 0; while (u === 0) u = rnd(); while (v === 0) v = rnd(); return mu + sd * Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+    const gone = {}, key = (o, m) => o + '|' + m;
+    resolvedCases.concat(droppedCases).forEach(x => { const q = key(x.office, x.signDate.slice(0, 7)); gone[q] = (gone[q] || 0) + 1; });
+    const firstDay = new Date(MONTHS[0] + '-01T00:00:00Z');
+    OFFICES.forEach(o => {
+      const files = inventory.filter(x => x.office === o.id && new Date(x.signDate + 'T00:00:00Z') >= firstDay)
+        .sort((a, b) => b.ageMonths - a.ageMonths);
+      const want = MONTHS.map(m => { const r = opsMonthly.find(x => x.office === o.id && x.month === m); return Math.max(0, (r ? r.signed : 0) - (gone[key(o.id, m)] || 0)); });
+      const tot = want.reduce((a, b) => a + b, 0) || 1;
+      const raw = want.map(w => w * files.length / tot), cnt = raw.map(Math.floor);
+      let left = files.length - cnt.reduce((a, b) => a + b, 0);
+      raw.map((v, i) => [v - cnt[i], i]).sort((a, b) => b[0] - a[0]).slice(0, left).forEach(([, i]) => cnt[i]++);
+      let f = 0;
+      MONTHS.forEach((m, i) => {
+        const start = new Date(m + '-01T00:00:00Z'), end = new Date(start); end.setUTCMonth(end.getUTCMonth() + 1);
+        const last = Math.min(end.getTime() - 86400000, asOfDate.getTime());
+        const days = Math.max(1, Math.round((last - start.getTime()) / 86400000) + 1);
+        for (let k = 0; k < cnt[i]; k++, f++) {
+          const file = files[f], seg = SEGMENTS.find(s => s.id === file.segment);
+          const sign = new Date(start.getTime() + Math.floor(rnd() * days) * 86400000);
+          const ageMo = Math.max(0, (asOfDate - sign) / 86400000 / 30.44);
+          Object.assign(file, caseFields(o, seg, ageMo, rnd, R2, N2, true), { signDate: sign.toISOString().slice(0, 10) });
+        }
+      });
+    });
+  }
   // Lit flag on the open inventory
   inventory.forEach(x => { x.isLit = x.stage === 'Litigation' || x.suitFiled || x.segment === 'LIT_MVA'; });
 
@@ -1039,16 +1081,17 @@ function demandsUtil(m,W,ids,cur,byOffice){
         const pool=[];
         invLit().forEach(x=>pool.push({office:x.office,age:ago(x.signDate),sent:D.STAGES.indexOf(x.stage)>SENT}));
         D.resolvedCases.filter(x=>offOk(x)&&segOk(x)&&litOk(x)).forEach(x=>pool.push({office:x.office,age:ago(x.signDate),sent:true}));
+        if(state.segment==='ALL'&&state.lit==='ALL') D.droppedCases.filter(offOk).forEach(x=>pool.push({office:x.office,age:ago(x.signDate),sent:false}));
         const BK=[[0,30,'0–30 d'],[31,60,'31–60 d'],[61,90,'61–90 d'],[91,120,'91–120 d'],[121,180,'121–180 d'],[181,365,'181–365 d'],[366,1e9,'365 d+']];
         const cell=(g)=>{ if(!g.length) return '<td class="num mini">—</td>'; const pctv=g.filter(x=>x.sent).length/g.length;
           const bg=SEQ[Math.min(6,Math.round(pctv*6))], ink=pctv>0.55?'#fff':'#0b0b0b';
-          return `<td class="num" style="background:${bg};color:${ink}" data-tip="${fmt.int(g.filter(x=>x.sent).length)} of ${fmt.int(g.length)} cases signed in this window have a demand out">${fmt.pct(pctv)}<div class="mini" style="color:${ink};opacity:.75">${fmt.int(g.length)} cases</div></td>`; };
+          return `<td class="num" style="background:${bg};color:${ink}" data-tip="${fmt.int(g.filter(x=>x.sent).length)} of ${fmt.int(g.length)} cases signed in this window have a demand out">${fmt.pct(pctv)}<div class="mini" style="color:${ink};opacity:.75">${fmt.int(g.filter(x=>x.sent).length)} of ${fmt.int(g.length)}</div></td>`; };
         const row=(label,f)=>`<tr><td>${label}</td>${BK.map(([lo,hi])=>cell(pool.filter(x=>f(x)&&x.age>=lo&&x.age<=hi))).join('')}</tr>`;
         return `<div class="tbl-wrap" style="margin-top:12px"><table class="mtx"><thead><tr><th>${byOffice?'Office':'Signed cohort'}</th>${BK.map(b=>`<th class="num">${b[2]}</th>`).join('')}</tr></thead><tbody>
           ${byOffice?D.OFFICES.filter(o=>ids.includes(o.id)).map(o=>row(o.name,x=>x.office===o.id)).join(''):''}
           <tr class="total">${row(byOffice?'Firm':scopeName(),()=>true).slice(4)}</tbody></table></div>`;
       })()}`,
-      'Demand volume today is fee revenue 9–14 months out — the most controllable number in the firm. The matrix reads across: of the cases signed in each window, what share now has a demand out. The first two columns are near zero by design — that is the treatment window, not a failure. The ramp starts around day 60 and should cross 50% near each office\'s median signed→demand time; read it against the velocity strip above as a consistency check. Tampa crosses by the 91–120 cohort (median 75 d); Phoenix is still at 10% there and only reaches 56% by 121–180 (median 168 d). Demands sent is derived from demands per team-week × teams × weeks in this dataset; on real data it is a count of demand.sent_at.')));
+      'Demand volume today is fee revenue 9–14 months out — the most controllable number in the firm. The matrix reads across: of the cases signed in each window, what share now has a demand out; each cell shows that count over every case signed in the window (open, resolved and dropped). The first two columns are near zero by design — that is the treatment window, not a failure. The ramp starts around day 60 and should cross 50% near each office\'s median signed→demand time; read it against the velocity strip above as a consistency check. Tampa crosses by the 91–120 cohort (median 75 d); Phoenix is still at 16% there and only reaches 63% by 121–180 (median 168 d). Demands sent is derived from demands per team-week × teams × weeks in this dataset; on real data it is a count of demand.sent_at.')));
 }
 
 VIEWS.push({id:'flash',n:1,label:'Executive flash',title:'Executive flash',driver:'Driver: fee revenue vs plan · Owner: CEO / owner / sponsor',segment:'segment',bench:['contactRate','leadToSign','cycleDays','marketingPctFees','feeRealization','flashDays'],
@@ -1730,7 +1773,7 @@ VIEWS.push({id:'utilization',n:99,label:'Demand utilization',title:'Demand utili
         `<div class="tbl-wrap"><table class="mtx"><thead><tr><th>Office</th>${BK.map(b=>`<th class="num">${b[2]}</th>`).join('')}</tr></thead><tbody>
           ${D.OFFICES.filter(o=>ids.includes(o.id)).map(o=>row(o.name,x=>x.office===o.id)).join('')}
           <tr class="total">${row('Firm',()=>true).slice(4)}</tbody></table></div>`,
-        'The mirror of the matrix above: where files go quiet instead of moving. Read it against the demand ramp — a cohort that has not had a demand out and has not been touched in 30 days is the one that turns into a cycle-time problem two quarters from now. Some idleness in the 31–120 day columns is the treatment window and is expected; idleness past 180 days on a file with no demand out is not. Denominators differ from the matrix above by design: this one counts open files only, while the demand ramp counts every case signed in the window, resolved ones included. Hover a cell for the fee at risk. Source: Filevine › project.last_activity_at, project.signed_at, project.status = Open.')));
+        'The mirror of the matrix above: where files go quiet instead of moving. Read it against the demand ramp — a cohort that has not had a demand out and has not been touched in 30 days is the one that turns into a cycle-time problem two quarters from now. Some idleness in the 31–120 day columns is the treatment window and is expected; idleness past 180 days on a file with no demand out is not. Denominators differ from the matrix above by design: this one counts open files only, while the demand ramp counts every case signed in the window, resolved and dropped ones included. Hover a cell for the fee at risk. Source: Filevine › project.last_activity_at, project.signed_at, project.status = Open.')));
     }
     m.appendChild(h(card(`Demand utilization by office, ${pl()}`,`<div class="tbl-wrap"><table><thead><tr><th>Office</th><th class="num">Demands sent</th><th class="num">Per team-week</th><th class="num">Per CM per week</th><th class="num">Staffed desks</th><th class="num">Pre-lit teams</th><th class="num">Median signed\u2192demand</th><th class="num">Ready, no demand out</th></tr></thead><tbody>${rows}</tbody></table></div>`,
       'The same four numbers as the firm strip, cut by office, next to the median signed\u2192demand time each office actually achieves. An office below four demands per team-week with a long median is a capacity problem; one at four with a long median is a sequencing problem. Source: Filevine \u203a demand.sent_at, project.signed_at; ADP \u203a staffed case-manager desks.')));
