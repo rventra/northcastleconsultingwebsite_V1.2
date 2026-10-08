@@ -555,6 +555,7 @@ gh repo view rventra/northcastleconsultingwebsite_V1.2
 
 | Date | Change | Description |
 |------|--------|-------------|
+| 2026-10-08 | Presentations folder | New `public/presentations/` (served at `/presentations/`): `index.html` landing page (same style as sample-dashboards, noindex) + `mso-deck-pi-firms.html` and `mso-deck-mass-tort-firms.html` (copied from Nick's MSO Decks folder; only change is a noindex meta tag). Older `public/MSO-Deck-GeneralLegal.html` left in place at the site root |
 | 2026-10-08 | Meridian demand-ramp fix | `public/sample-dashboards/meridian-dashboard.html`: cohort-matrix cells show "sent of signed"; dropped cases join the denominator; open inventory re-dated so each office-month follows signed − resolved − dropped (own RNG — no other dataset values move); sign dates spread across the month (was the 13th) |
 | 2026-07-31 | Case Studies McKinsey Restyle | All 9 case studies converted to shared `src/components/CaseStudyLayout.jsx` (data-driven McKinsey template); 3 category pages + hub restyled to quiet editorial style; archive in /archive/case-studies preserves old versions |
 | 2026-07-31 | Carve-Out McKinsey Restyle + Placement | Case study restyled to McKinsey editorial template (2-hero structure); featured card added to homepage Case Studies section; Corporate Development page amended for carve-outs/divestitures + links to case study |

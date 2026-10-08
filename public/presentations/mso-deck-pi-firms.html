@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass Tort MSO Partnership — PI Firms Adding Mass Tort</title>
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'], mono: ['JetBrains Mono','Consolas','monospace'] } } } }</script>
+    <style>
+        :root {
+            /* Brand palette: navy #051C2C, gold #EDB624, blue #2563EB, off-white #F9F9F7 */
+            --bg: #f9f9f7;
+            --panel: #ffffff;
+            --card: #ffffff;
+            --line: #e5e7eb;
+            --line-strong: #d1d5db;
+            --navy: #051c2c;
+            --gold: #edb624;
+            --blue: #2563eb;
+            --text: #1f2937;
+            --text-muted: #4b5563;
+            --text-dim: #9ca3af;
+            --amber: #a67c0f; --amber-soft: #fdf6e3; --amber-line: #edb624;
+            --sky: #2563eb;   --sky-soft: #eef3fd;   --sky-line: #2563eb;
+            --emerald: #0f6e56; --emerald-soft: #e6f3ee; --emerald-line: #9fcdbb;
+            --red: #a83232;   --red-soft: #fbeaea;    --red-line: #e3aaaa;
+            --purple: #051c2c; --purple-soft: #eef1f4; --purple-line: #051c2c;
+            --slate: #1f2937; --slate-soft: #f9f9f7; --slate-line: #d1d5db;
+        }
+        html { background: var(--bg); }
+        body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', 'Helvetica Neue', Arial, sans-serif; }
+
+        /* ---- fixed 16:9 page: identical size for every slide, screen and print ---- */
+        #stageWrap { flex: 1; display: flex; justify-content: center; align-items: flex-start; padding: 16px 0 96px; overflow-x: hidden; }
+        #deck { width: 1280px; transform-origin: top center; }
+        .slide { display: none; width: 1280px; height: 720px; box-sizing: border-box; padding: 28px 34px; background: var(--bg); overflow: hidden; position: relative; }
+        .slide.active { display: flex; flex-direction: column; }
+        .slide > .panel { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+        .slide > .panel > *:last-child { margin-bottom: 0; }
+        .slide-foot { position: absolute; left: 34px; right: 34px; bottom: 10px; display: flex; justify-content: space-between; font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); }
+
+        .panel { background: var(--panel); border: 1px solid var(--line); border-radius: .375rem; padding: 1.1rem 1.35rem 1.35rem; overflow: hidden; }
+        @media (min-width: 640px) { .panel { padding: 1.1rem 1.5rem 1.4rem; } }
+        .panel > .slide-head:first-child { margin: -1.1rem -1.5rem 0; padding: 1rem 1.5rem .9rem; }
+
+        .slide-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: .75rem 1rem; background: var(--navy); border-bottom: 3px solid var(--gold); }
+        .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+        .slide-title { font-size: 1.4rem; font-weight: 700; color: #fff; letter-spacing: -.01em; margin-top: .25rem; line-height: 1.15; }
+        
+        .chip { font-size: 11px; font-weight: 600; letter-spacing: .04em; padding: .4rem .8rem; border-radius: .25rem; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.25); color: #fff; white-space: nowrap; }
+        .slide-head .tag-amber { background: var(--gold); color: var(--navy); } .slide-head .tag-sky { background: rgba(37,99,235,.25); color: #cfe0ff; border-color: #7fa6f5; }
+        header .chip { background: var(--slate-soft); border-color: var(--line); color: var(--text-muted); }
+
+        .section-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
+
+        .card { background: var(--card); border: 1px solid var(--line); border-radius: .25rem; padding: .85rem 1rem; border-top-width: 3px; border-top-color: var(--line-strong); }
+        .card[data-accent="amber"]   { border-top-color: var(--gold); }
+        .card[data-accent="sky"]     { border-top-color: var(--sky); }
+        .card[data-accent="emerald"] { border-top-color: var(--emerald); }
+        .card[data-accent="red"]     { border-top-color: var(--red); }
+        .card[data-accent="purple"]  { border-top-color: var(--purple); }
+        .card[data-accent="slate"]   { border-top-color: var(--navy); }
+
+        .card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .6rem; margin-bottom: .6rem; }
+        .card-title { font-size: .95rem; font-weight: 700; color: var(--navy); letter-spacing: -.005em; line-height: 1.3; }
+
+        .tag { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .5rem; border-radius: .2rem; white-space: nowrap; border: 1px solid; }
+        .tag-amber   { background: var(--gold);   color: var(--navy);   border-color: var(--gold); }
+        .tag-sky     { background: var(--sky-soft);     color: var(--sky);     border-color: var(--sky-line); }
+        .tag-emerald { background: var(--emerald-soft); color: var(--emerald); border-color: var(--emerald-line); }
+        .tag-red     { background: var(--red-soft);     color: var(--red);     border-color: var(--red-line); }
+        .tag-purple  { background: var(--purple-soft);  color: var(--purple);  border-color: var(--purple-line); }
+        .tag-slate   { background: var(--slate-soft);   color: var(--text-muted); border-color: var(--line-strong); }
+
+        .body { font-size: .8rem; line-height: 1.45; color: var(--text); }
+        .body strong { color: var(--navy); font-weight: 700; }
+        .note { font-size: .69rem; line-height: 1.4; color: var(--text-muted); }
+        .note strong { color: var(--text); }
+
+        .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .4rem; }
+        .list li { position: relative; padding-left: .9rem; font-size: .8rem; line-height: 1.45; color: var(--text); }
+        .list li::before { content: ''; position: absolute; left: 0; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
+        .list li strong { color: var(--navy); font-weight: 700; }
+
+        .kv { display: flex; align-items: center; justify-content: space-between; gap: .8rem; padding: .28rem 0; border-bottom: 1px solid var(--line); font-size: .8rem; color: var(--text); }
+        .kv:last-child { border-bottom: 0; }
+        .kv .k small { color: var(--text-dim); font-size: .75rem; margin-left: .25rem; }
+        .kv .v { font-weight: 600; color: var(--navy); white-space: nowrap; font-variant-numeric: tabular-nums; }
+        .kv .v.pos { color: var(--emerald); } .kv .v.neg { color: var(--red); } .kv .v.dim { color: var(--text-muted); font-weight: 500; } .kv .v.amber { color: var(--amber); } .kv .v.sky { color: var(--sky); }
+        .kv.total { border-top: 2px solid var(--gold); border-bottom: 0; margin-top: .5rem; padding-top: .75rem; }
+        .kv.total .k { font-weight: 700; color: var(--navy); }
+        .kv.total .v { font-size: 1.125rem; font-weight: 700; }
+        .kv.highlight { background: var(--emerald-soft); border: 1px solid var(--emerald-line); border-radius: .25rem; padding: .55rem .75rem; margin-top: .4rem; }
+        .kv.highlight .k { color: var(--emerald); font-weight: 600; } .kv.highlight .k small { color: var(--emerald); opacity: .8; }
+        .kv.highlight .v { color: var(--emerald); font-weight: 700; }
+
+        .stat { background: var(--slate-soft); border: 1px solid var(--line); border-radius: .25rem; padding: .6rem .6rem; text-align: center; }
+        .stat .l { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+        .stat .n { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-top: .25rem; font-variant-numeric: tabular-nums; }
+        .stat .n.amber { color: var(--amber); } .stat .n.emerald { color: var(--emerald); } .stat .n.sky { color: var(--sky); } .stat .n.purple { color: var(--purple); }
+
+        .strip { display: grid; gap: 1rem; align-items: center; }
+        .strip.top { align-items: start; }
+        @media (min-width: 640px) { .strip { grid-template-columns: repeat(3, 1fr); } .strip > div:not(:last-child) { border-right: 1px solid var(--line); padding-right: 1rem; } }
+        .strip .l { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+        .strip .big { font-size: 1.5rem; font-weight: 700; color: var(--emerald); line-height: 1.1; font-variant-numeric: tabular-nums; }
+        .strip .big small { font-size: .875rem; color: var(--emerald); opacity: .8; margin-left: .35rem; }
+
+        .ctrl { display: flex; flex-direction: column; gap: .35rem; }
+        .ctrl .row { display: flex; justify-content: space-between; align-items: baseline; font-size: .74rem; }
+        .ctrl label { color: var(--text); font-weight: 500; }
+        .ctrl .val { font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
+        .ctrl input[type=range] { width: 100%; height: 4px; border-radius: 999px; background: var(--line-strong); cursor: pointer; accent-color: var(--navy); }
+        .ctrl input[type=range].sky, .ctrl input[type=range].emerald, .ctrl input[type=range].red, .ctrl input[type=range].purple, .ctrl input[type=range].slate { accent-color: var(--navy); }
+        .ctrl .hint { font-size: 11px; color: var(--text-dim); }
+
+        .model-inputs .ctrl + .ctrl { margin-top: .4rem; }
+        .model-inputs .section-label + .ctrl { margin-top: .35rem; }
+        .model-inputs select { font-size: .72rem; }
+        .tight .kv { padding: .2rem 0; font-size: .76rem; }
+        .tight .kv.total { margin-top: .35rem; padding-top: .5rem; }
+        .tight .kv.total .v { font-size: 1rem; }
+        .tight .kv.highlight { padding: .35rem .6rem; margin-top: .3rem; }
+        .tight .card-head { margin-bottom: .45rem; }
+
+        .stage { border-top: 3px solid var(--gold); }
+        .stage[data-owner="firm"] { border-top-color: var(--sky); }
+        .stage .num { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); }
+        .stage[data-owner="firm"] .num { color: var(--sky); }
+        .stage .t { font-size: .875rem; font-weight: 700; color: var(--navy); margin-top: .3rem; line-height: 1.25; }
+        .stage .d { font-size: .7rem; color: var(--text-muted); margin-top: .3rem; line-height: 1.4; }
+
+        .step { display: flex; gap: .8rem; align-items: center; padding: .6rem .8rem; border-radius: .375rem; border: 1px solid var(--line); background: var(--panel); }
+        .step .n { width: 2.25rem; height: 2.25rem; border-radius: 999px; display: grid; place-items: center; font-weight: 700; flex-shrink: 0; background: var(--slate-soft); color: var(--text-muted); border: 1px solid var(--line-strong); }
+        .step .t { font-size: .875rem; font-weight: 700; color: var(--navy); }
+        .step .d { font-size: .8rem; color: var(--text); margin-top: .2rem; line-height: 1.5; }
+        .step .d .big { display: block; font-weight: 700; color: var(--navy); margin-top: .25rem; font-variant-numeric: tabular-nums; }
+        .step[data-accent="amber"] .n { background: var(--amber-soft); color: var(--amber); border-color: var(--amber-line); } .step[data-accent="amber"] .t { color: var(--amber); }
+        .step[data-accent="red"] .n { background: var(--red-soft); color: var(--red); border-color: var(--red-line); } .step[data-accent="red"] .t { color: var(--red); }
+        .step[data-accent="emerald"] .n { background: var(--emerald); color: #fff; border-color: var(--emerald); } .step[data-accent="emerald"] .t { color: var(--emerald); }
+        .step[data-accent="emerald"] .d .big { font-size: 1.25rem; }
+
+        table.matrix { width: 100%; font-size: .73rem; text-align: left; border-collapse: collapse; }
+        .appendix table.matrix td { padding-top: .16rem; padding-bottom: .16rem; font-size: .7rem; }
+        .appendix table.matrix th { padding-bottom: .3rem; }
+        table.matrix th { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; padding: .5rem 1rem .5rem 0; border-bottom: 2px solid var(--navy); }
+        table.matrix td { padding: .34rem .85rem .34rem 0; border-bottom: 1px solid var(--line); color: var(--text); vertical-align: top; line-height: 1.5; font-variant-numeric: tabular-nums; }
+        table.matrix tr:last-child td { border-bottom: 0; }
+        table.matrix td.who { font-weight: 700; white-space: nowrap; color: var(--navy); }
+
+        .divider-label { display: flex; align-items: center; gap: .75rem; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
+        .divider-label::before, .divider-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+        .nav-btn { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; font-size: .75rem; font-weight: 600; border-radius: .3rem; padding: .45rem .85rem; border: 1px solid var(--line-strong); background: #fff; color: var(--navy); transition: .15s; }
+        .nav-btn:hover { background: var(--slate-soft); }
+        .nav-btn.primary { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+        .nav-btn.primary:hover { background: #f2c445; }
+        .nav-btn:disabled { opacity: .35; cursor: not-allowed; }
+
+        /* remap legacy utility colors used in markup to the flat palette */
+        .text-white { color: var(--navy) !important; }
+        .text-amber-400, .text-amber-300 { color: var(--amber) !important; }
+        .text-emerald-400, .text-emerald-300 { color: var(--emerald) !important; }
+        .text-sky-400, .text-sky-300 { color: var(--sky) !important; }
+        .text-red-400, .text-red-300 { color: var(--red) !important; }
+        .text-purple-400 { color: var(--purple) !important; }
+        .text-slate-200, .text-slate-300 { color: var(--text) !important; }
+        .text-slate-400, .text-slate-500 { color: var(--text-muted) !important; }
+        .bg-slate-900, .bg-slate-900\/70, .bg-slate-800 { background: var(--slate-soft) !important; }
+        .border-white\/10, .border-white\/\[\.06\], .border-white\/\[\.07\] { border-color: var(--line) !important; }
+        .bg-amber-500\/10 { background: var(--amber-soft) !important; }
+        .border-amber-500\/25 { border-color: var(--amber-line) !important; }
+        .big-num { font-size: 1.5rem; font-weight: 700; line-height: 1.1; color: var(--navy); font-variant-numeric: tabular-nums; }
+        .pill { font-size: .75rem; font-weight: 600; padding: .35rem .7rem; border-radius: .25rem; border: 1px solid var(--line-strong); color: var(--text); background: #fff; }
+        .pill.amber { border-color: var(--amber-line); color: var(--amber); background: var(--amber-soft); } .pill.sky { border-color: var(--sky-line); color: var(--sky); background: var(--sky-soft); } .pill.emerald { border-color: var(--emerald-line); color: var(--emerald); background: var(--emerald-soft); }
+        .appendix .eyebrow { color: rgba(255,255,255,.6); }
+        .appendix .slide-head { background: #0f2a3f; }
+        h2 span.text-transparent { background: none !important; -webkit-background-clip: border-box !important; background-clip: border-box !important; -webkit-text-fill-color: var(--amber) !important; color: var(--amber) !important; }
+        .cover-blob { display: none; }
+        .font-mono { font-family: inherit !important; font-variant-numeric: tabular-nums; }
+        /* cover: navy hero like the site */
+        .cover .panel { background: var(--navy); border-color: var(--navy); color: #fff; }
+        .cover .eyebrow { color: var(--gold); }
+        .cover h2 { color: #fff !important; }
+        .cover h2 span.text-transparent { -webkit-text-fill-color: var(--gold) !important; color: var(--gold) !important; }
+        .cover .panel > p { color: rgba(255,255,255,.8) !important; }
+        .cover .pill { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.25); color: #fff; }
+        .cover .pill.amber { border-color: var(--gold); color: var(--gold); background: rgba(237,182,36,.1); }
+        .cover .pill.sky { border-color: #7fa6f5; color: #bfd3ff; background: rgba(37,99,235,.15); }
+        .cover .pill.emerald { border-color: #7fcbb3; color: #bfeadb; background: rgba(15,110,86,.2); }
+        .cover .card { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); border-top-color: var(--gold); }
+        .cover .card .section-label { color: rgba(255,255,255,.6); }
+        .cover .card .big-num, .cover .card .text-amber-400, .cover .card .text-emerald-400, .cover .card .text-sky-400 { color: #fff !important; }
+        .cover .card .note { color: rgba(255,255,255,.65); }
+        .cover .card[data-accent="emerald"] { border-top-color: var(--gold); } .cover .card[data-accent="sky"] { border-top-color: var(--gold); }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 3px; }
+
+        @media print {
+            @page { size: 13.333in 7.5in; margin: 0; }
+            html, body { background: #fff; height: auto !important; min-height: 0 !important; display: block !important; overflow: visible !important; }
+            main, #stageWrap { height: auto !important; min-height: 0 !important; flex: none !important; overflow: visible !important; }
+            header, footer, #tocModal { display: none !important; }
+            #stageWrap { padding: 0; display: block; }
+            #deck { width: auto; transform: none !important; }
+            .slide { display: flex !important; flex-direction: column; page-break-after: always; break-after: page; }
+            .slide:last-child { page-break-after: auto; }
+        }
+
+        .pill-row { display:flex; flex-wrap:wrap; gap:.5rem; }
+    
+        /* ---- Appendix E/F additions: DRAFT stamp + pricing table ---- */
+        .draft-stamp { position: absolute; top: 5px; right: 34px; z-index: 5; font-size: 11px; font-weight: 800; letter-spacing: .22em; color: #a83232; background: #fff; border: 1.5px solid #a83232; border-radius: 3px; padding: 1px 8px 1px 10px; }
+        .tier-row { display: flex; align-items: center; justify-content: space-between; padding: .7rem .9rem; border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: .25rem; background: var(--panel); }
+        .tier-row + .tier-row { margin-top: .5rem; }
+        .tier-row .band { font-size: .95rem; font-weight: 700; color: var(--navy); }
+        .tier-row .band small { display: block; font-size: .68rem; font-weight: 500; color: var(--text-muted); margin-top: .1rem; }
+        .tier-row .price { font-size: 1.6rem; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; line-height: 1; }
+        .tier-row .price small { font-size: .7rem; font-weight: 600; color: var(--text-muted); margin-left: .2rem; }
+        .tier-row.t2 { border-left-color: var(--blue); } .tier-row.t3 { border-left-color: var(--emerald); }
+        table.bill { width: 100%; border-collapse: collapse; font-size: .8rem; }
+        table.bill th { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); text-align: left; padding: .45rem .5rem; border-bottom: 2px solid var(--gold); }
+        table.bill th.num, table.bill td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+        table.bill td { padding: .55rem .5rem; border-bottom: 1px solid var(--line); color: var(--text); }
+        table.bill td.how { color: var(--text-muted); font-size: .74rem; }
+        table.bill td.strong { font-weight: 700; color: var(--navy); }
+        .clock { display: flex; flex-direction: column; gap: .5rem; }
+        .clock .tick { display: flex; gap: .7rem; align-items: flex-start; }
+        .clock .day { flex-shrink: 0; width: 4.1rem; text-align: center; font-size: .72rem; font-weight: 800; letter-spacing: .04em; color: #fff; background: var(--navy); border-radius: .2rem; padding: .3rem 0; }
+        .clock .tick.warn .day { background: var(--gold); color: var(--navy); }
+        .clock .tick.end .day { background: var(--red); }
+        .clock .what { font-size: .76rem; line-height: 1.4; color: var(--text); }
+        .clock .what strong { color: var(--navy); }
+    
+        /* ---- v4: who-we-are + contact pages ---- */
+        .bigstat { background: var(--slate-soft); border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: .25rem; padding: .7rem .9rem; }
+        .bigstat .n { font-size: 1.9rem; font-weight: 800; color: var(--navy); line-height: 1; font-variant-numeric: tabular-nums; }
+        .bigstat .l { font-size: .74rem; color: var(--text-muted); margin-top: .3rem; line-height: 1.35; }
+        .contact-line { display: flex; align-items: baseline; gap: .8rem; padding: .55rem 0; border-bottom: 1px solid var(--line); font-size: 1.05rem; }
+        .contact-line .k { width: 4.5rem; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
+        .contact-line a { color: var(--navy); font-weight: 700; text-decoration: none; }
+        .contact-line a:hover { color: var(--blue); }
+    
+        /* ---- compensability % table ---- */
+        .cmp-row { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: .5rem; font-size: .76rem; padding: .2rem 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; color: var(--text); }
+        .cmp-row span:nth-child(n+2) { text-align: right; }
+        .cmp-head { font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); }
+        .cmp-row .p { font-weight: 700; color: var(--navy); text-align: left; }
+        .cmp-row.hi { font-weight: 700; }
+        .cmp-row.acq { grid-template-columns: 1fr 110px 120px; align-items: center; }
+        .cmp-row.hi .cmpFee { color: var(--emerald); }
+    </style>
+</head>
+<body class="h-full flex flex-col font-sans antialiased overflow-x-hidden" data-deck-label="PI Firms Adding Mass Tort">
+
+    <header class="bg-white border-b border-[#e3e6ea] sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div>
+                <div class="text-sm font-bold tracking-tight" style="color:#051c2c">Mass Tort Docket Operations &amp; Data</div>
+                <div class="text-[11px] text-slate-400">For PI Firms Adding Mass Tort</div>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="prevSlide()" class="nav-btn prev-slide-btn"><span aria-hidden="true">‹</span><span class="hidden sm:inline">Prev</span></button>
+            <span class="chip min-w-[92px] text-center" id="slideIndicator">Slide 1 of 9</span>
+            <button onclick="nextSlide()" class="nav-btn primary next-slide-btn"><span class="hidden sm:inline">Next</span><span aria-hidden="true">›</span></button>
+            <div class="h-5 w-px bg-[#e3e6ea] mx-1"></div>
+            <button onclick="toggleTocModal()" class="nav-btn px-2.5" title="Table of Contents" aria-label="Table of contents"><span aria-hidden="true">☰</span></button>
+        </div>
+    </header>
+
+    <main id="stageWrap">
+      <div id="deck">
+        <!-- ================= SLIDE 1: COVER (MSO-Deck-1-PI-Mass-Tort-Firms) ================= -->
+        <section class="slide active space-y-6 cover" id="slide-1">
+            <div class="panel sm:!p-10">
+                <span class="eyebrow">Slide 01</span>
+                <div class="max-w-3xl mt-3 space-y-4">
+                    <h2 class="text-3xl sm:text-[2.6rem] font-bold leading-[1.12] tracking-tight">Add a Mass Tort Docket <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">With Minimal Overhead</span></h2>
+                    <p class="text-base sm:text-lg leading-relaxed">You already sign injury clients and run intake. A settled mass tort case nets about $27,950 on a $75k settlement. We run the docket &mdash; case management, QA, AI medical record review, fact sheets, curing &mdash; and we build and maintain the claimant comms bridge, all aimed at one goal: a highly compensable docket. One flat monthly fee per open case, less than the cost of one hire, while your PI practice runs exactly as it does today.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+                    <div class="card" data-accent="amber">
+                        <div class="section-label">Firm Net Fee per Settled Case</div>
+                        <div class="big-num mt-1 text-amber-400" id="coverFee">$27,950</div>
+                        <p class="note mt-1">$75k GSV, 40% CFA, net of 5% common benefit and settlement admin.</p>
+                    </div>
+                    <div class="card" data-accent="emerald">
+                        <div class="section-label">Gross Profit per Settled Case</div>
+                        <div class="big-num mt-1 text-emerald-400" id="coverProfit">$24,983</div>
+                        <p class="note mt-1">After $2,967 acquisition cost: $1,483 per qualified signed lead &times; 2, assuming a 50% drop-off rate. Originate and litigate.</p>
+                    </div>
+                    <div class="card" data-accent="sky">
+                        <div class="section-label">Estimated ROI</div>
+                        <div class="big-num mt-1 text-sky-400">4X</div>
+                        <p class="note mt-1">Backup on slide 6.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ================= CORE: WHO WE ARE ================= -->
+        <section class="slide" id="slide-2">
+            <div class="panel">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Slide 02</span>
+                        <h2 class="slide-title">Who We Are: We Have Run This at Scale</h2>
+                    </div>
+                    <span class="chip">5,000+ Open Cases &middot; One Major Mass Tort Firm</span>
+                </div>
+                <div class="grid grid-cols-12 gap-4 mt-4">
+                    <div class="col-span-7 card flex flex-col" data-accent="amber">
+                        <div class="card-head"><h3 class="card-title">What We Built for 5,000+ Open Cases</h3><span class="tag tag-amber">Track Record</span></div>
+                        <p class="body mb-3">We led data operations at a major mass tort firm carrying <strong>5,000+ open cases</strong> &mdash; and built the processes and platform that kept that docket compensable, with reporting its investors and co-counsel could underwrite. Your PI practice keeps running as is. We bring the mass tort back office we already built and ran at scale.</p>
+                        <ul class="list">
+                            <li><strong>Intake QA and deficiency curing</strong> that kept cases compensable through multi-year MDL programs.</li>
+                            <li><strong>Medical record review, warehousing, and reporting</strong> &mdash; every record reviewed, stored in one claimant data warehouse, and reported: DX, records, deficiency state, SOL.</li>
+                            <li><strong>PFS, affidavits, and other incremental documents</strong> collected and served inside every deficiency window, at volume.</li>
+                            <li><strong>A claimant comms bridge</strong> that kept thousands of claimants reachable year after year.</li>
+                            <li><strong>A claimant data warehouse and investor reporting</strong> that supported the firm&rsquo;s litigation-funding diligence.</li>
+                        </ul>
+                        <div class="kv highlight mt-auto"><span class="k">The same playbook, applied to your docket</span><span class="v">Day one</span></div>
+                    </div>
+                    <div class="col-span-5 card flex flex-col" data-accent="sky">
+                        <div class="card-head"><h3 class="card-title">Experience</h3><span class="tag tag-sky">4+ Years</span></div>
+                        <p class="body" style="font-size:1rem;line-height:1.6"><strong>4+ years</strong> scaling a <strong>5,000+ case</strong> mass tort portfolio &mdash; keeping docket compensability high and <strong>managing liquidity</strong>. We built the data, technology, and processes behind it: <strong>financial forecasting</strong>, investor and co-counsel <strong>reporting</strong>, and claimant-level <strong>data portals</strong> &mdash; to bring in more investment and better serve claimants.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SLIDE 2: WHY NOW (docket leak + data) ================= -->
+        <section class="slide" id="slide-3">
+            <div class="panel">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Slide 03</span>
+                        <h2 class="slide-title">The Docket Leak &amp; the Data Gap</h2>
+                    </div>
+                    <span class="chip">Where the fee leaks — and why funders can't underwrite it</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4 flex-1 min-h-0">
+                    <div class="card flex flex-col" data-accent="red">
+                        <div class="card-head"><h3 class="card-title">Docket Compensability</h3><span class="tag tag-red">Where the Fee Leaks</span></div>
+                        <p class="body">Between signature and settlement, dockets lose cases to unreturned records, missed deficiency windows, unreachable claimants, incomplete Plaintiff Fact Sheets, and awards scored a tier below what the medicine supports.</p>
+                        <ul class="list mt-3">
+                            <li><strong>Intake QA</strong> stops non-qualifying cases before they consume records budget — and when retainers are purchased, enforces the vendor's replacement obligation so you only pay for Qualified Signed CFAs.</li>
+                            <li><strong>Medical record review and medical curing</strong> — retrieve the records, review the diagnosis and treatment history against docket criteria, and close the gaps the matrix will score on.</li>
+                            <li><strong>Curing and clarifying documentation</strong> — rapidly procure additional documentation such as Plaintiff Fact Sheets and affidavits inside every deficiency window; the administrator scores what it is given.</li>
+                            <li><strong>Claimant comms bridge and claimant enrichment</strong> — monthly case-update letters that solicit contact-info changes; for unreachable claimants, data enrichment to find current contact information so the docket stays enrolled through a multi-year program.</li>
+                            <li><strong>Matrix valuation and tier upgrades</strong> move cases from dropped to paid and from tier 3 to tier 2.</li>
+                        </ul>
+                        <div class="mt-3 pt-3 border-t border-white/10 grid grid-cols-2 gap-4 items-start">
+                            <div>
+                                <div class="big-num text-red-400" id="lkPt">+$140k</div>
+                                <div class="note">net fee for every <strong>+1%</strong> of docket compensability on a <span id="lkCohort2">500</span>-case annual cohort.</div>
+                                <div class="note mt-1">Compensability = the share of signed cases that end up paid. Each +1% moves 1 case in 100 from closed to paid at average GSV, with zero added acquisition spend.</div>
+                            </div>
+                            <div>
+                                <div class="cmp-row cmp-head"><span style="text-align:left">Compensability</span><span>More paid cases</span><span>Added net fee</span></div>
+                                <div class="cmp-row" data-cmp="1"><span class="p">+1%</span><span class="cmpCases">5</span><span class="cmpFee">$139,750</span></div>
+                                <div class="cmp-row" data-cmp="5"><span class="p">+5%</span><span class="cmpCases">25</span><span class="cmpFee">$698,750</span></div>
+                                <div class="cmp-row hi" data-cmp="10"><span class="p">+10%</span><span class="cmpCases">50</span><span class="cmpFee">$1,397,500</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card flex flex-col" data-accent="sky">
+                        <div class="card-head"><h3 class="card-title">The Data Gap — and Why It Blocks Funding</h3><span class="tag tag-sky">Reporting &amp; Portal</span></div>
+                        <p class="body">Most dockets live in a case-management export and a shared drive. Nobody can say, per claimant, what the diagnosis is, which records are in hand, what the matrix score is, or what the deficiency state is — so nobody can underwrite it.</p>
+                        <ul class="list mt-3">
+                            <li><strong>One record per claimant:</strong> DX, records status, medical history, matrix score, deficiency state, SOL date.</li>
+                            <li><strong>Rapid retrieval</strong> of medical records and diagnoses; AI medical record review, included in the monthly fee &mdash; all secure in AWS.</li>
+                            <li><strong>Compensability and ROI reporting</strong> by channel, docket, and cohort — the diligence package a funder asks for.</li>
+                            <li><strong>Firm-facing data portal</strong> — the docket becomes a financeable, portable asset instead of a filing cabinet.</li>
+                        </ul>
+                        <div class="mt-4 pt-3 border-t border-white/10">
+                            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                                <div class="big-num text-sky-400">$4.2M</div>
+                                <div class="body"><strong>to carry a 1,500-case docket until it starts paying</strong></div>
+                            </div>
+                            <div class="note mt-1">At 25 signed a month, almost all the spend comes before the first settlements land at month 60: Beacon fee $1.1M + litigator $0.8M + case acquisition $2.2M (Option A, Slide 6). Funders will cover that gap &mdash; but only on a docket whose data they can check: diagnosis, records, deficiencies. That is the data we build.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- ================= SLIDE 4: UNIT ECONOMICS + ACQUISITION ================= -->
+        <section class="slide space-y-6" id="slide-4">
+            <div class="panel">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Slide 04</span>
+                        <h2 class="slide-title">Unit Economics per Settled Case</h2>
+                    </div>
+                    <span class="chip">$75k GSV · 40% CFA · 5% Common Benefit · 50% Attrition</span>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mt-4 flex-1 min-h-0">
+                    <div class="lg:col-span-5 card" data-accent="amber">
+                        <div class="card-head"><h3 class="card-title">Fee Waterfall</h3><span class="tag tag-amber">Per Settled Case</span></div>
+                        <div class="kv"><span class="k">Gross settlement value</span><span class="v" id="ueGsv">$75,000</span></div>
+                        <div class="kv"><span class="k">Common benefit assessment (5%)</span><span class="v neg" id="ueCba">−$3,750</span></div>
+                        <div class="kv"><span class="k">Fee base</span><span class="v" id="ueBase">$71,250</span></div>
+                        <div class="kv"><span class="k">Gross contingency fee (<span id="ueCfa">40%</span>)</span><span class="v amber" id="ueGross">$28,500</span></div>
+                        <div class="kv"><span class="k">Settlement admin &amp; lien resolution</span><span class="v neg" id="ueAdmin">−$550</span></div>
+                        <div class="kv total"><span class="k">Firm net fee</span><span class="v amber" id="ueNetFee">$27,950</span></div>
+                        <div class="kv"><span class="k">Acquisition cost per settled case <small>($1,483 per qualified lead &times; 2 at 50% drop-off)</small></span><span class="v neg" id="ueCpl">−$2,967</span></div>
+                        <div class="kv highlight"><span class="k">Gross profit per settled case</span><span class="v" id="ueLitigate">$24,983</span></div>
+                    </div>
+                    <div class="lg:col-span-7 flex flex-col gap-4">
+                        <div class="card" data-accent="amber">
+                            <div class="card-head"><h3 class="card-title">Two Ways to Source a Case</h3><span class="tag tag-amber">Acquisition Cost</span></div>
+                            <div class="cmp-row cmp-head acq"><span style="text-align:left">Route</span><span>Per signed CFA</span><span>Per settled case</span></div>
+                            <div class="cmp-row acq"><span class="p" style="text-align:left">Agency media buy + our intake<br><small class="note font-normal">$150 raw lead + 15% agency fee + $50 call center; 15% sign</small></span><span class="font-mono" id="cmpASigned">$1,483</span><span class="font-mono font-bold text-amber-400" id="cmpANet">$2,967</span></div>
+                            <div class="cmp-row acq"><span class="p" style="text-align:left">Buy signed retainers<br><small class="note font-normal">$2,250 per retainer; call center bundled, data stays with vendor</small></span><span class="font-mono" id="cmpCSigned">$2,250</span><span class="font-mono font-bold" id="cmpCNet">$4,500</span></div>
+                            <p class="note mt-2">Per settled case = per signed case &times; 2, because half of signed cases drop out. Through us is <strong>about $1,500 less per settled case</strong>, and every call is qualified against the MDL criteria before it is signed. Acquisition is optional &mdash; skip it if you have your own feed.</p>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="card" data-accent="emerald">
+                                <div class="card-head"><h3 class="card-title">Originate &amp; Litigate</h3><span class="tag tag-emerald">100% Fee</span></div>
+                                <div class="big-num text-emerald-400" id="ueLitigate2">$24,983</div>
+                                <p class="note mt-1">gross profit per settled case</p>
+                                <p class="body mt-2">Firm is attorney of record, transfers to the MDL, and keeps the full fee. The MSO runs everything non-legal.</p>
+                            </div>
+                            <div class="card" data-accent="slate">
+                                <div class="card-head"><h3 class="card-title">Originate &amp; Refer</h3><span class="tag tag-slate"><span id="ueRefShare">50%</span> Share</span></div>
+                                <div class="big-num" id="ueRefer">$6,758</div>
+                                <p class="note mt-1">gross profit per settled case (<span id="ueReferFee">$9,975</span> fee share)</p>
+                                <p class="body mt-2">Sign, cure, and hand to a trial firm on a 50/50 referral split. Zero litigation overhead — and a little over 40% of the economics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ================= SLIDE 5: OPERATING BUDGET ================= -->
+        <section class="slide space-y-6" id="slide-5">
+            <div class="panel">
+
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Slide 05</span>
+                        <h2 class="slide-title">Operating Budget: Monthly Run-Rate</h2>
+                    </div>
+                    <span class="chip"><span id="budCasesHeader">50</span> Signed CFAs / Month · <span id="budOpenHeader">972</span> Open on Average</span>
+                </div>
+
+                <div class="card mt-3 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center !py-2">
+                    <div class="ctrl sm:col-span-6">
+                        <div class="row"><label>Scenario — Qualified Signed CFAs per month (25 · 50 · 75 · 100), for 60 months</label><span class="val text-amber-400" id="budCasesVal">50</span></div>
+                        <input type="range" id="inputCases" min="25" max="100" step="25" value="50" oninput="updateCalculator()">
+                    </div>
+                    <label class="flex items-start gap-2.5 sm:col-span-6 cursor-pointer select-none">
+                        <input type="checkbox" id="inputLitigator" checked onchange="updateCalculator()" class="mt-1 accent-amber-500 w-4 h-4">
+                        <span class="note"><strong class="text-white">Add a dedicated mass tort litigator</strong> — uncheck if the firm already has one on staff. Modeled at $160k/yr (<span class="font-mono text-white" id="litRateNote">$13,333</span>/mo).</span>
+                    </label>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-2">
+                    <div class="card flex flex-col" data-accent="amber">
+                        <div class="card-head"><h3 class="card-title">Option A: Agency Media Buy + Our Intake</h3><span class="tag tag-amber">Agency Media + Intake</span></div>
+                        <div class="section-label mb-0.5">Beacon fee — per open case, sliding scale (Appendix E)</div>
+                        <div class="kv"><span class="k">Beacon docket fee <small id="budAFeeNote">(972 open on average · avg $32 / case)</small></span><span class="v amber" id="budAFee">$62,750</span></div>
+                        <div class="section-label mt-1.5 mb-0.5">Firm-side</div>
+                        <div class="kv"><span class="k">Mass tort litigator <small>(if not on staff)</small></span><span class="v sky" id="budALit">$13,333</span></div>
+                        <div class="section-label mt-1.5 mb-0.5">Case Acquisition Cost</div>
+                        <div class="flex-1">
+                            <div class="kv"><span class="k">Agency media buy <small id="budAMediaNote">(333 raw × $150 + 15% agency fee)</small></span><span class="v" id="budAMedia">$57,500</span></div>
+                            <div class="kv"><span class="k">Outsourced intake / call center <small id="budAIntakeNote">(333 × $50)</small></span><span class="v" id="budAIntake">$16,667</span></div>
+                            <div class="kv"><span class="k">Federal filing fee reserve <small id="budAMrrNote">(50 × $405)</small> <span class="tag tag-emerald ml-1">Reimbursed at settlement</span></span><span class="v pos" id="budAMrr">$20,250</span></div>
+                        </div>
+                        <div class="kv total"><span class="k">Total monthly outlay</span><span class="v amber" id="budATotal">$170,500</span></div>
+                        <div class="kv highlight"><span class="k">Net monthly cost <small>(after filing fee reimbursement)</small></span><span class="v" id="budANet">$150,250</span></div>
+                    </div>
+
+                    <div class="card flex flex-col" data-accent="slate">
+                        <div class="card-head"><h3 class="card-title">Option B: Buy Qualified Signed Retainers</h3><span class="tag tag-slate">Media Company</span></div>
+                        <div class="section-label mb-0.5">Beacon fee — per open case, sliding scale (Appendix E)</div>
+                        <div class="kv"><span class="k">Beacon docket fee <small id="budBFeeNote">(972 open on average · avg $32 / case)</small></span><span class="v amber" id="budBFee">$62,750</span></div>
+                        <div class="section-label mt-1.5 mb-0.5">Firm-side</div>
+                        <div class="kv"><span class="k">Mass tort litigator <small>(if not on staff)</small></span><span class="v sky" id="budBLit">$13,333</span></div>
+                        <div class="section-label mt-1.5 mb-0.5">Case Acquisition Cost</div>
+                        <div class="flex-1">
+                            <div class="kv"><span class="k">Qualified signed retainers <small id="budBRetNote">(50 × $2,250)</small></span><span class="v" id="budBRet">$112,500</span></div>
+                            <div class="kv"><span class="k">Call center</span><span class="v dim">Bundled in Vendor Price</span></div>
+                            <div class="kv"><span class="k">Federal filing fee reserve <small id="budBMrrNote">(50 × $405)</small> <span class="tag tag-emerald ml-1">Reimbursed at settlement</span></span><span class="v pos" id="budBMrr">$20,250</span></div>
+                        </div>
+                        <div class="kv total"><span class="k">Total monthly outlay</span><span class="v" id="budBTotal">$208,833</span></div>
+                        <div class="kv highlight"><span class="k">Net monthly cost <small>(after filing fee reimbursement)</small></span><span class="v" id="budBNet">$188,583</span></div>
+                    </div>
+                </div>
+
+                <div class="strip top mt-1">
+                    <div>
+                        <div class="l">How the Beacon fee is computed (per MDL, on average open cases)</div>
+                        <p class="body mt-1 font-mono text-[11px]" id="budBracket">100 × $50 + 400 × $35 + 1,750 × $25 = $62,750 / mo</p>
+                        <p class="note mt-0.5">Average <strong class="text-white" id="budAvg">$27.89</strong> per open case. Case managers, QA, curing, AI record review, portal and reporting all inside.</p>
+                    </div>
+                    <div>
+                        <div class="l">Open cases, from the retention model</div>
+                        <p class="body mt-1" id="budOpenNote">50 signings / mo for 60 months = 3,000 signed. 50% retained, with a front-loaded drop-off → 972 open cases on average per month (peak 1,595; 477 open at month 12).</p>
+                    </div>
+                    <div>
+                        <div class="l">The four scenarios</div>
+                        <table class="w-full mt-1 text-[11px] font-mono" id="budScen"><tbody>
+                            <tr><td>25 / mo · 1,500 signed</td><td class="text-right">493 open</td><td class="text-right">$18,755 / mo</td><td class="text-right text-slate-500">$38.04</td></tr>
+                            <tr><td>50 / mo · 3,000 signed</td><td class="text-right">972 open</td><td class="text-right">$30,800 / mo</td><td class="text-right text-slate-500">$31.69</td></tr>
+                            <tr><td>75 / mo · 4,500 signed</td><td class="text-right">1,490 open</td><td class="text-right">$43,750 / mo</td><td class="text-right text-slate-500">$29.36</td></tr>
+                            <tr><td>100 / mo · 6,000 signed</td><td class="text-right">1,947 open</td><td class="text-right">$55,175 / mo</td><td class="text-right text-slate-500">$28.34</td></tr>
+                        </tbody></table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ================= SLIDE 6: ANNUAL OUTLAY + FIVE-YEAR SCALE ================= -->
+        <section class="slide" id="slide-6">
+            <div class="panel" style="justify-content:space-between">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Slide 06</span>
+                        <h2 class="slide-title">ROI Over the Life of One MDL</h2>
+                    </div>
+                    <span class="chip">Flows from the budget page · <span id="mdlSigned2">3,000</span> Signed over 60 Months · <span id="mdlOpen">972</span> Open on Average</span>
+                </div>
+                <div class="strip top mt-2 card !py-2">
+                    <div>
+                        <div class="l">From Slide 5 &mdash; the docket</div>
+                        <p class="body mt-1"><strong id="mdlCases">50</strong> signed CFAs / mo for 60 months = <strong id="mdlSigned">3,000</strong> signed. Retention model: <span id="mdlSurv">50%</span> retained, front-loaded drop-off &rarr; <strong id="mdlOpen2">972</strong> open on average per month. The retained half settles at month 60 &rarr; <strong id="mdlSettled">1,500</strong> settled.</p>
+                    </div>
+                    <div>
+                        <div class="l">From Slide 4 &mdash; the fee per settled case</div>
+                        <p class="body mt-1"><span id="mdlGsv">$75,000</span> GSV &minus; 5% common benefit, &times; <span id="mdlCfa">40%</span> contingency fee, &minus; $550 settlement admin = <strong id="mdlNetFee">$27,950</strong> net to the firm.</p>
+                    </div>
+                    <div>
+                        <div class="l">From Slide 5 &mdash; the Beacon fee</div>
+                        <p class="body mt-1"><span id="mdlFeeMo">$30,800</span> / mo on <span id="mdlOpen3">972</span> open cases on average = <strong id="mdlRate">$31.69</strong> per case per month on the Appendix E sliding scale. Litigator <span id="mdlLitMo">$13,333</span> / mo if not on staff.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-2 items-stretch">
+                    <div class="card flex flex-col" data-accent="amber">
+                        <div class="card-head"><h3 class="card-title">Option A: Agency Media Buy + Our Intake</h3><span class="tag tag-amber" id="mdlATag">$2,967 per settled case</span></div>
+                        <div class="kv"><span class="k">Net payout to the firm <small id="mdlAPayNote">(1,125 settled × $27,950)</small></span><span class="v pos" id="mdlAPay">+$31.4M</span></div>
+                        <div class="kv"><span class="k">Beacon docket fee <small id="mdlAFeeNote">($30,800 / mo × 60 months)</small></span><span class="v neg" id="mdlAFee">−$2.8M</span></div>
+                        <div class="kv"><span class="k">Mass tort litigator <small id="mdlALitNote">($13,333 / mo × 60 months)</small></span><span class="v neg" id="mdlALit">−$800k</span></div>
+                        <div class="kv"><span class="k">Case acquisition <small id="mdlAAcqNote">(2,250 signed × $1,483 = $2,967 per settled case)</small></span><span class="v neg" id="mdlAAcq">−$3.3M</span></div>
+                        <div class="kv total"><span class="k">Net to the firm over the life of the MDL</span><span class="v pos" id="mdlANet">$24.0M</span></div>
+                        <div class="strip mt-2">
+                            <div><div class="l">Net per settled case</div><div class="big" id="mdlAPerCase">$21,357</div></div>
+                            <div><div class="l">Beacon fee ÷ payout</div><div class="big" id="mdlAFeePct">9%</div></div>
+                            <div><div class="l">Return on every $1 spent</div><div class="big" id="mdlAMult">3.2x</div></div>
+                        </div>
+                    </div>
+                    <div class="card flex flex-col" data-accent="slate">
+                        <div class="card-head"><h3 class="card-title">Option B: Buy Qualified Signed Retainers</h3><span class="tag tag-slate" id="mdlBTag">$4,500 per settled case</span></div>
+                        <div class="kv"><span class="k">Net payout to the firm <small id="mdlBPayNote">(1,125 settled × $27,950)</small></span><span class="v pos" id="mdlBPay">+$31.4M</span></div>
+                        <div class="kv"><span class="k">Beacon docket fee <small id="mdlBFeeNote">($30,800 / mo × 60 months)</small></span><span class="v neg" id="mdlBFee">−$2.8M</span></div>
+                        <div class="kv"><span class="k">Mass tort litigator <small id="mdlBLitNote">($13,333 / mo × 60 months)</small></span><span class="v neg" id="mdlBLit">−$800k</span></div>
+                        <div class="kv"><span class="k">Case acquisition <small id="mdlBAcqNote">(2,250 signed × $2,250 = $4,500 per settled case)</small></span><span class="v neg" id="mdlBAcq">−$5.1M</span></div>
+                        <div class="kv total"><span class="k">Net to the firm over the life of the MDL</span><span class="v pos" id="mdlBNet">$22.3M</span></div>
+                        <div class="strip mt-2">
+                            <div><div class="l">Net per settled case</div><div class="big" id="mdlBPerCase">$19,824</div></div>
+                            <div><div class="l">Beacon fee ÷ payout</div><div class="big" id="mdlBFeePct">9%</div></div>
+                            <div><div class="l">Return on every $1 spent</div><div class="big" id="mdlBMult">2.4x</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="strip top mt-2">
+                    <div>
+                        <div class="l">Start Small, Scale on Proof</div>
+                        <p class="body mt-1">Begin at <strong>25 signed CFAs a month</strong> &mdash; roughly half the outlay and half the trough. The 90-day stage gate sits ahead of any scale-up in spend.</p>
+                    </div>
+                    <div>
+                        <div class="l">Who Funds the Gap</div>
+                        <p class="body mt-1">Litigation funders advance against dockets they can diligence &mdash; verified diagnosis, records status, matrix score, and deficiency state on every claimant. We build exactly that data.</p>
+                    </div>
+                    <div>
+                        <div class="l">Pace It to the Lag</div>
+                        <p class="body mt-1">Fees from the first cohort land in year <span id="scFirstYear">6</span>. Spend is stage-gated behind Daubert and bellwether milestones, and acquisition is paced to the lag rather than to media capacity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ================= SLIDE 5: HOW IT WORKS ================= -->
+        <section class="slide space-y-6" id="slide-7">
+            <div class="panel">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Slide 07</span>
+                        <h2 class="slide-title">How It Works: Operations, Data, Acquisition</h2>
+                    </div>
+                    <div class="flex items-center gap-2"><span class="tag tag-amber">MSO</span><span class="tag tag-sky">Firm</span></div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6">
+                    <div class="card" data-accent="amber">
+                        <div class="card-head"><h3 class="card-title">Docket Operations Engine</h3><span class="tag tag-amber">Core</span></div>
+                        <ul class="list">
+                            <li><strong>Intake QA</strong> against docket criteria; close out non-qualifying cases and report back to vendors.</li>
+                            <li><strong>Claimant comms bridge</strong> — case updates, incremental data requests, and staying reachable across a multi-year program.</li>
+                            <li><strong>Curing &amp; clarifying documentation</strong> inside every deficiency window.</li>
+                            <li><strong>PFS outreach</strong> — reach the claimant, complete the Plaintiff Fact Sheet, serve it on time.</li>
+                            <li><strong>Matrix valuation &amp; tier upgrades</strong> — score every case, work up the records that move it a tier, retarget closed cases.</li>
+                        </ul>
+                    </div>
+                    <div class="card" data-accent="sky">
+                        <div class="card-head"><h3 class="card-title">Data Layer &amp; Portal</h3><span class="tag tag-sky">Core</span></div>
+                        <ul class="list">
+                            <li><strong>Rapid retrieval</strong> of medical records, medical history, and diagnoses per claimant.</li>
+                            <li><strong>AI medical record review</strong> &mdash; every page checked against the docket lens; <strong>included in the monthly fee</strong>, no $250 per-case charge.</li>
+                            <li><strong>Secure in AWS</strong> &mdash; HIPAA-eligible, encrypted, every access logged; reviewers work only inside locked AWS virtual desktops.</li>
+                            <li><strong>Maintained database and data portal</strong> — one record per claimant: DX, records status, matrix score, deficiency state, SOL date.</li>
+                            <li><strong>Compensability and ROI reporting</strong> by channel, docket, and cohort — what a funder or acquirer diligences.</li>
+                        </ul>
+                    </div>
+                    <div class="card" data-accent="emerald">
+                        <div class="card-head"><h3 class="card-title">Acquisition Module</h3><span class="tag tag-emerald">Optional</span></div>
+                        <p class="body mb-3">If you don't have your own feed, we run a traditional agency media buy and handle intake through an outsourced call center on firm-approved scripts.</p>
+                        <div class="kv"><span class="k">Raw lead + 15% agency fee + $50 intake</span><span class="v">$222.50</span></div>
+                        <div class="kv"><span class="k">÷ 15% raw → Qualified Signed CFA</span><span class="v">$1,483</span></div>
+                        <div class="kv"><span class="k">÷ 50% survival to settlement</span><span class="v amber">$2,967</span></div>
+                        <div class="kv"><span class="k">vs. buying signed retainers</span><span class="v dim">$4,500</span></div>
+                        <p class="note mt-3">About $1,500 less per settled case than buying retainers; every signed case flows straight into the docket.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                    <div class="card !py-4" data-accent="amber">
+                        <div class="card-head !mb-2"><h3 class="card-title">The MSO Runs</h3><span class="tag tag-amber">Non-Legal</span></div>
+                        <p class="body">Lead generation → intake &amp; retainer → document QA &amp; curing → medical records, comms bridge &amp; updates → matrix valuation &amp; docket upgrade → settlement administrator and probate counsel relationships.</p>
+                    </div>
+                    <div class="card !py-4" data-accent="sky">
+                        <div class="card-head !mb-2"><h3 class="card-title">The Firm Runs</h3><span class="tag tag-sky">Legal</span></div>
+                        <p class="body">Home-court SOL filing → MDL transfer or direct filing + PFS → enroll and certify the docket against the participation threshold → award review, trust-account disbursement, and independent legal judgment on every case.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ================= CORE: COST / SAVINGS (DRAFT) ================= -->
+        <section class="slide" id="slide-8">
+            <div class="draft-stamp">DRAFT</div>
+            <div class="panel">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Slide 08</span>
+                        <h2 class="slide-title">Cost Efficiency: The Back Office for About 40% Less Than Building It</h2>
+                    </div>
+                    <span class="chip">Assumes 1,500 Signed over 60 Months &middot; 750 Settle</span>
+                </div>
+                <div class="grid grid-cols-12 gap-4 mt-4">
+                    <div class="col-span-6 card tight flex flex-col" data-accent="amber">
+                        <div class="card-head"><h3 class="card-title">Build It In-House vs. Our Fee</h3><span class="tag tag-amber">Per Year</span></div>
+                        <div class="kv"><span class="k">Mass tort case manager <small>(experienced; market $56k&ndash;$90k)</small></span><span class="v">$85,000</span></div>
+                        <div class="kv"><span class="k">Legal assistants &times; 2 <small>(BLS median $62,890 each)</small></span><span class="v">$125,800</span></div>
+                        <div class="kv"><span class="k">QA reviewer <small>(paid like a legal assistant)</small></span><span class="v">$62,900</span></div>
+                        <div class="kv"><span class="k">Benefits &amp; payroll taxes <small>(15% full-time markup)</small></span><span class="v">$41,100</span></div>
+                        <div class="kv"><span class="k">Outside medical record review <small>(300 new cases a year &times; $250)</small></span><span class="v">$75,000</span></div>
+                        <div class="kv total"><span class="k">In-house, per year <small>($32,480 / month)</small></span><span class="v neg">$389,800</span></div>
+                        <div class="kv highlight"><span class="k">Our fee, same docket <small>$18,755* / mo &times; 12; medical review included</small></span><span class="v">$225,060</span></div>
+                        <p class="note mt-2"><strong>Saves about $13,700 a month (42%)</strong> before software, hiring, training, and turnover &mdash; and the fee falls as cases close.</p>
+                    </div>
+                    <div class="col-span-6 card tight flex flex-col" data-accent="emerald">
+                        <div class="card-head"><h3 class="card-title">Return on the Fee &mdash; Per Settled Case</h3><span class="tag tag-emerald">50% Drop-Out</span></div>
+                        <div class="kv"><span class="k">Firm net fee per settled case</span><span class="v pos">$27,950</span></div>
+                        <div class="kv"><span class="k">Beacon fee over 60 months <small>($18,755* / mo &times; 60)</small></span><span class="v">$1,125,300</span></div>
+                        <div class="kv"><span class="k">Settled cases <small>(1,500 signed at 25 a month &times; 50% retained)</small></span><span class="v">750</span></div>
+                        <div class="kv"><span class="k">Our fee per settled case <small>($1,125,300 &divide; 750)</small></span><span class="v neg">$1,500</span></div>
+                        <div class="kv"><span class="k">Estimated mass tort overhead % of net fee <small>($1,500 &divide; $27,950)</small></span><span class="v">5.4%</span></div>
+                        <div class="kv"><span class="k">Outside medical record review avoided <small>(2 cases &times; $250)</small></span><span class="v pos">$500</span></div>
+                        <div class="kv total"><span class="k">Net fee per $1 of our fee</span><span class="v pos">$18.63</span></div>
+                        <div class="kv highlight"><span class="k">+1% compensability <small>1 more paid case per 100 signed</small></span><span class="v">+$27,950</span></div>
+                        <p class="note mt-2">Retention model: 50% retained, front-loaded drop-off, retained cases settle at month 60. Bigger dockets pay less per case on the sliding scale.</p>
+                    </div>
+                </div>
+                <div class="card mt-4" data-accent="slate">
+                    <div class="strip top">
+                        <div><div class="l">Estimated Mass Tort Overhead</div><p class="body mt-1">About <strong>5%</strong> of the firm&rsquo;s net fee &mdash; <strong>$1,500 per settled case</strong> at 25 signed a month (1,500 over 60 months, 50% retained).</p></div>
+                        <div><div class="l">Medical Review Without the Line Item</div><p class="body mt-1">Outside review runs about <strong>$250 a case</strong> (market rates $0.90&ndash;$2.50+ a page). Ours is AI medical record review, <strong>inside the monthly fee</strong>.</p></div>
+                        <div><div class="l">Assumptions</div><p class="note mt-1">$75k GSV, 40% CFA, 5% common benefit, $550 admin (Slide 4). Docket: 1,500 signed over 60 months at 25 a month, 750 settle. Salaries: BLS May 2025 paralegal &amp; legal assistant median; ZipRecruiter mass tort case manager range, set at the top for an experienced hire; QA reviewer paid like a legal assistant. 15% benefits &amp; payroll markup.</p></div>
+                    </div>
+                </div>
+                <p class="note mt-2">* 1,500 signed (25 a month &times; 60 months) averages about 500 open cases; on the sliding scale that is $18,755 a month.</p>
+            </div>
+        </section>
+        <!-- ================= SLIDE 7: STRUCTURE — THREE OPTIONS ================= -->
+        <section class="slide space-y-6" id="slide-9">
+            <div class="panel">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Slide 09</span>
+                        <h2 class="slide-title">Structure: Two Ways to Engage</h2>
+                    </div>
+                    <span class="chip">MSO Agreement Now &middot; Fee Division Once the ABS Issues</span>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-6">
+                    <div class="card flex flex-col" data-accent="amber">
+                        <div class="card-head"><h3 class="card-title">Option 1: MSO Agreement</h3><span class="tag tag-amber">Vendor Fees</span></div>
+                        <p class="body">Your firm retains full ownership. The MSO is a contracted vendor for docket operations, the data layer, and — if you want it — acquisition. Turn modules on or off as the docket grows.</p>
+                        <ul class="list mt-3 flex-1">
+                            <li><strong>Compensation:</strong> flat monthly fee per open case, tiered by docket size, AI medical record review included &mdash; see Appendix E.</li>
+                            <li><strong>Paper:</strong> Master Services Agreement; live in 30 days; 90-day stage gate before scaling.</li>
+                            <li><strong>Firm keeps:</strong> 100% of the contingency fee, the client data, and independent legal judgment.</li>
+                        </ul>
+                    </div>
+                    <div class="card flex flex-col" data-accent="purple">
+                        <div class="card-head"><h3 class="card-title">Option 2: Per-Case Fee Division via Beacon Law</h3><span class="tag tag-purple">ER 1.5(e) &middot; Requires ABS</span></div>
+                        <p class="body">Beacon Law &mdash; our Arizona firm, licensed as an ABS so its nonlawyer owners can hold equity &mdash; originates and works up the case, then divides the fee with your firm per case under ER 1.5(e): in proportion to services or with joint responsibility, and with the client&rsquo;s written consent. Two separate firms, no shared ownership. Your firm contributes license, representation, and the docket.</p>
+                        <ul class="list mt-3 flex-1">
+                            <li><strong>Compensation:</strong> origination share on cases Beacon Law sources, paid at settlement &mdash; aligned on each case&rsquo;s outcome, not on firm-wide economics.</li>
+                            <li><strong>Paper:</strong> co-counsel and fee-division agreement plus per-case client consent. Available once Beacon Law&rsquo;s ABS license issues; Option 1 runs as the bridge.</li>
+                            <li><strong>Firm keeps:</strong> 100% ownership of your firm, the contingency fee on every case you originate yourself, and full control of legal judgment. Outside Arizona, your state&rsquo;s ER 5.4 position on dividing a fee with a nonlawyer-owned firm is confirmed first.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5">
+                    <div class="card !py-4"><div class="section-label">Step 1</div><div class="body mt-1"><strong>30-minute economics call.</strong> We model your first 100 cases with your numbers &mdash; cost, cash, timeline, and our fee.</div></div>
+                    <div class="card !py-4"><div class="section-label">Step 2</div><div class="body mt-1"><strong>Pick the structure and sign.</strong> MSA for Option 1; co-counsel and fee-division agreement for Option 2 once Beacon Law&rsquo;s ABS license issues, with Option 1 as the bridge.</div></div>
+                    <div class="card !py-4"><div class="section-label">Step 3</div><div class="body mt-1"><strong>90-day pilot.</strong> Stage gate on cost per Qualified Signed CFA, cure rate, and compensability before scaling.</div></div>
+                </div>
+            </div>
+        </section>
+        <!-- ================= APPENDIX A: LIVE MODEL ================= -->
+        <section class="slide appendix tight" id="slide-10">
+            <div class="panel">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Appendix A</span>
+                        <h2 class="slide-title">Live Model &mdash; Unit Economics, Acquisition &amp; Five-Year Cohort</h2>
+                    </div>
+                    <span class="chip">Drag any input; every figure in the deck recalculates</span>
+                </div>
+                <input type="hidden" id="inputDirect" value="100">
+                <input type="hidden" id="inputCoCounselShare" value="65">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mt-3 flex-1 min-h-0">
+
+                    <div class="lg:col-span-4 card model-inputs">
+                        <h3 class="section-label">Case &amp; Fee</h3>
+                        <div class="ctrl">
+                            <div class="row"><label>Average settlement (GSV)</label><span class="val" id="calcGsvVal">$75,000</span></div>
+                            <input type="range" id="inputGsv" min="30000" max="150000" step="5000" value="75000" oninput="updateCalculator()">
+                        </div>
+                        <div class="ctrl">
+                            <div class="row"><label>Contingency fee rate (CFA)</label><span class="val" id="calcCfaVal">40%</span></div>
+                            <input type="range" id="inputCfa" class="emerald" min="30" max="45" step="1" value="40" oninput="updateCalculator()">
+                        </div>
+                        <h3 class="section-label mt-3">Acquisition Funnel</h3>
+                        <div class="ctrl">
+                            <div class="row"><label>Raw lead cost</label><span class="val" id="calcRawLeadVal">$150</span></div>
+                            <input type="range" id="inputRawLead" class="red" min="50" max="500" step="10" value="150" oninput="updateCalculator()">
+                        </div>
+                        <div class="ctrl">
+                            <div class="row"><label>Call center cost per raw lead</label><span class="val" id="calcCallCenterVal">$50</span></div>
+                            <input type="range" id="inputCallCenter" min="0" max="300" step="25" value="50" oninput="updateCalculator()">
+                        </div>
+                        <div class="ctrl">
+                            <div class="row"><label>Raw &rarr; signed conversion</label><span class="val" id="calcRawConvVal">15%</span></div>
+                            <input type="range" id="inputRawConv" class="slate" min="5" max="50" step="1" value="15" oninput="updateCalculator()">
+                        </div>
+                        <div class="ctrl">
+                            <div class="row"><label>Signed &rarr; settled drop-off</label><span class="val" id="calcDropoffVal">50%</span></div>
+                            <input type="range" id="inputDropoff" class="slate" min="10" max="80" step="5" value="50" oninput="updateCalculator()">
+                        </div>
+                        <div class="ctrl">
+                            <div class="row"><label>Vendor signed-retainer price</label><span class="val" id="calcRetainerVal">$2,250</span></div>
+                            <input type="range" id="inputRetainer" class="slate" min="1500" max="5000" step="250" value="2250" oninput="updateCalculator()">
+                        </div>
+                        <h3 class="section-label mt-3">Cohort</h3>
+                        <div class="ctrl">
+                            <div class="row"><label>Qualified Signed CFAs per year</label><span class="val" id="p5CasesVal">500</span></div>
+                            <input type="range" id="inputAnnualCases" min="100" max="1500" step="50" value="500" oninput="updateCalculator()">
+                        </div>
+                        <div class="ctrl">
+                            <div class="row"><label>Months from signing to settlement</label><span class="val" id="p5LagVal">60</span></div>
+                            <input type="range" id="inputLag" class="sky" min="12" max="60" step="6" value="60" oninput="updateCalculator()">
+                        </div>
+                        <div class="ctrl">
+                            <div class="row"><label>Acquisition path</label><span class="val" id="p5PathVal">Option A</span></div>
+                            <select id="inputPath" onchange="updateCalculator()" class="w-full border border-[#d1d5db] rounded px-2 py-1 text-xs bg-white text-[#1f2937]">
+                                <option value="A" selected>Option A &mdash; Build the funnel</option>
+                                <option value="B">Option B &mdash; Buy signed retainers</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-8 flex flex-col gap-3 min-h-0">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="card flex flex-col" data-accent="amber">
+                                <div class="card-head"><h3 class="card-title">Option A: Agency Media Buy + Our Intake</h3><span class="tag tag-amber">Agency Media + Intake</span></div>
+                                <div class="kv"><span class="k">Raw lead cost</span><span class="v" id="fnARaw">$150</span></div>
+                                <div class="kv"><span class="k">+ Call center intake per raw lead</span><span class="v" id="fnACallCenter">+$50</span></div>
+                                <div class="kv"><span class="k">Loaded cost per raw lead</span><span class="v" id="fnALoaded">$223</span></div>
+                                <div class="kv"><span class="k">&divide; Raw &rarr; signed conversion</span><span class="v" id="fnAConv">15%</span></div>
+                                <div class="kv"><span class="k">Cost per Qualified Signed CFA</span><span class="v" id="fnASigned">$1,483</span></div>
+                                <div class="kv"><span class="k">&divide; Signed &rarr; settled survival</span><span class="v neg" id="fnASurvive">50%</span></div>
+                                <div class="kv total"><span class="k">Net cost per settled case</span><span class="v amber" id="fnANet">$2,967</span></div>
+                                <div class="kv"><span class="k">Firm net fee per settled case</span><span class="v" id="fnANetFee">$27,950</span></div>
+                                <div class="kv highlight"><span class="k">Net revenue per settled case</span><span class="v pos" id="fnANetRev">$24,983</span></div>
+                            </div>
+                            <div class="card flex flex-col" data-accent="slate">
+                                <div class="card-head"><h3 class="card-title">Option B: Buy Signed Retainers</h3><span class="tag tag-slate">Media Company</span></div>
+                                <div class="kv"><span class="k">Signed retainer price</span><span class="v" id="fnBSigned">$2,250</span></div>
+                                <div class="kv"><span class="k">Call center</span><span class="v dim">Bundled in Vendor Price</span></div>
+                                <div class="kv"><span class="k">Lead data &amp; attribution</span><span class="v dim">Stays with vendor</span></div>
+                                <div class="kv"><span class="k">Q1 2026 quote range</span><span class="v dim">$1,150&ndash;$4,200</span></div>
+                                <div class="kv"><span class="k">Replacement obligation on non-qualifying cases</span><span class="v dim">Enforced at QA</span></div>
+                                <div class="kv"><span class="k">&divide; Signed &rarr; settled survival</span><span class="v neg" id="fnBSurvive">50%</span></div>
+                                <div class="kv total"><span class="k">Net cost per settled case</span><span class="v" id="fnBNet">$4,500</span></div>
+                                <div class="kv"><span class="k">Firm net fee per settled case</span><span class="v" id="fnBNetFee">$27,950</span></div>
+                                <div class="kv highlight"><span class="k">Net revenue per settled case</span><span class="v pos" id="fnBNetRev">$23,450</span></div>
+                            </div>
+                        </div>
+                        <div class="card" data-accent="emerald">
+                            <div class="card-head"><h3 class="card-title">Five-Year Cohort &mdash; Totals</h3><span class="tag tag-emerald" id="p5PathTag">Option A</span></div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div class="stat text-left"><div class="l">Total Revenue</div><div class="n amber" id="apRev">$35.7M</div><div class="note mt-1" id="apRevNote">1,250 settled &times; $27,950 net fee + advances recovered</div></div>
+                                <div class="stat text-left"><div class="l">Total Expense</div><div class="n" id="apExp">$6.4M</div><div class="note mt-1" id="apExpNote">operating stack + acquisition &amp; advances</div></div>
+                                <div class="stat text-left" style="border-color: var(--emerald-line)"><div class="l">Net Revenue</div><div class="n emerald" id="apNet">$29.3M</div><div class="note mt-1">after the Beacon docket fee and all acquisition costs</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ================= APPENDIX C: ADMIN COST & PROBATE ================= -->
+        <section class="slide appendix" id="slide-11">
+            <div class="panel">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Appendix B</span>
+                        <h2 class="slide-title">Admin Cost per Settled Case &amp; Probate</h2>
+                    </div>
+                    <span class="chip">Modeled Assumption</span>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mt-4 items-start">
+                    <div class="lg:col-span-7 card" data-accent="emerald">
+                        <div class="card-head"><h3 class="card-title">Firm-Side Admin Cost per Settled Case</h3><span class="tag tag-emerald">Modeled Assumption</span></div>
+                        <div class="kv"><span class="k">Lien resolution <small>(Medicare conditional payment, Medicaid, private / ERISA)</small></span><span class="v">$400</span></div>
+                        <div class="kv"><span class="k">QSF / disbursement administration &amp; settlement statement</span><span class="v">$150</span></div>
+                        <div class="kv"><span class="k">Claimant comms, bankruptcy coordination, tax reporting</span><span class="v dim">Bundled</span></div>
+                        <div class="kv total"><span class="k">Per settled case — absorbed by the firm</span><span class="v pos">$550</span></div>
+                        <div class="kv !border-0 !pt-2"><span class="k note">Probate (deceased claimants only, 10–15% of cancer dockets)</span><span class="v dim">$2,500–$5,000 per estate, from client share</span></div>
+                        <p class="note mt-3">Vendors do not publish rate cards; per-claimant program pricing is negotiated at volume. $550 is a planning figure for a docket of 500+ and should be confirmed in vendor quotes. Modeled as a firm-absorbed cost — deducted from the gross fee on Slides 5 and 7 — so the client's net recovery is untouched.</p>
+                    </div>
+                    <div class="lg:col-span-5 card" data-accent="purple">
+                        <div class="card-head"><h3 class="card-title">Probate Strategy</h3><span class="tag tag-purple">Outsourced</span></div>
+                        <p class="body mb-3">In cancer dockets like Hair Relaxer and AFFF, claimant mortality before funding is high. Probate is a certainty, not an edge case.</p>
+                        <ul class="list">
+                            <li><strong>Not handled in-house.</strong> Multi-state probate run internally destroys operational leverage.</li>
+                            <li><strong>Local probate counsel</strong> engaged in the claimant's home county per matter, routed through the settlement administrator.</li>
+                            <li><strong>Counsel opens the estate,</strong> appoints a representative, and executes the distribution; costs come from the client's share.</li>
+                        </ul>
+                    </div>
+                </div>
+            
+            </div>
+        </section>
+        <!-- ================= APPENDIX D: SAFEGUARDS ================= -->
+        <section class="slide appendix" id="slide-12">
+            <div class="panel">
+
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Appendix C</span>
+                        <h2 class="slide-title">Operational Safeguards &amp; Risk Mitigation</h2>
+                    </div>
+                    <span class="chip">Protecting the Firm's License</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-6">
+                    <div class="card" data-accent="amber">
+                        <div class="card-head"><h3 class="card-title">Intake &amp; Data Security</h3><span class="tag tag-amber">Top of Funnel</span></div>
+                        <p class="body mb-3">MSO infrastructure is built to keep compliance exposure out of the firm at the point of acquisition.</p>
+                        <ul class="list">
+                            <li><strong>TCPA compliance:</strong> consent logging (Jornaya / ActiveProspect) on every digital lead to shut down class-action exposure.</li>
+                            <li><strong>Secure in AWS:</strong> records, AI review, and the portal run in a HIPAA-eligible AWS environment under a signed BAA &mdash; encrypted, on a private network, every access logged. Reviewers work only inside locked AWS virtual desktops with copy, download, and print turned off.</li>
+                            <li><strong>Ethical advertising:</strong> all media copy is pre-approved by the firm for compliance with Rules 7.1 and 7.3.</li>
+                        </ul>
+                    </div>
+                    <div class="card" data-accent="sky">
+                        <div class="card-head"><h3 class="card-title">Legal Firewalls</h3><span class="tag tag-sky">UPL Boundary</span></div>
+                        <p class="body mb-3">Clear operational boundaries ensure the MSO never crosses into the unauthorized practice of law.</p>
+                        <ul class="list">
+                            <li><strong>Independent legal judgment:</strong> the MSO manages the business; lawyers direct case strategy. No involvement in settlement advice.</li>
+                            <li><strong>Scripted intake:</strong> call center staff qualify claimants using firm-approved scripts without giving legal advice.</li>
+                            <li><strong>Dual-calendar SOL controls:</strong> redundant, automated docketing integrations to prevent missed statutory deadlines.</li>
+                        </ul>
+                    </div>
+                </div>
+            
+            </div>
+        </section>
+        <!-- ================= APPENDIX E: TEAM ================= -->
+        <section class="slide appendix" id="slide-13">
+            <div class="panel">
+
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Appendix D</span>
+                        <h2 class="slide-title">Operational Expertise</h2>
+                    </div>
+                    <span class="chip">Beacon Legal Services</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+
+                    <div class="card flex flex-col" data-accent="sky">
+                        <div class="card-head">
+                            <div>
+                                <h3 class="card-title text-lg">Operations &amp; Data</h3>
+                                <p class="note font-mono mt-0.5">Docket operations, records, and reporting</p>
+                            </div>
+                            <span class="tag tag-sky">Ops</span>
+                        </div>
+                        <p class="body mb-4">Four-plus years of mass tort specialization at a major mass tort law firm with 5,000+ open cases. End-to-end expertise in the mass tort data lifecycle — turning raw leads into trial-ready dockets.</p>
+                        <ul class="list mt-auto">
+                            <li><strong>Medical record review, warehousing &amp; reporting:</strong> every record reviewed, stored, and tracked per claimant.</li>
+                            <li><strong>Intake &amp; QA:</strong> call center management and compliance oversight.</li>
+                            <li><strong>Case curing:</strong> PFS, affidavits, and other incremental documents.</li>
+                        </ul>
+                    </div>
+                    <div class="card flex flex-col" data-accent="amber">
+                        <div class="card-head">
+                            <div>
+                                <h3 class="card-title text-lg">Advertising &amp; Media</h3>
+                                <p class="note font-mono mt-0.5">Paid media and lead generation</p>
+                            </div>
+                            <span class="tag tag-amber">Growth</span>
+                        </div>
+                        <p class="body mb-4">Digital acquisition lead focused on driving down cost per lead and maximizing qualified prospect volume across competitive legal channels.</p>
+                        <ul class="list mt-auto">
+                            <li><strong>Media buying:</strong> scaled deployment across Meta, Search, and Display.</li>
+                            <li><strong>A/B testing:</strong> continuous creative and funnel optimization.</li>
+                            <li><strong>Vendor management:</strong> direct relationships with tier-1 legal lead providers.</li>
+                        </ul>
+                    </div>
+                </div>
+            
+            </div>
+        </section>
+        <!-- ================= APPENDIX F: PRICING (DRAFT) ================= -->
+        <section class="slide appendix" id="slide-14">
+            <div class="draft-stamp">DRAFT</div>
+            <div class="panel">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Appendix E</span>
+                        <h2 class="slide-title">Pricing: One Monthly Fee per Open Case</h2>
+                    </div>
+                    <span class="chip">Per MDL &middot; Billed Monthly &middot; No Setup Fee</span>
+                </div>
+                <div class="grid grid-cols-12 gap-4 mt-4">
+                    <div class="col-span-5 card flex flex-col" data-accent="amber">
+                        <div class="card-head"><h3 class="card-title">Price per Open Case, per Month</h3><span class="tag tag-amber">Per MDL</span></div>
+                        <div class="tier-row"><div class="band">Cases 1&ndash;100<small>First 100 open cases in the MDL</small></div><div class="price">$50<small>/case/mo</small></div></div>
+                        <div class="tier-row t2"><div class="band">Cases 101&ndash;500<small>The next 400 open cases</small></div><div class="price">$35<small>/case/mo</small></div></div>
+                        <div class="tier-row t3"><div class="band">Cases 501+<small>Every open case above 500</small></div><div class="price">$25<small>/case/mo</small></div></div>
+                        <p class="note mt-3"><strong>Works like tax brackets.</strong> Each price applies only to the cases inside its band, so adding a case always adds to the bill &mdash; it never drops the price on the cases below it. Each MDL / mass tort has its own count.</p>
+                        <div class="section-label mt-3">Included in the monthly fee</div>
+                        <ul class="list mt-2">
+                            <li>Case manager, legal assistant, and QA work on every case</li>
+                            <li><strong>AI medical record review</strong> &mdash; no $250 per-case charge</li>
+                            <li>Monthly status report and data portal, <strong>secure in AWS</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-span-7 card flex flex-col" data-accent="sky">
+                        <div class="card-head"><h3 class="card-title">What a Monthly Bill Looks Like &mdash; One MDL</h3><span class="tag tag-sky">Worked Examples</span></div>
+                        <table class="bill">
+                            <thead><tr><th class="num">Open cases</th><th>How it adds up</th><th class="num">Monthly bill</th><th class="num">Avg / case</th><th class="num">Per year</th></tr></thead>
+                            <tbody>
+                                <tr><td class="num">100</td><td class="how">100 &times; $50</td><td class="num strong">$5,000</td><td class="num">$50</td><td class="num">$60,000</td></tr>
+                                <tr><td class="num">250</td><td class="how">100 &times; $50 + 150 &times; $35</td><td class="num strong">$10,250</td><td class="num">$41</td><td class="num">$123,000</td></tr>
+                                <tr><td class="num">500</td><td class="how">100 &times; $50 + 400 &times; $35</td><td class="num strong">$19,000</td><td class="num">$38</td><td class="num">$228,000</td></tr>
+                                <tr><td class="num">1,000</td><td class="how">100 &times; $50 + 400 &times; $35 + 500 &times; $25</td><td class="num strong">$31,500</td><td class="num">$31.50</td><td class="num">$378,000</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="kv highlight mt-auto"><span class="k">Our fee per settled case &mdash; 1,500 signed over 60 months at 25 a month, 493 open on average, 50% retained <small>$18,755 / mo &times; 60 &divide; 750 settled; vs. $27,950 firm net fee</small></span><span class="v">$1,500 &middot; 5.4%</span></div>
+                        <p class="note mt-2">Not in the monthly fee: the optional acquisition module, provider charges for copies of records, and court filing fees.</p>
+                    </div>
+                </div>
+                <div class="card mt-4" data-accent="slate">
+                    <div class="strip top">
+                        <div><div class="l">Simple to Budget</div><p class="body mt-1">One price list. One line per MDL on the invoice. No setup fee, no hourly billing.</p></div>
+                        <div><div class="l">Gets Cheaper as You Grow</div><p class="body mt-1">The average price per case falls as the docket grows &mdash; <strong>$50 at 100 cases, $31.50 at 1,000.</strong></p></div>
+                        <div><div class="l">Only Live Cases Bill</div><p class="body mt-1">A claimant who goes silent stops billing about <strong>90 days</strong> after an unanswered request (Appendix F).</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ================= APPENDIX G: BILLING RULES (DRAFT) ================= -->
+        <section class="slide appendix" id="slide-15">
+            <div class="draft-stamp">DRAFT</div>
+            <div class="panel">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Appendix F</span>
+                        <h2 class="slide-title">What Counts as Open &mdash; and How a Silent Case Closes</h2>
+                    </div>
+                    <span class="chip">Every Bill Comes With a Status Report</span>
+                </div>
+                <div class="grid grid-cols-3 gap-4 mt-4">
+                    <div class="card flex flex-col" data-accent="amber">
+                        <div class="card-head"><h3 class="card-title">What Counts as an Open Case</h3><span class="tag tag-amber">Definition</span></div>
+                        <ul class="list">
+                            <li><strong>Open</strong> from the day the case enters our system until it is (1) settled and paid, (2) dropped by the firm in writing, or (3) closed under the no-response process.</li>
+                            <li><strong>Any day counts as the month.</strong> A case open on any day of a month is billed for that month.</li>
+                            <li><strong>Counted per MDL.</strong> Each mass tort has its own count and its own tiers.</li>
+                            <li><strong>The firm decides.</strong> We never drop a client; the firm signs off on every close.</li>
+                        </ul>
+                    </div>
+                    <div class="card flex flex-col" data-accent="sky">
+                        <div class="card-head"><h3 class="card-title">No-Response Close Clock</h3><span class="tag tag-sky">90 Days</span></div>
+                        <div class="clock">
+                            <div class="tick"><div class="day">Day 0</div><div class="what"><strong>Request goes out</strong> &mdash; for example, an affidavit or a records release.</div></div>
+                            <div class="tick warn"><div class="day">Day 60</div><div class="what"><strong>No answer &rarr; IAL sent.</strong> Immediate Action Letter on firm letterhead, firm-approved wording. Claimant has 30 days.</div></div>
+                            <div class="tick end"><div class="day">Day 90</div><div class="what"><strong>Still no answer &rarr; ready to close.</strong> Case goes on the monthly close list; the firm approves in one email; billing stops.</div></div>
+                        </div>
+                        <p class="note mt-3">Every try to reach the claimant &mdash; call, text, email, mail &mdash; is logged. If the case is already filed, the attorney takes the court step to end it.</p>
+                    </div>
+                    <div class="card flex flex-col" data-accent="emerald">
+                        <div class="card-head"><h3 class="card-title">With Every Monthly Bill</h3><span class="tag tag-emerald">Status Report</span></div>
+                        <div class="kv"><span class="k">Every open case, with stage and status</span><span class="v pos">&#10003;</span></div>
+                        <div class="kv"><span class="k">Billed count by MDL and by tier</span><span class="v pos">&#10003;</span></div>
+                        <div class="kv"><span class="k">Cases opened and closed this month</span><span class="v pos">&#10003;</span></div>
+                        <div class="kv"><span class="k">Request date, IAL sent date, close date</span><span class="v pos">&#10003;</span></div>
+                        <div class="kv"><span class="k">Contact log for every claimant</span><span class="v pos">&#10003;</span></div>
+                        <p class="note mt-3"><strong>The count on the bill always matches the count on the report.</strong> Any case can be checked line by line in the data portal.</p>
+                    </div>
+                </div>
+                <div class="card mt-4" data-accent="purple">
+                    <div class="card-head"><h3 class="card-title">Proposed Contract Wording</h3><span class="tag tag-purple">For Counsel Review</span></div>
+                    <p class="body">&ldquo;A case stays open until it is settled and paid, the firm drops it in writing, or it is closed under the IAL process (no response 30 days after the IAL is sent). A case open on any day of a calendar month is billed for that month. Case counts and price tiers apply separately to each MDL or mass tort.&rdquo;</p>
+                    <p class="note mt-2">IAL wording is approved by the firm once, up front, and sent on the firm&rsquo;s letterhead. Close letters should state the claimant&rsquo;s deadline to sue &mdash; to be confirmed by counsel.</p>
+                </div>
+            </div>
+        </section>
+        <!-- ================= CLOSING: CONTACT ================= -->
+        <section class="slide appendix closing" id="slide-16">
+            <div class="panel">
+                <div class="slide-head">
+                    <div>
+                        <span class="eyebrow">Contact</span>
+                        <h2 class="slide-title">Let&rsquo;s Talk About Your Docket</h2>
+                    </div>
+                    <span class="chip">Beacon Legal Services</span>
+                </div>
+                <div class="grid grid-cols-2 gap-5 mt-6">
+                    <div class="card" data-accent="slate">
+                        <div class="section-label">Contact</div>
+                        <div class="text-2xl font-bold mt-2" style="color:var(--navy)">Beacon Legal Services</div>
+                        <div class="note mt-1">Mass tort docket operations &amp; data</div>
+                        <div class="mt-4">
+                            <div class="contact-line"><span class="k">Email</span><a href="mailto:rventrapragada@northcastleconsulting.com">rventrapragada@northcastleconsulting.com</a></div>
+                        </div>
+                    </div>
+                    <div class="card flex flex-col" data-accent="amber">
+                        <div class="card-head"><h3 class="card-title">Next Step: A 30-Minute Economics Call</h3><span class="tag tag-amber">Your Numbers</span></div>
+                        <p class="body">We model your first 100 cases with your own numbers: cost per case, cash needed and when, timeline to first settlement, and exactly what our fee comes to.</p>
+                        <div class="kv highlight mt-3"><span class="k">You leave with <small>a one-page plan you can take to your partners</small></span><span class="v">1 page</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-white border border-[#d1d5db] px-3 py-2 rounded-full shadow-md flex items-center gap-2">
+        <button onclick="prevSlide()" class="nav-btn prev-slide-btn !rounded-full w-9 h-9 !p-0" title="Previous slide (←)"><span aria-hidden="true">←</span></button>
+        <div class="text-xs font-bold text-[#051c2c] px-2 min-w-[64px] text-center" id="footerSlideIndicator">1 / 9</div>
+        <button onclick="nextSlide()" class="nav-btn primary next-slide-btn !rounded-full w-9 h-9 !p-0" title="Next slide (→)"><span aria-hidden="true">→</span></button>
+    </footer>
+
+    <div id="tocModal" class="fixed inset-0 bg-[#051c2c]/60 z-50 hidden items-center justify-center p-4">
+        <div class="panel max-w-lg w-full max-h-[85vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3 mb-3">
+                <h3 class="text-base font-bold text-white">Contents</h3>
+                <button onclick="toggleTocModal()" class="nav-btn px-2.5" aria-label="Close"><span aria-hidden="true">✕</span></button>
+            </div>
+            <div class="space-y-1.5 text-sm" id="tocList"></div>
+        </div>
+    </div>
+
+    <script>
+
+        let currentSlide = 1;
+        let totalSlides = 17;
+        let coreSlides = 9;
+        const TOC = [
+            ['Add Mass Tort With Minimal Overhead', 'Who'],
+            ['Who We Are: We Have Run This at Scale', 'Who'],
+            ['The Docket Leak & the Data Gap', 'Why Now'],
+            ['Unit Economics per Settled Case', 'Core'],
+            ['Operating Budget: Monthly Run-Rate', 'Core'],
+            ['ROI Over the Life of One MDL', 'Core'],
+            ['How It Works: Operations, Data, Acquisition', 'Core'],
+            ['Cost Efficiency: The Back Office for About 40% Less Than Building It', 'Core'],
+            ['Structure: Two Ways to Engage', 'Core'],
+            ['Live Model — Unit Economics, Acquisition & Five-Year Cohort', 'Appendix'],
+            ['Admin Cost per Settled Case & Probate', 'Appendix'],
+            ['Operational Safeguards & Risk Mitigation', 'Appendix'],
+            ['Operational Expertise', 'Appendix'],
+            ['Pricing: One Monthly Fee per Open Case', 'Appendix'],
+            ['What Counts as Open — and How a Silent Case Closes', 'Appendix'],
+            ['Let’s Talk About Your Docket', 'Next Step'],
+        ];
+
+        function buildToc() {
+            const el = document.getElementById('tocList');
+            if (!el) return;
+            el.innerHTML = TOC.slice(0, totalSlides).map((t, i) => `
+                <button onclick="goToSlide(${i + 1}); toggleTocModal();" class="w-full text-left px-3 py-2.5 rounded bg-white hover:bg-[#f1f3f5] text-[#1f2937] font-semibold border border-[#e5e7eb] flex justify-between items-center gap-3">
+                    <span><span class="text-[#2563eb] mr-2">${String(i + 1).padStart(2, '0')}</span>${t[0]}</span>
+                    <span class="tag tag-slate">${t[1]}</span>
+                </button>`).join('');
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            if (!slides.length) return;
+            currentSlide = Math.min(totalSlides, Math.max(1, n));
+            slides.forEach((s, i) => s.classList.toggle('active', i + 1 === currentSlide));
+            const ind = document.getElementById('slideIndicator');
+            if (ind) ind.textContent = `${currentSlide <= coreSlides ? 'Slide ' + currentSlide + ' of ' + coreSlides : 'Appendix ' + String.fromCharCode(64 + currentSlide - coreSlides)}`;
+            const isClosing = slides[currentSlide - 1].classList.contains('closing');
+            if (ind && isClosing) ind.textContent = 'Contact';
+            const fi = document.getElementById('footerSlideIndicator');
+            if (fi) fi.textContent = isClosing ? 'Contact' : currentSlide <= coreSlides ? `${currentSlide} / ${coreSlides}` : `App. ${String.fromCharCode(64 + currentSlide - coreSlides)}`;
+            document.querySelectorAll('.prev-slide-btn').forEach(b => b.disabled = currentSlide === 1);
+            document.querySelectorAll('.next-slide-btn').forEach(b => b.disabled = currentSlide === totalSlides);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+        function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+        function goToSlide(n) { showSlide(n); }
+        function toggleTocModal() {
+            const m = document.getElementById('tocModal');
+            if (!m) return;
+            const open = m.classList.contains('hidden');
+            m.classList.toggle('hidden', !open);
+            m.classList.toggle('flex', open);
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+            else if (e.key === 'Escape') { const m = document.getElementById('tocModal'); if (m && !m.classList.contains('hidden')) toggleTocModal(); }
+        });
+
+        const LIT_RATE = 160000 / 12;
+        const DROP_LIFE = 30; // months a dropped (never-settles) case stays open on average (five-year cohort model only)
+        // Retention model (case_retention_model.xlsx): 50% retained, front-loaded exponential drop-off, retained cases settle at month 60.
+        // Per scenario: [signed over 60 months, average open cases per month, peak open, open at month 12]
+        const SCEN = { 25: [1500, 493, 809, 242], 50: [3000, 972, 1595, 477], 75: [4500, 1490, 2445, 731], 100: [6000, 1947, 3195, 955] };
+        const MDL_MONTHS = 60, RETAIN = 0.5;
+        const fmtN = n => Math.round(n).toLocaleString();
+        // Beacon docket fee: per open case per month, per MDL, tax-bracket style (Appendix E)
+        const msoFee = open => 50 * Math.min(open, 100) + 35 * Math.min(Math.max(open - 100, 0), 400) + 25 * Math.max(open - 500, 0);
+        const bracketText = open => { const t1 = Math.min(open, 100), t2 = Math.min(Math.max(open - 100, 0), 400), t3 = Math.max(open - 500, 0); const p = [fmtN(t1) + ' × $50']; if (t2 > 0) p.push(fmtN(t2) + ' × $35'); if (t3 > 0) p.push(fmtN(t3) + ' × $25'); return p.join(' + '); };
+        const ADMIN_PER_SETTLED = 550;
+        const ADV_PER_CASE = 405; // federal filing fee, advanced per signed case and recovered at settlement; medical record review is included in the MSO monthly fee
+        const fmtM = n => { const a = Math.abs(n); const s = n < 0 ? '−' : ''; return a >= 1e6 ? s + '$' + (a / 1e6).toFixed(1) + 'M' : s + '$' + Math.round(a / 1e3) + 'k'; };
+
+        function syncDropoff(v) { const e = document.getElementById('inputDropoff'); if (e) e.value = v; updateCalculator(); }
+        function updateCalculator() {
+            const $ = id => document.getElementById(id);
+            const val = id => parseFloat($(id).value);
+            const set = (id, v) => { const e = $(id); if (e) e.textContent = v; };
+            const fmt = n => '$' + Math.round(n).toLocaleString();
+            const pct = p => Math.round(p * 100) + '%';
+
+            const gsv = val('inputGsv') || 75000;
+            const cbaPct = 0.05;
+            const feeBase = gsv * (1 - cbaPct);
+            const cfaPct = val('inputCfa') / 100 || 0.40;
+            const directPct = val('inputDirect') / 100;
+            const coCounselPct = 1 - directPct;
+            const firmCoCounselSharePct = val('inputCoCounselShare') / 100 || 0.65;
+            const trialFirmSharePct = 1 - firmCoCounselSharePct;
+
+            const rawLeadCost = val('inputRawLead') || 150;
+            const callCenterCost = val('inputCallCenter');
+            const rawToSignedConv = val('inputRawConv') / 100 || 0.15;
+            const signedToSettledDrop = val('inputDropoff') / 100 || 0.50;
+            const retainerPrice = val('inputRetainer') || 2250;
+
+            const signedToSettledConv = 1 - signedToSettledDrop;
+            const AGENCY_FEE = 0.15; // traditional agency media buy: raw lead cost + 15% agency management fee
+            const loadedLead = rawLeadCost * (1 + AGENCY_FEE) + callCenterCost;
+            const costPerSigned = loadedLead / rawToSignedConv;
+            const netCpl = costPerSigned / signedToSettledConv;
+            const netCplVendor = retainerPrice / signedToSettledConv;
+
+            const grossFee = feeBase * cfaPct;
+            const coCounselRetainedFee = grossFee * firmCoCounselSharePct;
+            const blendedRetainedFee = directPct * grossFee + coCounselPct * coCounselRetainedFee;
+            const netFee = blendedRetainedFee - ADMIN_PER_SETTLED; // firm net fee per settled case
+            const netProfit = netFee - netCpl;
+            const roiMultiple = (netFee / netCpl).toFixed(1);
+
+            // Slide 5 inputs
+            set('calcGsvVal', fmt(gsv)); set('calcCfaVal', pct(cfaPct)); set('calcDirectVal', pct(directPct));
+            set('calcCoCounselPctText', pct(coCounselPct)); set('calcCoCounselShareVal', pct(firmCoCounselSharePct));
+            set('calcTrialFirmShareText', pct(trialFirmSharePct)); set('calcRawLeadVal', fmt(rawLeadCost));
+            set('calcCallCenterVal', fmt(callCenterCost)); set('calcRawConvVal', pct(rawToSignedConv));
+            set('calcDropoffVal', pct(signedToSettledDrop)); { const d2 = $('inputDropoff2'); if (d2) d2.value = Math.round(signedToSettledDrop * 100); } set('dropVal2', pct(signedToSettledDrop)); set('scSurv', pct(signedToSettledConv)); set('dropCplNote', fmt(netCpl)); set('dropPerSigned', fmt(costPerSigned)); set('dropSurv', pct(signedToSettledConv)); set('calcRetainerVal', fmt(retainerPrice));
+
+            // Slide 5 funnels
+            set('fnARaw', fmt(rawLeadCost)); set('fnACallCenter', '+' + fmt(callCenterCost)); set('fnALoaded', fmt(loadedLead));
+            set('fnAConv', pct(rawToSignedConv)); set('fnASigned', fmt(costPerSigned)); set('fnASurvive', pct(signedToSettledConv));
+            set('fnANet', fmt(netCpl)); set('fnBSigned', fmt(retainerPrice)); set('fnBSurvive', pct(signedToSettledConv)); set('fnBNet', fmt(netCplVendor));
+            const savings = netCplVendor - netCpl;
+            set('fnSavings', (savings < 0 ? '−' : '') + fmt(Math.abs(savings)));
+            set('fnSavingsPct', Math.round(savings / netCplVendor * 100) + '%');
+
+            // Slide 5 firm economics
+            set('calcBlendedFeeBanner', fmt(netFee) + ' / case');
+            set('calcGrossFeeSum', fmt(grossFee)); set('calcBlendedRetainedSum', fmt(netFee));
+            set('calcNetProfitSum', fmt(netProfit)); set('calcRoiMultipleSum', roiMultiple + 'x CPL');
+            set('calcFormulaExplanation',
+                `Fee base = ${fmt(gsv)} − 5% common benefit = ${fmt(feeBase)}. Gross fee = ${pct(cfaPct)} × fee base = ${fmt(grossFee)}. ` +
+                `Firm retained = ${pct(directPct)} in-house × ${fmt(grossFee)} + ${pct(coCounselPct)} co-counsel × ${fmt(coCounselRetainedFee)} = ${fmt(blendedRetainedFee)}; less ${fmt(ADMIN_PER_SETTLED)} settlement admin = ${fmt(netFee)} firm net fee. ` +
+                `Gross profit = firm net fee − Option A net cost per settled case (${fmt(netCpl)}). MSO compensation is structured separately per Slide 9.`);
+
+            // Slide 9 budget
+            if ($('inputCases')) {
+                const cases = val('inputCases') || 50;
+                const rawNeeded = cases / rawToSignedConv;
+                const litOn = $('inputLitigator') ? $('inputLitigator').checked : true;
+                const lit = litOn ? LIT_RATE : 0;
+                set('budALit', litOn ? fmt(lit) : 'Already on staff'); set('budBLit', litOn ? fmt(lit) : 'Already on staff');
+                set('litRateNote', fmt(LIT_RATE));
+                // Open docket from the retention model: fixed 50% retention, scenario lookup
+                const scn = SCEN[cases] || SCEN[50];
+                const signedTotal = scn[0], openSteady = scn[1], peakOpen = scn[2], m12Open = scn[3];
+                const fee = msoFee(openSteady);
+                const fixedA = fee + lit, fixedB = fee + lit;
+                const media = rawNeeded * rawLeadCost * (1 + AGENCY_FEE), intake = rawNeeded * callCenterCost;
+                const mrr = cases * ADV_PER_CASE, retainers = cases * retainerPrice;
+                const totalA = fixedA + media + intake + mrr, totalB = fixedB + retainers + mrr;
+                const netA = totalA - mrr, netB = totalB - mrr;
+                set('budCasesVal', cases); set('budCasesHeader', cases); set('budOpenHeader', fmtN(openSteady));
+                const feeNote = `(${fmtN(openSteady)} open on average · avg $${Math.round(fee / openSteady)} / case)`;
+                set('budAFeeNote', feeNote); set('budBFeeNote', feeNote); set('budAFee', fmt(fee)); set('budBFee', fmt(fee));
+                set('budBracket', `${bracketText(openSteady)} = ${fmt(fee)} / mo`); set('budAvg', '$' + (fee / openSteady).toFixed(2));
+                // ROI over the life of one MDL: take the open docket from this page and run it to the end
+                const settledN = signedTotal * RETAIN, ratePerCM = fee / openSteady;
+                const mdlPay = settledN * netFee, mdlFee = fee * MDL_MONTHS, mdlLit = lit * MDL_MONTHS;
+                set('mdlOpen', fmtN(openSteady)); set('mdlOpen2', fmtN(openSteady)); set('mdlOpen3', fmtN(openSteady)); set('mdlSigned', fmtN(signedTotal)); set('mdlSigned2', fmtN(signedTotal)); set('mdlSettled', fmtN(settledN)); set('mdlCases', cases); set('mdlFeeMo', fmt(fee)); set('mdlRate', '$' + ratePerCM.toFixed(2)); set('mdlLitMo', lit ? fmt(lit) : 'On staff —');
+                set('mdlSurv', pct(RETAIN)); set('mdlNetFee', fmt(netFee)); set('mdlGsv', fmt(gsv)); set('mdlCfa', pct(cfaPct));
+                [['A', costPerSigned], ['B', retainerPrice]].forEach(([o, per]) => {
+                    const acq = signedTotal * per, net = mdlPay - mdlFee - mdlLit - acq, spent = mdlFee + mdlLit + acq;
+                    set('mdl' + o + 'Tag', fmt(per / RETAIN) + ' per settled case');
+                    set('mdl' + o + 'Pay', '+' + fmtM(mdlPay)); set('mdl' + o + 'PayNote', `(${fmtN(settledN)} settled × ${fmt(netFee)})`);
+                    set('mdl' + o + 'Fee', '−' + fmtM(mdlFee)); set('mdl' + o + 'FeeNote', `(${fmt(fee)} / mo × ${MDL_MONTHS} months)`);
+                    set('mdl' + o + 'Lit', lit ? '−' + fmtM(mdlLit) : 'On staff'); set('mdl' + o + 'LitNote', lit ? `(${fmt(lit)} / mo × ${MDL_MONTHS} months)` : '(unchecked on the budget page)');
+                    set('mdl' + o + 'Acq', '−' + fmtM(acq)); set('mdl' + o + 'AcqNote', `(${fmtN(signedTotal)} signed × ${fmt(per)} = ${fmt(per / RETAIN)} per settled case)`);
+                    set('mdl' + o + 'Net', fmtM(net)); set('mdl' + o + 'PerCase', fmt(net / settledN));
+                    set('mdl' + o + 'FeePct', Math.round(mdlFee / mdlPay * 100) + '%'); set('mdl' + o + 'Mult', (net / spent).toFixed(1) + 'x');
+                });
+                set('budOpenNote', `${cases} signings / mo for ${MDL_MONTHS} months = ${fmtN(signedTotal)} signed. ${pct(RETAIN)} retained, with a front-loaded drop-off → ${fmtN(openSteady)} open cases on average per month (peak ${fmtN(peakOpen)}; ${fmtN(m12Open)} open at month 12).`);
+                set('budAMediaNote', `(${Math.round(rawNeeded)} raw × ${fmt(rawLeadCost)} + 15% agency fee)`); set('budAMedia', fmt(media));
+                set('budAIntakeNote', `(${Math.round(rawNeeded)} × ${fmt(callCenterCost)})`); set('budAIntake', fmt(intake));
+                set('budAMrrNote', `(${cases} × $${ADV_PER_CASE})`); set('budBMrrNote', `(${cases} × $${ADV_PER_CASE})`);
+                set('budAMrr', fmt(mrr)); set('budBMrr', fmt(mrr));
+                set('budATotal', fmt(totalA)); set('budANet', fmt(netA)); set('budAPerCase', fmt(netA / cases));
+                set('budBRetNote', `(${cases} × ${fmt(retainerPrice)})`); set('budBRet', fmt(retainers));
+                set('budBTotal', fmt(totalB)); set('budBNet', fmt(netB)); set('budBPerCase', fmt(netB / cases));
+                const diff = netB - netA;
+                set('budDiff', (diff < 0 ? '−' : '') + fmt(Math.abs(diff)));
+                set('budDiffPct', Math.round(diff / netB * 100) + '%');
+            }
+
+            // Slide 12 five-year cohort model
+            if ($('inputAnnualCases')) {
+                const annual = val('inputAnnualCases') || 500;
+                const lagYears = (val('inputLag') || 60) / 12;
+                const path = $('inputPath').value;
+                const litOn = $('inputLitigator') ? $('inputLitigator').checked : true;
+                const lit = litOn ? LIT_RATE : 0;
+                const fixedMo = lit; // firm-side litigator only; the Beacon docket fee is computed per open case below
+                const sMo = annual / 12, lagMo = Math.round(lagYears * 12), dropLife = Math.min(DROP_LIFE, lagMo);
+                // cases signed in months 1–60; open at month m if signed within the last `life` months
+                const openAt = m => { const cD = Math.max(0, Math.min(m, 60) - Math.max(0, m - dropLife)); const cL = Math.max(0, Math.min(m, 60) - Math.max(0, m - lagMo)); return sMo * (signedToSettledDrop * cD + signedToSettledConv * cL); };
+                const feeByYear = {}; let feeAll = 0;
+                for (let m = 1; m <= 60 + lagMo; m++) { const f = msoFee(openAt(m)); const yy = Math.ceil(m / 12); feeByYear[yy] = (feeByYear[yy] || 0) + f; feeAll += f; }
+                const feeY = y => feeByYear[y] || 0;
+                const perSigned = (path === 'A' ? costPerSigned : retainerPrice) + ADV_PER_CASE; // acquisition + MRR + filing fee advanced
+                const settledPerCohort = annual * signedToSettledConv;
+                const revPerSettled = netFee; // firm net fee: net of CBA and settlement admin
+                const cbaPerSettled = gsv * cbaPct;
+                set('p5CasesVal', annual.toLocaleString()); set('p5CasesHeader', annual.toLocaleString());
+                set('p5LagVal', Math.round(lagYears * 12)); set('p5PathVal', 'Option ' + path); set('p5PathTag', 'Option ' + path);
+
+                const years = 5, rows = [];
+                let cum = 0, peak = 0, totCost = 0, totRev = 0, totSettled = 0, tailRev = 0, tailSettled = 0;
+                // revenue for cohort c lands in year c + lagYears (fractional lag splits across two years)
+                const revByYear = {};
+                for (let c = 1; c <= years; c++) {
+                    const land = c + lagYears; const lo = Math.floor(land), frac = land - lo;
+                    revByYear[lo] = (revByYear[lo] || 0) + settledPerCohort * (1 - frac);
+                    if (frac > 0) revByYear[lo + 1] = (revByYear[lo + 1] || 0) + settledPerCohort * frac;
+                }
+                for (let y = 1; y <= years; y++) {
+                    const settled = revByYear[y] || 0;
+                    const cost = fixedMo * 12 + feeY(y) + perSigned * annual - settled * ADV_PER_CASE; // litigator + Beacon fee on open cases + acquisition; filing fee recovered on settled cases
+                    const rev = settled * revPerSettled;
+                    const net = rev - cost; cum += net; peak = Math.min(peak, cum);
+                    totCost += cost; totRev += rev; totSettled += settled;
+                    rows.push([`Year ${y}`, annual.toLocaleString(), fmtM(cost), settled ? Math.round(settled).toLocaleString() : '—', rev ? fmtM(rev) : '—', fmtM(net), fmtM(cum)]);
+                }
+                Object.keys(revByYear).forEach(k => { if (+k > years) { tailSettled += revByYear[k]; tailRev += revByYear[k] * revPerSettled; } });
+                const lastTail = Math.ceil(years + lagYears);
+                let tailFee = 0; for (let y = years + 1; y <= lastTail; y++) { const st = revByYear[y] || 0; const fy = feeY(y); tailFee += fy; if (st < 0.5 && fy < 1) continue; const rv = st * revPerSettled, rec = st * ADV_PER_CASE; cum += rv + rec - fy; rows.push([`Year ${y}`, '—', fy ? fmtM(fy) : '—', Math.round(st).toLocaleString(), fmtM(rv), fmtM(rv + rec - fy), fmtM(cum)]); }
+                const p5t = $('p5Table'); const tb = p5t ? p5t.querySelector('tbody') : null;
+                if (tb) tb.innerHTML = rows.map((r, i) => `<tr class="${i >= years ? 'text-slate-400' : ''}"><td class="who ${i >= years ? '' : 'text-white'}">${r[0]}</td>${r.slice(1).map((c, j) => `<td class="text-right font-mono ${j === 4 || j === 5 ? (String(c).startsWith('−') ? 'text-red-400' : 'text-emerald-400') : ''}">${c}</td>`).join('')}</tr>`).join('');
+
+                const cohortSettled = totSettled + tailSettled, cohortRev = totRev + tailRev;
+                set('scCost', fmtM(totCost)); set('scSettled', Math.round(cohortSettled).toLocaleString()); set('scRev', fmtM(cohortRev));
+                set('scNet', fmtM(cohortRev - totCost + tailSettled * ADV_PER_CASE - tailFee)); set('scPeak', fmtM(Math.abs(peak))); set('scSigned', (annual * 5).toLocaleString());
+                set('scInWindow', fmtM(totRev)); set('scTail', fmtM(tailRev)); set('scLag', Math.round(lagYears * 12));
+                set('scLagChip', Math.round(lagYears * 12)); set('scLagTag', Math.round(lagYears * 12)); set('scFirstYear', Math.floor(1 + lagYears));
+                set('scTailYears', `${years + 1}–${lastTail}`);
+                const st = $('scTable'); if (st && tb) st.querySelector('tbody').innerHTML = tb.innerHTML;
+                const brOpex = fixedMo * 12 * years + feeAll, brAcqV = perSigned * annual * years, brRecov = cohortSettled * ADV_PER_CASE, brPayV = cohortRev + brRecov;
+                set('brOpex', '−' + fmtM(brOpex)); set('brOpexNote', `${fmt(fixedMo)} / mo litigator × ${years * 12} mo + ${fmtM(feeAll)} Beacon fee, years 1–${lastTail}`);
+                set('brAcq', '−' + fmtM(brAcqV)); set('brAcqNote', `${(annual * years).toLocaleString()} signed × ${fmt(perSigned)} (${fmt(perSigned - ADV_PER_CASE)} acquisition + $${ADV_PER_CASE} filing fee)`);
+                set('brPay', '+' + fmtM(brPayV)); set('brPayNote', `${Math.round(cohortSettled).toLocaleString()} settled × ${fmt(netFee)} net fee + ${fmtM(brRecov)} advances recovered`);
+                set('brNet', fmtM(brPayV - brOpex - brAcqV));
+                set('brTiming', `Years 1–${years}: −${fmtM(totCost / years)} / yr avg · Years ${years + 1}–${lastTail}: +${fmtM((tailRev + tailSettled * ADV_PER_CASE - tailFee) / (lastTail - years))} / yr avg`);
+                set('ayFixed', fixedMo ? fmtM(fixedMo * 12) : 'On staff'); set('ayFixedNote', fixedMo ? fmt(fixedMo) + ' / mo × 12' : 'unchecked on the budget page');
+                set('ayFee', fmtM(feeY(years))); set('ayFeeNote', `${fmtN(openAt(60))} open by month 60 · ${fmtM(feeY(1))} in year 1`);
+                set('ayAcq', fmtM(annual * (path === 'A' ? costPerSigned : retainerPrice))); set('ayAcqNote', `${annual.toLocaleString()} signed × ${fmt(path === 'A' ? costPerSigned : retainerPrice)} = ${fmt((path === 'A' ? costPerSigned : retainerPrice) / signedToSettledConv)} per settled case`);
+                set('ayMrr', fmtM(annual * ADV_PER_CASE)); set('ayMrrNote', `${annual.toLocaleString()} × $${ADV_PER_CASE}, recovered at settlement`);
+                const ayYrs = Math.ceil(lagYears - 0.001);
+                set('ayTotal', fmtM(fixedMo * 12 + feeY(years) + perSigned * annual)); set('ayYears', ayYrs); set('ayPeak', fmtM(Math.abs(peak)));
+                set('lkPeak', fmtM(Math.abs(peak))); set('lkPeakTotal', fmtM(Math.abs(peak))); set('lkBurn', fmtM(Math.abs(peak) / ayYrs)); set('lkYears', ayYrs);
+                const grossCost = fixedMo * 12 * years + feeAll + perSigned * annual * years;
+                const allRev = cohortRev + cohortSettled * ADV_PER_CASE;
+                set('apExp', fmtM(grossCost)); set('apRev', fmtM(allRev)); set('apNet', fmtM(allRev - grossCost));
+                set('apExpNote', `${fmt(fixedMo)} / mo litigator × ${years * 12} months + ${fmtM(feeAll)} Beacon docket fee + ${(annual * years).toLocaleString()} signed × ${fmt(perSigned)} acquisition + advances`);
+                set('apRevNote', `${Math.round(cohortSettled).toLocaleString()} settled × ${fmt(netFee)} net fee + ${fmtM(cohortSettled * ADV_PER_CASE)} advances recovered`);
+                set('p5Cost', fmtM(totCost)); set('p5Settled', Math.round(cohortSettled).toLocaleString());
+                set('p5Rev', fmtM(cohortRev)); set('p5Net', fmtM(cohortRev - totCost + tailSettled * ADV_PER_CASE - tailFee)); set('p5Peak', fmtM(Math.abs(peak)));
+                set('p5CbaTotal', fmtM(cohortSettled * cbaPerSettled));
+                set('p5Note', `Five cohorts of ${annual.toLocaleString()} signed CFAs (${(annual * 5).toLocaleString()} total) at ${pct(signedToSettledConv)} survival settle ${Math.round(lagYears * 12)} months after signing, at ${fmt(netFee)} firm net fee per settled case (after common benefit and settlement admin). ` +
+                    `${fmtM(totRev)} of fee revenue lands inside the five-year window; ${fmtM(tailRev)} from the later cohorts lands in years 6–${lastTail}. The Beacon docket fee (${fmtM(feeAll)} over the cohort's life, charged per open case) is inside the expense line. Peak cumulative capital need is ${fmtM(Math.abs(peak))} before settlements begin to fund operations.`);
+            }
+
+            // Slide 10 funnel
+            set('s9Raw', fmt(rawLeadCost)); set('s9Cc', fmt(callCenterCost)); set('s9Loaded', fmt(loadedLead));
+            set('s9Conv', pct(rawToSignedConv)); set('s9Ratio', (1 / rawToSignedConv).toFixed(1)); set('s9Signed', fmt(costPerSigned));
+            set('s9Drop', pct(signedToSettledDrop)); set('s9Ratio2', (1 / signedToSettledConv).toFixed(1).replace(/\.0$/, '')); set('s9Net', fmt(netCpl));
+
+            // Core slide bindings
+            const referShare = 0.50;
+            const referNet = grossFee * referShare - ADMIN_PER_SETTLED - netCpl;
+            const litigateNet = netFee - netCpl;
+            set('ueGsv', fmt(gsv)); set('ueCba', '−' + fmt(gsv * cbaPct)); set('ueBase', fmt(feeBase)); set('ueGross', fmt(grossFee));
+            set('ueAdmin', '−' + fmt(ADMIN_PER_SETTLED)); set('ueNetFee', fmt(netFee)); set('ueCpl', '−' + fmt(netCpl));
+            set('ueLitigate', fmt(litigateNet)); set('ueLitigate2', fmt(litigateNet)); set('scPeak2', $('scPeak') ? $('scPeak').textContent : ''); set('ueRefer', fmt(referNet)); set('ueReferFee', fmt(grossFee * referShare));
+            set('ueCfa', pct(cfaPct)); set('ueRefShare', pct(referShare)); set('ueCplLabel', fmt(netCpl));
+            const liftCases = (($('inputAnnualCases') ? parseFloat($('inputAnnualCases').value) : 0) || 500) * 0.10, liftValue = liftCases * netFee;
+            const cohortN = ($('inputAnnualCases') ? parseFloat($('inputAnnualCases').value) : 0) || 500;
+            const ptCases = cohortN * 0.01, ptValue = ptCases * netFee;
+            ['lkCohort','lkCohort2','ueCohort','ueCohort2','ueCohort3'].forEach(i => set(i, cohortN.toLocaleString())); set('uePtCases2', Math.round(ptCases));
+            set('ueLift', fmtM(liftValue)); set('ueLiftCases', Math.round(liftCases)); set('ueLiftCases3', Math.round(liftCases)); set('ueLiftFee', fmt(netFee)); set('ueLiftTotal', fmt(liftValue));
+            set('lkLift', fmtM(liftValue)); set('lkCases', Math.round(liftCases)); set('lkFee', fmt(netFee)); set('lkTotal', fmt(liftValue));
+            set('uePt', '+' + fmtM(ptValue)); set('lkPt', '+' + fmtM(ptValue));
+            set('uePtCases', Math.round(ptCases)); set('lkPtCases', Math.round(ptCases));
+            set('uePtTotal', fmt(ptValue)); set('lkPtTotal', fmt(ptValue));
+            set('uePtFee', fmt(netFee));
+            document.querySelectorAll('[data-cmp]').forEach(el => { const c = cohortN * parseFloat(el.dataset.cmp) / 100; el.querySelector('.cmpCases').textContent = Math.round(c).toLocaleString(); el.querySelector('.cmpFee').textContent = fmt(c * netFee); });
+            set('fnANetFee', fmt(netFee)); set('fnBNetFee', fmt(netFee));
+            set('fnANetRev', fmt(netFee - netCpl)); set('fnBNetRev', fmt(netFee - netCplVendor));
+            const agencySigned = (rawLeadCost * 1.15 + callCenterCost) / rawToSignedConv;
+            set('cmpASigned', fmt(costPerSigned)); set('cmpANet', fmt(netCpl));
+            
+            set('cmpCSigned', fmt(retainerPrice)); set('cmpCNet', fmt(netCplVendor));
+            set('coverFee', fmt(netFee)); set('coverProfit', fmt(litigateNet)); set('coverPayback', roiMultiple + 'x');
+            // Slide 1 hero
+            set('heroWeightedFee', fmt(netFee) + ' / case net');
+            set('heroRoiMultiple', roiMultiple + 'x CPL');
+        }
+
+        function fitDeck() {
+            const deck = document.getElementById('deck');
+            if (!deck) return;
+            const avail = Math.min(window.innerWidth - 40, 1600);
+            const availH = window.innerHeight - 150;
+            const s = Math.min(avail / 1280, availH / 720, 1);
+            deck.style.transform = `scale(${s})`;
+            const wrap = document.getElementById('stageWrap');
+            if (wrap) wrap.style.height = (720 * s + 40) + 'px';
+        }
+        window.addEventListener('resize', fitDeck);
+
+        function addFooters() {
+            const slides = [...document.querySelectorAll('section.slide')];
+            const label = document.body.dataset.deckLabel || '';
+            slides.forEach((s, i) => {
+                if (s.querySelector('.slide-foot')) return;
+                const f = document.createElement('div');
+                f.className = 'slide-foot';
+                f.innerHTML = `<span>Mass Tort Docket Operations &amp; Data — ${label}</span><span>Beacon Legal Services · Confidential · ${String(i + 1).padStart(2, '0')} / ${slides.length}</span>`;
+                s.appendChild(f);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const all = document.querySelectorAll('section.slide');
+            totalSlides = all.length;
+            coreSlides = [...all].filter(s => !s.classList.contains('appendix')).length;
+            addFooters();
+            fitDeck();
+            buildToc();
+            showSlide(1);
+            updateCalculator();
+        });
+    
+    </script>
+</body>
+</html>
